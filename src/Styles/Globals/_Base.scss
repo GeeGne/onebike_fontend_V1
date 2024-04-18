@@ -1,0 +1,31 @@
+html {
+  box-sizing: border-box;
+  font-size: 100%;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+  min-width: 0;
+}
+
+body {
+  background-color: var(--background-color);
+  font-size: 1rem;
+  font-family: 'PT_Sans', sans-serif;
+}
+
+a
+a:visited,
+a:active,
+button {
+  text-decoration: none;
+  outline: none;
+}
+
+ul {
+  list-style: none;
+}

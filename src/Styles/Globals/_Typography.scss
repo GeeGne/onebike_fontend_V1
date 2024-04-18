@@ -1,0 +1,34 @@
+input,
+textarea,
+button {
+  font-family: inherit;
+  font-size: 1em;
+}
+
+h1,
+h2,
+h3 {
+  color: var(--font-h-color);
+  line-height: 1.1;
+}
+
+p {
+  color: var(--font-p-color);
+  line-height: 1.1;
+}
+
+
+h1 {
+  font-size: 1.8em;
+  font-weight: 600;
+}
+
+h2 {
+  font-size: 1.5em;
+  font-weight: 500;
+}
+
+h3 {
+  font-size: 1.2em;
+  font-weight: 400;
+}
