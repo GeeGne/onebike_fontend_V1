@@ -4,7 +4,7 @@
 import './Styles/App.scss';
 
 //  COMPONENTS
-import Header from './Components/Header.jsx';
+import Header from './Components/Header/Header.jsx';
 import Footer from './Components/Footer.jsx';
 
 // HOOKS
@@ -13,24 +13,26 @@ import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 
 function App() {
 
-  const handleClick = () => {
-    document.body.classList.toggle('dark-theme');
-  }
+  // const handleClick = () => {
+  //   document.body.classList.toggle('dark-theme');
+  // }
 
   return (
     <>
       <Router>
         <div className="app-layout">
 
-          <header>
+          <header className="app-layout__header">
             <Header/>
           </header>
 
-          <Routes>
-            <Route path="/" element={<h3>Home</h3>}/>
-          </Routes>
+          <main className="app-layout__main">
+            <Routes>
+              <Route path="/" element={<h3>Home</h3>}/>
+            </Routes>
+          </main>
           
-          <footer>
+          <footer className="app-layout__footer">
             <Footer/>
           </footer>
 

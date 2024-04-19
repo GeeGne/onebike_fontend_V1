@@ -1,11 +1,14 @@
 //  White Theme
 :root {
-  --background-color: #B8D1E0;
-  --font-h-color: #000000;
+  --background-color: hsl(0, 0%, 94%);
+  --font-h-color: hsl(0, 0%, 0%);
   --font-p-color: rgb(45, 45, 45);
   --primary-color: #4B6D90;
+  --secondary-color: #B8D1E0;
   --button-color: hsl(0, 0%, 100%);
   --button-active-color: #4B6D90;
+  --button-font-color: hsl(0, 0%, 0%);
+  --button-font-active-color: hsl(0, 0%, 100%);
 }
 
 //  Dark Theme
@@ -14,4 +17,6 @@
   --font-h-color: #ffffff;  
   --font-p-color: rgb(211, 211, 211);
   --primary-color: #85AED0;
+  --button-color: hsl(0, 0%, 0%);
+  --button-font-color: hsl(0, 0%, 100%);
 }

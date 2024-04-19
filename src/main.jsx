@@ -11,4 +11,4 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 )
 
 //  The Test Component is for Testing all global
-//  functionaliy like fonts, themes, base settings etc..
+//  functionaliy settings like fonts, themes, base settings etc..

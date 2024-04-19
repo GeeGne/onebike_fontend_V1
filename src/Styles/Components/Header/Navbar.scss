@@ -1,0 +1,24 @@
+.nav-container {
+  display: flex;
+  flex: 1;
+  justify-content: space-evenly;
+  // background-color: red;
+  // background-color: var(--primary-color);
+
+  &__toggles {
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    background-color: var(--button-color);
+    color: var(--button-font-color);
+    padding: 0.5rem;
+    border: solid hsl(0, 0%, 50%);
+    border-width: 0 1px 0 0;
+
+    &:hover {
+      background-color: var(--button-active-color);
+      color: var(--button-font-active-color)
+    }
+  }
+
+}
