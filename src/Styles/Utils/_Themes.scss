@@ -1,22 +1,27 @@
 //  White Theme
 :root {
-  --background-color: hsl(0, 0%, 94%);
+  --background-color: hsl(0, 0%, 93%);
   --font-h-color: hsl(0, 0%, 0%);
-  --font-p-color: rgb(45, 45, 45);
+  --font-p-color: hsl(0, 0%, 25%);
   --primary-color: #4B6D90;
   --secondary-color: #B8D1E0;
   --button-color: hsl(0, 0%, 100%);
   --button-active-color: #4B6D90;
   --button-font-color: hsl(0, 0%, 0%);
   --button-font-active-color: hsl(0, 0%, 100%);
+  --language-list-color: hsl(0, 0%, 100%);
+  --language-list-color-hover: hsl(0, 0%, 90%);
 }
 
 //  Dark Theme
 .dark-theme {
-  --background-color: #192740;
+  --background-color: hsl(0, 0%, 7%);
   --font-h-color: #ffffff;  
-  --font-p-color: rgb(211, 211, 211);
+  --font-p-color: hsl(0, 0%, 75%);
   --primary-color: #85AED0;
+  --secondary-color: #192740;
   --button-color: hsl(0, 0%, 0%);
   --button-font-color: hsl(0, 0%, 100%);
+  --language-list-color: hsl(0, 0%, 0%);
+  --language-list-color-hover: hsl(0, 0%, 10%);
 }

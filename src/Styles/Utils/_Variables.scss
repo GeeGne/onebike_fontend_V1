@@ -2,3 +2,18 @@
 :root {
   --icon-size: 1.6rem;
 }
+
+// URLs 
+:root {
+  --arrow-drop-down-icon: url(src/assets/Img/Icons/arrow_drop_down.svg);
+  --hamburger-icon: url(src/assets/Img/Icons/menu.svg);
+  --search-icon: url(src/assets/Img/Icons/search.svg);
+  --shoppingCart-icon: url(src/assets/Img/Icons/shopping_cart.svg);
+}
+
+.dark-theme {
+  --arrow-drop-down-icon: url(src/assets/Img/Icons/arrow_drop_down_darkMode.svg);
+  --hamburger-icon: url(src/assets/Img/Icons/menu_darkMode.svg);
+  --search-icon: url(src/assets/Img/Icons/search_darkMode.svg);
+  --shoppingCart-icon: url(src/assets/Img/Icons/shopping_cart_darkMode.svg);
+}

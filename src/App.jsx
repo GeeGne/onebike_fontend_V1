@@ -4,18 +4,14 @@
 import './Styles/App.scss';
 
 //  COMPONENTS
-import Header from './Components/Header/Header.jsx';
-import Footer from './Components/Footer.jsx';
+import Header from './Components/Header/Header';
+import Footer from './Components/Footer';
 
 // HOOKS
 import React, {useEffect, useRef} from 'react';
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 
 function App() {
-
-  // const handleClick = () => {
-  //   document.body.classList.toggle('dark-theme');
-  // }
 
   return (
     <>

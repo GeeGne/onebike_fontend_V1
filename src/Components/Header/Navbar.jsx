@@ -1,12 +1,15 @@
 import '../../Styles/Components/Header/Navbar.scss';
 
+import logo from '../../assets/Img/Logo/ONEBIKE.png';
+
 function Navbar () {
 
   return (
-    <nav class="nav-container">
-      <button class="nav-container__toggles">nav</button>
-      <button class="nav-container__toggles">nav</button>
-      <button class="nav-container__toggles">nav</button>
+    <nav className="nav-container">
+      <button className="nav-container__hamburger"/>
+      <img className="nav-container__logo" src={logo}/>
+      <button className="nav-container__search"/>
+      <button className="nav-container__shoppingCart"/>
     </nav>
   )
 }

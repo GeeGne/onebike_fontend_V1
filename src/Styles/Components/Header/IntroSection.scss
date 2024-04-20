@@ -1,18 +1,24 @@
 .userinfo-container {
   display: flex;
   flex: 1;
-  // justify-content: space-evenly;
   background-color: var(--secondary-color);
-  // margin: 0.5rem;
 
   &__icons-a {    
     &__img {
       width: var(--icon-size);
-      // background-color: red;
       margin: 0.3rem 0.5rem;
-      &:first-child {
-        background-color: red;
-      }
     }
+  }
+
+  &__light-dark-button, &__language-button {
+    background-color: transparent;
+  }
+
+  &__light-dark-button {
+    margin: 0.3rem 0.5rem 0.3rem auto;
+  }
+  
+  &__language-button {
+    margin: 0.3rem 0.5rem;
   }
 }

@@ -1,41 +1,75 @@
+import React, {useState, useContext} from 'react';
 import {Link} from 'react-router-dom';
 
 import '../../Styles/Components/Header/IntroSection.scss';
-import shoppingCartLogo from '../../assets/Img/Icons/home_app.svg';
-import facebook from '../../assets/Img/Icons/facebook.svg';
-import instagram from '../../assets/Img/Icons/instagram.svg';
-import whatsapp from '../../assets/Img/Icons/whatsapp.svg';
+
+import LanguageButton from '../LanguageButton.jsx';
+import LightDarkButton from '../LightDarkButton.jsx';
+
+//  ICONS
+import facebookIcon from '../../assets/Img/Icons/facebook.svg';
+import instagramIcon from '../../assets/Img/Icons/instagram.svg';
+import whatsappIcon from '../../assets/Img/Icons/whatsapp.svg';
+
+//  ICONS - DARKMODE
+import facebookIconDarkMode from '../../assets/Img/Icons/facebook_darkMode.svg';
+import instagramIconDarkMode from '../../assets/Img/Icons/instagram_darkMode.svg';
+import whatsappIconDarkMode from '../../assets/Img/Icons/whatsapp_darkMode.svg';
 
 function IntroSection () {
+ 
+  const [darkMode, setDarkMode] = useState(false);
+  const [language, setLanguage] = useState('English');
+
+  const getThemeData = (data) => {
+    setDarkMode(data);
+  }
+
+  const getLanguageData = (data) => {
+    console.log('test');
+    setLanguage(data);
+  }
+
+  const facebookURL = "https://www.facebook.com/profile.php?id=61555487381717";
+  const instagramURL = "https://www.instagram.com/onebike2024?fbclid=IwZXh0bgNhZW0CMTAAAR0j3tRBpSGxAkPztNBkI-KKoBI454wtiODT8gyzjrY2B6jtQhzTFDkpvuI_aem_AZvvFyQoDJ0_EqQr36CwzmanbLAnK_nFqsXLZollXvn2m7LBaFueZpOgtR9S0sRbuLf_CynuMk7xMjEVi3Capb1V";
+  const whatsAppURL = "https://chat.whatsapp.com/BanGDxwaSLgKMBWN6eDVzq";
 
   return (
     <>
-      <section className="userinfo-container">
+      <section className={`userinfo-container ${language === 'Arabic' && 'arabic'}`}>
         {/* <Link to="/">
           <img className="logo" src={shoppingCartLogo}/>
         </Link> */}
 
         <a 
           className="userinfo-container__icons-a"
-          href="https://www.facebook.com/profile.php?id=61555487381717"
+          href={facebookURL}
           target="_blank" 
         >
-          <img className="userinfo-container__icons-a__img" src={facebook}/>
+          <img className="userinfo-container__icons-a__img" src={darkMode ? facebookIconDarkMode : facebookIcon}/>
         </a>
         <a 
           className="userinfo-container__icons-a"
-          href="https://l.facebook.com/l.php?u=https%3A%2F%2Fwww.instagram.com%2Fonebike2024%3Ffbclid%3DIwZXh0bgNhZW0CMTAAAR0w6aYCDJGvMivgUz_w8X80es1HJ_7pw1C8SoFWz-dXSV82nzB7p2WBhAs_aem_AQCp6vp2WH18qga8n9Xxkms5Parh7WnW-XeJKJjRolLpd22rFmAbD-RJo2UXzvWxd3gtVnjnETyVbk07gc90-_DP&h=AT2F8y0fhas8_jET2eCAy7Ijb90oIl6CuhXOFH6ZtOF46Pg-dmqHcDn4oWQ2hfDfX4sl3XvMcwbQWEdxEczkVb4GH1K4OpTWHA7aO6gZaQFZIFUir_P-E0f3SObw7Gkakl0f" 
+          href={instagramURL}
           target="_blank"
         >
-          <img className="userinfo-container__icons-a__img" src={instagram}/>
+          <img className="userinfo-container__icons-a__img" src={darkMode ? instagramIconDarkMode : instagramIcon}/>
         </a>
         <a 
-          href="https://chat.whatsapp.com/BanGDxwaSLgKMBWN6eDVzq"
           className="userinfo-container__icons-a"
+          href={whatsAppURL}
           target="_blank"
         >
-          <img className="userinfo-container__icons-a__img" src={whatsapp}/>
+          <img className="userinfo-container__icons-a__img" src={darkMode ? whatsappIconDarkMode : whatsappIcon}/>
         </a>
+
+        <button className="userinfo-container__light-dark-button">
+          <LightDarkButton getThemeData={getThemeData}/>
+        </button>
+
+        <button className="userinfo-container__language-button">
+          <LanguageButton getLanguageData={getLanguageData}/>
+        </button>
       </section>
     </>
   )
