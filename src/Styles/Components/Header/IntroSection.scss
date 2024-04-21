@@ -5,6 +5,10 @@
 
   body.arabic & {
     flex-direction: row-reverse;
+
+    &__light-dark-button  {
+      margin: 0.3rem auto 0.3rem 0.5rem;
+    }
   }
 
   &__icons-a {    
@@ -20,10 +24,6 @@
 
   &__light-dark-button {
     margin: 0.3rem 0.5rem 0.3rem auto;
-
-    body.arabic & {
-      margin: 0.3rem auto 0.3rem 0.5rem;
-    }
   }
   
   &__language-button {

@@ -1,7 +1,7 @@
 import '../../Styles/Components/Header/Header.scss';
 
-import IntroSection from './IntroSection.jsx';
-import Navbar from './Navbar.jsx';
+import IntroSection from './IntroSection';
+import Navbar from './Navbar/Navbar';
 
 function Header () {
 
