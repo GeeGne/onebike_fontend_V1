@@ -1,7 +1,7 @@
 import React, {useState, useRef, useEffect} from 'react';
 import '../Styles/Components/LanguageButton.scss'
 
-function LanguageButton ({getLanguageData}) {
+function LanguageButton () {
 
   const [language, setLanguage] = useState('English');
   const [languageList, setLanguageList] = useState(false);
@@ -17,7 +17,11 @@ function LanguageButton ({getLanguageData}) {
   },[languageList])
 
   useEffect(() => {
-    getLanguageData(language);
+    if (language === 'العربيه') {
+      document.body.classList.add('arabic');
+      return;
+    }
+    document.body.classList.remove('arabic');
   },[language])
 
   const handleClick = e => {

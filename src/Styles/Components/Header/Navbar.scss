@@ -6,6 +6,10 @@
   align-items: center;
   background-color: var(--button-color);
 
+  &.arabic {
+    flex-direction: row-reverse;
+  }
+
   &__logo {
 
     height: 4rem;

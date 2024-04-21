@@ -25,18 +25,13 @@ function IntroSection () {
     setDarkMode(data);
   }
 
-  const getLanguageData = (data) => {
-    console.log('test');
-    setLanguage(data);
-  }
-
   const facebookURL = "https://www.facebook.com/profile.php?id=61555487381717";
   const instagramURL = "https://www.instagram.com/onebike2024?fbclid=IwZXh0bgNhZW0CMTAAAR0j3tRBpSGxAkPztNBkI-KKoBI454wtiODT8gyzjrY2B6jtQhzTFDkpvuI_aem_AZvvFyQoDJ0_EqQr36CwzmanbLAnK_nFqsXLZollXvn2m7LBaFueZpOgtR9S0sRbuLf_CynuMk7xMjEVi3Capb1V";
   const whatsAppURL = "https://chat.whatsapp.com/BanGDxwaSLgKMBWN6eDVzq";
 
   return (
     <>
-      <section className={`userinfo-container ${language === 'Arabic' && 'arabic'}`}>
+      <section className={`userinfo-container ${language === 'العربيه' && 'arabic'}`}>
         {/* <Link to="/">
           <img className="logo" src={shoppingCartLogo}/>
         </Link> */}
@@ -68,7 +63,7 @@ function IntroSection () {
         </button>
 
         <button className="userinfo-container__language-button">
-          <LanguageButton getLanguageData={getLanguageData}/>
+          <LanguageButton/>
         </button>
       </section>
     </>

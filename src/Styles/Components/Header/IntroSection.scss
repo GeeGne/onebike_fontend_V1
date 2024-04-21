@@ -3,6 +3,10 @@
   flex: 1;
   background-color: var(--secondary-color);
 
+  body.arabic & {
+    flex-direction: row-reverse;
+  }
+
   &__icons-a {    
     &__img {
       width: var(--icon-size);
@@ -16,6 +20,10 @@
 
   &__light-dark-button {
     margin: 0.3rem 0.5rem 0.3rem auto;
+
+    body.arabic & {
+      margin: 0.3rem auto 0.3rem 0.5rem;
+    }
   }
   
   &__language-button {
