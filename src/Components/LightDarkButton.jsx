@@ -5,14 +5,14 @@ import '../Styles/Components/LightDarkButton.scss';
 import sunIcon from "../assets/Img/Icons/sun.svg";
 import moonIcon from "../assets/Img/Icons/moon.svg";
 
-function LightDarkButton ({getThemeData}) {
+function LightDarkButton ({onThemeChange}) {
 
   const [darkTheme, setDarkTheme] = useState(false);
 
   useEffect(() => {
     darkTheme ? document.body.classList.add('dark-theme') :
     document.body.classList.remove('dark-theme');
-    getThemeData(darkTheme);
+    onThemeChange(darkTheme);
   }, [darkTheme])
 
 

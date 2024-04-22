@@ -1,18 +1,22 @@
 .ham-menu-container {
+  visibility: hidden;
   position: fixed;
   display: flex;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: var(--hamMenu-background-color);
+  background-color: hsl(0, 0%, 0%, 0);
   z-index: 100;
+  transition: background-color 0.5s ease-out;
 
   &__side-box {
     display: flex;
     width: 15rem;
     flex-direction: column;
-    background-color: white;
+    background-color: var(--hamMenu-sideBox-color);
+    transform: translateX(-15rem);
+    transition: transform 0.5s ease-out;
 
     &__menu {
       display: flex;
@@ -20,6 +24,7 @@
       font-size: var(--hamMenu-menu-font);
       font-weight: bold;
       background-color: var(--hamMenu-menu-background-color);
+      color: var(--font-h-color);
       padding: 1rem;
       
       & img {
@@ -48,6 +53,7 @@
         font-size: var(--hamMenu-list-font);
         font-weight: 500;
         color: var(--font-h-color);
+        // color: red;
         cursor: pointer;
         
         &::before {

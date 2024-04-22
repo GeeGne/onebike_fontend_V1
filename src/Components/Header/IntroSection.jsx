@@ -1,10 +1,10 @@
-import React, {useState, useContext} from 'react';
+import React, {useState, useEffect} from 'react';
 import {Link} from 'react-router-dom';
 
 import '../../Styles/Components/Header/IntroSection.scss';
 
-import LanguageButton from '../LanguageButton.jsx';
-import LightDarkButton from '../LightDarkButton.jsx';
+import LanguageButton from '../LanguageButton';
+import LightDarkButton from '../LightDarkButton';
 
 //  ICONS
 import facebookIcon from '../../assets/Img/Icons/facebook.svg';
@@ -16,12 +16,16 @@ import facebookIconDarkMode from '../../assets/Img/Icons/facebook_darkMode.svg';
 import instagramIconDarkMode from '../../assets/Img/Icons/instagram_darkMode.svg';
 import whatsappIconDarkMode from '../../assets/Img/Icons/whatsapp_darkMode.svg';
 
-function IntroSection () {
+function IntroSection ({onThemeChange}) {
  
   const [darkMode, setDarkMode] = useState(false);
   const [language, setLanguage] = useState('English');
 
-  const getThemeData = (data) => {
+  useEffect(() => {
+    onThemeChange(darkMode);
+  }, [darkMode])
+
+  const themeData = (data) => {
     setDarkMode(data);
   }
 
@@ -59,7 +63,7 @@ function IntroSection () {
         </a>
 
         <button className="userinfo-container__light-dark-button">
-          <LightDarkButton getThemeData={getThemeData}/>
+          <LightDarkButton onThemeChange={themeData}/>
         </button>
 
         <button className="userinfo-container__language-button">
