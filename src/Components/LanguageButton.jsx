@@ -1,7 +1,7 @@
 import React, {useState, useRef, useEffect} from 'react';
 import '../Styles/Components/LanguageButton.scss'
 
-function LanguageButton () {
+function LanguageButton ({onLanguageChange}) {
 
   const [language, setLanguage] = useState('English');
   const [languageList, setLanguageList] = useState(false);
@@ -17,6 +17,8 @@ function LanguageButton () {
   },[languageList])
 
   useEffect(() => {
+    onLanguageChange(language);
+
     if (language === 'العربيه') {
       document.body.classList.add('arabic');
       return;

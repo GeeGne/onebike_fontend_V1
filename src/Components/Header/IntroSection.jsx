@@ -16,7 +16,7 @@ import facebookIconDarkMode from '../../assets/Img/Icons/facebook_darkMode.svg';
 import instagramIconDarkMode from '../../assets/Img/Icons/instagram_darkMode.svg';
 import whatsappIconDarkMode from '../../assets/Img/Icons/whatsapp_darkMode.svg';
 
-function IntroSection ({onThemeChange}) {
+function IntroSection ({onThemeChange, onLanguageChange}) {
  
   const [darkMode, setDarkMode] = useState(false);
   const [language, setLanguage] = useState('English');
@@ -25,8 +25,16 @@ function IntroSection ({onThemeChange}) {
     onThemeChange(darkMode);
   }, [darkMode])
 
+  useEffect(() => {
+    onLanguageChange(language);
+  }, [language])
+
   const themeData = (data) => {
     setDarkMode(data);
+  }
+
+  const languageData = data => {
+    setLanguage(data);
   }
 
   const facebookURL = "https://www.facebook.com/profile.php?id=61555487381717";
@@ -67,7 +75,7 @@ function IntroSection ({onThemeChange}) {
         </button>
 
         <button className="userinfo-container__language-button">
-          <LanguageButton/>
+          <LanguageButton onLanguageChange={languageData}/>
         </button>
       </section>
     </>

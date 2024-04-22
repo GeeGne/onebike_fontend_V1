@@ -6,7 +6,7 @@ import '../../../Styles/Components/Header/Navbar/Navbar.scss';
 
 import logo from '../../../assets/Img/Logo/ONEBIKE.png';
 
-function Navbar ({darkMode}) {
+function Navbar ({darkMode, language}) {
 
   const [menu, setMenu] = useState(false);
 
@@ -28,7 +28,7 @@ function Navbar ({darkMode}) {
         <button className="nav-container__search"/>
         <button className="nav-container__shoppingCart"/>
       </nav>
-      <HamMenu menu={menu} onChange={handleMenuChange} darkMode={darkMode}/>
+      <HamMenu menu={menu} onChange={handleMenuChange} darkMode={darkMode} language={language}/>
     </>
     
   )

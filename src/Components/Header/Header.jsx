@@ -7,16 +7,22 @@ import Navbar from './Navbar/Navbar';
 
 function Header () {
 
- const [darkMode, setDarkMode] = useState(false)
+ const [darkMode, setDarkMode] = useState(false);
+ const [language, setLanguage] = useState('English');
 
   const themeData = data => {
     setDarkMode(data);
   }
 
+  const languageData = data => {
+    setLanguage(data);
+  }
+
+
   return (
     <>
-      <IntroSection onThemeChange={themeData}/>
-      <Navbar darkMode={darkMode}/>
+      <IntroSection onThemeChange={themeData} onLanguageChange={languageData}/>
+      <Navbar darkMode={darkMode} language={language}/>
     </>
   )
 }
