@@ -37,11 +37,12 @@ function LanguageButton ({onLanguageChange}) {
       onClick={() => setLanguageList(prevLang => !prevLang)}
       ref={languageElement}
     >
-      {language}
+      <h3 className="language-button__display">{language}</h3>
+      {/* {language} */}
       {languageList &&
       <ul className="language-button__list">
-        <li onClick={e => handleClick(e)}>English</li>
-        <li onClick={e => handleClick(e)}>العربيه</li>
+        <li onClick={e => handleClick(e)}><h3>English</h3></li>
+        <li onClick={e => handleClick(e)}><h3>العربيه</h3></li>
       </ul>
       }
     </div>
