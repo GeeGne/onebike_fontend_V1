@@ -10,38 +10,11 @@
   z-index: 100;
   transition: background-color 0.5s ease-out;
 
-  body.arabic & {
-    flex-direction: row-reverse;
-
-    &__side-box {
-
-      &__menu {
-        flex-direction: row-reverse;
-      }
-      
-      &__menu-list {
-        & > li {
-          flex-direction: row-reverse;
-          &__secondary-list {
-
-          }
-        }
-      }
-
-      & .expand-circle {
-        margin-right: auto;
-        margin-left: 0;
-      }
-    }
-  }
-
-
   &__side-box {
     display: flex;
     width: 15rem;
     flex-direction: column;
     background-color: var(--hamMenu-sideBox-color);
-    // transform: translateX(-15rem);
     transition: transform 0.5s ease-out;
 
     &__menu {
@@ -50,7 +23,7 @@
       justify-content: space-between;
       font-size: var(--hamMenu-menu-font);
       font-weight: bold;
-      background-color: var(--hamMenu-menu-background-color);
+      background-color: var(--secondary-color);
       color: var(--font-h-color);
       padding: 1rem;
       
@@ -80,7 +53,7 @@
         &__title {
           display: flex;
           align-items: center;
-          padding: 0.7rem;
+          padding: 0.7rem 0.7rem 0 0.7rem;
           opacity: 0.8;
           font-size: var(--hamMenu-list-font);
           font-weight: 500;
@@ -96,24 +69,30 @@
             // display: flex;
             width: var(--hamMenu-list-icon);
             margin-left: auto;
+            transition: transform 0.5s ease-out;
           }
 
+          &.clicked {
+            opacity: 1;
+            font-weight: 550;
+            & .expand-circle {
+              transform: rotate(-180deg)
+            }
+          }
         }
 
         &__secondary-list {
           display: flex;
           flex-direction: column;
-          height: 0;
-          // flex-shrink: 0;
           overflow: hidden;
+          height: 0;
           transition: height 0.5s ease;
+          margin: 0.35rem 0;
+          background-color: var(--hamMenu-secondaryList-background-color);
 
           &__lists {
-            padding: 0.5rem 1.4rem;
-          }
-
-          &.clicked {
-            height: auto;
+            padding: 0.5rem 1.4em;
+            color: var(--font-p-color);
           }
         }
 
@@ -129,5 +108,40 @@
         }
       }
     }
-  }  
+  } 
+
+  body.arabic & {
+    flex-direction: row-reverse;
+
+    &__side-box {
+
+      &__menu {
+        flex-direction: row-reverse;
+      }
+      
+      &__menu-list {
+        &__lists {
+
+          &__title {
+            flex-direction: row-reverse;
+
+            & .expand-circle {
+              margin-right: auto;
+              margin-left: 0;
+            }
+          }
+
+          &__secondary-list {
+          
+            &__lists {
+              text-align: right;
+            }
+          }
+
+        }
+      }
+
+      
+    }
+  }
 }
