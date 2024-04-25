@@ -7,7 +7,6 @@
   z-index: 10;
 
   &__display {
-    // font-size: inherit;
     font-weight: 600;
     margin: 0 1em 0.1em 0.1em;
   }
@@ -33,7 +32,7 @@
 
   &__list {
     position: absolute;
-    top: calc(100% + 0.7rem);
+    top: calc(100% + 0.7em);
     left: 50%;
     transform: translateX(-50%);
     box-shadow: 0 0 10px 0.1px hsla(0, 0%, 70%, 0.8);

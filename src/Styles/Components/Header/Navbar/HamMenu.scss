@@ -34,7 +34,7 @@
         border-radius: 6rem;
         width: var(--hamMenu-exitIcon-size);
         // height: var(--hamMenu-exitIcon-size);
-        padding: 0.2rem;
+        padding: 0.2em;
         aspect-ratio: 1 / 1;
         cursor: pointer;
         transition: background-color 0.25s ease;
@@ -53,21 +53,34 @@
         flex-direction: column;
 
         &__title {
+          position: relative;
           display: flex;
           align-items: center;
-          padding: 0.7rem 0.7rem 0 0.7rem;
+          padding: 0.7em 0.7em 0 0.7em;
           opacity: 0.8;
           // font-size: var(--hamMenu-list-font);
           // font-weight: 500;
           color: var(--font-h-color);
-          // color: red;
           cursor: pointer;
 
-          &__h2 {}
+          &::before {
+            content: "";
+            position: absolute;
+            top: 10px;
+            left: 0;
+            width: 0.2em;
+            height: calc(80% + 0px);
+            // background-color: black;
+            background-color: var(--primary-color);
+            transform: translateX(-0.22em);
+            transition: transform 0.25s ease;
+          }
 
           &:hover {
             opacity: 1;
           }
+
+          &__h2 {}
 
           & .expand-circle {
             // display: flex;
@@ -79,6 +92,10 @@
 
           &.clicked {
             opacity: 1;
+
+            &::before {
+              transform: translateX(0);
+            }
 
             &__h2 {
               font-weight: 550;
@@ -96,11 +113,11 @@
           overflow: hidden;
           height: 0;
           transition: height 0.5s ease;
-          margin: 0.35rem 0;
+          margin: 0.35em 0;
           background-color: var(--hamMenu-secondaryList-background-color);
 
           &__lists {
-            padding: 0.5rem 1.4em;
+            padding: 0.5em 1.4em;
             color: var(--font-p-color);
           }
         }
@@ -134,9 +151,21 @@
           &__title {
             flex-direction: row-reverse;
 
+            &::before {
+              left: auto;
+              right: 0;
+              transform: translateX(0.22em);
+            }
+
             & .expand-circle {
               margin-right: auto;
               margin-left: 0;
+            }
+
+            &.clicked {
+              &::before {
+                transform: translateX(0);
+              }
             }
           }
 
