@@ -81,18 +81,17 @@ function HamMenu ({menu, onChange, darkMode, language}) {
 
     if (type === 'title element') {
       const event = other;
-      const titleElement = event.target;
+      const titleElement = event.currentTarget;
       const {listId} = titleElement.dataset;
       const matchedSecondaryElement = getElement(secondaryListElements.current, listId);
       const matchedSecondaryElementScrollHeight = matchedSecondaryElement.scrollHeight; 
-      const matchedMainElement = getElement(mainListElements.current, listId);
-      const elementClicked = matchedMainElement.classList.contains('clicked') ? true : false;
+      const elementClicked = titleElement.classList.contains('clicked') ? true : false;
       
       if (elementClicked) {
-        matchedMainElement.classList.remove('clicked');
+        titleElement.classList.remove('clicked');
         matchedSecondaryElement.style.height = '0';
       } else if (!elementClicked) {
-        matchedMainElement.classList.add('clicked');
+        titleElement.classList.add('clicked');
         matchedSecondaryElement.style.height = `${matchedSecondaryElementScrollHeight}px`;
       }
     }
@@ -111,7 +110,7 @@ function HamMenu ({menu, onChange, darkMode, language}) {
       }
 
       containerStyle.backgroundColor = "hsl(0, 0%, 0%, 0)";
-      sideBoxStyle.transform = `translateX(${language === 'English' ? '-15rem' : '15rem'})`;
+      sideBoxStyle.transform = `translateX(${language === 'English' ? '-15em' : '15em'})`;
       setTimeout( () => containerStyle.visibility = "hidden", 500);
     }
     handleMenuStyles(menu);
@@ -132,7 +131,7 @@ function HamMenu ({menu, onChange, darkMode, language}) {
     )
 
     return (
-      <li 
+      <li
         className="ham-menu-container__side-box__menu-list__lists"
         ref={el => {
           i === 0 && (mainListElements.current = []);
@@ -142,27 +141,23 @@ function HamMenu ({menu, onChange, darkMode, language}) {
         data-list-id={i}
         key={mainList}
       >
+
         <div 
           className="ham-menu-container__side-box__menu-list__lists__title"
           onClick={e => handleClick('title element', e)}
-          // onClick={e => console.log(e)}
           data-list-id={i}
         >
           <h2 
             className="ham-menu-container__side-box__menu-list__lists__title__h2" 
-            data-list-id={i}
           >
             {mainList}
           </h2>
-          {/* {mainList} */}
           <img 
             className="expand-circle" 
-            // onClick={e => e.stopImmediatePropagation()}
-            // onClick={e => console.log(e.target.parentName)}
             src={darkMode ? expandCircleUpIconDarkMode : expandCircleUpIcon}
-            data-list-id={i}
           />
         </div>
+
         <ul 
           className="ham-menu-container__side-box__menu-list__lists__secondary-list"
           data-list-id={i}
@@ -173,8 +168,8 @@ function HamMenu ({menu, onChange, darkMode, language}) {
           }}  
         >
             {secondaryListHTML}
-          {/* {secondaryListHTML} */}
         </ul>
+
       </li> 
     )
   })
@@ -187,13 +182,16 @@ function HamMenu ({menu, onChange, darkMode, language}) {
           <h1 className="ham-menu-container__side-box__menu__h1">
             {textLanguage.current.menu}
           </h1>
-          {/* {textLanguage.current.menu} */}
-          <img className="ham-menu-container__side-box__menu__exit-icon" onClick={() =>  handleClick('exit')} src={darkMode ? closeIconDarkMode : closeIcon}/>
+          <img 
+            className="ham-menu-container__side-box__menu__exit-icon" 
+            onClick={() =>  handleClick('exit')} src={darkMode ? closeIconDarkMode : closeIcon}
+          />
         </section>
 
         <ul className="ham-menu-container__side-box__menu-list">
           {mainListDOM}
         </ul>
+
       </div>
     </nav>
   )

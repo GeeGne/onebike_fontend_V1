@@ -1,22 +1,24 @@
 .language-button {
   position: relative;
+  // font-size: inherit;
   color: var(--font-p-color);
   border: solid var(--font-p-color);;
   border-width: 0 0 2px 0;
   z-index: 10;
 
   &__display {
+    // font-size: inherit;
     font-weight: 600;
-    margin: 0 1rem 0.1rem 0.1rem;
+    margin: 0 1em 0.1em 0.1em;
   }
 
   &::before {
     content: "";
     position: absolute;
-    right: -0.3rem;
+    right: -0.3em;
     bottom: 0;
-    width: 1.5rem;
-    height: 1.5rem;
+    width: 1.5em;
+    height: 1.5em;
     background-image: var(--arrow-drop-down-icon);
     background-size: cover;
     background-repeat: no-repeat;
@@ -43,7 +45,7 @@
 
       & h3 {
         font-weight: 600;
-        margin: 0.7rem;
+        margin: 0.7em;
         transition: background-color 0.15s ease;
       }
 

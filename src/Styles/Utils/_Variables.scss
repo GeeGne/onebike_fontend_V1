@@ -1,6 +1,18 @@
+@use '_BreakPoints' as w;
+
 //  Icone size 
 :root {
-  --icon-size: 1.6rem;
+  --icon-size: 1.6em;
+  
+  // @include w.breakpoint(medium) {
+  //   --icon-size: 1.7rem;
+  // }
+  // @include w.breakpoint(large) {
+  //   --icon-size: 1.8rem;
+  // }
+  // @include w.breakpoint(xlarge) {
+  //   --icon-size: 1.9rem;
+  // }
 }
 
 // URLs 
@@ -11,9 +23,25 @@
   --shoppingCart-icon: url(src/assets/Img/Icons/shopping_cart.svg);
 
   // HamMenu Vars
-  --hamMenu-menu-font: 1.5rem;
-  --hamMenu-list-font: 1.3rem;
-  --hamMenu-list-icon: 1.5rem;
+  // --hamMenu-menu-font: 1.5rem;
+  // --hamMenu-list-font: 1.3rem;
+  // --hamMenu-list-icon: 1.5rem;
+  --hamMenu-exitIcon-size: 2.3em;
+  // @include w.breakpoint(medium) {
+  //   --hamMenu-exitIcon-size: 2.4rem;
+  // }
+  // @include w.breakpoint(large) {
+  //   --hamMenu-exitIcon-size: 2.5rem;
+  // }
+  // @include w.breakpoint(xlarge) {
+  //   --hamMenu-exitIcon-size: 2.6rem;
+  // }
+
+  // --hamMenu-list-icon: 1.5rem;
+
+  // NavBar Vars
+  --navBar-logoIcon-size: 4em;
+  --navBar-icon-size: 2em;
 }
 
 .dark-theme {

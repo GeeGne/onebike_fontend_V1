@@ -8,14 +8,14 @@
     flex-direction: row-reverse;
 
     &__light-dark-button  {
-      margin: 0.3rem auto 0.3rem 0.5rem;
+      margin: 0.3em auto 0.3em 0.5em;
     }
   }
 
   &__icons-a {    
     &__img {
       width: var(--icon-size);
-      margin: 0.3rem 0.5rem;
+      margin: 0.3em 0.5em;
     }
   }
 
@@ -24,10 +24,12 @@
   }
 
   &__light-dark-button {
-    margin: 0.3rem 0.5rem 0.3rem auto;
+    margin: 0.3em 0.5em 0.3em auto;
+    font-size: inherit;
   }
   
   &__language-button {
-    margin: 0.3rem 0.5rem;
+    margin: 0.3em 0.5em;
+    font-size: inherit;
   }
 }

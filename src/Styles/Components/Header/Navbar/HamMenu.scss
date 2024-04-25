@@ -12,7 +12,7 @@
 
   &__side-box {
     display: flex;
-    width: 15rem;
+    width: 15em;
     flex-direction: column;
     background-color: var(--hamMenu-sideBox-color);
     transition: transform 0.5s ease-out;
@@ -32,8 +32,8 @@
       &__exit-icon {
         background-color: hsl(0, 0%, 50%, 0);
         border-radius: 6rem;
-        width: 2rem;
-        height: 2rem;
+        width: var(--hamMenu-exitIcon-size);
+        // height: var(--hamMenu-exitIcon-size);
         padding: 0.2rem;
         aspect-ratio: 1 / 1;
         cursor: pointer;
@@ -71,17 +71,16 @@
 
           & .expand-circle {
             // display: flex;
-            width: var(--hamMenu-list-icon);
+            // width: var(--hamMenu-list-icon);
+            width: var(--icon-size);
             margin-left: auto;
             transition: transform 0.5s ease-out;
           }
-        }
 
-        &.clicked {
-          .ham-menu-container__side-box__menu-list__lists__title {
+          &.clicked {
             opacity: 1;
 
-            & .ham-menu-container__side-box__menu-list__lists__title__h2 {
+            &__h2 {
               font-weight: 550;
             }
 
@@ -148,7 +147,6 @@
               &__h3{}
             }
           }
-
         }
       }
 

@@ -1,9 +1,11 @@
+@use '../Utils/BreakPoints' as w;
+
 input,
 textarea,
 button {
   font-family: inherit;
   // font-size: clamp(1em, 1em + 1vw, 3em);
-  font-size: 1em;
+  font-size: 1rem;
 }
 
 h1,
@@ -23,16 +25,45 @@ h1 {
   // font-size: clamp(1.8em, 1.8em + 1vw, 3.8em);
   font-size: 1.5em;
   font-weight: 600;
+  // @include w.breakpoint(medium) {
+  //   font-size: 1.6rem;
+  // }
+  // @include w.breakpoint(large) {
+  //   font-size: 1.7rem;
+  // }
+  // @include w.breakpoint(xlarge) {
+  //   font-size: 1.8rem;
+  // }
 }
 
 h2 {
   // font-size: clamp(1.5em, 1.5em + 1vw, 3.5em);
   font-size: 1.3em;
   font-weight: 500;
+
+  // @include w.breakpoint(medium) {
+  //   font-size: 1.4rem;
+  // }
+  // @include w.breakpoint(large) {
+  //   font-size: 1.5rem;
+  // }
+  // @include w.breakpoint(xlarge) {
+  //   font-size: 1.6rem;
+  // }
 }
 
 h3 {
   // font-size: clamp(1.2em , 1.2em + 1vw, 3.5em);
   font-size: 1em;
   font-weight: 400;
+
+  // @include w.breakpoint(medium) {
+  //   font-size: 1.1rem;
+  // }
+  // @include w.breakpoint(large) {
+  //   font-size: 1.2rem;
+  // }
+  // @include w.breakpoint(xlarge) {
+  //   font-size: 1.3rem;
+  // }
 }

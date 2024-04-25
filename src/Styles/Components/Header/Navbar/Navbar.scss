@@ -3,21 +3,22 @@
   display: flex;
   flex: 1;
   align-items: center;
+  font-size: inherit;
   background-color: var(--button-color);
 
   body.arabic & {
     flex-direction: row-reverse;
 
     &__logo {
-      margin: 0.3rem 1rem 0.3rem auto;
+      margin: 0.3em 1em 0.3em auto;
     }
   }
 
   &__logo {
-    height: 4rem;
+    height: var(--navBar-logoIcon-size);
     filter: drop-shadow( 0 0 15px hsla(0, 0%, 100%, 0.4));
     cursor: pointer;
-    margin: 0.3rem auto 0.3rem 1rem;
+    margin: 0.3em auto 0.3em 1em;
   }
 
   &__hamburger {
@@ -27,12 +28,12 @@
 
   &__search {
     background-image: var(--search-icon);
-    margin: 0 1rem;
+    margin: 0 1em;
   }
 
   &__shoppingCart {
     background-image: var(--shoppingCart-icon);
-    margin: 0 1rem;
+    margin: 0 1em;
   }
 
   &__hamburger,
@@ -40,11 +41,12 @@
   &__shoppingCart {
     display: flex;
     position: relative;
-    width: 2rem;
-    height: 2rem;
-    // width: var(--icon-size);
-    // height: var(--icon-size);
-    background-size: contain;
+    font-size: inherit;
+    // width: 2rem;
+    // height: 2rem;
+    width: var(--navBar-icon-size);
+    height: var(--navBar-icon-size);
+    background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
     

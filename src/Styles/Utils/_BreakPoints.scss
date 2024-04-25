@@ -1,3 +1,21 @@
 //  Three break points: 1. Smartphone: 700px;
 //                      2. Tablet: 1000 px;
 //                      3. Desktop: x > 1000 px;
+
+$breakpoints-up: (
+  "medium": 700px,
+  "large": 1000px,
+  "xlarge": 1300px,
+);
+
+@mixin breakpoint($size) {
+  @media(min-width: map-get($breakpoints-up, $size)) {
+    @content;
+  }
+}
+
+// calling the function
+// @use '_BreakPoints file' as foo;
+// @include foo.breakpoint(large) {
+//  somthing: somthing;
+// }
