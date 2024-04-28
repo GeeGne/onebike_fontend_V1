@@ -1,3 +1,5 @@
+@use '../../../Utils/_BreakPoints' as w;
+
 .nav-container {
   position: relative;
   display: flex;
@@ -14,29 +16,20 @@
     }
   }
 
-  &__logo {
-    height: var(--navBar-logoIcon-size);
-    filter: drop-shadow( 0 0 15px hsla(0, 0%, 100%, 0.4));
-    cursor: pointer;
-    margin: 0.3em auto 0.3em 1em;
-  }
-
-  &__hamburger {
-    background-image: var(--hamburger-icon);
-    margin: 0 1em;
-  }
-
-  &__search {
-    background-image: var(--search-icon);
-    margin: 0 1em;
-  }
-
-  &__shoppingCart {
-    background-image: var(--shoppingCart-icon);
-    margin: 0 1em;
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100vw;
+    height: 100%;
+    background-color: var(--button-color);
+    z-index: -1;
   }
 
   &__hamburger,
+  &__favourite,
   &__search,
   &__shoppingCart {
     display: flex;
@@ -66,5 +59,66 @@
     }
   }
 
+  &__hamburger {
+    background-image: var(--hamburger-icon);
+    margin: 0 1em;
+  }
+  
+  &__logo {
+    height: var(--navBar-logoIcon-size);
+    filter: drop-shadow( 0 0 15px hsla(0, 0%, 100%, 0.4));
+    cursor: pointer;
+    margin: 0.3em auto 0.3em 1em;
+  }
+  
+  &__search {
+    background-image: var(--search-icon);
+    margin: 0 1em;
+  }
 
+  &__favourite {
+    // display: none;
+    background-image: var(--favourite-icon);
+    margin: 0 1em;
+    
+    @include w.breakpoint-down(medium) {
+      display: none;
+    }
+  }
+
+  &__shoppingCart {
+    background-image: var(--shoppingCart-icon);
+    margin: 0 1em;
+  }
+
+  // &__hamburger,
+  // &__favourite,
+  // &__search,
+  // &__shoppingCart {
+  //   display: flex;
+  //   position: relative;
+  //   font-size: inherit;
+  //   width: var(--navBar-icon-size);
+  //   height: var(--navBar-icon-size);
+  //   background-size: cover;
+  //   background-repeat: no-repeat;
+  //   background-position: center;
+    
+  //   &::before {
+  //     content: "";
+  //     position: absolute;
+  //     top: -0.5em;
+  //     bottom: -0.5em;
+  //     right: -0.5em;
+  //     left: -0.5em;
+  //     background-color: hsl(0, 0%, 80%, 0.5);
+  //     border-radius: 100%;
+  //     background-color: transparent;
+  //     transition: background-color 0.25s ease;
+  //   }
+
+  //   &:hover::before {
+  //     background-color: hsl(0, 0%, 80%, 0.5);
+  //   }
+  // }
 }

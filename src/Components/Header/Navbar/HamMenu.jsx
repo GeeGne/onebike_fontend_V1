@@ -39,6 +39,12 @@ function HamMenu ({menu, onChange, darkMode, language}) {
     },{
       mainList: 'Components',
       secondaryList: ['Handle Bar', 'Chain', 'Wheels', 'Frames', 'Forks']
+    },{
+      mainList: 'Clothing',
+      secondaryList: ['Upper Body', 'Lower Body', 'Essentials', 'Helmets', 'Shoes']
+    },{
+      mainList: 'Helmets & Shoes',
+      secondaryList: ['Handle Bar', 'Chain', 'Wheels', 'Frames', 'Forks']
     }],
     arabic: [{
       mainList: 'دراجات',
