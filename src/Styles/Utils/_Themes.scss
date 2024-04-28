@@ -25,6 +25,12 @@
   // Bubble pop
   --bubblePop-background-color: hsl(0, 0%, 0%, 0.7);
   --bubblePop-color: hsl(0, 0%, 100%);
+
+  // Alert
+  --alert-timer-background-color: hsl(0, 0%, 50%);
+  --alert-filler-background-color: hsl(0, 0%, 100%);
+  // --alert-filler-hover-background-color: hsl(0, 0%, 95%);
+  --alert-x-background-color: hsl(0, 0%, 70%);
 }
 
 //  Dark Theme
@@ -51,4 +57,10 @@
   // Bubble pop 
   --bubblePop-background-color: hsl(0, 0%, 100%, 0.7);
   --bubblePop-color: hsl(0, 0%, 0%);
+
+  // Alert
+  --alert-timer-background-color: hsl(0, 0%, 50%);
+  --alert-filler-background-color: hsl(0, 0%, 0%);
+  // --alert-filler-hover-background-color: hsl(0, 0%, 5%);
+  --alert-x-background-color: hsl(0, 0%, 30%);
 }

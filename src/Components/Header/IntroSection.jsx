@@ -26,6 +26,7 @@ function IntroSection ({onThemeChange, onLanguageChange}) {
   const [darkMode, setDarkMode] = useState(false);
   const [language, setLanguage] = useState('English');
   const [alertText, setAlertText] = useState(null);
+  const [newAlert, setNewAlert] = useState(0);
 
   const phoneNumberIconElement = useRef(null);
   const phoneNumberH2Element = useRef(null);
@@ -49,7 +50,8 @@ function IntroSection ({onThemeChange, onLanguageChange}) {
   const handleClick = () => {
     const number = phoneNumberH2Element.current.textContent;
     navigator.clipboard.writeText(number);
-    setAlertText('Number is copied to the clipboard successfully!')
+    setAlertText('Number is copied to the clipboard successfully!');
+    setNewAlert(Math.random());
   }
 
   const handleHover = type => {
@@ -66,7 +68,7 @@ function IntroSection ({onThemeChange, onLanguageChange}) {
 
   return (
     <>
-      <Alert alertText={alertText} />
+      <Alert alertText={alertText} newAlert={newAlert} />
       <section className={`userinfo-container ${language === 'العربيه' && 'arabic'}`}>
         {/* <Link to="/">
           <img className="logo" src={shoppingCartLogo}/>

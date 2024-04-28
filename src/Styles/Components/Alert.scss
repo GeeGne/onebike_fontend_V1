@@ -1,39 +1,25 @@
 .alert-container {
   position: fixed;
   display: flex;
-  // display: none;
   align-items: center;
-  top: 20%;
-  left: 25%;
-  transform: translate(-80%, -75%);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   padding: 0.5em;
-  background-color: rgba(255, 255, 255, 0);
   border-radius: 20px;
-  overflow: hidden;
+  // overflow: hidden;
   cursor: pointer;
   z-index: 100;
-  // animation-name: alertFadeIn--opacity, alertFadeOut;
-  // animation-timing-function: ease;
-  // animation-fill-mode: both;
-  // animation-delay: 1s, 0s;
-  // animation-duration: 0.5s, 10s;
 
-  // &.animate {
-  //   animation-name: alertFadeIn--opacity, alertFadeOut;
-  //   animation-timing-function: ease;
-  //   animation-fill-mode: both;
-  //   animation-delay: 1s, 0s;
-  //   animation-duration: 0.5s, 10s;
-  // }
+  &:hover {
+    filter: invert(5%);
+    // transform: scale(1.5);
+  }
 
   &__message {
     position: relative;
     margin-right: 0.5em;
-    // animation-name: alertFadeIn--opacity;
-    // animation-timing-function: ease;
-    // animation-fill-mode: both;
-    // animation-delay: 1s;
-    // animation-duration: 0.5s;
+    color: var(--font-p-color);
 
     &::before {
       content: "";
@@ -42,21 +28,19 @@
       right: -0.25em;
       height: 100%;
       width: 1px;
-      background-color: hsl(0, 0%, 30%);
+      background-color: hsl(0, 0%, 50%);
     }
   }
 
   &::after {
-    content: "x";
-    background-color: rgba(140, 139, 139, 0.405);
-    padding: 0 0.3em 0.2em 0.3em;
+    content: "X";
+    font-weight: 550;
+    background-color: var(--alert-x-background-color);
+    color: var(--font-h-color);
+    padding: 0.2em 0.4em 0.3em 0.4em;
     border-radius: 50%;
-    // animation-name: alertFadeIn--opacity;
-    // animation-timing-function: ease;
-    // animation-fill-mode: both;
-    // animation-delay: 1s;
-    // animation-duration: 0.5s;
-
+    opacity: var(--after-opacity, 0);
+    transition: opacity 0.5s ease;
   }
 
   &__filler-animation {
@@ -66,18 +50,19 @@
     width: 100%;
     height: 100%;
     transform: translate(-50%, -50%);
-    background-color: white;
+    background-color: var(--alert-filler-background-color);
     border-radius: 20px;
-    box-shadow: 0 0 6px 2px hsl(0, 0%, 30%, 0.5);
+    box-shadow: 0 0 3px 1px hsl(0, 0%, 30%, 0.5);
     z-index: -1;
   }
 
   &__timer-animation {
     position: absolute;
-    left: 0;
+    left: 1em;
     bottom: 0;
     width: 54%;
     height: 4px;
-    background-color: hsl(0, 0%, 50%);
+    border-radius: 4px;
+    background-color: var(--alert-timer-background-color);
   }
 }

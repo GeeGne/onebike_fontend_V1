@@ -42,13 +42,13 @@
   }
 
   to {
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0);
   }
 }
 
 @keyframes alertFadeOut {
   0% {
-    visibility: visibile;
+    visibility: visible;
     opacity: 1;
   }
 
@@ -86,7 +86,7 @@
   }
 
   100% {
-    width: 100%;
+    width: calc(100% - 2em);
   }
 }
 
@@ -125,4 +125,8 @@
   animation-timing-function: ease-out;
   animation-fill-mode: both;
   animation-duration: 10s;
+}
+
+.animation--none {
+  animation: none;
 }
