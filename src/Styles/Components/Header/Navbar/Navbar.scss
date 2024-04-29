@@ -91,34 +91,19 @@
     margin: 0 1em;
   }
 
-  // &__hamburger,
-  // &__favourite,
-  // &__search,
-  // &__shoppingCart {
-  //   display: flex;
-  //   position: relative;
-  //   font-size: inherit;
-  //   width: var(--navBar-icon-size);
-  //   height: var(--navBar-icon-size);
-  //   background-size: cover;
-  //   background-repeat: no-repeat;
-  //   background-position: center;
-    
-  //   &::before {
-  //     content: "";
-  //     position: absolute;
-  //     top: -0.5em;
-  //     bottom: -0.5em;
-  //     right: -0.5em;
-  //     left: -0.5em;
-  //     background-color: hsl(0, 0%, 80%, 0.5);
-  //     border-radius: 100%;
-  //     background-color: transparent;
-  //     transition: background-color 0.25s ease;
-  //   }
+  &__search-input {
 
-  //   &:hover::before {
-  //     background-color: hsl(0, 0%, 80%, 0.5);
-  //   }
-  // }
+    & input {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 100%;
+      height: 3em;
+      padding-left: 3.5em
+    }
+
+    &::before {
+
+    }
+  }
 }

@@ -28,6 +28,9 @@ function Navbar ({darkMode, language}) {
         <button className="nav-container__search"/>
         <button className="nav-container__favourite"/>
         <button className="nav-container__shoppingCart"/>
+        <div className="nav-container__search-input">
+          <input placeholder="type something"/>
+        </div>
       </nav>
       <HamMenu menu={menu} onChange={handleMenuChange} darkMode={darkMode} language={language}/>
       {/* <NavBottom/> */}

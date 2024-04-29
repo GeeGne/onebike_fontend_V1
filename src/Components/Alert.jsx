@@ -16,7 +16,7 @@ function Alert ({alertText, newAlert}) {
       alertElement.current.style.opacity = '0';
       return;
     }
-    console.log({alertText})
+
     alertElement.current.classList.remove('animation--none');
     alertElement.current.classList.remove('alertFadeOut');
     alertMessageElement.current.classList.remove('alertFadeIn--opacity');

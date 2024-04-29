@@ -7,13 +7,11 @@
   transform: translate(-50%, -50%);
   padding: 0.5em;
   border-radius: 20px;
-  // overflow: hidden;
   cursor: pointer;
   z-index: 100;
 
   &:hover {
     filter: invert(5%);
-    // transform: scale(1.5);
   }
 
   &__message {
@@ -64,5 +62,46 @@
     height: 4px;
     border-radius: 4px;
     background-color: var(--alert-timer-background-color);
+  }
+
+  body.arabic & {
+    flex-direction: row-reverse;
+
+    &__message {
+      margin-right: 0;
+      margin-left: 0.5em;
+
+      &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -0.25em;
+        right: auto;
+        height: 100%;
+        width: 1px;
+        background-color: hsl(0, 0%, 50%);
+      }
+    }
+
+    // &::before {
+    //   content: "X";
+    //   font-weight: 550;
+    //   background-color: var(--alert-x-background-color);
+    //   color: var(--font-h-color);
+    //   padding: 0.2em 0.4em 0.3em 0.4em;
+    //   border-radius: 50%;
+    //   opacity: var(--after-opacity, 0);
+    //   transition: opacity 0.5s ease;
+    // }
+
+    // &::after {
+    //   content: "";
+    //   padding: 0;
+    // }
+
+    &__timer-animation {
+      right: 1em;
+      left: auto;
+    }
   }
 }

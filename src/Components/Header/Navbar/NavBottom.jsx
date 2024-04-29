@@ -5,7 +5,9 @@ function NavBottom () {
 
   return (
     <>
-      
+      <section>
+        
+      </section>
     </>
   )
 }
