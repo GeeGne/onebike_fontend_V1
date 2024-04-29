@@ -49,7 +49,10 @@ function IntroSection ({onThemeChange, onLanguageChange}) {
 
   const handleClick = () => {
     const number = phoneNumberH2Element.current.textContent;
-    const alertMessage = language === 'English' ? 'Number is copied to the clipboard successfully!' : 'لقد تم نسخ رقم الهاتف بنجاح!ـ'
+    const alertMessage = language === 'English' ? 
+    'Number is copied to the clipboard successfully!' : 
+    'لقد تم نسخ رقم الهاتف بنجاح!ـ';
+    
     navigator.clipboard.writeText(number);
     setAlertText(alertMessage);
     setNewAlert(Math.random());

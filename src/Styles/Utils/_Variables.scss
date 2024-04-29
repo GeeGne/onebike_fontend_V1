@@ -8,10 +8,15 @@
 // URLs 
 :root {
   --arrow-drop-down-icon: url(src/assets/Img/Icons/arrow_drop_down.svg);
+  
+  // NavBar Vars
+  --shoppingCart-icon: url(src/assets/Img/Icons/shopping_cart.svg);
+  --search-icon: url(src/assets/Img/Icons/search.svg);
   --hamburger-icon: url(src/assets/Img/Icons/menu.svg);
   --favourite-icon: url(src/assets/Img/Icons/heart.svg);
-  --search-icon: url(src/assets/Img/Icons/search.svg);
-  --shoppingCart-icon: url(src/assets/Img/Icons/shopping_cart.svg);
+  --user-icon: url(src/assets/Img/Icons/user.svg);
+  --navBar-logoIcon-size: 4em;
+  --navBar-icon-size: 2em;
 
   // HamMenu Vars
   // --hamMenu-menu-font: 1.5rem;
@@ -19,16 +24,15 @@
   // --hamMenu-list-icon: 1.5rem;
   --hamMenu-exitIcon-size: 2.3em;
   // --hamMenu-list-icon: 1.5rem;
-
-  // NavBar Vars
-  --navBar-logoIcon-size: 4em;
-  --navBar-icon-size: 2em;
+  
 }
 
 .dark-theme {
+  // Navbar
   --arrow-drop-down-icon: url(src/assets/Img/Icons/arrow_drop_down_darkMode.svg);
   --hamburger-icon: url(src/assets/Img/Icons/menu_darkMode.svg);
   --favourite-icon: url(src/assets/Img/Icons/heart_darkMode.svg);
   --search-icon: url(src/assets/Img/Icons/search_darkMode.svg);
   --shoppingCart-icon: url(src/assets/Img/Icons/shopping_cart_darkMode.svg);
+  --user-icon: url(src/assets/Img/Icons/user_darkMode.svg);
 }

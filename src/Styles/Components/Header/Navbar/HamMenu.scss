@@ -163,14 +163,13 @@
     flex-direction: row-reverse;
 
     &__side-box {
-
       &__menu {
         flex-direction: row-reverse;
-      }
-      
-      &__menu-list {
-        &__lists {
 
+      }
+      &__menu-list {
+        overflow: auto hidden;
+        &__lists {
           &__title {
             flex-direction: row-reverse;
 

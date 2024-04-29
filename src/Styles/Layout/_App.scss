@@ -3,20 +3,20 @@
   // grid-template-columns: 1fr;
   grid-template-rows: auto 1fr auto;
   height: 1000px;
-  border: solid 1px black;
+  // border: solid 1px black;
   gap: 1rem;
   max-width: 1200px;
   // align-items: end;
   margin: 0 auto;
 
   &__header {
-    border: solid 1px black;
+    // border: solid 1px black;
   }
   &__main {
-    border: solid 1px black;
+    // border: solid 1px black;
     grid-row: 1fr;
   }
   &__footer {
-    border: solid 1px black;
+    // border: solid 1px black;
   }
 }
