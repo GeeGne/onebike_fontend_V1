@@ -1,6 +1,7 @@
 import React, {useState, useRef, useEffect} from 'react';
 
 import HamMenu from './HamMenu';
+import DropMenu from './DropMenu';
 
 import '../../../Styles/Components/Header/Navbar/Navbar.scss';
 
@@ -14,11 +15,39 @@ function Navbar ({darkMode, language}) {
   const [search, setSearch] = useState(false);
   const searchInputElement = useRef(null);
 
+  const mainListData = {
+    english: [{
+      mainList: 'Bikes',
+      secondaryList: ['Road Bikes', 'Mountain Bikes', 'Hybird Bikes']
+    },{
+      mainList: 'Accessories',
+      secondaryList: ['Flash lights', 'Horns', 'Wear', 'Stickers']
+    },{
+      mainList: 'Components',
+      secondaryList: ['Handle Bar', 'Chain', 'Wheels', 'Frames', 'Forks']
+    },{
+      mainList: 'Clothing',
+      secondaryList: ['Upper Body', 'Lower Body', 'Essentials', 'Helmets', 'Shoes']
+    },{
+      mainList: 'Helmets & Shoes',
+      secondaryList: ['Handle Bar', 'Chain', 'Wheels', 'Frames', 'Forks']
+    }],
+    arabic: [{
+      mainList: 'دراجات',
+      secondaryList: ['سباقي', 'جبلي', 'هجين']
+    },{
+      mainList: 'اكسسوارات',
+      secondaryList: ['سباقي', 'جبلي', 'هجين']
+    },{
+      mainList: 'قطع الدراجه',
+      secondaryList: ['سباقي', 'جبلي', 'هجين']
+    }]
+  }
+
   useEffect(() => {
     const handleResize = () => {
       const largeWidth = 1000;
       const webWidth = window.innerWidth;
-      console.log(window.innerWidth);
       setSearch(webWidth >= largeWidth ? true : false)
     }
 
@@ -28,10 +57,10 @@ function Navbar ({darkMode, language}) {
   }, []);
 
   useEffect(() => {
-    const inputElement = searchInputElement.current;
-    inputElement.style.visibility = `${search ? 'visible' : 'hidden'}`;
-    inputElement.style.opacity = `${search ? '1' : '0'}`;
-    inputElement.style.transform = `translateY(${search ? '0' : '-2em'})`;
+    // const inputElement = searchInputElement.current;
+    // inputElement.style.visibility = `${search ? 'visible' : 'hidden'}`;
+    // inputElement.style.opacity = `${search ? '1' : '0'}`;
+    // inputElement.style.transform = `translateY(${search ? '0' : '-2em'})`;
   }, [search])
 
   const handleClick = (type) => {
@@ -42,13 +71,19 @@ function Navbar ({darkMode, language}) {
       setMenu(oldMenu => !oldMenu)
     }
 
-    if (type === 'search cursor hover') {
-      setSearch(true)
-    }
+    // if (type === 'search cursor hover') {
+    //   setSearch(true)
+    // }
 
-    if (type === 'search cursor leave') {
-      setSearch(webWidth >= largeWidth ? true : false); 
-    }
+    // if (type === 'search cursor leave') {
+    //   setSearch(webWidth >= largeWidth ? true : false); 
+    // }
+  }
+
+  const handleHover = type => {
+    const largeWidth = 1000;
+    const webWidth = window.innerWidth;
+    setSearch(webWidth >= largeWidth ? true : type);
   }
 
   const handleMenuChange = (data) => {
@@ -60,24 +95,25 @@ function Navbar ({darkMode, language}) {
       <nav className="nav-container">
         <button className="nav-container__hamburger" onClick={() => handleClick('ham')}/>
         <img className="nav-container__logo" src={logo}/>
-        <div className="nav-container__search-input"
-          onMouseEnter={() => handleClick('search cursor hover')} 
-          onMouseLeave={() => handleClick('search cursor leave')}
+        {/* <div className="nav-container__search-input" */}
+        <div className={search ? "nav-container__search-input__hover" : "nav-container__search-input"}
+          onMouseEnter={() => handleHover(true)} 
+          onMouseLeave={() => handleHover(false)}
           ref={searchInputElement}
         >
           <input placeholder={language === 'English' ? 'Type something' : 'هل تبحث عن شيء؟'}/>
           <img src={darkMode ? searchIconDarkMode : searchIcon}/>
         </div>
         <button className="nav-container__search" 
-          onMouseEnter={() => handleClick('search cursor hover')} 
-          onMouseLeave={() => handleClick('search cursor leave')}
+          onMouseEnter={() => handleHover(true)} 
+          onMouseLeave={() => handleHover(false)}
         />
         <button className="nav-container__user"/>
         <button className="nav-container__favourite"/>
         <button className="nav-container__shoppingCart"/>
       </nav>
-
-      <HamMenu menu={menu} onChange={handleMenuChange} darkMode={darkMode} language={language}/>
+      <DropMenu menu={menu} darkMode={darkMode} language={language} mainListData={mainListData}/>
+      <HamMenu menu={menu} onChange={handleMenuChange} darkMode={darkMode} language={language} mainListData={mainListData}/>
       {/* <NavBottom/> */}
     </>
     

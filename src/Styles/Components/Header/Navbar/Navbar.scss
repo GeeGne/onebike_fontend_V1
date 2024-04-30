@@ -7,6 +7,8 @@
   align-items: center;
   font-size: inherit;
   background-color: var(--button-color);
+  z-index: 10;
+  opacity: 0.5;
 
   body.arabic & {
     flex-direction: row-reverse;
@@ -112,7 +114,7 @@
   &__search {
     position: relative;
     background-image: var(--search-icon);
-    
+
     &::after {
       content: "";
       position: absolute;
@@ -142,42 +144,67 @@
   }
 
   &__favourite {
-    display: none;
+    display: flex;
+    background-image: var(--favourite-icon);
 
-  @include w.breakpoint-up(medium) {
-      display: flex;
-      background-image: var(--favourite-icon);
+    &::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -1em;
+      height: 100%;
+      width: 1px;
+      background-color: hsl(0, 0%, 50%);
+    }
 
-      &::after {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: -1em;
-        height: 100%;
-        width: 1px;
-        background-color: hsl(0, 0%, 50%);
-      }
+    @include w.breakpoint-down(medium) {
+      display: none;
     }
   }
 
   &__user {
-    display: none;
+    display: flex;
+    background-image: var(--user-icon);
 
-  @include w.breakpoint-up(medium) {
-      display: flex;
-      background-image: var(--user-icon);
+    @include w.breakpoint-down(medium) {
+      display: none;
     }
   }
 
   &__search-input {
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(-2em);
+  }
+
+  &__search-input__hover {
+    visibility: visible;
+    opacity: 1;
     position: absolute;
     top: 100%;
     left: 0;
     width: 100%;
+    transform: translateY(0);
     transition: opacity 0.5s ease-out, transform 0.25s ease-out;
 
+    &:hover {
+      visibility: visible;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80%;
+      height: 1px;
+      background-color: hsl(0, 0%, 70%);
+    }
+
     & input {
-      position: relative;
       width: 100%;
       height: 3em;
       color: var(--font-h-color);

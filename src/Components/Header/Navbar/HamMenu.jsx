@@ -20,7 +20,7 @@ import bicycle2IconDarkMode from '../../../assets/Img/Icons/menu_darkMode.svg';
 import accesssoriesIconDarkMode from '../../../assets/Img/Icons/menu_darkMode.svg';
 import partsIconDarkMode from '../../../assets/Img/Icons/menu_darkMode.svg';
 
-function HamMenu ({menu, onChange, darkMode, language}) {
+function HamMenu ({menu, onChange, darkMode, language, mainListData}) {
 
   const hamMenuContainerElement = useRef(null);
   const hamMenuSideBoxElement = useRef(null);
@@ -29,34 +29,34 @@ function HamMenu ({menu, onChange, darkMode, language}) {
 
   const textLanguage = useRef({})
 
-  const mainListData = {
-    english: [{
-      mainList: 'Bikes',
-      secondaryList: ['Road Bikes', 'Mountain Bikes', 'Hybird Bikes']
-    },{
-      mainList: 'Accessories',
-      secondaryList: ['Flash lights', 'Horns', 'Wear', 'Stickers']
-    },{
-      mainList: 'Components',
-      secondaryList: ['Handle Bar', 'Chain', 'Wheels', 'Frames', 'Forks']
-    },{
-      mainList: 'Clothing',
-      secondaryList: ['Upper Body', 'Lower Body', 'Essentials', 'Helmets', 'Shoes']
-    },{
-      mainList: 'Helmets & Shoes',
-      secondaryList: ['Handle Bar', 'Chain', 'Wheels', 'Frames', 'Forks']
-    }],
-    arabic: [{
-      mainList: 'دراجات',
-      secondaryList: ['سباقي', 'جبلي', 'هجين']
-    },{
-      mainList: 'اكسسوارات',
-      secondaryList: ['سباقي', 'جبلي', 'هجين']
-    },{
-      mainList: 'قطع الدراجه',
-      secondaryList: ['سباقي', 'جبلي', 'هجين']
-    }]
-  }
+  // const mainListData = {
+  //   english: [{
+  //     mainList: 'Bikes',
+  //     secondaryList: ['Road Bikes', 'Mountain Bikes', 'Hybird Bikes']
+  //   },{
+  //     mainList: 'Accessories',
+  //     secondaryList: ['Flash lights', 'Horns', 'Wear', 'Stickers']
+  //   },{
+  //     mainList: 'Components',
+  //     secondaryList: ['Handle Bar', 'Chain', 'Wheels', 'Frames', 'Forks']
+  //   },{
+  //     mainList: 'Clothing',
+  //     secondaryList: ['Upper Body', 'Lower Body', 'Essentials', 'Helmets', 'Shoes']
+  //   },{
+  //     mainList: 'Helmets & Shoes',
+  //     secondaryList: ['Handle Bar', 'Chain', 'Wheels', 'Frames', 'Forks']
+  //   }],
+  //   arabic: [{
+  //     mainList: 'دراجات',
+  //     secondaryList: ['سباقي', 'جبلي', 'هجين']
+  //   },{
+  //     mainList: 'اكسسوارات',
+  //     secondaryList: ['سباقي', 'جبلي', 'هجين']
+  //   },{
+  //     mainList: 'قطع الدراجه',
+  //     secondaryList: ['سباقي', 'جبلي', 'هجين']
+  //   }]
+  // }
 
   useEffect(() => {
     if (language === 'English') {

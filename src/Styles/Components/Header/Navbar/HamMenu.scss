@@ -1,3 +1,5 @@
+@use 'src/Styles/Utils/_breakPoints' as w;
+
 .ham-menu-container {
   visibility: hidden;
   position: fixed;
@@ -9,6 +11,10 @@
   background-color: hsl(0, 0%, 0%, 0);
   z-index: 100;
   transition: background-color 0.5s ease-out;
+
+  @include w.breakpoint-up(large) {
+    display: none;
+  }
 
   &__side-box {
     display: flex;
