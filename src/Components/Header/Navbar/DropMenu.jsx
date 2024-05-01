@@ -21,17 +21,20 @@ function DropMenu ({darkMode, language, mainListData, menu}) {
     dropMenuElement.current.style.height = `${menu ? String(dropHeight) : '0'}px`;
   }, [menu])
 
-  const handleHover = type => {
-    setDropMenu(type);
+  const handleHover = (type, e) => {
+    const element = e.currentTarget;
+    console.log(element);
+    type ? element.classList.add('hover') : element.classList.remove('hover');
+    // setDropMenu(type);
   }
-
+                                                         
   return (
     <>
       <section className="drop-menu" ref={dropMenuElement}>
         <ul className="drop-menu__items" ref={itemsElement}>
-          <li className={`drop-menu__items__item${dropMenu ? ' hover' : ''}`} onMouseEnter={() => handleHover(true)} onMouseLeave={() => handleHover(false)} ref={itemElement}>
+          <li className={`drop-menu__items__item${dropMenu ? ' hover' : ''}`} onMouseEnter={(e) => handleHover(true, e)} onMouseLeave={(e) => handleHover(false, e)} ref={itemElement}>
             <h2 className="drop-menu__items__item__title">Parts</h2>
-            <ul className={`drop-menu__items__item__sub-items${dropMenu ? ' hover' : ''}`} onMouseEnter={() => handleHover(true)} onMouseLeave={() => handleHover(false)} ref={subItemsElement}>
+            <ul className={`drop-menu__items__item__sub-items${dropMenu ? ' hover' : ''}`} onMouseEnter={(e) => handleHover(true, e)} onMouseLeave={(e) => handleHover(false, e)} ref={subItemsElement}>
               <li className="drop-menu__items__item__sub-items__sub-item">
                 <h2 className="drop-menu__items__item__sub-items__sub-item__title">Wheels</h2>
                 <ul className="drop-menu__items__item__sub-items__sub-item__sub-sub-items">
@@ -67,32 +70,82 @@ function DropMenu ({darkMode, language, mainListData, menu}) {
               </li>
             </ul>
           </li>
-          {/* <li className="drop-menu__items__item">
+          <li className={`drop-menu__items__item${dropMenu ? ' hover' : ''}`} onMouseEnter={(e) => handleHover(true, e)} onMouseLeave={(e) => handleHover(false, e)} ref={itemElement}>
             <h2 className="drop-menu__items__item__title">Parts</h2>
-            <ul className="drop-menu__items__item__sub-items">
+            <ul className={`drop-menu__items__item__sub-items${dropMenu ? ' hover' : ''}`} onMouseEnter={(e) => handleHover(true, e)} onMouseLeave={(e) => handleHover(false, e)} ref={subItemsElement}>
+              <li className="drop-menu__items__item__sub-items__sub-item">
+                <h2 className="drop-menu__items__item__sub-items__sub-item__title">merorrs</h2>
+                <ul className="drop-menu__items__item__sub-items__sub-item__sub-sub-items">
+                  <li className="drop-menu__items__item__sub-items__sub-item__sub-sub-items__sub-sub-item">
+                    <h3 className="drop-menu__items__item__sub-items__sub-item__sub-sub-items__sub-sub-item__title">Mountains</h3>
+                    <h3 className="drop-menu__items__item__sub-items__sub-item__sub-sub-items__sub-sub-item__title">Mountains</h3>
+                    <h3 className="drop-menu__items__item__sub-items__sub-item__sub-sub-items__sub-sub-item__title">Mountains</h3>
+                    <h3 className="drop-menu__items__item__sub-items__sub-item__sub-sub-items__sub-sub-item__title">Mountains</h3>
+                  </li>
+                </ul>
+              </li>
+              <li className="drop-menu__items__item__sub-items__sub-item">
+                <h2 className="drop-menu__items__item__sub-items__sub-item__title">merors</h2>
+                <ul className="drop-menu__items__item__sub-items__sub-item__sub-sub-items">
+                  <li className="drop-menu__items__item__sub-items__sub-item__sub-sub-items__sub-sub-item">
+                    <h3 className="drop-menu__items__item__sub-items__sub-item__sub-sub-items__sub-sub-item__title">Mountains</h3>
+                    <h3 className="drop-menu__items__item__sub-items__sub-item__sub-sub-items__sub-sub-item__title">Mountains</h3>
+                    <h3 className="drop-menu__items__item__sub-items__sub-item__sub-sub-items__sub-sub-item__title">Mountains</h3>
+                    <h3 className="drop-menu__items__item__sub-items__sub-item__sub-sub-items__sub-sub-item__title">Mountains</h3>
+                  </li>
+                </ul>
+              </li>
               <li className="drop-menu__items__item__sub-items__sub-item">
                 <h2 className="drop-menu__items__item__sub-items__sub-item__title">Wheels</h2>
                 <ul className="drop-menu__items__item__sub-items__sub-item__sub-sub-items">
                   <li className="drop-menu__items__item__sub-items__sub-item__sub-sub-items__sub-sub-item">
-                    <h2 className="drop-menu__items__item__sub-items__sub-item__sub-sub-items__sub-sub-item__title"></h2>
+                    <h3 className="drop-menu__items__item__sub-items__sub-item__sub-sub-items__sub-sub-item__title">Mountains</h3>
+                    <h3 className="drop-menu__items__item__sub-items__sub-item__sub-sub-items__sub-sub-item__title">Mountains</h3>
+                    <h3 className="drop-menu__items__item__sub-items__sub-item__sub-sub-items__sub-sub-item__title">Mountains</h3>
+                    <h3 className="drop-menu__items__item__sub-items__sub-item__sub-sub-items__sub-sub-item__title">Mountains</h3>
                   </li>
                 </ul>
               </li>
             </ul>
           </li>
-          <li className="drop-menu__items__item">
+          <li className={`drop-menu__items__item${dropMenu ? ' hover' : ''}`} onMouseEnter={(e) => handleHover(true, e)} onMouseLeave={(e) => handleHover(false, e)} ref={itemElement}>
             <h2 className="drop-menu__items__item__title">Parts</h2>
-            <ul className="drop-menu__items__item__sub-items">
+            <ul className={`drop-menu__items__item__sub-items${dropMenu ? ' hover' : ''}`} onMouseEnter={(e) => handleHover(true, e)} onMouseLeave={(e) => handleHover(false, e)} ref={subItemsElement}>
               <li className="drop-menu__items__item__sub-items__sub-item">
-                <h2 className="drop-menu__items__item__sub-items__sub-item__title">Wheels</h2>
+                <h2 className="drop-menu__items__item__sub-items__sub-item__title">flash</h2>
                 <ul className="drop-menu__items__item__sub-items__sub-item__sub-sub-items">
                   <li className="drop-menu__items__item__sub-items__sub-item__sub-sub-items__sub-sub-item">
-                    <h2 className="drop-menu__items__item__sub-items__sub-item__sub-sub-items__sub-sub-item__title"></h2>
+                    <h3 className="drop-menu__items__item__sub-items__sub-item__sub-sub-items__sub-sub-item__title">Mountains</h3>
+                    <h3 className="drop-menu__items__item__sub-items__sub-item__sub-sub-items__sub-sub-item__title">Mountains</h3>
+                    <h3 className="drop-menu__items__item__sub-items__sub-item__sub-sub-items__sub-sub-item__title">Mountains</h3>
+                    <h3 className="drop-menu__items__item__sub-items__sub-item__sub-sub-items__sub-sub-item__title">Mountains</h3>
+                  </li>
+                </ul>
+              </li>
+              <li className="drop-menu__items__item__sub-items__sub-item">
+                <h2 className="drop-menu__items__item__sub-items__sub-item__title">flash</h2>
+                <ul className="drop-menu__items__item__sub-items__sub-item__sub-sub-items">
+                  <li className="drop-menu__items__item__sub-items__sub-item__sub-sub-items__sub-sub-item">
+                    <h3 className="drop-menu__items__item__sub-items__sub-item__sub-sub-items__sub-sub-item__title">Mountains</h3>
+                    <h3 className="drop-menu__items__item__sub-items__sub-item__sub-sub-items__sub-sub-item__title">Mountains</h3>
+                    <h3 className="drop-menu__items__item__sub-items__sub-item__sub-sub-items__sub-sub-item__title">Mountains</h3>
+                    <h3 className="drop-menu__items__item__sub-items__sub-item__sub-sub-items__sub-sub-item__title">Mountains</h3>
+                  </li>
+                </ul>
+              </li>
+              <li className="drop-menu__items__item__sub-items__sub-item">
+                <h2 className="drop-menu__items__item__sub-items__sub-item__title">flash</h2>
+                <ul className="drop-menu__items__item__sub-items__sub-item__sub-sub-items">
+                  <li className="drop-menu__items__item__sub-items__sub-item__sub-sub-items__sub-sub-item">
+                    <h3 className="drop-menu__items__item__sub-items__sub-item__sub-sub-items__sub-sub-item__title">Mountains</h3>
+                    <h3 className="drop-menu__items__item__sub-items__sub-item__sub-sub-items__sub-sub-item__title">Mountains</h3>
+                    <h3 className="drop-menu__items__item__sub-items__sub-item__sub-sub-items__sub-sub-item__title">Mountains</h3>
+                    <h3 className="drop-menu__items__item__sub-items__sub-item__sub-sub-items__sub-sub-item__title">Mountains</h3>
                   </li>
                 </ul>
               </li>
             </ul>
-          </li> */}
+          </li>
         </ul>
       </section>
     </>

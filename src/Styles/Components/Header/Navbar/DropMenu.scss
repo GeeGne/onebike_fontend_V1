@@ -4,7 +4,7 @@
   position: relative;
   transition: height 0.5s ease;
   
-  @include w.breakpoint-down(medium) {
+  @include w.breakpoint-down(large) {
     display: none;
   }
 
@@ -16,7 +16,30 @@
     bottom: 0;
     left: 0;
     width: 100%;
-    // padding: 0.5em;
+    
+    &::before {
+      // whole page filler
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      width: 100vw;
+      height: 100%;
+      transform: translateX(-50%);
+      background-color: rgb(255, 255, 255);
+    }
+
+    &::after {
+      // whole page filler
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      width: 100vw;
+      height: 1px;
+      transform: translateX(-50%);
+      background-color: var(--boxEnd-border-background-color);
+    }
 
     &__item {
 
@@ -30,6 +53,7 @@
         background-color: var(--primary-color);
         opacity: 0;
         transform: scaleX(0);
+        z-index: 1;
         transition: transform 0.25s ease;
       }
 
@@ -45,7 +69,6 @@
           left: 0;
           width: 100%;
           height: 5px;
-          // background-color: red;
           transform: scaleX(0);
           transition: transform 0.5s ease-out;
         }
@@ -58,11 +81,15 @@
         }
 
         .drop-menu__items__item__title {
-          // padding: 9em;
           &::before {
             background-color: var(--primary-color);
             transform: scaleX(1);
           }
+        }
+
+        & .drop-menu__items__item__sub-items {
+          visibility: visible;
+          opacity: 1;
         }
       }
     
@@ -76,16 +103,16 @@
         top: 100%;
         left: 0;
         width: 100%;
-        background-color: hsl(0, 0%, 95%);
+        background-color: var(--boxEnd-border-background-color);
         // height: 3rem;
         padding: 1em;
         z-index: 20;
         transition: opacity 0.5s ease-out;
 
-        &.hover {
-          visibility: visible;
-          opacity: 1;
-        }
+        // &.hover {
+        //   visibility: visible;
+        //   opacity: 1;
+        // }
 
         &__sub-item {
           display: flex;
