@@ -12,43 +12,99 @@
     position: absolute;
     display: flex; 
     justify-content: space-evenly;
-    padding: 1em;
-    background-color: rgb(255, 167, 167);
+    background-color: rgb(255, 255, 255);
     bottom: 0;
     left: 0;
     width: 100%;
+    // padding: 0.5em;
 
     &__item {
-      &__title {
-        // padding: 0 1em;
-        // border: solid hsl(0, 0%, 50%);
-        // border-width: 0 1px 0 0;
-        cursor: pointer;
+
+      &::before {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        height: 1px;
+        width: 100%;
+        background-color: var(--primary-color);
+        opacity: 0;
+        transform: scaleX(0);
+        transition: transform 0.25s ease;
       }
 
-      &:hover {
-        background-color: white;
-        &__sub-items {
-          background-color: red;
+      &__title {
+        position: relative;
+        padding: 0.5em;
+        cursor: pointer;
+
+        &::before {
+          content: "";
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          height: 5px;
+          // background-color: red;
+          transform: scaleX(0);
+          transition: transform 0.5s ease-out;
         }
       }
 
+      &.hover {
+        &::before {
+          opacity: 1;
+          transform: scaleY(1);
+        }
+
+        .drop-menu__items__item__title {
+          // padding: 9em;
+          &::before {
+            background-color: var(--primary-color);
+            transform: scaleX(1);
+          }
+        }
+      }
+    
+
       &__sub-items {
+        visibility: hidden;
+        opacity: 0;
         position: absolute;
         display: flex;
         justify-content: space-evenly;
         top: 100%;
         left: 0;
         width: 100%;
-        background-color: grey;
-        height: 3rem;
+        background-color: hsl(0, 0%, 95%);
+        // height: 3rem;
+        padding: 1em;
+        z-index: 20;
+        transition: opacity 0.5s ease-out;
+
+        &.hover {
+          visibility: visible;
+          opacity: 1;
+        }
 
         &__sub-item {
           display: flex;
           flex-direction: column;
+          // background-color: white;
 
           &__title {
-
+            position: relative;
+            padding-bottom: 0.5em;
+            &::before {
+              content: "";
+              position: absolute;
+              bottom: 0;
+              left: 50%;
+              transform: translateX(-50%);
+              width: 150%;
+              height: 1px;
+              background-color: hsl(0, 0%, 50%);
+            }
           }
 
           &__sub-sub-items {
@@ -57,7 +113,13 @@
 
             &__sub-sub-item {
               &__title {
+                cursor: pointer;
+                margin-top: 0.5em;
+                color: var(--font-p-color);
 
+                &:hover {
+                  color: var(--font-h-color)
+                }
               }
             }
           }

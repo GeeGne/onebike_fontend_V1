@@ -174,20 +174,14 @@
   &__search-input {
     visibility: hidden;
     opacity: 0;
-    transform: translateY(-2em);
-  }
-
-  &__search-input__hover {
-    visibility: visible;
-    opacity: 1;
     position: absolute;
     top: 100%;
     left: 0;
     width: 100%;
-    transform: translateY(0);
+    transform: translateY(-2em);
     transition: opacity 0.5s ease-out, transform 0.25s ease-out;
 
-    &:hover {
+    &.hover {
       visibility: visible;
       opacity: 1;
       transform: translateY(0);

@@ -56,28 +56,8 @@ function Navbar ({darkMode, language}) {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  useEffect(() => {
-    // const inputElement = searchInputElement.current;
-    // inputElement.style.visibility = `${search ? 'visible' : 'hidden'}`;
-    // inputElement.style.opacity = `${search ? '1' : '0'}`;
-    // inputElement.style.transform = `translateY(${search ? '0' : '-2em'})`;
-  }, [search])
-
-  const handleClick = (type) => {
-    const largeWidth = 1000;
-    const webWidth = window.innerWidth;
-
-    if (type === 'ham') {
-      setMenu(oldMenu => !oldMenu)
-    }
-
-    // if (type === 'search cursor hover') {
-    //   setSearch(true)
-    // }
-
-    // if (type === 'search cursor leave') {
-    //   setSearch(webWidth >= largeWidth ? true : false); 
-    // }
+  const handleClick = () => {
+    setMenu(oldMenu => !oldMenu)
   }
 
   const handleHover = type => {
@@ -93,10 +73,11 @@ function Navbar ({darkMode, language}) {
   return (
     <>
       <nav className="nav-container">
-        <button className="nav-container__hamburger" onClick={() => handleClick('ham')}/>
+        <button className="nav-container__hamburger" onClick={handleClick}/>
         <img className="nav-container__logo" src={logo}/>
         {/* <div className="nav-container__search-input" */}
-        <div className={search ? "nav-container__search-input__hover" : "nav-container__search-input"}
+        {/* <div className={search ? "nav-container__search-input hover" : "nav-container__search-input"} */}
+        <div className={`nav-container__search-input${search ? ' hover' : ''}`}
           onMouseEnter={() => handleHover(true)} 
           onMouseLeave={() => handleHover(false)}
           ref={searchInputElement}
