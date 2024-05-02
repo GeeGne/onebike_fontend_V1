@@ -15,32 +15,133 @@ function Navbar ({darkMode, language}) {
   const [search, setSearch] = useState(false);
   const searchInputElement = useRef(null);
 
+  // const mainListData = {
+  //   english: [{
+  //     mainList: 'Bikes',
+  //     secondaryList: ['Road Bikes', 'Mountain Bikes', 'Hybird Bikes']
+  //   },{
+  //     mainList: 'Accessories',
+  //     secondaryList: ['Flash lights', 'Horns', 'Wear', 'Stickers']
+  //   },{
+  //     mainList: 'Components',
+  //     secondaryList: ['Handle Bar', 'Chain', 'Wheels', 'Frames', 'Forks']
+  //   },{
+  //     mainList: 'Clothing',
+  //     secondaryList: ['Upper Body', 'Lower Body', 'Essentials', 'Helmets', 'Shoes']
+  //   },{
+  //     mainList: 'Helmets & Shoes',
+  //     secondaryList: ['Handle Bar', 'Chain', 'Wheels', 'Frames', 'Forks']
+  //   }],
+  //   arabic: [{
+  //     mainList: 'دراجات',
+  //     secondaryList: ['سباقي', 'جبلي', 'هجين']
+  //   },{
+  //     mainList: 'اكسسوارات',
+  //     secondaryList: ['سباقي', 'جبلي', 'هجين']
+  //   },{
+  //     mainList: 'قطع الدراجه',
+  //     secondaryList: ['سباقي', 'جبلي', 'هجين']
+  //   }]
+  // }
+
   const mainListData = {
     english: [{
       mainList: 'Bikes',
-      secondaryList: ['Road Bikes', 'Mountain Bikes', 'Hybird Bikes']
+      secondaryList: [{
+        name:  'Road Bikes',
+        thirdList: ['one', 'two', 'three']
+      },{
+        name:  'Mountain Bikes',
+        thirdList: ['one', 'two', 'three']
+      },{
+        name:  'Hybird Bikes',
+        thirdList: ['one', 'two', 'three']
+      }]
     },{
       mainList: 'Accessories',
-      secondaryList: ['Flash lights', 'Horns', 'Wear', 'Stickers']
+      secondaryList: [{
+        name:  'Road Bikes',
+        thirdList: ['one', 'two', 'three']
+      },{
+        name:  'Mountain Bikes',
+        thirdList: ['one', 'two', 'three']
+      },{
+        name:  'Hybird Bikes',
+        thirdList: ['one', 'two', 'three']
+      }]
     },{
       mainList: 'Components',
-      secondaryList: ['Handle Bar', 'Chain', 'Wheels', 'Frames', 'Forks']
+      secondaryList: [{
+        name:  'Road Bikes',
+        thirdList: ['one', 'two', 'three']
+      },{
+        name:  'Mountain Bikes',
+        thirdList: ['one', 'two', 'three']
+      },{
+        name:  'Hybird Bikes',
+        thirdList: ['one', 'two', 'three']
+      }]
     },{
       mainList: 'Clothing',
-      secondaryList: ['Upper Body', 'Lower Body', 'Essentials', 'Helmets', 'Shoes']
+      secondaryList: [{
+        name:  'Road Bikes',
+        thirdList: ['one', 'two', 'three']
+      },{
+        name:  'Mountain Bikes',
+        thirdList: ['one', 'two', 'three']
+      },{
+        name:  'Hybird Bikes',
+        thirdList: ['one', 'two', 'three']
+      }]
     },{
       mainList: 'Helmets & Shoes',
-      secondaryList: ['Handle Bar', 'Chain', 'Wheels', 'Frames', 'Forks']
+      secondaryList: [{
+        name:  'Road Bikes',
+        thirdList: ['one', 'two', 'three']
+      },{
+        name:  'Mountain Bikes',
+        thirdList: ['one', 'two', 'three']
+      },{
+        name:  'Hybird Bikes',
+        thirdList: ['one', 'two', 'three']
+      }]
     }],
     arabic: [{
       mainList: 'دراجات',
-      secondaryList: ['سباقي', 'جبلي', 'هجين']
+      secondaryList: [{
+        name:  'Road Bikes',
+        thirdList: ['one', 'two', 'three']
+      },{
+        name:  'Mountain Bikes',
+        thirdList: ['one', 'two', 'three']
+      },{
+        name:  'Hybird Bikes',
+        thirdList: ['one', 'two', 'three']
+      }]
     },{
       mainList: 'اكسسوارات',
-      secondaryList: ['سباقي', 'جبلي', 'هجين']
+      secondaryList: [{
+        name:  'Road Bikes',
+        thirdList: ['one', 'two', 'three']
+      },{
+        name:  'Mountain Bikes',
+        thirdList: ['one', 'two', 'three']
+      },{
+        name:  'Hybird Bikes',
+        thirdList: ['one', 'two', 'three']
+      }]
     },{
       mainList: 'قطع الدراجه',
-      secondaryList: ['سباقي', 'جبلي', 'هجين']
+      secondaryList: [{
+        name:  'Road Bikes',
+        thirdList: ['one', 'two', 'three']
+      },{
+        name:  'Mountain Bikes',
+        thirdList: ['one', 'two', 'three']
+      },{
+        name:  'Hybird Bikes',
+        thirdList: ['one', 'two', 'three']
+      }]
     }]
   }
 
@@ -75,8 +176,6 @@ function Navbar ({darkMode, language}) {
       <nav className="nav-container">
         <button className="nav-container__hamburger" onClick={handleClick}/>
         <img className="nav-container__logo" src={logo}/>
-        {/* <div className="nav-container__search-input" */}
-        {/* <div className={search ? "nav-container__search-input hover" : "nav-container__search-input"} */}
         <div className={`nav-container__search-input${search ? ' hover' : ''}`}
           onMouseEnter={() => handleHover(true)} 
           onMouseLeave={() => handleHover(false)}
@@ -94,7 +193,7 @@ function Navbar ({darkMode, language}) {
         <button className="nav-container__shoppingCart"/>
       </nav>
       <DropMenu menu={menu} darkMode={darkMode} language={language} mainListData={mainListData}/>
-      <HamMenu menu={menu} onChange={handleMenuChange} darkMode={darkMode} language={language} mainListData={mainListData}/>
+      {/* <HamMenu menu={menu} onChange={handleMenuChange} darkMode={darkMode} language={language} mainListData={mainListData}/> */}
       {/* <NavBottom/> */}
     </>
     

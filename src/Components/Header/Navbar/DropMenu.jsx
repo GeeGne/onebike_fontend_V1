@@ -23,7 +23,6 @@ function DropMenu ({darkMode, language, mainListData, menu}) {
 
   const handleHover = (type, e) => {
     const element = e.currentTarget;
-    console.log(element);
     type ? element.classList.add('hover') : element.classList.remove('hover');
     // setDropMenu(type);
   }
@@ -32,7 +31,7 @@ function DropMenu ({darkMode, language, mainListData, menu}) {
     <>
       <section className="drop-menu" ref={dropMenuElement}>
         <ul className="drop-menu__items" ref={itemsElement}>
-          <li className={`drop-menu__items__item${dropMenu ? ' hover' : ''}`} onMouseEnter={(e) => handleHover(true, e)} onMouseLeave={(e) => handleHover(false, e)} ref={itemElement}>
+          {/* <li className={`drop-menu__items__item${dropMenu ? ' hover' : ''}`} onMouseEnter={(e) => handleHover(true, e)} onMouseLeave={(e) => handleHover(false, e)} ref={itemElement}>
             <h2 className="drop-menu__items__item__title">Parts</h2>
             <ul className={`drop-menu__items__item__sub-items${dropMenu ? ' hover' : ''}`} onMouseEnter={(e) => handleHover(true, e)} onMouseLeave={(e) => handleHover(false, e)} ref={subItemsElement}>
               <li className="drop-menu__items__item__sub-items__sub-item">
@@ -145,7 +144,26 @@ function DropMenu ({darkMode, language, mainListData, menu}) {
                 </ul>
               </li>
             </ul>
-          </li>
+          </li> */}
+          {mainListsArray.map(data =>
+            <li className={`drop-menu__items__item${dropMenu ? ' hover' : ''}`} onMouseEnter={(e) => handleHover(true, e)} onMouseLeave={(e) => handleHover(false, e)} ref={itemElement}>
+              <h2 key={data.mainList} className="drop-menu__items__item__title">{data.mainList}</h2>
+              <ul className={`drop-menu__items__item__sub-items`} onMouseEnter={(e) => handleHover(true, e)} onMouseLeave={(e) => handleHover(false, e)} ref={subItemsElement}>
+                {data.secondaryList.map(data => 
+                  <li className="drop-menu__items__item__sub-items__sub-item">
+                    <h2 key={data.name} className="drop-menu__items__item__sub-items__sub-item__title">{data.name}</h2>
+                    <ul className="drop-menu__items__item__sub-items__sub-item__sub-sub-items">
+                      <li className="drop-menu__items__item__sub-items__sub-item__sub-sub-items__sub-sub-item">
+                      {data.thirdList.map(data =>
+                          <h3 key={data} className="drop-menu__items__item__sub-items__sub-item__sub-sub-items__sub-sub-item__title">{data}</h3>
+                      )}
+                      </li>
+                    </ul>
+                  </li>
+                )}
+              </ul>
+            </li>
+          )}
         </ul>
       </section>
     </>
