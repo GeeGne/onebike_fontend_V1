@@ -29,35 +29,6 @@ function HamMenu ({menu, onChange, darkMode, language, mainListData}) {
 
   const textLanguage = useRef({})
 
-  // const mainListData = {
-  //   english: [{
-  //     mainList: 'Bikes',
-  //     secondaryList: ['Road Bikes', 'Mountain Bikes', 'Hybird Bikes']
-  //   },{
-  //     mainList: 'Accessories',
-  //     secondaryList: ['Flash lights', 'Horns', 'Wear', 'Stickers']
-  //   },{
-  //     mainList: 'Components',
-  //     secondaryList: ['Handle Bar', 'Chain', 'Wheels', 'Frames', 'Forks']
-  //   },{
-  //     mainList: 'Clothing',
-  //     secondaryList: ['Upper Body', 'Lower Body', 'Essentials', 'Helmets', 'Shoes']
-  //   },{
-  //     mainList: 'Helmets & Shoes',
-  //     secondaryList: ['Handle Bar', 'Chain', 'Wheels', 'Frames', 'Forks']
-  //   }],
-  //   arabic: [{
-  //     mainList: 'دراجات',
-  //     secondaryList: ['سباقي', 'جبلي', 'هجين']
-  //   },{
-  //     mainList: 'اكسسوارات',
-  //     secondaryList: ['سباقي', 'جبلي', 'هجين']
-  //   },{
-  //     mainList: 'قطع الدراجه',
-  //     secondaryList: ['سباقي', 'جبلي', 'هجين']
-  //   }]
-  // }
-
   useEffect(() => {
     if (language === 'English') {
       textLanguage.current = {
@@ -129,9 +100,9 @@ function HamMenu ({menu, onChange, darkMode, language, mainListData}) {
     const arrayLength = mainListsArray.length;
 
     const secondaryListHTML = secondaryList.map(list => 
-      <li key={list} className="ham-menu-container__side-box__menu-list__lists__secondary-list__lists">
-        <h3 key={list} className="ham-menu-container__side-box__menu-list__lists__secondary-list__lists__h3">
-          {list}
+      <li key={list.name} className="ham-menu-container__side-box__menu-list__lists__secondary-list__lists">
+        <h3 key={list.name} className="ham-menu-container__side-box__menu-list__lists__secondary-list__lists__h3">
+          {list.name}
         </h3>  
       </li>
     )
