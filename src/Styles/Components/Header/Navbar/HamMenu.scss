@@ -152,6 +152,7 @@
         }
 
         &::before {
+          // bottom straight line
           content: "";
           position: absolute;
           bottom: 0;
@@ -159,27 +160,30 @@
           transform: translateX(-50%);
           width: 65%;
           height: 1px;
-          background-color: hsl(0, 0%, 60%);
+          background-color: hsl(0, 0%, 50%);
         }
       }
     }
   } 
 
   body.arabic & {
-    flex-direction: row-reverse;
-
+    // flex-direction: row-reverse;
+    direction: rtl;
     &__side-box {
       &__menu {
-        flex-direction: row-reverse;
-
+        // flex-direction: row-reverse;
+        // direction: rtl;
       }
       &__menu-list {
-        overflow: auto hidden;
+        // overflow: hidden auto;
+        // direction: rtl;
+
         &__lists {
           &__title {
-            flex-direction: row-reverse;
+            // flex-direction: row-reverse;
 
             &::before {
+              // position: absolute;
               left: auto;
               right: 0;
               transform: translateX(0.22em);
@@ -200,7 +204,7 @@
           &__secondary-list {
           
             &__lists {
-              text-align: right;
+              // text-align: right;
               &__h3{}
             }
           }
