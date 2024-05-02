@@ -1,8 +1,10 @@
 import React, {useEffect, useState, useRef} from 'react';
 
+import mainListData from '/src/Data/Menu.json';
+
 import '../../../Styles/Components/Header/Navbar/DropMenu.scss';
 
-function DropMenu ({darkMode, language, mainListData, menu}) {
+function DropMenu ({darkMode, language, menu}) {
 
   const [dropMenu, setDropMenu] = useState(false);
 
@@ -18,7 +20,7 @@ function DropMenu ({darkMode, language, mainListData, menu}) {
     const subItemsElementSH= subItemsElement.current.scrollHeight;
     const dropHeight = itemsElementSH - subItemsElementSH 
 
-    dropMenuElement.current.style.height = `${menu ? String(dropHeight) : '0'}px`;
+    // dropMenuElement.current.style.height = `${menu ? String(dropHeight) : '0'}px`;
     dropMenuElement.current.style.height = `${menu ? '48' : '0'}px`;
   }, [menu])
 

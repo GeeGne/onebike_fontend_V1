@@ -1,5 +1,7 @@
 import React, {useRef, useState, useEffect} from 'react';
 
+import mainListData from '/src/Data/Menu.json';
+
 import '../../../Styles/Components/Header/Navbar/HamMenu.scss';
 
 // ICONS
@@ -20,7 +22,7 @@ import bicycle2IconDarkMode from '../../../assets/Img/Icons/menu_darkMode.svg';
 import accesssoriesIconDarkMode from '../../../assets/Img/Icons/menu_darkMode.svg';
 import partsIconDarkMode from '../../../assets/Img/Icons/menu_darkMode.svg';
 
-function HamMenu ({menu, onChange, darkMode, language, mainListData}) {
+function HamMenu ({menu, onChange, darkMode, language}) {
 
   const hamMenuContainerElement = useRef(null);
   const hamMenuSideBoxElement = useRef(null);
@@ -100,8 +102,8 @@ function HamMenu ({menu, onChange, darkMode, language, mainListData}) {
     const arrayLength = mainListsArray.length;
 
     const secondaryListHTML = secondaryList.map(list => 
-      <li key={list.name} className="ham-menu-container__side-box__menu-list__lists__secondary-list__lists">
-        <h3 key={list.name} className="ham-menu-container__side-box__menu-list__lists__secondary-list__lists__h3">
+      <li key={list.id} className="ham-menu-container__side-box__menu-list__lists__secondary-list__lists">
+        <h3 className="ham-menu-container__side-box__menu-list__lists__secondary-list__lists__h3">
           {list.name}
         </h3>  
       </li>
