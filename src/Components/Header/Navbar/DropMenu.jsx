@@ -42,11 +42,11 @@ function DropMenu ({darkMode, language, menu}) {
               <li className="drop-menu__items__item__sub-items__sub-item" key={data.id}>
                 <h2 className="drop-menu__items__item__sub-items__sub-item__title">{data.name}</h2>
                 <ul className="drop-menu__items__item__sub-items__sub-item__sub-sub-items">
-                  <li className="drop-menu__items__item__sub-items__sub-item__sub-sub-items__sub-sub-item">
-                    {data.thirdList.map(data =>
-                    <h3 className="drop-menu__items__item__sub-items__sub-item__sub-sub-items__sub-sub-item__title" key={data}>{data}</h3>
-                    )}
+                  {data.thirdList.map(data =>
+                  <li className="drop-menu__items__item__sub-items__sub-item__sub-sub-items__sub-sub-item" key={data}>
+                    <h3 className="drop-menu__items__item__sub-items__sub-item__sub-sub-items__sub-sub-item__title">{data}</h3>
                   </li>
+                  )}
                 </ul>
               </li>
               )}

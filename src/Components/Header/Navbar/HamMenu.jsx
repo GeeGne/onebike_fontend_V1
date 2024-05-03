@@ -12,6 +12,8 @@ import bicycleIcon from '../../../assets/Img/Icons/bicycle.svg';
 import bicycle2Icon from '../../../assets/Img/Icons/menu.svg';
 import accesssoriesIcon from '../../../assets/Img/Icons/menu.svg';
 import partsIcon from '../../../assets/Img/Icons/menu.svg';
+import plusIcon from '../../../assets/Img/Icons/add.svg';
+import removeIcon from '../../../assets/Img/Icons/remove.svg';
 
 // ICONS - DARKMODE
 import expandCircleUpIconDarkMode from '../../../assets/Img/Icons/expand_circle_down_darkMode.svg';
@@ -21,6 +23,8 @@ import bicycleIconDarkMode from '../../../assets/Img/Icons/bicycle_darkMode.svg'
 import bicycle2IconDarkMode from '../../../assets/Img/Icons/menu_darkMode.svg';
 import accesssoriesIconDarkMode from '../../../assets/Img/Icons/menu_darkMode.svg';
 import partsIconDarkMode from '../../../assets/Img/Icons/menu_darkMode.svg';
+import plusIconDarkMode from '../../../assets/Img/Icons/add_darkMode.svg';
+import removeIconDarkMode from '../../../assets/Img/Icons/remove_darkMode.svg';
 
 function HamMenu ({menu, onChange, darkMode, language}) {
 
@@ -38,7 +42,7 @@ function HamMenu ({menu, onChange, darkMode, language}) {
       }
     } else if (language === 'العربيه') {
       textLanguage.current = {
-        menu: 'القا،مه',
+        menu: 'القائمه',
       }
     }
   }, [language])
@@ -74,6 +78,10 @@ function HamMenu ({menu, onChange, darkMode, language}) {
         matchedSecondaryElement.style.height = `${matchedSecondaryElementScrollHeight}px`;
       }
     }
+
+    if (type === 'second list') {
+      console.log(other);
+    }
   }
 
   useEffect(() => {
@@ -102,10 +110,33 @@ function HamMenu ({menu, onChange, darkMode, language}) {
     const arrayLength = mainListsArray.length;
 
     const secondaryListHTML = secondaryList.map(list => 
-      <li key={list.id} className="ham-menu-container__side-box__menu-list__lists__secondary-list__lists">
-        <h3 className="ham-menu-container__side-box__menu-list__lists__secondary-list__lists__h3">
-          {list.name}
-        </h3>  
+      <li 
+        className="ham-menu-container__side-box__menu-list__lists__secondary-list__lists clicked" key={list.id}
+        onClick={(e) => handleClick('second list', e)}
+      >
+        <div className="ham-menu-container__side-box__menu-list__lists__secondary-list__lists__section">
+          <h3 className="ham-menu-container__side-box__menu-list__lists__secondary-list__lists__section__h3">
+            {list.name}
+          </h3>
+          <img className="ham-menu-container__side-box__menu-list__lists__secondary-list__lists__section__img" src={darkMode ? plusIconDarkMode : plusIcon}/>
+        </div>
+        <ul 
+          className="ham-menu-container__side-box__menu-list__lists__secondary-list__lists__third-list"
+          onClick={(e) => handleClick('third list', e)}
+        >
+          <li className="ham-menu-container__side-box__menu-list__lists__secondary-list__lists__third-list__lists">
+            <h3 className="ham-menu-container__side-box__menu-list__lists__secondary-list__lists__third-list__lists__h3">test</h3>
+          </li>
+          <li className="ham-menu-container__side-box__menu-list__lists__secondary-list__lists__third-list__lists">
+            <h3 className="ham-menu-container__side-box__menu-list__lists__secondary-list__lists__third-list__lists__h3">test</h3>
+          </li>
+          <li className="ham-menu-container__side-box__menu-list__lists__secondary-list__lists__third-list__lists">
+            <h3 className="ham-menu-container__side-box__menu-list__lists__secondary-list__lists__third-list__lists__h3">test</h3>
+          </li>
+          <li className="ham-menu-container__side-box__menu-list__lists__secondary-list__lists__third-list__lists">
+            <h3 className="ham-menu-container__side-box__menu-list__lists__secondary-list__lists__third-list__lists__h3">test</h3>
+          </li>
+        </ul>
       </li>
     )
 
