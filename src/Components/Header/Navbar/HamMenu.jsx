@@ -6,28 +6,15 @@ import '../../../Styles/Components/Header/Navbar/HamMenu.scss';
 
 // ICONS
 import expandCircleUpIcon from '../../../assets/Img/Icons/expand_circle_down.svg';
-import expandCircleDownIcon from '../../../assets/Img/Icons/expand_circle_up.svg';
 import closeIcon from '../../../assets/Img/Icons/close.svg';
-import bicycleIcon from '../../../assets/Img/Icons/bicycle.svg';
-import bicycle2Icon from '../../../assets/Img/Icons/menu.svg';
-import accesssoriesIcon from '../../../assets/Img/Icons/menu.svg';
-import partsIcon from '../../../assets/Img/Icons/menu.svg';
-import plusIcon from '../../../assets/Img/Icons/add.svg';
-import removeIcon from '../../../assets/Img/Icons/remove.svg';
 
 // ICONS - DARKMODE
 import expandCircleUpIconDarkMode from '../../../assets/Img/Icons/expand_circle_down_darkMode.svg';
-import expandCircleDownIconDarkMode from '../../../assets/Img/Icons/expand_circle_up_darkMode.svg';
 import closeIconDarkMode from '../../../assets/Img/Icons/close_darkMode.svg';
-import bicycleIconDarkMode from '../../../assets/Img/Icons/bicycle_darkMode.svg';
-import bicycle2IconDarkMode from '../../../assets/Img/Icons/menu_darkMode.svg';
-import accesssoriesIconDarkMode from '../../../assets/Img/Icons/menu_darkMode.svg';
-import partsIconDarkMode from '../../../assets/Img/Icons/menu_darkMode.svg';
-import plusIconDarkMode from '../../../assets/Img/Icons/add_darkMode.svg';
-import removeIconDarkMode from '../../../assets/Img/Icons/remove_darkMode.svg';
 
 function HamMenu ({menu, onChange, darkMode, language}) {
 
+  // Elements
   const hamMenuContainerElement = useRef(null);
   const hamMenuSideBoxElement = useRef(null);
   const mainListElements = useRef([]);
@@ -35,8 +22,12 @@ function HamMenu ({menu, onChange, darkMode, language}) {
   const thirdListContainerElements = useRef([]);
 
   const textLanguage = useRef({})
-
   const randomNum = useRef(0);
+
+  const mainListsArray = language === 'English' ? mainListData.english : mainListData.arabic;
+  const arrayLength = mainListsArray.length;
+  let secondListLength = 0;
+  mainListsArray.forEach(list => list.secondaryList.forEach(() => secondListLength++))
 
   useEffect(() => {
     if (language === 'English') {
@@ -49,6 +40,25 @@ function HamMenu ({menu, onChange, darkMode, language}) {
       }
     }
   }, [language])
+
+  useEffect(() => {
+    const handleMenuStyles = menu => {        
+      const containerStyle = hamMenuContainerElement.current.style;
+      const sideBoxStyle = hamMenuSideBoxElement.current.style;
+
+      if (menu) {
+        containerStyle.visibility = "visible";
+        containerStyle.backgroundColor = "var(--hamMenu-background-color)";
+        sideBoxStyle.transform = "translateX(0)";
+        return;
+      }
+
+      containerStyle.backgroundColor = "hsl(0, 0%, 0%, 0)";
+      sideBoxStyle.transform = `translateX(${language === 'English' ? '-15em' : '15em'})`;
+      setTimeout( () => containerStyle.visibility = "hidden", 500);
+    }
+    handleMenuStyles(menu);
+  }, [menu, language])
 
   const handleClick = (type, other) => {
 
@@ -115,32 +125,13 @@ function HamMenu ({menu, onChange, darkMode, language}) {
       const {length} = secondaryListElements.current;
       length < arrayLength && (secondaryListElements.current = [...secondaryListElements.current, el])
     }
+
+    if (type === 'thirdListContainerElements') {
+      const {length} = thirdListContainerElements.current;
+      length < secondListLength && (thirdListContainerElements.current = [...thirdListContainerElements.current, el])
+    }
   }
 
-  useEffect(() => {
-    const handleMenuStyles = menu => {        
-      const containerStyle = hamMenuContainerElement.current.style;
-      const sideBoxStyle = hamMenuSideBoxElement.current.style;
-
-      if (menu) {
-        containerStyle.visibility = "visible";
-        containerStyle.backgroundColor = "var(--hamMenu-background-color)";
-        sideBoxStyle.transform = "translateX(0)";
-        return;
-      }
-
-      containerStyle.backgroundColor = "hsl(0, 0%, 0%, 0)";
-      sideBoxStyle.transform = `translateX(${language === 'English' ? '-15em' : '15em'})`;
-      setTimeout( () => containerStyle.visibility = "hidden", 500);
-    }
-    handleMenuStyles(menu);
-  }, [menu, language])
-
-  const mainListsArray = language === 'English' ? mainListData.english : mainListData.arabic;
-  const arrayLength = mainListsArray.length;
-  let secondListLength = 0;
-  mainListsArray.forEach(list => list.secondaryList.forEach(() => secondListLength++))
-  
   return (
     <nav className="ham-menu-container" ref={hamMenuContainerElement}>
       <div className="ham-menu-container__side-box" ref={hamMenuSideBoxElement}>
@@ -157,63 +148,32 @@ function HamMenu ({menu, onChange, darkMode, language}) {
           {mainListsArray.map((data, i) => 
           <li
             className="ham-menu-container__side-box__menu-list__lists"
-            // ref={el => {
-            //   i === 0 && (mainListElements.current = []);
-            //   const {length} = mainListElements.current;
-            //   length < arrayLength && (mainListElements.current = [...mainListElements.current, el])
-            // }}  
-            ref={el => addRef('mainListElement', el, i)}  
-            data-list-id={i}
-            key={data.id}
+            ref={el => addRef('mainListElement', el, i)} data-list-id={i} key={data.id}
           >
             <div 
               className="ham-menu-container__side-box__menu-list__lists__title"
-              onClick={e => handleClick('title element', e, i)}
-              data-list-id={i}
+              onClick={e => handleClick('title element', e, i)} data-list-id={i}
             >
-              <h2 className="ham-menu-container__side-box__menu-list__lists__title__h2">
-                {data.mainList}
-              </h2>
-              <img 
-                className="expand-circle" 
-                src={darkMode ? expandCircleUpIconDarkMode : expandCircleUpIcon}
-              />
+              <h2 className="ham-menu-container__side-box__menu-list__lists__title__h2">{data.mainList}</h2>
+              <img className="expand-circle" src={darkMode ? expandCircleUpIconDarkMode : expandCircleUpIcon}/>
             </div>
             <ul 
               className="ham-menu-container__side-box__menu-list__lists__secondary-list"
-              data-list-id={i}
-              // ref={le => {
-              //   i === 0 && (secondaryListElements.current = []);
-              //   const {length} = secondaryListElements.current;
-              //   length < arrayLength && (secondaryListElements.current = [...secondaryListElements.current, le]);
-              // }} 
-              ref={el => addRef('secondaryListElements', el, i)} 
+              ref={el => addRef('secondaryListElements', el, i)} data-list-id={i}
             >
               {data.secondaryList.map(list => 
-              <li 
-                className="ham-menu-container__side-box__menu-list__lists__secondary-list__lists" 
-                key={list.id}
-              >
+              <li className="ham-menu-container__side-box__menu-list__lists__secondary-list__lists" key={list.id}>
                 <div 
                   className="ham-menu-container__side-box__menu-list__lists__secondary-list__lists__section"
                   onClick={(e) => handleClick('second list', e)}
                   data-list-id={randomNum.current = Math.random()}
                 >
-                  <h3 className="ham-menu-container__side-box__menu-list__lists__secondary-list__lists__section__h3">
-                    {list.name}
-                  </h3>
+                  <h3 className="ham-menu-container__side-box__menu-list__lists__secondary-list__lists__section__h3">{list.name}</h3>
                   <div className="ham-menu-container__side-box__menu-list__lists__secondary-list__lists__section__img"></div>
                 </div>
                 <ul 
                   className="ham-menu-container__side-box__menu-list__lists__secondary-list__lists__third-list"
-                  data-list-id={randomNum.current}
-                  ref={el => {
-                    const {length} = thirdListContainerElements.current;
-                    if (el === null || length === secondListLength) {
-                      return;
-                    }
-                    thirdListContainerElements.current = [...thirdListContainerElements.current, el]
-                  }}
+                  ref={el => addRef('thirdListContainerElements', el, i)} data-list-id={randomNum.current}
                 >
                   {list.thirdList.map(data =>           
                   <li className="ham-menu-container__side-box__menu-list__lists__secondary-list__lists__third-list__lists" key={data}>
