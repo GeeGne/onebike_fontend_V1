@@ -99,10 +99,11 @@
           align-items: center;
           padding: 0.7em 0.7em 0 0.7em;
           opacity: 0.8;
-          // font-size: var(--hamMenu-list-font);
-          // font-weight: 500;
           color: var(--font-h-color);
           cursor: pointer;
+          &.clicked {
+            opacity: 1;
+          }
 
           &::before {
             content: "";
@@ -113,9 +114,10 @@
             height: calc(80% + 0px);
             background-color: var(--primary-color);
             transform: translateX(-0.22em);
+            // transform: translateX(0);
             transition: transform 0.25s ease;
           }
-          &.clicked &::before {
+          &.clicked::before {
             transform: translateX(0);
           }
 
@@ -138,10 +140,6 @@
             transform: rotate(-180deg)
           }
         }
-        // &__title.clicked + &__secondary-list {
-        //   height: 100%;
-        //   // background-color: red;
-        // }
 
         &__secondary-list {
           display: flex;
@@ -157,7 +155,6 @@
             flex-direction: column;
             color: var(--font-p-color);
             cursor: pointer;
-            // background-color: red;
 
             &__section {
               display: flex;
@@ -170,16 +167,19 @@
               &.clicked &__h3 {
                 font-weight: 550;
               }
+
               &__img {
-                width: var(--hamMenu-thirdList-plus-icon);
+                width: var(--hamMenu-thirdList-addIcon-size);
+                height: var(--hamMenu-thirdList-addIcon-size);
+                background-image: var(--hamMenu-add-icon);
+                background-size: cover;
+                background-repeat: no-repeat;
+              }
+              &.clicked &__img {
+                background-image: var(--hamMenu-remove-icon);
               }
             }
-            // &.clicked &__section {
-            //   &__h3 {
-            //     font-weight: 550;
-            //   }
-            // }
-          
+
             &__third-list {   
               background-color: var(--hamMenu-thirdList-background-color);
               height: 0;
@@ -187,18 +187,14 @@
               transition: height 0.5s ease;
               &__lists {
                 cursor: pointer;
-                // background-color: red;
                 &__h3{
-                // padding: 0 0.7em;
+                  padding: 0.5em 2.1em;
+                  // margin: 0 0 0.5em 2.1em;
 
-                  margin: 0 0 0.5em 2.1em;
-                }
-              }
-            }
-            &.clicked &__third-list {
-              height: 100%;
-              &__lists {
-                &__h3{
+                  &:hover {
+                    font-weight: 550;
+                    cursor: pointer;
+                  }
                 }
               }
             }

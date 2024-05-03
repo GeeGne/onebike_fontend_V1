@@ -9,7 +9,7 @@
 :root {
   --arrow-drop-down-icon: url(src/assets/Img/Icons/arrow_drop_down.svg);
   
-  // NavBar Vars
+  // NavBar
   --shoppingCart-icon: url(src/assets/Img/Icons/shopping_cart.svg);
   --search-icon: url(src/assets/Img/Icons/search.svg);
   --hamburger-icon: url(src/assets/Img/Icons/menu.svg);
@@ -18,12 +18,14 @@
   --navBar-logoIcon-size: 4em;
   --navBar-icon-size: 2em;
 
-  // HamMenu Vars
+  // HamMenu
   // --hamMenu-menu-font: 1.5rem;
   // --hamMenu-list-font: 1.3rem;
   // --hamMenu-list-icon: 1.5rem;
+  --hamMenu-add-icon: url(src/assets/Img/Icons/add.svg);
+  --hamMenu-remove-icon: url(src/assets/Img/Icons/remove.svg);
   --hamMenu-exitIcon-size: 2.3em;
-  --hamMenu-thirdList-plus-icon: 1em;
+  --hamMenu-thirdList-addIcon-size: 1em;
   // --hamMenu-list-icon: 1.5rem;
   
 }
@@ -36,4 +38,8 @@
   --search-icon: url(src/assets/Img/Icons/search_darkMode.svg);
   --shoppingCart-icon: url(src/assets/Img/Icons/shopping_cart_darkMode.svg);
   --user-icon: url(src/assets/Img/Icons/user_darkMode.svg);
+  
+  // HamMenu
+  --hamMenu-add-icon: url(src/assets/Img/Icons/add_darkMode.svg);
+  --hamMenu-remove-icon: url(src/assets/Img/Icons/remove_darkMode.svg);
 }
