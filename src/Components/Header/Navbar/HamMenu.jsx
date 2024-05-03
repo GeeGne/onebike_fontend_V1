@@ -32,6 +32,7 @@ function HamMenu ({menu, onChange, darkMode, language}) {
   const hamMenuSideBoxElement = useRef(null);
   const mainListElements = useRef([]);
   const secondaryListElements = useRef([]);
+  const thirdListContainerElements = useRef([]);
 
   const textLanguage = useRef({})
 
@@ -72,15 +73,33 @@ function HamMenu ({menu, onChange, darkMode, language}) {
       
       if (elementClicked) {
         titleElement.classList.remove('clicked');
+        matchedSecondaryElement.classList.remove('clicked');
         matchedSecondaryElement.style.height = '0';
       } else if (!elementClicked) {
         titleElement.classList.add('clicked');
+        matchedSecondaryElement.classList.add('clicked');
         matchedSecondaryElement.style.height = `${matchedSecondaryElementScrollHeight}px`;
       }
     }
 
     if (type === 'second list') {
-      console.log(other);
+      const event = other;
+      const secondSectionElement = event.currentTarget;
+      const {listId} = secondSectionElement.dataset;
+      const matchedThirdElement = getElement(thirdListContainerElements.current, listId);
+      console.log(matchedThirdElement);
+      const matchedThirdElementScrollHeight = matchedThirdElement.scrollHeight; 
+      const elementClicked = secondSectionElement.classList.contains('clicked') ? true : false;
+
+      if (elementClicked) {
+        secondSectionElement.classList.remove('clicked');
+        matchedThirdElement.style.height = '0';
+      } else if (!elementClicked) {
+        secondSectionElement.classList.add('clicked');
+        matchedThirdElement.style.height = `${matchedThirdElementScrollHeight}px`;
+      }
+      secondaryListElements.current.forEach(el => el.classList.contains('clicked') && ( el.style.height = `100%`))
+      // matchedSecondaryElement.style.height = `${matchedSecondaryElementScrollHeight}px`;
     }
   }
 
@@ -104,41 +123,53 @@ function HamMenu ({menu, onChange, darkMode, language}) {
   }, [menu, language])
 
   const mainListsArray = language === 'English' ? mainListData.english : mainListData.arabic;
+  let secondListLength = 0;
+  mainListsArray.forEach(list => list.secondaryList.forEach(() => secondListLength++))
   const mainListDOM = mainListsArray.map((data, i) => {
     const {mainList} = data;
     const {secondaryList} = data;
     const arrayLength = mainListsArray.length;
 
-    const secondaryListHTML = secondaryList.map(list => 
-      <li 
-        className="ham-menu-container__side-box__menu-list__lists__secondary-list__lists clicked" key={list.id}
-        onClick={(e) => handleClick('second list', e)}
-      >
-        <div className="ham-menu-container__side-box__menu-list__lists__secondary-list__lists__section">
-          <h3 className="ham-menu-container__side-box__menu-list__lists__secondary-list__lists__section__h3">
-            {list.name}
-          </h3>
-          <img className="ham-menu-container__side-box__menu-list__lists__secondary-list__lists__section__img" src={darkMode ? plusIconDarkMode : plusIcon}/>
-        </div>
-        <ul 
-          className="ham-menu-container__side-box__menu-list__lists__secondary-list__lists__third-list"
-          onClick={(e) => handleClick('third list', e)}
+    const secondaryListHTML = secondaryList.map(list => {
+      const randomNum = Math.random();
+      return (
+        <li 
+          className="ham-menu-container__side-box__menu-list__lists__secondary-list__lists" 
+          key={list.id}
         >
-          <li className="ham-menu-container__side-box__menu-list__lists__secondary-list__lists__third-list__lists">
-            <h3 className="ham-menu-container__side-box__menu-list__lists__secondary-list__lists__third-list__lists__h3">test</h3>
-          </li>
-          <li className="ham-menu-container__side-box__menu-list__lists__secondary-list__lists__third-list__lists">
-            <h3 className="ham-menu-container__side-box__menu-list__lists__secondary-list__lists__third-list__lists__h3">test</h3>
-          </li>
-          <li className="ham-menu-container__side-box__menu-list__lists__secondary-list__lists__third-list__lists">
-            <h3 className="ham-menu-container__side-box__menu-list__lists__secondary-list__lists__third-list__lists__h3">test</h3>
-          </li>
-          <li className="ham-menu-container__side-box__menu-list__lists__secondary-list__lists__third-list__lists">
-            <h3 className="ham-menu-container__side-box__menu-list__lists__secondary-list__lists__third-list__lists__h3">test</h3>
-          </li>
-        </ul>
-      </li>
-    )
+          <div 
+            className="ham-menu-container__side-box__menu-list__lists__secondary-list__lists__section"
+            onClick={(e) => handleClick('second list', e)}
+            data-list-id={randomNum}
+          >
+            <h3 className="ham-menu-container__side-box__menu-list__lists__secondary-list__lists__section__h3">
+              {list.name}
+            </h3>
+            <img className="ham-menu-container__side-box__menu-list__lists__secondary-list__lists__section__img" src={darkMode ? plusIconDarkMode : plusIcon}/>
+          </div>
+          <ul 
+            className="ham-menu-container__side-box__menu-list__lists__secondary-list__lists__third-list"
+            data-list-id={randomNum}
+            ref={el => {
+              // i === 0 && (thirdListContainerElements.current = [])
+              if (el === null) {
+                return;
+              }
+              if (thirdListContainerElements.current.length === secondListLength) {
+                return
+              }
+              thirdListContainerElements.current = [...thirdListContainerElements.current, el]
+            }}
+          >
+            {list.thirdList.map(data =>           
+            <li className="ham-menu-container__side-box__menu-list__lists__secondary-list__lists__third-list__lists" key={data}>
+              <h3 className="ham-menu-container__side-box__menu-list__lists__secondary-list__lists__third-list__lists__h3">{data}</h3>
+            </li>
+            )}
+          </ul>
+        </li>
+      )
+    })
 
     return (
       <li
