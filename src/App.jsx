@@ -6,6 +6,7 @@ import './Styles/App.scss';
 //  COMPONENTS
 import Header from './Components/Header/Header';
 import Footer from './Components/Footer';
+import Home from './Components/Pages/Home';
 
 // HOOKS
 import React, {useEffect, useRef} from 'react';
@@ -24,7 +25,7 @@ function App() {
 
           <main className="app-layout__main">
             <Routes>
-              <Route path="/" element={<h3>Home</h3>}/>
+              <Route path="/" element={<Home/>}/>
             </Routes>
           </main>
           

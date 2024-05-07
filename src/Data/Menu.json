@@ -93,7 +93,7 @@
     }]
   }],
   "arabic": [{
-    "id": 5,
+    "id": 1,
     "mainList": "دراجات",
     "secondaryList": [{
       "id": 0,
@@ -105,7 +105,7 @@
       "thirdList": ["Giant", "Treck", "Scott", "SantaCrus", "Felt", "Cannondale"]
     }]
   },{
-    "id": 6,
+    "id": 2,
     "mainList": "اكسسوارات",
     "secondaryList": [{
       "id": 0,
@@ -125,7 +125,7 @@
       "thirdList": ["مرايا", "سله", "مقعد للاطفال", "مقطورات الدراجه"]
     }]
   },{
-    "id": 7,
+    "id": 3,
     "mainList": "قطع الدراجه",
     "secondaryList": [{
       "id": 0,
@@ -141,7 +141,7 @@
       "thirdList": ["غيار الحركه & شرطان", "مسكات", "لفاف الكيدون", "رقبات", "مجموعه قطع الرقبه & تسميكات"]
     }]
   },{
-    "id": 8,
+    "id": 4,
     "mainList": "ملابس",
     "secondaryList": [{
       "id": 0,
@@ -161,7 +161,7 @@
       "thirdList": ["Endura", "Fox", "Castelli", "2XU"]
     }]
   },{
-    "id": 9,
+    "id": 5,
     "mainList": "خوذ & احذيه",
     "secondaryList": [{
       "id": 0,

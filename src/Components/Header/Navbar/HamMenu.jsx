@@ -75,7 +75,7 @@ function HamMenu ({menu, onChange, darkMode, language}) {
 
     const getListId = element => element.dataset.listId;
 
-    type === 'exit' && onChange(false);
+    // type === 'exit' && onChange(false);
 
     if (type === 'title element') {
       const event = other;
@@ -89,6 +89,7 @@ function HamMenu ({menu, onChange, darkMode, language}) {
         matchedSecondaryElement.classList.remove('clicked');
         matchedSecondaryElement.style.height = '0';
       } else if (!elementClicked) {
+        document.body.style.overFlow = "hidden hidden";
         titleElement.classList.add('clicked');
         matchedSecondaryElement.classList.add('clicked');
         matchedSecondaryElement.style.height = `${matchedSecondaryElementScrollHeight}px`;
@@ -103,9 +104,11 @@ function HamMenu ({menu, onChange, darkMode, language}) {
       const elementClicked = secondSectionElement.classList.contains('clicked') ? true : false;
 
       if (elementClicked) {
+
         secondSectionElement.classList.remove('clicked');
         matchedThirdElement.style.height = '0';
       } else if (!elementClicked) {
+        document.body.style.overFlow = "hidden hidden";
         secondSectionElement.classList.add('clicked');
         matchedThirdElement.style.height = `${matchedThirdElementScrollHeight}px`;
       }
@@ -141,7 +144,7 @@ function HamMenu ({menu, onChange, darkMode, language}) {
           </h1>
           <img 
             className="ham-menu-container__side-box__menu__exit-icon" 
-            onClick={() =>  handleClick('exit')} src={darkMode ? closeIconDarkMode : closeIcon}
+            onClick={() => onChange(false)} src={darkMode ? closeIconDarkMode : closeIcon}
           />
         </section>
         <ul className="ham-menu-container__side-box__menu-list">

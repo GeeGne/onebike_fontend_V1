@@ -1,0 +1,21 @@
+.ImageSlider-container {
+  width: 100%;
+  // background-color: red;
+  &__img-holder {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    overflow: hidden;
+    scroll-snap-type: x proximity;
+    &__imges {
+      width: 100%;
+      flex-shrink: 0;
+      scroll-snap-align: start;
+      & img {
+        width: 100%;
+        aspect-ratio: 1.85 / 1;
+        object-fit: cover;
+      }      
+    }
+  }
+}
