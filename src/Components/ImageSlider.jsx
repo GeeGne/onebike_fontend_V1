@@ -55,12 +55,9 @@ function ImageSlider () {
   useEffect(() => {
     action('scroll beginning');
     const id = setInterval(() => {
-      // scrollLeft.current = vars().sliderScrollLeft;
-
+      
       vars().sliderScrollLeft < vars().sliderWidth && action('scroll end');
-      if (vars().sliderScrollWidth <= vars().totalScroll) {
-        action('scroll beginning')
-      }
+      vars().sliderScrollWidth <= vars().totalScroll && action('scroll beginning')
       scrollLeft.current = vars().sliderScrollLeft
 
       action('scroll left');
