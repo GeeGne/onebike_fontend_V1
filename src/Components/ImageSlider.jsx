@@ -2,9 +2,8 @@ import React, {useState, useRef, useEffect} from 'react';
 
 import '../Styles/Components/ImageSlider.scss';
 
-import img1 from '/src/assets/Img/Content/main-sec.jpg';
-import img2 from '/src/assets/Img/Content/poster.jpg';
-import img3 from '/src/assets/Img/Content/poster1.jpg';
+import sliderData from '/src/Data/Slider.json';
+
 
 function ImageSlider () {
 
@@ -18,125 +17,123 @@ function ImageSlider () {
   const imageSliderElement = useRef(null);
   const dotElements = useRef([]);
 
+  const firstImage = sliderData[0].URL;
+  const lastImage = sliderData[sliderData.length - 1].URL;
+
   useEffect(() => {
-    const computedStyle = getComputedStyle(imageSliderElement.current);
-    const width= parseFloat(computedStyle.width);
-
-    imageSliderElement.current.scrollTo({
-      left: width,
-      behavior: 'instant'
-    })
-
+    const imageSliderWidth = getWidth(imageSliderElement.current);
+    const elScrollWidth = imageSliderElement.current.scrollWidth;
+    const lastIndex = sliderData.length - 1;
     setCurrentImage(0);
+    scroll(imageSliderElement.current, imageSliderWidth, 'instant');
+    // console.log(elScrollWidth);
+    // scroll(imageSliderElement.current, , 'instant');
+
+    // const id = setInterval(() => {
+    //   if (currentImage >= lastIndex) {
+    //     backToBegenning();
+    //   } 
+    //   scroll(imageSliderElement.current, imageSliderElement.current.scrollLeft + ImageSliderWidth, 'smooth')
+    //   setCurrentImage(old => old + 1);
+    // }, 4000)
+
+    // return () => {
+    //   clearInterval(id);
+    // };
   }, []);
 
   useEffect(() => {
-    console.log('moved');
     currentImage >= dotElements.current.length && setCurrentImage(0);
-    currentImage === -1 && setCurrentImage(dotElements.current.length - 1);
-    // dotElements.current.forEach(el => console.log(el));
-    dotElements.current.forEach(el => el.classList.remove('current'));
-    dotElements.current.forEach((el, i) => i === currentImage && el.classList.add('current'))
+    // // currentImage === -1 && setCurrentImage(dotElements.current.length - 1);
+    // dotElements.current.forEach(el => el.classList.remove('current'));
+    // dotElements.current.forEach((el, i) => i === currentImage && el.classList.add('current'))
   }, [currentImage]);
 
   const handleStart = e => {
-    console.log('start');
+    // note: in theory sliderScrollWidth should be equal to sliderScrollLeft when sliding all the way to the left,
+    // but for some reason it's acrually sliderScrollWidth is equal to sliderScrollLeft + sliderWidth.
 
-    const computedStyle = getComputedStyle(e.currentTarget);
-    const width = parseFloat(computedStyle.width);
-    if (e.currentTarget.scrollWidth <= e.currentTarget.scrollLeft + width + 300) {
-      console.log('hi')
-      setCurrentImage(0);
-      e.currentTarget.scrollTo({
-        left: width,
-        behavior: 'instant'
-      })
-    }
+    const sliderWidth = getWidth(e.currentTarget);
+    const sliderScrollWidth = e.currentTarget.scrollWidth;
+    const sliderScrollLeft = e.currentTarget.scrollLeft;
+    const extraLength = 100;
+    const totalScroll = sliderScrollLeft + sliderWidth + extraLength
 
-    if (e.currentTarget.scrollLeft < width) {
-      console.log('here', e.currentTarget.scrollWidth - width * 2)
-      setCurrentImage(2);
-      e.currentTarget.scrollTo({
-        // left: e.currentTarget.scrollWidth - width,
-        left: e.currentTarget.scrollWidth - width * 2,
-        behavior: 'instant'
-      })
-    }
+    sliderScrollWidth <= totalScroll && action('scroll beginning');
+    sliderScrollLeft < sliderWidth && action('scroll end');
 
     initialX.current = e.touches[0].clientX;
     scrollLeft.current = e.currentTarget.scrollLeft;
   }
 
   const handleMove = e => {
-    console.log('move');
-    // console.log(e.currentTarget);
     currentX.current = e.touches[0].clientX;
     amountX.current = initialX.current - currentX.current;
-    const total =  scrollLeft.current + amountX.current;
-    e.currentTarget.scrollTo({
-      left: total,
-      behavior: 'instant'
-    });
-
-    // const deltaX = 
+    const totalAmount =  scrollLeft.current + amountX.current;
+    scroll(e.currentTarget, totalAmount, 'instant');
   }
 
   const handleEnd = e => {
-
-    console.log('end');
-    // console.log(e.currentTarget.scrollLeft);
-
-    
-    const computedStyle = getComputedStyle(e.currentTarget);
-    const width= parseFloat(computedStyle.width);
-    const total = scrollLeft.current + width;
-    if (amountX.current > 100) {
-      setCurrentImage(oldNum => oldNum + 1);
-      e.currentTarget.scrollTo({
-        left: total,
-        behavior: 'smooth'
-      })
-    } else if (amountX.current < - 100) {
-      setCurrentImage(oldNum => oldNum - 1);
-      e.currentTarget.scrollTo({
-        left: scrollLeft.current - width,
-        behavior: 'smooth'
-      })
+    const activateLength = 100;
+    if (amountX.current > activateLength) {
+      action('scroll left')
+    } else if (amountX.current < -1 * activateLength) {
+      action('scroll right');
     } else {
-      e.currentTarget.scrollTo({
-        left: scrollLeft.current,
-        behavior: 'smooth'
-      })
+      scroll(e.currentTarget, scrollLeft.current, 'smooth');
     }
 
-    // setTimeout(() => scrollLeft.current = e.currentTarget.scrollLeft, 100);
-    // initialX.current = null;
-    // currentX.current = null;
-
-    // if (e.currentTarget.scrollWidth <= e.currentTarget.scrollLeft + width + 300) {
-    //   e.currentTarget.scrollTo({
-    //     left: 0,
-    //     behavior: 'smooth'
-    //   })
-    // }
-    console.log(e.currentTarget.scrollLeft);
-    console.log(e.currentTarget.scrollWidth);
-    console.log(width);
-    console.log(amountX);
+    amountX.current = 0;
   }
 
-  const addRef = el => {
-    console.log(dotElements.current.length)
-    dotElements.current.length < 3 && (dotElements.current = [...dotElements.current, el]);
-    // dotElements.current = [...dotElements.current, el];
-    console.log(dotElements.current)
+  function action (action) {
+    const sliderWidth = getWidth(imageSliderElement.current);
+    const sliderScrollWidth = imageSliderElement.current.scrollWidth;
+    const sliderLastImageWidth = sliderScrollWidth - sliderWidth * 2;
+    const sliderBetweenImagesWidth = scrollLeft.current + (action === 'scroll left' ? 1 : -1) * sliderWidth
+    const lastIndex = sliderData.length - 1;
+
+    const scrollToBeginning = () => {
+      console.log({sliderWidth});
+      scroll(imageSliderElement.current, sliderWidth, 'instant');
+      setCurrentImage(0);
+    }
+
+    const scrollToEnd = () => {
+      scroll(imageSliderElement.current, sliderLastImageWidth, 'instant');
+      setCurrentImage(lastIndex);
+    }
+
+    const scrollToLeft = () => {
+      scroll(imageSliderElement.current, sliderBetweenImagesWidth, 'smooth');    
+      setCurrentImage(oldNum => oldNum + 1);
+    }
+
+    const scrollToRight = () => {
+      scroll(imageSliderElement.current, sliderBetweenImagesWidth, 'smooth');    
+      setCurrentImage(oldNum => oldNum - 1);
+    }
+
+    action === 'scroll beginning' && scrollToBeginning();
+    action === 'scroll end' && scrollToEnd();
+    action === 'scroll left' && scrollToLeft();
+    action === 'scroll right' && scrollToRight();
   }
+
+  const scroll = (e, left, behavior) => e.scrollTo({left,behavior});
+
+  const getWidth = el => {
+    const computedStyle = getComputedStyle(el);
+    const width = parseFloat(computedStyle.width);
+    return width;
+  }
+
+  const addRef = el => dotElements.current.length < 3 && (dotElements.current = [...dotElements.current, el])
 
   return (
     <>
       <section className='imageSlider-container'>
-        <ul className='imageSlider-container__img-holder' 
-          onTouchStart={handleStart} 
+        <ul className='imageSlider-container__img-holder' onTouchStart={handleStart} 
           // onMouseEnter={handleStart} 
           onTouchMove={handleMove} 
           // onMouseDown={handleMove} 
@@ -144,26 +141,18 @@ function ImageSlider () {
           // onMouseUp={handleEnd}
           ref={imageSliderElement}
         >
-          <li className='imageSlider-container__img-holder__imges'>
-            <img src={img3}/>
-          </li>
-          <li className='imageSlider-container__img-holder__imges'>
-            <img src={img1}/>
-          </li>
-          <li className='imageSlider-container__img-holder__imges'>
-            <img src={img2}/>
-          </li>
-          <li className='imageSlider-container__img-holder__imges'>
-            <img src={img3}/>
-          </li>
-          <li className='imageSlider-container__img-holder__imges'>
-            <img src={img1}/>
-          </li>
+          <li className='imageSlider-container__img-holder__imges'><img src={lastImage}/></li>
+          {sliderData.map(data =>
+          <li className='imageSlider-container__img-holder__imges' key={data.id}>
+            <img src={data.URL}/>
+          </li>          
+          )}
+          <li className='imageSlider-container__img-holder__imges'><img src={firstImage}/></li>
         </ul>
         <ul className="imageSlider-container__dots-container">
-          <li className ="imageSlider-container__dots-container__dot" data-id='0' ref={el => addRef(el)}></li>
-          <li className ="imageSlider-container__dots-container__dot" data-id='1' ref={el => addRef(el)}></li>
-          <li className ="imageSlider-container__dots-container__dot" data-id='2' ref={el => addRef(el)}></li>
+          {sliderData.map((data, i) =>
+          <li className ={`imageSlider-container__dots-container__dot ${i === currentImage && 'current'}`} data-id={i} ref={el => addRef(el)} key={data.id}></li>
+          )}
         </ul>
       </section>
     </>
