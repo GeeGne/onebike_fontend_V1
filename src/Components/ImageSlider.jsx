@@ -15,55 +15,82 @@ function ImageSlider () {
   const scrollLeft = useRef(null);
 
   const imageSliderElement = useRef(null);
-  const dotElements = useRef([]);
 
   const firstImage = sliderData[0].URL;
   const lastImage = sliderData[sliderData.length - 1].URL;
 
-  useEffect(() => {
-    const imageSliderWidth = getWidth(imageSliderElement.current);
-    const elScrollWidth = imageSliderElement.current.scrollWidth;
+  const vars = () => {
+    const sliderWidth = getWidth(imageSliderElement.current);
+    let sliderScrollWidth = imageSliderElement.current.scrollWidth;
+    const extraLength = 100;
+    let sliderScrollLeft = imageSliderElement.current.scrollLeft;
+    let sliderBetweenImagesWidth = sliderScrollLeft + sliderWidth;
+    let totalScroll = sliderScrollLeft + sliderWidth + extraLength;
     const lastIndex = sliderData.length - 1;
-    setCurrentImage(0);
-    scroll(imageSliderElement.current, imageSliderWidth, 'instant');
-    // console.log(elScrollWidth);
-    // scroll(imageSliderElement.current, , 'instant');
 
-    // const id = setInterval(() => {
-    //   if (currentImage >= lastIndex) {
-    //     backToBegenning();
-    //   } 
-    //   scroll(imageSliderElement.current, imageSliderElement.current.scrollLeft + ImageSliderWidth, 'smooth')
-    //   setCurrentImage(old => old + 1);
-    // }, 4000)
+    return {
+      sliderWidth,
+      sliderScrollWidth,
+      extraLength,
+      sliderScrollLeft,
+      sliderBetweenImagesWidth,
+      totalScroll,
+      lastIndex
+    }
+  }
 
-    // return () => {
-    //   clearInterval(id);
-    // };
+  useEffect(() => {
+
+    action('scroll beginning');
+
+    const id = setInterval(() => {
+      // const sliderWidth = getWidth(imageSliderElement.current);
+      // let sliderScrollWidth = imageSliderElement.current.scrollWidth;
+      // const extraLength = 100;
+      // let sliderScrollLeft = imageSliderElement.current.scrollLeft;
+      // let sliderBetweenImagesWidth = sliderScrollLeft + sliderWidth;
+      // let totalScroll = sliderScrollLeft + sliderWidth + extraLength;
+      // const lastIndex = sliderData.length - 1;
+      
+      if (vars().sliderScrollLeft < vars().sliderWidth) {
+        action('scroll end');
+      } 
+
+      if (vars().sliderScrollWidth <= vars().totalScroll) {
+        action('scroll beginning');
+      }
+      
+      // sliderScrollLeft = imageSliderElement.current.scrollLeft
+      // sliderBetweenImagesWidth = sliderScrollLeft + sliderWidth;
+      // totalScroll = sliderScrollLeft + sliderWidth + extraLength;
+      scroll(imageSliderElement.current, vars().sliderBetweenImagesWidth, 'smooth')
+      setCurrentImage(old => vars().lastIndex === old ? 0 : old + 1);
+      // setCurrentImage(old => old + 1);
+    }, 4000)
+
+    return () => clearInterval(id);
   }, []);
 
   useEffect(() => {
-    currentImage >= dotElements.current.length && setCurrentImage(0);
-    // // currentImage === -1 && setCurrentImage(dotElements.current.length - 1);
-    // dotElements.current.forEach(el => el.classList.remove('current'));
-    // dotElements.current.forEach((el, i) => i === currentImage && el.classList.add('current'))
-  }, [currentImage]);
+    console.log(currentImage);
+  }, [currentImage])
 
   const handleStart = e => {
     // note: in theory sliderScrollWidth should be equal to sliderScrollLeft when sliding all the way to the left,
     // but for some reason it's acrually sliderScrollWidth is equal to sliderScrollLeft + sliderWidth.
 
-    const sliderWidth = getWidth(e.currentTarget);
-    const sliderScrollWidth = e.currentTarget.scrollWidth;
-    const sliderScrollLeft = e.currentTarget.scrollLeft;
-    const extraLength = 100;
-    const totalScroll = sliderScrollLeft + sliderWidth + extraLength
+    // const sliderWidth = getWidth(e.currentTarget);
+    // const sliderScrollWidth = e.currentTarget.scrollWidth;
+    // const sliderScrollLeft = e.currentTarget.scrollLeft;
+    // const extraLength = 100;
+    // const totalScroll = sliderScrollLeft + sliderWidth + extraLength
 
-    sliderScrollWidth <= totalScroll && action('scroll beginning');
-    sliderScrollLeft < sliderWidth && action('scroll end');
+    vars().sliderScrollWidth <= vars().totalScroll && action('scroll beginning');
+    vars().sliderScrollLeft < vars().sliderWidth && action('scroll end');
 
     initialX.current = e.touches[0].clientX;
-    scrollLeft.current = e.currentTarget.scrollLeft;
+    // scrollLeft.current = vars().sliderScrollLeft = e.currentTarget.scrollLeft;
+    scrollLeft.current = vars().sliderScrollLeft = e.currentTarget.scrollLeft;
   }
 
   const handleMove = e => {
@@ -94,7 +121,6 @@ function ImageSlider () {
     const lastIndex = sliderData.length - 1;
 
     const scrollToBeginning = () => {
-      console.log({sliderWidth});
       scroll(imageSliderElement.current, sliderWidth, 'instant');
       setCurrentImage(0);
     }
@@ -128,7 +154,6 @@ function ImageSlider () {
     return width;
   }
 
-  const addRef = el => dotElements.current.length < 3 && (dotElements.current = [...dotElements.current, el])
 
   return (
     <>
@@ -151,7 +176,7 @@ function ImageSlider () {
         </ul>
         <ul className="imageSlider-container__dots-container">
           {sliderData.map((data, i) =>
-          <li className ={`imageSlider-container__dots-container__dot ${i === currentImage && 'current'}`} data-id={i} ref={el => addRef(el)} key={data.id}></li>
+          <li className ={`imageSlider-container__dots-container__dot ${i === currentImage && 'current'}`} key={data.id}></li>
           )}
         </ul>
       </section>
