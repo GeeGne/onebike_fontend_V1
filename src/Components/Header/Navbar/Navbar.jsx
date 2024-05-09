@@ -44,7 +44,7 @@ function Navbar ({darkMode, language}) {
   return (
     <>
       <nav className="nav-container">
-        <button className="nav-container__hamburger" onClick={handleClick}/>
+        <button className={`nav-container__hamburger ${menu ? 'clicked' : ''}`} onClick={handleClick}/>
         <img className="nav-container__logo" src={logo}/>
         <div className={`nav-container__search-input${search ? ' hover' : ''}`}
           onMouseEnter={() => handleHover(true)} 
