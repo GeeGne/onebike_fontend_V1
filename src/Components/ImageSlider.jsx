@@ -71,7 +71,7 @@ function ImageSlider () {
     vars().sliderScrollLeft < vars().sliderWidth && action('scroll end');
 
     initialX.current = e.touches[0].clientX;
-    scrollLeft.current = vars().sliderScrollLeft;
+    scrollLeft.current = vars().sliderScrollLeft;   
   }
 
   const handleMove = e => {
@@ -120,8 +120,8 @@ function ImageSlider () {
 
     const returnBack = () => { 
       scroll(imageSliderElement.current, scrollLeft.current, 'smooth');
-    
     }
+
     const move = totalAmount => { 
       scroll(imageSliderElement.current, totalAmount, 'instant');
     }
@@ -151,6 +151,10 @@ function ImageSlider () {
           <li className ={`imageSlider-container__dots-container__dot ${i === currentImage && 'current'}`} key={data.id}></li>
           )}
         </ul>
+        <div className="imageSlider-container__arrows">
+          <button className="imageSlider-container__arrows__left-arrow"></button>
+          <button className="imageSlider-container__arrows__right-arrow"></button>
+        </div>
       </section>
     </>
   )

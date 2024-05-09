@@ -40,6 +40,11 @@
   --alert-filler-background-color: hsl(0, 0%, 100%);
   // --alert-filler-hover-background-color: hsl(0, 0%, 95%);
   --alert-x-background-color: hsl(0, 0%, 70%);
+
+  // ImageSlider
+  --imageSlider-arrows-background-color: hsl(0, 0%, 100%);
+  --imageSlider-arrowsBorder-color: hsl(0, 0%, 0%, 0.7);  
+  --ImageSlider-arrows-hover-background-color: var(--primary-color);
 }
 
 //  Dark Theme
@@ -81,4 +86,9 @@
   --alert-filler-background-color: hsl(0, 0%, 0%);
   // --alert-filler-hover-background-color: hsl(0, 0%, 5%);
   --alert-x-background-color: hsl(0, 0%, 30%);
+
+  // ImageSlider
+  --imageSlider-arrows-background-color: hsl(0, 0%, 0%);
+  --imageSlider-arrowsBorder-color: hsl(0, 0%, 100%, 0.7);
+  --ImageSlider-arrows-hover-background-color: var(--primary-color);
 }

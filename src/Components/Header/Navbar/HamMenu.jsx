@@ -112,7 +112,7 @@ function HamMenu ({menu, onChange, darkMode, language}) {
         secondSectionElement.classList.add('clicked');
         matchedThirdElement.style.height = `${matchedThirdElementScrollHeight}px`;
       }
-      secondaryListElements.current.forEach(el => el.classList.contains('clicked') && ( el.style.height = `100%`))
+      secondaryListElements.current.forEach(el => el.classList.contains('clicked') && (el.style.height = `100%`))
     }
   }
 

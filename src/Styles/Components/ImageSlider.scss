@@ -1,3 +1,5 @@
+@use 'src/Styles/Utils/_BreakPoints.scss' as w;
+
 .imageSlider-container {
   position: relative;
   width: 100%;
@@ -35,7 +37,7 @@
       // background-color: hsl(0, 0%, 50%);
       border: solid 2px hsl(0, 0%, 50%);
       border-radius: 1em;
-      opacity: 0.7;
+      opacity: 1;
 
       transition: width 0.5s ease, height 0.5s ease, opacity 0.5s ease, background-color 0.5s ease;
 
@@ -46,5 +48,76 @@
         opacity: 1;
       }
     }
+  }
+
+  &__arrows {
+    display: none;
+
+    @include w.breakpoint-up(medium) {
+      position: absolute;
+      display: flex;
+      justify-content: space-between;
+      top: 50%;
+      left: 0;
+      transform: translateY(-50%);
+      width: 100%;
+      padding: 0 1em;
+  
+      &__left-arrow,
+      &__right-arrow {
+        position: relative;
+        width: 2.5em;
+        height: 2.5em;
+        background-color: var(--imageSlider-arrows-background-color);
+        border: solid 2px var(--imageSlider-arrowsBorder-color);
+        border-radius: 50%;
+        background-size: 1em;
+        background-repeat: no-repeat;
+        background-position: center;
+        
+        &::before {
+          content: "";
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          width: 15%;
+          height: 15%;
+          background-color: var(--imageSlider-arrows-background-color);
+          border-radius: 50%;
+          background-size: 1em;
+          background-repeat: no-repeat;
+          background-position: center;
+          opacity: 0;
+          transition: width 0.5s ease, height 0.5s ease, background-color 0.5s ease, opacity 0.5s ease;
+        }
+
+        &:hover::before {
+          background-color: var(--ImageSlider-arrows-hover-background-color);
+          width: 90%;  
+          height: 90%;
+          opacity: 1;
+        }
+      }
+
+      &__left-arrow {
+        background-image: var(--arrow-left-icon); 
+
+        &::before {
+          background-image: var(--arrow-left-hover-icon); 
+        }
+      }
+
+      &__right-arrow {
+        background-image: var(--arrow-right-icon);
+
+        &::before {
+          background-image: var(--arrow-right-hover-icon); 
+        }
+      }
+
+    }
+
+    
   }
 }

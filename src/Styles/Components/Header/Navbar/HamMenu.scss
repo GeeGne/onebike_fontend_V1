@@ -104,10 +104,6 @@
           &.clicked {
             opacity: 1;
           }
-          &.clicked ~ body {
-            overflow: hidden;
-            background-color: red;
-          }
 
           &::before {
             content: "";

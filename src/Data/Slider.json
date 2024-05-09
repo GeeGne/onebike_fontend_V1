@@ -1,10 +1,16 @@
 [{
   "id": 1,
-  "URL": "/src/assets/Img/Content/main-sec.jpg" 
+  "URL": "/src/assets/Img/Content/poster0.jpg" 
 },{
   "id": 2,
   "URL": "/src/assets/Img/Content/poster.jpg" 
 },{
   "id": 3,
   "URL": "/src/assets/Img/Content/poster1.jpg" 
+},{
+  "id": 4,
+  "URL": "/src/assets/Img/Content/poster2.jpg" 
+},{
+  "id": 5,
+  "URL": "/src/assets/Img/Content/poster3.jpg" 
 }]

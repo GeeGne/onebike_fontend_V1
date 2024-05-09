@@ -28,6 +28,11 @@
   --hamMenu-thirdList-addIcon-size: 1em;
   // --hamMenu-list-icon: 1.5rem;
   
+  // ImageSlider
+  --arrow-left-icon: url(src/assets/img/Icons/arrow_left.svg);
+  --arrow-left-hover-icon: url(src/assets/img/Icons/arrow_left_darkMode.svg);
+  --arrow-right-icon: url(src/assets/img/Icons/arrow_right.svg);
+  --arrow-right-hover-icon: url(src/assets/img/Icons/arrow_right_darkMode.svg);
 }
 
 .dark-theme {
@@ -42,4 +47,10 @@
   // HamMenu
   --hamMenu-add-icon: url(src/assets/Img/Icons/add_darkMode.svg);
   --hamMenu-remove-icon: url(src/assets/Img/Icons/remove_darkMode.svg);
+
+  // ImageSlider
+  --arrow-left-icon: url(src/assets/img/Icons/arrow_left_darkMode.svg);
+  --arrow-left-hover-icon: url(src/assets/img/Icons/arrow_left.svg);
+  --arrow-right-icon: url(src/assets/img/Icons/arrow_right_darkMode.svg);
+  --arrow-right-hover-icon: url(src/assets/img/Icons/arrow_right.svg);
 }
