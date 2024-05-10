@@ -39,7 +39,7 @@ function IntroSection ({onThemeChange, onLanguageChange}) {
     onLanguageChange(language);
   }, [language])
 
-  const themeData = (data) => {
+  const themeData = data => {
     setDarkMode(data);
   }
 

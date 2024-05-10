@@ -107,12 +107,11 @@ function Test  () {
     newArray.forEach(product => {
       let matchedItem;
       matchedItems.forEach(item => item === product && (matchedItem = true));
-
       matchedItem || (matchedItems = [...matchedItems, product]);
     })
 
     console.log(matchedItems);
-  })
+  }, []);
 
   return (
     // <>

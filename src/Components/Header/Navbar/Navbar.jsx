@@ -1,4 +1,6 @@
 import React, {useState, useRef, useEffect} from 'react';
+// import {Outlet, Link} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 
 import HamMenu from './HamMenu';
 import DropMenu from './DropMenu';
@@ -14,6 +16,8 @@ function Navbar ({darkMode, language}) {
   const [menu, setMenu] = useState(false);
   const [search, setSearch] = useState(false);
   const searchInputElement = useRef(null);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleResize = () => {
@@ -45,7 +49,7 @@ function Navbar ({darkMode, language}) {
     <>
       <nav className="nav-container">
         <button className={`nav-container__hamburger ${menu ? 'clicked' : ''}`} onClick={handleClick}/>
-        <img className="nav-container__logo" src={logo}/>
+          <img className="nav-container__logo" onClick={() => navigate('/') } src={logo}/>
         <div className={`nav-container__search-input${search ? ' hover' : ''}`}
           onMouseEnter={() => handleHover(true)} 
           onMouseLeave={() => handleHover(false)}
@@ -65,6 +69,7 @@ function Navbar ({darkMode, language}) {
       <DropMenu menu={menu} darkMode={darkMode} language={language}/>
       <HamMenu menu={menu} onChange={handleMenuChange} darkMode={darkMode} language={language}/>
       {/* <NavBottom/> */}
+      {/* <Outlet/> */}
     </>
     
   )

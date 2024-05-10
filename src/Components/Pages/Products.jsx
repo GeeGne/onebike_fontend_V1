@@ -1,15 +1,16 @@
 import React, {useState, useEffect} from 'react';
 
-function Products ({gategory, type}) {
+function Products ({category, type}) {
 
   useEffect(() => {
 
-  }, [gategory, type])
+  }, [category, type])
 
   return (
     <>
       <div>hi</div>
-      <div>{type ? type : gategory}</div>
+      <div>{type ? type : category}</div>
+      {/* <div>{type ? type }</div> */}
     </>
   )
 }
