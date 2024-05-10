@@ -31,10 +31,11 @@ function Alert ({alertText, newAlert}) {
       alertTimerElement.current.classList.add('alert--timer');
     }, 10)
 
-    clearTimeout(afterTimerID.current);
-    afterTimerID.current = setTimeout(() => {
+    const exitIconID = setTimeout(() => {
       alertElement.current.style.setProperty('--after-opacity', '1');
     }, 1000)
+
+    return () => clearTimeout(exitIconID);
   }, [alertText, newAlert])
 
   const handleClick = () => {
