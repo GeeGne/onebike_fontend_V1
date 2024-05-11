@@ -5,6 +5,8 @@ import mainListData from '/src/Data/Menu.json';
 
 import '../../../Styles/Components/Header/Navbar/DropMenu.scss';
 
+import cleanseString from '/src/Utils/cleanseString.js';
+
 function DropMenu ({darkMode, language, menu}) {
 
   const [dropMenu, setDropMenu] = useState(false);
@@ -19,8 +21,8 @@ function DropMenu ({darkMode, language, menu}) {
   const mainListsArray = language === 'English' ? mainListData.english : mainListData.arabic;
 
   useEffect(() => {
-    const itemsElementSH= itemsElement.current.scrollHeight;
-    const subItemsElementSH= subItemsElement.current.scrollHeight;
+    const itemsElementSH = itemsElement.current.scrollHeight;
+    const subItemsElementSH = subItemsElement.current.scrollHeight;
     const dropHeight = itemsElementSH - subItemsElementSH 
 
     // dropMenuElement.current.style.height = `${menu ? String(dropHeight) : '0'}px`;
@@ -46,7 +48,7 @@ function DropMenu ({darkMode, language, menu}) {
                 <h2 className="drop-menu__items__item__sub-items__sub-item__title">{secondData.name}</h2>
                 <ul className="drop-menu__items__item__sub-items__sub-item__sub-sub-items">
                   {secondData.thirdList.map(thirdData =>
-                  <li className="drop-menu__items__item__sub-items__sub-item__sub-sub-items__sub-sub-item" onClick={() => navigate(`/${mainData.mainList.toLowerCase()}/${thirdData.toLowerCase()}`)} key={thirdData}>
+                  <li className="drop-menu__items__item__sub-items__sub-item__sub-sub-items__sub-sub-item" onClick={() => navigate(`/${cleanseString(mainData.mainList)}/${cleanseString(thirdData)}`)} key={thirdData}>
                     <h3 className="drop-menu__items__item__sub-items__sub-item__sub-sub-items__sub-sub-item__title">{thirdData}</h3>
                   </li>
                   )}

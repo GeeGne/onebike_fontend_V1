@@ -26,8 +26,8 @@ function Navbar ({darkMode, language}) {
       setSearch(webWidth >= largeWidth ? true : false)
     }
 
+    handleResize();
     window.addEventListener('resize', handleResize);
-
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
