@@ -16,6 +16,12 @@ import NotFound from './Components/Pages/NotFound';
 // HOOKS
 import React, {useEffect, useState, useRef} from 'react';
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
+// import ReactDOM from 'react-dom/client';
+
+
+// UTILS
+import removeDuplicates from '/src/Utils/removeDuplicates.js';
+import cleanseString from '/src/Utils/cleanseString.js';
 
 function App() {
 
@@ -106,33 +112,33 @@ function App() {
     brand: "GIYO"
   }]
   useEffect(() => {
-    let categoriesArray = [];
-    const categoriesCollecterArray = products.map(product => language === 'English' ? product.category.english : product.category.arabic);
-    categoriesCollecterArray.forEach(category => {
-      let matchedItem;
-      categoriesArray.forEach(item => item === category && (matchedItem = true));
-      matchedItem || (categoriesArray = [...categoriesArray, category]);
-    })
+
+    const getCategoriesData = () => {
+      const categoriesCollecterArray = products.map(product => language === 'English' ? product.category.english : product.category.arabic);
+      const categoriesArray = removeDuplicates(categoriesCollecterArray);
+
+      return categoriesArray;
+    }
+
+    const getTypesData = () => {
+      const typesCollecterArray = products.map(product => language === 'English' ? product.type.english : product.type.arabic);
+      const typesArray = removeDuplicates(typesCollecterArray);
+  
+      const typesWithCatArray = typesArray.map(type => {
+        let matchedItem;
+        products.forEach(product => type === (language === 'English' ? product.type.english : product.type.arabic) && (matchedItem = product));
+        return language === 'English' ? {type: matchedItem.type.english, category: matchedItem.category.english} : {type: matchedItem.type.arabic, category: matchedItem.category.arabic}
+      })
+      return typesWithCatArray;
+    }
     
-    let typesArray = [];
-    const typesCollecterArray = products.map(product => language === 'English' ? product.type.english : product.type.arabic);
-    typesCollecterArray.forEach(product => {
-      let matchedItem;
-      typesArray.forEach(item => item === product && (matchedItem = true));
-      matchedItem || (typesArray = [...typesArray, product]);
-    })
-    const typeswithCatArray = typesArray.map(type => {
-      let matchedItem;
-      products.forEach(product => type === (language === 'English' ? product.type.english : product.type.arabic) && (matchedItem = product));
-      // console.log({matchedItem})
-      return language === 'English' ? {type: matchedItem.type.english, category: matchedItem.category.english} : {type: matchedItem.type.arabic, category: matchedItem.category.arabic}
-    })
-    console.log({categoriesArray, typesArray, typeswithCatArray})
-    setTypes(typeswithCatArray);
-    setCategories(categoriesArray);
-
+    setCategories(getCategoriesData())
+    setTypes(getTypesData());
+      
+    
   }, [language]);
-
+  
+  console.log({types, categories})
   const themeData = data => {
     setDarkMode(data);
   }
@@ -143,35 +149,37 @@ function App() {
   }
 
   return (
-    <>
-      <Router>
-        <div className="app-layout">
+    <Router>
+      <div className="app-layout">
 
-          <header className="app-layout__header">
-            <Header onThemeChange={themeData} onLanguageChange={languageData}/>
-          </header>
+        <header className="app-layout__header">
+          <Header onThemeChange={themeData} onLanguageChange={languageData}/>
+        </header>
 
-          <main className="app-layout__main">
-            <Routes>
-              <Route path="/" element={<Home/>}/>
-              {categories.map(category => 
-              <Route path={`/${category}`} element={<Products category={category}/>} key ={category}/>
-              )}
-              {types.map(typeVal => 
-              <Route path={`/${typeVal.category}/${typeVal.type}`} element={<Products category={typeVal.category} type={typeVal.type}/>} key ={typeVal.type}/>
-              )}
-              <Route path="*" element={<NotFound/>}/>
-            </Routes>
-          </main>
-          
-          <footer className="app-layout__footer">
-            <Footer/>
-          </footer>
+        <main className="app-layout__main">
+          <Routes>
+            <Route path="/" element={<Home/>}/>
+            {categories.map(category => 
+            <Route path={`/${cleanseString(category)}`} element={<Products category={category}/>} key ={category}/>
+            )}
+            {types.map(typeVal => 
+            <Route path={`/${cleanseString(typeVal.category)}/${cleanseString(typeVal.type)}`} element={<Products category={typeVal.category} type={typeVal.type}/>} key ={typeVal.type}/>
+            )}
+            <Route path="*" element={<NotFound/>}/>
+          </Routes>
+        </main>
+        
+        <footer className="app-layout__footer">
+          <Footer/>
+        </footer>
 
-        </div>
-      </Router>
-    </>
+      </div>
+    </Router>
   )
 }
 
-export default App
+export default App;
+
+// const root = ReactDOM.createRoot(document.getElementById('root'));
+// root.render(<App />);
+

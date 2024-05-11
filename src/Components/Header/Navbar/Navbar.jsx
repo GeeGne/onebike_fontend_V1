@@ -5,11 +5,11 @@ import {useNavigate} from 'react-router-dom';
 import HamMenu from './HamMenu';
 import DropMenu from './DropMenu';
 
-import '../../../Styles/Components/Header/Navbar/Navbar.scss';
+import '/src/Styles/Components/Header/Navbar/Navbar.scss';
 
-import logo from '../../../assets/Img/Logo/ONEBIKE.png';
-import searchIcon from '../../../assets/Img/Icons/search.svg';
-import searchIconDarkMode from '../../../assets/Img/Icons/search_darkMode.svg';
+import logo from '/src/assets/Img/Logo/ONEBIKE.png';
+import searchIcon from '/src/assets/Img/Icons/search.svg';
+import searchIconDarkMode from '/src/assets/Img/Icons/search_darkMode.svg';
 
 function Navbar ({darkMode, language}) {
 
@@ -48,7 +48,7 @@ function Navbar ({darkMode, language}) {
   return (
     <>
       <nav className="nav-container">
-        <button className={`nav-container__hamburger ${menu ? 'clicked' : ''}`} onClick={handleClick}/>
+        <button className={`nav-container__hamburger${menu ? ' clicked' : ''}`} onClick={handleClick}/>
           <img className="nav-container__logo" onClick={() => navigate('/') } src={logo}/>
         <div className={`nav-container__search-input${search ? ' hover' : ''}`}
           onMouseEnter={() => handleHover(true)} 
