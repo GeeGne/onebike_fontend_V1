@@ -1,5 +1,4 @@
 import React, {useState, useRef, useEffect} from 'react';
-// import {Outlet, Link} from 'react-router-dom';
 import {useNavigate} from 'react-router-dom';
 
 import HamMenu from './HamMenu';
@@ -12,12 +11,12 @@ import searchIcon from '/src/assets/Img/Icons/search.svg';
 import searchIconDarkMode from '/src/assets/Img/Icons/search_darkMode.svg';
 
 function Navbar ({darkMode, language}) {
+  
+  const navigate = useNavigate();
 
   const [menu, setMenu] = useState(false);
   const [search, setSearch] = useState(false);
   const searchInputElement = useRef(null);
-
-  const navigate = useNavigate();
 
   useEffect(() => {
     const handleResize = () => {
@@ -41,7 +40,7 @@ function Navbar ({darkMode, language}) {
     setSearch(webWidth >= largeWidth ? true : type);
   }
 
-  const handleMenuChange = (data) => {
+  const menuData = (data) => {
     setMenu(data)
   }
 
@@ -67,7 +66,7 @@ function Navbar ({darkMode, language}) {
         <button className="nav-container__shoppingCart"/>
       </nav>
       <DropMenu menu={menu} darkMode={darkMode} language={language}/>
-      <HamMenu menu={menu} onChange={handleMenuChange} darkMode={darkMode} language={language}/>
+      <HamMenu menu={menu} onMenuChange={menuData} darkMode={darkMode} language={language}/>
       {/* <NavBottom/> */}
       {/* <Outlet/> */}
     </>

@@ -1,0 +1,21 @@
+.breadCrumb-list {
+  display: flex;
+  justify-content: center;
+  // background-color: red;
+
+  &__item-container {
+    display: flex;
+    align-items: center;
+
+    &__link {
+      margin: 1em;
+      color: var(--font-p-color);
+      
+      &:last-child {
+        text-decoration: none;
+        color: var(--font-h-color);
+        font-weight: 550;
+      }
+    }
+  }
+}

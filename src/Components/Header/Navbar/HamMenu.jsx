@@ -16,7 +16,7 @@ import closeIcon from '../../../assets/Img/Icons/close.svg';
 import expandCircleUpIconDarkMode from '../../../assets/Img/Icons/expand_circle_down_darkMode.svg';
 import closeIconDarkMode from '../../../assets/Img/Icons/close_darkMode.svg';
 
-function HamMenu ({menu, onChange, darkMode, language}) {
+function HamMenu ({menu, onMenuChange, darkMode, language}) {
 
   const navigate = useNavigate();
 
@@ -66,7 +66,7 @@ function HamMenu ({menu, onChange, darkMode, language}) {
     handleMenuStyles(menu);
   }, [menu, language])
 
-  const handleClick = (type, other) => {
+  const handleClick = (type, other, mainList, thirdData) => {
 
     const getElement = (elements, id) => {
       let matchedElement;
@@ -81,7 +81,7 @@ function HamMenu ({menu, onChange, darkMode, language}) {
 
     const getListId = element => element.dataset.listId;
 
-    // type === 'exit' && onChange(false);
+    // type === 'exit' && onMenuChange(false);
 
     if (type === 'title element') {
       const event = other;
@@ -107,7 +107,7 @@ function HamMenu ({menu, onChange, darkMode, language}) {
       const secondSectionElement = event.currentTarget;
       const matchedThirdElement = getElement(thirdListContainerElements.current, getListId(secondSectionElement));
       const matchedThirdElementScrollHeight = matchedThirdElement.scrollHeight; 
-      const elementClicked = secondSectionElement.classList.contains('clicked') ? true : false;
+      const elementClicked = secondSectionElement.classList.contains('clicked');
 
       if (elementClicked) {
         secondSectionElement.classList.remove('clicked');
@@ -118,6 +118,11 @@ function HamMenu ({menu, onChange, darkMode, language}) {
         matchedThirdElement.style.height = `${matchedThirdElementScrollHeight}px`;
       }
       secondaryListElements.current.forEach(el => el.classList.contains('clicked') && (el.style.height = `100%`))
+    }
+
+    if (type === 'third list') {
+      navigate(`/${cleanseString(mainList)}/${cleanseString(thirdData)}`);
+      onMenuChange(false);
     }
   }
 
@@ -149,7 +154,7 @@ function HamMenu ({menu, onChange, darkMode, language}) {
           </h1>
           <img 
             className="ham-menu-container__side-box__menu__exit-icon" 
-            onClick={() => onChange(false)} src={darkMode ? closeIconDarkMode : closeIcon}
+            onClick={() => onMenuChange(false)} src={darkMode ? closeIconDarkMode : closeIcon}
           />
         </section>
         <ul className="ham-menu-container__side-box__menu-list">
@@ -184,7 +189,7 @@ function HamMenu ({menu, onChange, darkMode, language}) {
                   ref={el => addRef('thirdListContainerElements', el, i)} data-list-id={randomNum.current}
                 >
                   {secondData.thirdList.map(thirdData =>           
-                  <li className="ham-menu-container__side-box__menu-list__lists__secondary-list__lists__third-list__lists" onClick={() => navigate(`/${cleanseString(mainData.mainList)}/${cleanseString(thirdData)}`)} key={thirdData}>
+                  <li className="ham-menu-container__side-box__menu-list__lists__secondary-list__lists__third-list__lists" onClick={() => handleClick('third list', null, mainData.mainList, thirdData)} key={thirdData}>
                     <h3 className="ham-menu-container__side-box__menu-list__lists__secondary-list__lists__third-list__lists__h3">{thirdData}</h3>
                   </li>
                   )}

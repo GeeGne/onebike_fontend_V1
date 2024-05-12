@@ -31,6 +31,10 @@ function IntroSection ({onThemeChange, onLanguageChange}) {
   const phoneNumberIconElement = useRef(null);
   const phoneNumberH2Element = useRef(null);
 
+  const facebookURL = "https://www.facebook.com/profile.php?id=61555487381717";
+  const instagramURL = "https://www.instagram.com/onebike2024?fbclid=IwZXh0bgNhZW0CMTAAAR0j3tRBpSGxAkPztNBkI-KKoBI454wtiODT8gyzjrY2B6jtQhzTFDkpvuI_aem_AZvvFyQoDJ0_EqQr36CwzmanbLAnK_nFqsXLZollXvn2m7LBaFueZpOgtR9S0sRbuLf_CynuMk7xMjEVi3Capb1V";
+  const whatsAppURL = "https://chat.whatsapp.com/BanGDxwaSLgKMBWN6eDVzq";
+
   useEffect(() => {
     onThemeChange(darkMode);
   }, [darkMode])
@@ -66,9 +70,6 @@ function IntroSection ({onThemeChange, onLanguageChange}) {
     type === 'enter' ? (element.src = callFillImg) : (element.src = callImg);
   }
 
-  const facebookURL = "https://www.facebook.com/profile.php?id=61555487381717";
-  const instagramURL = "https://www.instagram.com/onebike2024?fbclid=IwZXh0bgNhZW0CMTAAAR0j3tRBpSGxAkPztNBkI-KKoBI454wtiODT8gyzjrY2B6jtQhzTFDkpvuI_aem_AZvvFyQoDJ0_EqQr36CwzmanbLAnK_nFqsXLZollXvn2m7LBaFueZpOgtR9S0sRbuLf_CynuMk7xMjEVi3Capb1V";
-  const whatsAppURL = "https://chat.whatsapp.com/BanGDxwaSLgKMBWN6eDVzq";
 
   return (
     <>
