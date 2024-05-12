@@ -46,6 +46,9 @@
   --imageSlider-arrows-background-color: hsl(0, 0%, 100%);
   --imageSlider-arrowsBorder-color: hsl(0, 0%, 0%, 0.7);  
   --ImageSlider-arrows-hover-background-color: var(--primary-color);
+
+  // NotFound
+  --notFound-homePage-color: var(--secondary-color); 
 }
 
 //  Dark Theme
@@ -93,4 +96,7 @@
   --imageSlider-arrows-background-color: hsl(0, 0%, 0%);
   --imageSlider-arrowsBorder-color: hsl(0, 0%, 100%, 0.7);
   --ImageSlider-arrows-hover-background-color: var(--primary-color);
+
+  // NotFound
+  --notFound-homePage-color: var(--primary-color); 
 }

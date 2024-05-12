@@ -16,8 +16,6 @@ import NotFound from './Components/Pages/NotFound';
 // HOOKS
 import React, {useEffect, useState, useRef} from 'react';
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
-// import ReactDOM from 'react-dom/client';
-
 
 // UTILS
 import removeDuplicates from '/src/Utils/removeDuplicates.js';
@@ -129,13 +127,12 @@ function App() {
         products.forEach(product => type === (language === 'English' ? product.type.english : product.type.arabic) && (matchedItem = product));
         return language === 'English' ? {type: matchedItem.type.english, category: matchedItem.category.english} : {type: matchedItem.type.arabic, category: matchedItem.category.arabic}
       })
+
       return typesWithCatArray;
     }
     
     setCategories(getCategoriesData())
     setTypes(getTypesData());
-      
-    
   }, [language]);
   
   console.log({types, categories})
@@ -179,7 +176,4 @@ function App() {
 }
 
 export default App;
-
-// const root = ReactDOM.createRoot(document.getElementById('root'));
-// root.render(<App />);
 
