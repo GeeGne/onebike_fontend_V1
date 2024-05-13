@@ -11,7 +11,8 @@ function BreadCrumb () {
 
   // useEffect (() => {
 
-    const {pathname} = window.location;
+    const pathname = decodeURIComponent(window.location.pathname);
+    console.log(pathname)
 
   // }, [])
 
