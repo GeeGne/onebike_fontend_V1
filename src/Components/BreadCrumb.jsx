@@ -12,7 +12,7 @@ function BreadCrumb () {
   // useEffect (() => {
 
     const pathname = decodeURIComponent(window.location.pathname);
-    console.log(pathname)
+    // console.log(pathname);
 
   // }, [])
 

@@ -9,14 +9,14 @@ import cleanseString from '/src/Utils/cleanseString.js';
 
 function DropMenu ({darkMode, language, menu}) {
 
+  const navigate = useNavigate();
+
   const [dropMenu, setDropMenu] = useState(false);
 
   const dropMenuElement = useRef(null);
   const itemsElement = useRef(null);
   const subItemsElement = useRef(null);
   const itemElement = useRef(null);
-
-  const navigate = useNavigate();
 
   const mainListsArray = language === 'English' ? mainListData.english : mainListData.arabic;
 

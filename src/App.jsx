@@ -1,13 +1,11 @@
 //  STYLES
-// import '../Styles/Globals/Theme.scss';
-// import '../Styles/Globals/Fonts.scss';
 import './Styles/App.scss';
 
 //  COMPONENTS
 import Header from './Components/Header/Header';
 import Footer from './Components/Footer';
 import Home from './Components/Pages/Home';
-import Products from './Components/Pages/Products';
+import Products from './Components/Pages/Products/Products';
 import NotFound from './Components/Pages/NotFound';
 
 // DATA
@@ -109,6 +107,7 @@ function App() {
     color: {english: "Grey", arabic:"رمادي"},
     brand: "GIYO"
   }]
+
   useEffect(() => {
 
     const getCategoriesData = () => {
@@ -135,14 +134,13 @@ function App() {
     setTypes(getTypesData());
   }, [language]);
   
-  console.log({types, categories})
+
   const themeData = data => {
     setDarkMode(data);
   }
   
   const languageData = data => {
     setLanguage(data);
-    console.log('lang changed', data)
   }
 
   return (
@@ -157,10 +155,10 @@ function App() {
           <Routes>
             <Route path="/" element={<Home/>}/>
             {categories.map(category => 
-            <Route path={`/${cleanseString(category)}`} element={<Products category={category}/>} key ={category}/>
+            <Route path={`/${cleanseString(category)}`} element={<Products category={category} darkMode={darkMode} language={language}/>} key ={category}/>
             )}
             {types.map(typeVal => 
-            <Route path={`/${cleanseString(typeVal.category)}/${cleanseString(typeVal.type)}`} element={<Products category={typeVal.category} type={typeVal.type}/>} key ={typeVal.type}/>
+            <Route path={`/${cleanseString(typeVal.category)}/${cleanseString(typeVal.type)}`} element={<Products category={typeVal.category} type={typeVal.type} darkMode={darkMode} language={language}/>} key ={typeVal.type}/>
             )}
             <Route path="*" element={<NotFound/>}/>
           </Routes>
