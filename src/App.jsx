@@ -22,7 +22,7 @@ import cleanseString from '/src/Utils/cleanseString.js';
 function App() {
 
   const [darkMode, setDarkMode] = useState(false);
-  const [language, setLanguage] = useState('English');
+  const [language, setLanguage] = useState('english');
   const [categories, setCategories] = useState([]);
   const [types, setTypes] = useState([]);
 
@@ -108,31 +108,31 @@ function App() {
     brand: "GIYO"
   }]
 
-  useEffect(() => {
+  // useEffect(() => {
 
-    const getCategoriesData = () => {
-      const categoriesCollecterArray = products.map(product => language === 'English' ? product.category.english : product.category.arabic);
-      const categoriesArray = removeDuplicates(categoriesCollecterArray);
+  //   const getCategoriesData = () => {
+  //     const categoriesCollecterArray = products.map(product => language === 'english' ? product.category.english : product.category.arabic);
+  //     const categoriesArray = removeDuplicates(categoriesCollecterArray);
 
-      return categoriesArray;
-    }
+  //     return categoriesArray;
+  //   }
 
-    const getTypesData = () => {
-      const typesCollecterArray = products.map(product => language === 'English' ? product.type.english : product.type.arabic);
-      const typesArray = removeDuplicates(typesCollecterArray);
+  //   const getTypesData = () => {
+  //     const typesCollecterArray = products.map(product => language === 'english' ? product.type.english : product.type.arabic);
+  //     const typesArray = removeDuplicates(typesCollecterArray);
   
-      const typesWithCatArray = typesArray.map(type => {
-        let matchedItem;
-        products.forEach(product => type === (language === 'English' ? product.type.english : product.type.arabic) && (matchedItem = product));
-        return language === 'English' ? {type: matchedItem.type.english, category: matchedItem.category.english} : {type: matchedItem.type.arabic, category: matchedItem.category.arabic}
-      })
+  //     const typesWithCatArray = typesArray.map(type => {
+  //       let matchedItem;
+  //       products.forEach(product => type === (language === 'english' ? product.type.english : product.type.arabic) && (matchedItem = product));
+  //       return language === 'english' ? {type: matchedItem.type.english, category: matchedItem.category.english} : {type: matchedItem.type.arabic, category: matchedItem.category.arabic}
+  //     })
 
-      return typesWithCatArray;
-    }
+  //     return typesWithCatArray;
+  //   }
     
-    setCategories(getCategoriesData())
-    setTypes(getTypesData());
-  }, [language]);
+  //   setCategories(getCategoriesData())
+  //   setTypes(getTypesData());
+  // }, [language]);
   
 
   const themeData = data => {
@@ -154,12 +154,12 @@ function App() {
         <main className="app-layout__main">
           <Routes>
             <Route path="/" element={<Home/>}/>
-            {categories.map(category => 
+            {/* {categories.map(category => 
             <Route path={`/${cleanseString(category)}`} element={<Products category={category} darkMode={darkMode} language={language}/>} key ={category}/>
             )}
             {types.map(typeVal => 
             <Route path={`/${cleanseString(typeVal.category)}/${cleanseString(typeVal.type)}`} element={<Products category={typeVal.category} type={typeVal.type} darkMode={darkMode} language={language}/>} key ={typeVal.type}/>
-            )}
+            )} */}
             <Route path="*" element={<NotFound/>}/>
           </Routes>
         </main>

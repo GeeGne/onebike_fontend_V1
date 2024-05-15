@@ -24,7 +24,7 @@ import callPlusFillIconDarkMode from '../../assets/Img/Icons/call_plus_fill_dark
 function IntroSection ({onThemeChange, onLanguageChange}) {
  
   const [darkMode, setDarkMode] = useState(false);
-  const [language, setLanguage] = useState('English');
+  const [language, setLanguage] = useState('english');
   const [alertText, setAlertText] = useState(null);
   const [newAlert, setNewAlert] = useState(0);
 
@@ -53,7 +53,7 @@ function IntroSection ({onThemeChange, onLanguageChange}) {
 
   const handleClick = () => {
     const number = phoneNumberH2Element.current.textContent;
-    const alertMessage = language === 'English' ? 
+    const alertMessage = language === 'english' ? 
     'Number is copied to the clipboard successfully!' : 
     'لقد تم نسخ رقم الهاتف بنجاح!ـ';
     

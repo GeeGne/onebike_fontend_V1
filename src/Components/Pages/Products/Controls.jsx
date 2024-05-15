@@ -11,7 +11,7 @@ import filterDarkMode from '/src/assets/Img/Icons/filter_list_darkMode.svg';
 function Controls ({darkMode, language}) {
 
   const [sortBy, setSortBy] = useState(false);
-  const [sortType, setSortType] = useState(language === 'English' ? 'Sort by' : 'تصنيف حسب')
+  const [sortType, setSortType] = useState(language === 'english' ? 'Sort by' : 'تصنيف حسب')
 
   return (
     <>
@@ -20,15 +20,15 @@ function Controls ({darkMode, language}) {
           <h3 className="controls-container__sort-by-button__h3">{sortType}</h3>
           <img className="controls-container__sort-by-button__down-arrow-icon" src={darkMode ? keyboardArrowDropDownDarkMode : keyboardArrowDropDown}/>
           <ul className="controls-container__sort-by-button__expanded-list">
-            <li className="controls-container__sort-by-button__expanded-list__item" onClick={e => setSortType(language === 'English' ? 'Sort by' : 'تصنيف حسب')}>{language === 'English' ? 'Default' : 'افتراضي'}</li>
-            <li className="controls-container__sort-by-button__expanded-list__item" onClick={e => setSortType(e.currentTarget.textContent)}>{language === 'English' ? 'Price: Low to Hight' : 'السعر: منخفض الى مرتفع'}</li>
-            <li className="controls-container__sort-by-button__expanded-list__item" onClick={e => setSortType(e.currentTarget.textContent)}>{language === 'English' ? 'Price: Hight to Low' : 'السعر: مرتفع الى منخفض'}</li>
-            <li className="controls-container__sort-by-button__expanded-list__item" onClick={e => setSortType(e.currentTarget.textContent)}>{language === 'English' ? 'Newest' : 'الاجدد'}</li>
-            <li className="controls-container__sort-by-button__expanded-list__item" onClick={e => setSortType(e.currentTarget.textContent)}>{language === 'English' ? 'Popularity' : 'الاكثر شهره'}</li>
+            <li className="controls-container__sort-by-button__expanded-list__item" onClick={e => setSortType(language === 'english' ? 'Sort by' : 'تصنيف حسب')}>{language === 'english' ? 'Default' : 'افتراضي'}</li>
+            <li className="controls-container__sort-by-button__expanded-list__item" onClick={e => setSortType(e.currentTarget.textContent)}>{language === 'english' ? 'Price: Low to Hight' : 'السعر: منخفض الى مرتفع'}</li>
+            <li className="controls-container__sort-by-button__expanded-list__item" onClick={e => setSortType(e.currentTarget.textContent)}>{language === 'english' ? 'Price: Hight to Low' : 'السعر: مرتفع الى منخفض'}</li>
+            <li className="controls-container__sort-by-button__expanded-list__item" onClick={e => setSortType(e.currentTarget.textContent)}>{language === 'english' ? 'Newest' : 'الاجدد'}</li>
+            <li className="controls-container__sort-by-button__expanded-list__item" onClick={e => setSortType(e.currentTarget.textContent)}>{language === 'english' ? 'Popularity' : 'الاكثر شهره'}</li>
           </ul>
         </button>
         <button className="controls-container__filter-button">
-          <h3 className="controls-container__sort-by-button__h3">{language === 'English' ? 'Filter' : 'تصفيه'}</h3>
+          <h3 className="controls-container__sort-by-button__h3">{language === 'english' ? 'Filter' : 'تصفيه'}</h3>
           <img src={darkMode ? filterDarkMode : filter}/>
         </button>
       </div>

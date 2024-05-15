@@ -54,7 +54,7 @@ function Navbar ({darkMode, language}) {
           onMouseLeave={() => handleHover(false)}
           ref={searchInputElement}
         >
-          <input placeholder={language === 'English' ? 'Type something' : 'هل تبحث عن شيء؟'}/>
+          <input placeholder={language === 'english' ? 'Type something' : 'هل تبحث عن شيء؟'}/>
           <img src={darkMode ? searchIconDarkMode : searchIcon}/>
         </div>
         <button className="nav-container__search" 

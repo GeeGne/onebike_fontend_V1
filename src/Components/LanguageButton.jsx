@@ -3,7 +3,7 @@ import '../Styles/Components/LanguageButton.scss'
 
 function LanguageButton ({onLanguageChange}) {
 
-  const [language, setLanguage] = useState('English');
+  const [language, setLanguage] = useState('english');
   const [languageList, setLanguageList] = useState(false);
 
   const languageElement = useRef(null);
@@ -19,17 +19,12 @@ function LanguageButton ({onLanguageChange}) {
   useEffect(() => {
     onLanguageChange(language);
 
-    if (language === 'العربيه') {
+    if (language === 'arabic') {
       document.body.classList.add('arabic');
       return;
     }
     document.body.classList.remove('arabic');
   },[language])
-
-  const handleClick = e => {
-    const selectedLanguage = e.target.textContent;
-    setLanguage(selectedLanguage)
-  }
 
   return (
     <div 
@@ -37,12 +32,11 @@ function LanguageButton ({onLanguageChange}) {
       onClick={() => setLanguageList(prevLang => !prevLang)}
       ref={languageElement}
     >
-      <h3 className="language-button__display">{language}</h3>
-      {/* {language} */}
+      <h3 className="language-button__display">{language === 'english' ? 'English' : 'العربيه'}</h3>
       {languageList &&
       <ul className="language-button__list">
-        <li onClick={e => handleClick(e)}><h3>English</h3></li>
-        <li onClick={e => handleClick(e)}><h3>العربيه</h3></li>
+        <li onClick={() => setLanguage('english')}><h3>English</h3></li>
+        <li onClick={() => setLanguage('arabic')}><h3>العربيه</h3></li>
       </ul>
       }
     </div>

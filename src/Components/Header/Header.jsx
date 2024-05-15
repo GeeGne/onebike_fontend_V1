@@ -8,7 +8,7 @@ import Navbar from './Navbar/Navbar';
 function Header ({onThemeChange, onLanguageChange}) {
 
  const [darkMode, setDarkMode] = useState(false);
- const [language, setLanguage] = useState('English');
+ const [language, setLanguage] = useState('english');
 
   useEffect(() => {
     onThemeChange(darkMode);
