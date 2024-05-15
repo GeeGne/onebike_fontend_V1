@@ -167,7 +167,7 @@ function HamMenu ({menu, onMenuChange, darkMode, language}) {
               className="ham-menu-container__side-box__menu-list__lists__title"
               onClick={e => handleClick('title element', e, i)} data-list-id={i}
             >
-              <h2 className="ham-menu-container__side-box__menu-list__lists__title__h2">{mainData.mainList[language]}</h2>
+              <h2 className="ham-menu-container__side-box__menu-list__lists__title__h2">{mainData[language]}</h2>
               <img className="expand-circle" src={darkMode ? expandCircleUpIconDarkMode : expandCircleUpIcon}/>
             </div>
             <ul 
@@ -181,16 +181,16 @@ function HamMenu ({menu, onMenuChange, darkMode, language}) {
                   onClick={(e) => handleClick('second list', e)}
                   data-list-id={randomNum.current = Math.random()}
                 >
-                  <h3 className="ham-menu-container__side-box__menu-list__lists__secondary-list__lists__section__h3">{secondData.name[language]}</h3>
+                  <h3 className="ham-menu-container__side-box__menu-list__lists__secondary-list__lists__section__h3">{secondData[language]}</h3>
                   <div className="ham-menu-container__side-box__menu-list__lists__secondary-list__lists__section__img"></div>
                 </div>
                 <ul 
                   className="ham-menu-container__side-box__menu-list__lists__secondary-list__lists__third-list"
                   ref={el => addRef('thirdListContainerElements', el, i)} data-list-id={randomNum.current}
                 >
-                  {secondData.thirdList[language].map(thirdData =>           
-                  <li className="ham-menu-container__side-box__menu-list__lists__secondary-list__lists__third-list__lists" onClick={() => handleClick('third list', null, mainData.mainList.english, thirdData)} key={thirdData}>
-                    <h3 className="ham-menu-container__side-box__menu-list__lists__secondary-list__lists__third-list__lists__h3">{thirdData}</h3>
+                  {secondData.thirdList.map(thirdData =>           
+                  <li className="ham-menu-container__side-box__menu-list__lists__secondary-list__lists__third-list__lists" onClick={() => handleClick('third list', null, mainData.english, thirdData.english)} key={thirdData.id}>
+                    <h3 className="ham-menu-container__side-box__menu-list__lists__secondary-list__lists__third-list__lists__h3">{thirdData[language]}</h3>
                   </li>
                   )}
                 </ul>
