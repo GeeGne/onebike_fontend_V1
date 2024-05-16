@@ -92,18 +92,18 @@
     background-position: center;
     margin: 0 1em;
     
-    // &::before {
-    //   content: "";
-    //   position: absolute;
-    //   top: -0.5em;
-    //   bottom: -0.5em;
-    //   right: -0.5em;
-    //   left: -0.5em;
-    //   background-color: hsl(0, 0%, 80%, 0.5);
-    //   border-radius: 100%;
-    //   background-color: transparent;
-    //   transition: background-color 0.25s ease;
-    // }
+    &::before {
+      content: "";
+      position: absolute;
+      top: -0.5em;
+      bottom: -0.5em;
+      right: -0.5em;
+      left: -0.5em;
+      background-color: hsl(0, 0%, 80%, 0.5);
+      border-radius: 100%;
+      background-color: transparent;
+      transition: background-color 0.25s ease;
+    }
 
     &:hover::before {
       background-color: hsl(0, 0%, 80%, 0.5);

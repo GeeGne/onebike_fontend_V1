@@ -16,16 +16,19 @@ function Products ({category, type, darkMode, language}) {
   const [productCategory, setProductGategory] = useState('');
 
   useEffect(() => {
-    setProductGategory(type ? type : category);
-  }, [category, type])
+    setProductGategory(type ? type[language] : category[language]);
+    // console.log(type, category)
+  }, [category, type, language])
+
+  console.log({productCategory, type, category});
 
   return (
     <>
       <div className="products-container">
-        <section className="products-container__breadCrumb-container"><BreadCrumb/></section>
+        <section className="products-container__breadCrumb-container"><BreadCrumb category={category} type={type} language={language}/></section>
         <section className="products-container__category-title-container">
-          <h1 className="products-container__category-title-container__h1">{capitalizeFirstLetter(productCategory)}</h1>
-          <h3 className="products-container__category-title-container__result">&#10088;0 results&#10089;</h3>
+          <h1 className="products-container__category-title-container__h1">{productCategory}</h1>
+          <h3 className="products-container__category-title-container__result">&#10088;{language === 'english' ? '0 results' : '0 نتيجه'}&#10089;</h3>
         </section>
         <section className="products-container__controls-container"><Controls darkMode={darkMode} language={language}/></section>
       </div>

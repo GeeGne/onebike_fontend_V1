@@ -10,6 +10,7 @@ import NotFound from './Components/Pages/NotFound';
 
 // DATA
 // import products from '/src/Data/Products.json';
+import mainListData from '/src/Data/Menu.json';
 
 // HOOKS
 import React, {useEffect, useState, useRef} from 'react';
@@ -160,6 +161,20 @@ function App() {
             {types.map(typeVal => 
             <Route path={`/${cleanseString(typeVal.category)}/${cleanseString(typeVal.type)}`} element={<Products category={typeVal.category} type={typeVal.type} darkMode={darkMode} language={language}/>} key ={typeVal.type}/>
             )} */}
+            {mainListData.map(category => 
+            <Route path={`/${cleanseString(category.english)}`} element={<Products category={category} darkMode={darkMode} language={language}/>} key ={category.id}/>
+            )}
+
+            {mainListData.map(category => category.secondaryList.map(list =>
+              list.thirdList.map(data =>
+                <Route path={`/${cleanseString(category.english)}/${cleanseString(data.english)}`} element={<Products category={category} type={data} darkMode={darkMode} language={language}/>} key ={data.id}/>
+              )
+            ))}
+            {/* {types.map(typeVal => 
+            <Route path={`/${cleanseString(typeVal.category)}/${cleanseString(typeVal.type)}`} element={<Products category={typeVal.category} type={typeVal.type} darkMode={darkMode} language={language}/>} key ={typeVal.type}/>
+            )} */}
+
+
             <Route path="*" element={<NotFound/>}/>
           </Routes>
         </main>

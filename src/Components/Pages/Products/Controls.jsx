@@ -11,7 +11,21 @@ import filterDarkMode from '/src/assets/Img/Icons/filter_list_darkMode.svg';
 function Controls ({darkMode, language}) {
 
   const [sortBy, setSortBy] = useState(false);
-  const [sortType, setSortType] = useState(language === 'english' ? 'Sort by' : 'تصنيف حسب')
+  const [sortType, setSortType] = useState('Sort by');
+
+  useEffect(() => {
+    sortType === 'Sort by' && setSortType('تصنيف حسب')
+    sortType === 'Price: Low to Hight' && setSortType('السعر: منخفض الى مرتفع')
+    sortType === 'Price: Hight to Low' && setSortType('السعر: مرتفع الى منخفض')
+    sortType === 'Newest' && setSortType('الاجدد')
+    sortType === 'Popularity' && setSortType('الاكثر شهره')
+    
+    sortType === 'تصنيف حسب' && setSortType('Sort by')
+    sortType === 'السعر: منخفض الى مرتفع' && setSortType('Price: Low to Hight' )
+    sortType === 'السعر: مرتفع الى منخفض' && setSortType('Price: Hight to Low' )
+    sortType === 'الاجدد' && setSortType('Newest')
+    sortType === 'الاكثر شهره' && setSortType('Popularity')
+  }, [language]);
 
   return (
     <>

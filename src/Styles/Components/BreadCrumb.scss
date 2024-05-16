@@ -1,5 +1,10 @@
 .breadCrumb-list {
   display: flex;
+
+  body.arabic & {
+    direction: rtl;
+  }
+
   &__item-container {
     display: flex;
     align-items: center;

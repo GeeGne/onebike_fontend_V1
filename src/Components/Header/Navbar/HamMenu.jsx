@@ -36,18 +36,6 @@ function HamMenu ({menu, onMenuChange, darkMode, language}) {
   mainListData.forEach(list => list.secondaryList.forEach(() => secondListLength++))
 
   useEffect(() => {
-    if (language === 'english') {
-      textLanguage.current = {
-        menu: 'MENU',
-      }
-    } else if (language === 'العربيه') {
-      textLanguage.current = {
-        menu: 'القائمه',
-      }
-    }
-  }, [language])
-
-  useEffect(() => {
     const handleMenuStyles = menu => {        
       const containerStyle = hamMenuContainerElement.current.style;
       const sideBoxStyle = hamMenuSideBoxElement.current.style;
@@ -150,7 +138,7 @@ function HamMenu ({menu, onMenuChange, darkMode, language}) {
       <div className="ham-menu-container__side-box" ref={hamMenuSideBoxElement}>
         <section className="ham-menu-container__side-box__menu">
           <h1 className="ham-menu-container__side-box__menu__h1">
-            {textLanguage.current.menu}
+            {language === 'english' ? 'MENU' : 'القائمه'}
           </h1>
           <img 
             className="ham-menu-container__side-box__menu__exit-icon" 
