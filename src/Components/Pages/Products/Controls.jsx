@@ -14,17 +14,19 @@ function Controls ({darkMode, language}) {
   const [sortType, setSortType] = useState('Sort by');
 
   useEffect(() => {
-    sortType === 'Sort by' && setSortType('تصنيف حسب')
-    sortType === 'Price: Low to Hight' && setSortType('السعر: منخفض الى مرتفع')
-    sortType === 'Price: Hight to Low' && setSortType('السعر: مرتفع الى منخفض')
-    sortType === 'Newest' && setSortType('الاجدد')
-    sortType === 'Popularity' && setSortType('الاكثر شهره')
-    
-    sortType === 'تصنيف حسب' && setSortType('Sort by')
-    sortType === 'السعر: منخفض الى مرتفع' && setSortType('Price: Low to Hight' )
-    sortType === 'السعر: مرتفع الى منخفض' && setSortType('Price: Hight to Low' )
-    sortType === 'الاجدد' && setSortType('Newest')
-    sortType === 'الاكثر شهره' && setSortType('Popularity')
+    if (language ==='arabic') {
+      sortType === 'Sort by' && setSortType('تصنيف حسب');
+      sortType === 'Price: Low to Hight' && setSortType('السعر: منخفض الى مرتفع');
+      sortType === 'Price: Hight to Low' && setSortType('السعر: مرتفع الى منخفض');
+      sortType === 'Newest' && setSortType('الاجدد');
+      sortType === 'Popularity' && setSortType('الاكثر شهره');
+    } else if (language === 'english') {
+      sortType === 'تصنيف حسب' && setSortType('Sort by');
+      sortType === 'السعر: منخفض الى مرتفع' && setSortType('Price: Low to Hight' );
+      sortType === 'السعر: مرتفع الى منخفض' && setSortType('Price: Hight to Low' );
+      sortType === 'الاجدد' && setSortType('Newest');
+      sortType === 'الاكثر شهره' && setSortType('Popularity');
+    }
   }, [language]);
 
   return (

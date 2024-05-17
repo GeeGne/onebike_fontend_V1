@@ -4,6 +4,7 @@ import React, {useState, useEffect} from 'react';
 // COMPONENTS
 import BreadCrumb from '../../BreadCrumb';
 import Controls from './Controls';
+import AdvertList from './AdvertList';
 
 //SCSS
 import '/src/Styles/Components/Pages/Products/Products.scss';
@@ -17,10 +18,7 @@ function Products ({category, type, darkMode, language}) {
 
   useEffect(() => {
     setProductGategory(type ? type[language] : category[language]);
-    // console.log(type, category)
   }, [category, type, language])
-
-  console.log({productCategory, type, category});
 
   return (
     <>
@@ -31,6 +29,7 @@ function Products ({category, type, darkMode, language}) {
           <h3 className="products-container__category-title-container__result">&#10088;{language === 'english' ? '0 results' : '0 نتيجه'}&#10089;</h3>
         </section>
         <section className="products-container__controls-container"><Controls darkMode={darkMode} language={language}/></section>
+        <section className="products-container__advertList-container"><AdvertList darkMode={darkMode} language={language}/></section>
       </div>
     </>
   )
