@@ -9,73 +9,118 @@
   &__grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
+
+    @include w.breakpoint-up(medium) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    @include w.breakpoint-up(large) {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
     &__product-content {
       display: flex;
       flex-direction: column;
       gap: 0.5em;
       padding: 0.5em;
+      
+      &__img-container {
+        position: relative;
 
-      &__img {
-        width: 100%;
-        aspect-ratio: 1 / 1;
-        object-fit: contain;
-        object-position: center;
-        border: solid 1px;
+        &__img {
+          width: 100%;
+          aspect-ratio: 1 / 1;
+          object-fit: contain;
+          object-position: center;
+          border: solid 1px;
+        }
+
+        &__favourite {
+          position: absolute;
+          top: 0.5em;
+          right: 0.5em;
+          width: 1.8em;
+          height: 1.8em;
+          background-color: var(--background-color);
+          background-image: var(--heart-icon);
+          background-repeat: no-repeat;
+          background-size: 70%;
+          background-position: center;
+          border-radius: 3em;
+        }
       }
 
       &__description {
-
+        color: var(--font-h-color);
       }
 
       &__brandLogo {
         width: 100%;
+        // aspect-ratio: 5 / 1;
+        // filter: var(--advertList-brandLogo-filter-brightness);
       }
 
       &__price {
         font-weight: 600;
+        margin-top: auto;
+        color: var(--font-h-color);
 
         & .currency-symbol {
-          margin-inline: 0.5em;
+          // margin-inline: 0.5em;
+          color: var(--font-h-color);
+        }
+
+        &.discount {
+          color: var(--advertList-discount-color);
+        }
+
+        & s {
+          margin-right: 0.5em;
+          color: var(--font-p-color);
+          font-weight: 300;
         }
       }
 
       &__cart-utils {
         display: flex;
-        border: solid hsl(0, 0%, 70%);
+        border: solid 2px var(--advertList-cartUtil-border-color);
         border-radius: 5px;
         align-items: center;
-
 
         &__add-to-cart {
           font-weight: 600;
           flex: 1;
+          white-space: nowrap;
           padding: 0.3em;
+          color: var(--font-h-color);
         }
         
         &__increment,
         &__decrement {
           height: 100%;
           aspect-ratio: 1 / 1;
-          border: solid hsl(0, 0%, 85%);
           background-repeat: no-repeat;
-          background-size: cover;                
+          background-size: cover;
+          background-position: center;
         }
+
         &__increment {
-          background-image: url(/src/assets/Img/Icons/add.svg);
-          border-width: 0 1px;
+          background-image: var(--advertList-increment-add-icon);
+          border: solid var(--advertList-incrementAndDecrement-border-color);
+          border-width: 0 0 0 2px;
+
+          body.arabic & {
+            border-width: 0 2px 0 0;
+          }
         }
 
         &__decrement {
-          background-image: url(/src/assets/Img/Icons/minus.svg);
-          border-width: 0 0 0 1px;
+          background-image: var(--advertList-decrement-add-icon);
         }
-
 
         &__add-to-cart,
         &__increment,
         &__decrement {
           position: relative;
-
           &::before {
             content: "";
             position: absolute;
@@ -83,7 +128,7 @@
             left: 0;
             width: 100%;
             height: 0%;
-            background-color: red;
+            background-color: var(--advertList-addToCart-background-color);
             z-index: -1;
             transition: height 0.5s ease;
           }
@@ -112,9 +157,10 @@
           display: flex;
           align-items: center;
           font-weight: bold;
+          color: var(--font-h-color);
           height: 100%;
           text-align: center;
-          background-color: hsl(0, 0%, 85%);
+          background-color: var(--advertList-total-background-color);
           padding-inline: 0.3em;
         }
       }

@@ -54,7 +54,6 @@
       transform: rotate(180deg)
     }
 
-
     &__expanded-list {
       position: absolute;
       display: flex;
@@ -65,11 +64,12 @@
       top: calc(100% + 0.5em);
       left: 0;
       width: 100%;
-      // background-color: hsl(0, 0%, );
+      background-color: var(--background-color);
       padding-block: 0.5em;
       border: solid 1px var(--endElement-border-background-color);
       border-radius: 8px;
       box-shadow: 2px 2px 10px 1px hsl(0, 0%, 50%, 0.3);
+      z-index: 10;
       transition: opacity 0.25s ease;
 
       &__item {

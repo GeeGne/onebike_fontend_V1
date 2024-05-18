@@ -7,14 +7,15 @@
 
 // URLs 
 :root {
-  --arrow-drop-down-icon: url(src/assets/Img/Icons/arrow_drop_down.svg);
+  --heart-icon: url(/src/assets/Img/Icons/heart.svg);
   
   // NavBar
-  --shoppingCart-icon: url(src/assets/Img/Icons/shopping_cart.svg);
-  --search-icon: url(src/assets/Img/Icons/search.svg);
-  --hamburger-icon: url(src/assets/Img/Icons/menu.svg);
-  --favourite-icon: url(src/assets/Img/Icons/heart.svg);
-  --user-icon: url(src/assets/Img/Icons/user.svg);
+  --arrow-drop-down-icon: url(/src/assets/Img/Icons/arrow_drop_down.svg);
+  --shoppingCart-icon: url(/src/assets/Img/Icons/shopping_cart.svg);
+  --search-icon: url(/src/assets/Img/Icons/search.svg);
+  --hamburger-icon: url(/src/assets/Img/Icons/menu.svg);
+  --favourite-icon: url(/src/assets/Img/Icons/heart.svg);
+  --user-icon: url(/src/assets/Img/Icons/user.svg);
   --navBar-logoIcon-size: 4em;
   --navBar-icon-size: 2em;
 
@@ -22,38 +23,50 @@
   // --hamMenu-menu-font: 1.5rem;
   // --hamMenu-list-font: 1.3rem;
   // --hamMenu-list-icon: 1.5rem;
-  --hamMenu-add-icon: url(src/assets/Img/Icons/add.svg);
-  --hamMenu-remove-icon: url(src/assets/Img/Icons/remove.svg);
+  --hamMenu-add-icon: url(/src/assets/Img/Icons/add.svg);
+  --hamMenu-remove-icon: url(/src/assets/Img/Icons/remove.svg);
   --hamMenu-exitIcon-size: 2.3em;
   --hamMenu-thirdList-addIcon-size: 1em;
   // --hamMenu-list-icon: 1.5rem;
   
   // ImageSlider
-  --arrow-left-icon: url(src/assets/img/Icons/arrow_left.svg);
-  --arrow-left-hover-icon: url(src/assets/img/Icons/arrow_left_darkMode.svg);
-  --arrow-right-icon: url(src/assets/img/Icons/arrow_right.svg);
-  --arrow-right-hover-icon: url(src/assets/img/Icons/arrow_right_darkMode.svg);
+  --arrow-left-icon: url(/src/assets/img/Icons/arrow_left.svg);
+  --arrow-left-hover-icon: url(/src/assets/img/Icons/arrow_left_darkMode.svg);
+  --arrow-right-icon: url(/src/assets/img/Icons/arrow_right.svg);
+  --arrow-right-hover-icon: url(/src/assets/img/Icons/arrow_right_darkMode.svg);
 
   // Product Controls
   --controls-downArrowIcon-size: 1.3em;
+
+  //AdvertList
+  --advertList-increment-add-icon: url(/src/assets/Img/Icons/add.svg);
+  --advertList-decrement-add-icon: url(/src/assets/Img/Icons/minus.svg);
+  --advertList-brandLogo-filter-brightness: brightness(100%);
 }
 
 .dark-theme {
+  --heart-icon: url(/src/assets/Img/Icons/heart_darkMode.svg);
+
   // Navbar
-  --arrow-drop-down-icon: url(src/assets/Img/Icons/arrow_drop_down_darkMode.svg);
-  --hamburger-icon: url(src/assets/Img/Icons/menu_darkMode.svg);
-  --favourite-icon: url(src/assets/Img/Icons/heart_darkMode.svg);
-  --search-icon: url(src/assets/Img/Icons/search_darkMode.svg);
-  --shoppingCart-icon: url(src/assets/Img/Icons/shopping_cart_darkMode.svg);
-  --user-icon: url(src/assets/Img/Icons/user_darkMode.svg);
+  --arrow-drop-down-icon: url(/src/assets/Img/Icons/arrow_drop_down_darkMode.svg);
+  --hamburger-icon: url(/src/assets/Img/Icons/menu_darkMode.svg);
+  --favourite-icon: url(/src/assets/Img/Icons/heart_darkMode.svg);
+  --search-icon: url(/src/assets/Img/Icons/search_darkMode.svg);
+  --shoppingCart-icon: url(/src/assets/Img/Icons/shopping_cart_darkMode.svg);
+  --user-icon: url(/src/assets/Img/Icons/user_darkMode.svg);
   
   // HamMenu
-  --hamMenu-add-icon: url(src/assets/Img/Icons/add_darkMode.svg);
-  --hamMenu-remove-icon: url(src/assets/Img/Icons/remove_darkMode.svg);
+  --hamMenu-add-icon: url(/src/assets/Img/Icons/add_darkMode.svg);
+  --hamMenu-remove-icon: url(/src/assets/Img/Icons/remove_darkMode.svg);
 
   // ImageSlider
-  --arrow-left-icon: url(src/assets/img/Icons/arrow_left_darkMode.svg);
-  --arrow-left-hover-icon: url(src/assets/img/Icons/arrow_left.svg);
-  --arrow-right-icon: url(src/assets/img/Icons/arrow_right_darkMode.svg);
-  --arrow-right-hover-icon: url(src/assets/img/Icons/arrow_right.svg);
+  --arrow-left-icon: url(/src/assets/img/Icons/arrow_left_darkMode.svg);
+  --arrow-left-hover-icon: url(/src/assets/img/Icons/arrow_left.svg);
+  --arrow-right-icon: url(/src/assets/img/Icons/arrow_right_darkMode.svg);
+  --arrow-right-hover-icon: url(/src/assets/img/Icons/arrow_right.svg);
+
+  //AdvertList
+  --advertList-increment-add-icon: url(/src/assets/Img/Icons/add_darkMode.svg);
+  --advertList-decrement-add-icon: url(/src/assets/Img/Icons/minus_darkMode.svg);
+  --advertList-brandLogo-filter-brightness: brightness(300%);
 }

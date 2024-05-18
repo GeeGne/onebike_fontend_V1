@@ -32,6 +32,15 @@ body {
   @include w.breakpoint-up(xlarge) {
    font-size: 1.15rem;
   }
+
+  &.arabic {
+    // font-family: 'PT_Sans';
+    font-family: 'Rubik';
+    // font-family: 'Noto_Arabic';
+    // font-family: 'Vazirmatn';
+    // direction: rtl;
+
+  }
 }
 
 a

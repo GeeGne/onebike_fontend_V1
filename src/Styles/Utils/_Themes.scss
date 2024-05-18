@@ -51,13 +51,20 @@
 
   // NotFound
   --notFound-homePage-color: var(--secondary-color); 
+
+  // AdvertList
+  --advertList-cartUtil-border-color: var(--endElement-border-background-color);
+  --advertList-incrementAndDecrement-border-color: var(--endElement-border-background-color);
+  --advertList-total-background-color: var(--light-background-color);
+  --advertList-addToCart-background-color: #b4926f;
+  --advertList-discount-color: var(--primary-color);
 }
 
 //  Dark Theme
 .dark-theme {
   // Main
   --background-color: hsl(0, 0%, 0%);
-  --light-background-color: hsl(0, 0%, 10%);
+  --light-background-color: hsl(0, 0%, 15%);
   --endElement-border-background-color: hsl(0, 0%, 15%);
   --font-h-color: #ffffff;  
   --font-p-color: hsl(0, 0%, 75%);
@@ -103,4 +110,11 @@
 
   // NotFound
   --notFound-homePage-color: var(--primary-color); 
+
+  // AdvertList
+  --advertList-cartUtil-border-color: var(--endElement-border-background-color);
+  --advertList-incrementAndDecrement-border-color: var(--endElement-border-background-color);
+  --advertList-total-background-color: var(--light-background-color);
+  --advertList-addToCart-background-color: #472e1f;
+  --advertList-discount-color: var(--primary-color);
 }
