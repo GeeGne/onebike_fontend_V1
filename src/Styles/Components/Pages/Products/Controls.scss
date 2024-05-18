@@ -79,7 +79,8 @@
         transition: background-color 0.25s ease;
         
         &:hover {
-          background-color: hsl(0, 0%, 85%);
+          // background-color: hsl(0, 0%, 85%);
+          background-color: var(--controls--expandedList-hover-background-color);
           color: var(--font-h-color);
           font-weight: 550;
         }

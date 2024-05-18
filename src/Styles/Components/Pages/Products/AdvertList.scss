@@ -1,7 +1,9 @@
 @use 'src/Styles/Utils/_BreakPoints' as w;
 
 .advertList-container {
-  padding: 0.5em;
+  padding: 1em;
+  background-color: var(--light-background-color);
+
   body.arabic & {
     direction: rtl;
   }
@@ -9,6 +11,7 @@
   &__grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
+    gap: 1em;
 
     @include w.breakpoint-up(medium) {
       grid-template-columns: repeat(3, 1fr);
@@ -18,44 +21,47 @@
     }
 
     &__product-content {
+      position: relative;
       display: flex;
       flex-direction: column;
       gap: 0.5em;
       padding: 0.5em;
-      
-      &__img-container {
-        position: relative;
+      background-color: var(--background-color);
+      border: solid var(--advertList-productContent-border-color) 1px;
+      transition: transform 0.5s ease-out;
 
-        &__img {
-          width: 100%;
-          aspect-ratio: 1 / 1;
-          object-fit: contain;
-          object-position: center;
-          border: solid 1px;
-        }
-
-        &__favourite {
-          position: absolute;
-          top: 0.5em;
-          right: 0.5em;
-          width: 1.8em;
-          height: 1.8em;
-          background-color: var(--background-color);
-          background-image: var(--heart-icon);
-          background-repeat: no-repeat;
-          background-size: 70%;
-          background-position: center;
-          border-radius: 3em;
-        }
+      &:hover {
+        transform: scale(1.05);
       }
 
+      &__favourite {
+        position: absolute;
+        top: 0.5em;
+        right: 0.5em;
+        width: 1.8em;
+        height: 1.8em;
+        background-color: var(--background-color);
+        background-image: var(--heart-icon);
+        background-repeat: no-repeat;
+        background-size: 70%;
+        background-position: center;
+        border-radius: 3em;
+      }
+
+      &__img {
+        width: 100%;
+        aspect-ratio: 1 / 1;
+        object-fit: contain;
+        object-position: center;
+        // border: solid 1px;
+      }
+      
       &__description {
         color: var(--font-h-color);
       }
 
       &__brandLogo {
         width: 100%;
-        // aspect-ratio: 5 / 1;
         // filter: var(--advertList-brandLogo-filter-brightness);
       }
 
@@ -65,7 +71,6 @@
         color: var(--font-h-color);
 
         & .currency-symbol {
-          // margin-inline: 0.5em;
           color: var(--font-h-color);
         }
 
@@ -85,13 +90,24 @@
         border: solid 2px var(--advertList-cartUtil-border-color);
         border-radius: 5px;
         align-items: center;
+        z-index: 10;
 
         &__add-to-cart {
           font-weight: 600;
           flex: 1;
           white-space: nowrap;
           padding: 0.3em;
-          color: var(--font-h-color);
+          color: transparent;
+          background-image: var(--add-shoppingCart-icon);
+          background-repeat: no-repeat;
+          // background-size: 20%;
+          background-size: 1.3em;
+          background-position: center;
+          
+          @include w.breakpoint-up (medium) {
+            color: var(--font-h-color);
+            background-image: none;
+          }
         }
         
         &__increment,

@@ -1,0 +1,29 @@
+@use '/src/Styles/Utils/_BreakPoints' as w;
+
+.newsLetter-container {
+  position: relative;
+  background-color: red;
+  width: 100%;
+  aspect-ratio: 2.39 / 1;
+  background-image: url(/src/assets/Img/Content/poster3.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: top;
+  padding: 1em;
+  
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: hsl(0, 0%, 0%, 0.4);
+  }
+
+  &__content {
+    width: 100%;
+    height: 100%;
+    background-color: hsl(0, 0%, 100%, 0.7);
+  }
+}

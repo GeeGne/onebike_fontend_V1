@@ -1,0 +1,10 @@
+@use '/src/Styles/Utils/_BreakPoints' as w;
+
+.home-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  // background-color: lime;
+  // width: 100%;
+  // height: 2080px;
+}

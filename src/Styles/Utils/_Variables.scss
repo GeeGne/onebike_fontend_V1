@@ -8,7 +8,8 @@
 // URLs 
 :root {
   --heart-icon: url(/src/assets/Img/Icons/heart.svg);
-  
+  --add-shoppingCart-icon: url(/src/assets/Img/Icons/add_shopping_cart.svg); 
+
   // NavBar
   --arrow-drop-down-icon: url(/src/assets/Img/Icons/arrow_drop_down.svg);
   --shoppingCart-icon: url(/src/assets/Img/Icons/shopping_cart.svg);
@@ -46,6 +47,7 @@
 
 .dark-theme {
   --heart-icon: url(/src/assets/Img/Icons/heart_darkMode.svg);
+  --add-shoppingCart-icon: url(/src/assets/Img/Icons/add_shopping_cart_darkMode.svg); 
 
   // Navbar
   --arrow-drop-down-icon: url(/src/assets/Img/Icons/arrow_drop_down_darkMode.svg);

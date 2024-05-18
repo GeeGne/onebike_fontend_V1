@@ -41,6 +41,7 @@
   // Alert
   --alert-timer-background-color: hsl(0, 0%, 50%);
   --alert-filler-background-color: hsl(0, 0%, 100%);
+
   // --alert-filler-hover-background-color: hsl(0, 0%, 95%);
   --alert-x-background-color: hsl(0, 0%, 70%);
 
@@ -52,7 +53,11 @@
   // NotFound
   --notFound-homePage-color: var(--secondary-color); 
 
+  // Controls
+  --controls--expandedList-hover-background-color: var(--light-background-color);
+  
   // AdvertList
+  --advertList-productContent-border-color: hsl(0, 0%, 80%);
   --advertList-cartUtil-border-color: var(--endElement-border-background-color);
   --advertList-incrementAndDecrement-border-color: var(--endElement-border-background-color);
   --advertList-total-background-color: var(--light-background-color);
@@ -111,7 +116,11 @@
   // NotFound
   --notFound-homePage-color: var(--primary-color); 
 
+  // Controls
+  --controls--expandedList-hover-background-color: var(--light-background-color);
+  
   // AdvertList
+  --advertList-productContent-border-color: hsl(0, 0%, 20%);
   --advertList-cartUtil-border-color: var(--endElement-border-background-color);
   --advertList-incrementAndDecrement-border-color: var(--endElement-border-background-color);
   --advertList-total-background-color: var(--light-background-color);
