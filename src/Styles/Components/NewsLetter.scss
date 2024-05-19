@@ -2,28 +2,118 @@
 
 .newsLetter-container {
   position: relative;
-  background-color: red;
   width: 100%;
-  aspect-ratio: 2.39 / 1;
-  background-image: url(/src/assets/Img/Content/poster3.jpg);
+  aspect-ratio: 2 / 3;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#4b6e9075), to(#b8d1e064)), url('/src/assets/Img/Content/Giant and Snow.jpg');
+  // background-image: url('/src/assets/Img/Content/bicycle and syria flag poster.jpg');
+  // background-image: -webkit-gradient(linear, left top, left bottom, from(#4b6e9075), to(#b8d1e064)), url('/src/assets/Img/Content/bicycle background.jpg');
   background-repeat: no-repeat;
   background-size: cover;
-  background-position: top;
-  padding: 1em;
-  
-  &::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: hsl(0, 0%, 0%, 0.4);
+  background-position: left;
+  overflow: hidden;
+
+  @include w.breakpoint-up(medium) {
+    aspect-ratio: 1 / 1;
+  }
+
+  @include w.breakpoint-up(large) {
+    aspect-ratio: 3 / 2;
   }
 
   &__content {
+    display: flex;
+    flex-direction: column;
+    // align-items: center;
+    // text-align: center;
     width: 100%;
     height: 100%;
-    background-color: hsl(0, 0%, 100%, 0.7);
+    // background-color: hsl(200, 100%, 15%, 0.20);
+    color: white;
+    gap: 0.5em;
+    padding: 1em;
+
+    &__title {
+      font-family: 'Righteous';
+      font-weight: bold;
+      filter: drop-shadow(-5px 6px 2px hsl(0, 0%, 0%, 0.4));
+
+      & .one-bike {
+        font-size: 1.3em;
+        // color: var(--secondary-color);
+        // mask-image: linear-gradient(to bottom, hsl(0, 0%, 0%) 0%, hsl(0, 0%, 0%) 50%,  hsl(0, 0%, 100%) 0%, hsl(0, 0%, 100%) 100%);
+        mask-image: linear-gradient(to bottom, hsl(0, 0%, 0%, 1) 0%, hsl(0, 0%, 0%, 1) 50%, hsl(0, 0%, 100%, 0) 50%, rgb(0, 0, 0, 1) 100%);
+        -webkit-mask-image: linear-gradient(to bottom, hsl(0, 0%, 0%, 1) 0%, hsl(0, 0%, 0%, 1) 50%, hsl(0, 0%, 100%, 1) 50%, rgb(0, 0, 0, 1) 100%);
+        // mask-image: image(url(src/assets/Img/Logo/ONEBIKE.png), green);
+      }
+
+      & .colored {
+        // color: var(--secondary-color);
+      }
+    }
+
+    &__description {
+      margin-bottom: auto;
+      // color: lightblue;
+      font-weight: 700;
+      // color: var(--secondary-color);
+      color: white;
+      filter: drop-shadow(-5px 6px 7px hsl(0, 0%, 0%, 0.4));
+      
+      &::before,
+      &::after {
+        content: "";
+        display: inline-block;
+        width: 1.2em;
+        height: 1.2em;
+        background-image: url(/src/assets/Img/Icons/quote_darkMode.svg);
+        background-size: cover;
+        background-repeat: no-repeat;
+      }
+
+      & .firstLetter {
+        // transform: scale(2);
+        color: lightBlue;
+        font-size: 1.6em;
+      }
+    }
+
+    &__paragraph {
+      font-weight: bold;
+      font-size: 0.9em;
+      filter: drop-shadow(-5px 6px 7px hsl(0, 0%, 0%, 0.4));
+    }
+
+    &__toggles {
+      display: flex;
+      flex-direction: column;
+      opacity: 0.8;
+      backdrop-filter: blur(6px);
+
+      &__input-container {
+        position: relative;
+
+        &__logo {
+          position: absolute;
+          bottom: 50%;
+          right: 1em;
+          transform: translateY(50%);
+          height: 100%;
+          object-fit: cover;
+        }
+
+        &__input {
+          width: 100%;
+          padding: 0.5em;
+          outline: none;
+          border: none;
+        }
+      }
+
+      &__subscribe-button {
+        font-weight: bold;
+        background-color: lightblue;
+        padding: 0.5em;
+      }
+    }
   }
 }

@@ -1,16 +1,25 @@
 [{
   "id": 1,
-  "URL": "/src/assets/Img/Content/poster0.jpg" 
+  "URL": "/src/assets/Img/Content/bicycle and syria flag poster.jpg" 
 },{
   "id": 2,
-  "URL": "/src/assets/Img/Content/poster.jpg" 
+  "URL": "/src/assets/Img/Content/bicycle and lake.jpg" 
 },{
   "id": 3,
-  "URL": "/src/assets/Img/Content/poster1.jpg" 
+  "URL": "/src/assets/Img/Content/Special bicycle and forest.jpg" 
 },{
   "id": 4,
-  "URL": "/src/assets/Img/Content/poster2.jpg" 
+  "URL": "/src/assets/Img/Content/two bicycles.jpg" 
 },{
   "id": 5,
+  "URL": "/src/assets/Img/Content/Giant and Snow.jpg" 
+},{
+  "id": 6,
+  "URL": "/src/assets/Img/Content/bicycle background.jpg" 
+},{
+  "id": 7,
   "URL": "/src/assets/Img/Content/poster3.jpg" 
+},{
+  "id": 8,
+  "URL": "/src/assets/Img/Content/bicycle group.jpg" 
 }]

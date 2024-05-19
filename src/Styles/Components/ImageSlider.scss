@@ -13,9 +13,10 @@
       flex-shrink: 0;
       & img {
         width: 100%;
-        aspect-ratio: 2.39 / 1;
+        // aspect-ratio: 2.39 / 1;
+        aspect-ratio: 16 / 9;
         object-fit: cover;
-        object-position: 0 -10px;
+        object-position: center;
       }      
     }
   }
