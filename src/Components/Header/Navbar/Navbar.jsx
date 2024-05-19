@@ -10,7 +10,7 @@ import logo from '/src/assets/Img/Logo/ONEBIKE.png';
 import searchIcon from '/src/assets/Img/Icons/search.svg';
 import searchIconDarkMode from '/src/assets/Img/Icons/search_darkMode.svg';
 
-function Navbar ({darkMode, language}) {
+function Navbar ({darkMode, lan}) {
   
   const navigate = useNavigate();
 
@@ -49,24 +49,17 @@ function Navbar ({darkMode, language}) {
       <nav className="nav-container">
         <button className={`nav-container__hamburger${menu ? ' clicked' : ''}`} onClick={handleClick}/>
           <img className="nav-container__logo" onClick={() => navigate('/') } src={logo}/>
-        <div className={`nav-container__search-input${search ? ' hover' : ''}`}
-          onMouseEnter={() => handleHover(true)} 
-          onMouseLeave={() => handleHover(false)}
-          ref={searchInputElement}
-        >
-          <input placeholder={language === 'english' ? 'Type something' : 'هل تبحث عن شيء؟'}/>
+        <div className={`nav-container__search-input${search ? ' hover' : ''}`} onMouseEnter={() => handleHover(true)}  onMouseLeave={() => handleHover(false)} ref={searchInputElement}>
+          <input placeholder={lan === 'en' ? 'Type something' : 'هل تبحث عن شيء؟'}/>
           <img src={darkMode ? searchIconDarkMode : searchIcon}/>
         </div>
-        <button className="nav-container__search" 
-          onMouseEnter={() => handleHover(true)} 
-          onMouseLeave={() => handleHover(false)}
-        />
+        <button className="nav-container__search" onMouseEnter={() => handleHover(true)} onMouseLeave={() => handleHover(false)} />
         <button className="nav-container__user"/>
         <button className="nav-container__favourite"/>
         <button className="nav-container__shoppingCart"/>
       </nav>
-      <DropMenu menu={menu} darkMode={darkMode} language={language}/>
-      <HamMenu menu={menu} onMenuChange={menuData} darkMode={darkMode} language={language}/>
+      <DropMenu menu={menu} darkMode={darkMode} lan={lan}/>
+      <HamMenu menu={menu} onMenuChange={menuData} darkMode={darkMode} lan={lan}/>
       {/* <NavBottom/> */}
       {/* <Outlet/> */}
     </>

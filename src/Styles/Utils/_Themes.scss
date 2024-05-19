@@ -5,7 +5,9 @@
   --light-background-color: hsl(0, 0%, 85%);
   --endElement-border-background-color: hsl(0, 0%, 85%);
   --font-h-color: hsl(0, 0%, 0%);
+  --font-h-invert-color: hsl(0, 0%, 100%);
   --font-p-color: hsl(0, 0%, 25%);
+  --font-p-invert-color: hsl(0, 0%, 75%);
   --primary-color: #4B6D90;
   --secondary-color: #B8D1E0;
 
@@ -74,8 +76,10 @@
   --background-color: hsl(0, 0%, 0%);
   --light-background-color: hsl(0, 0%, 15%);
   --endElement-border-background-color: hsl(0, 0%, 15%);
-  --font-h-color: #ffffff;  
+  --font-h-color: hsl(0, 0%, 100%);  
+  --font-h-invert-color: hsl(0, 0%, 0%);  
   --font-p-color: hsl(0, 0%, 75%);
+  --font-p-invert-color: hsl(0, 0%, 25%);
   --primary-color: #85AED0;
   --secondary-color: #192740;
 
@@ -129,7 +133,7 @@
   --advertList-total-background-color: var(--light-background-color);
   --advertList-addToCart-background-color: #472e1f;
   --advertList-discount-color: var(--primary-color);
-  
+
   // Footer
   --footer-background-color: var(--secondary-color);
 }

@@ -24,7 +24,7 @@ import callPlusFillIconDarkMode from '../../assets/Img/Icons/call_plus_fill_dark
 function IntroSection ({onThemeChange, onLanguageChange}) {
  
   const [darkMode, setDarkMode] = useState(false);
-  const [language, setLanguage] = useState('english');
+  const [lan, setLanguage] = useState('en');
   const [alertText, setAlertText] = useState(null);
   const [newAlert, setNewAlert] = useState(0);
 
@@ -40,8 +40,8 @@ function IntroSection ({onThemeChange, onLanguageChange}) {
   }, [darkMode])
 
   useEffect(() => {
-    onLanguageChange(language);
-  }, [language])
+    onLanguageChange(lan);
+  }, [lan])
 
   const themeData = data => {
     setDarkMode(data);
@@ -53,7 +53,7 @@ function IntroSection ({onThemeChange, onLanguageChange}) {
 
   const handleClick = () => {
     const number = phoneNumberH2Element.current.textContent;
-    const alertMessage = language === 'english' ? 
+    const alertMessage = lan === 'en' ? 
     'Number is copied to the clipboard successfully!' : 
     'لقد تم نسخ رقم الهاتف بنجاح!ـ';
     
@@ -74,42 +74,24 @@ function IntroSection ({onThemeChange, onLanguageChange}) {
   return (
     <>
       <Alert alertText={alertText} newAlert={newAlert} />
-      <section className={`userinfo-container ${language === 'العربيه' && 'arabic'}`}>
+      <section className="userinfo-container">
         {/* <Link to="/">
           <img className="logo" src={shoppingCartLogo}/>
         </Link> */}
 
-        <a 
-          className="userinfo-container__icons-a"
-          href={facebookURL}
-          target="_blank" 
-        >
+        <a className="userinfo-container__icons-a" href={facebookURL} target="_blank">
           <img className="userinfo-container__icons-a__img" src={darkMode ? facebookIconDarkMode : facebookIcon}/>
         </a>
-        <a 
-          className="userinfo-container__icons-a"
-          href={instagramURL}
-          target="_blank"
+        <a className="userinfo-container__icons-a" href={instagramURL} target="_blank"
         >
           <img className="userinfo-container__icons-a__img" src={darkMode ? instagramIconDarkMode : instagramIcon}/>
         </a>
-        <a 
-          className="userinfo-container__icons-a"
-          href={whatsAppURL}
-          target="_blank"
-        >
+        <a className="userinfo-container__icons-a" href={whatsAppURL} target="_blank">
           <img className="userinfo-container__icons-a__img" src={darkMode ? whatsappIconDarkMode : whatsappIcon}/>
         </a>
 
-        <div className="userinfo-container__phone-number" 
-          onClick={handleClick}
-          onMouseEnter={() => handleHover('enter')}
-          onMouseLeave={() => handleHover('leave')}
-        >
-          <img 
-            src={darkMode ? callIconDarkMode : callIcon}
-            ref={phoneNumberIconElement}
-          />
+        <div className="userinfo-container__phone-number" onClick={handleClick} onMouseEnter={() => handleHover('enter')} onMouseLeave={() => handleHover('leave')}>
+          <img src={darkMode ? callIconDarkMode : callIcon} ref={phoneNumberIconElement}/>
           <h2 ref={phoneNumberH2Element}>+963 964 803 712</h2>
         </div>
 

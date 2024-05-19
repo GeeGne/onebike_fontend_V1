@@ -1,327 +1,327 @@
 [{
   "id": 0,
-  "english": "Bikes", "arabic" :"دراجات",
+  "en": "Bikes", "ar" :"دراجات",
   "secondaryList": [{
     "id": 0,
-    "english": "Bikes", "arabic" :"دراجات",
+    "en": "Bikes", "ar" :"دراجات",
     "thirdList": [{
       "id": 0,
-      "english": "Road Bike", "arabic": "دراجه الطرق"
+      "en": "Road Bike", "ar": "دراجه الطرق"
     },{
       "id": 1,
-      "english": "Mountain Bike", "arabic": "دراجه الجبلي"
+      "en": "Mountain Bike", "ar": "دراجه الجبلي"
     },{
       "id": 2,
-      "english": "Hybird Bike", "arabic": "دراجه الهجين"
+      "en": "Hybird Bike", "ar": "دراجه الهجين"
     },{
       "id": 3,
-      "english": "City Bike", "arabic": "دراجه سياحي"
+      "en": "City Bike", "ar": "دراجه سياحي"
     }]
   },{
     "id": 1,
-    "english": "Top Bike Brands", "arabic": "اشهر ماركات للدراجات",
+    "en": "Top Bike Brands", "ar": "اشهر ماركات للدراجات",
     "thirdList": [{
       "id": 0,
-      "english": "Giant", "arabic": "Giant"
+      "en": "Giant", "ar": "Giant"
     },{
       "id": 1,
-      "english": "Trek", "arabic": "Trek"
+      "en": "Trek", "ar": "Trek"
     },{
       "id": 2,
-      "english": "Scott", "arabic": "Scott"
+      "en": "Scott", "ar": "Scott"
     },{
       "id": 3,
-      "english": "SantaCrus", "arabic": "SantaCrus"
+      "en": "SantaCrus", "ar": "SantaCrus"
     },{
       "id": 4,
-      "english": "Felt", "arabic": "Felt"
+      "en": "Felt", "ar": "Felt"
     },{
       "id": 5,
-      "english": "Cannondale", "arabic": "Cannondale"
+      "en": "Cannondale", "ar": "Cannondale"
     }]
   }]
 },{
   "id": 1,
-  "english": "Accessories", "arabic": "اكسسوارات",
+  "en": "Accessories", "ar": "اكسسوارات",
   "secondaryList": [{
     "id": 0,
-    "english": "Most Popular", "arabic" : "اكثر طلبا",
+    "en": "Most Popular", "ar" : "اكثر طلبا",
     "thirdList": [{
       "id": 0,
-      "english": "Lights", "arabic": "اناره"
+      "en": "Lights", "ar": "اناره"
     },{
       "id": 1,
-      "english": "Bags", "arabic": "حقائب"
+      "en": "Bags", "ar": "حقائب"
     },{
       "id": 2,
-      "english": "Pumps", "arabic": "منافخ"
+      "en": "Pumps", "ar": "منافخ"
     },{
       "id": 3,
-      "english": "Trainers", "arabic": "ترينرز"
+      "en": "Trainers", "ar": "ترينرز"
     },{
       "id": 4,
-      "english": "Sunglasses", "arabic": "نظارات شمسيه"
+      "en": "Sunglasses", "ar": "نظارات شمسيه"
     }]
   },{
     "id": 1,
-    "english": "Essentials", "arabic": "اساسيات",
+    "en": "Essentials", "ar": "اساسيات",
     "thirdList": [{
       "id": 0,
-      "english": "Bike Locks", "arabic": "قفل للدراجه"
+      "en": "Bike Locks", "ar": "قفل للدراجه"
     },{
       "id": 1,
-      "english": "Body Creams", "arabic": "كريم للجسم"
+      "en": "Body Creams", "ar": "كريم للجسم"
     },{
       "id": 2,
-      "english": "Bells & Horns", "arabic": "مزامير"
+      "en": "Bells & Horns", "ar": "مزامير"
     },{
       "id": 3,
-      "english": "Bottles", "arabic": "مطره"
+      "en": "Bottles", "ar": "مطره"
     },{
       "id": 4,
-      "english": "Cages", "arabic": "حماله مطره"
+      "en": "Cages", "ar": "حماله مطره"
     }]
   },{
     "id": 2,
-    "english": "Tools, Racks, Lube", "arabic": "ادوات, شحم",
+    "en": "Tools, Racks, Lube", "ar": "ادوات, شحم",
     "thirdList": [{
       "id": 0,
-      "english": "Chain Lubricants", "arabic": "شحم للجنزير"
+      "en": "Chain Lubricants", "ar": "شحم للجنزير"
     },{
       "id": 1,
-      "english": "Cleaning Tools", "arabic": "معدات للتنضيف"
+      "en": "Cleaning Tools", "ar": "معدات للتنضيف"
     },{
       "id": 2,
-      "english": "Tools", "arabic": "معدات"
+      "en": "Tools", "ar": "معدات"
     },{
       "id": 3,
-      "english": "Car Bike Racks", "arabic": "قواعد تنصيب الدراجه للسياره"
+      "en": "Car Bike Racks", "ar": "قواعد تنصيب الدراجه للسياره"
     },{
       "id": 4,
-      "english": "Storage & Display Stands", "arabic": "تخزين & عرض"
+      "en": "Storage & Display Stands", "ar": "تخزين & عرض"
     }]
   },{
     "id": 3,
-    "english": "Additonal", "arabic": "اضافي",
+    "en": "Additonal", "ar": "اضافي",
     "thirdList": [{
       "id": 0,
-      "english": "Handlebar Mirros", "arabic": "مرايا"
+      "en": "Handlebar Mirros", "ar": "مرايا"
     },{
       "id": 1,
-      "english": "Baskets", "arabic": "سله"
+      "en": "Baskets", "ar": "سله"
     },{
       "id": 2,
-      "english": "Child Seats", "arabic": "مقعد للاطفال"
+      "en": "Child Seats", "ar": "مقعد للاطفال"
     },{
       "id": 3,
-      "english": "Bike Trailers", "arabic": "مقطورات الدراجه"
+      "en": "Bike Trailers", "ar": "مقطورات الدراجه"
     }]
   }]
 },{
   "id": 2,
-  "english": "Components", "arabic": "قطع الدراجه",
+  "en": "Components", "ar": "قطع الدراجه",
   "secondaryList": [{
     "id": 0,
-    "english": "Common Parts", "arabic": "قطع الاكثر شيوعا",
+    "en": "Common Parts", "ar": "قطع الاكثر شيوعا",
     "thirdList": [{
       "id": 0,
-      "english": "Pedals", "arabic": "دواسه"
+      "en": "Pedals", "ar": "دواسه"
     },{
       "id": 1,
-      "english": "Groupsets", "arabic": "مجموعه القياده"
+      "en": "Groupsets", "ar": "مجموعه القياده"
     },{
       "id": 2,
-      "english": "Seats", "arabic": "مقعد"
+      "en": "Seats", "ar": "مقعد"
     },{
       "id": 3,
-      "english": "Brakes & Parts", "arabic": "فرامل و اجزاءه"
+      "en": "Brakes & Parts", "ar": "فرامل و اجزاءه"
     },{
       "id": 4,
-      "english": "Power Meters", "arabic": "مقياس الطاقه"
+      "en": "Power Meters", "ar": "مقياس الطاقه"
     }]
   },{
     "id": 1,
-    "english": "Drive Train", "arabic": "قطع الحركه",
+    "en": "Drive Train", "ar": "قطع الحركه",
     "thirdList": [{
       "id": 0,
-      "english": "Chains", "arabic": "جنزير"
+      "en": "Chains", "ar": "جنزير"
     },{
       "id": 1,
-      "english": "Derailleurs", "arabic": "صندوق المسننات"
+      "en": "Derailleurs", "ar": "صندوق المسننات"
     },{
       "id": 2,
-      "english": "Cranksets", "arabic": "مجموعه الدفع الاماميه"
+      "en": "Cranksets", "ar": "مجموعه الدفع الاماميه"
     },{
       "id": 3,
-      "english": "Bottom Brackets", "arabic": "القوالب الاماميه و الخلفيه"
+      "en": "Bottom Brackets", "ar": "القوالب الاماميه و الخلفيه"
     }]
   },{
     "id": 2,
-    "english": "Handlebars", "arabic": "مستلزمات الكيدون",
+    "en": "Handlebars", "ar": "مستلزمات الكيدون",
     "thirdList": [{
       "id": 0,
-      "english": "GearShifters & Cables", "arabic": "غيار الحركه & شرطان"
+      "en": "GearShifters & Cables", "ar": "غيار الحركه & شرطان"
     },{
       "id": 1,
-      "english": "Grips", "arabic": "مسكات"
+      "en": "Grips", "ar": "مسكات"
     },{
       "id": 2,
-      "english": "Bar Tape", "arabic": "لفاف الكيدون"
+      "en": "Bar Tape", "ar": "لفاف الكيدون"
     },{
       "id": 3,
-      "english": "Stems", "arabic": "رقبات"
+      "en": "Stems", "ar": "رقبات"
     },{
       "id": 4,
-      "english": "Headsets & Spacers", "arabic": "مجموعه قطع الرقبه & تسميكات"
+      "en": "Headsets & Spacers", "ar": "مجموعه قطع الرقبه & تسميكات"
     }]
   },{
     "id": 3,
-    "english": "Popular Brands", "arabic": "ماركات مشهوره",
+    "en": "Popular Brands", "ar": "ماركات مشهوره",
     "thirdList": [{
       "id": 0,
-      "english": "Shimano", "arabic": "Shimano"
+      "en": "Shimano", "ar": "Shimano"
     },{
       "id": 1,
-      "english": "SRAM", "arabic": "SRAM"
+      "en": "SRAM", "ar": "SRAM"
     },{
       "id": 2,
-      "english": "Campagnolo", "arabic": "Campagnolo"
+      "en": "Campagnolo", "ar": "Campagnolo"
     },{
       "id": 3,
-      "english": "Zipp", "arabic": "Zipp"
+      "en": "Zipp", "ar": "Zipp"
     },{
       "id": 4,
-      "english": "RockShox", "arabic": "RockShox"
+      "en": "RockShox", "ar": "RockShox"
     }]
   }]
 },{
   "id": 3,
-  "english": "Clothing", "arabic": "ملابس",
+  "en": "Clothing", "ar": "ملابس",
   "secondaryList": [{
     "id": 0,
-    "english": "UpperBody", "arabic": "القسم العلوي",
+    "en": "UpperBody", "ar": "القسم العلوي",
     "thirdList": [{
       "id": 0,
-      "english": "Short SLeeve Jerseys", "arabic": "جيرسي كم قصير"
+      "en": "Short SLeeve Jerseys", "ar": "جيرسي كم قصير"
     },{
       "id": 1,
-      "english": "Long Sleeve Jerseys", "arabic": "جيرسي كم طويل"
+      "en": "Long Sleeve Jerseys", "ar": "جيرسي كم طويل"
     },{
       "id": 2,
-      "english": "Sleeveless Jerseys", "arabic": "جيرسي كم حفر"
+      "en": "Sleeveless Jerseys", "ar": "جيرسي كم حفر"
     },{
       "id": 3,
-      "english": "Vests", "arabic": "فيستس"
+      "en": "Vests", "ar": "فيستس"
     },{
       "id": 4,
-      "english": "Jackets", "arabic": "جواكيت"
+      "en": "Jackets", "ar": "جواكيت"
     }]
   },{
     "id": 1,
-    "english": "Lower Body", "arabic": "القسم السفلي",
+    "en": "Lower Body", "ar": "القسم السفلي",
     "thirdList": [{
       "id": 0,
-      "english": "Shorts", "arabic": "شورتس"
+      "en": "Shorts", "ar": "شورتس"
     },{
       "id": 1,
-      "english": "Mountain Bike Shorts", "arabic": "شورتس للدراجه الجبلي"
+      "en": "Mountain Bike Shorts", "ar": "شورتس للدراجه الجبلي"
     },{
       "id": 2,
-      "english": "Cycling Tights", "arabic": "مشدات رياضيه"
+      "en": "Cycling Tights", "ar": "مشدات رياضيه"
     }]
   },{
     "id": 2,
-    "english": "Essentials", "arabic": "اساسيات",
+    "en": "Essentials", "ar": "اساسيات",
     "thirdList": [{
       "id": 0,
-      "english": "Gloves", "arabic": "كفوف"
+      "en": "Gloves", "ar": "كفوف"
     },{
       "id": 1,
-      "english": "Socks", "arabic": "جرابات"
+      "en": "Socks", "ar": "جرابات"
     },{
       "id": 2,
-      "english": "Warmers & Base Layers", "arabic": "داخلي"
+      "en": "Warmers & Base Layers", "ar": "داخلي"
     },{
       "id": 3,
-      "english": "T-Shirts", "arabic": "تشيرتات"
+      "en": "T-Shirts", "ar": "تشيرتات"
     },{
       "id": 4,
-      "english": "Caps", "arabic": "طواقي"
+      "en": "Caps", "ar": "طواقي"
     }]
   },{
     "id": 3,
-    "english": "Popular Clothing Brands", "arabic": "ماركات ملابس مشهوره",
+    "en": "Popular Clothing Brands", "ar": "ماركات ملابس مشهوره",
     "thirdList": [{
       "id": 0,
-      "english": "Endura", "arabic": "Endura"
+      "en": "Endura", "ar": "Endura"
     },{
       "id": 1,
-      "english": "Fox", "arabic": "Fox"
+      "en": "Fox", "ar": "Fox"
     },{
       "id": 2,
-      "english": "Castelli", "arabic": "Castelli"
+      "en": "Castelli", "ar": "Castelli"
     },{
       "id": 3,
-      "english": "2XU", "arabic": "2XU"
+      "en": "2XU", "ar": "2XU"
     }]
   }]
 },{
   "id": 4,
-  "english": "Helmets & Shoes", "arabic": "خوذ & احذيه",
+  "en": "Helmets & Shoes", "ar": "خوذ & احذيه",
   "secondaryList": [{
     "id": 0,
-    "english": "Shoe Accessories", "arabic": "اكسسوارات الاحذيه",
+    "en": "Shoe Accessories", "ar": "اكسسوارات الاحذيه",
     "thirdList": [{
       "id": 0,
-      "english": "Cleats", "arabic": "مرابط"
+      "en": "Cleats", "ar": "مرابط"
     },{
       "id": 1,
-      "english": "Cleat Covers", "arabic": "كفر المربط"
+      "en": "Cleat Covers", "ar": "كفر المربط"
     },{
       "id": 2,
-      "english": "Shoe Covers", "arabic": "كفر الحذاء"
+      "en": "Shoe Covers", "ar": "كفر الحذاء"
     }]
   },{
     "id": 1,
-    "english": "Popular Shoe Brands", "arabic": "ماركات احذيه مشهوره",
+    "en": "Popular Shoe Brands", "ar": "ماركات احذيه مشهوره",
     "thirdList": [{
       "id": 0,
-      "english": "Shimano", "arabic": "Shimano"
+      "en": "Shimano", "ar": "Shimano"
     },{
       "id": 1,
-      "english": "Vittoria", "arabic": "Vittoria"
+      "en": "Vittoria", "ar": "Vittoria"
     },{
       "id": 2,
-      "english": "Sidi", "arabic": "Sidi"
+      "en": "Sidi", "ar": "Sidi"
     },{
       "id": 3,
-      "english": "Giro", "arabic": "Giro"
+      "en": "Giro", "ar": "Giro"
     }]
   },{
     "id": 2,
-    "english": "Helmet Categories", "arabic": "اقسام الخوذ",
+    "en": "Helmet Categories", "ar": "اقسام الخوذ",
     "thirdList": [{
       "id": 0,
-      "english": "Road", "arabic": "خوذ الطريق"
+      "en": "Road", "ar": "خوذ الطريق"
     },{
       "id": 1,
-      "english": "Mountain Bike", "arabic": "خوذ الجبلي"
+      "en": "Mountain Bike", "ar": "خوذ الجبلي"
     },{
       "id": 2,
-      "english": "Full Face", "arabic": "الوجه كامل"
+      "en": "Full Face", "ar": "الوجه كامل"
     }]
   },{
     "id": 3,
-    "english": "Popular Helmet Brands", "arabic": "ماركات خوذ مشهوره",
+    "en": "Popular Helmet Brands", "ar": "ماركات خوذ مشهوره",
     "thirdList": [{
       "id": 0,
-      "english": "Giro", "arabic": "Giro"
+      "en": "Giro", "ar": "Giro"
     },{
       "id": 1,
-      "english": "Bell", "arabic": "Bell"
+      "en": "Bell", "ar": "Bell"
     },{
       "id": 2,
-      "english": "Fox", "arabic": "Fox"
+      "en": "Fox", "ar": "Fox"
     }]
   }]
 }]

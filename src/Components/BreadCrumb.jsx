@@ -8,24 +8,24 @@ import '/src/Styles/Components/BreadCrumb.scss';
 import strSlashSplit from '/src/Utils/strSlashSplit.js';
 import cleanseString from '/src/Utils/cleanseString.js';
 
-function BreadCrumb ({category, type, language}) {
+function BreadCrumb ({category, type, lan}) {
 
   return (
     <> 
       <ul className="breadCrumb-list">
         <li className="breadCrumb-list__item-container">
-          <Link className="breadCrumb-list__item-container__link" to="/">{language === 'english' ? 'Home' : 'الرئيسيه'} </Link>
+          <Link className="breadCrumb-list__item-container__link" to="/">{lan === 'en' ? 'Home' : 'الرئيسيه'} </Link>
           <span className="breadCrumb-list__item-container__quotation-mark-ornament">&#10095;</span>
         </li>
         {type ? 
         <li className ="breadCrumb-list__item-container">
-          <Link className="breadCrumb-list__item-container__link" to={'/' + cleanseString(category.english)}>{category[language]}</Link> 
+          <Link className="breadCrumb-list__item-container__link" to={'/' + cleanseString(category.en)}>{category[lan]}</Link> 
           <span className="breadCrumb-list__item-container__quotation-mark-ornament">&#10095;</span>
-          <Link className="breadCrumb-list__item-container__link" to={'/' + cleanseString(category.english) + '/' + cleanseString(type.english) }>{type[language]}</Link> 
+          <Link className="breadCrumb-list__item-container__link" to={'/' + cleanseString(category.en) + '/' + cleanseString(type.en) }>{type[lan]}</Link> 
         </li>
         :  
         <li className ="breadCrumb-list__item-container">
-          <Link className="breadCrumb-list__item-container__link" to={'/' + cleanseString(category.english)}>{category[language]}</Link> 
+          <Link className="breadCrumb-list__item-container__link" to={'/' + cleanseString(category.en)}>{category[lan]}</Link> 
         </li> 
         }
       </ul>

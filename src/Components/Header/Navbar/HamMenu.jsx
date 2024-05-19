@@ -16,7 +16,7 @@ import closeIcon from '../../../assets/Img/Icons/close.svg';
 import expandCircleUpIconDarkMode from '../../../assets/Img/Icons/expand_circle_down_darkMode.svg';
 import closeIconDarkMode from '../../../assets/Img/Icons/close_darkMode.svg';
 
-function HamMenu ({menu, onMenuChange, darkMode, language}) {
+function HamMenu ({menu, onMenuChange, darkMode, lan}) {
 
   const navigate = useNavigate();
 
@@ -30,7 +30,6 @@ function HamMenu ({menu, onMenuChange, darkMode, language}) {
   const textLanguage = useRef({})
   const randomNum = useRef(0);
 
-  // const mainListsArray = language === 'english' ? mainListData : mainListData;
   const arrayLength = mainListData.length;
   let secondListLength = 0;
   mainListData.forEach(list => list.secondaryList.forEach(() => secondListLength++))
@@ -48,11 +47,11 @@ function HamMenu ({menu, onMenuChange, darkMode, language}) {
       }
 
       containerStyle.backgroundColor = "hsl(0, 0%, 0%, 0)";
-      sideBoxStyle.transform = `translateX(${language === 'english' ? '-15em' : '15em'})`;
+      sideBoxStyle.transform = `translateX(${lan === 'en' ? '-15em' : '15em'})`;
       setTimeout( () => containerStyle.visibility = "hidden", 500);
     }
     handleMenuStyles(menu);
-  }, [menu, language])
+  }, [menu, lan])
 
   const handleClick = (type, other, mainList, thirdData) => {
 
@@ -138,7 +137,7 @@ function HamMenu ({menu, onMenuChange, darkMode, language}) {
       <div className="ham-menu-container__side-box" ref={hamMenuSideBoxElement}>
         <section className="ham-menu-container__side-box__menu">
           <h1 className="ham-menu-container__side-box__menu__h1">
-            {language === 'english' ? 'MENU' : 'القائمه'}
+            {lan === 'en' ? 'MENU' : 'القائمه'}
           </h1>
           <img 
             className="ham-menu-container__side-box__menu__exit-icon" 
@@ -155,7 +154,7 @@ function HamMenu ({menu, onMenuChange, darkMode, language}) {
               className="ham-menu-container__side-box__menu-list__lists__title"
               onClick={e => handleClick('title element', e, i)} data-list-id={i}
             >
-              <h2 className="ham-menu-container__side-box__menu-list__lists__title__h2">{mainData[language]}</h2>
+              <h2 className="ham-menu-container__side-box__menu-list__lists__title__h2">{mainData[lan]}</h2>
               <img className="expand-circle" src={darkMode ? expandCircleUpIconDarkMode : expandCircleUpIcon}/>
             </div>
             <ul 
@@ -169,7 +168,7 @@ function HamMenu ({menu, onMenuChange, darkMode, language}) {
                   onClick={(e) => handleClick('second list', e)}
                   data-list-id={randomNum.current = Math.random()}
                 >
-                  <h3 className="ham-menu-container__side-box__menu-list__lists__secondary-list__lists__section__h3">{secondData[language]}</h3>
+                  <h3 className="ham-menu-container__side-box__menu-list__lists__secondary-list__lists__section__h3">{secondData[lan]}</h3>
                   <div className="ham-menu-container__side-box__menu-list__lists__secondary-list__lists__section__img"></div>
                 </div>
                 <ul 
@@ -177,8 +176,8 @@ function HamMenu ({menu, onMenuChange, darkMode, language}) {
                   ref={el => addRef('thirdListContainerElements', el, i)} data-list-id={randomNum.current}
                 >
                   {secondData.thirdList.map(thirdData =>           
-                  <li className="ham-menu-container__side-box__menu-list__lists__secondary-list__lists__third-list__lists" onClick={() => handleClick('third list', null, mainData.english, thirdData.english)} key={thirdData.id}>
-                    <h3 className="ham-menu-container__side-box__menu-list__lists__secondary-list__lists__third-list__lists__h3">{thirdData[language]}</h3>
+                  <li className="ham-menu-container__side-box__menu-list__lists__secondary-list__lists__third-list__lists" onClick={() => handleClick('third list', null, mainData.en, thirdData.en)} key={thirdData.id}>
+                    <h3 className="ham-menu-container__side-box__menu-list__lists__secondary-list__lists__third-list__lists__h3">{thirdData[lan]}</h3>
                   </li>
                   )}
                 </ul>

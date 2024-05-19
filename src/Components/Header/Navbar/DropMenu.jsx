@@ -7,7 +7,7 @@ import '../../../Styles/Components/Header/Navbar/DropMenu.scss';
 
 import cleanseString from '/src/Utils/cleanseString.js';
 
-function DropMenu ({darkMode, language, menu}) {
+function DropMenu ({darkMode, lan, menu}) {
 
   const navigate = useNavigate();
 
@@ -17,11 +17,6 @@ function DropMenu ({darkMode, language, menu}) {
   const itemsElement = useRef(null);
   const subItemsElement = useRef(null);
   const itemElement = useRef(null);
-
-
-  // const mainListsArray = language === 'english' ? mainListData : mainListData;
-  // const language = 'english';
-  // mainListData.forEach(val => val.secondaryList.forEach(val => console.log(val.thirdList[language])))
 
   useEffect(() => {
     const itemsElementSH = itemsElement.current.scrollHeight;
@@ -44,15 +39,15 @@ function DropMenu ({darkMode, language, menu}) {
         <ul className="drop-menu__items" ref={itemsElement}>
           {mainListData.map(mainData =>
           <li className={`drop-menu__items__item${dropMenu ? ' hover' : ''}`} onMouseEnter={(e) => handleHover(true, e)} onMouseLeave={(e) => handleHover(false, e)} ref={itemElement} key={mainData.id}>
-            <h2 className="drop-menu__items__item__title">{mainData[language]}</h2>
+            <h2 className="drop-menu__items__item__title">{mainData[lan]}</h2>
             <ul className={`drop-menu__items__item__sub-items`} onMouseEnter={(e) => handleHover(true, e)} onMouseLeave={(e) => handleHover(false, e)} ref={subItemsElement}>
               {mainData.secondaryList.map(secondData => 
               <li className="drop-menu__items__item__sub-items__sub-item" key={secondData.id}>
-                <h2 className="drop-menu__items__item__sub-items__sub-item__title">{secondData[language]}</h2>
+                <h2 className="drop-menu__items__item__sub-items__sub-item__title">{secondData[lan]}</h2>
                 <ul className="drop-menu__items__item__sub-items__sub-item__sub-sub-items">
                   {secondData.thirdList.map(thirdData =>
-                  <li className="drop-menu__items__item__sub-items__sub-item__sub-sub-items__sub-sub-item" onClick={() => navigate(`/${cleanseString(mainData.english)}/${cleanseString(thirdData.english)}`)} key={thirdData.id}>
-                    <h3 className="drop-menu__items__item__sub-items__sub-item__sub-sub-items__sub-sub-item__title">{thirdData[language]}</h3>
+                  <li className="drop-menu__items__item__sub-items__sub-item__sub-sub-items__sub-sub-item" onClick={() => navigate(`/${cleanseString(mainData.en)}/${cleanseString(thirdData.en)}`)} key={thirdData.id}>
+                    <h3 className="drop-menu__items__item__sub-items__sub-item__sub-sub-items__sub-sub-item__title">{thirdData[lan]}</h3>
                   </li>
                   )}
                 </ul>

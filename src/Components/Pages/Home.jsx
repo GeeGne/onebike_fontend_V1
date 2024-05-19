@@ -10,7 +10,7 @@ function Home () {
   return (
     <div className="home-container">
       <ImageSlider/>
-      <section className="home-container__newsLetter-container"><NewsLetter/></section>
+      <NewsLetter/>
     </div>
   )
 }

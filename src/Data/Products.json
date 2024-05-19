@@ -4,7 +4,7 @@
   "type": "lights",
   "title": "NiteRider Lumina 1200 Boost USB Rechargeable Bike Light Powerful Lumens Bicycle Headlight LED Front Light Easy to Install for Men Women Road Mountain City Commuting Adventure Cycling Safety Flashlight",
   "img": "src/assets/Img/Products/NiteRider Lumina 1200.jpg",
-  "color": {"english": "Black", "arabic":"اسود"},
+  "color": {"en": "Black", "ar":"اسود"},
   "brand": "NiteRider"
 },{
   "id": 1,
@@ -12,6 +12,6 @@
   "type": "Bike Pumps",
   "title": "GIYO Small Bike tire Pump Schrader & Presta Valve for MTB 80 PSI Telescopic Barrel All Metal CNC Portable Mini Bike Pump Secure Valve Lock for Easy Pumping | Taiwan Made GM043",
   "img": "src/assets/Img/Products/GIYO Small Bike tire Pump Schrader.jpg",
-  "color": {"english": "Grey", "arabic":"رمادي"},
+  "color": {"en": "Grey", "ar":"رمادي"},
   "brand": "GIYO"
 }]

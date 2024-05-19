@@ -1,8 +1,122 @@
 @use '/src/Styles/Utils/_BreakPoints' as w;
 
-.footer-grid {
-  display: grid;
-  background-color: var(--footer-background-color);
+.footer-container {
 
-  
+  &__footer-upper-grid {
+    position: relative;
+    display: grid;
+    background-color: var(--footer-background-color);
+    grid-template-columns: 1fr;
+    padding-block: 2em;
+    gap: 2em;
+
+    @include w.breakpoint-up (medium) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include w.breakpoint-up (large) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100vw;
+      height: 100%;
+      z-index: -1;
+      background-color: var(--footer-background-color);
+    }
+
+    &__section-quick-links,
+    &__section-contact-us,
+    &__section-subscribe {
+      padding-inline: 2em;
+
+      &__title {
+        color: var(--font-h-color);
+        font-weight: bold;
+        margin-bottom: 1.2em;
+      }
+
+      &__list {
+
+        &__item {
+        margin-bottom: 0.8em;
+
+          &__link {
+            text-decoration: none;
+            color: var(--font-p-color);
+            transition: text-decoration 0.15s ease, color 0.15s ease, font-weight 0.5s ease;
+
+            &:hover {
+              text-decoration: underline var(--font-h-color);
+              color: var(--font-h-color);
+              font-weight: 500;
+            }
+          }
+        }
+      }
+    }
+    
+    &__section-contact-us {
+      &__list {
+        &__item{
+          display: flex;
+          align-items: center; 
+
+          &__img {
+            width: 1.2em;
+            margin-right: 0.5em;
+          }
+        }
+      }
+    }
+
+    &__section-subscribe {
+      @include w.breakpoint-up (medium) {
+        // grid-column: span 2;
+      }   
+    }
+  }
+
+  &__footer-lower {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding-block: 2em;
+    background-color: var(--primary-color);
+    align-items: center;
+    gap: 1em;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100vw;
+      height: 100%;
+      background-color: var(--primary-color);
+      z-index: -1;
+    }
+
+    &__media-section {
+      display: flex;
+      gap: 1.5em;
+      &__media-icon{
+        width: 1.5em;
+      }
+    }
+
+    &__organism-rights {
+      &__h3 {
+        font-size: 0.8em;
+        color: var(--font-h-invert-color);
+        opacity: 0.7;
+      }
+    }
+  }
 }

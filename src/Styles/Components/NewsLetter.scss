@@ -4,9 +4,9 @@
   position: relative;
   width: 100%;
   aspect-ratio: 2 / 3;
-  background-image: -webkit-gradient(linear, left top, left bottom, from(#4b6e9075), to(#b8d1e064)), url('/src/assets/Img/Content/Giant and Snow.jpg');
-  // background-image: url('/src/assets/Img/Content/bicycle and syria flag poster.jpg');
-  // background-image: -webkit-gradient(linear, left top, left bottom, from(#4b6e9075), to(#b8d1e064)), url('/src/assets/Img/Content/bicycle background.jpg');
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#001e3d5e), to(#5090d055)), url('/src/assets/Img/Content/Giant and Snow.jpg');
+  // background-image: -webkit-gradient(linear, left top, left bottom, from(#001e3d41), to(#5090d05e)), url('/src/assets/Img/Content/bicycle and syria flag poster.jpg');
+  // background-image: -webkit-gradient(linear, left top, left bottom, from(#001e3d5e), to(#5090d055)), url('/src/assets/Img/Content/bicycle background.jpg');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: left;
@@ -23,19 +23,17 @@
   &__content {
     display: flex;
     flex-direction: column;
-    // align-items: center;
-    // text-align: center;
     width: 100%;
     height: 100%;
     // background-color: hsl(200, 100%, 15%, 0.20);
-    color: white;
     gap: 0.5em;
     padding: 1em;
 
     &__title {
+       color: white;
       font-family: 'Righteous';
       font-weight: bold;
-      filter: drop-shadow(-5px 6px 2px hsl(0, 0%, 0%, 0.4));
+      // filter: drop-shadow(-5px 6px 2px hsl(0, 0%, 0%, 0.6));
 
       & .one-bike {
         font-size: 1.3em;
@@ -52,17 +50,17 @@
     }
 
     &__description {
+      max-width: 80%;
       margin-bottom: auto;
-      // color: lightblue;
-      font-weight: 700;
-      // color: var(--secondary-color);
+      font-weight: 600;
       color: white;
-      filter: drop-shadow(-5px 6px 7px hsl(0, 0%, 0%, 0.4));
+      // filter: drop-shadow(-5px 6px 7px hsl(0, 0%, 0%, 0.4));
       
       &::before,
       &::after {
         content: "";
         display: inline-block;
+        display: none;
         width: 1.2em;
         height: 1.2em;
         background-image: url(/src/assets/Img/Icons/quote_darkMode.svg);
@@ -71,16 +69,16 @@
       }
 
       & .firstLetter {
-        // transform: scale(2);
-        color: lightBlue;
-        font-size: 1.6em;
+        color: #B8D1E0;
+        font-size: 1.8em;
       }
     }
 
     &__paragraph {
       font-weight: bold;
       font-size: 0.9em;
-      filter: drop-shadow(-5px 6px 7px hsl(0, 0%, 0%, 0.4));
+      color: white;
+      // filter: drop-shadow(-5px 6px 7px hsl(0, 0%, 0%, 0.4));
     }
 
     &__toggles {

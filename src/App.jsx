@@ -23,7 +23,7 @@ import cleanseString from '/src/Utils/cleanseString.js';
 function App() {
 
   const [darkMode, setDarkMode] = useState(false);
-  const [language, setLanguage] = useState('english');
+  const [lan, setLanguage] = useState('en');
 
   const themeData = data => {
     setDarkMode(data);
@@ -46,9 +46,9 @@ function App() {
             <Route path="/" element={<Home/>}/>
             {mainListData.map(category =>
             <>
-            <Route path={`/${cleanseString(category.english)}`} element={<Products category={category} darkMode={darkMode} language={language}/>} key={category.id}/>
+            <Route path={`/${cleanseString(category.en)}`} element={<Products category={category} darkMode={darkMode} lan={lan}/>} key={category.id}/>
             {category.secondaryList.map(secondData => secondData.thirdList.map(thirdData => 
-            <Route path={`/${cleanseString(category.english)}/${cleanseString(thirdData.english)}`} element={<Products category={category} type={thirdData} darkMode={darkMode} language={language}/>} key={thirdData.id}/>
+            <Route path={`/${cleanseString(category.en)}/${cleanseString(thirdData.en)}`} element={<Products category={category} type={thirdData} darkMode={darkMode} lan={lan}/>} key={thirdData.id}/>
             ))}
             </> 
             )}
@@ -57,7 +57,7 @@ function App() {
         </main>
         
         <footer className="app-layout__footer">
-          <Footer/>
+          <Footer darkMode={darkMode} lan={lan}/>
         </footer>
 
       </div>

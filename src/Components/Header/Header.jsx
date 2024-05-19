@@ -8,15 +8,15 @@ import Navbar from './Navbar/Navbar';
 function Header ({onThemeChange, onLanguageChange}) {
 
  const [darkMode, setDarkMode] = useState(false);
- const [language, setLanguage] = useState('english');
+ const [lan, setLanguage] = useState('en');
 
   useEffect(() => {
     onThemeChange(darkMode);
   }, [darkMode]);
 
   useEffect(() => {
-    onLanguageChange(language);
-  }, [language]);
+    onLanguageChange(lan);
+  }, [lan]);
 
   const themeData = data => {
     setDarkMode(data);
@@ -30,7 +30,7 @@ function Header ({onThemeChange, onLanguageChange}) {
   return (
     <>
       <IntroSection onThemeChange={themeData} onLanguageChange={languageData}/>
-      <Navbar darkMode={darkMode} language={language}/>
+      <Navbar darkMode={darkMode} lan={lan}/>
     </>
   )
 }
