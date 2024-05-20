@@ -1,14 +1,17 @@
 @use '/src/Styles/Utils/_BreakPoints' as w;
 
 .footer-container {
-
   &__footer-upper-grid {
     position: relative;
     display: grid;
     background-color: var(--footer-background-color);
     grid-template-columns: 1fr;
-    padding-block: 2em;
+    padding: 2em;
     gap: 2em;
+
+    body.arabic & {
+      direction: rtl;
+    }
 
     @include w.breakpoint-up (medium) {
       grid-template-columns: repeat(2, 1fr);
@@ -30,11 +33,72 @@
       background-color: var(--footer-background-color);
     }
 
-    &__section-quick-links,
-    &__section-contact-us,
     &__section-subscribe {
-      padding-inline: 2em;
 
+      @include w.breakpoint-up (medium) {
+        grid-column: span 2;
+      } 
+      
+      @include w.breakpoint-up (large) {
+        grid-column: span 1;
+      } 
+
+      &__title {
+        font-size: 1.7em;
+        font-weight: bold;
+        color: var(--font-h-color);
+        margin-bottom: 1em;
+      }
+
+      &__list {
+        &__item {
+          display: flex;
+          flex-direction: column;
+          gap: 1em;
+
+          @include w.breakpoint-up (medium) {
+            flex-direction: row;
+            gap: 0;
+          }
+
+          @include w.breakpoint-up (large) {
+            flex-direction: column;
+            gap: 1em;
+          } 
+
+          &__input {
+            padding: 1em;
+            border: none;
+
+            @include w.breakpoint-up (medium) {
+              flex: 2;
+            } 
+            @include w.breakpoint-up (large) {
+              flex: 1;
+            } 
+          }
+          &__button {
+            font-weight: 600;
+            background-color: var(--primary-color);
+            color: var(--font-h-invert-color);
+            padding: 1em;
+            transition: color 0.5s ease, background-color 0.5s ease;
+
+            @include w.breakpoint-up (medium) {
+              flex: 1;
+            } 
+
+            &:hover {
+              background-color: black;
+              color: white;
+            }
+          }
+        }
+      }
+    }
+
+    &__section-quick-links,
+    &__section-contact-us {
       &__title {
         color: var(--font-h-color);
         font-weight: bold;
@@ -42,7 +106,6 @@
       }
 
       &__list {
-
         &__item {
         margin-bottom: 0.8em;
 
@@ -66,19 +129,14 @@
         &__item{
           display: flex;
           align-items: center; 
-
+          &__link {
+            margin-inline: 0.5em;
+          }
           &__img {
             width: 1.2em;
-            margin-right: 0.5em;
           }
         }
       }
-    }
-
-    &__section-subscribe {
-      @include w.breakpoint-up (medium) {
-        // grid-column: span 2;
-      }   
     }
   }
 
@@ -106,12 +164,17 @@
     &__media-section {
       display: flex;
       gap: 1.5em;
+      
       &__media-icon{
         width: 1.5em;
       }
     }
 
     &__organism-rights {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+ 
       &__h3 {
         font-size: 0.8em;
         color: var(--font-h-invert-color);
