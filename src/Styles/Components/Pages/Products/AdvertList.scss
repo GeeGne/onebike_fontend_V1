@@ -60,9 +60,9 @@
         color: var(--font-h-color);
       }
 
-      &__brandLogo {
+      &__brand-logo {
         width: 100%;
-        // filter: var(--advertList-brandLogo-filter-brightness);
+        filter: var(--advertList-brandLogo-filter-invert);
       }
 
       &__price {

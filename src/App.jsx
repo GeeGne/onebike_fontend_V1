@@ -43,7 +43,7 @@ function App() {
 
         <main className="app-layout__main">
           <Routes>
-            <Route path="/" element={<Home/>}/>
+            <Route path="/" element={<Home darkMode={darkMode} lan={lan}/>}/>
             {mainListData.map(category =>
             <>
             <Route path={`/${cleanseString(category.en)}`} element={<Products category={category} darkMode={darkMode} lan={lan}/>} key={category.id}/>

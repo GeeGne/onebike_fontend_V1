@@ -4,7 +4,7 @@
   position: relative;
   width: 100%;
   aspect-ratio: 2 / 3;
-  background-image: -webkit-gradient(linear, left top, left bottom, from(#001e3d5e), to(#5090d055)), url('/src/assets/Img/Content/Giant and Snow.jpg');
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#001e3d3e), to(#5ca7f15a)), url('/src/assets/Img/Content/Giant and Snow.jpg');
   // background-image: -webkit-gradient(linear, left top, left bottom, from(#001e3d41), to(#5090d05e)), url('/src/assets/Img/Content/bicycle and syria flag poster.jpg');
   // background-image: -webkit-gradient(linear, left top, left bottom, from(#001e3d5e), to(#5090d055)), url('/src/assets/Img/Content/bicycle background.jpg');
   background-repeat: no-repeat;
@@ -27,10 +27,10 @@
     height: 100%;
     // background-color: hsl(200, 100%, 15%, 0.20);
     gap: 0.5em;
-    padding: 1em;
+    padding: 2em 1em;
 
     &__title {
-       color: white;
+      color: white;
       font-family: 'Righteous';
       font-weight: bold;
       // filter: drop-shadow(-5px 6px 2px hsl(0, 0%, 0%, 0.6));
@@ -39,8 +39,8 @@
         font-size: 1.3em;
         // color: var(--secondary-color);
         // mask-image: linear-gradient(to bottom, hsl(0, 0%, 0%) 0%, hsl(0, 0%, 0%) 50%,  hsl(0, 0%, 100%) 0%, hsl(0, 0%, 100%) 100%);
-        mask-image: linear-gradient(to bottom, hsl(0, 0%, 0%, 1) 0%, hsl(0, 0%, 0%, 1) 50%, hsl(0, 0%, 100%, 0) 50%, rgb(0, 0, 0, 1) 100%);
-        -webkit-mask-image: linear-gradient(to bottom, hsl(0, 0%, 0%, 1) 0%, hsl(0, 0%, 0%, 1) 50%, hsl(0, 0%, 100%, 1) 50%, rgb(0, 0, 0, 1) 100%);
+        // mask-image: linear-gradient(to bottom, hsl(0, 0%, 0%, 1) 0%, hsl(0, 0%, 0%, 1) 50%, hsl(0, 0%, 100%, 0) 50%, rgb(0, 0, 0, 1) 100%);
+        // -webkit-mask-image: linear-gradient(to bottom, hsl(0, 0%, 0%, 1) 0%, hsl(0, 0%, 0%, 1) 50%, hsl(0, 0%, 100%, 1) 50%, rgb(0, 0, 0, 1) 100%);
         // mask-image: image(url(src/assets/Img/Logo/ONEBIKE.png), green);
       }
 

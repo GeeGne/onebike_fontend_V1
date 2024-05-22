@@ -1,6 +1,5 @@
 .language-button {
   position: relative;
-  // font-size: inherit;
   color: var(--font-p-color);
   border: solid var(--font-p-color);;
   border-width: 0 0 2px 0;
@@ -9,6 +8,10 @@
   &__display {
     font-weight: 600;
     margin: 0 1em 0.1em 0.1em;
+
+    body.arabic & {
+      margin: 0 0.1em 0.1em 1em;
+    }
   }
 
   &::before {
@@ -25,6 +28,10 @@
     transform: var(--rotate-icon, rotate(0deg));
     transition: transform 0.5s ease;
   }
+  body.arabic &::before {
+    right: auto;
+    left: -0.3em;
+  }
 
   &:hover {
     color: var(--font-h-color);
@@ -35,16 +42,21 @@
     top: calc(100% + 0.7em);
     left: 50%;
     transform: translateX(-50%);
-    box-shadow: 0 0 10px 0.1px hsla(0, 0%, 70%, 0.8);
+    box-shadow: 0 0 10px 0.1px hsl(0, 0%, 70%, 0.8);
 
-    & li {
+    body.arabic & {
+      direction: rtl;
+    }
+
+    & li button {  
       position: relative;
       display: flex;
+      width: 100%;
       background-color: var(--language-list-color);
+      padding: 1em 0.5em;
 
       & h3 {
         font-weight: 600;
-        margin: 0.7em;
         transition: background-color 0.15s ease;
       }
 
@@ -53,7 +65,7 @@
       }
     }
 
-    & li:first-child::before {
+    & li:first-child button::before {
       content: "";
       position: absolute;
       bottom: 0;

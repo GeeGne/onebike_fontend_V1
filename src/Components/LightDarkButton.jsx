@@ -26,13 +26,9 @@ function LightDarkButton ({onThemeChange}) {
   }
 
   return (
-    <>
-      <img 
-        className="light-dark-button" 
-        onClick={event => toggleTheme(event)} 
-        src={darkTheme? moonIcon : sunIcon}
-      />
-    </>
+    <button onClick={event => toggleTheme(event)} >
+      <img className="light-dark-button" src={darkTheme? moonIcon : sunIcon}/>
+    </button>
   )
 }
 

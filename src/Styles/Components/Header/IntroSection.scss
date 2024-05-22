@@ -23,7 +23,7 @@
   body.arabic & {
     flex-direction: row-reverse;
 
-    &__light-dark-button  {
+    &__light-dark-button-container  {
       margin: 0.3em auto 0.3em 0.5em;
     }
 
@@ -106,16 +106,16 @@
   }
 
   
-  &__light-dark-button, &__language-button {
+  &__light-dark-button-container, &__language-button-container {
     background-color: transparent;
   }
 
-  &__light-dark-button {
+  &__light-dark-button-container {
     margin: 0em 0.5em 0em auto;
     font-size: inherit;
   }
   
-  &__language-button {
+  &__language-button-container {
     margin: 0.3em 0.5em;
     font-size: inherit;
   }

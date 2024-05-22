@@ -5,6 +5,9 @@ import {Link} from 'react-router-dom';
 // SCSS
 import '../Styles/Components/Footer.scss';
 
+// COMPONENTS
+import NeedHelp from './NeedHelp';
+
 //  ICONS
 import facebookIcon from '/src/assets/Img/Icons/facebook.svg';
 import instagramIcon from '/src/assets/Img/Icons/instagram.svg';
@@ -78,9 +81,9 @@ function Footer ({darkMode, lan}) {
 
       <div className="footer-container__footer-lower">
         <section className="footer-container__footer-lower__media-section">
-        <a href={facebookURL} target="_blank"><img className="footer-container__footer-lower__media-section__media-icon" src={darkMode ? facebookIcon : facebookIconDarkMode}/></a>
-        <a href={whatsAppURL} target="_blank"><img className="footer-container__footer-lower__media-section__media-icon" src={darkMode ? whatsappIcon : whatsappIconDarkMode}/></a>
-        <a href={instagramURL} target="_blank"><img className="footer-container__footer-lower__media-section__media-icon" src={darkMode ? instagramIcon : instagramIconDarkMode}/></a>
+        <a href={facebookURL} target="_blank" tabIndex="0"><img className="footer-container__footer-lower__media-section__media-icon" src={darkMode ? facebookIcon : facebookIconDarkMode}/></a>
+        <a href={whatsAppURL} target="_blank" tabIndex="0"><img className="footer-container__footer-lower__media-section__media-icon" src={darkMode ? whatsappIcon : whatsappIconDarkMode}/></a>
+        <a href={instagramURL} target="_blank" tabIndex="0"><img className="footer-container__footer-lower__media-section__media-icon" src={darkMode ? instagramIcon : instagramIconDarkMode}/></a>
         </section>
         <section className="footer-container__footer-lower__organism-rights">
           <h3 className="footer-container__footer-lower__organism-rights__h3">{lan === 'en' ? 'Syria © 2024 ONE BIKE all rights reseved' : 'سوريا © 2024 ون بايك جميع الحقوق محفوظة'}</h3>

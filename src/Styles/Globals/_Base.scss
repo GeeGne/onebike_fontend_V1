@@ -37,13 +37,11 @@ body {
     // font-family: 'PT_Sans';
     font-family: 'Rubik';
     // font-family: 'Noto_Arabic';
-    // font-family: 'Vazirmatn';
-    // direction: rtl;
-
+    // font-family: 'Vazirmatn
   }
 }
 
-a
+
 a:visited,
 a:active,
 button {
@@ -55,6 +53,12 @@ button {
   background-color: transparent;
   border: none;
   cursor: pointer;
+}
+
+button:focus-visible, 
+[role="button"]:focus,
+a:focus-visible {
+  outline: 3px solid hsl(0, 0%, 50%); 
 }
 
 a {

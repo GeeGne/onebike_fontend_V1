@@ -1,1 +1,99 @@
 @use '/src/Styles/Utils/_BreakPoints' as w;
+
+.need-help-container {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr;
+  background-color: var(--light-background-color);
+  gap: 2em;
+  padding: 2em 1em;
+
+  body.arabic & {
+    direction: rtl;
+  }
+
+  @include w.breakpoint-up (medium) {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100vw;
+    height: 100%;
+    background-color: var(--light-background-color);
+    z-index: -1;
+  }
+
+  &__need-help,
+  &__call-us,
+  &__email-us,
+  &__chat-with-us {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    align-items: center;
+
+    @include w.breakpoint-up (medium) {
+      align-items: start;
+    }
+
+    &__img {
+      width: 4em;
+    }
+
+    &__title {
+      font-weight: 600;
+      color: var(--font-h-color);
+    }
+
+    &__description {
+      line-height: 1.3em;
+      color: var(--font-p-color);
+      @include w.breakpoint-up (medium) {
+        text-wrap: balance;
+      }
+    }
+
+    &__button, 
+    &__a {
+      font-weight: 550;
+      text-decoration: none;
+      // background-color: var(--background-color);
+      color: var(--font-h-color);
+      border: solid 2px black;
+      margin-top: auto;
+      padding: 0.5em 1em;
+    }
+  }
+
+  &__need-help {
+    position: relative;
+    margin-block: auto;
+
+    &::before {
+      content: "";
+      position: absolute;
+      @include w.breakpoint-up (medium) {
+        top: 50%;
+        right: -0.5em;
+        transform: translateY(-50%);
+        height: 120%;
+        width: 1px;
+        background-color: hsl(0, 0%, 60%);
+
+        body.arabic & {
+          right: auto;
+          left: -0.5em;
+        }
+      }
+    }
+
+    &__title {
+      color: var(--primary-color);
+    }
+  }
+}

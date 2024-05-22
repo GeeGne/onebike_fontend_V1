@@ -6,7 +6,7 @@
     display: grid;
     background-color: var(--footer-background-color);
     grid-template-columns: 1fr;
-    padding: 2em;
+    padding: 2em 1em;
     gap: 2em;
 
     body.arabic & {
@@ -167,6 +167,11 @@
       
       &__media-icon{
         width: 1.5em;
+        transition: transform 0.25s ease-out;
+
+        &:hover {
+          transform: scale(1.2);
+        }
       }
     }
 

@@ -47,7 +47,7 @@ function HamMenu ({menu, onMenuChange, darkMode, lan}) {
       }
 
       containerStyle.backgroundColor = "hsl(0, 0%, 0%, 0)";
-      sideBoxStyle.transform = `translateX(${lan === 'en' ? '-15em' : '15em'})`;
+      sideBoxStyle.transform = `translateX(${lan === 'en' ? '-16em' : '16em'})`;
       setTimeout( () => containerStyle.visibility = "hidden", 500);
     }
     handleMenuStyles(menu);
@@ -136,31 +136,17 @@ function HamMenu ({menu, onMenuChange, darkMode, lan}) {
     <nav className="ham-menu-container" ref={hamMenuContainerElement}>
       <div className="ham-menu-container__side-box" ref={hamMenuSideBoxElement}>
         <section className="ham-menu-container__side-box__menu">
-          <h1 className="ham-menu-container__side-box__menu__h1">
-            {lan === 'en' ? 'MENU' : 'القائمه'}
-          </h1>
-          <img 
-            className="ham-menu-container__side-box__menu__exit-icon" 
-            onClick={() => onMenuChange(false)} src={darkMode ? closeIconDarkMode : closeIcon}
-          />
+          <h1 className="ham-menu-container__side-box__menu__h1">{lan === 'en' ? 'MENU' : 'القائمه'}</h1>
+          <img className="ham-menu-container__side-box__menu__exit-icon" onClick={() => onMenuChange(false)} src={darkMode ? closeIconDarkMode : closeIcon}/>
         </section>
         <ul className="ham-menu-container__side-box__menu-list">
           {mainListData.map((mainData, i) => 
-          <li
-            className="ham-menu-container__side-box__menu-list__lists"
-            ref={el => addRef('mainListElement', el, i)} data-list-id={i} key={mainData.id}
-          >
-            <div 
-              className="ham-menu-container__side-box__menu-list__lists__title"
-              onClick={e => handleClick('title element', e, i)} data-list-id={i}
-            >
+          <li className="ham-menu-container__side-box__menu-list__lists" ref={el => addRef('mainListElement', el, i)} data-list-id={i} key={mainData.id}>
+            <div className="ham-menu-container__side-box__menu-list__lists__title" onClick={e => handleClick('title element', e, i)} data-list-id={i}>
               <h2 className="ham-menu-container__side-box__menu-list__lists__title__h2">{mainData[lan]}</h2>
               <img className="expand-circle" src={darkMode ? expandCircleUpIconDarkMode : expandCircleUpIcon}/>
             </div>
-            <ul 
-              className="ham-menu-container__side-box__menu-list__lists__secondary-list"
-              ref={el => addRef('secondaryListElements', el, i)} data-list-id={i}
-            >
+            <ul className="ham-menu-container__side-box__menu-list__lists__secondary-list" ref={el => addRef('secondaryListElements', el, i)} data-list-id={i}>
               {mainData.secondaryList.map(secondData => 
               <li className="ham-menu-container__side-box__menu-list__lists__secondary-list__lists" key={secondData.id}>
                 <div 

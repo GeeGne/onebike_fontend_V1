@@ -2,7 +2,7 @@
   display: grid;
   // grid-template-columns: 1fr;
   grid-template-rows: auto 1fr auto;
-  height: 1000px;
+  // height: 1000px;
   // border: solid 1px black;
   // gap: 1rem;
   max-width: 1400px;
@@ -14,9 +14,10 @@
   }
   &__main {
     // border: solid 1px black;
-    grid-row: 1fr;
+    // grid-row: 1fr;
   }
   &__footer {
     // border: solid 1px black;
+    margin-top: 2em;
   }
 }

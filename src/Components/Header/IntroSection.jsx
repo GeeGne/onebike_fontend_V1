@@ -70,38 +70,32 @@ function IntroSection ({onThemeChange, onLanguageChange}) {
     type === 'enter' ? (element.src = callFillImg) : (element.src = callImg);
   }
 
-
   return (
     <>
       <Alert alertText={alertText} newAlert={newAlert} />
       <section className="userinfo-container">
-        {/* <Link to="/">
-          <img className="logo" src={shoppingCartLogo}/>
-        </Link> */}
-
-        <a className="userinfo-container__icons-a" href={facebookURL} target="_blank">
+        <a className="userinfo-container__icons-a" href={facebookURL} target="_blank" tabIndex="0">
           <img className="userinfo-container__icons-a__img" src={darkMode ? facebookIconDarkMode : facebookIcon}/>
         </a>
-        <a className="userinfo-container__icons-a" href={instagramURL} target="_blank"
-        >
+        <a className="userinfo-container__icons-a" href={instagramURL} target="_blank" tabIndex="0">
           <img className="userinfo-container__icons-a__img" src={darkMode ? instagramIconDarkMode : instagramIcon}/>
         </a>
-        <a className="userinfo-container__icons-a" href={whatsAppURL} target="_blank">
+        <a className="userinfo-container__icons-a" href={whatsAppURL} target="_blank" tabIndex="0">
           <img className="userinfo-container__icons-a__img" src={darkMode ? whatsappIconDarkMode : whatsappIcon}/>
         </a>
 
-        <div className="userinfo-container__phone-number" onClick={handleClick} onMouseEnter={() => handleHover('enter')} onMouseLeave={() => handleHover('leave')}>
+        <button className="userinfo-container__phone-number" onClick={handleClick} onMouseEnter={() => handleHover('enter')} onMouseLeave={() => handleHover('leave')}>
           <img src={darkMode ? callIconDarkMode : callIcon} ref={phoneNumberIconElement}/>
           <h2 ref={phoneNumberH2Element}>+963 964 803 712</h2>
+        </button>
+
+        <div className="userinfo-container__light-dark-button-container">
+          <LightDarkButton onThemeChange={themeData}/>
         </div>
 
-        <button className="userinfo-container__light-dark-button">
-          <LightDarkButton onThemeChange={themeData}/>
-        </button>
-
-        <button className="userinfo-container__language-button">
+        <div className="userinfo-container__language-button-container">
           <LanguageButton onLanguageChange={languageData}/>
-        </button>
+        </div>
       </section>
     </>
   )

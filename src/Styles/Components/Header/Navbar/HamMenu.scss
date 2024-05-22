@@ -18,7 +18,7 @@
 
   &__side-box {
     display: flex;
-    width: 15em;
+    width: 16em;
     flex-direction: column;
     background-color: var(--hamMenu-sideBox-color);
     transition: transform 0.5s ease-out;
@@ -207,8 +207,6 @@
   body.arabic & {
     direction: rtl;
     &__side-box {
-      &__menu {
-      }
       &__menu-list {
         &__lists {
           &__title {

@@ -42,7 +42,7 @@
   //AdvertList
   --advertList-increment-add-icon: url(/src/assets/Img/Icons/add.svg);
   --advertList-decrement-add-icon: url(/src/assets/Img/Icons/minus.svg);
-  --advertList-brandLogo-filter-brightness: brightness(100%);
+  --advertList-brandLogo-filter-invert: invert(0%);
 }
 
 .dark-theme {
@@ -70,5 +70,5 @@
   //AdvertList
   --advertList-increment-add-icon: url(/src/assets/Img/Icons/add_darkMode.svg);
   --advertList-decrement-add-icon: url(/src/assets/Img/Icons/minus_darkMode.svg);
-  --advertList-brandLogo-filter-brightness: brightness(300%);
+  --advertList-brandLogo-filter-invert: invert(100%);
 }
