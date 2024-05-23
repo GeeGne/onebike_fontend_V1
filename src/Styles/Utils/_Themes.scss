@@ -2,7 +2,7 @@
 :root {
   // MAIN
   --background-color: hsl(0, 0%, 100%);
-  --light-background-color: hsl(0, 0%, 85%);
+  --light-background-color: hsl(0, 0%, 95%);
   --endElement-border-background-color: hsl(0, 0%, 85%);
   --font-h-color: hsl(0, 0%, 0%);
   --font-h-invert-color: hsl(0, 0%, 100%);
@@ -30,8 +30,8 @@
   --hamMenu-sideBox-color: hsl(0, 0%, 100%);
   --hamMenu-menu-background-color: hsl(0, 0%, 85%);
   --sideMenu-scrollBar-background-color: hsl(0, 0%, 35%);
-  --hamMenu-secondaryList-background-color: hsl(0, 0%, 80%);
-  --hamMenu-thirdList-background-color: hsl(0, 0%, 65%);
+  --hamMenu-secondaryList-background-color: hsl(0, 0%, 90%);
+  --hamMenu-thirdList-background-color: hsl(0, 0%, 80%);
 
   // Drop Menu 
   --dropMenu-background-color: hsl(0, 0%, 100%);
@@ -59,11 +59,13 @@
   --controls--expandedList-hover-background-color: var(--light-background-color);
   
   // AdvertList
-  --advertList-productContent-border-color: hsl(0, 0%, 80%);
+  --advertList-productContent-border-color: var(--endElement-border-background-color);
   --advertList-cartUtil-border-color: var(--endElement-border-background-color);
+  --advertList-loadMore-border-color: var(--endElement-border-background-color);
   --advertList-incrementAndDecrement-border-color: var(--endElement-border-background-color);
   --advertList-total-background-color: var(--light-background-color);
   --advertList-addToCart-background-color: #b4926f;
+  --advertList-loadMore-background-color: #b4926f;
   --advertList-discount-color: var(--primary-color);
 
   // Footer
@@ -74,7 +76,7 @@
 .dark-theme {
   // Main
   --background-color: hsl(0, 0%, 0%);
-  --light-background-color: hsl(0, 0%, 15%);
+  --light-background-color: hsl(0, 0%, 5%);
   --endElement-border-background-color: hsl(0, 0%, 15%);
   --font-h-color: hsl(0, 0%, 100%);  
   --font-h-invert-color: hsl(0, 0%, 0%);  
@@ -99,8 +101,8 @@
   --hamMenu-sideBox-color: hsl(0, 0%, 0%);
   --hamMenu-menu-background-color: hsl(0, 0%, 15%);
   --sideMenu-scrollBar-background-color: hsl(0, 0%, 65%);
-  --hamMenu-secondaryList-background-color: hsl(0, 0%, 20%);
-  --hamMenu-thirdList-background-color: hsl(0, 0%, 35%);
+  --hamMenu-secondaryList-background-color: hsl(0, 0%, 10%);
+  --hamMenu-thirdList-background-color: hsl(0, 0%, 20%);
 
   // Drop Menu
   --dropMenu-background-color: hsl(0, 0%, 0%);
@@ -127,11 +129,13 @@
   --controls--expandedList-hover-background-color: var(--light-background-color);
   
   // AdvertList
-  --advertList-productContent-border-color: hsl(0, 0%, 20%);
+  --advertList-productContent-border-color: var(--endElement-border-background-color);
   --advertList-cartUtil-border-color: var(--endElement-border-background-color);
+  --advertList-loadMore-border-color: var(--endElement-border-background-color);
   --advertList-incrementAndDecrement-border-color: var(--endElement-border-background-color);
   --advertList-total-background-color: var(--light-background-color);
   --advertList-addToCart-background-color: #472e1f;
+  --advertList-loadMore-background-color: #472e1f;
   --advertList-discount-color: var(--primary-color);
 
   // Footer

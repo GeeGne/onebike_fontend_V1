@@ -2,41 +2,42 @@
   position: fixed;
   display: flex;
   align-items: center;
-  top: 50%;
+  top: 15%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -15%);
   padding: 0.5em;
+  gap: 0.5em;
   border-radius: 20px;
   cursor: pointer;
   z-index: 100;
+
+  body.arabic & {
+    direction: rtl;
+  }
 
   &:hover {
     filter: invert(5%);
   }
 
   &__message {
-    position: relative;
-    margin-right: 0.5em;
     color: var(--font-p-color);
-
-    &::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      right: -0.25em;
-      height: 100%;
-      width: 1px;
-      background-color: hsl(0, 0%, 50%);
-    }
+    text-wrap: nowrap;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
 
   &::after {
-    content: "X";
+    content: "";
     font-weight: 550;
     background-color: var(--alert-x-background-color);
     color: var(--font-h-color);
-    padding: 0.2em 0.4em 0.3em 0.4em;
-    border-radius: 50%;
+    background-image: var(--close-icon);
+    background-repeat: no-repeat;
+    background-size: 75%;
+    background-position: center;
+    width: 1.5em;
+    height: 1.5em;
+    border-radius: 39px;
     opacity: var(--after-opacity, 0);
     transition: opacity 0.5s ease;
   }
@@ -62,46 +63,5 @@
     height: 4px;
     border-radius: 4px;
     background-color: var(--alert-timer-background-color);
-  }
-
-  body.arabic & {
-    flex-direction: row-reverse;
-
-    &__message {
-      margin-right: 0;
-      margin-left: 0.5em;
-
-      &::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: -0.25em;
-        right: auto;
-        height: 100%;
-        width: 1px;
-        background-color: hsl(0, 0%, 50%);
-      }
-    }
-
-    // &::before {
-    //   content: "X";
-    //   font-weight: 550;
-    //   background-color: var(--alert-x-background-color);
-    //   color: var(--font-h-color);
-    //   padding: 0.2em 0.4em 0.3em 0.4em;
-    //   border-radius: 50%;
-    //   opacity: var(--after-opacity, 0);
-    //   transition: opacity 0.5s ease;
-    // }
-
-    // &::after {
-    //   content: "";
-    //   padding: 0;
-    // }
-
-    &__timer-animation {
-      right: 1em;
-      left: auto;
-    }
   }
 }

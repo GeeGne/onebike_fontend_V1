@@ -1,20 +1,22 @@
 import React, {useState, useEffect, useRef} from 'react';
 import {Link} from 'react-router-dom';
 
+// SCSS
 import '../../Styles/Components/Header/IntroSection.scss';
 
+// COMPONENTS
 import Alert from '../Alert';
 import LanguageButton from '../LanguageButton';
 import LightDarkButton from '../LightDarkButton';
 
-//  ICONS
+// ICONS
 import facebookIcon from '../../assets/Img/Icons/facebook.svg';
 import instagramIcon from '../../assets/Img/Icons/instagram.svg';
 import whatsappIcon from '../../assets/Img/Icons/whatsapp.svg';
 import callIcon from '../../assets/Img/Icons/call.svg';
 import callPlusFillIcon from '../../assets/Img/Icons/call_plus_fill.svg';
 
-//  ICONS - DARKMODE
+// ICONS - DARKMODE
 import facebookIconDarkMode from '../../assets/Img/Icons/facebook_darkMode.svg';
 import instagramIconDarkMode from '../../assets/Img/Icons/instagram_darkMode.svg';
 import whatsappIconDarkMode from '../../assets/Img/Icons/whatsapp_darkMode.svg';
@@ -55,7 +57,7 @@ function IntroSection ({onThemeChange, onLanguageChange}) {
     const number = phoneNumberH2Element.current.textContent;
     const alertMessage = lan === 'en' ? 
     'Number is copied to the clipboard successfully!' : 
-    'لقد تم نسخ رقم الهاتف بنجاح!ـ';
+    'لقد تم نسخ رقم الهاتف بنجاح!';
     
     navigator.clipboard.writeText(number);
     setAlertText(alertMessage);
@@ -72,7 +74,7 @@ function IntroSection ({onThemeChange, onLanguageChange}) {
 
   return (
     <>
-      <Alert alertText={alertText} newAlert={newAlert} />
+      <Alert alertText={alertText} newAlert={newAlert}/>
       <section className="userinfo-container">
         <a className="userinfo-container__icons-a" href={facebookURL} target="_blank" tabIndex="0">
           <img className="userinfo-container__icons-a__img" src={darkMode ? facebookIconDarkMode : facebookIcon}/>

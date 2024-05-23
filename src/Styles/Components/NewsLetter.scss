@@ -13,7 +13,18 @@
   overflow: hidden;
 
   @include w.breakpoint-up(medium) {
-    aspect-ratio: 1 / 1;
+    aspect-ratio: 3 / 2;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 2px;
+      height: 40%;
+      background-color: white;
+    }
   }
 
   @include w.breakpoint-up(large) {
@@ -21,27 +32,40 @@
   }
 
   &__content {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto 1fr auto;
+    grid-template-areas:
+    'title'
+    'description'
+    'paragraph'
+    'toggles';
     width: 100%;
     height: 100%;
-    // background-color: hsl(200, 100%, 15%, 0.20);
     gap: 0.5em;
     padding: 2em 1em;
+ 
+    @include w.breakpoint-up(medium) {
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      grid-template-rows: 1fr auto auto 1fr;
+      grid-template-areas:
+      'title title title title'
+      'description description paragraph paragraph'
+      'description description toggles toggles';
+    }
 
     &__title {
+      grid-area: title;
       color: white;
       font-family: 'Righteous';
       font-weight: bold;
-      // filter: drop-shadow(-5px 6px 2px hsl(0, 0%, 0%, 0.6));
+      @include w.breakpoint-up(medium) {
+        margin-bottom: auto;
+        margin-inline: auto;
+      }
 
       & .one-bike {
         font-size: 1.3em;
-        // color: var(--secondary-color);
-        // mask-image: linear-gradient(to bottom, hsl(0, 0%, 0%) 0%, hsl(0, 0%, 0%) 50%,  hsl(0, 0%, 100%) 0%, hsl(0, 0%, 100%) 100%);
-        // mask-image: linear-gradient(to bottom, hsl(0, 0%, 0%, 1) 0%, hsl(0, 0%, 0%, 1) 50%, hsl(0, 0%, 100%, 0) 50%, rgb(0, 0, 0, 1) 100%);
-        // -webkit-mask-image: linear-gradient(to bottom, hsl(0, 0%, 0%, 1) 0%, hsl(0, 0%, 0%, 1) 50%, hsl(0, 0%, 100%, 1) 50%, rgb(0, 0, 0, 1) 100%);
-        // mask-image: image(url(src/assets/Img/Logo/ONEBIKE.png), green);
       }
 
       & .colored {
@@ -50,11 +74,17 @@
     }
 
     &__description {
+      grid-area: description;
       max-width: 80%;
       margin-bottom: auto;
       font-weight: 600;
       color: white;
-      // filter: drop-shadow(-5px 6px 7px hsl(0, 0%, 0%, 0.4));
+
+      @include w.breakpoint-up(medium) {
+        margin-block: auto;
+        margin-inline: auto;
+        max-width: 80%;
+      }
       
       &::before,
       &::after {
@@ -75,17 +105,29 @@
     }
 
     &__paragraph {
+      grid-area: paragraph;
       font-weight: bold;
       font-size: 0.9em;
       color: white;
-      // filter: drop-shadow(-5px 6px 7px hsl(0, 0%, 0%, 0.4));
+      margin-top: auto;
+
+      @include w.breakpoint-up(medium) {
+        margin-inline: auto;
+        width: 80%;
+      }
     }
 
     &__toggles {
+      grid-area: toggles;
       display: flex;
       flex-direction: column;
       opacity: 0.8;
       backdrop-filter: blur(6px);
+
+      @include w.breakpoint-up(medium) {
+        margin-inline: auto;
+        width: 80%;
+      }
 
       &__input-container {
         position: relative;

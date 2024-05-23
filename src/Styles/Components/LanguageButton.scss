@@ -56,6 +56,7 @@
       padding: 1em 0.5em;
 
       & h3 {
+        color: var(--font-h-color);
         font-weight: 600;
         transition: background-color 0.15s ease;
       }

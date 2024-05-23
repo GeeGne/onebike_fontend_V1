@@ -30,24 +30,18 @@ function NeedHelp ({darkMode, lan}) {
     
     if (type === 'phone') {
       copiedMessage = '+963964803712';
-      alertMessage = lan === 'en' ? 'Number is copied to the clipboard successfully!' : 'لقد تم نسخ رقم الهاتف بنجاح!ـ';
+      alertMessage = lan === 'en' ? 'Number is copied to the clipboard successfully!' : 'لقد تم نسخ رقم الهاتف بنجاح!';
     }
 
     if (type === 'email') {
       copiedMessage = 'example@gmail.com';
-      alertMessage = lan === 'en' ? 'Email is copied to the clipboard successfully!' : 'لقد تم نسخ عنوان البريد الاكنروني بنجاح!ـ';
+      alertMessage = lan === 'en' ? 'Email is copied to the clipboard successfully!' : 'لقد تم نسخ عنوان البريد الاكنروني بنجاح!';
     }
-    // navigator.clipboard.writeText(copiedMessage);
-
-    // navigator.clipboard.writeText(copiedMessage).then(() => {
-    //   alert('Text copied to clipboard!');
-    // }).catch(err => {
-    //   console.error('Failed to copy text: ', err);
-    // });
   
     if (navigator.clipboard) {
       navigator.clipboard.writeText(copiedMessage).then(() => {
-        alert('Text copied to clipboard!');
+        setAlertText(alertMessage);
+        setNewAlert(Math.random());
       }).catch(err => {
         console.error('Failed to copy text: ', err);
       });
@@ -61,15 +55,16 @@ function NeedHelp ({darkMode, lan}) {
       textarea.select();
       try {
         document.execCommand('copy');
-        alert('Text copied to clipboard!');
+        setAlertText(alertMessage);
+        setNewAlert(Math.random());
       } catch (err) {
         console.error('Failed to copy text: ', err);
       }
       document.body.removeChild(textarea);
     }
 
-    setAlertText(alertMessage);
-    setNewAlert(Math.random());
+    // setAlertText(alertMessage);
+    // setNewAlert(Math.random());
   }
 
   return (

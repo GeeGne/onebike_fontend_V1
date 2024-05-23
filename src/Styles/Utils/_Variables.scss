@@ -9,6 +9,7 @@
 :root {
   --heart-icon: url(/src/assets/Img/Icons/heart.svg);
   --add-shoppingCart-icon: url(/src/assets/Img/Icons/add_shopping_cart.svg); 
+  --close-icon: url(/src/assets/Img/Icons/close.svg);
 
   // NavBar
   --arrow-drop-down-icon: url(/src/assets/Img/Icons/arrow_drop_down.svg);
@@ -48,6 +49,7 @@
 .dark-theme {
   --heart-icon: url(/src/assets/Img/Icons/heart_darkMode.svg);
   --add-shoppingCart-icon: url(/src/assets/Img/Icons/add_shopping_cart_darkMode.svg); 
+  --close-icon: url(/src/assets/Img/Icons/close_darkMode.svg);
 
   // Navbar
   --arrow-drop-down-icon: url(/src/assets/Img/Icons/arrow_drop_down_darkMode.svg);

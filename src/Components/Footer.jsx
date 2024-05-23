@@ -32,10 +32,10 @@ function Footer ({darkMode, lan}) {
     <div className="footer-container">
       <div className="footer-container__footer-upper-grid">
         <section className="footer-container__footer-upper-grid__section-subscribe">
-          <h2 className="footer-container__footer-upper-grid__section-subscribe__title">{lan === 'en' ? 'Subscribe to our newsletter' : 'اشترك في نشرتنا'}</h2>
+          <label htmlFor="subscribe"><h2 className="footer-container__footer-upper-grid__section-subscribe__title">{lan === 'en' ? 'Subscribe to our newsletter' : 'اشترك في نشرتنا'}</h2></label>
           <ul className="footer-container__footer-upper-grid__section-subscribe__list">
             <li className="footer-container__footer-upper-grid__section-subscribe__list__item">
-              <input className="footer-container__footer-upper-grid__section-subscribe__list__item__input" placeholder={lan === 'en' ? 'Email address' : 'عنوان البريد الاكتروني'} />
+              <input className="footer-container__footer-upper-grid__section-subscribe__list__item__input" id="subscribe" type="text" placeholder={lan === 'en' ? 'Email address' : 'عنوان البريد الاكتروني'} />
               <button className="footer-container__footer-upper-grid__section-subscribe__list__item__button">{lan === 'en' ? 'Subscribe': 'اشترك'}</button>
             </li>
           </ul>
