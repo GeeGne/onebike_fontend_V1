@@ -96,7 +96,7 @@ function ImageSlider () {
 
   function action (action, totalAmount) {
 
-    const scroll = (e, left, behavior) => e.scrollTo({left,behavior});
+    const scroll = (e, left, behavior) => e.scroll({left,behavior});
 
     const scrollToBeginning = () => {
       scroll(imageSliderElement.current, vars().sliderWidth, 'instant');

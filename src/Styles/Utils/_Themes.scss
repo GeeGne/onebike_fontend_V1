@@ -2,7 +2,9 @@
 :root {
   // MAIN
   --background-color: hsl(0, 0%, 100%);
-  --light-background-color: hsl(0, 0%, 95%);
+  --background-invert-color: hsl(0, 0%, 0%);
+  --light-background-color: hsl(0, 0%, 90%);
+  --light-invert-background-color: hsl(0, 0%, 10%);
   --endElement-border-background-color: hsl(0, 0%, 85%);
   --font-h-color: hsl(0, 0%, 0%);
   --font-h-invert-color: hsl(0, 0%, 100%);
@@ -76,7 +78,9 @@
 .dark-theme {
   // Main
   --background-color: hsl(0, 0%, 0%);
-  --light-background-color: hsl(0, 0%, 5%);
+  --background-invert-color: hsl(0, 0%, 100%);
+  --light-background-color: hsl(0, 0%, 10%);
+  --light-invert-background-color: hsl(0, 0%, 90%);
   --endElement-border-background-color: hsl(0, 0%, 15%);
   --font-h-color: hsl(0, 0%, 100%);  
   --font-h-invert-color: hsl(0, 0%, 0%);  

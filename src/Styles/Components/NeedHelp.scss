@@ -62,11 +62,16 @@
     &__a {
       font-weight: 550;
       text-decoration: none;
-      // background-color: var(--background-color);
       color: var(--font-h-color);
       border: solid 2px black;
       margin-top: auto;
       padding: 0.5em 1em;
+      transition: background-color 0.25s ease, color 0.25s ease;
+
+      &:hover {
+        background-color: var(--light-invert-background-color);
+        color: var(--font-h-invert-color);
+      }
     }
   }
 

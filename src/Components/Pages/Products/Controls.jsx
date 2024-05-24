@@ -37,7 +37,6 @@ function Controls ({darkMode, lan}) {
           <img className="controls-container__sort-by-button__down-arrow-icon" src={darkMode ? keyboardArrowDropDownDarkMode : keyboardArrowDropDown}/>
           <ul className="controls-container__sort-by-button__expanded-list">
             <li className="controls-container__sort-by-button__expanded-list__item" onClick={e => setSortType(lan === 'en' ? 'Sort by' : 'تصنيف حسب')}>{lan === 'en' ? 'Default' : 'افتراضي'}</li>
-            <li className="controls-container__sort-by-button__expanded-list__item" onClick={e => setSortType(lan === 'en' ? 'Sort by' : 'تصنيف حسب')}>{lan === 'en' ? 'Default' : 'افتراضي'}</li>
             <li className="controls-container__sort-by-button__expanded-list__item" onClick={e => setSortType(e.currentTarget.textContent)}>{lan === 'en' ? 'Price: Low to Hight' : 'السعر: منخفض الى مرتفع'}</li>
             <li className="controls-container__sort-by-button__expanded-list__item" onClick={e => setSortType(e.currentTarget.textContent)}>{lan === 'en' ? 'Price: Hight to Low' : 'السعر: مرتفع الى منخفض'}</li>
             <li className="controls-container__sort-by-button__expanded-list__item" onClick={e => setSortType(e.currentTarget.textContent)}>{lan === 'en' ? 'Newest' : 'الاجدد'}</li>
