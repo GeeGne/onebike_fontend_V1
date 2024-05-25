@@ -4,7 +4,7 @@ import NewsLetter from '../NewsLetter';
 import NeedHelp from '../NeedHelp';
 
 // SCSS
-import '/src/Styles/Components/Pages/Home.scss';
+import '/src/styles/components/pages/Home.scss';
 
 function Home ({darkMode, lan}) {
 

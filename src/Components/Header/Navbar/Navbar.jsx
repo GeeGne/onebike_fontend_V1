@@ -1,14 +1,18 @@
+// HOOKS
 import React, {useState, useRef, useEffect} from 'react';
 import {useNavigate} from 'react-router-dom';
 
+// COMPONENTS
 import HamMenu from './HamMenu';
 import DropMenu from './DropMenu';
 
-import '/src/Styles/Components/Header/Navbar/Navbar.scss';
+// SCSS
+import '/src/styles/components/header/navbar/Navbar.scss';
 
-import logo from '/src/assets/Img/Logo/ONEBIKE.png';
-import searchIcon from '/src/assets/Img/Icons/search.svg';
-import searchIconDarkMode from '/src/assets/Img/Icons/search_darkMode.svg';
+// ASSETS
+import logo from '/src/assets/img/logo/ONEBIKE.png';
+import searchIcon from '/src/assets/img/icons/search.svg';
+import searchIconDarkMode from '/src/assets/img/icons/search_darkMode.svg';
 
 function Navbar ({darkMode, lan}) {
   

@@ -1,9 +1,12 @@
+// HOOKS
 import React, {useState, useEffect} from 'react';
 
-import '../../Styles/Components/Header/Header.scss';
+// SCSS
+import '../../styles/components/header/Header.scss';
 
+// COMPONENTS
 import IntroSection from './IntroSection';
-import Navbar from './Navbar/Navbar';
+import Navbar from './navbar/Navbar';
 
 function Header ({onThemeChange, onLanguageChange}) {
 

@@ -1,9 +1,12 @@
+// HOOKS
 import React, {useState, useEffect} from 'react';
 
-import '../Styles/Components/LightDarkButton.scss';
+// SCSS
+import '../styles/components/LightDarkButton.scss';
 
-import sunIcon from "../assets/Img/Icons/sun.svg";
-import moonIcon from "../assets/Img/Icons/moon.svg";
+// ICONS
+import sunIcon from "../assets/img/icons/sun.svg";
+import moonIcon from "../assets/img/icons/moon.svg";
 
 function LightDarkButton ({onThemeChange}) {
 

@@ -2,10 +2,10 @@
 import React, {useEffect, useState, useRef} from 'react';
 
 // SCSS
-import '/src/Styles/Components/NewsLetter.scss';
+import '/src/styles/components/NewsLetter.scss';
 
 // ICONS
-import oneBikeLogo from '/src/assets/Img/Logo/ONEBIKE.png'
+import oneBikeLogo from '/src/assets/img/logo/ONEBIKE.png'
 
 function NewsLetter () {
 

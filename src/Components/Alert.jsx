@@ -1,6 +1,8 @@
+// HOOKS
 import React, {useState, useRef, useEffect} from 'react';
 
-import '../Styles/Components/Alert.scss';
+// SCSS
+import '../styles/components/Alert.scss';
 
 function Alert ({alertText, newAlert}) {
 

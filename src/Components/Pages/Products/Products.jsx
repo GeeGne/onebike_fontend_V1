@@ -7,10 +7,10 @@ import Controls from './Controls';
 import AdvertList from './AdvertList';
 
 //SCSS
-import '/src/Styles/Components/Pages/Products/Products.scss';
+import '/src/styles/components/pages/products/Products.scss';
 
 //UTILS
-import capitalizeFirstLetter from '/src/Utils/capitalizeFirstLetter.js'
+import capitalizeFirstLetter from '/src/utils/capitalizeFirstLetter.js'
 
 function Products ({category, type, darkMode, lan}) {
   
@@ -21,17 +21,15 @@ function Products ({category, type, darkMode, lan}) {
   }, [category, type, lan])
 
   return (
-    <>
-      <div className="products-container">
-        <section className="products-container__breadCrumb-container"><BreadCrumb category={category} type={type} lan={lan}/></section>
-        <section className="products-container__category-title-container">
-          <h1 className="products-container__category-title-container__h1">{productCategory}</h1>
-          <h3 className="products-container__category-title-container__result">&#10088;{lan === 'en' ? '0 results' : '0 نتيجه'}&#10089;</h3>
-        </section>
-        <section className="products-container__controls-container"><Controls darkMode={darkMode} lan={lan}/></section>
-        <section className="products-container__advertList-container"><AdvertList darkMode={darkMode} lan={lan}/></section>
-      </div>
-    </>
+    <div className="products-container">
+      <section className="products-container__breadCrumb-container"><BreadCrumb category={category} type={type} lan={lan}/></section>
+      <section className="products-container__category-title-container">
+        <h1 className="products-container__category-title-container__h1">{productCategory}</h1>
+        <h3 className="products-container__category-title-container__result">&#10088;{lan === 'en' ? '0 results' : '0 نتيجه'}&#10089;</h3>
+      </section>
+      <section className="products-container__controls-container"><Controls darkMode={darkMode} lan={lan}/></section>
+      <section className="products-container__advertList-container"><AdvertList darkMode={darkMode} lan={lan}/></section>
+    </div>
   )
 }
 

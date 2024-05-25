@@ -1,11 +1,15 @@
+// HOOKS
 import React, {useEffect, useState, useRef} from 'react';
 import {useNavigate} from 'react-router-dom';
 
-import mainListData from '/src/Data/Menu.json';
+// JSON
+import mainListData from '/src/data/menu.json';
 
-import '../../../Styles/Components/Header/Navbar/DropMenu.scss';
+// SCSS
+import '../../../styles/components/header/navbar/DropMenu.scss';
 
-import cleanseString from '/src/Utils/cleanseString.js';
+// UTILS
+import cleanseString from '/src/utils/cleanseString.js';
 
 function DropMenu ({darkMode, lan, menu}) {
 

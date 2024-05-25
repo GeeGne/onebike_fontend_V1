@@ -2,16 +2,16 @@
 import React, {useState, useEffect, useRef} from 'react';
 
 // SCSS
-import '/src/Styles/Components/Pages/Products/AdvertList.scss';
+import '/src/styles/components/pages/products/AdvertList.scss';
 
 // product img test
-import productIMG from '/src/assets/Img/Products/GIYO Small Bike tire Pump Schrader.jpg';
-import productIMG2 from '/src/assets/Img/Products/Giant Bicycle Road full Carbon.avif';
-import productIMG3 from '/src/assets/Img/Products/RIDE 12 Chili Red Carbon Grey 2023.avif';
-import productIMG4 from '/src/assets/Img/Products/Seymour Oceanweave 1.3 H2O.avif';
-import brandLogo from '/src/assets/Img/Logo/TREK.avif';
-import brandLogo2 from '/src/assets/Img/Logo/GIANT.avif';
-import brandLogo3 from '/src/assets/Img/Logo/EVOC.avif';
+import productIMG from '/src/assets/img/products/GIYO Small Bike tire Pump Schrader.jpg';
+import productIMG2 from '/src/assets/img/products/Giant Bicycle Road full Carbon.avif';
+import productIMG3 from '/src/assets/img/products/RIDE 12 Chili Red Carbon Grey 2023.avif';
+import productIMG4 from '/src/assets/img/products/Seymour Oceanweave 1.3 H2O.avif';
+import brandLogo from '/src/assets/img/logo/TREK.avif';
+import brandLogo2 from '/src/assets/img/logo/GIANT.avif';
+import brandLogo3 from '/src/assets/img/logo/EVOC.avif';
 
 function AdvertList ({darkMode, lan}) {
 

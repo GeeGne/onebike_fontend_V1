@@ -1,5 +1,8 @@
+// HOOKS
 import React, {useState, useRef, useEffect} from 'react';
-import '../Styles/Components/LanguageButton.scss'
+
+// SCSS
+import '../styles/components/LanguageButton.scss'
 
 function LanguageButton ({onLanguageChange}) {
 

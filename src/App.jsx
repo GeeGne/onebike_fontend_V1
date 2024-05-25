@@ -1,24 +1,24 @@
 //  STYLES
-import './Styles/App.scss';
+import './styles/App.scss';
 
 //  COMPONENTS
-import Header from './Components/Header/Header';
-import Footer from './Components/Footer';
-import Home from './Components/Pages/Home';
-import Products from './Components/Pages/Products/Products';
-import NotFound from './Components/Pages/NotFound';
+import Header from './components/header/Header';
+import Footer from './components/Footer';
+import Home from './components/pages/Home';
+import Products from './components/pages/products/Products';
+import NotFound from './components/pages/NotFound';
 
 // DATA
 // import products from '/src/Data/Products.json';
-import mainListData from '/src/Data/Menu.json';
+import mainListData from '/src/data/menu.json';
 
 // HOOKS
 import React, {useEffect, useState, useRef} from 'react';
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 
 // UTILS
-import removeDuplicates from '/src/Utils/removeDuplicates.js';
-import cleanseString from '/src/Utils/cleanseString.js';
+import removeDuplicates from '/src/utils/removeDuplicates.js';
+import cleanseString from '/src/utils/cleanseString.js';
 
 function App() {
 

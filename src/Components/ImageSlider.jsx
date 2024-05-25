@@ -1,8 +1,11 @@
+// HOOKS
 import React, {useState, useRef, useEffect} from 'react';
 
-import '../Styles/Components/ImageSlider.scss';
+// SCSS
+import '../styles/components/ImageSlider.scss';
 
-import sliderData from '/src/Data/Slider.json';
+// JSON
+import sliderData from '/src/data/slider.json';
 
 
 function ImageSlider () {
@@ -135,28 +138,26 @@ function ImageSlider () {
   }
 
   return (
-    <>
-      <section className='imageSlider-container'>
-        <ul className='imageSlider-container__img-holder' onTouchStart={handleStart}  onTouchMove={handleMove} onTouchEnd={handleEnd} ref={imageSliderElement}>
-          <li className='imageSlider-container__img-holder__imges'><img src={lastImage}/></li>
-          {sliderData.map(data =>
-          <li className='imageSlider-container__img-holder__imges' key={data.id}>
-            <img src={data.URL}/>
-          </li>          
-          )}
-          <li className='imageSlider-container__img-holder__imges'><img src={firstImage}/></li>
-        </ul>
-        <ul className="imageSlider-container__dots-container">
-          {sliderData.map((data, i) =>
-          <li className ={`imageSlider-container__dots-container__dot ${i === currentImage && 'current'}`} key={data.id}></li>
-          )}
-        </ul>
-        <div className="imageSlider-container__arrows">
-          <button className="imageSlider-container__arrows__left-arrow"></button>
-          <button className="imageSlider-container__arrows__right-arrow"></button>
-        </div>
-      </section>
-    </>
+    <section className='imageSlider-container'>
+      <ul className='imageSlider-container__img-holder' onTouchStart={handleStart}  onTouchMove={handleMove} onTouchEnd={handleEnd} ref={imageSliderElement}>
+        <li className='imageSlider-container__img-holder__imges'><img src={lastImage}/></li>
+        {sliderData.map(data =>
+        <li className='imageSlider-container__img-holder__imges' key={data.id}>
+          <img src={data.URL}/>
+        </li>          
+        )}
+        <li className='imageSlider-container__img-holder__imges'><img src={firstImage}/></li>
+      </ul>
+      <ul className="imageSlider-container__dots-container">
+        {sliderData.map((data, i) =>
+        <li className ={`imageSlider-container__dots-container__dot ${i === currentImage && 'current'}`} key={data.id}></li>
+        )}
+      </ul>
+      <div className="imageSlider-container__arrows">
+        <button className="imageSlider-container__arrows__left-arrow"></button>
+        <button className="imageSlider-container__arrows__right-arrow"></button>
+      </div>
+    </section>
   )
 }
 

@@ -2,27 +2,27 @@
 import React, {useState, useEffect, useRef} from 'react';
 
 // SCSS
-import '/src/Styles/Components/NeedHelp.scss';
+import '/src/styles/components/NeedHelp.scss';
 
 // COMPONENTS
 import Alert from './Alert';
 
 // ICONS
-import callIcon from '/src/assets/Img/Icons/call.svg';
-import mailIcon from '/src/assets/Img/Icons/mail.svg';
-import chatDotsIcon from '/src/assets/Img/Icons/chat_dots.svg';
+import callIcon from '/src/assets/img/icons/call.svg';
+import mailIcon from '/src/assets/img/icons/mail.svg';
+import chatDotsIcon from '/src/assets/img/icons/chat_dots.svg';
 
 // ICONS - DARKMODE
-import callIconDarkMode from '/src/assets/Img/Icons/call_darkMode.svg';
-import mailIconDarkMode from '/src/assets/Img/Icons/mail_darkMode.svg';
-import chatDotsIconDarkMode from '/src/assets/Img/Icons/chat_dots_darkMode.svg';
+import callIconDarkMode from '/src/assets/img/icons/call_darkMode.svg';
+import mailIconDarkMode from '/src/assets/img/icons/mail_darkMode.svg';
+import chatDotsIconDarkMode from '/src/assets/img/icons/chat_dots_darkMode.svg';
 
 function NeedHelp ({darkMode, lan}) {
-  // alert('hi')
+
   const [alertText, setAlertText] = useState(null);
   const [newAlert, setNewAlert] = useState(0);
-  const whatsAppURL = "https://chat.whatsapp.com/BanGDxwaSLgKMBWN6eDVzq";
 
+  const whatsAppURL = "https://chat.whatsapp.com/BanGDxwaSLgKMBWN6eDVzq";
 
   const handleClick = (type) => {
     let copiedMessage;
@@ -62,9 +62,6 @@ function NeedHelp ({darkMode, lan}) {
       }
       document.body.removeChild(textarea);
     }
-
-    // setAlertText(alertMessage);
-    // setNewAlert(Math.random());
   }
 
   return (

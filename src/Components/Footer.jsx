@@ -3,25 +3,25 @@ import React, {useState, useEffect, useRef} from 'react';
 import {Link} from 'react-router-dom';
 
 // SCSS
-import '../Styles/Components/Footer.scss';
+import '../styles/components/Footer.scss';
 
 // COMPONENTS
 import NeedHelp from './NeedHelp';
 import Alert from './Alert';
 
 //  ICONS
-import facebookIcon from '/src/assets/Img/Icons/facebook.svg';
-import instagramIcon from '/src/assets/Img/Icons/instagram.svg';
-import whatsappIcon from '/src/assets/Img/Icons/whatsapp.svg';
-import callIcon from '/src/assets/Img/Icons/call.svg';
-import mailIcon from '/src/assets/Img/Icons/mail.svg';
+import facebookIcon from '/src/assets/img/icons/facebook.svg';
+import instagramIcon from '/src/assets/img/icons/instagram.svg';
+import whatsappIcon from '/src/assets/img/icons/whatsapp.svg';
+import callIcon from '/src/assets/img/icons/call.svg';
+import mailIcon from '/src/assets/img/icons/mail.svg';
 
 //  ICONS - DARKMODE
-import facebookIconDarkMode from '/src/assets/Img/Icons/facebook_darkMode.svg';
-import instagramIconDarkMode from '/src/assets/Img/Icons/instagram_darkMode.svg';
-import whatsappIconDarkMode from '/src/assets/Img/Icons/whatsapp_darkMode.svg';
-import callIconDarkMode from '/src/assets/Img/Icons/call_darkMode.svg';
-import mailIconDarkMode from '/src/assets/Img/Icons/mail_darkMode.svg';
+import facebookIconDarkMode from '/src/assets/img/icons/facebook_darkMode.svg';
+import instagramIconDarkMode from '/src/assets/img/icons/instagram_darkMode.svg';
+import whatsappIconDarkMode from '/src/assets/img/icons/whatsapp_darkMode.svg';
+import callIconDarkMode from '/src/assets/img/icons/call_darkMode.svg';
+import mailIconDarkMode from '/src/assets/img/icons/mail_darkMode.svg';
 
 function Footer ({darkMode, lan}) {
 

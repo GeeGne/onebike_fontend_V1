@@ -1,20 +1,23 @@
+// HOOKS
 import React, {useRef, useState, useEffect} from 'react';
 import {useNavigate} from 'react-router-dom';
 
-import mainListData from '/src/Data/Menu.json';
+// JSON
+import mainListData from '/src/data/menu.json';
 
-import '../../../Styles/Components/Header/Navbar/HamMenu.scss';
+// SCSS
+import '../../../styles/components/header/navbar/HamMenu.scss';
 
 // UTILS
-import cleanseString from '/src/Utils/cleanseString.js';
+import cleanseString from '/src/utils/cleanseString.js';
 
 // ICONS
-import expandCircleUpIcon from '../../../assets/Img/Icons/expand_circle_down.svg';
-import closeIcon from '../../../assets/Img/Icons/close.svg';
+import expandCircleUpIcon from '../../../assets/img/icons/expand_circle_down.svg';
+import closeIcon from '../../../assets/img/icons/close.svg';
 
 // ICONS - DARKMODE
-import expandCircleUpIconDarkMode from '../../../assets/Img/Icons/expand_circle_down_darkMode.svg';
-import closeIconDarkMode from '../../../assets/Img/Icons/close_darkMode.svg';
+import expandCircleUpIconDarkMode from '../../../assets/img/icons/expand_circle_down_darkMode.svg';
+import closeIconDarkMode from '../../../assets/img/icons/close_darkMode.svg';
 
 function HamMenu ({menu, onMenuChange, darkMode, lan}) {
 
