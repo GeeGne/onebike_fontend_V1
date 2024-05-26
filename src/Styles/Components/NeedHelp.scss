@@ -60,10 +60,11 @@
 
     &__button, 
     &__a {
-      font-weight: 550;
+      font-weight: 600;
       text-decoration: none;
+      // background-color: var(--background-color);
       color: var(--font-h-color);
-      border: solid 2px black;
+      border: solid 1px var(--font-h-color);
       margin-top: auto;
       padding: 0.5em 1em;
       transition: background-color 0.25s ease, color 0.25s ease;
@@ -88,7 +89,7 @@
         transform: translateY(-50%);
         height: 120%;
         width: 1px;
-        background-color: hsl(0, 0%, 60%);
+        background-color: var(--endElement-border-background-color);
 
         body.arabic & {
           right: auto;

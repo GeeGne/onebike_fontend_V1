@@ -1,81 +1,94 @@
 [{
-  "id": 0,
-  "category": "accessories",
-  "type": "lights",
-  "title": "NiteRider Lumina 1200 Boost USB Rechargeable Bike Light Powerful Lumens Bicycle Headlight LED Front Light Easy to Install for Men Women Road Mountain City Commuting Adventure Cycling Safety Flashlight",
-  "img": "src/assets/img/products/NiteRider Lumina 1200.jpg",
-  "color": {"en": "Black", "ar":"اسود"},
-  "brand": "NiteRider"
-},{
   "id": 1,
   "category": "accessories",
-  "type": "Bike Pumps",
-  "title": "GIYO Small Bike tire Pump Schrader & Presta Valve for MTB 80 PSI Telescopic Barrel All Metal CNC Portable Mini Bike Pump Secure Valve Lock for Easy Pumping | Taiwan Made GM043",
+  "type": "lights",
+  "title": {"en": "Generic Rechargable Front Bicycle Light", "ar": "مصباح امامي قابل للشحن"},
   "img": "src/assets/img/products/GIYO Small Bike tire Pump Schrader.jpg",
-  "color": {"en": "Grey", "ar":"رمادي"},
-  "brand": "GIYO"
+  "price": 10,
+  "discount": false,
+  "extraAngels": false,
+  "color": {"en": "black", "ar": "اسود"},
+  "colorFeature": false,
+  "brand": false
 },{
   "id": 2,
   "category": "accessories",
   "type": "lights",
-  "title": "NiteRider Lumina 1200 Boost USB Rechargeable Bike Light Powerful Lumens Bicycle Headlight LED Front Light Easy to Install for Men Women Road Mountain City Commuting Adventure Cycling Safety Flashlight",
+  "title": {"en": "Generic Rear Bicycle Light", "ar": "مصباح خلفي"},
   "img": "src/assets/img/products/NiteRider Lumina 1200.jpg",
-  "color": {"en": "Black", "ar":"اسود"},
-  "brand": "NiteRider"
+  "color": {"en": "Black", "ar": "اسود"},
+  "price": 10,
+  "brand": false
 },{
   "id": 3,
-  "category": "accessories",
-  "type": "Bike Pumps",
-  "title": "GIYO Small Bike tire Pump Schrader & Presta Valve for MTB 80 PSI Telescopic Barrel All Metal CNC Portable Mini Bike Pump Secure Valve Lock for Easy Pumping | Taiwan Made GM043",
+  "category": "components",
+  "type": "brakes-&-parts",
+  "title": {"en": "Generic Road Brake Pads", "ar": "فحمات فرامل لدراجات الطريق"},
   "img": "src/assets/img/products/GIYO Small Bike tire Pump Schrader.jpg",
-  "color": {"en": "Grey", "ar":"رمادي"},
-  "brand": "GIYO"
+  "color": {"en": "grey", "ar": "رمادي"},
+  "price": 10,
+  "brand": false
 },{
   "id": 4,
   "category": "accessories",
-  "type": "lights",
-  "title": "NiteRider Lumina 1200 Boost USB Rechargeable Bike Light Powerful Lumens Bicycle Headlight LED Front Light Easy to Install for Men Women Road Mountain City Commuting Adventure Cycling Safety Flashlight",
+  "type": "pumps",
+  "title": {"en": "Crivit Portable Air Pump", "ar": "منفاخ كريفيت متنقل"},
   "img": "src/assets/img/products/NiteRider Lumina 1200.jpg",
-  "color": {"en": "Black", "ar":"اسود"},
-  "brand": "NiteRider"
+  "color": {"en": "black", "ar": "اسود"},
+  "price": 10,
+  "brand": "crivit"
 },{
   "id": 5,
   "category": "accessories",
-  "type": "Bike Pumps",
-  "title": "GIYO Small Bike tire Pump Schrader & Presta Valve for MTB 80 PSI Telescopic Barrel All Metal CNC Portable Mini Bike Pump Secure Valve Lock for Easy Pumping | Taiwan Made GM043",
+  "type": "sunglasses",
+  "title": {"en": "Generic Air Proof Bicycle Sunglasses", "ar": "نظارات شمسيه للدراجات مقاومه للهواء"},
   "img": "src/assets/img/products/GIYO Small Bike tire Pump Schrader.jpg",
-  "color": {"en": "Grey", "ar":"رمادي"},
-  "brand": "GIYO"
+  "color": {"en": "grey", "ar":"رمادي"},
+  "price": 10,
+  "brand": false
 },{
   "id": 6,
   "category": "accessories",
-  "type": "lights",
-  "title": "NiteRider Lumina 1200 Boost USB Rechargeable Bike Light Powerful Lumens Bicycle Headlight LED Front Light Easy to Install for Men Women Road Mountain City Commuting Adventure Cycling Safety Flashlight",
+  "type": "sunglasses",
+  "title": {"en": "Generic Air Proof Bicycle Sunglasses", "ar": "نظارات شمسيه للدراجات مقاومه للهواء"},
   "img": "src/assets/img/products/NiteRider Lumina 1200.jpg",
-  "color": {"en": "Black", "ar":"اسود"},
-  "brand": "NiteRider"
+  "color": {"en": "silver", "ar":"فضي"},
+  "price": 10,
+  "brand": false
 },{
   "id": 7,
-  "category": "accessories",
-  "type": "Bike Pumps",
-  "title": "GIYO Small Bike tire Pump Schrader & Presta Valve for MTB 80 PSI Telescopic Barrel All Metal CNC Portable Mini Bike Pump Secure Valve Lock for Easy Pumping | Taiwan Made GM043",
+  "category": "components",
+  "type": "headsets-&-spacers",
+  "title": {"en": "Full Aluminum Headset with three spacers", "ar": "رقبه المينيوم مع ثلاث تسميكات"},
   "img": "src/assets/img/products/GIYO Small Bike tire Pump Schrader.jpg",
-  "color": {"en": "Grey", "ar":"رمادي"},
-  "brand": "GIYO"
+  "color": {"en": "black", "ar":"رمادي"},
+  "price": 10,
+  "brand": false
 },{
   "id": 8,
   "category": "accessories",
-  "type": "lights",
-  "title": "NiteRider Lumina 1200 Boost USB Rechargeable Bike Light Powerful Lumens Bicycle Headlight LED Front Light Easy to Install for Men Women Road Mountain City Commuting Adventure Cycling Safety Flashlight",
+  "type": "tools",
+  "title": {"en": "Brake Fluid Adjuster Tool", "ar": "اداه لتعيين زيت الفرامل"},
   "img": "src/assets/img/products/NiteRider Lumina 1200.jpg",
-  "color": {"en": "Black", "ar":"اسود"},
-  "brand": "NiteRider"
+  "color": {"en": "yellow", "ar":"اصفر"},
+  "price": 10,
+  "brand": false
 },{
   "id": 9,
-  "category": "accessories",
-  "type": "Bike Pumps",
-  "title": "GIYO Small Bike tire Pump Schrader & Presta Valve for MTB 80 PSI Telescopic Barrel All Metal CNC Portable Mini Bike Pump Secure Valve Lock for Easy Pumping | Taiwan Made GM043",
+  "category": "tires-&-wheels",
+  "type": "tubes",
+  "title": {"en": "Kenda 29 MTB Tires", "ar": "كوشوك خارجي مقاس 29 جبلي ماركه كيندا"},
   "img": "src/assets/img/products/GIYO Small Bike tire Pump Schrader.jpg",
-  "color": {"en": "Grey", "ar":"رمادي"},
-  "brand": "GIYO"
+  "color": {"en": "black", "ar":"اسود"},
+  "price": 10,
+  "brand": "kenda"
+},{
+  "id": 10,
+  "category": "accessories",
+  "type": "cages",
+  "title": {"en": "Generic Blastic Cage Bottle Holder", "ar": "قاعده حماله مطره من البلاستيك"},
+  "img": "src/assets/img/products/GIYO Small Bike tire Pump Schrader.jpg",
+  "color": {"en": "purple", "ar":"بنفسجي"},
+  "price": 10,
+  "brand": false
 }]

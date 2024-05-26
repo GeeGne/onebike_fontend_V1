@@ -10,7 +10,7 @@ import DropMenu from './DropMenu';
 import '/src/styles/components/header/navbar/Navbar.scss';
 
 // ASSETS
-import logo from '/src/assets/img/logo/ONEBIKE.png';
+import logo from '/src/assets/img/logo/onebike.png';
 import searchIcon from '/src/assets/img/icons/search.svg';
 import searchIconDarkMode from '/src/assets/img/icons/search_darkMode.svg';
 

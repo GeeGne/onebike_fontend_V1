@@ -119,6 +119,55 @@
   }]
 },{
   "id": 2,
+  "en": "Tires & Wheels", "ar": "كوشوك & اطار",
+  "secondaryList": [{
+    "id": 0,
+    "en": "Most Replaced", "ar": "الاكثر استبدالا",
+    "thirdList": [{
+      "id": 0,
+      "en": "Tires", "ar": "كوشوك خارجي"
+    },{
+      "id": 1,
+      "en": "Tubes", "ar": "كوشوك داخلي"
+    },{
+      "id": 2,
+      "en": "Wheels", "ar": "دواليب"
+    }]
+  },{
+    "id": 1,
+    "en": "Wheel Components", "ar": "قطع الدولاب",
+    "thirdList": [{
+      "id": 0,
+      "en": "Rims", "ar": "طارات"
+    },{
+      "id": 1,
+      "en": "Spokes", "ar": "سياخ"
+    },{
+      "id": 2,
+      "en": "Hubs", "ar": "قوالب"
+    },{
+      "id": 3,
+      "en": "Adaptors", "ar": "فك قفل"
+    },{
+      "id": 4,
+      "en": "Hubs's Axis", "ar": "عواميد القالب"
+    }]
+  },{
+    "id": 3,
+    "en": "Popular Brands", "ar": "ماركات مشهوره",
+    "thirdList": [{
+      "id": 0,
+      "en": "Shimano", "ar": "Shimano"
+    },{
+      "id": 1,
+      "en": "ZIPP", "ar": "ZIPP"
+    },{
+      "id": 2,
+      "en": "Giant", "ar": "Giant"
+    }]
+  }]
+},{
+  "id": 3,
   "en": "Components", "ar": "قطع الدراجه",
   "secondaryList": [{
     "id": 0,
@@ -195,7 +244,7 @@
     }]
   }]
 },{
-  "id": 3,
+  "id": 4,
   "en": "Clothing", "ar": "ملابس",
   "secondaryList": [{
     "id": 0,
@@ -266,7 +315,7 @@
     }]
   }]
 },{
-  "id": 4,
+  "id": 5,
   "en": "Helmets & Shoes", "ar": "خوذ & احذيه",
   "secondaryList": [{
     "id": 0,
