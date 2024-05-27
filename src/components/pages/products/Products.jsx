@@ -13,8 +13,8 @@ import '/src/styles/components/pages/products/Products.scss';
 import products from '/src/data/products.json';
 
 // UTILS
-import capitalizeFirstLetter from '/src/utils/capitalizeFirstLetter.js'
-import cleanseString from '/src/utils/cleanseString.js'
+import capitalizeFirstLetter from '/src/utils/capitalizeFirstLetter.js';
+import cleanseString from '/src/utils/cleanseString.js';
 
 function Products ({category, type, darkMode, lan}) {
   
