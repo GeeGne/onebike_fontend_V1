@@ -7,6 +7,11 @@ import '/src/styles/components/pages/products/AdvertList.scss';
 // JSON
 import products from '/src/data/products.json';
 
+// UTILS
+import formatNumberWithCommas from '/src/utils/formatNumberWithCommas.js'
+import calculatePrice from '/src/utils/calculatePrice.js'
+
+
 // product img test
 import productIMG from '/src/assets/img/products/GIYO Small Bike tire Pump Schrader.jpg';
 import productIMG2 from '/src/assets/img/products/Giant Bicycle Road full Carbon.avif';
@@ -16,9 +21,13 @@ import brandLogo from '/src/assets/img/logo/trek.avif';
 import brandLogo2 from '/src/assets/img/logo/giant.avif';
 import brandLogo3 from '/src/assets/img/logo/evoc.avif';
 
-function AdvertList ({darkMode, lan, productCategory}) {
+function AdvertList ({darkMode, lan, matchedProducts}) {
 
-  const matchedProducts = products.filter(product => product.category  === productCategory || product.type  === productCategory)
+  // const matchedProducts = products.filter(product => product.category  === productCategory || product.type  === productCategory)
+
+  const nowStyle = {
+    color: "var(--primary-color)"
+  }
   
   return (
     <div className="advertList-container">
@@ -30,7 +39,7 @@ function AdvertList ({darkMode, lan, productCategory}) {
           <img className="advertList-container__advert-section__grid__product-content__img" src={`/src/assets/img/products/${product.category}/${product.type}/${product.id + '-' + product.color.en}-front.webp`}/>
           <h3 className="advertList-container__advert-section__grid__product-content__description">{product.title[lan]}</h3>
           <img className="advertList-container__advert-section__grid__product-content__brand-logo" src={product.brand ? `/src/assets/img/logo/${product.brand}.png` : ''}/>
-          <h2 className="advertList-container__advert-section__grid__product-content__price">{product.price} <span className="currency-symbol">{lan === 'en' ? 'S.P' : 'ل.س'}</span></h2>
+          <h2 className="advertList-container__advert-section__grid__product-content__price">{product.discount ? <><span style={nowStyle}>{lan === 'en' ? 'NOW' : 'الان'}</span> {formatNumberWithCommas(calculatePrice(product.price, product.discount))} <span className="currency-symbol">{lan === 'en' ? 'S.P ' : 'ل.س'}</span><s>{formatNumberWithCommas(product.price)}</s></> : <>{formatNumberWithCommas(product.price)} <span className="currency-symbol">{lan === 'en' ? 'S.P' : 'ل.س'}</span></>}</h2>
           <div className="advertList-container__advert-section__grid__product-content__cart-utils">
             <button className="advertList-container__advert-section__grid__product-content__cart-utils__add-to-cart">{lan === 'en' ? 'Add to cart' : 'اضف الى السله'}</button>  
             <button className="advertList-container__advert-section__grid__product-content__cart-utils__increment"></button>  
