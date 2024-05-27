@@ -1,0 +1,27 @@
+.breadCrumb-list {
+  display: flex;
+
+  body.arabic & {
+    direction: rtl;
+  }
+
+  &__item-container {
+    display: flex;
+    align-items: center;
+
+    &__link {
+      margin-inline: 1em;
+      color: var(--font-p-color);
+      
+      &:last-child {
+        text-decoration: none;
+        color: var(--font-h-color);
+        font-weight: 550;
+      }
+    }
+
+    &__quotation-mark-ornament {
+      color: var(--font-h-color);
+    }
+  }
+}

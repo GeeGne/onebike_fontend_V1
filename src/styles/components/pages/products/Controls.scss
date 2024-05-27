@@ -1,0 +1,101 @@
+@use '/src/styles/utils/_BreakPoints' as w;
+
+.controls-container {
+  position: relative;
+  display: flex;
+  width: 100%;
+  padding-block: 0.5em;
+  border: solid var(--endElement-border-background-color);
+  border-width: 0 0 1px 0;
+  background-color: var(--background-color);
+
+  body.arabic & {
+    direction: rtl;
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    bottom: 50%;
+    left: 50%;
+    transform: translate(50%, 50%);
+    width: 1px;
+    height: 80%;
+    background-color: var(--endElement-border-background-color);
+  }
+
+  &__sort-by-button,
+  &__filter-button {
+    position: relative;
+    display: flex;
+    width: 50%;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5em;
+
+    &__h3 {
+      color: var(--font-h-color);
+      font-weight: 550;
+    }
+    &:hover &__h3 {
+      color: var(--primary-color);
+    }
+    &.clicked &__h3 {
+      color: var(--primary-color);
+      font-weight: 600;
+    }
+
+    &__down-arrow-icon {
+      width: var(--controls-downArrowIcon-size);
+      transition: transform 0.25s ease;
+
+    }
+    &.clicked &__down-arrow-icon {
+      transform: rotate(180deg)
+    }
+
+    &__expanded-list {
+      position: absolute;
+      display: flex;
+      visibility: hidden;
+      opacity: 0; 
+      flex-direction: column;
+      align-items: center;
+      top: calc(100% + 0.5em);
+      left: 0;
+      width: 100%;
+      background-color: var(--background-color);
+      padding-block: 0.5em;
+      border: solid 1px var(--endElement-border-background-color);
+      border-radius: 8px;
+      box-shadow: 2px 2px 10px 1px hsl(0, 0%, 50%, 0.3);
+      z-index: 20;
+      transition: opacity 0.25s ease;
+
+      &__item {
+        padding-block: 1em;
+        width: 100%;
+        color: var(--font-p-color);
+        transition: background-color 0.25s ease;
+        
+        &:hover {
+          background-color: var(--controls--expandedList-hover-background-color);
+          color: var(--font-h-color);
+          font-weight: 550;
+        }
+      }
+    }
+
+    &.clicked &__expanded-list {
+      visibility: visible;
+      opacity: 1;  
+    }
+  }
+
+  // &__sort-by-button.clicked {
+  //   &__expanded-list {
+  //     visibility: visible;
+  //     opacity: 1;
+  //   }  
+  // }
+}

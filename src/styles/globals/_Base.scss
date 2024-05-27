@@ -1,0 +1,70 @@
+@use '../utils/BreakPoints' as w;
+
+html {
+  box-sizing: border-box;
+  font-size: 100%;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+  min-width: 0;
+}
+
+body {
+  background-color: var(--background-color);
+  font-size: 1rem;
+  font-family: 'PT_Sans', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: 100%;
+  text-rendering: optimizeSpeed;
+  overflow: hidden auto;
+
+  @include w.breakpoint-up(medium) {
+   font-size: 1.05rem;
+  }
+  @include w.breakpoint-up(large) {
+   font-size: 1.1rem;
+  }
+  @include w.breakpoint-up(xlarge) {
+   font-size: 1.15rem;
+  }
+
+  &.arabic {
+    // font-family: 'PT_Sans';
+    font-family: 'Rubik';
+    // font-family: 'Noto_Arabic';
+    // font-family: 'Vazirmatn
+  }
+}
+
+
+a:visited,
+a:active,
+button {
+  text-decoration: none;
+  outline: none;
+}
+
+button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+button:focus-visible, 
+[role="button"]:focus,
+a:focus-visible {
+  outline: 3px solid hsl(0, 0%, 50%); 
+}
+
+a {
+  cursor: pointer;
+}
+
+ul {
+  list-style: none;
+}

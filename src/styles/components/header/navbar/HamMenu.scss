@@ -1,0 +1,242 @@
+@use 'src/styles/utils/_breakPoints' as w;
+
+.ham-menu-container {
+  visibility: hidden;
+  position: fixed;
+  display: flex;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: hsl(0, 0%, 0%, 0);
+  z-index: 100;
+  transition: background-color 0.5s ease-out;
+
+  @include w.breakpoint-up(large) {
+    display: none;
+  }
+
+  &__side-box {
+    display: flex;
+    width: 16em;
+    flex-direction: column;
+    background-color: var(--hamMenu-sideBox-color);
+    transition: transform 0.5s ease-out;
+    // overflow-y: auto;
+    
+    &__menu {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      // font-size: var(--hamMenu-menu-font);
+      background-color: var(--secondary-color);
+      padding: 1rem;
+      
+      &__h1 {
+        color: var(--font-h-color);
+      }
+
+      &__exit-icon {
+        background-color: hsl(0, 0%, 50%, 0);
+        border-radius: 6rem;
+        width: var(--hamMenu-exitIcon-size);
+        // height: var(--hamMenu-exitIcon-size);
+        padding: 0.2em;
+        aspect-ratio: 1 / 1;
+        cursor: pointer;
+        transition: background-color 0.25s ease;
+
+        &:hover {
+          background-color: hsl(0, 0%, 50%, 1);
+        }
+      }
+    }
+
+    &__menu-list {
+      overflow-y: auto;
+      
+      &::-webkit-scrollbar {
+        width: 0.5em;
+      }
+    
+      &::-webkit-scrollbar-thumb {
+        cursor: grab;
+        background-color: var(--sideMenu-scrollBar-background-color);
+        transition: background-color 0.15s;
+      }
+      &::-webkit-scrollbar-thumb:active {
+        cursor: grabbing;
+      }
+    
+      &::-webkit-scrollbar-thumb:hover {
+        background-color: hsl(0, 0%, 50%);
+      }
+    
+      &::-webkit-scrollbar-track {
+        background-color: rgba(42, 42, 42, 0);
+      }
+
+      &__lists {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+
+        &::before {
+          // bottom straight line
+          content: "";
+          position: absolute;
+          bottom: 0;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 65%;
+          height: 1px;
+          background-color: hsl(0, 0%, 50%);
+        }
+
+        &__title {
+          position: relative;
+          display: flex;
+          align-items: center;
+          padding: 0.7em 0.7em 0 0.7em;
+          opacity: 0.8;
+          color: var(--font-h-color);
+          cursor: pointer;
+          &.clicked {
+            opacity: 1;
+          }
+
+          &::before {
+            content: "";
+            position: absolute;
+            top: 10px;
+            left: 0;
+            width: 0.2em;
+            height: calc(80% + 0px);
+            background-color: var(--primary-color);
+            transform: translateX(-0.22em);
+            // transform: translateX(0);
+            transition: transform 0.25s ease;
+          }
+          &.clicked::before {
+            transform: translateX(0);
+          }
+
+          &:hover {
+            opacity: 1;
+          }
+
+          &__h2 {}
+          &.clicked &__h2 {
+            font-weight: 550;
+          }
+
+          & .expand-circle {
+            // display: flex;
+            width: var(--icon-size);
+            margin-left: auto;
+            transition: transform 0.5s ease-out;
+          }
+          &.clicked .expand-circle {
+            transform: rotate(-180deg)
+          }
+        }
+
+        &__secondary-list {
+          display: flex;
+          flex-direction: column;
+          overflow: hidden;
+          height: 0;
+          transition: height 0.5s ease;
+          margin: 0.35em 0;
+          background-color: var(--hamMenu-secondaryList-background-color);
+
+          &__lists {
+            display: flex;
+            flex-direction: column;
+            color: var(--font-p-color);
+            cursor: pointer;
+
+            &__section {
+              display: flex;
+              justify-content: space-between;
+              padding: 0.5em 1.4em;
+
+              &__h3 {
+                
+              }
+              &.clicked &__h3 {
+                font-weight: 550;
+              }
+
+              &__img {
+                width: var(--hamMenu-thirdList-addIcon-size);
+                height: var(--hamMenu-thirdList-addIcon-size);
+                background-image: var(--hamMenu-add-icon);
+                background-size: cover;
+                background-repeat: no-repeat;
+              }
+              &.clicked &__img {
+                background-image: var(--hamMenu-remove-icon);
+              }
+            }
+
+            &__third-list {   
+              background-color: var(--hamMenu-thirdList-background-color);
+              height: 0;
+              overflow: hidden;
+              transition: height 0.5s ease;
+              &__lists {
+                cursor: pointer;
+                &__h3{
+                  padding: 0.5em 2.1em;
+                  // margin: 0 0 0.5em 2.1em;
+
+                  &:hover {
+                    font-weight: 550;
+                    cursor: pointer;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  } 
+
+  body.arabic & {
+    direction: rtl;
+    &__side-box {
+      &__menu-list {
+        &__lists {
+          &__title {
+            &::before {
+              left: auto;
+              right: 0;
+              transform: translateX(0.22em);
+            }
+
+            & .expand-circle {
+              margin-right: auto;
+              margin-left: 0;
+            }
+
+            &.clicked {
+              &::before {
+                transform: translateX(0);
+              }
+            }
+          }
+
+          &__secondary-list {
+            &__lists {
+              &__h3{}
+            }
+          }
+        }
+      }
+
+      
+    }
+  }
+}

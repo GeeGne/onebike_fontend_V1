@@ -1,0 +1,67 @@
+.alert-container {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  top: 15%;
+  left: 50%;
+  transform: translate(-50%, -15%);
+  padding: 0.5em;
+  gap: 0.5em;
+  border-radius: 20px;
+  cursor: pointer;
+  z-index: 100;
+
+  body.arabic & {
+    direction: rtl;
+  }
+
+  &:hover {
+    filter: invert(5%);
+  }
+
+  &__message {
+    color: var(--font-p-color);
+    text-wrap: nowrap;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  &::after {
+    content: "";
+    font-weight: 550;
+    background-color: var(--alert-x-background-color);
+    color: var(--font-h-color);
+    background-image: var(--close-icon);
+    background-repeat: no-repeat;
+    background-size: 75%;
+    background-position: center;
+    width: 1.5em;
+    height: 1.5em;
+    border-radius: 39px;
+    opacity: var(--after-opacity, 0);
+    transition: opacity 0.5s ease;
+  }
+
+  &__filler-animation {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 100%;
+    height: 100%;
+    transform: translate(-50%, -50%);
+    background-color: var(--alert-filler-background-color);
+    border-radius: 20px;
+    box-shadow: 0 0 3px 1px hsl(0, 0%, 30%, 0.5);
+    z-index: -1;
+  }
+
+  &__timer-animation {
+    position: absolute;
+    left: 1em;
+    bottom: 0;
+    width: 54%;
+    height: 4px;
+    border-radius: 4px;
+    background-color: var(--alert-timer-background-color);
+  }
+}

@@ -1,0 +1,39 @@
+@use '../utils/BreakPoints' as w;
+
+input,
+textarea,
+button {
+  font-family: inherit;
+  // font-size: clamp(1em, 1em + 1vw, 3em);
+  font-size: 1em;
+}
+
+h1,
+h2,
+h3 {
+  // color: var(--font-h-color);
+  line-height: 1.1;
+}
+
+p {
+  // color: var(--font-p-color);
+  line-height: 1.1;
+}
+
+
+h1 {
+  // font-size: clamp(1.8em, 1.8em + 1vw, 3.8em);
+  font-size: 1.5em;  font-weight: 600;
+}
+
+h2 {
+  // font-size: clamp(1.5em, 1.5em + 1vw, 3.5em);
+  font-size: 1.3em;
+  font-weight: 500;
+}
+
+h3 {
+  // font-size: clamp(1.2em , 1.2em + 1vw, 3.5em);
+  font-size: 1em;
+  font-weight: 400;
+}

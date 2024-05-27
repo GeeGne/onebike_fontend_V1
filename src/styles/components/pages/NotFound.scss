@@ -1,0 +1,52 @@
+@use 'src/styles/utils/_breakPoints' as w;
+
+.notFound-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  // background-color: red;
+  line-height: 1;
+  @include w.breakpoint-up(medium) {
+    font-size: 2rem;
+  }
+  @include w.breakpoint-up(large) {
+    font-size: 2.5rem;
+  }
+
+  &__404 {
+    font-size: 8em;
+    font-weight: bold;
+    font-style: italic;
+    color: var(--font-h-color);
+  }
+
+  &__not-found {
+    font-size: 3em;
+    font-weight: bold;
+    font-style: italic;
+    color: var(--font-h-color);
+  }
+
+  &__h2 {
+    font-size: 1.4em;
+    margin: 1em;
+    font-weight: 550;
+    color: var(--font-h-color);
+  }
+
+  &__description {
+    color: var(--font-p-color);
+  }
+
+  &__link-to-home {
+    margin: 0.5em;
+    font-weight: 600;
+    color: var(--font-h-color);
+
+    & span {
+      color: rgb(113, 204, 195);
+      color: var(--notFound-homePage-color);
+      text-decoration: inherit;
+    }
+  }
+}

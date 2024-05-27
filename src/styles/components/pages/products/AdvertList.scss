@@ -1,0 +1,232 @@
+@use 'src/styles/utils/_BreakPoints' as w;
+
+.advertList-container {
+  &__advert-section {
+    padding: 1em;
+    // background-color: var(--light-background-color);
+    background-color: var(--background-color);
+    
+    body.arabic & {
+      direction: rtl;
+    }
+
+    &__grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1em;
+
+      @include w.breakpoint-up(medium) {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      @include w.breakpoint-up(large) {
+        grid-template-columns: repeat(4, 1fr);
+      }
+
+      &__product-content {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5em;
+        padding: 0.5em;
+        background-color: var(--background-color);
+        border: solid var(--advertList-productContent-border-color) 1px;
+        transition: transform 0.5s ease-out;
+
+        &:hover {
+          transform: scale(1.05);
+        }
+
+        &__favourite {
+          position: absolute;
+          top: 0.5em;
+          right: 0.5em;
+          width: 1.8em;
+          height: 1.8em;
+          background-color: var(--background-color);
+          background-image: var(--heart-icon);
+          background-repeat: no-repeat;
+          background-size: 70%;
+          background-position: center;
+          border-radius: 3em;
+        }
+
+        &__img {
+          width: 100%;
+          aspect-ratio: 1 / 1;
+          object-fit: contain;
+          object-position: center;
+          // border: solid 1px;
+        }
+        
+        &__description {
+          color: var(--font-h-color);
+        }
+
+        &__brand-logo {
+          width: 100%;
+          filter: var(--advertList-brandLogo-filter-invert);
+        }
+
+        &__price {
+          font-weight: 600;
+          margin-top: auto;
+          color: var(--font-h-color);
+
+          & .currency-symbol {
+            color: var(--font-h-color);
+          }
+
+          &.discount {
+            color: var(--advertList-discount-color);
+          }
+
+          & s {
+            margin-right: 0.5em;
+            color: var(--font-p-color);
+            font-weight: 300;
+          }
+        }
+
+        &__cart-utils {
+          display: flex;
+          border: solid 2px var(--advertList-cartUtil-border-color);
+          border-radius: 5px;
+          align-items: center;
+          z-index: 10;
+
+          &__add-to-cart {
+            font-weight: 600;
+            flex: 1;
+            white-space: nowrap;
+            padding: 0.3em;
+            color: transparent;
+            background-image: var(--add-shoppingCart-icon);
+            background-repeat: no-repeat;
+            // background-size: 20%;
+            background-size: 1.3em;
+            background-position: center;
+            
+            @include w.breakpoint-up (medium) {
+              color: var(--font-h-color);
+              background-image: none;
+            }
+          }
+          
+          &__increment,
+          &__decrement {
+            height: 100%;
+            aspect-ratio: 1 / 1;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+          }
+
+          &__increment {
+            background-image: var(--advertList-increment-add-icon);
+            border: solid var(--advertList-incrementAndDecrement-border-color);
+            border-width: 0 0 0 2px;
+
+            body.arabic & {
+              border-width: 0 2px 0 0;
+            }
+          }
+
+          &__decrement {
+            background-image: var(--advertList-decrement-add-icon);
+          }
+
+          &__add-to-cart,
+          &__increment,
+          &__decrement {
+            position: relative;
+            &::before {
+              content: "";
+              position: absolute;
+              bottom: 0;
+              left: 0;
+              width: 100%;
+              height: 0%;
+              background-color: var(--advertList-addToCart-background-color);
+              z-index: -1;
+              transition: height 0.5s ease;
+            }
+
+            &:hover::before {
+              height: 100%;
+            }
+
+            &::after {
+              content: "";
+              position: absolute;
+              bottom: 0;
+              left: 0;
+              width: 100%;
+              height: 0%;
+              transition: height 0.5s ease;
+              backdrop-filter: invert(100%);
+            }
+
+            &:hover::after {
+              height: 100%;
+            }
+          }
+
+          &__total {
+            display: flex;
+            align-items: center;
+            font-weight: bold;
+            color: var(--font-h-color);
+            height: 100%;
+            text-align: center;
+            background-color: var(--advertList-total-background-color);
+            padding-inline: 0.3em;
+          }
+        }
+      }
+    }
+  }
+
+  &__button-section {
+    display: flex;
+    justify-content: center;
+    padding-block: 2em;
+    border: solid var(--endElement-border-background-color);
+    border-width: 0px 0 1px 0;
+
+    &__load-more {
+      position: relative;
+      font-weight: 550;
+      color: var(--font-h-color);
+      border: solid var(--advertList-loadMore-border-color) 2px;
+      padding: 0.5em 1em;
+
+      &::before {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 0%;
+        background-color: var(--advertList-loadMore-background-color); 
+        z-index: -1;
+        transition: height 0.5s ease;
+      }
+      
+      &::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 0%;
+        backdrop-filter: invert(100%);
+        transition: height 0.5s ease;
+      }
+
+      &:hover::before, 
+      &:hover::after {
+        height: 100%;
+      }
+    }
+  }
+}
