@@ -4,6 +4,7 @@ import React, {useState, useEffect} from 'react';
 // COMPONENTS
 import BreadCrumb from '../../BreadCrumb';
 import Controls from './Controls';
+import EmptyList from './EmptyList';
 import AdvertList from './AdvertList';
 
 // SCSS
@@ -19,7 +20,8 @@ import cleanseString from '/src/utils/cleanseString.js';
 function Products ({category, type, darkMode, lan}) {
   
   const productCategory = type ? type[lan] : category[lan];
-  const matchedProducts = products.filter(product => product.category  === cleanseString(productCategory) || product.type  === cleanseString(productCategory));
+  const productCategoryEN = type ? type.en : category.en;
+  const matchedProducts = products.filter(product => product.category === cleanseString(productCategoryEN) || product.type  === cleanseString(productCategoryEN));
   const totalProducts = matchedProducts.length;
 
   return (
@@ -30,7 +32,9 @@ function Products ({category, type, darkMode, lan}) {
         <h3 className="products-container__category-title-container__result">&#10088;{lan === 'en' ? totalProducts + ' results' : totalProducts + ' نتيجه'}&#10089;</h3>
       </section>
       <Controls darkMode={darkMode} lan={lan}/>
-      <AdvertList darkMode={darkMode} lan={lan} matchedProducts={matchedProducts}/>
+      {totalProducts === 0 ? 
+      <EmptyList darkMode={darkMode} lan={lan} productCategoryEN={cleanseString(productCategoryEN)} productCategory={productCategory}/> : 
+      <AdvertList darkMode={darkMode} lan={lan} matchedProducts={matchedProducts}/>}
     </div>
   )
 }

@@ -1,0 +1,1021 @@
+[{
+  "id": -4,
+  "keyword": "bikes",
+  "title": {
+    "en": "No Bikes Available", 
+    "ar": "لا توجد دراجات متاحة"
+  },
+  "intro": {
+    "en": "We know you're eager to find the perfect bike to hit the road or trail. Unfortunately, our bike section is currently out of stock. But don't worry, our team is working hard to bring in new models that will get you back on two wheels in no time!", 
+    "ar": "نعلم أنك متحمس للعثور على الدراجة المثالية لتجوب الطرق أو المسارات. للأسف، قسم الدراجات لدينا حالياً غير متوفر. لكن لا تقلق، فريقنا يعمل بجد لإحضار موديلات جديدة تعيدك إلى الطريق على دراجتين في أقرب وقت!"
+  },
+  "outro": {
+    "en": "We appreciate your patience and can't wait to help you find your dream bike. If you have any questions or need assistance, feel free to reach out to our friendly support team.", 
+    "ar": "نقدر صبرك ونتطلع لمساعدتك في العثور على دراجتك المثالية. إذا كان لديك أي أسئلة أو تحتاج إلى مساعدة، لا تتردد في التواصل مع فريق الدعم الودود لدينا."
+  }
+},{
+  "id": -3,
+  "keyword": "road-bike",
+  "title": {
+    "en": "No Bikes Available", 
+    "ar": "لا توجد دراجات متاحة"
+  },
+  "intro": {
+    "en": "We know you're eager to find the perfect bike to hit the road or trail. Unfortunately, our bike section is currently out of stock. But don't worry, our team is working hard to bring in new models that will get you back on two wheels in no time!", 
+    "ar": "نعلم أنك متحمس للعثور على الدراجة المثالية لتجوب الطرق أو المسارات. للأسف، قسم الدراجات لدينا حالياً غير متوفر. لكن لا تقلق، فريقنا يعمل بجد لإحضار موديلات جديدة تعيدك إلى الطريق على دراجتين في أقرب وقت!"
+  },
+  "outro": {
+    "en": "We appreciate your patience and can't wait to help you find your dream bike. If you have any questions or need assistance, feel free to reach out to our friendly support team.", 
+    "ar": "نقدر صبرك ونتطلع لمساعدتك في العثور على دراجتك المثالية. إذا كان لديك أي أسئلة أو تحتاج إلى مساعدة، لا تتردد في التواصل مع فريق الدعم الودود لدينا."
+  }
+},{
+  "id": -2,
+  "keyword": "mountain-bike",
+  "title": {
+    "en": "No Bikes Available", 
+    "ar": "لا توجد دراجات متاحة"
+  },
+  "intro": {
+    "en": "We know you're eager to find the perfect bike to hit the road or trail. Unfortunately, our bike section is currently out of stock. But don't worry, our team is working hard to bring in new models that will get you back on two wheels in no time!", 
+    "ar": "نعلم أنك متحمس للعثور على الدراجة المثالية لتجوب الطرق أو المسارات. للأسف، قسم الدراجات لدينا حالياً غير متوفر. لكن لا تقلق، فريقنا يعمل بجد لإحضار موديلات جديدة تعيدك إلى الطريق على دراجتين في أقرب وقت!"
+  },
+  "outro": {
+    "en": "We appreciate your patience and can't wait to help you find your dream bike. If you have any questions or need assistance, feel free to reach out to our friendly support team.", 
+    "ar": "نقدر صبرك ونتطلع لمساعدتك في العثور على دراجتك المثالية. إذا كان لديك أي أسئلة أو تحتاج إلى مساعدة، لا تتردد في التواصل مع فريق الدعم الودود لدينا."
+  }
+},{
+  "id": -1,
+  "keyword": "hybird-bike",
+  "title": {
+    "en": "No Bikes Available", 
+    "ar": "لا توجد دراجات متاحة"
+  },
+  "intro": {
+    "en": "We know you're eager to find the perfect bike to hit the road or trail. Unfortunately, our bike section is currently out of stock. But don't worry, our team is working hard to bring in new models that will get you back on two wheels in no time!", 
+    "ar": "نعلم أنك متحمس للعثور على الدراجة المثالية لتجوب الطرق أو المسارات. للأسف، قسم الدراجات لدينا حالياً غير متوفر. لكن لا تقلق، فريقنا يعمل بجد لإحضار موديلات جديدة تعيدك إلى الطريق على دراجتين في أقرب وقت!"
+  },
+  "outro": {
+    "en": "We appreciate your patience and can't wait to help you find your dream bike. If you have any questions or need assistance, feel free to reach out to our friendly support team.", 
+    "ar": "نقدر صبرك ونتطلع لمساعدتك في العثور على دراجتك المثالية. إذا كان لديك أي أسئلة أو تحتاج إلى مساعدة، لا تتردد في التواصل مع فريق الدعم الودود لدينا."
+  }
+},{
+  "id": 0,
+  "keyword": "city-bike",
+  "title": {
+    "en": "No Bikes Available", 
+    "ar": "لا توجد دراجات متاحة"
+  },
+  "intro": {
+    "en": "We know you're eager to find the perfect bike to hit the road or trail. Unfortunately, our bike section is currently out of stock. But don't worry, our team is working hard to bring in new models that will get you back on two wheels in no time!", 
+    "ar": "نعلم أنك متحمس للعثور على الدراجة المثالية لتجوب الطرق أو المسارات. للأسف، قسم الدراجات لدينا حالياً غير متوفر. لكن لا تقلق، فريقنا يعمل بجد لإحضار موديلات جديدة تعيدك إلى الطريق على دراجتين في أقرب وقت!"
+  },
+  "outro": {
+    "en": "We appreciate your patience and can't wait to help you find your dream bike. If you have any questions or need assistance, feel free to reach out to our friendly support team.", 
+    "ar": "نقدر صبرك ونتطلع لمساعدتك في العثور على دراجتك المثالية. إذا كان لديك أي أسئلة أو تحتاج إلى مساعدة، لا تتردد في التواصل مع فريق الدعم الودود لدينا."
+  }
+},{
+  "id": 1,
+  "keyword": "accessories",
+  "title": {
+    "en": "No Accessories Available", 
+    "ar": "لا توجد إكسسوارات متاحة"
+  },
+  "intro": {
+    "en": "We know you're eager to find the perfect accessories to enhance your ride. Unfortunately, our accessories section is currently out of stock. But don't worry, our team is working hard to bring in new items that will get you back on the road in no time!", 
+    "ar": "نعلم أنك متحمس للعثور على الإكسسوارات المثالية لتحسين رحلتك. للأسف، قسم الإكسسوارات لدينا حالياً غير متوفر. لكن لا تقلق، فريقنا يعمل بجد لإحضار عناصر جديدة تعيدك إلى الطريق في أقرب وقت!"
+  },
+  "outro": {
+    "en": "We appreciate your patience and can't wait to help you find your perfect accessories. If you have any questions or need assistance, feel free to reach out to our friendly support team.", 
+    "ar": "نقدر صبرك ونتطلع لمساعدتك في العثور على الإكسسوارات المثالية لك. إذا كان لديك أي أسئلة أو تحتاج إلى مساعدة، لا تتردد في التواصل مع فريق الدعم الودود لدينا."
+  }
+},{
+  "id": 2,
+  "keyword": "lights",
+  "title": {
+    "en": "No Bikes Available", 
+    "ar": "لا توجد أضواء متاحة"
+  },
+  "intro": {
+    "en": "We know you're eager to find the perfect lights to enhance your ride. Unfortunately, our lights section is currently out of stock. But don't worry, our team is working hard to bring in new items that will get you back on the road in no time!",
+    "ar": "نعلم أنك متحمس للعثور على الأضواء المثالية لتحسين رحلتك. للأسف، قسم الأضواء لدينا حالياً غير متوفر. لكن لا تقلق، فريقنا يعمل بجد لإحضار عناصر جديدة تعيدك إلى الطريق في أقرب وقت!"
+  },
+  "outro": {
+    "en": "We appreciate your patience and can't wait to help you find your perfect lights. If you have any questions or need assistance, feel free to reach out to our friendly support team.", 
+    "ar": "نقدر صبرك ونتطلع لمساعدتك في العثور على الأضواء المثالية لك. إذا كان لديك أي أسئلة أو تحتاج إلى مساعدة، لا تتردد في التواصل مع فريق الدعم الودود لدينا."
+  }
+},{
+  "id": 3,
+  "keyword": "pumps",
+  "title": {
+    "en": "No Pumps Available", 
+    "ar": "لا توجد مضخات متاحة"
+  },
+  "intro": {
+    "en": "We know you're eager to find the perfect pumps to enhance your ride. Unfortunately, our pumps section is currently out of stock. But don't worry, our team is working hard to bring in new items that will get you back on the road in no time!", 
+    "ar": "نعلم أنك متحمس للعثور على المضخات المثالية لتحسين رحلتك. للأسف، قسم المضخات لدينا حالياً غير متوفر. لكن لا تقلق، فريقنا يعمل بجد لإحضار عناصر جديدة تعيدك إلى الطريق في أقرب وقت!"
+  },
+  "outro": {
+    "en": "We appreciate your patience and can't wait to help you find your perfect pumps. If you have any questions or need assistance, feel free to reach out to our friendly support team.", 
+    "ar": "نقدر صبرك ونتطلع لمساعدتك في العثور على المضخات المثالية لك. إذا كان لديك أي أسئلة أو تحتاج إلى مساعدة، لا تتردد في التواصل مع فريق الدعم الودود لدينا."
+  }
+},{
+  "id": 4,
+  "keyword": "bags",
+  "title": {
+    "en": "No Bags Available", 
+    "ar": "لا توجد حقائب متاحة"
+  },
+  "intro": {
+    "en": "We know you're eager to find the perfect bags to enhance your ride. Unfortunately, our bags section is currently out of stock. But don't worry, our team is working hard to bring in new items that will get you back on the road in no time!", 
+    "ar": "نعلم أنك متحمس للعثور على الحقائب المثالية لتحسين رحلتك. للأسف، قسم الحقائب لدينا حالياً غير متوفر. لكن لا تقلق، فريقنا يعمل بجد لإحضار عناصر جديدة تعيدك إلى الطريق في أقرب وقت!"
+  },
+  "outro": {
+    "en": "We appreciate your patience and can't wait to help you find your perfect bags. If you have any questions or need assistance, feel free to reach out to our friendly support team.", 
+    "ar": "نقدر صبرك ونتطلع لمساعدتك في العثور على الحقائب المثالية لك. إذا كان لديك أي أسئلة أو تحتاج إلى مساعدة، لا تتردد في التواصل مع فريق الدعم الودود لدينا."
+  }
+},{
+  "id": 5,
+  "keyword": "trainers",
+  "title": {
+    "en": "No Trainers Available", 
+    "ar": "لا توجد أجهزة تدريب متاحة"
+  },
+  "intro": {
+    "en": "We know you're eager to find the perfect trainers to enhance your ride. Unfortunately, our trainers section is currently out of stock. But don't worry, our team is working hard to bring in new items that will get you back on the road in no time!", 
+    "ar": "نعلم أنك متحمس للعثور على أجهزة التدريب المثالية لتحسين رحلتك. للأسف، قسم أجهزة التدريب لدينا حالياً غير متوفر. لكن لا تقلق، فريقنا يعمل بجد لإحضار عناصر جديدة تعيدك إلى الطريق في أقرب وقت!"
+  },
+  "outro": {
+    "en": "We appreciate your patience and can't wait to help you find your perfect trainers. If you have any questions or need assistance, feel free to reach out to our friendly support team.", 
+    "ar": "نقدر صبرك ونتطلع لمساعدتك في العثور على أجهزة التدريب المثالية لك. إذا كان لديك أي أسئلة أو تحتاج إلى مساعدة، لا تتردد في التواصل مع فريق الدعم الودود لدينا."
+  }
+},{
+  "id": 6,
+  "keyword": "sunglasses",
+  "title": {
+    "en": "No Sunglasses Available", 
+    "ar": "لا توجد نظارات شمسية متاحة"
+  },
+  "intro": {
+    "en": "We know you're eager to find the perfect sunglasses to enhance your ride. Unfortunately, our sunglasses section is currently out of stock. But don't worry, our team is working hard to bring in new items that will get you back on the road in no time!", 
+    "ar": "نعلم أنك متحمس للعثور على النظارات الشمسية المثالية لتحسين رحلتك. للأسف، قسم النظارات الشمسية لدينا حالياً غير متوفر. لكن لا تقلق، فريقنا يعمل بجد لإحضار عناصر جديدة تعيدك إلى الطريق في أقرب وقت!"
+  },
+  "outro": {
+    "en": "We appreciate your patience and can't wait to help you find your perfect sunglasses. If you have any questions or need assistance, feel free to reach out to our friendly support team.", 
+    "ar": "نقدر صبرك ونتطلع لمساعدتك في العثور على النظارات الشمسية المثالية لك. إذا كان لديك أي أسئلة أو تحتاج إلى مساعدة، لا تتردد في التواصل مع فريق الدعم الودود لدينا."
+  }
+},{
+  "id": 7,
+  "keyword": "bike-locks",
+  "title": {
+    "en": "No Bike Locks Available", 
+    "ar": "لا توجد أقفال للدراجات متاحة"
+  },
+  "intro": {
+    "en": "We know you're eager to find the perfect bike locks to keep your ride safe and secure. Unfortunately, our bike locks section is currently out of stock. But don't worry, our team is working hard to bring in new items that will help you protect your bike in no time!", 
+    "ar": "نعلم أنك متحمس للعثور على الأقفال المثالية للدراجات للحفاظ على رحلتك آمنة ومأمونة. للأسف، قسم الأقفال للدراجات لدينا حالياً غير متوفر. لكن لا تقلق، فريقنا يعمل بجد لإحضار عناصر جديدة ستساعدك في حماية دراجتك في أقرب وقت!"
+  },
+  "outro": {
+    "en": "We appreciate your patience and can't wait to help you find your perfect bike lock. If you have any questions or need assistance, feel free to reach out to our friendly support team.", 
+    "ar": "نقدر صبرك ونتطلع لمساعدتك في العثور على القفل المثالي لدراجتك. إذا كان لديك أي أسئلة أو تحتاج إلى مساعدة، لا تتردد في التواصل مع فريق الدعم الودود لدينا."
+  }
+},{
+  "id": 8,
+  "keyword": "body-creams",
+  "title": {
+    "en": "No Body Creams Available", 
+    "ar": "لا توجد كريمات للجسم متاحة"
+  },
+  "intro": {
+    "en": "We know you're eager to find the perfect body creams to enhance your ride. Unfortunately, our body creams section is currently out of stock. But don't worry, our team is working hard to bring in new items that will get you back on the road in no time!", 
+    "ar": "نعلم أنك متحمس للعثور على كريمات الجسم المثالية لتحسين رحلتك. للأسف، قسم كريمات الجسم لدينا حالياً غير متوفر. لكن لا تقلق، فريقنا يعمل بجد لإحضار عناصر جديدة تعيدك إلى الطريق في أقرب وقت!"
+  },
+  "outro": {
+    "en": "We appreciate your patience and can't wait to help you find your perfect body creams. If you have any questions or need assistance, feel free to reach out to our friendly support team.", 
+    "ar": "نقدر صبرك ونتطلع لمساعدتك في العثور على كريمات الجسم المثالية لك. إذا كان لديك أي أسئلة أو تحتاج إلى مساعدة، لا تتردد في التواصل مع فريق الدعم الودود لدينا."
+  }
+},{
+  "id": 9,
+  "keyword": "bells-&-horns",
+  "title": {
+    "en": "No Bells & Horns Available", 
+    "ar": "لا توجد أجراس وأبواق متاحة"
+  },
+  "intro": {
+    "en": "We know you're eager to find the perfect bells and horns to enhance your ride. Unfortunately, our bells and horns section is currently out of stock. But don't worry, our team is working hard to bring in new items that will get you back on the road in no time!", 
+    "ar": "نعلم أنك متحمس للعثور على الأجراس والأبواق المثالية لتحسين رحلتك. للأسف، قسم الأجراس والأبواق لدينا حالياً غير متوفر. لكن لا تقلق، فريقنا يعمل بجد لإحضار عناصر جديدة تعيدك إلى الطريق في أقرب وقت!"
+  },
+  "outro": {
+    "en": "We appreciate your patience and can't wait to help you find your perfect bells and horns. If you have any questions or need assistance, feel free to reach out to our friendly support team.", 
+    "ar": "نقدر صبرك ونتطلع لمساعدتك في العثور على الأجراس والأبواق المثالية لك. إذا كان لديك أي أسئلة أو تحتاج إلى مساعدة، لا تتردد في التواصل مع فريق الدعم الودود لدينا."
+  }
+},{
+  "id": 10,
+  "keyword": "cages",
+  "title": {
+    "en": "No Cages Available", 
+    "ar": "لا توجد أقفاص متاحة"
+  },
+  "intro": {
+    "en": "We know you're eager to find the perfect cages to enhance your ride. Unfortunately, our cages section is currently out of stock. But don't worry, our team is working hard to bring in new items that will get you back on the road in no time!",
+    "ar": "نعلم أنك متحمس للعثور على الأقفاص المثالية لتحسين رحلتك. للأسف، قسم الأقفاص لدينا حالياً غير متوفر. لكن لا تقلق، فريقنا يعمل بجد لإحضار عناصر جديدة تعيدك إلى الطريق في أقرب وقت"
+  },
+  "outro": {
+    "en": "We appreciate your patience and can't wait to help you find your perfect cages. If you have any questions or need assistance, feel free to reach out to our friendly support team.",
+    "ar": "نقدر صبرك ونتطلع لمساعدتك في العثور على الأقفاص المثالية لك. إذا كان لديك أي أسئلة أو تحتاج إلى مساعدة، لا تتردد في التواصل مع فريق الدعم الودود لدينا."
+  }
+},{
+  "id": 11,
+  "keyword": "chain-lubricants",
+  "title": {
+    "en": "No Chain Lubricants Available", 
+    "ar": "لا توجد زيوت السلاسل متاحة"
+  },
+  "intro": {
+    "en": "We know you're eager to find the perfect chain lubricants to enhance your ride. Unfortunately, our chain lubricants section is currently out of stock. But don't worry, our team is working hard to bring in new items that will get you back on the road in no time!",
+    "ar": "نعلم أنك متحمس للعثور على زيوت السلاسل المثالية لتحسين رحلتك. للأسف، قسم زيوت السلاسل لدينا حالياً غير متوفر. لكن لا تقلق، فريقنا يعمل بجد لإحضار عناصر جديدة تعيدك إلى الطريق في أقرب وقت"
+  },
+  "outro": {
+    "en": "We appreciate your patience and can't wait to help you find your perfect chain lubricants. If you have any questions or need assistance, feel free to reach out to our friendly support team.",
+    "ar": "نقدر صبرك ونتطلع لمساعدتك في العثور على زيوت السلاسل المثالية لك. إذا كان لديك أي أسئلة أو تحتاج إلى مساعدة، لا تتردد في التواصل مع فريق الدعم الودود لدينا."
+  }
+},{
+  "id": 12,
+  "keyword": "cleaning-tools",
+  "title": {
+    "en": "No Cleaning Tools Available", 
+    "ar": "لا توجد أدوات تنظيف متاحة"
+  },
+  "intro": {
+    "en": "We know you're eager to find the perfect cleaning tools to enhance your ride. Unfortunately, our cleaning tools section is currently out of stock. But don't worry, our team is working hard to bring in new items that will get you back on the road in no time!",
+    "ar": "نعلم أنك متحمس للعثور على أدوات التنظيف المثالية لتحسين رحلتك. للأسف، قسم أدوات التنظيف لدينا حالياً غير متوفر. لكن لا تقلق، فريقنا يعمل بجد لإحضار عناصر جديدة تعيدك إلى الطريق في أقرب وقت!"
+  },
+  "outro": {
+    "en": "We appreciate your patience and can't wait to help you find your perfect cleaning tools. If you have any questions or need assistance, feel free to reach out to our friendly support team.Happy riding and stay tuned!",
+    "ar": "نقدر صبرك ونتطلع لمساعدتك في العثور على أدوات التنظيف المثالية لك. إذا كان لديك أي أسئلة أو تحتاج إلى مساعدة، لا تتردد في التواصل مع فريق الدعم الودود لدينا."
+  }
+},{
+  "id": 13,
+  "keyword": "tools",
+  "title": {
+    "en": "No Tools Available", 
+    "ar": ""
+  },
+  "intro": {
+    "en": "Looking to upgrade your biking experience with the latest tools and accessories? We understand your excitement! Unfortunately, our tools section is currently empty. But fret not! Our team is actively sourcing high-quality tools to help you maintain and customize your bike.",
+    "ar": ""
+  },
+  "outro": {
+    "en": "Thank you for your patience as we work to fill our shelves with top-notch tools. For any inquiries or assistance, don't hesitate to reach out to our dedicated support team. Wishing you many happy rides and stay tuned for updates!",
+    "ar": "نشكرك على صبرك بينما نعمل على ملء رفوفنا بأفضل الأدوات. لأية استفسارات أو مساعدة، لا تتردد في الاتصال بفريق الدعم المخصص لدينا."
+  }
+},{
+  "id": 14,
+  "keyword": "car-bike-racks",
+  "title": {
+    "en": "No Car Bike Racks Available", 
+    "ar": "لا توجد حوامل للدراجات في السيارات متاحة"
+  },
+  "intro": {
+    "en": "Dreaming of scenic road trips with your bike in tow? We understand the excitement! Unfortunately, our car bike racks section is currently empty. But don't worry, we're on the lookout for sturdy racks to safely transport your bike wherever your adventures take you.",
+    "ar": "هل تحلم برحلات على الطرق الجميلة مع دراجتك في الحقيبة الخلفية؟ نحن نفهم الحماس! للأسف، قسم حمالات الدراجات على السيارات لدينا فارغ حالياً. ولكن لا تقلق، فنحن في سبيل البحث عن حمالات قوية لنقل دراجتك بأمان أينما ذهبت مغامراتك."
+  },
+  "outro": {
+    "en": "We appreciate your patience and can't wait to help you find your perfect car bike rack. If you have any questions or need assistance, feel free to reach out to our friendly support team.",
+    "ar": "نشكرك على صبرك بينما نعمل على توفير حمالات للدراجات على السيارات موثوقة. لأية استفسارات أو مساعدة، لا تتردد في الاتصال بفريق الدعم المخصص لدينا."
+  }
+},{
+  "id": 15,
+  "keyword": "storage-&-display-stands",
+  "title": {
+    "en": "No Storage & Display Stands Available", 
+    "ar": "لا توجد أرفف وأرجُل عرض متاحة"
+  },
+  "intro": {
+    "en": "We know you're eager to find the perfect storage and display stand to showcase your bike collection. Unfortunately, our storage and display stands section is currently out of stock. But don't worry, our team is working hard to bring in new items that will help you store and display your bikes in style!",
+    "ar": "نحن ندرك حماسك للعثور على الرفوف وأرجُل العرض المثالية لعرض مجموعتك من الدراجات. للأسف، قسم الرفوف وأرجُل العرض لدينا غير متوفر حالياً. لكن لا تقلق، ففريقنا يعمل بجد لجلب عناصر جديدة ستساعدك في تخزين وعرض دراجاتك بأناقة!"
+  },
+  "outro": {
+    "en": "We appreciate your patience and can't wait to help you find the perfect storage and display stand. If you have any questions or need assistance, feel free to reach out to our friendly support team.",
+    "ar": "نحن نقدر صبرك ولا يمكننا الانتظار لمساعدتك في العثور على الرفوف وأرجُل العرض المثالية. إذا كانت لديك أي أسئلة أو تحتاج إلى مساعدة، فلا تتردد في الاتصال بفريق الدعم لدينا."
+  }
+},{
+  "id": 16,
+  "keyword": "handlebar-mirrors",
+  "title": {
+    "en": "No Handlebar Mirrors Available", 
+    "ar": ""
+  },
+  "intro": {
+    "en": "We know you're eager to find the perfect handlebar mirror to enhance your biking experience. Unfortunately, our handlebar mirrors section is currently out of stock. But don't worry, our team is working hard to bring in new items that will improve your visibility and safety on the road!",
+    "ar": "نحن ندرك حماسك للعثور على المرآة المثالية للمقود لتعزيز تجربتك في ركوب الدراجة. للأسف، قسم المرايا للمقود لدينا غير متوفر حالياً. لكن لا تقلق، ففريقنا يعمل بجد لجلب عناصر جديدة ستحسن رؤيتك وسلامتك على الطريق!"
+  },
+  "outro": {
+    "en": "We appreciate your patience and can't wait to help you find the perfect handlebar mirror. If you have any questions or need assistance, feel free to reach out to our friendly support team.",
+    "ar": "نحن نقدر صبرك ولا يمكننا الانتظار لمساعدتك في العثور على المرآة المثالية للمقود. إذا كانت لديك أي أسئلة أو تحتاج إلى مساعدة، فلا تتردد في الاتصال بفريق الدعم لدينا."
+  }
+},{
+  "id": 17,
+  "keyword": "baskets",
+  "title": {
+    "en": "No Baskets Available", 
+    "ar": "لا توجد سلال متاحة"
+  },
+  "intro": {
+    "en": "We know you're eager to find the perfect basket to carry your essentials on your bike adventures. Unfortunately, our baskets section is currently out of stock. But don't worry, our team is working hard to bring in new items that will make your rides even more convenient and enjoyable!",
+    "ar": "نحن ندرك حماسك للعثور على السلة المثالية لنقل الضروريات خلال مغامراتك بالدراجة. للأسف، قسم السلال لدينا غير متوفر حالياً. لكن لا تقلق، ففريقنا يعمل بجد لجلب عناصر جديدة ستجعل رحلاتك أكثر سهولة ومتعة!"
+  },
+  "outro": {
+    "en": "We appreciate your patience and can't wait to help you find the perfect basket. If you have any questions or need assistance, feel free to reach out to our friendly support team.",
+    "ar": "نحن نقدر صبرك ولا يمكننا الانتظار لمساعدتك في العثور على السلة المثالية. إذا كانت لديك أي أسئلة أو تحتاج إلى مساعدة، فلا تتردد في الاتصال بفريق الدعم لدينا."
+  }
+},{
+  "id": 18,
+  "keyword": "child-seats",
+  "title": {
+    "en": "No Child Seats Available", 
+    "ar": "لا توجد مقاعد أطفال متاحة"
+  },
+  "intro": {
+    "en": "We know you're eager to find the perfect child seat to bring your little one along on your bike adventures. Unfortunately, our child seats section is currently out of stock. But don't worry, our team is working hard to bring in new items that will ensure a safe and enjoyable ride for both you and your child!",
+    "ar": "نحن ندرك حماسك للعثور على المقعد المثالي لطفلك لتأخذه معك في مغامراتك بالدراجة. للأسف، قسم المقاعد الأطفال لدينا غير متوفر حالياً. لكن لا تقلق، ففريقنا يعمل بجد لجلب عناصر جديدة ستضمن رحلة آمنة وممتعة لك ولطفلك!"
+  },
+  "outro": {
+    "en": "We appreciate your patience and can't wait to help you find the perfect child seat. If you have any questions or need assistance, feel free to reach out to our friendly support team.",
+    "ar": "نحن نقدر صبرك ولا يمكننا الانتظار لمساعدتك في العثور على المقعد المثالي لطفلك. إذا كانت لديك أي أسئلة أو تحتاج إلى مساعدة، فلا تتردد في الاتصال بفريق الدعم لدينا."
+  }
+},{
+  "id": 19,
+  "keyword": "bike-trailers",
+  "title": {
+    "en": "No Bike Trailers Available", 
+    "ar": "لا توجد مقطورات دراجات متاحة"
+  },
+  "intro": {
+    "en": "We know you're eager to find the perfect bike trailer to transport your gear or little ones on your bike adventures. Unfortunately, our bike trailers section is currently out of stock. But don't worry, our team is working hard to bring in new items that will make your rides even more versatile and enjoyable!",
+    "ar": "نحن ندرك حماسك للعثور على المقطورة المثالية لنقل معداتك أو أحبائك الصغار خلال مغامراتك بالدراجة. للأسف، قسم مقطورات الدراجات لدينا غير متوفر حالياً. لكن لا تقلق، ففريقنا يعمل بجد لجلب عناصر جديدة ستجعل رحلاتك أكثر تنوعاً ومتعة!"
+  },
+  "outro": {
+    "en": "We appreciate your patience and can't wait to help you find the perfect bike trailer. If you have any questions or need assistance, feel free to reach out to our friendly support team.",
+    "ar": "نحن نقدر صبرك ولا يمكننا الانتظار لمساعدتك في العثور على المقطورة المثالية لدراجتك. إذا كانت لديك أي أسئلة أو تحتاج إلى مساعدة، فلا تتردد في الاتصال بفريق الدعم لدينا."
+  }
+},{
+  "id": 20,
+  "keyword": "tires-&-wheels",
+  "title": {
+    "en": "No Tires & Wheels Available", 
+    "ar": "لا توجد إطارات وعجلات متاحة"
+  },
+  "intro": {
+    "en": "We know you're eager to find the perfect tires and wheels to enhance your bike's performance on the road. Unfortunately, our tires & wheels section is currently out of stock. But don't worry, our team is working hard to bring in new items that will keep you rolling smoothly on your rides!",
+    "ar": "نحن ندرك حماسك للعثور على الإطارات والعجلات المثالية لتعزيز أداء دراجتك على الطريق. للأسف، قسم الإطارات والعجلات لدينا غير متوفر حالياً. لكن لا تقلق، ففريقنا يعمل بجد لجلب عناصر جديدة ستحافظ على تمريرك بسلاسة أثناء رحلاتك!"
+  },
+  "outro": {
+    "en": "We appreciate your patience and can't wait to help you find the perfect tires and wheels. If you have any questions or need assistance, feel free to reach out to our friendly support team.",
+    "ar": "نحن نقدر صبرك ولا يمكننا الانتظار لمساعدتك في العثور على الإطارات والعجلات المثالية. إذا كانت لديك أي أسئلة أو تحتاج إلى مساعدة، فلا تتردد في الاتصال بفريق الدعم لدينا."
+  }
+},{
+  "id": 21,
+  "keyword": "tires",
+  "title": {
+    "en": "No Tires Available", 
+    "ar": "لا توجد إطارات متاحة"
+  },
+  "intro": {
+    "en": "We know you're eager to find the perfect tires to keep you rolling smoothly on your bike adventures. Unfortunately, our tires section is currently out of stock. But don't worry, our team is working hard to bring in new items that will ensure a safe and enjoyable ride for you!",
+    "ar": "نحن ندرك حماسك للعثور على الإطارات المثالية لتمريرك بسلاسة خلال مغامراتك بالدراجة. للأسف، قسم الإطارات لدينا غير متوفر حالياً. لكن لا تقلق، ففريقنا يعمل بجد لجلب عناصر جديدة ستضمن رحلة آمنة وممتعة بالنسبة لك!"
+  },
+  "outro": {
+    "en": "We appreciate your patience and can't wait to help you find the perfect tires. If you have any questions or need assistance, feel free to reach out to our friendly support team.",
+    "ar": "نحن نقدر صبرك ولا يمكننا الانتظار لمساعدتك في العثور على الإطارات المثالية. إذا كانت لديك أي أسئلة أو تحتاج إلى مساعدة، فلا تتردد في الاتصال بفريق الدعم لدينا."
+  }
+},{
+  "id": 22,
+  "keyword": "tubes",
+  "title": {
+    "en": "No Tubes Available", 
+    "ar": "لا توجد كواشيك داخليه متاحه"
+  },
+  "intro": {
+    "en": "We know you're eager to find the perfect tubes to keep your bike rolling smoothly on your adventures. Unfortunately, our tubes section is currently out of stock. But don't worry, our team is working hard to bring in new items that will ensure a safe and enjoyable ride for you!",
+    "ar": "نحن ندرك حماسك للعثور على الكواشيك الداخليه المثاليه لتمرير دراجتك بسلاسة خلال مغامراتك. للأسف، قسم الكواشيك الداخليه لدينا غير متوفر حالياً. لكن لا تقلق، ففريقنا يعمل بجد لجلب عناصر جديدة ستضمن رحلة آمنة وممتعة بالنسبة لك!"
+  },
+  "outro": {
+    "en": "We appreciate your patience and can't wait to help you find the perfect tubes. If you have any questions or need assistance, feel free to reach out to our friendly support team.",
+    "ar": "نحن نقدر صبرك ولا يمكننا الانتظار لمساعدتك في العثور على الكواشيك الداخليه. إذا كانت لديك أي أسئلة أو تحتاج إلى مساعدة، فلا تتردد في الاتصال بفريق الدعم لدينا."
+  }
+},{
+  "id": 23,
+  "keyword": "wheels",
+  "title": {
+    "en": "No Wheels Available", 
+    "ar": "لا توجد عجلات متاحة"
+  },
+  "intro": {
+    "en": "We know you're eager to find the perfect wheels to keep you rolling smoothly on your bike adventures. Unfortunately, our wheels section is currently out of stock. But don't worry, our team is working hard to bring in new items that will ensure a safe and enjoyable ride for you!",
+    "ar": "نحن ندرك حماسك للعثور على العجلات المثالية لتمريرك بسلاسة خلال مغامراتك بالدراجة. للأسف، قسم العجلات لدينا غير متوفر حالياً. لكن لا تقلق، ففريقنا يعمل بجد لجلب عناصر جديدة ستضمن رحلة آمنة وممتعة بالنسبة لك!"
+  },
+  "outro": {
+    "en": "We appreciate your patience and can't wait to help you find the perfect wheels. If you have any questions or need assistance, feel free to reach out to our friendly support team.",
+    "ar": "نحن نقدر صبرك ولا يمكننا الانتظار لمساعدتك في العثور على العجلات المثالية. إذا كانت لديك أي أسئلة أو تحتاج إلى مساعدة، فلا تتردد في الاتصال بفريق الدعم لدينا."
+  }
+},{
+  "id": 24,
+  "keyword": "rims",
+  "title": {
+    "en": "No Rims Available", 
+    "ar": "لا توجد طارات متاحة"
+  },
+  "intro": {
+    "en": "We know you're eager to find the perfect rims to keep you rolling smoothly on your bike adventures. Unfortunately, our rims section is currently out of stock. But don't worry, our team is working hard to bring in new items that will ensure a safe and enjoyable ride for you!",
+    "ar": "نحن ندرك حماسك للعثور على الطارات المثالية لتمريرك بسلاسة خلال مغامراتك بالدراجة. للأسف، قسم الطارات لدينا غير متوفر حالياً. لكن لا تقلق، ففريقنا يعمل بجد لجلب عناصر جديدة ستضمن رحلة آمنة وممتعة بالنسبة لك!"
+  },
+  "outro": {
+    "en": "We appreciate your patience and can't wait to help you find the perfect rims. If you have any questions or need assistance, feel free to reach out to our friendly support team.",
+    "ar": "نحن نقدر صبرك ولا يمكننا الانتظار لمساعدتك في العثور على الطارات المثالية. إذا كانت لديك أي أسئلة أو تحتاج إلى مساعدة، فلا تتردد في الاتصال بفريق الدعم لدينا."
+  }
+},{
+  "id": 25,
+  "keyword": "spokes",
+  "title": {
+    "en": "No Spokes Available", 
+    "ar": "لا توجد سياخ طارة متاحة"
+  },
+  "intro": {
+    "en": "We know you're eager to find the perfect spokes to keep your wheels turning smoothly on your bike adventures. Unfortunately, our spokes section is currently out of stock. But don't worry, our team is working hard to bring in new items that will ensure a safe and enjoyable ride for you!",
+    "ar": "نحن ندرك حماسك للعثور على السياخ الطارة المثالية للحفاظ على دوران عجلاتك بسلاسة خلال مغامراتك بالدراجة. للأسف، قسم السياخ الطارة لدينا غير متوفر حالياً. لكن لا تقلق، ففريقنا يعمل بجد لجلب عناصر جديدة ستضمن رحلة آمنة وممتعة بالنسبة لك!"
+  },
+  "outro": {
+    "en": "We appreciate your patience and can't wait to help you find the perfect spokes. If you have any questions or need assistance, feel free to reach out to our friendly support team.",
+    "ar": "نحن نقدر صبرك ولا يمكننا الانتظار لمساعدتك في العثور على السياخ الطارة المثالية. إذا كانت لديك أي أسئلة أو تحتاج إلى مساعدة، فلا تتردد في الاتصال بفريق الدعم لدينا."
+  }
+},{
+  "id": 26,
+  "keyword": "hubs",
+  "title": {
+    "en": "No Hubs Available", 
+    "ar": "لا توجد قوالب متاحة"
+  },
+  "intro": {
+    "en": "We know you're eager to find the perfect hubs to enhance your cycling experience. Unfortunately, our hubs section is currently out of stock. But don't worry, our team is working hard to bring in new items that will ensure a smooth and enjoyable ride for you!",
+    "ar": "نحن ندرك حماسك للعثور على القوالب المثالية لتحسين تجربة ركوب الدراجة الخاصة بك. للأسف، قسم القوالب لدينا غير متوفر حالياً. لكن لا تقلق، ففريقنا يعمل بجد لجلب عناصر جديدة ستضمن رحلة سلسة وممتعة بالنسبة لك!"
+  },
+  "outro": {
+    "en": "We appreciate your patience and can't wait to help you find the perfect hubs. If you have any questions or need assistance, feel free to reach out to our friendly support team.",
+    "ar": "نحن نقدر صبرك ولا يمكننا الانتظار لمساعدتك في العثور على القوالب المثالية. إذا كانت لديك أي أسئلة أو تحتاج إلى مساعدة، فلا تتردد في الاتصال بفريق الدعم لدينا."
+  }
+},{
+  "id": 27,
+  "keyword": "adaptors",
+  "title": {
+    "en": "No Adaptors Available", 
+    "ar": "لا توجد فك قفل متاحة"
+  },
+  "intro": {
+    "en": "We know you're eager to find the perfect adaptors to enhance your cycling experience. Unfortunately, our adaptors section is currently out of stock. But don't worry, our team is working hard to bring in new items that will ensure a smooth and enjoyable ride for you!",
+    "ar": "نحن ندرك حماسك للعثور على أدوات فك القفل المثالية لتحسين تجربة ركوب الدراجة الخاصة بك. للأسف، قسم فك القفل لدينا غير متوفر حالياً. لكن لا تقلق، ففريقنا يعمل بجد لجلب عناصر جديدة ستضمن رحلة سلسة وممتعة بالنسبة لك!"
+  },
+  "outro": {
+    "en": "We appreciate your patience and can't wait to help you find the perfect adaptors. If you have any questions or need assistance, feel free to reach out to our friendly support team.",
+    "ar": "نحن نقدر صبرك ولا يمكننا الانتظار لمساعدتك في العثور على أدوات فك القفل المثالية. إذا كانت لديك أي أسئلة أو تحتاج إلى مساعدة، فلا تتردد في الاتصال بفريق الدعم لدينا."
+  }
+},{
+  "id": 28,
+  "keyword": "hub's-axis",
+  "title": {
+    "en": "No Hub Axes Available", 
+    "ar": "لا توجد عواميد قالب متاحة"
+  },
+  "intro": {
+    "en": "We know you're eager to find the perfect hub axes to enhance your cycling experience. Unfortunately, our hub axes section is currently out of stock. But don't worry, our team is working hard to bring in new items that will ensure a smooth and enjoyable ride for you!",
+    "ar": "نحن ندرك حماسك للعثور على العواميد القالب المثالية لتحسين تجربة ركوب الدراجة الخاصة بك. للأسف، قسم العواميد القالب لدينا غير متوفر حالياً. لكن لا تقلق، ففريقنا يعمل بجد لجلب عناصر جديدة ستضمن رحلة سلسة وممتعة بالنسبة لك!"
+  },
+  "outro": {
+    "en": "We appreciate your patience and can't wait to help you find the perfect hub axes. If you have any questions or need assistance, feel free to reach out to our friendly support team.",
+    "ar": "نحن نقدر صبرك ولا يمكننا الانتظار لمساعدتك في العثور على العواميد القالب المثالية. إذا كانت لديك أي أسئلة أو تحتاج إلى مساعدة، فلا تتردد في الاتصال بفريق الدعم لدينا."
+  }
+},{
+  "id": 29,
+  "keyword": "components",
+  "title": {
+    "en": "No Components Available", 
+    "ar": "لا توجد قطع الدراجه متاحة"
+  },
+  "intro": {
+    "en": "We know you're eager to find the perfect components to enhance your cycling experience. Unfortunately, our components section is currently out of stock. But don't worry, our team is working hard to bring in new items that will ensure a smooth and enjoyable ride for you!",
+    "ar": "نحن ندرك حماسك للعثور على قطع الدراجه المثالية لتحسين تجربة ركوب الدراجة الخاصة بك. للأسف، قسم قطع الدراجه لدينا غير متوفر حالياً. لكن لا تقلق، ففريقنا يعمل بجد لجلب عناصر جديدة ستضمن رحلة سلسة وممتعة بالنسبة لك!"
+  },
+  "outro": {
+    "en": "We appreciate your patience and can't wait to help you find the perfect components. If you have any questions or need assistance, feel free to reach out to our friendly support team.",
+    "ar": "نحن نقدر صبرك ولا يمكننا الانتظار لمساعدتك في العثور على قطع الدراجه المثالية. إذا كانت لديك أي أسئلة أو تحتاج إلى مساعدة، فلا تتردد في الاتصال بفريق الدعم لدينا."
+  }
+},{
+  "id": 30,
+  "keyword": "pedals",
+  "title": {
+    "en": "No Pedals Available", 
+    "ar": "لا توجد دواسات متاحة"
+  },
+  "intro": {
+    "en": "We know you're eager to find the perfect pedals to enhance your cycling experience. Unfortunately, our pedals section is currently out of stock. But don't worry, our team is working hard to bring in new items that will ensure a smooth and enjoyable ride for you!",
+    "ar": "نحن ندرك حماسك للعثور على الدواسات المثالية لتحسين تجربة ركوب الدراجة الخاصة بك. للأسف، قسم الدواسات لدينا غير متوفر حالياً. لكن لا تقلق، ففريقنا يعمل بجد لجلب عناصر جديدة ستضمن رحلة سلسة وممتعة بالنسبة لك!"
+  },
+  "outro": {
+    "en": "We appreciate your patience and can't wait to help you find the perfect pedals. If you have any questions or need assistance, feel free to reach out to our friendly support team.",
+    "ar": "نحن نقدر صبرك ولا يمكننا الانتظار لمساعدتك في العثور على الدواسات المثالية. إذا كانت لديك أي أسئلة أو تحتاج إلى مساعدة، فلا تتردد في الاتصال بفريق الدعم لدينا."
+  }
+},{
+  "id": 31,
+  "keyword": "groupsets",
+  "title": {
+    "en": "No Groupsets Available", 
+    "ar": "لا توجد مجموعات القيادة متاحة"
+  },
+  "intro": {
+    "en": "We know you're eager to find the perfect groupsets to enhance your cycling experience. Unfortunately, our groupsets section is currently out of stock. But don't worry, our team is working hard to bring in new items that will ensure a smooth and enjoyable ride for you!",
+    "ar": "نحن ندرك حماسك للعثور على مجموعات القيادة المثالية لتحسين تجربة ركوب الدراجة الخاصة بك. للأسف، قسم مجموعات القيادة لدينا غير متوفر حالياً. لكن لا تقلق، ففريقنا يعمل بجد لجلب عناصر جديدة ستضمن رحلة سلسة وممتعة بالنسبة لك!"
+  },
+  "outro": {
+    "en": "We appreciate your patience and can't wait to help you find the perfect groupsets. If you have any questions or need assistance, feel free to reach out to our friendly support team.",
+    "ar": "نحن نقدر صبرك ولا يمكننا الانتظار لمساعدتك في العثور على مجموعات القيادة المثالية. إذا كانت لديك أي أسئلة أو تحتاج إلى مساعدة، فلا تتردد في الاتصال بفريق الدعم لدينا."
+  }
+},{
+  "id": 32,
+  "keyword": "seats",
+  "title": {
+    "en": "No Seats Available", 
+    "ar": "لا توجد مقاعد متاحة"
+  },
+  "intro": {
+    "en": "We know you're eager to find the perfect seats to enhance your cycling experience. Unfortunately, our seats section is currently out of stock. But don't worry, our team is working hard to bring in new items that will ensure a comfortable and enjoyable ride for you!",
+    "ar": "نحن ندرك حماسك للعثور على المقاعد المثالية لتحسين تجربة ركوب الدراجة الخاصة بك. للأسف، قسم المقاعد لدينا غير متوفر حالياً. لكن لا تقلق، ففريقنا يعمل بجد لجلب عناصر جديدة ستضمن رحلة مريحة وممتعة بالنسبة لك!"
+  },
+  "outro": {
+    "en": "We appreciate your patience and can't wait to help you find the perfect seats. If you have any questions or need assistance, feel free to reach out to our friendly support team.",
+    "ar": "نحن نقدر صبرك ولا يمكننا الانتظار لمساعدتك في العثور على المقاعد المثالية. إذا كانت لديك أي أسئلة أو تحتاج إلى مساعدة، فلا تتردد في الاتصال بفريق الدعم لدينا."
+  }
+},{
+  "id": 33,
+  "keyword": "brakes-&-parts",
+  "title": {
+    "en": "No Brakes & Parts Available", 
+    "ar": "لا توجد فرامل وقطع غيار متاحة"
+  },
+  "intro": {
+    "en": "We know you're eager to find the perfect brakes and parts to enhance your cycling experience. Unfortunately, our brakes and parts section is currently out of stock. But don't worry, our team is working hard to bring in new items that will ensure a safe and enjoyable ride for you!",
+    "ar": "نحن ندرك حماسك للعثور على الفرامل وقطع الغيار المثالية لتحسين تجربة ركوب الدراجة الخاصة بك. للأسف، قسم الفرامل وقطع الغيار لدينا غير متوفر حالياً. لكن لا تقلق، ففريقنا يعمل بجد لجلب عناصر جديدة ستضمن رحلة آمنة وممتعة بالنسبة لك!"
+  },
+  "outro": {
+    "en": "We appreciate your patience and can't wait to help you find the perfect brakes and parts. If you have any questions or need assistance, feel free to reach out to our friendly support team.",
+    "ar": "نحن نقدر صبرك ولا يمكننا الانتظار لمساعدتك في العثور على الفرامل وقطع الغيار المثالية. إذا كانت لديك أي أسئلة أو تحتاج إلى مساعدة، فلا تتردد في الاتصال بفريق الدعم لدينا."
+  }
+},{
+  "id": 34,
+  "keyword": "power-meters",
+  "title": {
+    "en": "No Power Meters Available", 
+    "ar": "لا توجد أجهزة قياس القدرة متاحة"
+  },
+  "intro": {
+    "en": "We know you're eager to find the perfect power meters to enhance your cycling performance. Unfortunately, our power meters section is currently out of stock. But don't worry, our team is working hard to bring in new items that will help you track and improve your rides!",
+    "ar": "نحن ندرك حماسك للعثور على أجهزة قياس القدرة المثالية لتحسين أدائك في ركوب الدراجة. للأسف، قسم أجهزة قياس القدرة لدينا غير متوفر حالياً. لكن لا تقلق، ففريقنا يعمل بجد لجلب عناصر جديدة ستساعدك في تتبع وتحسين رحلاتك!"
+  },
+  "outro": {
+    "en": "We appreciate your patience and can't wait to help you find the perfect power meters. If you have any questions or need assistance, feel free to reach out to our friendly support team",
+    "ar": "نحن نقدر صبرك ولا يمكننا الانتظار لمساعدتك في العثور على أجهزة قياس القدرة المثالية. إذا كانت لديك أي أسئلة أو تحتاج إلى مساعدة، فلا تتردد في الاتصال بفريق الدعم لدينا."
+  }
+},{
+  "id": 35,
+  "keyword": "chains",
+  "title": {
+    "en": "No Chains Available", 
+    "ar": "لا توجد جنازير متاحة"
+  },
+  "intro": {
+    "en": "We know you're eager to find the perfect chains to enhance your cycling experience. Unfortunately, our chains section is currently out of stock. But don't worry, our team is working hard to bring in new items that will keep you riding smoothly!",
+    "ar": "نحن ندرك حماسك للعثور على الجنازير المثالية لتحسين تجربتك في ركوب الدراجة. للأسف، قسم الجنازير لدينا غير متوفر حالياً. لكن لا تقلق، ففريقنا يعمل بجد لجلب عناصر جديدة ستجعل رحلاتك أكثر سلاسة!"
+  },
+  "outro": {
+    "en": "We appreciate your patience and can't wait to help you find the perfect chains. If you have any questions or need assistance, feel free to reach out to our friendly support team.",
+    "ar": "نحن نقدر صبرك ولا يمكننا الانتظار لمساعدتك في العثور على الجنازير المثالية. إذا كانت لديك أي أسئلة أو تحتاج إلى مساعدة، فلا تتردد في الاتصال بفريق الدعم لدينا."
+  }
+},{
+  "id": 36,
+  "keyword": "derailleurs",
+  "title": {
+    "en": "No Derailleurs Available", 
+    "ar": "لا توجد صناديق المسننات متاحة"
+  },
+  "intro": {
+    "en": "We know you're eager to find the perfect derailleurs to enhance your cycling experience. Unfortunately, our derailleurs section is currently out of stock. But don't worry, our team is working hard to bring in new items that will keep you riding smoothly!",
+    "ar": "نحن ندرك حماسك للعثور على صندوق المسننات المثالي لتحسين تجربتك في ركوب الدراجة. للأسف، قسم صناديق المسننات لدينا غير متوفر حالياً. لكن لا تقلق، ففريقنا يعمل بجد لجلب عناصر جديدة ستجعل رحلاتك أكثر سلاسة!"
+  },
+  "outro": {
+    "en": "We appreciate your patience and can't wait to help you find the perfect derailleurs. If you have any questions or need assistance, feel free to reach out to our friendly support team.",
+    "ar": "نحن نقدر صبرك ولا يمكننا الانتظار لمساعدتك في العثور على صناديق المسننات المثالية. إذا كانت لديك أي أسئلة أو تحتاج إلى مساعدة، فلا تتردد في الاتصال بفريق الدعم لدينا."
+  }
+},{
+  "id": 37,
+  "keyword": "cranksets",
+  "title": {
+    "en": "No Cranksets Available", 
+    "ar": "لا توجد مجموعات الدفع الأمامية متاحة"
+  },
+  "intro": {
+    "en": "We know you're eager to find the perfect cranksets to enhance your cycling experience. Unfortunately, our cranksets section is currently out of stock. But don't worry, our team is working hard to bring in new items that will keep you riding smoothly!",
+    "ar": "نحن ندرك حماسك للعثور على مجموعات الدفع الأمامية المثالية لتحسين تجربتك في ركوب الدراجة. للأسف، قسم مجموعات الدفع الأمامية لدينا غير متوفر حالياً. لكن لا تقلق، ففريقنا يعمل بجد لجلب عناصر جديدة ستجعل رحلاتك أكثر سلاسة!"
+  },
+  "outro": {
+    "en": "We appreciate your patience and can't wait to help you find the perfect cranksets. If you have any questions or need assistance, feel free to reach out to our friendly support team.",
+    "ar": "نحن نقدر صبرك ولا يمكننا الانتظار لمساعدتك في العثور على مجموعات الدفع الأمامية المثالية. إذا كانت لديك أي أسئلة أو تحتاج إلى مساعدة، فلا تتردد في الاتصال بفريق الدعم لدينا."
+  }
+},{
+  "id": 38,
+  "keyword": "bottom-brackets",
+  "title": {
+    "en": "No Bottom Brackets Available", 
+    "ar": "لا توجد قوالب التدويس متاحة"
+  },
+  "intro": {
+    "en": "We know you're eager to find the perfect bottom brackets to enhance your cycling experience. Unfortunately, our bottom brackets section is currently out of stock. But don't worry, our team is working hard to bring in new items that will keep you riding smoothly!",
+    "ar": "نحن ندرك حماسك للعثور على قوالب التدويس المثالية لتحسين تجربتك في ركوب الدراجة. للأسف، قسم قوالب التدويس لدينا غير متوفر حالياً. لكن لا تقلق، ففريقنا يعمل بجد لجلب عناصر جديدة ستجعل رحلاتك أكثر سلاسة!"
+  },
+  "outro": {
+    "en": "We appreciate your patience and can't wait to help you find the perfect bottom brackets. If you have any questions or need assistance, feel free to reach out to our friendly support team.",
+    "ar": "نحن نقدر صبرك ولا يمكننا الانتظار لمساعدتك في العثور على قوالب التدويس المثالية. إذا كانت لديك أي أسئلة أو تحتاج إلى مساعدة، فلا تتردد في الاتصال بفريق الدعم لدينا."
+  }
+},{
+  "id": 39,
+  "keyword": "gearshifters-&-cables",
+  "title": {
+    "en": "No Gear Shifters & Cables Available", 
+    "ar": "لا توجد نقال حركات وكوابل متاحة"
+  },
+  "intro": {
+    "en": "We know you're eager to find the perfect gear shifters & cables to enhance your cycling experience. Unfortunately, our gear shifters & cables section is currently out of stock. But don't worry, our team is working hard to bring in new items that will keep you shifting smoothly!",
+    "ar": "نحن ندرك حماسك للعثور على نقال حركات وكوابل مثالية لتحسين تجربتك في ركوب الدراجة. للأسف، قسم نقال حركات وكوابل لدينا غير متوفر حالياً. لكن لا تقلق، ففريقنا يعمل بجد لجلب عناصر جديدة ستجعل رحلاتك أكثر سلاسة!"
+  },
+  "outro": {
+    "en": "We appreciate your patience and can't wait to help you find the perfect gear shifters & cables. If you have any questions or need assistance, feel free to reach out to our friendly support team.",
+    "ar": "نحن نقدر صبرك ولا يمكننا الانتظار لمساعدتك في العثور على نقال حركات وكوابل المثالية. إذا كانت لديك أي أسئلة أو تحتاج إلى مساعدة، فلا تتردد في الاتصال بفريق الدعم لدينا."
+  }
+},{
+  "id": 40,
+  "keyword": "grips",
+  "title": {
+    "en": "No Grips Available", 
+    "ar": "لا توجد مقابض متاحة"
+  },
+  "intro": {
+    "en": "We know you're eager to find the perfect grips to enhance your cycling experience. Unfortunately, our grips section is currently out of stock. But don't worry, our team is working hard to bring in new items that will keep you riding comfortably!",
+    "ar": "نحن ندرك حماسك للعثور على المقابض المثالية لتحسين تجربتك في ركوب الدراجة. للأسف، قسم المقابض لدينا غير متوفر حالياً. لكن لا تقلق، ففريقنا يعمل بجد لجلب عناصر جديدة ستجعل رحلاتك مريحة!"
+  },
+  "outro": {
+    "en": "We appreciate your patience and can't wait to help you find the perfect grips. If you have any questions or need assistance, feel free to reach out to our friendly support team.",
+    "ar": "نحن نقدر صبرك ولا يمكننا الانتظار لمساعدتك في العثور على المقابض المثالية. إذا كانت لديك أي أسئلة أو تحتاج إلى مساعدة، فلا تتردد في الاتصال بفريق الدعم لدينا."
+  }
+},{
+  "id": 41,
+  "keyword": "bar-tape",
+  "title": {
+    "en": "No Bar Tape Available", 
+    "ar": "لا توجد شريطة مقابض متاحة"
+  },
+  "intro": {
+    "en": "We know you're eager to find the perfect bar tape to enhance your cycling experience. Unfortunately, our bar tape section is currently out of stock. But don't worry, our team is working hard to bring in new items that will keep your handlebars grippy and comfortable!",
+    "ar": "نحن ندرك حماسك للعثور على الشريطة المثالية لتحسين تجربتك في ركوب الدراجة. للأسف، قسم الشريطة لدينا غير متوفر حالياً. لكن لا تقلق، ففريقنا يعمل بجد لجلب عناصر جديدة ستبقي مقابض دراجتك مريحة ومحكمة!"
+  },
+  "outro": {
+    "en": "We appreciate your patience and can't wait to help you find the perfect bar tape. If you have any questions or need assistance, feel free to reach out to our friendly support team.",
+    "ar": "نحن نقدر صبرك ولا يمكننا الانتظار لمساعدتك في العثور على الشريطة المثالية. إذا كانت لديك أي أسئلة أو تحتاج إلى مساعدة، فلا تتردد في الاتصال بفريق الدعم لدينا."
+  }
+},{
+  "id": 42,
+  "keyword": "stems",
+  "title": {
+    "en": "No Stems Available", 
+    "ar": "لا يوجد أذرع متاحة"
+  },
+  "intro": {
+    "en": "We know you're eager to find the perfect stem to enhance your cycling experience. Unfortunately, our stems section is currently out of stock. But don't worry, our team is working hard to bring in new items that will keep your handlebars in the perfect position!",
+    "ar": "نحن ندرك حماسك للعثور على الذراع المثالي لتحسين تجربتك في ركوب الدراجة. للأسف، قسم الأذرع لدينا غير متوفر حالياً. لكن لا تقلق، ففريقنا يعمل بجد لجلب عناصر جديدة ستبقي مقود دراجتك في المكان المثالي!"
+  },
+  "outro": {
+    "en": "We appreciate your patience and can't wait to help you find the perfect stem. If you have any questions or need assistance, feel free to reach out to our friendly support team.",
+    "ar": "نحن نقدر صبرك ولا يمكننا الانتظار لمساعدتك في العثور على الذراع المثالي. إذا كانت لديك أي أسئلة أو تحتاج إلى مساعدة، فلا تتردد في الاتصال بفريق الدعم لدينا."
+  }
+},{
+  "id": 43,
+  "keyword": "headsets-&-spacers",
+  "title": {
+    "en": "No Headsets & Spacers Available", 
+    "ar": "لا توجد مجموعه قطع الرقبه و التسميكات متاحة"
+  },
+  "intro": {
+    "en": "We know you're eager to find the perfect headsets & spacers to enhance your cycling experience. Unfortunately, our headsets & spacers section is currently out of stock. But don't worry, our team is working hard to bring in new items that will keep your bike running smoothly!",
+    "ar": "نحن ندرك حماسك للعثور على الأطقم والمسافات المثالية لتحسين تجربتك في ركوب الدراجة. للأسف، قسم الأطقم والمسافات لدينا غير متوفر حالياً. لكن لا تقلق، ففريقنا يعمل بجد لجلب عناصر جديدة ستحافظ على سلاسة دراجتك!"
+  },
+  "outro": {
+    "en": "We appreciate your patience and can't wait to help you find the perfect headsets & spacers. If you have any questions or need assistance, feel free to reach out to our friendly support team.",
+    "ar": "نحن نقدر صبرك ولا يمكننا الانتظار لمساعدتك في العثور على الأطقم والمسافات المثالية. إذا كانت لديك أي أسئلة أو تحتاج إلى مساعدة، فلا تتردد في الاتصال بفريق الدعم لدينا."
+  }
+},{
+  "id": 44,
+  "keyword": "cothing",
+  "title": {
+    "en": "No Clothing Available", 
+    "ar": "لا توجد ملابس متاحة"
+  },
+  "intro": {
+    "en": "We know you're eager to find the perfect cycling clothing to enhance your riding experience. Unfortunately, our clothing section is currently out of stock. But don't worry, our team is working hard to bring in new items that will keep you comfortable and stylish on your rides!",
+    "ar": "نحن ندرك حماسك للعثور على الملابس الدراجات المثالية لتعزيز تجربتك في ركوب الدراجة. للأسف، قسم الملابس لدينا غير متوفر حالياً. لكن لا تقلق، ففريقنا يعمل بجد لجلب عناصر جديدة ستجعلك مرتاحاً وأنيقاً أثناء رحلاتك!"
+  },
+  "outro": {
+    "en": "We appreciate your patience and can't wait to help you find the perfect cycling apparel. If you have any questions or need assistance, feel free to reach out to our friendly support team.",
+    "ar": "نحن نقدر صبرك ولا يمكننا الانتظار لمساعدتك في العثور على الملابس الدراجات المثالية. إذا كانت لديك أي أسئلة أو تحتاج إلى مساعدة، فلا تتردد في الاتصال بفريق الدعم لدينا."
+  }
+},{
+  "id": 45,
+  "keyword": "short-sleeve-jerseys",
+  "title": {
+    "en": "No Short Sleeve Jerseys Available", 
+    "ar": "لا توجد قمصان قصيرة الأكمام متاحة"
+  },
+  "intro": {
+    "en": "We know you're eager to find the perfect short sleeve jerseys to enhance your riding experience. Unfortunately, our short sleeve jerseys section is currently out of stock. But don't worry, our team is working hard to bring in new items that will keep you comfortable and stylish on your rides!",
+    "ar": "نحن ندرك حماسك للعثور على قمصان قصيرة الأكمام المثالية لتعزيز تجربتك في ركوب الدراجة. للأسف، قسم القمصان القصيرة الأكمام لدينا غير متوفر حالياً. لكن لا تقلق، ففريقنا يعمل بجد لجلب عناصر جديدة ستجعلك مرتاحاً وأنيقاً أثناء رحلاتك!"
+  },
+  "outro": {
+    "en": "We appreciate your patience and can't wait to help you find the perfect cycling apparel. If you have any questions or need assistance, feel free to reach out to our friendly support team.",
+    "ar": "نحن نقدر صبرك ولا يمكننا الانتظار لمساعدتك في العثور على الملابس الدراجات المثالية. إذا كانت لديك أي أسئلة أو تحتاج إلى مساعدة، فلا تتردد في الاتصال بفريق الدعم لدينا."
+  }
+},{
+  "id": 46,
+  "keyword": "long-sleeve-jerseys",
+  "title": {
+    "en": "No Long Sleeve Jerseys Available", 
+    "ar": "لا توجد قمصان طويلة الأكمام متاحة"
+  },
+  "intro": {
+    "en": "We know you're eager to find the perfect long sleeve jerseys to enhance your riding experience. Unfortunately, our long sleeve jerseys section is currently out of stock. But don't worry, our team is working hard to bring in new items that will keep you comfortable and stylish on your rides!",
+    "ar": "نحن ندرك حماسك للعثور على القمصان طويلة الأكمام المثالية لتعزيز تجربتك في ركوب الدراجة. للأسف، قسم القمصان طويلة الأكمام لدينا غير متوفر حالياً. لكن لا تقلق، ففريقنا يعمل بجد لجلب عناصر جديدة ستجعلك مرتاحاً وأنيقاً أثناء رحلاتك!"
+  },
+  "outro": {
+    "en": "We appreciate your patience and can't wait to help you find the perfect cycling apparel. If you have any questions or need assistance, feel free to reach out to our friendly support team.",
+    "ar": "نحن نقدر صبرك ولا يمكننا الانتظار لمساعدتك في العثور على الملابس الدراجات المثالية. إذا كانت لديك أي أسئلة أو تحتاج إلى مساعدة، فلا تتردد في الاتصال بفريق الدعم لدينا."
+  }
+},{
+  "id": 47,
+  "keyword": "sleeveless-jerseys",
+  "title": {
+    "en": "No Sleeveless Jerseys Available", 
+    "ar": "لا توجد قمصان بدون أكمام متاحة"
+  },
+  "intro": {
+    "en": "We know you're eager to find the perfect sleeveless jerseys to enhance your riding experience. Unfortunately, our sleeveless jerseys section is currently out of stock. But don't worry, our team is working hard to bring in new items that will keep you comfortable and stylish on your rides!",
+    "ar": "نحن ندرك حماسك للعثور على القمصان بدون أكمام المثالية لتعزيز تجربتك في ركوب الدراجة. للأسف، قسم القمصان بدون أكمام لدينا غير متوفر حالياً. لكن لا تقلق، ففريقنا يعمل بجد لجلب عناصر جديدة ستجعلك مرتاحاً وأنيقاً أثناء رحلاتك!"
+  },
+  "outro": {
+    "en": "We appreciate your patience and can't wait to help you find the perfect cycling apparel. If you have any questions or need assistance, feel free to reach out to our friendly support team.",
+    "ar": "نحن نقدر صبرك ولا يمكننا الانتظار لمساعدتك في العثور على الملابس الدراجات المثالية. إذا كانت لديك أي أسئلة أو تحتاج إلى مساعدة، فلا تتردد في الاتصال بفريق الدعم لدينا."
+  }
+},{
+  "id": 48,
+  "keyword": "vests",
+  "title": {
+    "en": "No Vests Available", 
+    "ar": "لا توجد فيستس متاحة"
+  },
+  "intro": {
+    "en": "We know you're eager to find the perfect vests to enhance your riding experience. Unfortunately, our vests section is currently out of stock. But don't worry, our team is working hard to bring in new items that will keep you comfortable and stylish on your rides!",
+    "ar": "نحن ندرك حماسك للعثور على الفيستس المثالية لتعزيز تجربتك في ركوب الدراجة. للأسف، قسم الفيستس لدينا غير متوفر حالياً. لكن لا تقلق، ففريقنا يعمل بجد لجلب عناصر جديدة ستجعلك مرتاحاً وأنيقاً أثناء رحلاتك!"
+  },
+  "outro": {
+    "en": "We appreciate your patience and can't wait to help you find the perfect cycling apparel. If you have any questions or need assistance, feel free to reach out to our friendly support team.",
+    "ar": "نحن نقدر صبرك ولا يمكننا الانتظار لمساعدتك في العثور على الملابس الدراجات المثالية. إذا كانت لديك أي أسئلة أو تحتاج إلى مساعدة، فلا تتردد في الاتصال بفريق الدعم لدينا."
+  }
+},{
+  "id": 49,
+  "keyword": "jackets",
+  "title": {
+    "en": "No Jackets Available",
+    "ar": "لا توجد جواكيت متاحة"
+  },
+  "intro": {
+    "en": "We know you're eager to find the perfect jackets to enhance your riding experience. Unfortunately, our jackets section is currently out of stock. But don't worry, our team is working hard to bring in new items that will keep you comfortable and stylish on your rides!",
+    "ar": "نحن ندرك حماسك للعثور على الجواكيت المثالية لتعزيز تجربتك في ركوب الدراجة. للأسف، قسم الجواكيت لدينا غير متوفر حالياً. لكن لا تقلق، ففريقنا يعمل بجد لجلب عناصر جديدة ستجعلك مرتاحاً وأنيقاً أثناء رحلاتك!"
+  },
+  "outro": {
+    "en": "We appreciate your patience and can't wait to help you find the perfect cycling apparel. If you have any questions or need assistance, feel free to reach out to our friendly support team",
+    "ar": "نحن نقدر صبرك ولا يمكننا الانتظار لمساعدتك في العثور على الملابس الدراجات المثالية. إذا كانت لديك أي أسئلة أو تحتاج إلى مساعدة، فلا تتردد في الاتصال بفريق الدعم لدينا."
+  }
+},{
+  "id": 50,
+  "keyword": "shorts",
+  "title": {
+    "en": "No Shorts Available", 
+    "ar": "لا توجد سراويل قصيرة متاحة"
+  },
+  "intro": {
+    "en": "We know you're eager to find the perfect cycling shorts to enhance your riding experience. Unfortunately, our shorts section is currently out of stock. But don't worry, our team is working hard to bring in new items that will keep you comfortable and stylish on your rides!",
+    "ar": "حن ندرك حماسك للعثور على السراويل القصيرة المثالية لتعزيز تجربتك في ركوب الدراجة. للأسف، قسم السراويل القصيرة لدينا غير متوفر حالياً. لكن لا تقلق، ففريقنا يعمل بجد لجلب عناصر جديدة ستجعلك مرتاحاً وأنيقاً أثناء رحلاتك!"
+  },
+  "outro": {
+    "en": "We appreciate your patience and can't wait to help you find the perfect cycling apparel. If you have any questions or need assistance, feel free to reach out to our friendly support team.",
+    "ar": "نحن نقدر صبرك ولا يمكننا الانتظار لمساعدتك في العثور على الملابس الدراجات المثالية. إذا كانت لديك أي أسئلة أو تحتاج إلى مساعدة، فلا تتردد في الاتصال بفريق الدعم لدينا."
+  }
+},{
+  "id": 51,
+  "keyword": "mountain-bike-shorts",
+  "title": {
+    "en": "No Mountain Bike Shorts Available", 
+    "ar": "لا توجد سراويل دراجات جبلية متاحة"
+  },
+  "intro": {
+    "en": "We know you're eager to find the perfect mountain bike shorts to enhance your off-road adventures. Unfortunately, our mountain bike shorts section is currently out of stock. But don't worry, our team is working hard to bring in new items that will keep you comfortable and protected on the trails!",
+    "ar": "نحن ندرك حماسك للعثور على السراويل المثالية لركوب الدراجات الجبلية لتعزيز مغامراتك خارج الطريق. للأسف، قسم السراويل الخاصة بركوب الدراجات الجبلية غير متوفر حالياً. ولكن لا تقلق، ففريقنا يعمل بجد لجلب عناصر جديدة ستجعلك مرتاحاً ومحمياً أثناء رحلاتك على المسارات!"
+  },
+  "outro": {
+    "en": "We appreciate your patience and can't wait to help you find the perfect gear for your mountain biking excursions. If you have any questions or need assistance, feel free to reach out to our friendly support team.",
+    "ar": "نحن نقدر صبرك ولا يمكننا الانتظار لمساعدتك في العثور على العتاد المثالي لرحلات ركوب الدراجات الجبلية الخاصة بك. إذا كانت لديك أي أسئلة أو تحتاج إلى مساعدة، فلا تتردد في الاتصال بفريق الدعم لدينا."
+  }
+},{
+  "id": 52,
+  "keyword": "cycling-tights",
+  "title": {
+    "en": "No Cycling Tights Available", 
+    "ar": "لا توجد بنطلونات ركوب الدراجات متاحة"
+  },
+  "intro": {
+    "en": "We know you're eager to find the perfect cycling tights to enhance your performance on the road. Unfortunately, our cycling tights section is currently out of stock. But don't worry, our team is working hard to bring in new items that will keep you comfortable and stylish on your rides!",
+    "ar": "نحن ندرك حماسك للعثور على بنطلونات ركوب الدراجات المثالية لتحسين أدائك على الطريق. للأسف، قسم بنطلونات ركوب الدراجات غير متوفر حالياً. ولكن لا تقلق، ففريقنا يعمل بجد لجلب عناصر جديدة ستجعلك مرتاحاً وأنيقاً خلال رحلاتك!"
+  },
+  "outro": {
+    "en": "We appreciate your patience and can't wait to help you find the perfect gear for your cycling adventures. If you have any questions or need assistance, feel free to reach out to our friendly support team.",
+    "ar": "نحن نقدر صبرك ولا يمكننا الانتظار لمساعدتك في العثور على العتاد المثالي لمغامرات ركوب الدراجات الخاصة بك. إذا كانت لديك أي أسئلة أو تحتاج إلى مساعدة، فلا تتردد في الاتصال بفريق الدعم لدينا."
+  }
+},{
+  "id": 53,
+  "keyword": "gloves",
+  "title": {
+    "en": "No Gloves Available", 
+    "ar": "لا توجد قفازات متاحة"
+  },
+  "intro": {
+    "en": "We know you're eager to find the perfect gloves to enhance your grip and comfort during your rides. Unfortunately, our gloves section is currently out of stock. But don't worry, our team is working hard to bring in new items that will keep your hands protected and comfortable on the road!",
+    "ar": "نحن ندرك حماسك للعثور على القفازات المثالية لتعزيز قبضتك وراحتك أثناء رحلاتك. للأسف، قسم القفازات غير متوفر حالياً. ولكن لا تقلق، ففريقنا يعمل بجد لجلب عناصر جديدة ستحافظ على حماية وراحة يديك أثناء رحلاتك!"
+  },
+  "outro": {
+    "en": "We appreciate your patience and can't wait to help you find the perfect gear for your cycling adventures. If you have any questions or need assistance, feel free to reach out to our friendly support team.",
+    "ar": "نحن نقدر صبرك ولا يمكننا الانتظار لمساعدتك في العثور على العتاد المثالي لمغامرات ركوب الدراجات الخاصة بك. إذا كانت لديك أي أسئلة أو تحتاج إلى مساعدة، فلا تتردد في الاتصال بفريق الدعم لدينا."
+  }
+},{
+  "id": 54,
+  "keyword": "socks",
+  "title": {
+    "en": "نحن نقدر صبرك ولا يمكننا الانتظار لمساعدتك في العثور على العتاد المثالي لمغامرات ركوب الدراجات الخاصة بك. إذا كانت لديك أي أسئلة أو تحتاج إلى مساعدة، فلا تتردد في الاتصال بفريق الدعم لدينا.", 
+    "ar": "لا توجد جوارب متاحة"
+  },
+  "intro": {
+    "en": "We know you're eager to find the perfect socks to keep your feet comfortable during your rides. Unfortunately, our socks section is currently out of stock. But don't worry, our team is working hard to bring in new items that will keep your feet feeling great on the road!",
+    "ar": "نحن ندرك حماسك للعثور على الجوارب المثالية للحفاظ على راحة قدميك أثناء رحلاتك. للأسف، قسم الجوارب غير متوفر حالياً. ولكن لا تقلق، ففريقنا يعمل بجد لجلب عناصر جديدة ستبقي قدميك مرتاحة أثناء الرحلات!"
+  },
+  "outro": {
+    "en": "We appreciate your patience and can't wait to help you find the perfect gear for your cycling adventures. If you have any questions or need assistance, feel free to reach out to our friendly support team.",
+    "ar": "نحن نقدر صبرك ولا يمكننا الانتظار لمساعدتك في العثور على العتاد المثالي لمغامرات ركوب الدراجات الخاصة بك. إذا كانت لديك أي أسئلة أو تحتاج إلى مساعدة، فلا تتردد في الاتصال بفريق الدعم لدينا."
+  }
+},{
+  "id": 55,
+  "keyword": "warmers-&-base-layers",
+  "title": {
+    "en": "No Warmers & Base Layers Available", 
+    "ar": "لا توجد ملابس داخلية متاحة"
+  },
+  "intro": {
+    "en": "We know you're eager to find the perfect warmers & base layers to keep you comfortable during your rides. Unfortunately, our warmers & base layers section is currently out of stock. But don't worry, our team is working hard to bring in new items that will keep you warm and cozy on the road!",
+    "ar": "ندرك حماسك للعثور على الملابس الداخلية المثالية للحفاظ على راحتك أثناء رحلاتك. للأسف، قسم الملابس الداخلية غير متوفر حاليًا. ولكن لا تقلق، ففريقنا يعمل بجد لجلب عناصر جديدة ستبقيك دافئًا ومرتاحًا على الطريق!"
+  },
+  "outro": {
+    "en": "We appreciate your patience and can't wait to help you find the perfect gear for your cycling adventures. If you have any questions or need assistance, feel free to reach out to our friendlنحن نقدر صبرك ولا يمكننا الانتظار لمساعدتك في العثور على العتاد المثالي لمغامرات ركوب الدراجات الخاصة بك. إذا كانت لديك أي أسئلة أو تحتاج إلى مساعدة، فلا تتردد في الاتصال بفريق الدعم لدينا.y support team.",
+    "ar": ""
+  }
+},{
+  "id": 56,
+  "keyword": "t-shirts",
+  "title": {
+    "en": "No T-Shirts Available", 
+    "ar": "لا توجد تي شيرتات متاحة"
+  },
+  "intro": {
+    "en": "We know you're eager to find the perfect t-shirts to keep you comfortable during your rides. Unfortunately, our t-shirts section is currently out of stock. But don't worry, our team is working hard to bring in new items that will keep you stylish and comfortable on the road!",
+    "ar": "ندرك حماسك للعثور على التي شيرتات المثالية للحفاظ على راحتك أثناء رحلاتك. للأسف، قسم التي شيرتات غير متوفر حاليًا. ولكن لا تقلق، ففريقنا يعمل بجد لجلب عناصر جديدة ستبقيك أنيقًا ومرتاحًا على الطريق!"
+  },
+  "outro": {
+    "en": "We appreciate your patience and can't wait to help you find the perfect gear for your cycling adventures. If you have any questions or need assistance, feel free to reach out to our friendly support team.",
+    "ar": "نحن نقدر صبرك ولا يمكننا الانتظار لمساعدتك في العثور على العتاد المثالي لمغامرات ركوب الدراجات الخاصة بك. إذا كانت لديك أي أسئلة أو تحتاج إلى مساعدة، فلا تتردد في الاتصال بفريق الدعم لدينا."
+  }
+},{
+  "id": 57,
+  "keyword": "helmets-&-shoes",
+  "title": {
+    "en": "No Helmets & Shoes Available", 
+    "ar": "لا توجد خوذات وأحذية متاحة"
+  },
+  "intro": {
+    "en": "We know you're eager to find the perfect helmets and shoes to keep you safe and comfortable during your rides. Unfortunately, our helmets and shoes section is currently out of stock. But don't worry, our team is working hard to bring in new items that will protect and support you on the road!",
+    "ar": "ندرك حماسك للعثور على الخوذات والأحذية المثالية للحفاظ على سلامتك وراحتك أثناء رحلاتك. للأسف، قسم الخوذات والأحذية غير متوفر حاليًا. ولكن لا تقلق، ففريقنا يعمل بجد لجلب عناصر جديدة ستحميك وتدعمك على الطريق!"
+  },
+  "outro": {
+    "en": "We appreciate your patience and can't wait to help you find the perfect gear for your cycling adventures. If you have any questions or need assistance, feel free to reach out to our friendly support team.",
+    "ar": "نحن نقدر صبرك ولا يمكننا الانتظار لمساعدتك في العثور على العتاد المثالي لمغامرات ركوب الدراجات الخاصة بك. إذا كانت لديك أي أسئلة أو تحتاج إلى مساعدة، فلا تتردد في الاتصال بفريق الدعم لدينا."
+  }
+},{
+  "id": 58,
+  "keyword": "cleats",
+  "title": {
+    "en": "No Cleats Available", 
+    "ar": ""
+  },
+  "intro": {
+    "en": "We know you're eager to find the perfect cleats to enhance your cycling experience. Unfortunately, our cleats section is currently out of stock. But don't worry, our team is working hard to bring in new items that will improve your ride!",
+    "ar": ""
+  },
+  "outro": {
+    "en": "We appreciate your patience and can't wait to help you find the perfect gear for your cycling adventures. If you have any questions or need assistance, feel free to reach out to our friendly support team.",
+    "ar": ""
+  }
+},{
+  "id": 59,
+  "keyword": "cleat-covers",
+  "title": {
+    "en": "No Cleats Available", 
+    "ar": "لا توجد مرابط متاحة"
+  },
+  "intro": {
+    "en": "We know you're eager to find the perfect cleats to enhance your cycling experience. Unfortunately, our cleats section is currently out of stock. But don't worry, our team is working hard to bring in new items that will improve your ride!",
+    "ar": "ندرك حماسك للعثور على المرابط المثالية لتعزيز تجربتك في ركوب الدراجة. للأسف، قسم المرابط غير متوفر حاليًا. ولكن لا تقلق، ففريقنا يعمل بجد لجلب عناصر جديدة ستحسن رحلتك!"
+  },
+  "outro": {
+    "en": "We appreciate your patience and can't wait to help you find the perfect gear for your cycling adventures. If you have any questions or need assistance, feel free to reach out to our friendly support team.",
+    "ar": "نحن نقدر صبرك ولا يمكننا الانتظار لمساعدتك في العثور على العتاد المثالي لمغامرات ركوب الدراجات الخاصة بك. إذا كانت لديك أي أسئلة أو تحتاج إلى مساعدة، فلا تتردد في الاتصال بفريق الدعم لدينا."
+  }
+},{
+  "id": 60,
+  "keyword": "shoe-covers",
+  "title": {
+    "en": "No Shoe Covers Available", 
+    "ar": "لا توجد أغطية أحذية متاحة"
+  },
+  "intro": {
+    "en": "We know you're eager to find the perfect shoe covers to protect your feet during your rides. Unfortunately, our shoe covers section is currently out of stock. But don't worry, our team is working hard to bring in new items that will meet your needs!",
+    "ar": "ندرك حماسك للعثور على أغطية الأحذية المثالية لحماية قدميك أثناء رحلاتك. للأسف، قسم أغطية الأحذية غير متوفر حاليًا. ولكن لا تقلق، ففريقنا يعمل بجد لجلب عناصر جديدة ستلبي احتياجاتك!"
+  },
+  "outro": {
+    "en": "We appreciate your patience and can't wait to help you find the perfect gear for your cycling adventures. If you have any questions or need assistance, feel free to reach out to our friendly support team.",
+    "ar": "نحن نقدر صبرك ولا يمكننا الانتظار لمساعدتك في العثور على العتاد المثالي لمغامرات ركوب الدراجات الخاصة بك. إذا كانت لديك أي أسئلة أو تحتاج إلى مساعدة، فلا تتردد في الاتصال بفريق الدعم لدينا."
+  }
+},{
+  "id": 61,
+  "keyword": "road-bike-helmets",
+  "title": {
+    "en": "No Road Bike Helmets Available", 
+    "ar": "لا يتوفر خوذات الدراجات الطريق"
+  },
+  "intro": {
+    "en": "We know you're eager to find the perfect road bike helmet to ensure your safety on the road. Unfortunately, our road bike helmets section is currently out of stock. But don't worry, our team is working hard to bring in new items that will keep you protected during your rides!",
+    "ar": "ندرك حماسك للعثور على الخوذة المثالية للدراجة الطريقية لضمان سلامتك على الطريق. للأسف، قسم خوذات الدراجات الطريقية غير متوفر حاليًا. ولكن لا تقلق، ففريقنا يعمل بجد لجلب عناصر جديدة ستحافظ عليك محميًا أثناء رحلاتك!"
+  },
+  "outro": {
+    "en": "We appreciate your patience and can't wait to help you find the perfect gear for your cycling adventures. If you have any questions or need assistance, feel free to reach out to our friendly support team.",
+    "ar": "نحن نقدر صبرك ولا يمكننا الانتظار لمساعدتك في العثور على العتاد المثالي لمغامرات ركوب الدراجات الخاصة بك. إذا كانت لديك أي أسئلة أو تحتاج إلى مساعدة، فلا تتردد في الاتصال بفريق الدعم لدينا."
+  }
+},{
+  "id": 62,
+  "keyword": "mountain-bike-helmets",
+  "title": {
+    "en": "No Mountain Bike Helmets Available", 
+    "ar": "ا يتوفر خوذات الدراجات الجبلية"
+  },
+  "intro": {
+    "en": "We know you're eager to find the perfect mountain bike helmet to ensure your safety on the trails. Unfortunately, our mountain bike helmets section is currently out of stock. But don't worry, our team is working hard to bring in new items that will keep you protected during your off-road adventures!",
+    "ar": "ندرك حماسك للعثور على الخوذة المثالية للدراجة الجبلية لضمان سلامتك على المسارات. للأسف، قسم خوذات الدراجات الجبلية غير متوفر حاليًا. ولكن لا تقلق، ففريقنا يعمل بجد لجلب عناصر جديدة ستحافظ عليك محميًا خلال مغامراتك خارج الطريق!"
+  },
+  "outro": {
+    "en": "We appreciate your patience and can't wait to help you find the perfect gear for your mountain biking excursions. If you have any questions or need assistance, feel free to reach out to our friendly support team.",
+    "ar": "نحن نقدر صبرك ولا يمكننا الانتظار لمساعدتك في العثور على العتاد المثالي لرحلات ركوب الدراجات الجبلية الخاصة بك. إذا كانت لديك أي أسئلة أو تحتاج إلى مساعدة، فلا تتردد في الاتصال بفريق الدعم لدينا."
+  }
+},{
+  "id": 63,
+  "keyword": "full-face",
+  "title": {
+    "en": "No Full Face Helmets Available", 
+    "ar": "لا يتوفر خوذات الوجه الكاملة"
+  },
+  "intro": {
+    "en": "We know you're eager to find the perfect full face helmet to ensure your safety on the trails. Unfortunately, our full face helmets section is currently out of stock. But don't worry, our team is working hard to bring in new items that will keep you protected during your off-road adventures!",
+    "ar": "ندرك حماسك للعثور على الخوذة الوجه الكاملة المثالية لضمان سلامتك على المسارات. للأسف، قسم الخوذ الوجه الكاملة غير متوفر حاليًا. ولكن لا تقلق، ففريقنا يعمل بجد لجلب عناصر جديدة ستحافظ عليك محميًا خلال مغامراتك خارج الطريق!"
+  },
+  "outro": {
+    "en": "We appreciate your patience and can't wait to help you find the perfect gear for your mountain biking excursions. If you have any questions or need assistance, feel free to reach out to our friendly support team.",
+    "ar": "نحن نقدر صبرك ولا يمكننا الانتظار لمساعدتك في العثور على العتاد المثالي لرحلات ركوب الدراجات الجبلية الخاصة بك. إذا كانت لديك أي أسئلة أو تحتاج إلى مساعدة، فلا تتردد في الاتصال بفريق الدعم لدينا."
+  }
+}]

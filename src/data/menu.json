@@ -351,10 +351,10 @@
     "en": "Helmet Categories", "ar": "اقسام الخوذ",
     "thirdList": [{
       "id": 0,
-      "en": "Road", "ar": "خوذ الطريق"
+      "en": "Road Bike Helmets", "ar": "خوذ الطريق"
     },{
       "id": 1,
-      "en": "Mountain Bike", "ar": "خوذ الجبلي"
+      "en": "Mountain Bike Helmets", "ar": "خوذ الجبلي"
     },{
       "id": 2,
       "en": "Full Face", "ar": "الوجه كامل"

@@ -5,7 +5,7 @@ import React, {useEffect, useState, useRef} from 'react';
 import '/src/styles/components/NewsLetter.scss';
 
 // ICONS
-import oneBikeLogo from '/src/assets/img/logo/onebike.png'
+import oneBikeLogo from '/src/assets/img/logo/onebike.webp';
 
 function NewsLetter () {
 

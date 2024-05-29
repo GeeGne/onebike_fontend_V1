@@ -1,0 +1,37 @@
+@use '/src/styles/utils/_BreakPoints' as w;
+
+.empty-list-container {
+  padding: 2em 1em;
+
+  &.hide {
+    display: none;
+  }
+
+  body.arabic & {
+    direction: rtl;
+  }
+
+  & h1 {
+    margin-bottom: 0.5em;
+  }
+
+  & h2 {
+    margin-bottom: 0.5em;
+  }
+
+  & ul {
+    margin-bottom: 0.5em;
+  }
+
+  & li {
+    list-style: inside;
+  }
+
+  & p {
+    margin-bottom: 0.5em;
+  }
+
+  & b {
+    font-weight: 600;
+  }
+}

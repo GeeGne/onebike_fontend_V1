@@ -17,9 +17,9 @@ import productIMG from '/src/assets/img/products/GIYO Small Bike tire Pump Schra
 import productIMG2 from '/src/assets/img/products/Giant Bicycle Road full Carbon.avif';
 import productIMG3 from '/src/assets/img/products/RIDE 12 Chili Red Carbon Grey 2023.avif';
 import productIMG4 from '/src/assets/img/products/Seymour Oceanweave 1.3 H2O.avif';
-import brandLogo from '/src/assets/img/logo/trek.avif';
-import brandLogo2 from '/src/assets/img/logo/giant.avif';
-import brandLogo3 from '/src/assets/img/logo/evoc.avif';
+import brandLogo from '/src/assets/img/logo/trek.webp';
+import brandLogo2 from '/src/assets/img/logo/giant.webp';
+import brandLogo3 from '/src/assets/img/logo/evoc.webp';
 
 function AdvertList ({darkMode, lan, matchedProducts}) {
 
