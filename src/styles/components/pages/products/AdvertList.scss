@@ -36,6 +36,32 @@
           transform: scale(1.05);
         }
 
+        &.out-of-stock {
+          &::before {
+            content: "Item is out of stock";
+            position: absolute;
+            display: flex;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2em;
+            font-weight: 600;
+            color: white;
+            backdrop-filter: brightness(50%);
+            z-index: 20;
+            transition: background-color 0.25s ease-out;
+          }
+          body.arabic &::before {
+            content: "المنتج غير متوفر"
+          }
+          &:active::before {
+            background-color: rgba(255, 0, 0, 0.223);
+          }
+        }
+
         &__favourite {
           position: absolute;
           top: 0.5em;
@@ -57,7 +83,16 @@
           object-position: center;
           // border: solid 1px;
         }
-        
+ 
+        &__discount {
+          background-color: var(--primary-color);
+          color: var(--font-h-invert-color);
+          border-radius: 40px 10%;
+          font-weight: bold;
+          padding: 0.3em 2em;
+          margin-inline: auto;
+        }
+
         &__description {
           color: var(--font-h-color);
         }

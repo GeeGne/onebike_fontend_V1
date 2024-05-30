@@ -13,25 +13,35 @@
 
   & h1 {
     margin-bottom: 0.5em;
+    color: var(--font-h-color);
   }
 
   & h2 {
     margin-bottom: 0.5em;
+    color: var(--font-h-color);
   }
 
   & ul {
     margin-bottom: 0.5em;
+    color: var(--font-p-color);
   }
 
   & li {
     list-style: inside;
+    color: var(--font-h-color);
   }
 
   & p {
     margin-bottom: 0.5em;
+    color: var(--font-p-color);
   }
 
   & b {
     font-weight: 600;
+    color: var(--font-h-color);
+  }
+
+  & a {
+    color: var(--primary-color);
   }
 }

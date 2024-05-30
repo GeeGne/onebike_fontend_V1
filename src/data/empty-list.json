@@ -209,6 +209,21 @@
     "ar": "نقدر صبرك ونتطلع لمساعدتك في العثور على الأجراس والأبواق المثالية لك. إذا كان لديك أي أسئلة أو تحتاج إلى مساعدة، لا تتردد في التواصل مع فريق الدعم الودود لدينا."
   }
 },{
+  "id": 10.5,
+  "keyword": "bottles",
+  "title": {
+    "en": "No Bottles Available", 
+    "ar": "لا تتوفر مطرات"
+  },
+  "intro": {
+    "en": "We know you're eager to find the perfect water bottle to keep you hydrated during your rides. Unfortunately, our bottles section is currently out of stock. But don't worry, our team is working hard to bring in new items that will quench your thirst and keep you going!",
+    "ar": "ندرك حماسك للعثور على المطرة المثالية للحفاظ على ترطيبك أثناء رحلاتك. للأسف، قسم المطرات غير متوفر حاليًا. ولكن لا تقلق، ففريقنا يعمل بجد لجلب عناصر جديدة ستروي عطشك وتبقيك في المقدمة!"
+  },
+  "outro": {
+    "en": "We appreciate your patience and can't wait to help you find the perfect gear for your cycling adventures. If you have any questions or need assistance, feel free to reach out to our friendly support team.",
+    "ar": "نحن نقدر صبرك ولا يمكننا الانتظار لمساعدتك في العثور على العتاد المثالي لرحلات ركوب الدراجات الخاصة بك. إذا كانت لديك أي أسئلة أو تحتاج إلى مساعدة، فلا تتردد في الاتصال بفريق الدعم لدينا."
+  }
+},{
   "id": 10,
   "keyword": "cages",
   "title": {

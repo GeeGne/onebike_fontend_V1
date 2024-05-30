@@ -6,6 +6,7 @@ import BreadCrumb from '../../BreadCrumb';
 import Controls from './Controls';
 import EmptyList from './EmptyList';
 import AdvertList from './AdvertList';
+import NeedHelp from '../../NeedHelp';
 
 // SCSS
 import '/src/styles/components/pages/products/Products.scss';
@@ -19,9 +20,11 @@ import cleanseString from '/src/utils/cleanseString.js';
 
 function Products ({category, type, darkMode, lan}) {
   
+  const checkMatchedProduct = (category, type) => category === cleanseString(productCategoryEN) || type  === cleanseString(productCategoryEN)
+
   const productCategory = type ? type[lan] : category[lan];
   const productCategoryEN = type ? type.en : category.en;
-  const matchedProducts = products.filter(product => product.category === cleanseString(productCategoryEN) || product.type  === cleanseString(productCategoryEN));
+  const matchedProducts = products.filter(product => checkMatchedProduct(product.category, product.type) && !product.hide);
   const totalProducts = matchedProducts.length;
 
   return (
@@ -32,8 +35,10 @@ function Products ({category, type, darkMode, lan}) {
         <h3 className="products-container__category-title-container__result">&#10088;{lan === 'en' ? totalProducts + ' results' : totalProducts + ' نتيجه'}&#10089;</h3>
       </section>
       <Controls darkMode={darkMode} lan={lan}/>
-      {totalProducts === 0 ? 
-      <EmptyList darkMode={darkMode} lan={lan} productCategoryEN={cleanseString(productCategoryEN)} productCategory={productCategory}/> : 
+      {totalProducts === 0 ? <>
+      <EmptyList darkMode={darkMode} lan={lan} productCategoryEN={cleanseString(productCategoryEN)} productCategory={productCategory}/> 
+      <NeedHelp darkMode={darkMode} lan={lan}/></>
+      : 
       <AdvertList darkMode={darkMode} lan={lan} matchedProducts={matchedProducts}/>}
     </div>
   )

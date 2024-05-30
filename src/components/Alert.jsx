@@ -16,8 +16,11 @@ function Alert ({alertText, newAlert}) {
     if (!alertText) {
       // alertElement.current.classList.add('animation--none');
       alertElement.current.style.opacity = '0';
+      alertElement.current.style.visibility = 'hidden';
+      alertElement.current.style.cursor = 'default';
       return;
     }
+    
 
     alertElement.current.classList.remove('animation--none');
     alertElement.current.classList.remove('alertFadeOut');
@@ -27,6 +30,8 @@ function Alert ({alertText, newAlert}) {
     alertElement.current.style.setProperty('--after-opacity', '0');
 
     setTimeout(() => {
+      alertElement.current.style.visibility = 'visibile';
+      alertElement.current.style.cursor = 'pointer';
       alertElement.current.classList.add('alertFadeOut');
       alertMessageElement.current.classList.add('alertFadeIn--opacity');
       alertFillerElement.current.classList.add('alert-popIn');

@@ -12,6 +12,7 @@
 
 @keyframes alert-popIn {
   0% {
+    display: initial;
     height: 0%;
     width: 20%;
   }
@@ -68,10 +69,12 @@
 
 @keyframes alertFadeIn--opacity {
   from {
+    visibility: hidden;
     opacity: 0;
   }
 
   to {
+    visibility: visible;
     opacity: 1;
   }
 }
@@ -129,4 +132,5 @@
 
 .animation--none {
   animation: none;
+  // display: none;
 }
