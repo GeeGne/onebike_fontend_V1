@@ -5,6 +5,7 @@ import {useNavigate} from 'react-router-dom';
 // COMPONENTS
 import HamMenu from './HamMenu';
 import DropMenu from './DropMenu';
+import CartSlider from './CartSlider';
 
 // SCSS
 import '/src/styles/components/header/navbar/Navbar.scss';
@@ -89,6 +90,7 @@ function Navbar ({darkMode, lan}) {
       </nav>
       <DropMenu menu={menu} darkMode={darkMode} lan={lan}/>
       <HamMenu menu={menu} onMenuChange={menuData} darkMode={darkMode} lan={lan}/>
+      <CartSlider darkMode={darkMode} lan={lan}/>
       {/* <NavBottom/> */}
       {/* <Outlet/> */}
     </>

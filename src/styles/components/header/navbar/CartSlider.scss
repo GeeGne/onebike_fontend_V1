@@ -1,0 +1,51 @@
+@use '/src/styles/utils/_BreakPoints' as w;
+
+
+.cartSlider-container {
+  visibility: hidden;
+  position: fixed;
+  display: flex;
+  justify-content: end;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: var(--cartSlider-background-color);
+  height: 100%;
+  z-index: 100;
+
+  &__slider {
+    display: flex;
+    flex-direction: column;
+    width: 30em;
+    height: 100%;
+    background-color: white;
+    padding-inline: 2em;
+
+    &__top {
+      display: flex;
+      align-items: center;
+      gap: 1em;
+      padding-block: 2em;
+
+      &__cart {
+        
+      }
+
+      &__quanitity {
+
+      }
+
+      &__exit {
+        margin-left: auto;
+      }
+    }
+
+    &__products {
+
+    }
+
+    &__total {
+
+    }
+  }
+}
