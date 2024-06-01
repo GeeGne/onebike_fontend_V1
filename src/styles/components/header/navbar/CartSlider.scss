@@ -23,8 +23,9 @@
     width: 30em;
     height: 100%;
     background-color: var(--background-color);
-    padding-inline: 2em;
+    // padding-inline: 2em;
     // border-radius: 50px 0 0 50px;
+    transform: translateX(30em);
     transition: transform 0.5s ease-out;
 
     &__top {
@@ -32,6 +33,7 @@
       align-items: center;
       gap: 1em;
       padding-block: 2em;
+      margin-inline: 2em;
       border: solid var(--endElement-border-background-color);
       border-width: 0 0 2px 0;
       font-weight: 600;
@@ -78,7 +80,10 @@
       flex-direction: column;
       gap: 2em;
       padding-block: 2em;
-
+      padding-inline: 2em;
+      overflow: hidden scroll;
+      -webkit-mask-image: linear-gradient(to bottom, hsla(0, 0%, 0%, 0) 0%, hsla(0, 0%, 0%, 1) 2em, hsla(0, 0%, 0%, 1) calc(100% - 2em), hsla(0, 0%, 0%, 0) 100%);
+      mask-image: linear-gradient(to bottom, hsla(0, 0%, 0%, 0) 0%, hsla(0, 0%, 0%, 1) 2em, hsla(0, 0%, 0%, 1) calc(100% - 2em), hsla(0, 0%, 0%, 0) 100%);
 
       &__product {
         display: grid;
@@ -88,14 +93,8 @@
         'image price toggles';
         gap: 1em;
 
-        // body.arabic & {
-        //   grid-template-areas:
-        //   'title title image'
-        //   'toggles price image';
-        // }
         &__image {
           grid-area: image;
-          // width: 7em;  
           width: 100%;  
           aspect-ratio: 1 / 1;
           margin-bottom: auto;
@@ -103,13 +102,17 @@
   
         &__title {
           grid-area: title;
-          color: var(--font-p-color);
+          font-weight: 550;
+          color: var(--font-h-color);
         }
   
         &__price {
           grid-area: price;
-          color: var(--font-h-color);
-          // margin-block: auto;
+          display: flex;
+          align-items: center;
+          color: var(--font-p-color);
+          width: auto;
+          height: 2em;
         }
   
         &__toggles {
@@ -153,20 +156,82 @@
 
           &__increment, 
           &__decrement {
+            position: relative;
             width: 2em;
             height: 2em;
             background-repeat: no-repeat;
             background-size: 80%;
             background-position: center;
             border: solid var(--endElement-border-background-color);
+
+            &::before,
+            &::after {
+              content: "";
+              position: absolute;
+              bottom: 0;
+              left: 0;
+              width: 100%;
+              height: 0;
+              transition: height 0.5s ease;
+            }
+            &:hover::before,
+            &:hover::after {
+              height: 100%;
+            }
+
+            &::before {
+              background-color: var(--cartSlider-addToCart-background-color);
+              z-index: -1;              
+            }
+            &::after {
+              backdrop-filter: invert(100%);
+            }
           }
         }
-      }
-    
+      }   
     }
 
-    &__total {
+    &__bottom {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      padding-block: 2em;
+      margin-inline: 2em;
+      border: solid var(--endElement-border-background-color);
+      border-width: 2px 0 0 0;
+      gap: 1em;
 
+      &__total {
+        grid-column: span 3;
+        display: flex;
+        justify-content: space-between;
+        color: var(--font-h-color);
+        font-size: var(--font-size-large);
+        font-weight: 600;
+      }
+
+      &__shipment {
+        grid-column: span 3;
+        font-size: var(--font-size-extraSmall);
+        color: var(--font-p-color);
+      }
+
+      &__view-cart {grid-column: span 1}
+      &__checkout {grid-column: span 2}
+      &__view-cart,
+      &__checkout {
+        width: 100%;
+        color: var(--font-h-invert-color);
+        font-size: var(--font-size-medium);
+        font-weight: 600;
+        background-color: var(--primary-color);
+        border-radius: 5px;
+        padding-block: 1em;
+        transition: background-color 0.5s ease;
+
+        &:hover {
+          background-color: var(--background-invert-color)
+        }
+      }
     }
   }
 }

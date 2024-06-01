@@ -56,7 +56,7 @@ function CartSlider ({darkMode, lan, cart, onCartChange}) {
           <li className="cartSlider-container__slider__products__product">
             <img className="cartSlider-container__slider__products__product__image" src={productIMG}/>
             <a className="cartSlider-container__slider__products__product__title">Hand size Air Pump That is very VERYY good I don't know whta's better but YOU should try it.</a>
-            <div className="cartSlider-container__slider__products__product__price">$ 20</div>
+            <div className="cartSlider-container__slider__products__product__price">{lan === 'en' ? 'S.P' : 'ل.س'} 20</div>
             <div className="cartSlider-container__slider__products__product__toggles">
             <button className="cartSlider-container__slider__products__product__toggles__delete"></button>
               <button className="cartSlider-container__slider__products__product__toggles__increment"></button>
@@ -67,7 +67,7 @@ function CartSlider ({darkMode, lan, cart, onCartChange}) {
           <li className="cartSlider-container__slider__products__product">
             <img className="cartSlider-container__slider__products__product__image" src={productIMG}/>
             <a className="cartSlider-container__slider__products__product__title">Hand size Air Pump</a>
-            <div className="cartSlider-container__slider__products__product__price">$ 20</div>
+            <div className="cartSlider-container__slider__products__product__price">{lan === 'en' ? 'S.P' : 'ل.س'} 20</div>
             <div className="cartSlider-container__slider__products__product__toggles">
               <button className="cartSlider-container__slider__products__product__toggles__delete"></button>
               <button className="cartSlider-container__slider__products__product__toggles__increment"></button>
@@ -78,7 +78,51 @@ function CartSlider ({darkMode, lan, cart, onCartChange}) {
           <li className="cartSlider-container__slider__products__product">
             <img className="cartSlider-container__slider__products__product__image" src={productIMG}/>
             <a className="cartSlider-container__slider__products__product__title">Hand size Air Pump</a>
-            <div className="cartSlider-container__slider__products__product__price">$ 20</div>
+            <div className="cartSlider-container__slider__products__product__price">{lan === 'en' ? 'S.P' : 'ل.س'} 20</div>
+            <div className="cartSlider-container__slider__products__product__toggles">
+              <button className="cartSlider-container__slider__products__product__toggles__delete"></button>
+              <button className="cartSlider-container__slider__products__product__toggles__increment"></button>
+              <div className="cartSlider-container__slider__products__product__toggles__value">1</div>
+              <button className="cartSlider-container__slider__products__product__toggles__decrement"></button>
+            </div>
+          </li>
+          <li className="cartSlider-container__slider__products__product">
+            <img className="cartSlider-container__slider__products__product__image" src={productIMG}/>
+            <a className="cartSlider-container__slider__products__product__title">Hand size Air Pump</a>
+            <div className="cartSlider-container__slider__products__product__price">{lan === 'en' ? 'S.P' : 'ل.س'} 20</div>
+            <div className="cartSlider-container__slider__products__product__toggles">
+              <button className="cartSlider-container__slider__products__product__toggles__delete"></button>
+              <button className="cartSlider-container__slider__products__product__toggles__increment"></button>
+              <div className="cartSlider-container__slider__products__product__toggles__value">1</div>
+              <button className="cartSlider-container__slider__products__product__toggles__decrement"></button>
+            </div>
+          </li>
+          <li className="cartSlider-container__slider__products__product">
+            <img className="cartSlider-container__slider__products__product__image" src={productIMG}/>
+            <a className="cartSlider-container__slider__products__product__title">Hand size Air Pump</a>
+            <div className="cartSlider-container__slider__products__product__price">{lan === 'en' ? 'S.P' : 'ل.س'} 20</div>
+            <div className="cartSlider-container__slider__products__product__toggles">
+              <button className="cartSlider-container__slider__products__product__toggles__delete"></button>
+              <button className="cartSlider-container__slider__products__product__toggles__increment"></button>
+              <div className="cartSlider-container__slider__products__product__toggles__value">1</div>
+              <button className="cartSlider-container__slider__products__product__toggles__decrement"></button>
+            </div>
+          </li>
+          <li className="cartSlider-container__slider__products__product">
+            <img className="cartSlider-container__slider__products__product__image" src={productIMG}/>
+            <a className="cartSlider-container__slider__products__product__title">Hand size Air Pump</a>
+            <div className="cartSlider-container__slider__products__product__price">{lan === 'en' ? 'S.P' : 'ل.س'} 20</div>
+            <div className="cartSlider-container__slider__products__product__toggles">
+              <button className="cartSlider-container__slider__products__product__toggles__delete"></button>
+              <button className="cartSlider-container__slider__products__product__toggles__increment"></button>
+              <div className="cartSlider-container__slider__products__product__toggles__value">1</div>
+              <button className="cartSlider-container__slider__products__product__toggles__decrement"></button>
+            </div>
+          </li>
+          <li className="cartSlider-container__slider__products__product">
+            <img className="cartSlider-container__slider__products__product__image" src={productIMG}/>
+            <a className="cartSlider-container__slider__products__product__title">Hand size Air Pump</a>
+            <div className="cartSlider-container__slider__products__product__price">{lan === 'en' ? 'S.P' : 'ل.س'} 20</div>
             <div className="cartSlider-container__slider__products__product__toggles">
               <button className="cartSlider-container__slider__products__product__toggles__delete"></button>
               <button className="cartSlider-container__slider__products__product__toggles__increment"></button>
@@ -87,7 +131,12 @@ function CartSlider ({darkMode, lan, cart, onCartChange}) {
             </div>
           </li>
         </ul>
-        <section className="cartSlider-container__slider__total"></section>
+        <section className="cartSlider-container__slider__bottom">
+          <div className="cartSlider-container__slider__bottom__total">{lan === 'en' ? 'Total' : 'اجمالي'} <span>{lan === 'en' ? 'S.P' : 'ل.س'} 300</span></div>
+          <div className="cartSlider-container__slider__bottom__shipment">{lan === 'en' ? 'Shipment fee calculated at Checkout' : 'تكاليف الشحن ستضاف عند الدفع'}</div>
+          <button className="cartSlider-container__slider__bottom__view-cart">{lan === 'en' ? 'View cart' : 'عرض العربة'}</button>
+          <button className="cartSlider-container__slider__bottom__checkout">{lan === 'en' ? 'Checkout' : 'الدفع'}</button>
+        </section>
         {/* <section className="cartSlider-container__slider__"></section>
         <section className="cartSlider-container__slider__"></section> */}
       </div>
