@@ -15,12 +15,15 @@ import logo from '/src/assets/img/logo/onebike.webp';
 import searchIcon from '/src/assets/img/icons/search.svg';
 import searchIconDarkMode from '/src/assets/img/icons/search_darkMode.svg';
 
+
 function Navbar ({darkMode, lan}) {
   
   const navigate = useNavigate();
 
   const [menu, setMenu] = useState(false);
   const [search, setSearch] = useState(false);
+  const [cart, setCart] = useState(false);
+
   const searchInputElement = useRef(null);
   const searchButtonElement = useRef(null);
 
@@ -33,16 +36,20 @@ function Navbar ({darkMode, lan}) {
       const largeWidth = 1000;
       const webWidth = window.innerWidth;
       const desktopWidth = webWidth >= largeWidth;
-      if (desktopWidth) {
-        searchInputElement.current.classList.add('hover');
-        searchButtonElement.current.classList.add('hover');
-        document.body.style.overflow = 'hidden auto';
-        return;
-      }
 
-      searchInputElement.current.classList.remove('hover');
-      searchButtonElement.current.classList.remove('hover');
-      document.body.style.overflow = menu ? 'hidden' : 'hidden auto';
+
+      switch (desktopWidth) {
+        case true:
+          searchInputElement.current.classList.add('hover');
+          searchButtonElement.current.classList.add('hover');
+          document.body.style.overflow = 'hidden auto';
+          break;
+        case false: 
+          searchInputElement.current.classList.remove('hover');
+          searchButtonElement.current.classList.remove('hover');
+          document.body.style.overflow = menu ? 'hidden' : 'hidden auto';
+          break;
+      }
     }
     handleResize(menu);
     window.addEventListener('resize', () => handleResize(menu));
@@ -70,8 +77,12 @@ function Navbar ({darkMode, lan}) {
     type ? searchButtonElement.current.classList.add('hover') : searchButtonElement.current.classList.remove('hover'); 
   }
 
-  const menuData = (data) => {
-    setMenu(data)
+  const menuData = data => {
+    setMenu(data);
+  }
+
+  const cartData = data => {
+    setCart(data);
   }
 
   return (
@@ -86,11 +97,11 @@ function Navbar ({darkMode, lan}) {
         <button className={`nav-container__search`} onClick={handleClick} onMouseEnter={() => handleHover(true)} onMouseLeave={() => handleHover(false)} ref={searchButtonElement}/>
         <button className="nav-container__user"/>
         <button className="nav-container__favourite"/>
-        <button className="nav-container__shoppingCart"/>
+        <button className="nav-container__shoppingCart" onClick={() => setCart(true)}/>
       </nav>
       <DropMenu menu={menu} darkMode={darkMode} lan={lan}/>
       <HamMenu menu={menu} onMenuChange={menuData} darkMode={darkMode} lan={lan}/>
-      <CartSlider darkMode={darkMode} lan={lan}/>
+      <CartSlider darkMode={darkMode} lan={lan} cart={cart} onCartChange={cartData}/>
       {/* <NavBottom/> */}
       {/* <Outlet/> */}
     </>

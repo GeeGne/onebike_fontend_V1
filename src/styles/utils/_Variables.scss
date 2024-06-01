@@ -1,6 +1,6 @@
 @use '_BreakPoints' as w;
 
-//  Icone size 
+//  Icon size 
 :root {
   --icon-size: 1.6em;
 }
@@ -10,6 +10,9 @@
   --heart-icon: url(/src/assets/img/icons/heart.svg);
   --add-shoppingCart-icon: url(/src/assets/img/icons/add_shopping_cart.svg); 
   --close-icon: url(/src/assets/img/icons/close.svg);
+  --add-icon: url(/src/assets/img/icons/add.svg);
+  --remove-icon: url(/src/assets/img/icons/remove.svg);
+  --delete-icon: url(/src/assets/img/icons/delete.svg);
 
   // NavBar
   --arrow-drop-down-icon: url(/src/assets/img/icons/arrow_drop_down.svg);
@@ -51,6 +54,9 @@
   --heart-icon: url(/src/assets/img/icons/heart_darkMode.svg);
   --add-shoppingCart-icon: url(/src/assets/img/icons/add_shopping_cart_darkMode.svg); 
   --close-icon: url(/src/assets/img/icons/close_darkMode.svg);
+  --add-icon: url(/src/assets/img/icons/add_darkMode.svg);
+  --remove-icon: url(/src/assets/img/icons/remove_darkMode.svg);
+  --delete-icon: url(/src/assets/img/icons/delete_darkMode.svg);
 
   // Navbar
   --arrow-drop-down-icon: url(/src/assets/img/icons/arrow_drop_down_darkMode.svg);

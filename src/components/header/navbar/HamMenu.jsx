@@ -78,7 +78,7 @@ function HamMenu ({menu, onMenuChange, darkMode, lan}) {
       const titleElement = event.currentTarget;
       const matchedSecondaryElement = getElement(secondaryListElements.current, getListId(titleElement));
       const matchedSecondaryElementScrollHeight = matchedSecondaryElement.scrollHeight; 
-      const elementClicked = titleElement.classList.contains('clicked') ? true : false;
+      const elementClicked = titleElement.classList.contains('clicked');
       
       if (elementClicked) {
         titleElement.classList.remove('clicked');
@@ -136,8 +136,8 @@ function HamMenu ({menu, onMenuChange, darkMode, lan}) {
   }
 
   return (
-    <nav className="ham-menu-container" ref={hamMenuContainerElement}>
-      <div className="ham-menu-container__side-box" ref={hamMenuSideBoxElement}>
+    <nav className="ham-menu-container" onClick={() => onMenuChange(false)} ref={hamMenuContainerElement}>
+      <div className="ham-menu-container__side-box" onClick={(e) => e.stopPropagation()} ref={hamMenuSideBoxElement}>
         <section className="ham-menu-container__side-box__menu">
           <h1 className="ham-menu-container__side-box__menu__h1">{lan === 'en' ? 'MENU' : 'القائمه'}</h1>
           <img className="ham-menu-container__side-box__menu__exit-icon" onClick={() => onMenuChange(false)} src={darkMode ? closeIconDarkMode : closeIcon}/>
