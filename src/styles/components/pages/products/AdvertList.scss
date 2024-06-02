@@ -223,7 +223,9 @@
 
   &__button-section {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    gap: 1em;
     padding-block: 2em;
     border: solid var(--endElement-border-background-color);
     border-width: 0px 0 1px 0;
@@ -262,6 +264,12 @@
       &:hover::after {
         height: 100%;
       }
+    }
+
+    &__load-amount {
+      color: var(--font-p-color);
+      font-size: var(--font-size-small);
+      body.arabic & {direction: rtl}
     }
   }
 }

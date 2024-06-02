@@ -13,6 +13,7 @@ import '/src/styles/components/pages/products/Products.scss';
 
 // JSON
 import products from '/src/data/products.json';
+// import products from '/src/data/products copy.json';
 
 // UTILS
 import capitalizeFirstLetter from '/src/utils/capitalizeFirstLetter.js';

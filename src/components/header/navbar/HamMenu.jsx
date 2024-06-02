@@ -33,7 +33,7 @@ function HamMenu ({menu, onMenuChange, darkMode, lan}) {
   const textLanguage = useRef({})
   const randomNum = useRef(0);
 
-  const arrayLength = mainListData.length;
+  // const mainListDatalength = mainListData.length;
   let secondListLength = 0;
   mainListData.forEach(list => list.secondaryList.forEach(() => secondListLength++))
 
@@ -120,13 +120,13 @@ function HamMenu ({menu, onMenuChange, darkMode, lan}) {
     if (type === 'mainListElement') {
       i === 0 && (mainListElements.current = []);
       const {length} = mainListElements.current;
-      length < arrayLength && (mainListElements.current = [...mainListElements.current, el])
+      length < mainListData.length && (mainListElements.current = [...mainListElements.current, el])
     }
 
     if (type === 'secondaryListElements') {
       i === 0 && (secondaryListElements.current = []);
       const {length} = secondaryListElements.current;
-      length < arrayLength && (secondaryListElements.current = [...secondaryListElements.current, el])
+      length < mainListData.length && (secondaryListElements.current = [...secondaryListElements.current, el])
     }
 
     if (type === 'thirdListContainerElements') {
