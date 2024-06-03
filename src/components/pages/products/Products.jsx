@@ -28,8 +28,7 @@ function Products ({category, type, darkMode, lan, onCartProductsChange}) {
   const matchedProducts = products.filter(product => checkMatchedProduct(product.category, product.type) && !product.hide);
   const totalProducts = matchedProducts.length;
 
-  // const cartProductsData = data => onCartProductsChange(data);
-  const cartProductsData = data => console.log(data);
+  const cartProductsData = data => onCartProductsChange(data);
 
   return (
     <div className="products-container">

@@ -35,7 +35,7 @@ function AdvertList ({darkMode, lan, matchedProducts, onCartProductsChange}) {
   }
 
   useEffect(() => {
-    // onCartProductsChange(cartProducts);
+    onCartProductsChange(cartProducts);
   }, [cartProducts])
 
   useEffect(() => {

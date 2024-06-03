@@ -1,11 +1,16 @@
 // HOOKS
 import React, {useState, useEffect, useRef, useContext} from 'react';
 
-// UTILS
-// import {MyContext} from '/src/utils/myContext.js';
-
 // SCSS
 import '/src/styles/components/header/navbar/CartSlider.scss';
+
+// UTILS
+import CartProductsContext from '/src/utils/myContext.js';
+import formatNumberWithCommas from '/src/utils/formatNumberWithCommas.js'
+import calculatePrice from '/src/utils/calculatePrice.js'
+import calculateDiscountPercantage from '/src/utils/calculateDiscountPercantage.js'
+import fetchElementById from '/src/utils/fetchElementById.js'
+
 
 // ICONS
 import expandCircleUpIcon from '../../../assets/img/icons/expand_circle_down.svg';
@@ -25,11 +30,13 @@ import brandLogo2 from '/src/assets/img/logo/giant.webp';
 import brandLogo3 from '/src/assets/img/logo/evoc.webp';
 
 function CartSlider ({darkMode, lan, cart, onCartChange}) {
-  // const [cartProducts, setCartProducts] = useContext(MyContext);
+  const cartProducts = useContext(CartProductsContext);
   const cartContainerElement = useRef(null);  
   const sliderElement = useRef(null);
 
-  // console.log(cartProducts, 'cartSlider');
+  let totalPrice = 0;
+  cartProducts.forEach(list => (totalPrice += calculatePrice(list.product.price, list.product.discount) * list.currentAmount))
+
 
   useEffect(() => {
     const containerStyle = cartContainerElement.current.style;
@@ -53,98 +60,37 @@ function CartSlider ({darkMode, lan, cart, onCartChange}) {
   return (
     <div className="cartSlider-container" onClick={() => onCartChange(false)} ref={cartContainerElement}>
       <div className="cartSlider-container__slider" onClick={e => e.stopPropagation()} ref={sliderElement}>
+        <div className="cartSlider-container__slider__empty">
+          <img/>
+          <div className="cartSlider-container__slider__empty__note">Your Cart Is Empty</div>
+          <button className="cartSlider-container__slider__empty__button" onClick={() => onCartChange(false)}>Back to shopping</button>
+        </div>
         <section className="cartSlider-container__slider__top">
           <div className="cartSlider-container__slider__top__cart">{lan === 'en' ? 'Cart' : 'السله'}</div>
-          <div className="cartSlider-container__slider__top__quantity">3</div>
+          <div className="cartSlider-container__slider__top__quantity">{cartProducts.length}</div>
           <img className="cartSlider-container__slider__top__exit" onClick={() => onCartChange(false)} src={darkMode ? closeIconDarkMode : closeIcon} role="button" tabIndex="0"/>
         </section>
         <ul className="cartSlider-container__slider__products">
-          <li className="cartSlider-container__slider__products__product">
-            <img className="cartSlider-container__slider__products__product__image" src={productIMG}/>
-            <a className="cartSlider-container__slider__products__product__title">Hand size Air Pump That is very VERYY good I don't know whta's better but YOU should try it.</a>
-            <div className="cartSlider-container__slider__products__product__price">{lan === 'en' ? 'S.P' : 'ل.س'} 20</div>
+          {cartProducts.map(list =>
+          <li className="cartSlider-container__slider__products__product" key={list.id}>
+            <img className="cartSlider-container__slider__products__product__image" src={`/src/assets/img/products/${list.product.category}/${list.product.type}/${list.product.id + '-' + list.product.color.en}-front.webp`}/>
+            <a className="cartSlider-container__slider__products__product__title">{list.product.title[lan]}</a>
+            <div className="cartSlider-container__slider__products__product__price">{lan === 'en' ? 'S.P' : 'ل.س'} {formatNumberWithCommas(calculatePrice(list.product.price, list.product.discount) * list.currentAmount)}</div>
             <div className="cartSlider-container__slider__products__product__toggles">
             <button className="cartSlider-container__slider__products__product__toggles__delete"></button>
               <button className="cartSlider-container__slider__products__product__toggles__increment"></button>
-              <div className="cartSlider-container__slider__products__product__toggles__value">1</div>
+              <div className="cartSlider-container__slider__products__product__toggles__value">{list.currentAmount}</div>
               <button className="cartSlider-container__slider__products__product__toggles__decrement"></button>
             </div>
           </li>
-          <li className="cartSlider-container__slider__products__product">
-            <img className="cartSlider-container__slider__products__product__image" src={productIMG}/>
-            <a className="cartSlider-container__slider__products__product__title">Hand size Air Pump</a>
-            <div className="cartSlider-container__slider__products__product__price">{lan === 'en' ? 'S.P' : 'ل.س'} 20</div>
-            <div className="cartSlider-container__slider__products__product__toggles">
-              <button className="cartSlider-container__slider__products__product__toggles__delete"></button>
-              <button className="cartSlider-container__slider__products__product__toggles__increment"></button>
-              <div className="cartSlider-container__slider__products__product__toggles__value">1</div>
-              <button className="cartSlider-container__slider__products__product__toggles__decrement"></button>
-            </div>
-          </li>
-          <li className="cartSlider-container__slider__products__product">
-            <img className="cartSlider-container__slider__products__product__image" src={productIMG}/>
-            <a className="cartSlider-container__slider__products`__product__title">Hand size Air Pump</a>
-            <div className="cartSlider-container__slider__products__product__price">{lan === 'en' ? 'S.P' : 'ل.س'} 20</div>
-            <div className="cartSlider-container__slider__products__product__toggles">
-              <button className="cartSlider-container__slider__products__product__toggles__delete"></button>
-              <button className="cartSlider-container__slider__products__product__toggles__increment"></button>
-              <div className="cartSlider-container__slider__products__product__toggles__value">1</div>
-              <button className="cartSlider-container__slider__products__product__toggles__decrement"></button>
-            </div>
-          </li>
-          <li className="cartSlider-container__slider__products__product">
-            <img className="cartSlider-container__slider__products__product__image" src={productIMG}/>
-            <a className="cartSlider-container__slider__products__product__title">Hand size Air Pump</a>
-            <div className="cartSlider-container__slider__products__product__price">{lan === 'en' ? 'S.P' : 'ل.س'} 20</div>
-            <div className="cartSlider-container__slider__products__product__toggles">
-              <button className="cartSlider-container__slider__products__product__toggles__delete"></button>
-              <button className="cartSlider-container__slider__products__product__toggles__increment"></button>
-              <div className="cartSlider-container__slider__products__product__toggles__value">1</div>
-              <button className="cartSlider-container__slider__products__product__toggles__decrement"></button>
-            </div>
-          </li>
-          <li className="cartSlider-container__slider__products__product">
-            <img className="cartSlider-container__slider__products__product__image" src={productIMG}/>
-            <a className="cartSlider-container__slider__products__product__title">Hand size Air Pump</a>
-            <div className="cartSlider-container__slider__products__product__price">{lan === 'en' ? 'S.P' : 'ل.س'} 20</div>
-            <div className="cartSlider-container__slider__products__product__toggles">
-              <button className="cartSlider-container__slider__products__product__toggles__delete"></button>
-              <button className="cartSlider-container__slider__products__product__toggles__increment"></button>
-              <div className="cartSlider-container__slider__products__product__toggles__value">1</div>
-              <button className="cartSlider-container__slider__products__product__toggles__decrement"></button>
-            </div>
-          </li>
-          <li className="cartSlider-container__slider__products__product">
-            <img className="cartSlider-container__slider__products__product__image" src={productIMG}/>
-            <a className="cartSlider-container__slider__products__product__title">Hand size Air Pump</a>
-            <div className="cartSlider-container__slider__products__product__price">{lan === 'en' ? 'S.P' : 'ل.س'} 20</div>
-            <div className="cartSlider-container__slider__products__product__toggles">
-              <button className="cartSlider-container__slider__products__product__toggles__delete"></button>
-              <button className="cartSlider-container__slider__products__product__toggles__increment"></button>
-              <div className="cartSlider-container__slider__products__product__toggles__value">1</div>
-              <button className="cartSlider-container__slider__products__product__toggles__decrement"></button>
-            </div>
-          </li>
-          <li className="cartSlider-container__slider__products__product">
-            <img className="cartSlider-container__slider__products__product__image" src={productIMG}/>
-            <a className="cartSlider-container__slider__products__product__title">Hand size Air Pump</a>
-            <div className="cartSlider-container__slider__products__product__price">{lan === 'en' ? 'S.P' : 'ل.س'} 20</div>
-            <div className="cartSlider-container__slider__products__product__toggles">
-              <button className="cartSlider-container__slider__products__product__toggles__delete"></button>
-              <button className="cartSlider-container__slider__products__product__toggles__increment"></button>
-              <div className="cartSlider-container__slider__products__product__toggles__value">1</div>
-              <button className="cartSlider-container__slider__products__product__toggles__decrement"></button>
-            </div>
-          </li>
+          )}
         </ul>
         <section className="cartSlider-container__slider__bottom">
-          <div className="cartSlider-container__slider__bottom__total">{lan === 'en' ? 'Total' : 'اجمالي'} <span>{lan === 'en' ? 'S.P' : 'ل.س'} 300</span></div>
+          <div className="cartSlider-container__slider__bottom__total">{lan === 'en' ? 'Total' : 'اجمالي'} <span>{lan === 'en' ? 'S.P' : 'ل.س'} {formatNumberWithCommas(totalPrice)}</span></div>
           <div className="cartSlider-container__slider__bottom__shipment">{lan === 'en' ? 'Shipment fee calculated at Checkout' : 'تكاليف الشحن ستضاف عند الدفع'}</div>
           <button className="cartSlider-container__slider__bottom__view-cart">{lan === 'en' ? 'View cart' : 'عرض العربة'}</button>
           <button className="cartSlider-container__slider__bottom__checkout">{lan === 'en' ? 'Checkout' : 'الدفع'}</button>
         </section>
-        {/* <section className="cartSlider-container__slider__"></section>
-        <section className="cartSlider-container__slider__"></section> */}
       </div>
     </div>
   )

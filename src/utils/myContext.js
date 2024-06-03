@@ -1,5 +1,5 @@
 import {createContext} from 'react';
 
-const MyContext = createContext("");
+const CartProductsContext = createContext([]);
 
-export default MyContext;
+export default CartProductsContext;

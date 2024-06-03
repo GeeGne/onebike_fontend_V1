@@ -19,7 +19,7 @@ import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 // UTILS
 import removeDuplicates from '/src/utils/removeDuplicates.js';
 import cleanseString from '/src/utils/cleanseString.js';
-// import MyContext from '/src/utils/myContext.js';
+import CartProductsContext from '/src/utils/myContext.js';
 
 function App () {
 
@@ -29,18 +29,18 @@ function App () {
 
   const themeData = setDarkMode;
   const languageData = setLanguage;
-  // const themeData = data => setDarkMode(data);
-  // const languageData = data => setLanguage(data);
-  const cartProductsData = data => setCartProducts(data);
+  const cartProductsData = setCartProducts;
+
+  console.log(cartProducts, 'App');
 
   return (
     <Router>
       <div className="app-layout">
 
         <header className="app-layout__header">
-          {/* <MyContext.Provider value={{cartProducts, setCartProducts}}> */}
+          <CartProductsContext.Provider value={cartProducts}>
             <Header onThemeChange={themeData} onLanguageChange={languageData}/>
-          {/* </MyContext.Provider> */}
+          </CartProductsContext.Provider>
         </header>
 
         <main className="app-layout__main">

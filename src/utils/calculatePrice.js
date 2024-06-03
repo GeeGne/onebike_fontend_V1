@@ -6,6 +6,10 @@ function calculatePrice (price, discount) {
       return price - discountAmount;
     case 'number':
       return price - discount;
+    case 'boolean':
+      return price;
+    default:
+      console.log('Unknown type:' + type);
   }
 }
 
