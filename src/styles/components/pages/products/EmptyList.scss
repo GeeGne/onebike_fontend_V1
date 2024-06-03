@@ -2,7 +2,7 @@
 
 .empty-list-container {
   padding: 2em 1em;
-
+  // line-height: 2em;
   &.hide {
     display: none;
   }
@@ -12,18 +12,19 @@
   }
 
   & h1 {
-    margin-bottom: 0.5em;
+    margin-bottom: 0.7em;
     color: var(--font-h-color);
   }
 
   & h2 {
-    margin-bottom: 0.5em;
+    margin-bottom: 0.7em;
     color: var(--font-h-color);
   }
 
   & ul {
-    margin-bottom: 0.5em;
+    margin-bottom: 0.7em;
     color: var(--font-p-color);
+    line-height: 1.3em;
   }
 
   & li {
@@ -32,8 +33,9 @@
   }
 
   & p {
-    margin-bottom: 0.5em;
+    margin-bottom: 0.7em;
     color: var(--font-p-color);
+    line-height: 1.3em;
   }
 
   & b {

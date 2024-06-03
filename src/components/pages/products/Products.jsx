@@ -19,7 +19,7 @@ import products from '/src/data/products.json';
 import capitalizeFirstLetter from '/src/utils/capitalizeFirstLetter.js';
 import cleanseString from '/src/utils/cleanseString.js';
 
-function Products ({category, type, darkMode, lan}) {
+function Products ({category, type, darkMode, lan, onCartProductsChange}) {
   
   const checkMatchedProduct = (category, type) => category === cleanseString(productCategoryEN) || type  === cleanseString(productCategoryEN)
 
@@ -27,6 +27,9 @@ function Products ({category, type, darkMode, lan}) {
   const productCategoryEN = type ? type.en : category.en;
   const matchedProducts = products.filter(product => checkMatchedProduct(product.category, product.type) && !product.hide);
   const totalProducts = matchedProducts.length;
+
+  // const cartProductsData = data => onCartProductsChange(data);
+  const cartProductsData = data => console.log(data);
 
   return (
     <div className="products-container">
@@ -40,7 +43,7 @@ function Products ({category, type, darkMode, lan}) {
       <EmptyList darkMode={darkMode} lan={lan} productCategoryEN={cleanseString(productCategoryEN)} productCategory={productCategory}/> 
       <NeedHelp darkMode={darkMode} lan={lan}/></>
       : 
-      <AdvertList darkMode={darkMode} lan={lan} matchedProducts={matchedProducts}/>}
+      <AdvertList darkMode={darkMode} lan={lan} matchedProducts={matchedProducts} onCartProductsChange={cartProductsData}/>}
     </div>
   )
 }

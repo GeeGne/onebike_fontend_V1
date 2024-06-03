@@ -19,26 +19,28 @@ import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 // UTILS
 import removeDuplicates from '/src/utils/removeDuplicates.js';
 import cleanseString from '/src/utils/cleanseString.js';
+// import MyContext from '/src/utils/myContext.js';
 
-function App() {
+function App () {
 
   const [darkMode, setDarkMode] = useState(false);
   const [lan, setLanguage] = useState('en');
+  const [cartProducts, setCartProducts] = useState([]);
 
-  const themeData = data => {
-    setDarkMode(data);
-  }
-  
-  const languageData = data => {
-    setLanguage(data);
-  }
+  const themeData = setDarkMode;
+  const languageData = setLanguage;
+  // const themeData = data => setDarkMode(data);
+  // const languageData = data => setLanguage(data);
+  const cartProductsData = data => setCartProducts(data);
 
   return (
     <Router>
       <div className="app-layout">
 
         <header className="app-layout__header">
-          <Header onThemeChange={themeData} onLanguageChange={languageData}/>
+          {/* <MyContext.Provider value={{cartProducts, setCartProducts}}> */}
+            <Header onThemeChange={themeData} onLanguageChange={languageData}/>
+          {/* </MyContext.Provider> */}
         </header>
 
         <main className="app-layout__main">
@@ -46,9 +48,9 @@ function App() {
             <Route path="/" element={<Home darkMode={darkMode} lan={lan}/>}/>
             {mainListData.map(category =>
             <>
-            <Route path={`/${cleanseString(category.en)}`} element={<Products category={category} darkMode={darkMode} lan={lan}/>} key={category.id}/>
+            <Route path={`/${cleanseString(category.en)}`} element={<Products category={category} darkMode={darkMode} lan={lan} onCartProductsChange={cartProductsData}/>} key={category.id}/>
             {category.secondaryList.map(secondData => secondData.thirdList.map(thirdData => 
-            <Route path={`/${cleanseString(category.en)}/${cleanseString(thirdData.en)}`} element={<Products category={category} type={thirdData} darkMode={darkMode} lan={lan}/>} key={thirdData.id}/>
+            <Route path={`/${cleanseString(category.en)}/${cleanseString(thirdData.en)}`} element={<Products category={category} type={thirdData} darkMode={darkMode} lan={lan} onCartProductsChange={cartProductsData}/>} key={thirdData.id}/>
             ))}
             </> 
             )}

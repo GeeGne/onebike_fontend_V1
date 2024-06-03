@@ -1,5 +1,8 @@
 // HOOKS
-import React, {useState, useEffect, useRef} from 'react';
+import React, {useState, useEffect, useRef, useContext} from 'react';
+
+// UTILS
+// import {MyContext} from '/src/utils/myContext.js';
 
 // SCSS
 import '/src/styles/components/header/navbar/CartSlider.scss';
@@ -22,8 +25,11 @@ import brandLogo2 from '/src/assets/img/logo/giant.webp';
 import brandLogo3 from '/src/assets/img/logo/evoc.webp';
 
 function CartSlider ({darkMode, lan, cart, onCartChange}) {
+  // const [cartProducts, setCartProducts] = useContext(MyContext);
   const cartContainerElement = useRef(null);  
   const sliderElement = useRef(null);
+
+  // console.log(cartProducts, 'cartSlider');
 
   useEffect(() => {
     const containerStyle = cartContainerElement.current.style;
@@ -77,7 +83,7 @@ function CartSlider ({darkMode, lan, cart, onCartChange}) {
           </li>
           <li className="cartSlider-container__slider__products__product">
             <img className="cartSlider-container__slider__products__product__image" src={productIMG}/>
-            <a className="cartSlider-container__slider__products__product__title">Hand size Air Pump</a>
+            <a className="cartSlider-container__slider__products`__product__title">Hand size Air Pump</a>
             <div className="cartSlider-container__slider__products__product__price">{lan === 'en' ? 'S.P' : 'ل.س'} 20</div>
             <div className="cartSlider-container__slider__products__product__toggles">
               <button className="cartSlider-container__slider__products__product__toggles__delete"></button>
