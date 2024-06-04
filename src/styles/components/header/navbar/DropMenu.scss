@@ -105,7 +105,6 @@
         left: 0;
         width: 100%;
         background-color: var(--dropMenu-subItems-background-color);
-        // height: 3rem;
         padding: 2em;
         z-index: 20;
         transition: opacity 0.5s ease-out;
@@ -122,15 +121,9 @@
           z-index: -1;
         }
 
-        // &.hover {
-        //   visibility: visible;
-        //   opacity: 1;
-        // }
-
         &__sub-item {
           display: flex;
           flex-direction: column;
-          // background-color: white;
 
           &__title {
             position: relative;
@@ -159,7 +152,6 @@
             &__sub-sub-item {
               &__title {
                 cursor: pointer;
-                // margin-top: 0.5em;
                 color: var(--font-p-color);
 
                 &:hover {

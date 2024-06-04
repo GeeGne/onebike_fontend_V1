@@ -118,9 +118,14 @@
       }
     }
 
+    &.empty &__products{
+      -webkit-mask-image: none;
+      mask-image: none;
+    }
     &__products {
       display: flex;
       flex-direction: column;
+      flex: 1;
       gap: 2em;
       padding-block: 2em;
       padding-inline: 2em;

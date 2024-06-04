@@ -10,6 +10,9 @@
   margin: 0 auto;
 
   &__header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
     // border: solid 1px black;
   }
   &__main {

@@ -37,8 +37,50 @@ function IntroSection ({onThemeChange, onLanguageChange}) {
   const [alertText, setAlertText] = useState(null);
   const [newAlert, setNewAlert] = useState(0);
 
+  const infoSectionEL = useRef(null);
   const phoneNumberIconElement = useRef(null);
   const phoneNumberH2Element = useRef(null);
+  const sectionHeight = useRef(null);
+
+  useEffect(() => {
+    sectionHeight.current = infoSectionEL.current.scrollHeight; 
+  }, []);
+
+  useEffect(() => {
+    const changeDisplayOfIntroEL = () => {
+      const currentScrollY = window.scrollY;
+
+      switch (true) {
+        case (currentScrollY >= 1):
+          const timerA = setTimeout(() => {
+            infoSectionEL.current.style.overflow = 'hidden';
+            infoSectionEL.current.style.height = '0';
+            infoSectionEL.current.style.paddingBlock = '0';
+          }, 250);
+          const timerB = setTimeout(() => {
+            // infoSectionEL.current.style.overflow = 'hidden';
+            infoSectionEL.current.style.setProperty('--set-introSection-visibility', 'visible');
+            infoSectionEL.current.style.setProperty('--set-introSection-opacity', '1');
+          }, 500);
+          break;
+        default:
+          const timerC = setTimeout(() => {
+            infoSectionEL.current.style.overflow = `visible`;
+            infoSectionEL.current.style.height = `${sectionHeight.current}px`;
+            infoSectionEL.current.style.paddingBlock = '0.3em';
+          }, 250);
+          const timerD = setTimeout(() => {
+            infoSectionEL.current.style.setProperty('--set-introSection-opacity', '0');
+          }, 500);
+          const timerE = setTimeout(() => {
+            infoSectionEL.current.style.setProperty('--set-introSection-visibility', 'hidden');
+          }, 750);
+      }
+    }
+
+    window.addEventListener && window.addEventListener('scroll', changeDisplayOfIntroEL);
+    return () => window.removeEventListener('scroll', changeDisplayOfIntroEL);
+  }, [])
 
   useEffect(() => {
     onThemeChange(darkMode);
@@ -49,7 +91,6 @@ function IntroSection ({onThemeChange, onLanguageChange}) {
   }, [lan])
 
   const themeData = setDarkMode;
-
   const languageData = setLanguage;
 
   const handleClick = () => {
@@ -71,7 +112,7 @@ function IntroSection ({onThemeChange, onLanguageChange}) {
   }
 
   return (
-    <section className="userinfo-container">
+    <section className="userinfo-container" ref={infoSectionEL}>
       <Alert alertText={alertText} newAlert={newAlert}/>
         <a className="userinfo-container__icons-a" href={oneBike.facebook} target="_blank" tabIndex="0">
           <img className="userinfo-container__icons-a__img" src={darkMode ? facebookIconDarkMode : facebookIcon}/>
