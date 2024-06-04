@@ -23,10 +23,16 @@ function Navbar ({darkMode, lan}) {
   const [menu, setMenu] = useState(false);
   const [search, setSearch] = useState(false);
   const [cart, setCart] = useState(false);
-
+  const [cartProducts, setCartProducts] = useState([]);
+  
   const searchInputElement = useRef(null);
   const searchButtonElement = useRef(null);
 
+  const menuData = setMenu;
+  const cartData = setCart;
+  const cartProductsData = setCartProducts;
+
+  const cartEmpty = cartProducts.length === 0;
   const largeWidth = 1000;
   const webWidth = window.innerWidth;
   const desktopWidth = webWidth >= largeWidth;
@@ -77,19 +83,11 @@ function Navbar ({darkMode, lan}) {
     type ? searchButtonElement.current.classList.add('hover') : searchButtonElement.current.classList.remove('hover'); 
   }
 
-  const menuData = data => {
-    setMenu(data);
-  }
-
-  const cartData = data => {
-    setCart(data);
-  }
-
   return (
     <>
       <nav className="nav-container">
         <button className={`nav-container__hamburger${menu ? ' clicked' : ''}`} onClick={() => setMenu(oldMenu => !oldMenu)}/>
-          <img className="nav-container__logo" onClick={() => navigate('/') } src={logo}/>
+        <img className="nav-container__logo" onClick={() => navigate('/') } src={logo}/>
         <div className={`nav-container__search-input`} onMouseEnter={() => handleHover(true)}  onMouseLeave={() => handleHover(false)} ref={searchInputElement}>
           <input placeholder={lan === 'en' ? 'Type something' : 'هل تبحث عن شيء؟'} /* ref={searchInputElement} *//>
           <img src={darkMode ? searchIconDarkMode : searchIcon}/>
@@ -97,15 +95,14 @@ function Navbar ({darkMode, lan}) {
         <button className={`nav-container__search`} onClick={handleClick} onMouseEnter={() => handleHover(true)} onMouseLeave={() => handleHover(false)} ref={searchButtonElement}/>
         <button className="nav-container__user"/>
         <button className="nav-container__favourite"/>
-        <button className="nav-container__shoppingCart" onClick={() => setCart(true)}/>
+        <button className={`nav-container__shoppingCart${cartEmpty ? ' empty' : ''}`} onClick={() => setCart(true)}/>
       </nav>
       <DropMenu menu={menu} darkMode={darkMode} lan={lan}/>
       <HamMenu menu={menu} onMenuChange={menuData} darkMode={darkMode} lan={lan}/>
-      <CartSlider darkMode={darkMode} lan={lan} cart={cart} onCartChange={cartData}/>
+      <CartSlider darkMode={darkMode} lan={lan} cart={cart} onCartChange={cartData} onCartProductsChange={cartProductsData}/>
       {/* <NavBottom/> */}
       {/* <Outlet/> */}
     </>
-    
   )
 }
 

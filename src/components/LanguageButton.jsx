@@ -31,11 +31,11 @@ function LanguageButton ({onLanguageChange}) {
 
   return (
     <button className="language-button" onClick={() => setLanguageList(prevLang => !prevLang)} ref={languageElement}>
-      <h3 className="language-button__display">{lan === 'en' ? 'English' : 'العربيه'}</h3>
+      <span className="language-button__display">{lan === 'en' ? 'English' : 'العربيه'}</span>
       {languageList &&
       <ul className="language-button__list">
-        <li><button onClick={() => setLanguage('en')}><h3>English</h3></button></li>
-        <li><button onClick={() => setLanguage('ar')}><h3>العربيه</h3></button></li>
+        <li><button onClick={() => setLanguage('en')}>English</button></li>
+        <li><button onClick={() => setLanguage('ar')}>العربيه</button></li>
       </ul>
       }
     </button>

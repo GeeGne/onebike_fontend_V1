@@ -104,11 +104,23 @@
         top: 100%;
         left: 0;
         width: 100%;
-        background-color: var(--boxEnd-border-background-color);
+        background-color: var(--dropMenu-subItems-background-color);
         // height: 3rem;
-        padding: 1em;
+        padding: 2em;
         z-index: 20;
         transition: opacity 0.5s ease-out;
+
+        &::before {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 100vw;
+          height: 100%;
+          background-color: var(--dropMenu-subItems-background-color);
+          z-index: -1;
+        }
 
         // &.hover {
         //   visibility: visible;
@@ -141,11 +153,13 @@
           &__sub-sub-items {
             display: flex;
             flex-direction: column;
-
+            padding-top: 1em;
+            gap: 1em;
+            
             &__sub-sub-item {
               &__title {
                 cursor: pointer;
-                margin-top: 0.5em;
+                // margin-top: 0.5em;
                 color: var(--font-p-color);
 
                 &:hover {

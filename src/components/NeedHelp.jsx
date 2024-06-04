@@ -7,6 +7,12 @@ import '/src/styles/components/NeedHelp.scss';
 // COMPONENTS
 import Alert from './Alert';
 
+// JSON
+import oneBike from '/src/data/one-bike.json';
+
+// UTILS
+import strRemoveSpace from '/src/utils/strRemoveSpace.js';
+
 // ICONS
 import callIcon from '/src/assets/img/icons/call.svg';
 import mailIcon from '/src/assets/img/icons/mail.svg';
@@ -22,19 +28,17 @@ function NeedHelp ({darkMode, lan}) {
   const [alertText, setAlertText] = useState(null);
   const [newAlert, setNewAlert] = useState(0);
 
-  const whatsAppURL = "https://chat.whatsapp.com/BanGDxwaSLgKMBWN6eDVzq";
-
   const handleClick = (type) => {
     let copiedMessage;
     let alertMessage ;
     
     if (type === 'phone') {
-      copiedMessage = '+963964803712';
+      copiedMessage = strRemoveSpace(oneBike.phone);
       alertMessage = lan === 'en' ? 'Number is copied to the clipboard successfully!' : 'لقد تم نسخ رقم الهاتف بنجاح!';
     }
 
     if (type === 'email') {
-      copiedMessage = 'example@gmail.com';
+      copiedMessage = oneBike.email;
       alertMessage = lan === 'en' ? 'Email is copied to the clipboard successfully!' : 'لقد تم نسخ عنوان البريد الاكنروني بنجاح!';
     }
   
@@ -87,7 +91,7 @@ function NeedHelp ({darkMode, lan}) {
         <img className="need-help-container__chat-with-us__img" src={darkMode ? chatDotsIconDarkMode : chatDotsIcon}/>
         <h2 className="need-help-container__chat-with-us__title">{lan === 'en' ? 'Chat with us' : 'تواصل معنا'}</h2>
         <h3 className="need-help-container__chat-with-us__description">{lan === 'en' ? 'Our amazing community is always here to answer whatever question you have, feel free to post your question on the Group Chat!' : 'مجتمعنا الفريد من نوعه متواجد دائما للدعم على ايا استفسار لديك, قم بارسال سؤالك على مجموعه المحادثه!'}</h3>
-        <a className="need-help-container__chat-with-us__a" href={whatsAppURL} target="_blank">{lan === 'en' ? 'Join our Group Chat' : 'انضم الى مجموعه المحادثه'}</a>
+        <a className="need-help-container__chat-with-us__a" href={oneBike.whatsApp} target="_blank">{lan === 'en' ? 'Join our Group Chat' : 'انضم الى مجموعه المحادثه'}</a>
       </section>
     </div>
   )

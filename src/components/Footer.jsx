@@ -9,6 +9,12 @@ import '../styles/components/Footer.scss';
 import NeedHelp from './NeedHelp';
 import Alert from './Alert';
 
+// JSON
+import oneBike from '/src/data/one-bike.json'
+
+// UTILS
+import strRemoveSpace from '/src/utils/strRemoveSpace.js';
+
 //  ICONS
 import facebookIcon from '/src/assets/img/icons/facebook.svg';
 import instagramIcon from '/src/assets/img/icons/instagram.svg';
@@ -28,21 +34,17 @@ function Footer ({darkMode, lan}) {
   const [alertText, setAlertText] = useState(null);
   const [newAlert, setNewAlert] = useState(0);
 
-  const facebookURL = "https://www.facebook.com/profile.php?id=61555487381717";
-  const instagramURL = "https://www.instagram.com/onebike2024?fbclid=IwZXh0bgNhZW0CMTAAAR0j3tRBpSGxAkPztNBkI-KKoBI454wtiODT8gyzjrY2B6jtQhzTFDkpvuI_aem_AZvvFyQoDJ0_EqQr36CwzmanbLAnK_nFqsXLZollXvn2m7LBaFueZpOgtR9S0sRbuLf_CynuMk7xMjEVi3Capb1V";
-  const whatsAppURL = "https://chat.whatsapp.com/BanGDxwaSLgKMBWN6eDVzq";
-
   const handleClick = (type) => {
     let copiedMessage;
     let alertMessage ;
     
     if (type === 'phone') {
-      copiedMessage = '+963964803712';
+      copiedMessage = strRemoveSpace(oneBike.phone);
       alertMessage = lan === 'en' ? 'Number is copied to the clipboard successfully!' : 'لقد تم نسخ رقم الهاتف بنجاح!';
     }
 
     if (type === 'email') {
-      copiedMessage = 'example@gmail.com';
+      copiedMessage = oneBike.email;
       alertMessage = lan === 'en' ? 'Email is copied to the clipboard successfully!' : 'لقد تم نسخ عنوان البريد الاكنروني بنجاح!';
     }
   
@@ -110,15 +112,15 @@ function Footer ({darkMode, lan}) {
           <ul className="footer-container__footer-upper-grid__section-contact-us__list">
             <li className="footer-container__footer-upper-grid__section-contact-us__list__item">
               <img className="footer-container__footer-upper-grid__section-contact-us__list__item__img" src={darkMode ? callIconDarkMode : callIcon}/>
-              <button className="footer-container__footer-upper-grid__section-contact-us__list__item__link" onClick={() => handleClick('phone')}>+963 964 803 712</button>
+              <button className="footer-container__footer-upper-grid__section-contact-us__list__item__link" onClick={() => handleClick('phone')}>{oneBike.phone}</button>
             </li>
             <li className="footer-container__footer-upper-grid__section-contact-us__list__item">
               <img className="footer-container__footer-upper-grid__section-contact-us__list__item__img" src={darkMode ? mailIconDarkMode : mailIcon}/>
-              <button className="footer-container__footer-upper-grid__section-contact-us__list__item__link" onClick={() => handleClick('email')}>example@gmail.com</button>
+              <button className="footer-container__footer-upper-grid__section-contact-us__list__item__link" onClick={() => handleClick('email')}>{oneBike.email}</button>
             </li>
             <li className="footer-container__footer-upper-grid__section-contact-us__list__item">
               <img className="footer-container__footer-upper-grid__section-contact-us__list__item__img" src={darkMode ? whatsappIconDarkMode : whatsappIcon}/>
-            <Link className="footer-container__footer-upper-grid__section-contact-us__list__item__link" to={whatsAppURL} target="_blank" tabIndex="0">{lan === 'en' ? 'Chat with us' : 'تحدث معنا'}</Link>
+            <Link className="footer-container__footer-upper-grid__section-contact-us__list__item__link" to={oneBike.whatsApp} target="_blank" tabIndex="0">{lan === 'en' ? 'Chat with us' : 'تحدث معنا'}</Link>
             </li>
           </ul>
         </section>
@@ -126,9 +128,9 @@ function Footer ({darkMode, lan}) {
 
       <div className="footer-container__footer-lower">
         <section className="footer-container__footer-lower__media-section">
-        <a href={facebookURL} target="_blank" tabIndex="0"><img className="footer-container__footer-lower__media-section__media-icon" src={darkMode ? facebookIcon : facebookIconDarkMode}/></a>
-        <a href={whatsAppURL} target="_blank" tabIndex="0"><img className="footer-container__footer-lower__media-section__media-icon" src={darkMode ? whatsappIcon : whatsappIconDarkMode}/></a>
-        <a href={instagramURL} target="_blank" tabIndex="0"><img className="footer-container__footer-lower__media-section__media-icon" src={darkMode ? instagramIcon : instagramIconDarkMode}/></a>
+        <a href={oneBike.facebook} target="_blank" tabIndex="0"><img className="footer-container__footer-lower__media-section__media-icon" src={darkMode ? facebookIcon : facebookIconDarkMode}/></a>
+        <a href={oneBike.whatsApp} target="_blank" tabIndex="0"><img className="footer-container__footer-lower__media-section__media-icon" src={darkMode ? whatsappIcon : whatsappIconDarkMode}/></a>
+        <a href={oneBike.instagram} target="_blank" tabIndex="0"><img className="footer-container__footer-lower__media-section__media-icon" src={darkMode ? instagramIcon : instagramIconDarkMode}/></a>
         </section>
         <section className="footer-container__footer-lower__organism-rights">
           <h3 className="footer-container__footer-lower__organism-rights__h3">{lan === 'en' ? 'Syria © 2024 ONE BIKE all rights reseved' : 'سوريا © 2024 ون بايك جميع الحقوق محفوظة'}</h3>

@@ -10,6 +10,12 @@ import Alert from '../Alert';
 import LanguageButton from '../LanguageButton';
 import LightDarkButton from '../LightDarkButton';
 
+// JSON
+import oneBike from '/src/data/one-bike.json';
+
+// UTILS
+import strRemoveSpace from '/src/utils/strRemoveSpace.js';
+
 // ICONS
 import facebookIcon from '../../assets/img/icons/facebook.svg';
 import instagramIcon from '../../assets/img/icons/instagram.svg';
@@ -34,10 +40,6 @@ function IntroSection ({onThemeChange, onLanguageChange}) {
   const phoneNumberIconElement = useRef(null);
   const phoneNumberH2Element = useRef(null);
 
-  const facebookURL = "https://www.facebook.com/profile.php?id=61555487381717";
-  const instagramURL = "https://www.instagram.com/onebike2024?fbclid=IwZXh0bgNhZW0CMTAAAR0j3tRBpSGxAkPztNBkI-KKoBI454wtiODT8gyzjrY2B6jtQhzTFDkpvuI_aem_AZvvFyQoDJ0_EqQr36CwzmanbLAnK_nFqsXLZollXvn2m7LBaFueZpOgtR9S0sRbuLf_CynuMk7xMjEVi3Capb1V";
-  const whatsAppURL = "https://chat.whatsapp.com/BanGDxwaSLgKMBWN6eDVzq";
-
   useEffect(() => {
     onThemeChange(darkMode);
   }, [darkMode])
@@ -46,19 +48,14 @@ function IntroSection ({onThemeChange, onLanguageChange}) {
     onLanguageChange(lan);
   }, [lan])
 
-  const themeData = data => {
-    setDarkMode(data);
-  }
+  const themeData = setDarkMode;
 
-  const languageData = data => {
-    setLanguage(data);
-  }
+  const languageData = setLanguage;
 
   const handleClick = () => {
-    const number = phoneNumberH2Element.current.textContent;
+    const number = strRemoveSpace(phoneNumberH2Element.current.textContent);
     const alertMessage = lan === 'en' ? 
-    'Number is copied to the clipboard successfully!' : 
-    'لقد تم نسخ رقم الهاتف بنجاح!';
+    'Number is copied to the clipboard successfully!' : 'لقد تم نسخ رقم الهاتف بنجاح!';
     
     navigator.clipboard.writeText(number);
     setAlertText(alertMessage);
@@ -74,33 +71,26 @@ function IntroSection ({onThemeChange, onLanguageChange}) {
   }
 
   return (
-    <>
+    <section className="userinfo-container">
       <Alert alertText={alertText} newAlert={newAlert}/>
-      <section className="userinfo-container">
-        <a className="userinfo-container__icons-a" href={facebookURL} target="_blank" tabIndex="0">
+        <a className="userinfo-container__icons-a" href={oneBike.facebook} target="_blank" tabIndex="0">
           <img className="userinfo-container__icons-a__img" src={darkMode ? facebookIconDarkMode : facebookIcon}/>
         </a>
-        <a className="userinfo-container__icons-a" href={instagramURL} target="_blank" tabIndex="0">
+        <a className="userinfo-container__icons-a" href={oneBike.instagram} target="_blank" tabIndex="0">
           <img className="userinfo-container__icons-a__img" src={darkMode ? instagramIconDarkMode : instagramIcon}/>
         </a>
-        <a className="userinfo-container__icons-a" href={whatsAppURL} target="_blank" tabIndex="0">
+        <a className="userinfo-container__icons-a" href={oneBike.whatsApp} target="_blank" tabIndex="0">
           <img className="userinfo-container__icons-a__img" src={darkMode ? whatsappIconDarkMode : whatsappIcon}/>
         </a>
 
         <button className="userinfo-container__phone-number" onClick={handleClick} onMouseEnter={() => handleHover('enter')} onMouseLeave={() => handleHover('leave')}>
           <img src={darkMode ? callIconDarkMode : callIcon} ref={phoneNumberIconElement}/>
-          <h2 ref={phoneNumberH2Element}>+963 964 803 712</h2>
+          <span ref={phoneNumberH2Element}>{oneBike.phone}</span>
         </button>
 
-        <div className="userinfo-container__light-dark-button-container">
-          <LightDarkButton onThemeChange={themeData}/>
-        </div>
-
-        <div className="userinfo-container__language-button-container">
-          <LanguageButton onLanguageChange={languageData}/>
-        </div>
-      </section>
-    </>
+        <LightDarkButton onThemeChange={themeData}/>
+        <LanguageButton onLanguageChange={languageData}/>
+    </section>
   )
 }
 

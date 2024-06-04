@@ -13,12 +13,12 @@ import fetchElementById from '/src/utils/fetchElementById.js'
 
 
 // ICONS
-import expandCircleUpIcon from '../../../assets/img/icons/expand_circle_down.svg';
 import closeIcon from '../../../assets/img/icons/close.svg';
+import cartIcon from '/src/assets/img/icons/shopping_cart.svg';
 
 // ICONS - DARKMODE
-import expandCircleUpIconDarkMode from '../../../assets/img/icons/expand_circle_down_darkMode.svg';
 import closeIconDarkMode from '../../../assets/img/icons/close_darkMode.svg';
+import cartIconDarkMode from '/src/assets/img/icons/shopping_cart_darkMode.svg';
 
 // product img test
 import productIMG from '/src/assets/img/products/GIYO Small Bike tire Pump Schrader.jpg';
@@ -29,7 +29,7 @@ import brandLogo from '/src/assets/img/logo/trek.webp';
 import brandLogo2 from '/src/assets/img/logo/giant.webp';
 import brandLogo3 from '/src/assets/img/logo/evoc.webp';
 
-function CartSlider ({darkMode, lan, cart, onCartChange}) {
+function CartSlider ({darkMode, lan, cart, onCartChange, onCartProductsChange}) {
   const cartProducts = useContext(CartProductsContext);
   const cartContainerElement = useRef(null);  
   const sliderElement = useRef(null);
@@ -37,6 +37,11 @@ function CartSlider ({darkMode, lan, cart, onCartChange}) {
   let totalPrice = 0;
   cartProducts.forEach(list => (totalPrice += calculatePrice(list.product.price, list.product.discount) * list.currentAmount))
 
+  const cartEmpty = cartProducts.length === 0;
+
+  useEffect(() => {
+    onCartProductsChange(cartProducts);
+  }, [cartProducts])
 
   useEffect(() => {
     const containerStyle = cartContainerElement.current.style;
@@ -59,11 +64,11 @@ function CartSlider ({darkMode, lan, cart, onCartChange}) {
 
   return (
     <div className="cartSlider-container" onClick={() => onCartChange(false)} ref={cartContainerElement}>
-      <div className="cartSlider-container__slider" onClick={e => e.stopPropagation()} ref={sliderElement}>
+      <div className={`cartSlider-container__slider${cartEmpty ? ' empty' : ''}`} onClick={e => e.stopPropagation()} ref={sliderElement}>
         <div className="cartSlider-container__slider__empty">
-          <img/>
-          <div className="cartSlider-container__slider__empty__note">Your Cart Is Empty</div>
-          <button className="cartSlider-container__slider__empty__button" onClick={() => onCartChange(false)}>Back to shopping</button>
+          <img className="cartSlider-container__slider__empty__cart" src={darkMode ? cartIconDarkMode : cartIcon}/>
+          <div className="cartSlider-container__slider__empty__note">{lan === 'en' ? 'Your Cart Is Empty' : 'سله التسوق فارغه'}</div>
+          <button className="cartSlider-container__slider__empty__button" onClick={() => onCartChange(false)}>{lan === 'en' ? 'Back to shopping' : 'العوده للتسوق'}</button>
         </div>
         <section className="cartSlider-container__slider__top">
           <div className="cartSlider-container__slider__top__cart">{lan === 'en' ? 'Cart' : 'السله'}</div>

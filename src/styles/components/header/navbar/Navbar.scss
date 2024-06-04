@@ -173,8 +173,27 @@
   }
 
   &__shoppingCart {
+    position: relative;
     background-image: var(--shoppingCart-icon);
     margin: 0 1em;
+
+    &::after {
+      content: "";
+      position: absolute;
+      visibility: visible;
+      top: -0.3em;
+      right: -0.3em;
+      width: 0.7em;
+      height: 0.7em;
+      background-color: var(--red-color);
+      border-radius: 1em;
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    &.empty::after{
+      visibility: hidden;
+      opacity: 0;
+      transform: scale(0);
+    }
   }
 
   &__favourite {

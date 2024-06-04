@@ -31,8 +31,6 @@ function App () {
   const languageData = setLanguage;
   const cartProductsData = setCartProducts;
 
-  console.log(cartProducts, 'App');
-
   return (
     <Router>
       <div className="app-layout">
