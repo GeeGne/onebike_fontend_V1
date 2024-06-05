@@ -6,9 +6,7 @@
     // background-color: var(--light-background-color);
     background-color: var(--background-color);
     
-    body.arabic & {
-      direction: rtl;
-    }
+    body.arabic & {direction: rtl}
 
     &__grid {
       display: grid;
@@ -54,12 +52,8 @@
             z-index: 20;
             transition: background-color 0.25s ease-out;
           }
-          body.arabic &::before {
-            content: "المنتج غير متوفر"
-          }
-          &:active::before {
-            background-color: rgba(255, 0, 0, 0.223);
-          }
+          body.arabic &::before {content: "المنتج غير متوفر"}
+          &:active::before {background-color: rgba(255, 0, 0, 0.223)}
         }
 
         &__favourite {
@@ -137,7 +131,6 @@
             color: transparent;
             background-image: var(--add-shoppingCart-icon);
             background-repeat: no-repeat;
-            // background-size: 20%;
             background-size: 1.3em;
             background-position: center;
             
@@ -161,9 +154,7 @@
             border: solid var(--advertList-incrementAndDecrement-border-color);
             border-width: 0 0 0 2px;
 
-            body.arabic & {
-              border-width: 0 2px 0 0;
-            }
+            body.arabic & {border-width: 0 2px 0 0}
           }
 
           &__decrement {
@@ -174,22 +165,7 @@
           &__increment,
           &__decrement {
             position: relative;
-            &::before {
-              content: "";
-              position: absolute;
-              bottom: 0;
-              left: 0;
-              width: 100%;
-              height: 0%;
-              background-color: var(--advertList-addToCart-background-color);
-              z-index: -1;
-              transition: height 0.5s ease;
-            }
-
-            &:hover::before {
-              height: 100%;
-            }
-
+            &::before,
             &::after {
               content: "";
               position: absolute;
@@ -197,13 +173,13 @@
               left: 0;
               width: 100%;
               height: 0%;
-              transition: height 0.5s ease;
-              backdrop-filter: invert(100%);
+              transition: height 0.5s ease, background-color 0.15s ease;
             }
-
-            &:hover::after {
-              height: 100%;
-            }
+            &::before{background-color: var(--advertList-addToCart-background-color); z-index: -1}
+            &::after {backdrop-filter: invert(100%)}
+            &:hover::before,
+            &:hover::after {height: 100%}
+            &:active::before {background-color: var(--advertList-addToCart-active-background-color)}
           }
 
           &__total {
@@ -237,18 +213,7 @@
       border: solid var(--advertList-loadMore-border-color) 2px;
       padding: 0.5em 1em;
 
-      &::before {
-        content: "";
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        height: 0%;
-        background-color: var(--advertList-loadMore-background-color); 
-        z-index: -1;
-        transition: height 0.5s ease;
-      }
-      
+      &::before,
       &::after {
         content: "";
         position: absolute;
@@ -256,14 +221,13 @@
         left: 0;
         width: 100%;
         height: 0%;
-        backdrop-filter: invert(100%);
-        transition: height 0.5s ease;
+        transition: height 0.5s ease, background-color 0.15s ease;
       }
-
-      &:hover::before, 
-      &:hover::after {
-        height: 100%;
-      }
+      &::before{background-color: var(--advertList-loadMore-background-color); z-index: -1}
+      &::after {backdrop-filter: invert(100%)}
+      &:hover::before,
+      &:hover::after {height: 100%}
+      &:active::before {background-color: var(--advertList-loadMore-active-background-color)}
     }
 
     &__load-amount {

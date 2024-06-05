@@ -115,15 +115,9 @@ function IntroSection ({onThemeChange, onLanguageChange}) {
   return (
     <section className="userinfo-container" ref={infoSectionEL}>
       <Alert alertText={alertText} newAlert={newAlert}/>
-        <a className="userinfo-container__icons-a" href={oneBike.facebook} target="_blank" tabIndex="0">
-          <img className="userinfo-container__icons-a__img" src={darkMode ? facebookIconDarkMode : facebookIcon}/>
-        </a>
-        <a className="userinfo-container__icons-a" href={oneBike.instagram} target="_blank" tabIndex="0">
-          <img className="userinfo-container__icons-a__img" src={darkMode ? instagramIconDarkMode : instagramIcon}/>
-        </a>
-        <a className="userinfo-container__icons-a" href={oneBike.whatsApp} target="_blank" tabIndex="0">
-          <img className="userinfo-container__icons-a__img" src={darkMode ? whatsappIconDarkMode : whatsappIcon}/>
-        </a>
+        <a className="userinfo-container__facebook" href={oneBike.facebook} target="_blank" tabIndex="0"/>
+        <a className="userinfo-container__whatsapp" href={oneBike.whatsApp} target="_blank" tabIndex="0"/>
+        <a className="userinfo-container__instagram" href={oneBike.instagram} target="_blank" tabIndex="0"/>
 
         <button className="userinfo-container__phone-number" onClick={handleClick} onMouseEnter={() => handleHover('enter')} onMouseLeave={() => handleHover('leave')}>
           <img src={darkMode ? callIconDarkMode : callIcon} ref={phoneNumberIconElement}/>

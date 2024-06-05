@@ -223,17 +223,10 @@
               transition: height 0.5s ease;
             }
             &:hover::before,
-            &:hover::after {
-              height: 100%;
-            }
-
-            &::before {
-              background-color: var(--cartSlider-addToCart-background-color);
-              z-index: -1;              
-            }
-            &::after {
-              backdrop-filter: invert(100%);
-            }
+            &:hover::after {height: 100%}
+            &::before {background-color: var(--cartSlider-addToCart-background-color); z-index: -1}
+            &::after {backdrop-filter: invert(100%)}
+            &:active::before {background-color: var(--cartSlider-addToCart-active-background-color)}
           }
         }
       }   

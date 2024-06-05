@@ -887,7 +887,7 @@
   "id": 54,
   "keyword": "socks",
   "title": {
-    "en": "نحن نقدر صبرك ولا يمكننا الانتظار لمساعدتك في العثور على العتاد المثالي لمغامرات ركوب الدراجات الخاصة بك. إذا كانت لديك أي أسئلة أو تحتاج إلى مساعدة، فلا تتردد في الاتصال بفريق الدعم لدينا.", 
+    "en": "No Socks Available",
     "ar": "لا توجد جوارب متاحة"
   },
   "intro": {
@@ -1032,5 +1032,65 @@
   "outro": {
     "en": "We appreciate your patience and can't wait to help you find the perfect gear for your mountain biking excursions. If you have any questions or need assistance, feel free to reach out to our friendly support team.",
     "ar": "نحن نقدر صبرك ولا يمكننا الانتظار لمساعدتك في العثور على العتاد المثالي لرحلات ركوب الدراجات الجبلية الخاصة بك. إذا كانت لديك أي أسئلة أو تحتاج إلى مساعدة، فلا تتردد في الاتصال بفريق الدعم لدينا."
+  }
+},{
+  "id": 64,
+  "keyword": "clothing",
+  "title": {
+    "en" : "No Clothing Available",
+    "ar": "لا ملابس متاحة"
+  },
+  "intro": {
+    "en": "We know you're eager to find the perfect clothing to enhance your comfort and performance during your rides. Unfortunately, our clothing section is currently out of stock. But don't worry, our team is working hard to bring in new items that will keep you protected and comfortable on the road!",
+    "ar": "نعلم أنك متحمس للعثور على الملابس المثالية التي تعزز راحتك وأدائك أثناء الركوب. للأسف، قسم الملابس لدينا غير متوفر حاليًا. لكن لا تقلق، فريقنا يعمل بجد لإحضار عناصر جديدة ستبقيك محميًا ومريحًا على الطريق!"
+  },
+  "outro": {
+    "en": "We appreciate your patience and can't wait to help you find the perfect gear for your cycling adventures. If you have any questions or need assistance, feel free to reach out to our friendly support team.",
+    "ar": "نقدر صبرك ونتطلع لمساعدتك في العثور على المعدات المثالية لمغامراتك في ركوب الدراجات. إذا كانت لديك أي أسئلة أو تحتاج إلى مساعدة، لا تتردد في التواصل مع فريق الدعم الودود لدينا."
+  }
+},{
+  "id": 65,
+  "keyword": "caps",
+  "title": {
+    "en" : "NO CAPS AVAILABLE",
+    "ar": "لا قبعات متاحة"
+  },
+  "intro": {
+    "en": "We know you're eager to find the perfect caps to enhance your comfort and style during your rides. Unfortunately, our caps section is currently out of stock. But don't worry, our team is working hard to bring in new items that will keep your head protected and comfortable on the road!",
+    "ar": "نعلم أنك متحمس للعثور على القبعات المثالية التي تعزز راحتك وأسلوبك أثناء الركوب. للأسف، قسم القبعات لدينا غير متوفر حاليًا. لكن لا تقلق، فريقنا يعمل بجد لإحضار عناصر جديدة ستحافظ على حماية رأسك وراحته على الطريق!"
+  },
+  "outro": {
+    "en": "We appreciate your patience and can't wait to help you find the perfect gear for your cycling adventures. If you have any questions or need assistance, feel free to reach out to our friendly support team.",
+    "ar": "نقدر صبرك ونتطلع لمساعدتك في العثور على المعدات المثالية لمغامراتك في ركوب الدراجات. إذا كانت لديك أي أسئلة أو تحتاج إلى مساعدة، لا تتردد في التواصل مع فريق الدعم الودود لدينا."
+  }
+},{
+  "id": 64,
+  "keyword": "",
+  "title": {
+    "en" : "",
+    "ar": ""
+  },
+  "intro": {
+    "en": "",
+    "ar": ""
+  },
+  "outro": {
+    "en": "",
+    "ar": ""
+  }
+},{
+  "id": 64,
+  "keyword": "",
+  "title": {
+    "en" : "",
+    "ar": ""
+  },
+  "intro": {
+    "en": "",
+    "ar": ""
+  },
+  "outro": {
+    "en": "",
+    "ar": ""
   }
 }]

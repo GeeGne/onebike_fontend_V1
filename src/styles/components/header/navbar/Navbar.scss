@@ -2,7 +2,7 @@
 
 .nav-dropMenu-container {
   transition: transform 0.35s ease-out;
-
+  
   &__nav-container {
     position: relative;
     display: flex;
@@ -11,8 +11,6 @@
     font-size: inherit;
     background-color: var(--button-color);
     z-index: 10;
-    // transition: transform 0.35s ease-out;
-    transition: transform 3s ease-out;
 
     body.arabic & {
       flex-direction: row-reverse;

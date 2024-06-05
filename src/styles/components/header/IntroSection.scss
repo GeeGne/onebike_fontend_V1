@@ -33,7 +33,7 @@
   &::after {
     content: "";
     position: absolute;
-    visibility: var(--set-introSection-after-visibility, 'hidden');
+    visibility: var(--set-introSection-after-visibility, hidden);
     opacity: var(--set-introSection-after-opacity, 0);
     top: 0;
     left: 50%;
@@ -45,11 +45,17 @@
     transition: opacity 0.25s ease-out;
   }
 
-  &__icons-a {    
-    &__img {
-      width: var(--icon-size);
-    }
+  &__facebook,
+  &__whatsapp,
+  &__instagram {
+    width: var(--icon-size);
+    height: var(--icon-size);
+    background-repeat: no-repeat;
+    background-size: cover;
   }
+  &__facebook {background-image: var(--facebook-icon)}
+  &__whatsapp {background-image: var(--whatsapp-icon)}  
+  &__instagram {background-image: var(--instagram-icon)}
 
   &__phone-number {
     visibility: hidden;

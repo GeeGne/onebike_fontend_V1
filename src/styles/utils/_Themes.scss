@@ -13,6 +13,7 @@
   --primary-color: #4B6D90;
   --secondary-color: #B8D1E0;
   --red-color: #E3242B;
+  --red-inverted-color: #1cdbd4;
 
   // Secondary
   --button-color: hsl(0, 0%, 100%);
@@ -72,11 +73,14 @@
   --advertList-incrementAndDecrement-border-color: var(--endElement-border-background-color);
   --advertList-total-background-color: var(--light-background-color);
   --advertList-addToCart-background-color: #b4926f;
+  --advertList-addToCart-active-background-color: hsl(0, 0%, 100%);
   --advertList-loadMore-background-color: #b4926f;
+  --advertList-loadMore-active-background-color: hsl(0, 0%, 100%);
   --advertList-discount-color: var(--primary-color);
 
   // CartSlider
   --cartSlider-addToCart-background-color: #b4926f;
+  --cartSlider-addToCart-active-background-color: hsl(0, 0%, 100%);
 
   // Footer
   --footer-background-color: var(--secondary-color);
@@ -151,11 +155,14 @@
   --advertList-incrementAndDecrement-border-color: var(--endElement-border-background-color);
   --advertList-total-background-color: var(--light-background-color);
   --advertList-addToCart-background-color: #472e1f;
+  --advertList-addToCart-active-background-color: hsl(0, 0%, 0%);
   --advertList-loadMore-background-color: #472e1f;
+  --advertList-loadMore-active-background-color: hsl(0, 0%, 0%);
   --advertList-discount-color: var(--primary-color);
 
   // CartSlider
   --cartSlider-addToCart-background-color: #472e1f;
+  --cartSlider-addToCart-active-background-color: hsl(0, 0%, 0%);
 
   // Footer
   --footer-background-color: var(--secondary-color);
