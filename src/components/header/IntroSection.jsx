@@ -47,39 +47,40 @@ function IntroSection ({onThemeChange, onLanguageChange}) {
   }, []);
 
   useEffect(() => {
-    const changeDisplayOfIntroEL = () => {
+    const styleIntroElWhenScrollToTop = () => {
       const currentScrollY = window.scrollY;
 
       switch (true) {
         case (currentScrollY >= 1):
+          infoSectionEL.current.style.setProperty('--set-introSection-before-width', '100%');
           const timerA = setTimeout(() => {
             infoSectionEL.current.style.overflow = 'hidden';
             infoSectionEL.current.style.height = '0';
             infoSectionEL.current.style.paddingBlock = '0';
           }, 250);
           const timerB = setTimeout(() => {
-            // infoSectionEL.current.style.overflow = 'hidden';
-            infoSectionEL.current.style.setProperty('--set-introSection-visibility', 'visible');
-            infoSectionEL.current.style.setProperty('--set-introSection-opacity', '1');
+            infoSectionEL.current.style.setProperty('--set-introSection-after-visibility', 'visible');
+            infoSectionEL.current.style.setProperty('--set-introSection-after-opacity', '1');
           }, 500);
           break;
         default:
           const timerC = setTimeout(() => {
-            infoSectionEL.current.style.overflow = `visible`;
             infoSectionEL.current.style.height = `${sectionHeight.current}px`;
             infoSectionEL.current.style.paddingBlock = '0.3em';
           }, 250);
           const timerD = setTimeout(() => {
-            infoSectionEL.current.style.setProperty('--set-introSection-opacity', '0');
+            infoSectionEL.current.style.setProperty('--set-introSection-after-opacity', '0');
           }, 500);
           const timerE = setTimeout(() => {
-            infoSectionEL.current.style.setProperty('--set-introSection-visibility', 'hidden');
+            infoSectionEL.current.style.overflow = `visible`;
+            infoSectionEL.current.style.setProperty('--set-introSection-after-visibility', 'hidden');
+            infoSectionEL.current.style.setProperty('--set-introSection-before-width', '100vw');
           }, 750);
       }
     }
 
-    window.addEventListener && window.addEventListener('scroll', changeDisplayOfIntroEL);
-    return () => window.removeEventListener('scroll', changeDisplayOfIntroEL);
+    window.addEventListener && window.addEventListener('scroll', styleIntroElWhenScrollToTop);
+    return () => window.removeEventListener('scroll', styleIntroElWhenScrollToTop);
   }, [])
 
   useEffect(() => {

@@ -38,31 +38,29 @@ function DropMenu ({darkMode, lan, menu}) {
   }
                                                          
   return (
-    <>
-      <section className="drop-menu" ref={dropMenuElement}>
-        <ul className="drop-menu__items" ref={itemsElement}>
-          {mainListData.map(mainData =>
-          <li className={`drop-menu__items__item${dropMenu ? ' hover' : ''}`} onMouseEnter={(e) => handleHover(true, e)} onMouseLeave={(e) => handleHover(false, e)} ref={itemElement} key={mainData.id}>
-            <h2 className="drop-menu__items__item__title">{mainData[lan]}</h2>
-            <ul className={`drop-menu__items__item__sub-items`} onMouseEnter={(e) => handleHover(true, e)} onMouseLeave={(e) => handleHover(false, e)} ref={subItemsElement}>
-              {mainData.secondaryList.map(secondData => 
-              <li className="drop-menu__items__item__sub-items__sub-item" key={secondData.id}>
-                <h2 className="drop-menu__items__item__sub-items__sub-item__title">{secondData[lan]}</h2>
-                <ul className="drop-menu__items__item__sub-items__sub-item__sub-sub-items">
-                  {secondData.thirdList.map(thirdData =>
-                  <li className="drop-menu__items__item__sub-items__sub-item__sub-sub-items__sub-sub-item" onClick={() => navigate(`/${cleanseString(mainData.en)}/${cleanseString(thirdData.en)}`)} key={thirdData.id}>
-                    <h3 className="drop-menu__items__item__sub-items__sub-item__sub-sub-items__sub-sub-item__title">{thirdData[lan]}</h3>
-                  </li>
-                  )}
-                </ul>
-              </li>
-              )}
-            </ul>
-          </li>
-           )}
-        </ul>
-      </section>
-    </>
+    <section className="drop-menu" ref={dropMenuElement}>
+      <ul className="drop-menu__items" ref={itemsElement}>
+        {mainListData.map(mainData =>
+        <li className={`drop-menu__items__item${dropMenu ? ' hover' : ''}`} onMouseEnter={(e) => handleHover(true, e)} onMouseLeave={(e) => handleHover(false, e)} ref={itemElement} key={mainData.id}>
+          <h2 className="drop-menu__items__item__title">{mainData[lan]}</h2>
+          <ul className={`drop-menu__items__item__sub-items`} onMouseEnter={(e) => handleHover(true, e)} onMouseLeave={(e) => handleHover(false, e)} ref={subItemsElement}>
+            {mainData.secondaryList.map(secondData => 
+            <li className="drop-menu__items__item__sub-items__sub-item" key={secondData.id}>
+              <h2 className="drop-menu__items__item__sub-items__sub-item__title">{secondData[lan]}</h2>
+              <ul className="drop-menu__items__item__sub-items__sub-item__sub-sub-items">
+                {secondData.thirdList.map(thirdData =>
+                <li className="drop-menu__items__item__sub-items__sub-item__sub-sub-items__sub-sub-item" onClick={() => navigate(`/${cleanseString(mainData.en)}/${cleanseString(thirdData.en)}`)} key={thirdData.id}>
+                  <h3 className="drop-menu__items__item__sub-items__sub-item__sub-sub-items__sub-sub-item__title">{thirdData[lan]}</h3>
+                </li>
+                )}
+              </ul>
+            </li>
+            )}
+          </ul>
+        </li>
+          )}
+      </ul>
+    </section>
   )
 }
 
