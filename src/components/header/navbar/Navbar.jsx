@@ -25,8 +25,11 @@ function Navbar ({darkMode, lan}) {
   const [cart, setCart] = useState(false);
   const [cartProducts, setCartProducts] = useState([]);
   
-  const searchInputElement = useRef(null);
-  const searchButtonElement = useRef(null);
+  const navDropMenuEL = useRef(null);
+  const prevScrollY = useRef(0);
+  const prevScrollYTimer = useRef(null);
+  const searchInputEL = useRef(null);
+  const searchButtonEL = useRef(null);
 
   const menuData = setMenu;
   const cartData = setCart;
@@ -43,16 +46,15 @@ function Navbar ({darkMode, lan}) {
       const webWidth = window.innerWidth;
       const desktopWidth = webWidth >= largeWidth;
 
-
       switch (desktopWidth) {
         case true:
-          searchInputElement.current.classList.add('hover');
-          searchButtonElement.current.classList.add('hover');
+          searchInputEL.current.classList.add('hover');
+          searchButtonEL.current.classList.add('hover');
           document.body.style.overflow = 'hidden auto';
           break;
         case false: 
-          searchInputElement.current.classList.remove('hover');
-          searchButtonElement.current.classList.remove('hover');
+          searchInputEL.current.classList.remove('hover');
+          searchButtonEL.current.classList.remove('hover');
           document.body.style.overflow = menu ? 'hidden' : 'hidden auto';
           break;
       }
@@ -66,38 +68,69 @@ function Navbar ({darkMode, lan}) {
     document.body.style.overflow = menu & !desktopWidth ? 'hidden' : 'hidden auto';
   }, [menu])
 
+  useEffect(() => {
+    const stylenavDropMenuELWhenScrolling = () => {
+      const hideNav = (el, height) => el.style.transform = `translateY(-${height}px)`;
+      const showNav = el => el.style.transform = `translateY(0)`;
+
+      const navDropMenuELHeight = navDropMenuEL.current.scrollHeight;
+      const currentScrollY = window.scrollY;
+      const activateHeight = currentScrollY >= 400;
+      clearTimeout(prevScrollYTimer.current);
+
+      prevScrollYTimer.current = setTimeout(() => (prevScrollY.current = currentScrollY), 100);
+      const scrollingUp = prevScrollY.current > currentScrollY;
+      const scrollingDown = currentScrollY > prevScrollY.current + 50;
+
+      switch (true) {
+        case (activateHeight && scrollingDown):
+          hideNav(navDropMenuEL.current, navDropMenuELHeight + 50);
+          break;
+        case (activateHeight && scrollingUp):
+          showNav(navDropMenuEL.current);
+          break;
+        default:
+          showNav(navDropMenuEL.current);
+      }
+    }
+    window.addEventListener('scroll', stylenavDropMenuELWhenScrolling);
+    return () => window.removeEventListener('scroll', stylenavDropMenuELWhenScrolling);
+  }, [])
+
   const handleClick = () => {
     if (!desktopWidth) {
-      searchInputElement.current.classList.toggle('clicked');
-      searchButtonElement.current.classList.toggle('clicked');
+      searchInputEL.current.classList.toggle('clicked');
+      searchButtonEL.current.classList.toggle('clicked');
     }
   }
 
   const handleHover = type => {
     if (desktopWidth) {
-      searchInputElement.current.classList.add('hover');
-      searchButtonElement.current.classList.add('hover');
+      searchInputEL.current.classList.add('hover');
+      searchButtonEL.current.classList.add('hover');
       return;
     }
-    type ? searchInputElement.current.classList.add('hover') : searchInputElement.current.classList.remove('hover');
-    type ? searchButtonElement.current.classList.add('hover') : searchButtonElement.current.classList.remove('hover'); 
+    type ? searchInputEL.current.classList.add('hover') : searchInputEL.current.classList.remove('hover');
+    type ? searchButtonEL.current.classList.add('hover') : searchButtonEL.current.classList.remove('hover'); 
   }
 
   return (
     <>
-      <nav className="nav-container">
-        <button className={`nav-container__hamburger${menu ? ' clicked' : ''}`} onClick={() => setMenu(oldMenu => !oldMenu)}/>
-        <img className="nav-container__logo" onClick={() => navigate('/') } src={logo}/>
-        <div className={`nav-container__search-input`} onMouseEnter={() => handleHover(true)}  onMouseLeave={() => handleHover(false)} ref={searchInputElement}>
-          <input placeholder={lan === 'en' ? 'Type something' : 'هل تبحث عن شيء؟'} /* ref={searchInputElement} *//>
+    <div className="nav-dropMenu-container" ref={navDropMenuEL}>
+      <nav className="nav-dropMenu-container__nav-container" /* ref={navDropMenuEL} */>
+        <button className={`nav-dropMenu-container__nav-container__hamburger${menu ? ' clicked' : ''}`} onClick={() => setMenu(oldMenu => !oldMenu)}/>
+        <img className="nav-dropMenu-container__nav-container__logo" onClick={() => navigate('/') } src={logo}/>
+        <div className={`nav-dropMenu-container__nav-container__search-input`} onMouseEnter={() => handleHover(true)}  onMouseLeave={() => handleHover(false)} ref={searchInputEL}>
+          <input placeholder={lan === 'en' ? 'Type something' : 'هل تبحث عن شيء؟'} /* ref={searchInputEL} *//>
           <img src={darkMode ? searchIconDarkMode : searchIcon}/>
         </div>
-        <button className={`nav-container__search`} onClick={handleClick} onMouseEnter={() => handleHover(true)} onMouseLeave={() => handleHover(false)} ref={searchButtonElement}/>
-        <button className="nav-container__user"/>
-        <button className="nav-container__favourite"/>
-        <button className={`nav-container__shoppingCart${cartEmpty ? ' empty' : ''}`} onClick={() => setCart(true)}/>
+        <button className={`nav-dropMenu-container__nav-container__search`} onClick={handleClick} onMouseEnter={() => handleHover(true)} onMouseLeave={() => handleHover(false)} ref={searchButtonEL}/>
+        <button className="nav-dropMenu-container__nav-container__user"/>
+        <button className="nav-dropMenu-container__nav-container__favourite"/>
+        <button className={`nav-dropMenu-container__nav-container__shoppingCart${cartEmpty ? ' empty' : ''}`} onClick={() => setCart(true)}/>
       </nav>
       <DropMenu menu={menu} darkMode={darkMode} lan={lan}/>
+    </div>
       <HamMenu menu={menu} onMenuChange={menuData} darkMode={darkMode} lan={lan}/>
       <CartSlider darkMode={darkMode} lan={lan} cart={cart} onCartChange={cartData} onCartProductsChange={cartProductsData}/>
       {/* <NavBottom/> */}
