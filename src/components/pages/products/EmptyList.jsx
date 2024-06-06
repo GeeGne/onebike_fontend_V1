@@ -8,12 +8,12 @@ import '/src/styles/components/pages/products/EmptyList.scss'
 import descriptions from '/src/data/empty-list.json';
 import oneBike from '/src/data/one-bike.json';
 
-function EmptyList ({darkMode, lan, productCategoryEN, productCategory}) {
-
+function EmptyList ({darkMode, lan, matchedProducts, productCategoryEN, productCategory}) {
+  const isListEmpty = matchedProducts.length === 0;
   const getCurrentDescription = descriptions.filter(description => productCategoryEN === description.keyword);
 
   return (
-    <article className="empty-list-container">
+    <article className={`empty-list-container${isListEmpty ? '' : ' hide'}`}>
       {getCurrentDescription.map(description => 
       <div key={description.id}>
       <h1>{description.title[lan]}</h1>

@@ -1,12 +1,13 @@
 @use 'src/styles/utils/_BreakPoints' as w;
 
 .advertList-container {
+  &.hide {display: none}
+  body.arabic & {direction: rtl}
+
   &__advert-section {
     padding: 1em;
     // background-color: var(--light-background-color);
     background-color: var(--background-color);
-    
-    body.arabic & {direction: rtl}
 
     &__grid {
       display: grid;
@@ -233,7 +234,6 @@
     &__load-amount {
       color: var(--font-p-color);
       font-size: var(--font-size-small);
-      body.arabic & {direction: rtl}
     }
   }
 }

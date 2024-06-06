@@ -35,7 +35,7 @@ function CartSlider ({darkMode, lan, cart, onCartChange, onCartProductsChange}) 
   const sliderElement = useRef(null);
 
   let totalPrice = 0;
-  cartProducts.forEach(list => (totalPrice += calculatePrice(list.product.price, list.product.discount) * list.currentAmount))
+  cartProducts.forEach(list => (totalPrice += calculatePrice(list.product.price, list.product.discount) * list.quantity))
 
   const cartEmpty = cartProducts.length === 0;
 
@@ -80,11 +80,11 @@ function CartSlider ({darkMode, lan, cart, onCartChange, onCartProductsChange}) 
           <li className="cartSlider-container__slider__products__product" key={list.id}>
             <img className="cartSlider-container__slider__products__product__image" src={`/src/assets/img/products/${list.product.category}/${list.product.type}/${list.product.id + '-' + list.product.color.en}-front.webp`}/>
             <a className="cartSlider-container__slider__products__product__title">{list.product.title[lan]}</a>
-            <div className="cartSlider-container__slider__products__product__price">{lan === 'en' ? 'S.P' : 'ل.س'} {formatNumberWithCommas(calculatePrice(list.product.price, list.product.discount) * list.currentAmount)}</div>
+            <div className="cartSlider-container__slider__products__product__price">{lan === 'en' ? 'S.P' : 'ل.س'} {formatNumberWithCommas(calculatePrice(list.product.price, list.product.discount) * list.quantity)}</div>
             <div className="cartSlider-container__slider__products__product__toggles">
             <button className="cartSlider-container__slider__products__product__toggles__delete"></button>
               <button className="cartSlider-container__slider__products__product__toggles__increment"></button>
-              <div className="cartSlider-container__slider__products__product__toggles__value">{list.currentAmount}</div>
+              <div className="cartSlider-container__slider__products__product__toggles__value">{list.quantity}</div>
               <button className="cartSlider-container__slider__products__product__toggles__decrement"></button>
             </div>
           </li>

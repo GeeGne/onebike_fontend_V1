@@ -45,12 +45,12 @@ function App () {
           <Routes>
             <Route path="/" element={<Home darkMode={darkMode} lan={lan}/>}/>
             {mainListData.map(category =>
-            <>
-            <Route path={`/${cleanseString(category.en)}`} element={<Products category={category} darkMode={darkMode} lan={lan} onCartProductsChange={cartProductsData}/>} key={category.id}/>
+            <React.Fragment key={category.id}>
+            <Route path={`/${cleanseString(category.en)}`} element={<Products category={category} darkMode={darkMode} lan={lan} onCartProductsChange={cartProductsData}/>}/>
             {category.secondaryList.map(secondData => secondData.thirdList.map(thirdData => 
             <Route path={`/${cleanseString(category.en)}/${cleanseString(thirdData.en)}`} element={<Products category={category} type={thirdData} darkMode={darkMode} lan={lan} onCartProductsChange={cartProductsData}/>} key={thirdData.id}/>
             ))}
-            </> 
+            </React.Fragment>
             )}
             <Route path="*" element={<NotFound/>}/>
           </Routes>

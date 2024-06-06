@@ -2,14 +2,10 @@
 
 .empty-list-container {
   padding: 2em 1em;
-  // line-height: 2em;
-  &.hide {
-    display: none;
-  }
 
-  body.arabic & {
-    direction: rtl;
-  }
+  &.hide {display: none}
+
+  body.arabic & {direction: rtl}
 
   & h1 {
     margin-bottom: 0.7em;

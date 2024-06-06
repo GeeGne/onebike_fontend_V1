@@ -28,7 +28,8 @@ function Products ({category, type, darkMode, lan, onCartProductsChange}) {
   const matchedProducts = products.filter(product => checkMatchedProduct(product.category, product.type) && !product.hide);
   const totalProducts = matchedProducts.length;
 
-  const cartProductsData = data => onCartProductsChange(data);
+  // const cartProductsData = data => onCartProductsChange(data);
+  const cartProductsData = data => {onCartProductsChange(data);console.log('test data', data)};
 
   return (
     <div className="products-container">
@@ -38,11 +39,15 @@ function Products ({category, type, darkMode, lan, onCartProductsChange}) {
         <h3 className="products-container__category-title-container__result">&#10088;{lan === 'en' ? totalProducts + ' results' : totalProducts + ' نتيجه'}&#10089;</h3>
       </section>
       <Controls darkMode={darkMode} lan={lan}/>
-      {totalProducts === 0 ? <>
-      <EmptyList darkMode={darkMode} lan={lan} productCategoryEN={cleanseString(productCategoryEN)} productCategory={productCategory}/> 
-      <NeedHelp darkMode={darkMode} lan={lan}/></>
-      : 
-      <AdvertList darkMode={darkMode} lan={lan} matchedProducts={matchedProducts} onCartProductsChange={cartProductsData}/>}
+      <EmptyList darkMode={darkMode} lan={lan} matchedProducts={matchedProducts} productCategoryEN={cleanseString(productCategoryEN)} productCategory={productCategory}/> 
+      <AdvertList darkMode={darkMode} lan={lan} matchedProducts={matchedProducts} onCartProductsChange={cartProductsData}/>
+      <NeedHelp darkMode={darkMode} lan={lan}/>
+      {/* // {totalProducts === 0 ? <>
+      // <EmptyList darkMode={darkMode} lan={lan} productCategoryEN={cleanseString(productCategoryEN)} productCategory={productCategory}/> 
+      // <AdvertList darkMode={darkMode} lan={lan} matchedProducts={matchedProducts} onCartProductsChange={cartProductsData}/>}
+      // <NeedHelp darkMode={darkMode} lan={lan}/></>
+      // : 
+      // <AdvertList darkMode={darkMode} lan={lan} matchedProducts={matchedProducts} onCartProductsChange={cartProductsData}/>} */}
     </div>
   )
 }
