@@ -29,9 +29,9 @@ function cartReducer(cart, action) {
     case 'MODIFY__AMOUNT':
       return;
     case 'REMOVE_FROM_CART':
-      return;
-    case 'TOGGLE_CART_SLIDER':
-      return;
+      return cart.filter(item => item.id !== action.id );
+    default:
+      return [...cart];
   }
 }
 

@@ -26,23 +26,20 @@ import brandLogo2 from '/src/assets/img/logo/giant.webp';
 import brandLogo3 from '/src/assets/img/logo/evoc.webp';
 
 function AdvertList ({darkMode, lan, matchedProducts, onCartProductsChange}) {
-  const [cart, dispatch] = useReducer(cartReducer, []);
+  const [cartDispatchData, setCartDispatchData] = useState([]);
   const [loadLimit, setLoadLimit] = useState(0);
   const allProductsLoaded = loadLimit === matchedProducts.length;
   const addToCartELs = useRef([]);
   const productAmountELs = useRef([]);
-
   const en = lan === 'en';
-  const isListEmpty = matchedProducts.length === 0;
   const displayedProducts = matchedProducts.slice(0, loadLimit);
   const nowStyle = {
     color: "var(--primary-color)"
   }
 
   useEffect(() => {
-    console.log('cart is changing')
-    onCartProductsChange(cart);
-  }, [cart])
+    onCartProductsChange(cartDispatchData);
+  }, [cartDispatchData])
 
   useEffect(() => {
     setLoadLimit(24 < matchedProducts.length ? 24 : matchedProducts.length);
@@ -81,11 +78,12 @@ function AdvertList ({darkMode, lan, matchedProducts, onCartProductsChange}) {
   function handleClick (type, e, product) {
     
     switch (type) {
-      case 'addToCart':
+      case 'ADD_TO_CART':
         const getAmountEL = fetchElementById(e.target, 'productId', productAmountELs.current);
         const quantity = Number(getAmountEL.textContent);
-        dispatch({
-          type: 'ADD_TO_CART',
+
+        setCartDispatchData({
+          type,
           quantity,
           product
         })
@@ -96,7 +94,7 @@ function AdvertList ({darkMode, lan, matchedProducts, onCartProductsChange}) {
   }
 
   return (
-    <div className={`advertList-container${isListEmpty ? ' hide' : ''}`}>
+    <div className='advertList-container'>
       <section className="advertList-container__advert-section">
         <ul className="advertList-container__advert-section__grid">
           {displayedProducts.map((product, i) => 
@@ -108,7 +106,7 @@ function AdvertList ({darkMode, lan, matchedProducts, onCartProductsChange}) {
             <img className="advertList-container__advert-section__grid__product-content__brand-logo" src={product.brand ? `/src/assets/img/logo/${product.brand}.webp` : ''}/>
             <h2 className="advertList-container__advert-section__grid__product-content__price">{product.discount ? <><span style={nowStyle}>{en ? 'NOW' : 'الان'}</span> {formatNumberWithCommas(calculatePrice(product.price, product.discount))} <span className="currency-symbol">{en ? 'S.P ' : 'ل.س'}</span><s>{formatNumberWithCommas(product.price)}</s></> : <>{formatNumberWithCommas(product.price)} <span className="currency-symbol">{en ? 'S.P' : 'ل.س'}</span></>}</h2>
             <div className="advertList-container__advert-section__grid__product-content__cart-utils">
-              <button className="advertList-container__advert-section__grid__product-content__cart-utils__add-to-cart" data-product-id={product.id} onClick={e => handleClick('addToCart', e, product)}>{en ? 'Add to cart' : 'اضف الى السله'}</button>  
+              <button className="advertList-container__advert-section__grid__product-content__cart-utils__add-to-cart" data-product-id={product.id} onClick={e => handleClick('ADD_TO_CART', e, product)}>{en ? 'Add to cart' : 'اضف الى السله'}</button>  
               <button className="advertList-container__advert-section__grid__product-content__cart-utils__increment" data-product-id={product.id} onClick={e => updateProductAmount(e, 1)}></button>  
               <div className="advertList-container__advert-section__grid__product-content__cart-utils__total" data-product-id={product.id} ref={el => addRef('productAmountELs', el, i)}>1</div>  
               <button className="advertList-container__advert-section__grid__product-content__cart-utils__decrement" data-product-id={product.id} onClick={e => updateProductAmount(e, -1)}></button>  

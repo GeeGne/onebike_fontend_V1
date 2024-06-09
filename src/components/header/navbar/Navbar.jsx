@@ -1,11 +1,14 @@
 // HOOKS
-import React, {useState, useRef, useEffect} from 'react';
+import React, {useState, useRef, useEffect, useReducer} from 'react';
 import {useNavigate} from 'react-router-dom';
 
 // COMPONENTS
 import HamMenu from './HamMenu';
 import DropMenu from './DropMenu';
 import CartSlider from './CartSlider';
+
+// REDUCERS
+import cartReducer from '/src/reducers/cartReducer.js';
 
 // SCSS
 import '/src/styles/components/header/navbar/Navbar.scss';
@@ -22,8 +25,8 @@ function Navbar ({darkMode, lan}) {
 
   const [menu, setMenu] = useState(false);
   const [search, setSearch] = useState(false);
-  const [cart, setCart] = useState(false);
-  const [cartProducts, setCartProducts] = useState([]);
+  const [cartToggle, setCartToggle] = useState(false);
+  const [cart,setCart] = useState([]);
   
   const navDropMenuEL = useRef(null);
   const prevScrollY = useRef(0);
@@ -32,10 +35,10 @@ function Navbar ({darkMode, lan}) {
   const searchButtonEL = useRef(null);
 
   const menuData = setMenu;
+  const cartToggleData = setCartToggle;
   const cartData = setCart;
-  const cartProductsData = setCartProducts;
 
-  const cartEmpty = cartProducts.length === 0;
+  const cartEmpty = cart.length === 0;
   const largeWidth = 1000;
   const webWidth = window.innerWidth;
   const desktopWidth = webWidth >= largeWidth;
@@ -131,12 +134,12 @@ function Navbar ({darkMode, lan}) {
         <button className={`nav-dropMenu-container__nav-container__search`} onClick={() => handleClick('search')} onMouseEnter={() => handleHover(true)} onMouseLeave={() => handleHover(false)} ref={searchButtonEL}/>
         <button className="nav-dropMenu-container__nav-container__user"/>
         <button className="nav-dropMenu-container__nav-container__favourite"/>
-        <button className={`nav-dropMenu-container__nav-container__shoppingCart${cartEmpty ? ' empty' : ''}`} onClick={() => setCart(true)}/>
+        <button className={`nav-dropMenu-container__nav-container__shoppingCart${cartEmpty ? ' empty' : ''}`} onClick={() => setCartToggle(true)}/>
       </nav>
       <DropMenu menu={menu} darkMode={darkMode} lan={lan}/>
     </div>
       <HamMenu menu={menu} onMenuChange={menuData} darkMode={darkMode} lan={lan}/>
-      <CartSlider darkMode={darkMode} lan={lan} cart={cart} onCartChange={cartData} onCartProductsChange={cartProductsData}/>
+      <CartSlider darkMode={darkMode} lan={lan} onCartChange={cartData} cartToggle={cartToggle} onCartToggleChange={cartToggleData} /* onCartProductsChange={cartProductsData} */ />
       {/* <NavBottom/> */}
       {/* <Outlet/> */}
     </>
