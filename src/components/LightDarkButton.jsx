@@ -5,8 +5,8 @@ import React, {useState, useEffect} from 'react';
 import '../styles/components/LightDarkButton.scss';
 
 // ICONS
-import sunIcon from "../assets/img/icons/sun.svg";
-import moonIcon from "../assets/img/icons/moon.svg";
+import sunIcon from "/assets/img/icons/sun.svg";
+import moonIcon from "/assets/img/icons/moon.svg";
 
 function LightDarkButton ({onThemeChange}) {
 

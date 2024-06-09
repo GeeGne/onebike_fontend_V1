@@ -16,18 +16,18 @@ import oneBike from '/src/data/one-bike.json'
 import strRemoveSpace from '/src/utils/strRemoveSpace.js';
 
 //  ICONS
-import facebookIcon from '/src/assets/img/icons/facebook.svg';
-import instagramIcon from '/src/assets/img/icons/instagram.svg';
-import whatsappIcon from '/src/assets/img/icons/whatsapp.svg';
-import callIcon from '/src/assets/img/icons/call.svg';
-import mailIcon from '/src/assets/img/icons/mail.svg';
+import facebookIcon from '/assets/img/icons/facebook.svg';
+import instagramIcon from '/assets/img/icons/instagram.svg';
+import whatsappIcon from '/assets/img/icons/whatsapp.svg';
+import callIcon from '/assets/img/icons/call.svg';
+import mailIcon from '/assets/img/icons/mail.svg';
 
 //  ICONS - DARKMODE
-import facebookIconDarkMode from '/src/assets/img/icons/facebook_darkMode.svg';
-import instagramIconDarkMode from '/src/assets/img/icons/instagram_darkMode.svg';
-import whatsappIconDarkMode from '/src/assets/img/icons/whatsapp_darkMode.svg';
-import callIconDarkMode from '/src/assets/img/icons/call_darkMode.svg';
-import mailIconDarkMode from '/src/assets/img/icons/mail_darkMode.svg';
+import facebookIconDarkMode from '/assets/img/icons/facebook_darkMode.svg';
+import instagramIconDarkMode from '/assets/img/icons/instagram_darkMode.svg';
+import whatsappIconDarkMode from '/assets/img/icons/whatsapp_darkMode.svg';
+import callIconDarkMode from '/assets/img/icons/call_darkMode.svg';
+import mailIconDarkMode from '/assets/img/icons/mail_darkMode.svg';
 
 function Footer ({darkMode, lan}) {
 

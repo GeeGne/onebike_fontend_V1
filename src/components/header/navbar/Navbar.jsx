@@ -14,9 +14,9 @@ import cartReducer from '/src/reducers/cartReducer.js';
 import '/src/styles/components/header/navbar/Navbar.scss';
 
 // ASSETS
-import logo from '/src/assets/img/logo/onebike.webp';
-import searchIcon from '/src/assets/img/icons/search.svg';
-import searchIconDarkMode from '/src/assets/img/icons/search_darkMode.svg';
+import logo from '/assets/img/logo/onebike.webp';
+import searchIcon from '/assets/img/icons/search.svg';
+import searchIconDarkMode from '/assets/img/icons/search_darkMode.svg';
 
 
 function Navbar ({darkMode, lan}) {

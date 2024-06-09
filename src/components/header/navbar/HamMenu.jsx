@@ -12,12 +12,12 @@ import '../../../styles/components/header/navbar/HamMenu.scss';
 import cleanseString from '/src/utils/cleanseString.js';
 
 // ICONS
-import expandCircleUpIcon from '../../../assets/img/icons/expand_circle_down.svg';
-import closeIcon from '../../../assets/img/icons/close.svg';
+import expandCircleUpIcon from '/assets/img/icons/expand_circle_down.svg';
+import closeIcon from '/assets/img/icons/close.svg';
 
 // ICONS - DARKMODE
-import expandCircleUpIconDarkMode from '../../../assets/img/icons/expand_circle_down_darkMode.svg';
-import closeIconDarkMode from '../../../assets/img/icons/close_darkMode.svg';
+import expandCircleUpIconDarkMode from '/assets/img/icons/expand_circle_down_darkMode.svg';
+import closeIconDarkMode from '/assets/img/icons/close_darkMode.svg';
 
 function HamMenu ({menu, onMenuChange, darkMode, lan}) {
 

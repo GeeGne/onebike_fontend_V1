@@ -15,21 +15,21 @@ import calculateDiscountPercantage from '/src/utils/calculateDiscountPercantage.
 import fetchElementById from '/src/utils/fetchElementById.js'
 
 // ICONS
-import closeIcon from '../../../assets/img/icons/close.svg';
-import cartIcon from '/src/assets/img/icons/shopping_cart.svg';
+import closeIcon from '/assets/img/icons/close.svg';
+import cartIcon from '/assets/img/icons/shopping_cart.svg';
 
 // ICONS - DARKMODE
-import closeIconDarkMode from '../../../assets/img/icons/close_darkMode.svg';
-import cartIconDarkMode from '/src/assets/img/icons/shopping_cart_darkMode.svg';
+import closeIconDarkMode from '/assets/img/icons/close_darkMode.svg';
+import cartIconDarkMode from '/assets/img/icons/shopping_cart_darkMode.svg';
 
 // product img test
-import productIMG from '/src/assets/img/products/GIYO Small Bike tire Pump Schrader.jpg';
-import productIMG2 from '/src/assets/img/products/Giant Bicycle Road full Carbon.avif';
-import productIMG3 from '/src/assets/img/products/RIDE 12 Chili Red Carbon Grey 2023.avif';
-import productIMG4 from '/src/assets/img/products/Seymour Oceanweave 1.3 H2O.avif';
-import brandLogo from '/src/assets/img/logo/trek.webp';
-import brandLogo2 from '/src/assets/img/logo/giant.webp';
-import brandLogo3 from '/src/assets/img/logo/evoc.webp';
+import productIMG from '/assets/img/products/GIYO Small Bike tire Pump Schrader.jpg';
+import productIMG2 from '/assets/img/products/Giant Bicycle Road full Carbon.avif';
+import productIMG3 from '/assets/img/products/RIDE 12 Chili Red Carbon Grey 2023.avif';
+import productIMG4 from '/assets/img/products/Seymour Oceanweave 1.3 H2O.avif';
+import brandLogo from '/assets/img/logo/trek.webp';
+import brandLogo2 from '/assets/img/logo/giant.webp';
+import brandLogo3 from '/assets/img/logo/evoc.webp';
 
 function CartSlider ({darkMode, lan, onCartChange, cartToggle, onCartToggleChange}) {
   const cartDispatchData = useContext(CartProductsContext);
@@ -114,7 +114,7 @@ function CartSlider ({darkMode, lan, onCartChange, cartToggle, onCartToggleChang
         <ul className="cartSlider-container__slider__products">
           {cart.map((list, i) =>
           <li className="cartSlider-container__slider__products__product" key={list.id} data-product-id={list.product.id} ref={el => addRef('cartProductsELS', el, i)}>
-            <img className="cartSlider-container__slider__products__product__image" src={`/src/assets/img/products/${list.product.category}/${list.product.type}/${list.product.id + '-' + list.product.color.en}-front.webp`} />
+            <img className="cartSlider-container__slider__products__product__image" src={`/assets/img/products/${list.product.category}/${list.product.type}/${list.product.id + '-' + list.product.color.en}-front.webp`} />
             <a className="cartSlider-container__slider__products__product__title">{list.product.title[lan]}</a>
             <div className="cartSlider-container__slider__products__product__price">{en ? 'S.P' : 'ل.س'} {formatNumberWithCommas(calculatePrice(list.product.price, list.product.discount) * list.quantity)}</div>
             <div className="cartSlider-container__slider__products__product__toggles">

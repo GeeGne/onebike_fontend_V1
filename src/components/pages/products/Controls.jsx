@@ -5,14 +5,14 @@ import React, {useState, useRef, useEffect} from 'react';
 import '/src/styles/components/pages/products/Controls.scss';
 
 // ICONS
-import filter from '/src/assets/img/icons/filter_list.svg';
-import arrowDropDown from '/src/assets/img/icons/arrow_drop_down.svg';
-import keyboardArrowDropDown from '/src/assets/img/icons/keyboard_arrow_down.svg';
+import filter from '/assets/img/icons/filter_list.svg';
+import arrowDropDown from '/assets/img/icons/arrow_drop_down.svg';
+import keyboardArrowDropDown from '/assets/img/icons/keyboard_arrow_down.svg';
 
 // ICONS - DARK MODE
-import filterDarkMode from '/src/assets/img/icons/filter_list_darkMode.svg';
-import arrowDropDownDarkMode from '/src/assets/img/icons/arrow_drop_down_darkMode.svg';
-import keyboardArrowDropDownDarkMode from '/src/assets/img/icons/keyboard_arrow_down_darkMode.svg';
+import filterDarkMode from '/assets/img/icons/filter_list_darkMode.svg';
+import arrowDropDownDarkMode from '/assets/img/icons/arrow_drop_down_darkMode.svg';
+import keyboardArrowDropDownDarkMode from '/assets/img/icons/keyboard_arrow_down_darkMode.svg';
 
 function Controls ({darkMode, lan}) {
 

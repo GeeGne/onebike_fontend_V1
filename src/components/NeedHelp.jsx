@@ -14,14 +14,14 @@ import oneBike from '/src/data/one-bike.json';
 import strRemoveSpace from '/src/utils/strRemoveSpace.js';
 
 // ICONS
-import callIcon from '/src/assets/img/icons/call.svg';
-import mailIcon from '/src/assets/img/icons/mail.svg';
-import chatDotsIcon from '/src/assets/img/icons/chat_dots.svg';
+import callIcon from '/assets/img/icons/call.svg';
+import mailIcon from '/assets/img/icons/mail.svg';
+import chatDotsIcon from '/assets/img/icons/chat_dots.svg';
 
 // ICONS - DARKMODE
-import callIconDarkMode from '/src/assets/img/icons/call_darkMode.svg';
-import mailIconDarkMode from '/src/assets/img/icons/mail_darkMode.svg';
-import chatDotsIconDarkMode from '/src/assets/img/icons/chat_dots_darkMode.svg';
+import callIconDarkMode from '/assets/img/icons/call_darkMode.svg';
+import mailIconDarkMode from '/assets/img/icons/mail_darkMode.svg';
+import chatDotsIconDarkMode from '/assets/img/icons/chat_dots_darkMode.svg';
 
 function NeedHelp ({darkMode, lan}) {
 

@@ -17,18 +17,18 @@ import oneBike from '/src/data/one-bike.json';
 import strRemoveSpace from '/src/utils/strRemoveSpace.js';
 
 // ICONS
-import facebookIcon from '../../assets/img/icons/facebook.svg';
-import instagramIcon from '../../assets/img/icons/instagram.svg';
-import whatsappIcon from '../../assets/img/icons/whatsapp.svg';
-import callIcon from '../../assets/img/icons/call.svg';
-import callPlusFillIcon from '../../assets/img/icons/call_plus_fill.svg';
+import facebookIcon from '/assets/img/icons/facebook.svg';
+import instagramIcon from '/assets/img/icons/instagram.svg';
+import whatsappIcon from '/assets/img/icons/whatsapp.svg';
+import callIcon from '/assets/img/icons/call.svg';
+import callPlusFillIcon from '/assets/img/icons/call_plus_fill.svg';
 
 // ICONS - DARKMODE
-import facebookIconDarkMode from '../../assets/img/icons/facebook_darkMode.svg';
-import instagramIconDarkMode from '../../assets/img/icons/instagram_darkMode.svg';
-import whatsappIconDarkMode from '../../assets/img/icons/whatsapp_darkMode.svg';
-import callIconDarkMode from '../../assets/img/icons/call_darkMode.svg';
-import callPlusFillIconDarkMode from '../../assets/img/icons/call_plus_fill_darkMode.svg';
+import facebookIconDarkMode from '/assets/img/icons/facebook_darkMode.svg';
+import instagramIconDarkMode from '/assets/img/icons/instagram_darkMode.svg';
+import whatsappIconDarkMode from '/assets/img/icons/whatsapp_darkMode.svg';
+import callIconDarkMode from '/assets/img/icons/call_darkMode.svg';
+import callPlusFillIconDarkMode from '/assets/img/icons/call_plus_fill_darkMode.svg';
 
 function IntroSection ({onThemeChange, onLanguageChange}) {
  

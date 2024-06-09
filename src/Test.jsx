@@ -4,9 +4,9 @@ import React, {useRef, useState, useEffect} from 'react';
 
 // import products from '/src/Data/products.json';
 
-import img1 from '/src/assets/img/content/main-sec.jpg';
-import img2 from '/src/assets/img/content/poster.jpg';
-import img3 from '/src/assets/img/content/poster1.jpg';
+import img1 from '/assets/img/content/main-sec.jpg';
+import img2 from '/assets/img/content/poster.jpg';
+import img3 from '/assets/img/content/poster1.jpg';
 
 function Test  () {
   const mainContainer = useRef(null);
