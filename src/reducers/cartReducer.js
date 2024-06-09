@@ -4,7 +4,14 @@ function cartReducer(cart, action) {
 
   const updateQuantityAndCheckLimit = (prevAmount, newAmount) => {
     const totalAmount = prevAmount + newAmount;
-    return totalAmount > 9 ? 9 : totalAmount;
+    switch(true) {
+      case totalAmount > 9:
+        return 9
+      case totalAmount < 1:
+        return 1
+      default:
+        return totalAmount
+    }
   }
 
   const checkProduct = () => {
@@ -13,23 +20,24 @@ function cartReducer(cart, action) {
     return itemFound;
   }
 
-  const updateCartProductQuanitiy = () => {
-    return cart.map(item => item.id === action.product.id ? {...item, quantity: updateQuantityAndCheckLimit(item.quantity, action.quantity)} : item);
-  }
+  const updateCartProductQuantity = () => cart.map(item => item.id === action.product.id ? {...item, quantity: updateQuantityAndCheckLimit(item.quantity, action.quantity)} : item);
 
   const addProductToCart = () => {
     const newItem = {id: action.product.id, quantity: action.quantity, product: action.product};
     return [...cart, newItem];
   }
 
+  const removeProductFromCart = () => cart.filter(item => item.id !== action.product.id );
+
   switch (action.type) {
     case 'ADD_TO_CART':
-      const updatedCart = checkProduct() ? updateCartProductQuanitiy() : addProductToCart();
-      return updatedCart;
-    case 'MODIFY__AMOUNT':
-      return;
+      return checkProduct() ? updateCartProductQuantity() : addProductToCart();
     case 'REMOVE_FROM_CART':
-      return cart.filter(item => item.id !== action.id );
+      return removeProductFromCart();
+    case 'INCREASE_AMOUNT_BY_ONE':
+      return updateCartProductQuantity();
+    case 'DECREASE_AMOUNT_BY_ONE':
+      return updateCartProductQuantity();
     default:
       return [...cart];
   }

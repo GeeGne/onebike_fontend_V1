@@ -140,6 +140,7 @@
         'image title title'
         'image price toggles';
         gap: 1em;
+        transition: opacity 0.25s ease-out;
 
         &__image {
           grid-area: image;

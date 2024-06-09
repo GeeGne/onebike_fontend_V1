@@ -36,19 +36,16 @@ function CartSlider ({darkMode, lan, onCartChange, cartToggle, onCartToggleChang
   const [cart, dispatch] = useReducer(cartReducer, []);
   const cartContainerElement = useRef(null);  
   const sliderElement = useRef(null);
+  const cartProductsELS = useRef([]);
 
   let totalPrice = 0;
   cart.forEach(list => (totalPrice += calculatePrice(list.product.price, list.product.discount) * list.quantity))
 
   const cartEmpty = cart.length === 0;
-  console.log(cart);
-  useEffect(() => {
-    onCartChange(cart);
-  },[cart])
+  const en = lan === 'en';
 
-  useEffect(() => {
-    dispatch(cartDispatchData);
-  }, [cartDispatchData])
+  useEffect(() => onCartChange(cart), [cart])
+  useEffect(() => dispatch(cartDispatchData), [cartDispatchData])
 
   useEffect(() => {
     const containerStyle = cartContainerElement.current.style;
@@ -62,26 +59,42 @@ function CartSlider ({darkMode, lan, onCartChange, cartToggle, onCartToggleChang
         break;
       case false:
         document.body.style.overflow = 'hidden auto';
-        sliderStyle.transform = `translateX(${lan === 'en' ? '' : '-'}30em)`;
+        sliderStyle.transform = `translateX(${en ? '' : '-'}30em)`;
         containerStyle.backgroundColor= 'hsla(0, 0%, 0%, 0)';
         setTimeout(() => containerStyle.visibility = 'hidden', 500);
         break;
     }
   }, [cartToggle, lan])
 
-  function handleClick (type, e) {
-    console.log(type)
-    switch (type) {
+  const handleClick = (e, type, product) => {
+
+    const getElement = (els, id) => els.filter(el => Number(el.dataset.productId) === id)[0];
+    const styleProductWhenRemoved = () => getElement(cartProductsELS.current, product.id).style.opacity = '0';
+
+    switch(type) {
       case 'REMOVE_FROM_CART':
-        console.log('hi')
-        const id = Number(e.target.dataset.productId);
-        dispatch({
-          type,
-          id
-        })
+        styleProductWhenRemoved();
+        setTimeout(() => dispatch({type, product}), 250);
+        break;
+      case 'INCREASE_AMOUNT_BY_ONE':
+        dispatch({type, product, quantity: 1});
+        break;
+      case 'DECREASE_AMOUNT_BY_ONE':
+        dispatch({type, product, quantity: -1});
+        break;
+    }
+  }
+
+  const addRef = (type, el, i) => {
+    const updateElements = (currentArray, el) => currentArray.length < cart.length ? [...currentArray, el] : currentArray;
+    
+    switch (type) {
+      case 'cartProductsELS':
+        i === 0 && (cartProductsELS.current = []);
+        cartProductsELS.current = updateElements(cartProductsELS.current, el)
         break;
       default:
-        console.log('Unknown type:', type);
+        console.log('unknown type:' + type);
     }
   }
 
@@ -90,36 +103,34 @@ function CartSlider ({darkMode, lan, onCartChange, cartToggle, onCartToggleChang
       <div className={`cartSlider-container__slider${cartEmpty ? ' empty' : ''}`} onClick={e => e.stopPropagation()} ref={sliderElement}>
         <div className="cartSlider-container__slider__empty">
           <img className="cartSlider-container__slider__empty__cart" src={darkMode ? cartIconDarkMode : cartIcon}/>
-          <div className="cartSlider-container__slider__empty__note">{lan === 'en' ? 'Your Cart Is Empty' : 'سله التسوق فارغه'}</div>
-          <button className="cartSlider-container__slider__empty__button" onClick={() => onCartToggleChange(false)}>{lan === 'en' ? 'Back to shopping' : 'العوده للتسوق'}</button>
+          <div className="cartSlider-container__slider__empty__note">{en ? 'Your Cart Is Empty' : 'سله التسوق فارغه'}</div>
+          <button className="cartSlider-container__slider__empty__button" onClick={() => onCartToggleChange(false)}>{en ? 'Back to shopping' : 'العوده للتسوق'}</button>
         </div>
         <section className="cartSlider-container__slider__top">
-          <div className="cartSlider-container__slider__top__cart">{lan === 'en' ? 'Cart' : 'السله'}</div>
+          <div className="cartSlider-container__slider__top__cart">{en ? 'Cart' : 'السله'}</div>
           <div className="cartSlider-container__slider__top__quantity">{cart.length}</div>
           <img className="cartSlider-container__slider__top__exit" onClick={() => onCartToggleChange(false)} src={darkMode ? closeIconDarkMode : closeIcon} role="button" tabIndex="0"/>
         </section>
         <ul className="cartSlider-container__slider__products">
-          {cart.map(list =>
-          {
-              return <li className="cartSlider-container__slider__products__product" key={list.id}>
-                <img className="cartSlider-container__slider__products__product__image" src={`/src/assets/img/products/${list.product.category}/${list.product.type}/${list.product.id + '-' + list.product.color.en}-front.webp`} />
-                <a className="cartSlider-container__slider__products__product__title">{list.product.title[lan]}</a>
-                <div className="cartSlider-container__slider__products__product__price">{lan === 'en' ? 'S.P' : 'ل.س'} {formatNumberWithCommas(calculatePrice(list.product.price, list.product.discount) * list.quantity)}</div>
-                <div className="cartSlider-container__slider__products__product__toggles">
-                  <button className="cartSlider-container__slider__products__product__toggles__delete" data-product-id={list.id} onClick={e => handleClick('REMOVE_FROM_CART', e)}/> 
-                  <button className="cartSlider-container__slider__products__product__toggles__increment" />
-                  <div className="cartSlider-container__slider__products__product__toggles__value">{list.quantity}</div>
-                  <button className="cartSlider-container__slider__products__product__toggles__decrement" />
-                </div>
-              </li>;
-            }
+          {cart.map((list, i) =>
+          <li className="cartSlider-container__slider__products__product" key={list.id} data-product-id={list.product.id} ref={el => addRef('cartProductsELS', el, i)}>
+            <img className="cartSlider-container__slider__products__product__image" src={`/src/assets/img/products/${list.product.category}/${list.product.type}/${list.product.id + '-' + list.product.color.en}-front.webp`} />
+            <a className="cartSlider-container__slider__products__product__title">{list.product.title[lan]}</a>
+            <div className="cartSlider-container__slider__products__product__price">{en ? 'S.P' : 'ل.س'} {formatNumberWithCommas(calculatePrice(list.product.price, list.product.discount) * list.quantity)}</div>
+            <div className="cartSlider-container__slider__products__product__toggles">
+              <button className="cartSlider-container__slider__products__product__toggles__delete" onClick={e => handleClick(e, 'REMOVE_FROM_CART', list.product)}/> 
+              <button className="cartSlider-container__slider__products__product__toggles__increment" onClick={e => handleClick(e, 'INCREASE_AMOUNT_BY_ONE', list.product)}/>
+              <div className="cartSlider-container__slider__products__product__toggles__value">{list.quantity}</div>
+              <button className="cartSlider-container__slider__products__product__toggles__decrement" onClick={e => handleClick(e, 'DECREASE_AMOUNT_BY_ONE', list.product)}/>
+            </div>
+          </li>
           )}
         </ul>
         <section className="cartSlider-container__slider__bottom">
-          <div className="cartSlider-container__slider__bottom__total">{lan === 'en' ? 'Total' : 'اجمالي'} <span>{lan === 'en' ? 'S.P' : 'ل.س'} {formatNumberWithCommas(totalPrice)}</span></div>
-          <div className="cartSlider-container__slider__bottom__shipment">{lan === 'en' ? 'Shipment fee calculated at Checkout' : 'تكاليف الشحن ستضاف عند الدفع'}</div>
-          <button className="cartSlider-container__slider__bottom__view-cart">{lan === 'en' ? 'View cart' : 'عرض العربة'}</button>
-          <button className="cartSlider-container__slider__bottom__checkout">{lan === 'en' ? 'Checkout' : 'الدفع'}</button>
+          <div className="cartSlider-container__slider__bottom__total">{en ? 'Total' : 'اجمالي'} <span>{en ? 'S.P' : 'ل.س'} {formatNumberWithCommas(totalPrice)}</span></div>
+          <div className="cartSlider-container__slider__bottom__shipment">{en ? 'Shipment fee calculated at Checkout' : 'تكاليف الشحن ستضاف عند الدفع'}</div>
+          <button className="cartSlider-container__slider__bottom__view-cart">{en ? 'View cart' : 'عرض العربة'}</button>
+          <button className="cartSlider-container__slider__bottom__checkout">{en ? 'Checkout' : 'الدفع'}</button>
         </section>
       </div>
     </div>
