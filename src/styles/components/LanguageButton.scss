@@ -6,28 +6,36 @@
   border-width: 0 0 2px 0;
   z-index: 30;
 
+  &:hover {color: var(--font-h-color)}
+
   &__display {
     font-weight: 600;
+    padding-block: 0.2em;
+    margin-right: 1.5em;
+  }
+  body.arabic &__display {
+    margin-right: 0;
+    margin-left: 1.5em;
   }
 
-  &::after {
+  &::before {
     content: "";
-    width: 1.5em;
-    height: 1.5em;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    width: 1.3em;
+    height: 1.3em;
     background-image: var(--arrow-drop-down-icon);
-    background-size: cover;
+    background-size: contain;
     background-repeat: no-repeat;
-    transform-origin: center;
     transform: var(--rotate-icon, rotate(0deg));
+    transform-origin: center;
     transition: transform 0.5s ease;
   }
   body.arabic &::before {
     right: auto;
-    left: -0.3em;
-  }
-
-  &:hover {
-    color: var(--font-h-color);
+    left: 0;
   }
 
   &__list {

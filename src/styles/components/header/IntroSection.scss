@@ -51,7 +51,8 @@
     width: var(--icon-size);
     height: var(--icon-size);
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: contain;
+    background-position: center;
   }
   &__facebook {background-image: var(--facebook-icon)}
   &__whatsapp {background-image: var(--whatsapp-icon)}  

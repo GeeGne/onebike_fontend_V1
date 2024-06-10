@@ -7,6 +7,8 @@ import Footer from './components/Footer';
 import Home from './components/pages/Home';
 import Products from './components/pages/products/Products';
 import NotFound from './components/pages/NotFound';
+import SignIn from './components/pages/SignIn';
+import SignUp from './components/pages/SignUp';
 
 // DATA
 import mainListData from '/src/data/menu.json';
@@ -40,15 +42,17 @@ function App () {
 
         <main className="app-layout__main">
           <Routes>
-            <Route exact path="/" element={<Home darkMode={darkMode} lan={lan}/>}/>
+            <Route exact path="/" element={<Home darkMode={darkMode} lan={lan}/>} />
             {mainListData.map(category =>
             <React.Fragment key={category.id}>
-              <Route exact path={`/${cleanseString(category.en)}`} element={<Products category={category} darkMode={darkMode} lan={lan} onCartProductsChange={cartProductsData}/>}/>
+              <Route exact path={`/${cleanseString(category.en)}`} element={<Products category={category} darkMode={darkMode} lan={lan} onCartProductsChange={cartProductsData}/>} />
               {category.secondaryList.map(secondData => secondData.thirdList.map(thirdData => 
-              <Route path={`/${cleanseString(category.en)}/${cleanseString(thirdData.en)}`} element={<Products category={category} type={thirdData} darkMode={darkMode} lan={lan} /* onCartProductsChange={cartProductsData} */ onCartProductsChange={cartProductsData}/>} key={thirdData.id}/>
+              <Route path={`/${cleanseString(category.en)}/${cleanseString(thirdData.en)}`} element={<Products category={category} type={thirdData} darkMode={darkMode} lan={lan} /* onCartProductsChange={cartProductsData} */ onCartProductsChange={cartProductsData}/>} key={thirdData.id} />
               ))}
             </React.Fragment>
             )}
+            <Route path="/welcome/signup/new" element={<SignUp/>} />
+            <Route path="/signin" element={<SignIn/>} />
             <Route path="*" element={<NotFound/>}/>
           </Routes>
         </main>
