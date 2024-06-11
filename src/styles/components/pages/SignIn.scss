@@ -4,28 +4,80 @@
   display: flex;
   flex-direction: column;
 
+  body.arabic &{direction: rtl}
+
   &__form {
+    display: grid;
+    gap: 1em;
     padding-block: 2em;
     margin-inline: auto;
+    width: 75%;
 
+    @include w.breakpoint-up (medium) {width: 27em}
     
-    & label {
-      margin-left: 2em;
-      // transform: translateY(-2em);
-    }
+    &__password,
+    &__tel {
+      position: relative;
 
-    & input {
-      padding-inline: 1em;
-      padding-block: 0.5em;
-      margin-bottom: 1em;
-      width: 15em;
-      @include w.breakpoint-up(medium) {
-        width: 24em;
+      body.arabic & label {left: auto; right: 1em}
+      & label {
+        position: absolute;
+        top: 50%;
+        left: 1em;
+        transform: translateY(-50%);
+        font-size: var(--font-size-small);
+        font-weight: 600;
+        background-color: var(--background-color);
+        transition: top 0.15s ease-out, font-size 0.15s ease-out;
+      }
+      
+      body.arabic & input {direction: rtl}
+      & input {
+        background-color: var(--background-color);
+        color: var(--font-p-color);
+        font-size: var(--font-size-small);
+        width: 100%;
+        border: solid 2px var(--light-background-color);
+        outline: none;
+        border-radius: 5px;
+        padding: 1em;
+        transition: border 0.25s ease-out;
+        
+        &:hover {border: solid var(--secondary-color) 2px}
+        &:focus {border: solid var(--primary-color) 2px}
       }
     }
 
-    & button {
+    &__signIn {
+      background-color: var(--primary-color);
+      color: var(--font-h-invert-color);
+      font-size: var(--font-size-medium);
+      font-weight: 600;
+      width: 100%;
+      padding-block: 1em;
+      border-radius: 5px;
+      transition: background-color 0.25s ease;
 
+      &:hover {
+        background-color: var(--background-invert-color);
+      }
+    }
+
+    &__forgot-password {margin-left: auto}
+    body.arabic &__forgot-password { margin-left: 0; margin-right: auto}
+
+    &__new-costumer,
+    &__forgot-password {
+      font-size: var(--font-size-small);
+      color: var(--font-p-color);
+      cursor: pointer;
+      transition: font-weight 0.15s ease, color 0.15s ease;
+
+      &:hover {
+        text-decoration: underline var(--font-h-color);
+        color: var(--font-h-color);
+        font-weight: 500;
+      }
     }
   }
 }

@@ -100,15 +100,16 @@ function Navbar ({darkMode, lan}) {
     return () => window.removeEventListener('scroll', stylenavDropMenuELWhenScrolling);
   }, [])
 
+  const path = el => el.dataset.path;
+
   const handleClick = type => {
     if (!desktopWidth && type === 'search') {
       searchInputEL.current.classList.toggle('clicked');
       searchButtonEL.current.classList.toggle('clicked');
+      return;
     }
-    if (type === 'logo') {
-      navigate('/'); 
-      scroll({top: 0, behavior: 'smooth'});
-    }
+    navigate(path(type.target));
+    scroll({top: 0, behavior: 'smooth'});
   }
 
   const handleHover = type => {
@@ -126,13 +127,13 @@ function Navbar ({darkMode, lan}) {
     <div className="nav-dropMenu-container" ref={navDropMenuEL}>
       <nav className="nav-dropMenu-container__nav-container">
         <button className={`nav-dropMenu-container__nav-container__hamburger${menu ? ' clicked' : ''}`} onClick={() => setMenu(oldMenu => !oldMenu)}/>
-        <img className="nav-dropMenu-container__nav-container__logo" onClick={() => handleClick('logo')} src={logo}/>
+        <img className="nav-dropMenu-container__nav-container__logo" data-path="/" onClick={handleClick} src={logo}/>
         <div className={`nav-dropMenu-container__nav-container__search-input`} onMouseEnter={() => handleHover(true)}  onMouseLeave={() => handleHover(false)} ref={searchInputEL}>
           <input placeholder={lan === 'en' ? 'Type something' : 'هل تبحث عن شيء؟'} /* ref={searchInputEL} *//>
           <img src={darkMode ? searchIconDarkMode : searchIcon}/>
         </div>
-        <button className={`nav-dropMenu-container__nav-container__search`} onClick={() => handleClick('search')} onMouseEnter={() => handleHover(true)} onMouseLeave={() => handleHover(false)} ref={searchButtonEL}/>
-        <button className="nav-dropMenu-container__nav-container__user"/>
+        <button className={`nav-dropMenu-container__nav-container__search`} onClick={handleClick} onMouseEnter={() => handleHover(true)} onMouseLeave={() => handleHover(false)} ref={searchButtonEL}/>
+        <button className="nav-dropMenu-container__nav-container__user" data-path="/account/login" onClick={handleClick}/>
         <button className="nav-dropMenu-container__nav-container__favourite"/>
         <button className={`nav-dropMenu-container__nav-container__shoppingCart${cartEmpty ? ' empty' : ''}`} onClick={() => setCartToggle(true)}/>
       </nav>

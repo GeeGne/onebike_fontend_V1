@@ -51,8 +51,8 @@ function App () {
               ))}
             </React.Fragment>
             )}
-            <Route path="/welcome/signup/new" element={<SignUp darkMode={darkMode} lan={lan} />} />
-            <Route path="/signin" element={<SignIn darkMode={darkMode} lan={lan} />} />
+            <Route path="/account/register" element={<SignUp darkMode={darkMode} lan={lan} />} />
+            <Route path="/account/login" element={<SignIn darkMode={darkMode} lan={lan} />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </main>
