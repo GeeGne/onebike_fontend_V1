@@ -1,0 +1,31 @@
+@use '/src/styles/utils/_BreakPoints' as w;
+
+.signIn-container {
+  display: flex;
+  flex-direction: column;
+
+  &__form {
+    padding-block: 2em;
+    margin-inline: auto;
+
+    
+    & label {
+      margin-left: 2em;
+      // transform: translateY(-2em);
+    }
+
+    & input {
+      padding-inline: 1em;
+      padding-block: 0.5em;
+      margin-bottom: 1em;
+      width: 15em;
+      @include w.breakpoint-up(medium) {
+        width: 24em;
+      }
+    }
+
+    & button {
+
+    }
+  }
+}

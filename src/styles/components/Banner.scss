@@ -1,0 +1,11 @@
+@use '/src/styles/utils/_BreakPoints' as w;
+
+.banner-container {
+  display: flex;
+  justify-content: center;
+  font-size: var(--font-size-large);
+  background-color: var(--primary-color);
+  color: var(--font-h-invert-color);
+  font-weight: bold;
+  padding-block: 2em;
+}

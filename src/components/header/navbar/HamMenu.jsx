@@ -71,8 +71,6 @@ function HamMenu ({menu, onMenuChange, darkMode, lan}) {
 
     const getListId = element => element.dataset.listId;
 
-    // type === 'exit' && onMenuChange(false);
-
     if (type === 'title element') {
       const event = other;
       const titleElement = event.currentTarget;
