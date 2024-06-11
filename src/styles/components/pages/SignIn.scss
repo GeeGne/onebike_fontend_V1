@@ -27,9 +27,14 @@
         transform: translateY(-50%);
         font-size: var(--font-size-small);
         font-weight: 600;
+<<<<<<< HEAD
         color: var(--signIn-label-font-color);
         background-color: var(--background-color);
         transition: top 0.25s ease-out, font-size 0.25s ease-out, color 0.25s ease-out;
+=======
+        background-color: var(--background-color);
+        transition: top 0.15s ease-out, font-size 0.15s ease-out;
+>>>>>>> 9a5db8c2e8fde06300f17090d39b3a5056384690
       }
       
       body.arabic & input {direction: rtl}
@@ -38,7 +43,11 @@
         color: var(--font-p-color);
         font-size: var(--font-size-small);
         width: 100%;
+<<<<<<< HEAD
         border: solid 2px var(--signIn-input-border-color);
+=======
+        border: solid 2px var(--light-background-color);
+>>>>>>> 9a5db8c2e8fde06300f17090d39b3a5056384690
         outline: none;
         border-radius: 5px;
         padding: 1em;
