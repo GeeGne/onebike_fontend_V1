@@ -1,11 +1,24 @@
 @use '/src/styles/utils/_BreakPoints' as w;
 
 .banner-container {
+  position: relative;
   display: flex;
   justify-content: center;
   font-size: var(--font-size-large);
-  background-color: var(--primary-color);
-  color: var(--font-h-invert-color);
+  background-color: var(--secondary-color);
+  color: var(--font-h-color);
   font-weight: bold;
   padding-block: 2em;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100vw;
+    height: 100%;
+    background-color: var(--secondary-color);
+    z-index: -1;
+  }
 }

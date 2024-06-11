@@ -82,6 +82,10 @@
   --cartSlider-addToCart-background-color: #b4926f;
   --cartSlider-addToCart-active-background-color: hsl(0, 0%, 100%);
 
+ // SignIn
+  --signIn-input-border-color: hsl(0, 0%, 35%);
+  --signIn-label-font-color: hsl(0, 0%, 35%);
+
   // Footer
   --footer-background-color: var(--secondary-color);
 }
@@ -163,6 +167,10 @@
   // CartSlider
   --cartSlider-addToCart-background-color: #472e1f;
   --cartSlider-addToCart-active-background-color: hsl(0, 0%, 0%);
+
+  // SignIn
+  --signIn-input-border-color: hsl(0, 0%, 65%);
+  --signIn-label-font-color: hsl(0, 0%, 65%);
 
   // Footer
   --footer-background-color: var(--secondary-color);
