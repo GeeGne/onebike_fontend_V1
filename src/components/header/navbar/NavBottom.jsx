@@ -1,5 +1,5 @@
 
-import '../../../styles/components/header/NavBottom.scss';
+import '/src/styles/components/header/NavBottom.scss';
 
 function NavBottom () {
 

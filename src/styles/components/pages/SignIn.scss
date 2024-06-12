@@ -59,9 +59,7 @@
       border-radius: 5px;
       transition: background-color 0.25s ease;
 
-      &:hover {
-        background-color: var(--background-invert-color);
-      }
+      &:hover {background-color: var(--background-invert-color)}
     }
 
     &__forgot-password {margin-left: auto}

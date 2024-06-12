@@ -1,4 +1,114 @@
-@use '../../utils/_BreakPoints' as w;
+@use '/src/styles/utils/_BreakPoints' as w;
 
 .signUp-container {
+  display: flex;
+  flex-direction: column;
+
+  body.arabic & {direction: rtl}
+
+  &__form {
+    display: grid;
+    gap: 1em;
+    padding: 1em;
+    margin-block: 1em;
+    margin-inline: auto;
+    width: calc(100% - 2em);
+    // border: solid var(--light-background-color) 2px;
+    border: solid var(--signUp-input-border-color) 2px;
+    border-radius: 5px;
+
+    @include w.breakpoint-up (medium) {
+      padding: 1em 2em;
+      width: 31em;
+    }
+    
+    &__intro {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1em;
+
+      & .img {
+        width: 8em;
+        height: 8em;
+        background-color: var(--secondary-color);
+        background-image: var(--person-fill-icon);
+        background-repeat: no-repeat;
+        background-size: 4em;
+        background-position: center;
+        border-radius: 100%;
+      }
+
+      & h1 {
+        font-size: var(--font-size-medium);
+        color: var(--font-h-color);
+      }
+
+      & p {color: var(--font-h-color)}
+    }
+
+    &__fname,
+    &__lname,
+    &__tel,
+    &__password,
+    &__cpassword {
+      position: relative;
+
+      body.arabic & label {left: auto; right: 1em}
+      & label {
+        position: absolute;
+        top: 50%;
+        left: 1em;
+        transform: translateY(-50%);
+        font-size: var(--font-size-small);
+        font-weight: 600;
+        color: var(--signUp-label-font-color);
+        background-color: var(--background-color);
+        transition: top 0.25s ease-out, font-size 0.25s ease-out, color 0.25s ease-out;
+      }
+      
+      body.arabic & input {direction: rtl}
+      & input {
+        background-color: var(--background-color);
+        color: var(--font-p-color);
+        font-size: var(--font-size-small);
+        width: 100%;
+        border: solid 2px var(--signUp-input-border-color);
+        outline: none;
+        border-radius: 5px;
+        padding: 1em;
+        transition: border 0.25s ease-out;
+        
+        &:hover {border: solid var(--secondary-color) 2px}
+        &:focus {border: solid var(--primary-color) 2px}
+      }
+    }
+
+    &__create {
+      background-color: var(--primary-color);
+      color: var(--font-h-invert-color);
+      font-size: var(--font-size-medium);
+      font-weight: 600;
+      width: 100%;
+      padding-block: 1em;
+      border-radius: 5px;
+      transition: background-color 0.25s ease;
+
+      &:hover {background-color: var(--background-invert-color)}
+    }
+
+    &__newsletter {
+      display: flex;
+      align-items: start;
+      gap: 0.5em;
+
+      & .checkbox-input {width: 1.5em}
+
+      & .description {
+        color: var(--font-p-color);
+        font-size: var(--font-size-extraSmall);
+      }
+    }
+  }
 }
+

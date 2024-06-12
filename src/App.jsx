@@ -9,6 +9,7 @@ import Products from './components/pages/products/Products';
 import NotFound from './components/pages/NotFound';
 import SignIn from './components/pages/SignIn';
 import SignUp from './components/pages/SignUp';
+import NavBottom from './components/header/navbar/NavBottom';
 
 // DATA
 import mainListData from '/src/data/menu.json';
@@ -61,6 +62,7 @@ function App () {
           <Footer darkMode={darkMode} lan={lan}/>
         </footer>
 
+        <NavBottom />
       </div>
     </Router>
   )
