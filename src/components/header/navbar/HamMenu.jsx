@@ -135,37 +135,37 @@ function HamMenu ({menu, onMenuChange, darkMode, lan}) {
   }
 
   return (
-    <nav className="ham-menu-container" onClick={() => onMenuChange(false)} ref={hamMenuContainerElement}>
-      <div className="ham-menu-container__side-box" onClick={(e) => e.stopPropagation()} ref={hamMenuSideBoxElement}>
-        <section className="ham-menu-container__side-box__menu">
-          <h1 className="ham-menu-container__side-box__menu__h1">{lan === 'en' ? 'MENU' : 'القائمه'}</h1>
-          <img className="ham-menu-container__side-box__menu__exit-icon" onClick={() => onMenuChange(false)} src={darkMode ? closeIconDarkMode : closeIcon}/>
+    <nav className="hamMenu" onClick={() => onMenuChange(false)} ref={hamMenuContainerElement}>
+      <div className="hamMenu__slider" onClick={(e) => e.stopPropagation()} ref={hamMenuSideBoxElement}>
+        <section className="hamMenu__slider__menu">
+          <h1 className="hamMenu__slider__menu__h1">{lan === 'en' ? 'MENU' : 'القائمه'}</h1>
+          <img className="hamMenu__slider__menu__exit-icon" onClick={() => onMenuChange(false)} src={darkMode ? closeIconDarkMode : closeIcon}/>
         </section>
-        <ul className="ham-menu-container__side-box__menu-list">
+        <ul className="hamMenu__slider__menuL">
           {mainListData.map((mainData, i) => 
-          <li className="ham-menu-container__side-box__menu-list__lists" ref={el => addRef('mainListElement', el, i)} data-list-id={i} key={mainData.id}>
-            <div className="ham-menu-container__side-box__menu-list__lists__title" onClick={e => handleClick('title element', e, i)} data-list-id={i}>
-              <h2 className="ham-menu-container__side-box__menu-list__lists__title__h2">{mainData[lan]}</h2>
+          <li className="hamMenu__slider__menuL__lists" ref={el => addRef('mainListElement', el, i)} data-list-id={i} key={mainData.id}>
+            <div className="hamMenu__slider__menuL__lists__title" onClick={e => handleClick('title element', e, i)} data-list-id={i}>
+              <h2 className="hamMenu__slider__menuL__lists__title__h2">{mainData[lan]}</h2>
               <img className="expand-circle" src={darkMode ? expandCircleUpIconDarkMode : expandCircleUpIcon}/>
             </div>
-            <ul className="ham-menu-container__side-box__menu-list__lists__secondary-list" ref={el => addRef('secondaryListElements', el, i)} data-list-id={i}>
+            <ul className="hamMenu__slider__menuL__lists__secondaryL" ref={el => addRef('secondaryListElements', el, i)} data-list-id={i}>
               {mainData.secondaryList.map(secondData => 
-              <li className="ham-menu-container__side-box__menu-list__lists__secondary-list__lists" key={secondData.id}>
+              <li className="hamMenu__slider__menuL__lists__secondaryL__lists" key={secondData.id}>
                 <div 
-                  className="ham-menu-container__side-box__menu-list__lists__secondary-list__lists__section"
+                  className="hamMenu__slider__menuL__lists__secondaryL__lists__section"
                   onClick={(e) => handleClick('second list', e)}
                   data-list-id={randomNum.current = Math.random()}
                 >
-                  <h3 className="ham-menu-container__side-box__menu-list__lists__secondary-list__lists__section__h3">{secondData[lan]}</h3>
-                  <div className="ham-menu-container__side-box__menu-list__lists__secondary-list__lists__section__img"></div>
+                  <h3 className="hamMenu__slider__menuL__lists__secondaryL__lists__section__h3">{secondData[lan]}</h3>
+                  <div className="hamMenu__slider__menuL__lists__secondaryL__lists__section__img"></div>
                 </div>
                 <ul 
-                  className="ham-menu-container__side-box__menu-list__lists__secondary-list__lists__third-list"
+                  className="hamMenu__slider__menuL__lists__secondaryL__lists__thirdL"
                   ref={el => addRef('thirdListContainerElements', el, i)} data-list-id={randomNum.current}
                 >
                   {secondData.thirdList.map(thirdData =>           
-                  <li className="ham-menu-container__side-box__menu-list__lists__secondary-list__lists__third-list__lists" onClick={() => handleClick('third list', null, mainData.en, thirdData.en)} key={thirdData.id}>
-                    <h3 className="ham-menu-container__side-box__menu-list__lists__secondary-list__lists__third-list__lists__h3">{thirdData[lan]}</h3>
+                  <li className="hamMenu__slider__menuL__lists__secondaryL__lists__thirdL__lists" onClick={() => handleClick('third list', null, mainData.en, thirdData.en)} key={thirdData.id}>
+                    <h3 className="hamMenu__slider__menuL__lists__secondaryL__lists__thirdL__lists__h3">{thirdData[lan]}</h3>
                   </li>
                   )}
                 </ul>

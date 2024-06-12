@@ -1,0 +1,70 @@
+@use '/src/styles/utils/_BreakPoints' as w;
+
+.navBottom {
+  position: relative;
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  padding-block: 1em;
+  background-color: var(--background-color);
+  border: solid var(--boxEnd-border-background-color);
+  border-width: 1px 0 0 0;
+  transition: transform 0.35s ease-out;
+
+  body.arabic & {direction: rtl}
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 1px;
+    height: 80%;
+    background-color: var(--boxEnd-border-background-color);
+  }
+
+  &__favourite::before {background-image: var(--heart-icon)}
+  &__user::before {background-image: var(--user-icon)}
+
+  &__favourite,
+  &__user {
+    position: relative;
+    width: var(--navBar-icon-size);
+    height: var(--navBar-icon-size);
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-repeat: no-repeat;
+      background-size: contain;
+      background-position: center;
+      z-index: 1;
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: calc(var(--navBar-icon-size) + 1em);
+      height: calc(var(--navBar-icon-size) + 1em);
+      border-radius: 100%;
+      background-color: var(--light-background-color);
+      opacity: 0;
+      transition: opacity 0.25s ease;
+    }
+
+    &:hover::after {opacity: 1}
+  }
+
+
+  @include w.breakpoint-up (medium) {
+    display: none;
+  }
+}

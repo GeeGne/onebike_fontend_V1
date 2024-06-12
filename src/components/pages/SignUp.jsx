@@ -146,8 +146,8 @@ function SignUp ({darkMode, lan}) {
           <input type="cpassword" name="cpassword" id="cpassword" required onFocus={handleFocus} onBlur={handleBlur}/>
         </div>
         <div className='signUp-container__form__newsletter'>
-          <input className="checkbox-input" type="checkbox"/>
-          <label className="description">{en ? 'I agree recieving latest news and special deals emails according to the privacy policy' : 'أوافق على تلقي آخر الأخبار والعروض الخاصة عبر البريد الإلكتروني وفقًا لسياسة الخصوصية'}</label>
+          <input className="checkbox-input" type="checkbox" id="newsletter"/>
+          <label className="description" htmlFor="newsletter">{en ? 'I agree recieving latest news and special deals emails according to the privacy policy' : 'أوافق على تلقي آخر الأخبار والعروض الخاصة عبر البريد الإلكتروني وفقًا لسياسة الخصوصية'}</label>
         </div>
         <button className='signUp-container__form__create' type="submit">{en ? 'CREATE' : 'انشئ'}</button>
       </form>

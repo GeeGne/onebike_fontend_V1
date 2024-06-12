@@ -14,6 +14,7 @@ function SignIn ({darkMode, lan}) {
   const pageTitle = en ? 'LOGIN' : 'تسجيل الدخول';
   const telLabelEL = useRef(null);
   const passLabelEL = useRef(null);
+
   const navigate = useNavigate();
 
   const handleFocus = e => {
@@ -66,6 +67,13 @@ function SignIn ({darkMode, lan}) {
     scroll({top: 0, behavior: 'smooth'});
   }
 
+  const handleKeyDown = e => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      handleClick(e);
+    }
+  }
+
   const path = el => el.dataset.path;
 
   return (
@@ -80,9 +88,9 @@ function SignIn ({darkMode, lan}) {
           <label htmlFor="password" ref={passLabelEL}>{en ? 'PASSWORD' : 'كلمه المرور'}</label>
           <input type="password" name="password" id="password" required onFocus={handleFocus} onBlur={handleBlur}/>
         </div>
-        <div className="signIn-container__form__forgot-password">{en ? 'Forgot password?' : 'نسيت كلمه المرور؟'}</div>
-        <button className='signIn-container__form__signIn' type="submit">{en ? 'SIGN IN' : 'سجل الدخول'}</button>
-        <div className="signIn-container__form__new-costumer" data-path="/account/register" onClick={handleClick}>{en ? 'Don\'t have an account? Join us!' : 'ليس لديك حساب؟ انضم الينا'}</div>
+        <a className="forgot-password" tabIndex="0">{en ? 'Forgot password?' : 'نسيت كلمه المرور؟'}</a>
+        <button className='signIn' type="submit">{en ? 'SIGN IN' : 'سجل الدخول'}</button>
+        <a className="new-costumer" tabIndex="0" data-path="/account/register" onClick={handleClick} onKeyDown={handleKeyDown}>{en ? 'Don\'t have an account? Join us!' : 'ليس لديك حساب؟ انضم الينا'}</a>
       </form>
     </section>
   )

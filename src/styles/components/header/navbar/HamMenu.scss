@@ -1,6 +1,6 @@
 @use 'src/styles/utils/_breakPoints' as w;
 
-.ham-menu-container {
+.hamMenu {
   visibility: hidden;
   position: fixed;
   display: flex;
@@ -16,7 +16,7 @@
     display: none;
   }
 
-  &__side-box {
+  &__slider {
     display: flex;
     width: 16em;
     flex-direction: column;
@@ -48,7 +48,7 @@
       }
     }
 
-    &__menu-list {
+    &__menuL {
       overflow-y: auto;
       
       &::-webkit-scrollbar {
@@ -137,7 +137,7 @@
           }
         }
 
-        &__secondary-list {
+        &__secondaryL {
           display: flex;
           flex-direction: column;
           overflow: hidden;
@@ -176,7 +176,7 @@
               }
             }
 
-            &__third-list {   
+            &__thirdL {   
               background-color: var(--hamMenu-thirdList-background-color);
               height: 0;
               overflow: hidden;
@@ -202,8 +202,8 @@
 
   body.arabic & {
     direction: rtl;
-    &__side-box {
-      &__menu-list {
+    &__slider {
+      &__menuL {
         &__lists {
           &__title {
             &::before {
@@ -224,7 +224,7 @@
             }
           }
 
-          &__secondary-list {
+          &__secondaryL {
             &__lists {
               &__h3{}
             }

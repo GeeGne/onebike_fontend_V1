@@ -59,10 +59,13 @@ function App () {
         </main>
         
         <footer className="app-layout__footer">
-          <Footer darkMode={darkMode} lan={lan}/>
+          <Footer darkMode={darkMode} lan={lan} />
         </footer>
 
-        <NavBottom />
+        <section className="app-layout__navBottom">
+          <NavBottom />
+        </section>
+        
       </div>
     </Router>
   )

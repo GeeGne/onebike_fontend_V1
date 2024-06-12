@@ -31,6 +31,7 @@ function Navbar ({darkMode, lan}) {
   const navDropMenuEL = useRef(null);
   const prevScrollY = useRef(0);
   const prevScrollYTimer = useRef(null);
+  const searchEL = useRef(null);
   const searchInputEL = useRef(null);
   const searchButtonEL = useRef(null);
 
@@ -51,12 +52,12 @@ function Navbar ({darkMode, lan}) {
 
       switch (desktopWidth) {
         case true:
-          searchInputEL.current.classList.add('hover');
+          searchEL.current.classList.add('hover');
           searchButtonEL.current.classList.add('hover');
           document.body.style.overflow = 'hidden auto';
           break;
         case false: 
-          searchInputEL.current.classList.remove('hover');
+          searchEL.current.classList.remove('hover');
           searchButtonEL.current.classList.remove('hover');
           document.body.style.overflow = menu ? 'hidden' : 'hidden auto';
           break;
@@ -104,7 +105,7 @@ function Navbar ({darkMode, lan}) {
 
   const handleClick = type => {
     if (!desktopWidth && type === 'search') {
-      searchInputEL.current.classList.toggle('clicked');
+      searchEL.current.classList.toggle('clicked');
       searchButtonEL.current.classList.toggle('clicked');
       return;
     }
@@ -113,35 +114,36 @@ function Navbar ({darkMode, lan}) {
   }
 
   const handleHover = type => {
-    if (desktopWidth) {
-      searchInputEL.current.classList.add('hover');
+    const isInputInFocus = document.activeElement === searchInputEL.current
+
+    if (desktopWidth || isInputInFocus) {
+      searchEL.current.classList.add('hover');
       searchButtonEL.current.classList.add('hover');
       return;
     }
-    type ? searchInputEL.current.classList.add('hover') : searchInputEL.current.classList.remove('hover');
+    type ? searchEL.current.classList.add('hover') : searchEL.current.classList.remove('hover');
     type ? searchButtonEL.current.classList.add('hover') : searchButtonEL.current.classList.remove('hover'); 
   }
 
   return (
     <>
-    <div className="nav-dropMenu-container" ref={navDropMenuEL}>
-      <nav className="nav-dropMenu-container__nav-container">
-        <button className={`nav-dropMenu-container__nav-container__hamburger${menu ? ' clicked' : ''}`} onClick={() => setMenu(oldMenu => !oldMenu)}/>
-        <img className="nav-dropMenu-container__nav-container__logo" data-path="/" onClick={handleClick} src={logo}/>
-        <div className={`nav-dropMenu-container__nav-container__search-input`} onMouseEnter={() => handleHover(true)}  onMouseLeave={() => handleHover(false)} ref={searchInputEL}>
-          <input placeholder={lan === 'en' ? 'Type something' : 'هل تبحث عن شيء؟'} /* ref={searchInputEL} *//>
+    <div className="dropMenu" ref={navDropMenuEL}>
+      <nav className="dropMenu__nav">
+        <button className={`dropMenu__nav__hamburger${menu ? ' clicked' : ''}`} onClick={() => setMenu(oldMenu => !oldMenu)}/>
+        <img className="dropMenu__nav__logo" data-path="/" onClick={handleClick} src={logo}/>
+        <div className="dropMenu__nav__search-input" onMouseEnter={() => handleHover(true)}  onMouseLeave={() => handleHover(false)} ref={searchEL}>
+          <input placeholder={lan === 'en' ? 'Type something' : 'هل تبحث عن شيء؟'} onBlur={() => handleHover(false)} ref={searchInputEL}/>
           <img src={darkMode ? searchIconDarkMode : searchIcon}/>
         </div>
-        <button className={`nav-dropMenu-container__nav-container__search`} onClick={handleClick} onMouseEnter={() => handleHover(true)} onMouseLeave={() => handleHover(false)} ref={searchButtonEL}/>
-        <button className="nav-dropMenu-container__nav-container__user" data-path="/account/login" onClick={handleClick}/>
-        <button className="nav-dropMenu-container__nav-container__favourite"/>
-        <button className={`nav-dropMenu-container__nav-container__shoppingCart${cartEmpty ? ' empty' : ''}`} onClick={() => setCartToggle(true)}/>
+        <button className="dropMenu__nav__search" onClick={() => handleClick('search')} onMouseEnter={() => handleHover(true)} onMouseLeave={() => handleHover(false)} ref={searchButtonEL}/>
+        <button className="dropMenu__nav__user" data-path="/account/login" onClick={handleClick}/>
+        <button className="dropMenu__nav__favourite"/>
+        <button className={`dropMenu__nav__shoppingCart${cartEmpty ? ' empty' : ''}`} onClick={() => setCartToggle(true)}/>
       </nav>
       <DropMenu menu={menu} darkMode={darkMode} lan={lan}/>
     </div>
       <HamMenu menu={menu} onMenuChange={menuData} darkMode={darkMode} lan={lan}/>
-      <CartSlider darkMode={darkMode} lan={lan} onCartChange={cartData} cartToggle={cartToggle} onCartToggleChange={cartToggleData} /* onCartProductsChange={cartProductsData} */ />
-      {/* <NavBottom/> */}
+      <CartSlider darkMode={darkMode} lan={lan} onCartChange={cartData} cartToggle={cartToggle} onCartToggleChange={cartToggleData} />
       {/* <Outlet/> */}
     </>
   )

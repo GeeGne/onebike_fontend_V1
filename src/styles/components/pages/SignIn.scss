@@ -49,7 +49,7 @@
       }
     }
 
-    &__signIn {
+    & .signIn {
       background-color: var(--primary-color);
       color: var(--font-h-invert-color);
       font-size: var(--font-size-medium);
@@ -62,11 +62,11 @@
       &:hover {background-color: var(--background-invert-color)}
     }
 
-    &__forgot-password {margin-left: auto}
-    body.arabic &__forgot-password { margin-left: 0; margin-right: auto}
+    & .forgot-password {margin-left: auto}
+    body.arabic & .forgot-password {margin-left: 0; margin-right: auto}
 
-    &__new-costumer,
-    &__forgot-password {
+    & .new-costumer,
+    & .forgot-password {
       font-size: var(--font-size-small);
       color: var(--font-p-color);
       cursor: pointer;

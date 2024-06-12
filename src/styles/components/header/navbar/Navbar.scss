@@ -1,15 +1,15 @@
 @use '../../../utils/_BreakPoints' as w;
 
-.nav-dropMenu-container {
+.dropMenu {
   transition: transform 0.35s ease-out;
   
-  &__nav-container {
+  &__nav {
     position: relative;
     display: flex;
     width: 100%;
     align-items: center;
     font-size: inherit;
-    background-color: var(--button-color);
+    background-color: var(--background-color);
     z-index: 10;
 
     body.arabic & {
@@ -64,7 +64,8 @@
       transform: translateX(-50%);
       width: 100vw;
       height: 100%;
-      background-color: var(--button-color);
+      // background-color: var(--button-color);
+      background-color: var(--background-color);
       z-index: -1;
     }
 
@@ -76,7 +77,7 @@
       transform: translateX(-50%);
       width: 100vw;
       height: 1px;
-      background-color: var(--boxEnd-border-background-color);;
+      background-color: var(--boxEnd-border-background-color);
       z-index: -1;
     }
 
@@ -108,9 +109,7 @@
         z-index: -1;
       }
 
-      &:hover::before {
-        background-color: hsl(0, 0%, 80%, 0.5);
-      }
+      &:hover::before {background-color: var(--light-background-color)}
     }
 
     &__hamburger {
@@ -146,9 +145,12 @@
       position: relative;
       background-image: var(--search-icon);
 
-      &.clicked {
-        background-image: var(--search-invert-icon);
-      }
+      @include w.breakpoint-up(large) {display: none}
+
+      &.hover::before {background-color: var(--light-background-color)}
+      &.clicked {background-image: var(--search-invert-icon)}
+      &.clicked:hover::before {background-color: var(--primary-color)}
+      &.clicked::before {background-color: var(--primary-color)}
 
       &::after {
         content: "";
@@ -158,20 +160,6 @@
         transform: translate(-50%, -50%);
         width: 100%;
         height: 4.6em;
-      }
-
-      @include w.breakpoint-up(large) {
-        display: none;
-      }
-
-      &.hover::before {
-        background-color: hsl(0, 0%, 80%, 0.5);
-      }
-      &.clicked:hover::before {
-        background-color: var(--primary-color);
-      }
-      &.clicked::before {
-        background-color: var(--primary-color);
       }
     }
 
