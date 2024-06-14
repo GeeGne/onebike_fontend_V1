@@ -18,49 +18,206 @@ import personDarkMode from '/assets/img/icons/person_darkMode.svg';
 
 function SignUp ({darkMode, lan}) {
 
+  const [formData, setFormData] = useState({
+    fname: '',
+    lname: '',
+    phone: '',
+    password: '',
+    newsLetter: false,
+    confirmedPassword: ''
+  });
+
   const en = lan === 'en';
   const pageTitle = en ? 'CREATE ACCOUNT' : 'انشاء حساب';
+
+  const formEL = useRef(null);
   const fNameLabelEL = useRef(null);
   const lNameLabelEL = useRef(null);
-  const telLabelEL = useRef(null);
+  const phoneLabelEL = useRef(null);
   const passLabelEL = useRef(null);
   const cPassLabelEL = useRef(null);
 
+  const fNamePopupEL = useRef(null);
+  const lNamePopupEL = useRef(null);  
+  const phonePopupEL = useRef(null);  
+  const passPopupEL = useRef(null);  
+  const cPassPopupEL = useRef(null);  
+
+  const fNameInputEL = useRef(null);
+
+  const fNameEL = useRef(null);
+  const lNameEL = useRef(null);
+  const phoneEL = useRef(null);
+  const passEL = useRef(null);
+  const cPassEL = useRef(null);
+
   const navigate = useNavigate();
+
+  const handleChange = e => {
+    const {name, value, checked} = e.target;
+    // name === 'newsLetter' && (value = e.target.checked);
+    const isNewsLetter = name === 'newsLetter';
+    console.log(name, value, checked);
+    setFormData(prevData => ({...prevData, [name]: isNewsLetter ? checked : value}))
+  }
+
+  const handleSubmit = e => {
+    e.preventDefault();
+    validateInputs();
+    console.log('submit', formData);
+  }
+
+  const validateInputs = () => {
+    const validateFirstName = () => {
+      const {fname} = formData;
+      const re= /^[a-zA-Z]+$/;
+
+      switch (false) {
+        case fname !== '':
+          return 'can\'t be blank';
+          case re.test(fname):
+            return 'must not contain Special Characters \'$%@..\' or Numbers'
+        case fname.length > 2:
+          return 'must be atleast 3 characters'
+        case fname.length < 12:
+          return 'must not exceed 12 characters'
+        default:
+          return true
+      }
+    }
+
+    const validateLastName = () => {
+      const {lname} = formData;
+      const re= /^[a-zA-Z]+$/;
+
+      switch (false) {
+        case lname !== '':
+          return 'can\'t be blank';
+          case re.test(lname):
+            return 'must not contain Special Characters \'$%@..\' or Numbers'
+        case lname.length > 2:
+          return 'must be atleast 3 characters'
+        case lname.length < 12:
+          return 'must not exceed 3 characters'
+        default:
+          return true
+      }
+    }
+
+    const validatePhone = () => {
+      const {phone} = formData;
+      const re= /^[0-9]+$/;
+
+      switch (false) {
+        case phone !== '':
+          return 'can\'t be blank';
+          case re.test(phone):
+            return 'must not contain Special Characters \'$%@..\' or Alphabets';
+        case phone.length === 9:
+          return 'wrong phone number';
+        default:
+          return true
+      }
+    }
+
+    const validatePass = () => {
+      const {password} = formData;
+      const re= /^[a-zA-Z0-9]+$/;
+      const re1= /^[a-zA-Z]+$/;
+      const re2= /^[0-9]+$/;
+
+      switch (false) {
+        case password !== '':
+          return 'can\'t be blank';
+        case password.length > 7:
+          return 'must be atleast 8 characters long';
+        case (re1.test(password) || re2.test(password)):
+          if (!re1.test(password)) {
+            return 'must contain atleast one alphabet';
+          } 
+          if (!re2.test(password)) {
+            return 'must contain atleast one number';
+          };
+        default:
+          return true
+      }
+    }
+
+    const validateCPass = () => {
+      const {confirmedPassword, password} = formData;
+
+      switch (false) {
+        case confirmedPassword !== '':
+          return 'can\'t be blank';
+        case confirmedPassword === password:
+          return 'unmatched password';
+        default:
+          return true
+      }
+    }
+
+    if (typeof(validateFirstName()) === 'string') {
+      fNamePopupEL.current.textContent = validateFirstName();
+      fNameEL.current.classList.add('error');
+      formEL.current.style.border = 'solid var(--red-color) 2px';
+      return false;
+    }
+
+    if (typeof(validateLastName()) === 'string') {
+      lNamePopupEL.current.textContent = validateLastName();
+      lNameEL.current.classList.add('error');
+      formEL.current.style.border = 'solid var(--red-color) 2px';
+      return false;
+    }
+
+    if (typeof(validatePhone()) === 'string') {
+      phonePopupEL.current.textContent = validatePhone();
+      phoneEL.current.classList.add('error');
+      formEL.current.style.border = 'solid var(--red-color) 2px';
+      return false;
+    }
+
+    if (typeof(validatePass()) === 'string') {
+      passPopupEL.current.textContent = validatePass();
+      passEL.current.classList.add('error');
+      formEL.current.style.border = 'solid var(--red-color) 2px';
+      return false;
+    }
+
+    if (typeof(validateCPass()) === 'string') {
+      cPassPopupEL.current.textContent = validateCPass();
+      cPassEL.current.classList.add('error');
+      formEL.current.style.border = 'solid var(--red-color) 2px';
+      return false;
+    }
+  }
+
+  const removeError = el => el.classList.remove('error');
 
   const handleFocus = e => {
     const {name} = e.target;
+    formEL.current.style.border = 'solid var(--signUp-input-border-color) 2px';
 
     switch (name) {
       case 'fname':
-        fNameLabelEL.current.style.top = '0';
-        fNameLabelEL.current.style.fontSize = 'var(--font-size-extraSmall)';
-        fNameLabelEL.current.style.fontWeight = '500';
-        fNameLabelEL.current.style.color = 'var(--primary-color)';
+        fNameEL.current.classList.remove('error');
+        fNameEL.current.classList.add('onFocus');
         break;
       case 'lname':
-        lNameLabelEL.current.style.top = '0';
-        lNameLabelEL.current.style.fontSize = 'var(--font-size-extraSmall)';
-        lNameLabelEL.current.style.fontWeight = '500';
-        lNameLabelEL.current.style.color = 'var(--primary-color)';
+        lNameEL.current.classList.remove('error');
+        lNameEL.current.classList.add('onFocus');  
         break;
-      case 'tel':
-        telLabelEL.current.style.top = '0';
-        telLabelEL.current.style.fontSize = 'var(--font-size-extraSmall)';
-        telLabelEL.current.style.fontWeight = '500';
-        telLabelEL.current.style.color = 'var(--primary-color)';
+      case 'phone':
+        phoneEL.current.classList.remove('error');
+        phoneEL.current.classList.add('onFocus');  
         break;
       case 'password':
-        passLabelEL.current.style.top = '0';
-        passLabelEL.current.style.fontSize = 'var(--font-size-extraSmall)';
-        passLabelEL.current.style.fontWeight = '500';
-        passLabelEL.current.style.color = 'var(--primary-color)';
+        passEL.current.classList.remove('error');
+        passEL.current.classList.add('onFocus');
         break;
-      case 'cpassword':
-        cPassLabelEL.current.style.top = '0';
-        cPassLabelEL.current.style.fontSize = 'var(--font-size-extraSmall)';
-        cPassLabelEL.current.style.fontWeight = '500';
-        cPassLabelEL.current.style.color = 'var(--primary-color)';
+      case 'confirmedPassword':
+        cPassEL.current.classList.remove('error');
+        cPassEL.current.classList.add('onFocus');  
         break;
       default:
         console.log('Unknown type:', type);
@@ -74,34 +231,19 @@ function SignUp ({darkMode, lan}) {
     if (inputEmpty) {
       switch (name) {
         case 'fname':
-          fNameLabelEL.current.style.top = '50%';
-          fNameLabelEL.current.style.fontSize = 'var(--font-size-small)';
-          fNameLabelEL.current.style.fontWeight = '600';
-          fNameLabelEL.current.style.color = 'var(--signUp-label-font-color)';
+          fNameEL.current.classList.remove('onFocus');
           break;
         case 'lname':
-          lNameLabelEL.current.style.top = '50%';
-          lNameLabelEL.current.style.fontSize = 'var(--font-size-small)';
-          lNameLabelEL.current.style.fontWeight = '600';
-          lNameLabelEL.current.style.color = 'var(--signUp-label-font-color)';
+          lNameEL.current.classList.remove('onFocus');
           break;
-        case 'tel':
-          telLabelEL.current.style.top = '50%';
-          telLabelEL.current.style.fontSize = 'var(--font-size-small)';
-          telLabelEL.current.style.fontWeight = '600';
-          telLabelEL.current.style.color = 'var(--signUp-label-font-color)';
+        case 'phone':
+          phoneEL.current.classList.remove('onFocus');
           break;
         case 'password':
-          passLabelEL.current.style.top = '50%';
-          passLabelEL.current.style.fontSize = 'var(--font-size-small)';
-          passLabelEL.current.style.fontWeight = '600';
-          passLabelEL.current.style.color = 'var(--signUp-label-font-color)';
+          passEL.current.classList.remove('onFocus');
           break;
-        case 'cpassword':
-          cPassLabelEL.current.style.top = '50%';
-          cPassLabelEL.current.style.fontSize = 'var(--font-size-small)';
-          cPassLabelEL.current.style.fontWeight = '600';
-          cPassLabelEL.current.style.color = 'var(--signUp-label-font-color)';
+        case 'confirmedPassword':
+          cPassEL.current.classList.remove('onFocus');
           break;
         default:
           console.log('Unknown type:', type);
@@ -109,47 +251,52 @@ function SignUp ({darkMode, lan}) {
     }
   }
 
+  const path = el => el.dataset.path;
+
   const handleClick = e => {
     navigate(path(e.target))
     scroll({top: 0, behavior: 'smooth'});
   }
 
-  const path = el => el.dataset.path;
-
   return (
-    <section className='signUp-container'>
+    <section className='signUp'>
       <Banner pageTitle={pageTitle}/>
-      <form className='signUp-container__form'>
-        <div className="signUp-container__form__intro">
+      <form className='signUp__form' onSubmit={handleSubmit} ref={formEL}>
+        <div className="signUp__form__intro">
           <div className="img"/>
           <h1>{en ? 'Start Your Cycling Journey' : 'ابدأ رحلتك في ركوب الدراجات'}</h1>
           <p>{en ? 'Let\'s get you set up!' : 'دعنا نقوم بإعدادك!'}</p>
         </div>
-        <div className='signUp-container__form__fname'>
-          <label htmlFor="fname" ref={fNameLabelEL}>{en ? 'FIRST NAME' : 'الاسم الاول'}</label>
-          <input type="fname" name="fname" id="fname" required onFocus={handleFocus} onBlur={handleBlur}/>
+        <div className="signUp__form__fname" ref={fNameEL}>
+          <label className="signUp__form__fname__label" htmlFor="fname" ref={fNameLabelEL}>{en ? 'FIRST NAME' : 'الاسم الاول'}</label>
+          <input className="signUp__form__fname__input" type="text" name="fname" id="fname" onChange={handleChange} onFocus={handleFocus} onBlur={handleBlur} ref={fNameInputEL}/>
+          <div className="signUp__form__fname__error-popup" onClick={() => removeError(fNameEL.current)} ref={fNamePopupEL} />
         </div>
-        <div className='signUp-container__form__lname'>
+        <div className='signUp__form__lname' ref={lNameEL}>
           <label htmlFor="lname" ref={lNameLabelEL}>{en ? 'LAST NAME' : 'الاسم الاخير'}</label>
-          <input type="lname" name="lname" id="lname" required onFocus={handleFocus} onBlur={handleBlur}/>
+          <input type="text" name="lname" id="lname" onChange={handleChange} onFocus={handleFocus} onBlur={handleBlur}/>
+          <div className="signUp__form__fname__error-popup" onClick={() => removeError(lNameEL.current)} ref={lNamePopupEL} />
         </div>
-        <div className='signUp-container__form__tel'>
-          <label htmlFor="tel" ref={telLabelEL}>{en ? 'PHONE NUMBER' : 'رقم الهاتف'}</label>
-          <input type="tel" name="tel" id="tel" required onFocus={handleFocus} onBlur={handleBlur}/>
+        <div className='signUp__form__phone' ref={phoneEL}>
+          <label htmlFor="phone" ref={phoneLabelEL}>{en ? 'PHONE NUMBER' : 'رقم الهاتف'}</label>
+          <input type="tel" name="phone" id="phone" onChange={handleChange} onFocus={handleFocus} onBlur={handleBlur} />
+          <div className="signUp__form__phone__error-popup" onClick={() => removeError(phoneEL.current)} ref={phonePopupEL} />
         </div>
-        <div className='signUp-container__form__password'>
+        <div className='signUp__form__password' ref={passEL}>
           <label htmlFor="password" ref={passLabelEL}>{en ? 'PASSWORD' : 'كلمه المرور'}</label>
-          <input type="password" name="password" id="password" required onFocus={handleFocus} onBlur={handleBlur}/>
+          <input type="password" name="password" id="password" onChange={handleChange} onFocus={handleFocus} onBlur={handleBlur}/>
+          <div className="signUp__form__password__error-popup" onClick={() => removeError(passEL.current)} ref={passPopupEL} />
         </div>
-        <div className='signUp-container__form__cpassword'>
+        <div className='signUp__form__cpassword' ref={cPassEL}>
           <label htmlFor="cpassword" ref={cPassLabelEL}>{en ? 'CONFIRM PASSWORD' : 'تاكيد كلمه المرور'}</label>
-          <input type="cpassword" name="cpassword" id="cpassword" required onFocus={handleFocus} onBlur={handleBlur}/>
+          <input type="password" name="confirmedPassword" id="cpassword" onChange={handleChange} onFocus={handleFocus} onBlur={handleBlur} />
+          <div className="signUp__form__password__error-popup" onClick={() => removeError(cPassEL.current)} ref={cPassPopupEL} />
         </div>
-        <div className='signUp-container__form__newsletter'>
-          <input className="checkbox-input" type="checkbox" id="newsletter"/>
-          <label className="description" htmlFor="newsletter">{en ? 'I agree recieving latest news and special deals emails according to the privacy policy' : 'أوافق على تلقي آخر الأخبار والعروض الخاصة عبر البريد الإلكتروني وفقًا لسياسة الخصوصية'}</label>
+        <div className='signUp__form__newsletter'>
+          <input className="checkbox-input" type="checkbox" name="newsLetter" id="newsLetter" onChange={handleChange}/>
+          <label className="description" htmlFor="newsLetter">{en ? 'I agree recieving latest news and special deals emails according to the privacy policy' : 'أوافق على تلقي آخر الأخبار والعروض الخاصة عبر البريد الإلكتروني وفقًا لسياسة الخصوصية'}</label>
         </div>
-        <button className='signUp-container__form__create' type="submit">{en ? 'CREATE' : 'انشئ'}</button>
+        <button className='signUp__form__create' type="submit">{en ? 'CREATE' : 'انشئ'}</button>
       </form>
     </section>
   )

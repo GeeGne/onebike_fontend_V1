@@ -82,7 +82,7 @@ function SignIn ({darkMode, lan}) {
       <form className='signIn-container__form'>
         <div className='signIn-container__form__tel'>
           <label htmlFor="tel" ref={telLabelEL}>{en ? 'PHONE NUMBER' : 'رقم الهاتف'}</label>
-          <input type="tel" name="tel" id="tel" required onFocus={handleFocus} onBlur={handleBlur}/>
+          <input type="tel" name="tel" id="tel" onFocus={handleFocus} onBlur={handleBlur}/>
         </div>
         <div className='signIn-container__form__password'>
           <label htmlFor="password" ref={passLabelEL}>{en ? 'PASSWORD' : 'كلمه المرور'}</label>
