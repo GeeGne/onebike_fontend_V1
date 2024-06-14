@@ -55,9 +55,7 @@ function SignUp ({darkMode, lan}) {
 
   const handleChange = e => {
     const {name, value, checked} = e.target;
-    // name === 'newsLetter' && (value = e.target.checked);
     const isNewsLetter = name === 'newsLetter';
-    console.log(name, value, checked);
     setFormData(prevData => ({...prevData, [name]: isNewsLetter ? checked : value}))
   }
 
@@ -70,17 +68,17 @@ function SignUp ({darkMode, lan}) {
   const validateInputs = () => {
     const validateFirstName = () => {
       const {fname} = formData;
-      const re= /^[a-zA-Z]+$/;
+      const re= /^[a-zA-Z\u0600-\u06FF]+$/;
 
       switch (false) {
         case fname !== '':
-          return 'can\'t be blank';
-          case re.test(fname):
-            return 'must not contain Special Characters \'$%@..\' or Numbers'
+          return en ? 'can\'t be blank' : 'لا يمكن أن يكون فارغًا';
+        case re.test(fname):
+            return en ? 'must not contain Special Characters \'$%@..\' or Numbers' : 'يجب أن لا يحتوي على أحرف خاصة مثل \'$%@..\' أو أرقام'
         case fname.length > 2:
-          return 'must be atleast 3 characters'
+          return en ? 'must be at least 3 characters' : 'يجب أن يكون على الأقل 3 أحرف';
         case fname.length < 12:
-          return 'must not exceed 12 characters'
+          return en ? 'must not exceed 12 characters' : 'يجب ألا يتجاوز 12 حرفً';
         default:
           return true
       }
@@ -88,17 +86,17 @@ function SignUp ({darkMode, lan}) {
 
     const validateLastName = () => {
       const {lname} = formData;
-      const re= /^[a-zA-Z]+$/;
+      const re= /^[a-zA-Z\u0600-\u06FF]+$/;
 
       switch (false) {
         case lname !== '':
-          return 'can\'t be blank';
+          return en ? 'can\'t be blank' : 'لا يمكن أن يكون فارغًا';
           case re.test(lname):
-            return 'must not contain Special Characters \'$%@..\' or Numbers'
+            return en ? 'must not contain Special Characters \'$%@..\' or Numbers' : 'يجب أن لا يحتوي على أحرف خاصة مثل \'$%@..\' أو أرقام'
         case lname.length > 2:
-          return 'must be atleast 3 characters'
+          return en ? 'must be at least 3 characters' : 'يجب أن يكون على الأقل 3 أحرف';
         case lname.length < 12:
-          return 'must not exceed 3 characters'
+          return en ? 'must not exceed 12 characters' : 'يجب ألا يتجاوز 12 حرفً';
         default:
           return true
       }
@@ -110,11 +108,11 @@ function SignUp ({darkMode, lan}) {
 
       switch (false) {
         case phone !== '':
-          return 'can\'t be blank';
+          return en ? 'can\'t be blank' : 'لا يمكن أن يكون فارغًا';
           case re.test(phone):
-            return 'must not contain Special Characters \'$%@..\' or Alphabets';
+            return en ? 'must not contain Special Characters \'$%@..\' or Alphabets' : 'يجب ألا يحتوي على أحرف خاصة مثل \'$%@..\' أو أحرف أبجدية';
         case phone.length === 9:
-          return 'wrong phone number';
+          return en ? 'wrong phone number' : 'رقم هاتف خاطئ';
         default:
           return true
       }
@@ -122,21 +120,21 @@ function SignUp ({darkMode, lan}) {
 
     const validatePass = () => {
       const {password} = formData;
-      const re= /^[a-zA-Z0-9]+$/;
+      const re= /^(?=.*[a-zA-Z])(?=.*[0-9])/;
       const re1= /^[a-zA-Z]+$/;
       const re2= /^[0-9]+$/;
 
       switch (false) {
         case password !== '':
-          return 'can\'t be blank';
+          return en ? 'can\'t be blank' : 'لا يمكن أن يكون فارغًا';
         case password.length > 7:
-          return 'must be atleast 8 characters long';
-        case (re1.test(password) || re2.test(password)):
+          return en ? 'must be at least 8 characters' : 'يجب أن يكون على الأقل 8 أحرف';
+        case (re.test(password)):
           if (!re1.test(password)) {
-            return 'must contain atleast one alphabet';
+            return en ? 'must contain at least one alphabet': 'يجب أن يحتوي على حرف واحد على الأقل';
           } 
           if (!re2.test(password)) {
-            return 'must contain atleast one number';
+            return en ? 'must contain at least one number' : 'يجب أن يحتوي على رقم واحد على الأقل';
           };
         default:
           return true
@@ -148,9 +146,9 @@ function SignUp ({darkMode, lan}) {
 
       switch (false) {
         case confirmedPassword !== '':
-          return 'can\'t be blank';
+          return en ? 'can\'t be blank' : 'لا يمكن أن يكون فارغًا';
         case confirmedPassword === password:
-          return 'unmatched password';
+          return en ? 'unmatched password': 'كلمة المرور غير مطابقة';
         default:
           return true
       }
