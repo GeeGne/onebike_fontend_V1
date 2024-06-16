@@ -24,4 +24,5 @@ dist-ssr
 *.sw?
 
 # Hide
+fireBase/confige.js
 config/

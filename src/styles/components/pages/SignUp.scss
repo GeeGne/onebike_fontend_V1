@@ -145,6 +145,12 @@
         font-size: var(--font-size-extraSmall);
       }
     }
+
+    & .test {
+      & div {
+        margin-inline: auto;
+      }
+    }
   }
 }
 

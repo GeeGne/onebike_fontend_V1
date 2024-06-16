@@ -64,4 +64,10 @@
     border-radius: 4px;
     background-color: var(--alert-timer-background-color);
   }
+
+  & .test {
+    background-color: red;
+    width: 100%;
+    height: 20em;
+  }
 }

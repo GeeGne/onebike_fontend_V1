@@ -1,3 +1,6 @@
+// FIREBASE
+import {auth, RecaptchaVerifier, signInWithPhoneNumber} from "/src/config/firebase";
+
 // HOOKS
 import React, {useState, useEffect, useRef} from 'react';
 import {Link, useNavigate} from 'react-router-dom';
@@ -17,7 +20,26 @@ import userDarkMode from '/assets/img/icons/user_darkMode.svg';
 import personDarkMode from '/assets/img/icons/person_darkMode.svg';
 
 function SignUp ({darkMode, lan}) {
+  const phoneNumber = '+201150407151';
 
+  const sendVerificaitonCode = async () => {
+    window.recaptchaVerifier = new RecaptchaVerifier(auth, 'sign-up', {
+      'size': 'invisible',
+      'callback': (response) => {}
+    });
+      
+    const appVerifier = window.recaptchaVerifier;
+    signInWithPhoneNumber(auth, phoneNumber, appVerifier)
+      .then((confirmationResult) => {
+        window.confirmationResult = confirmationResult;
+        alert('Verification code sent');
+      })
+      .catch((error) => {
+        console.error("Error during signInWithPhoneNumber", error);
+        alert('Error sending verification code');
+      });
+  }
+    
   const [formData, setFormData] = useState({
     fname: '',
     lname: '',
@@ -59,9 +81,24 @@ function SignUp ({darkMode, lan}) {
     setFormData(prevData => ({...prevData, [name]: isNewsLetter ? checked : value}))
   }
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
+
+    const addVarificationInput = () => {
+      
+    }
+
+    const addVarificationSyles = () => {
+
+    }
+
     e.preventDefault();
-    validateInputs();
+    if (validateInputs()) {
+      const isOperationSucesssful = await sendVerificaitonCode();
+      if (isOperationSucesssful) {
+        addVarificationInput();
+        addVarificationSyles();
+      }
+    };
     console.log('submit', formData);
   }
 
@@ -188,6 +225,8 @@ function SignUp ({darkMode, lan}) {
       formEL.current.style.border = 'solid var(--red-color) 2px';
       return false;
     }
+
+    return true;
   }
 
   const removeError = el => el.classList.remove('error');
@@ -267,12 +306,12 @@ function SignUp ({darkMode, lan}) {
         </div>
         <div className="signUp__form__fname" ref={fNameEL}>
           <label className="signUp__form__fname__label" htmlFor="fname" ref={fNameLabelEL}>{en ? 'FIRST NAME' : 'الاسم الاول'}</label>
-          <input className="signUp__form__fname__input" type="text" name="fname" id="fname" onChange={handleChange} onFocus={handleFocus} onBlur={handleBlur} ref={fNameInputEL}/>
+          <input className="signUp__form__fname__input" type="text" name="fname" id="fname" onChange={handleChange} onFocus={handleFocus} onBlur={handleBlur} ref={fNameInputEL} readOnly/>
           <div className="signUp__form__fname__error-popup" onClick={() => removeError(fNameEL.current)} ref={fNamePopupEL} />
         </div>
         <div className='signUp__form__lname' ref={lNameEL}>
           <label htmlFor="lname" ref={lNameLabelEL}>{en ? 'LAST NAME' : 'الاسم الاخير'}</label>
-          <input type="text" name="lname" id="lname" onChange={handleChange} onFocus={handleFocus} onBlur={handleBlur}/>
+          <input type="text" name="lname" id="lname" onChange={handleChange} onFocus={handleFocus} onBlur={handleBlur} readonly/>
           <div className="signUp__form__fname__error-popup" onClick={() => removeError(lNameEL.current)} ref={lNamePopupEL} />
         </div>
         <div className='signUp__form__phone' ref={phoneEL}>
@@ -294,7 +333,11 @@ function SignUp ({darkMode, lan}) {
           <input className="checkbox-input" type="checkbox" name="newsLetter" id="newsLetter" onChange={handleChange}/>
           <label className="description" htmlFor="newsLetter">{en ? 'I agree recieving latest news and special deals emails according to the privacy policy' : 'أوافق على تلقي آخر الأخبار والعروض الخاصة عبر البريد الإلكتروني وفقًا لسياسة الخصوصية'}</label>
         </div>
-        <button className='signUp__form__create' type="submit">{en ? 'CREATE' : 'انشئ'}</button>
+        <button className='signUp__form__create' id ='sign-up' type="submit">{en ? 'CREATE' : 'انشئ'}</button>
+        <div>
+          <div className="test" id='recaptcha-container'></div>
+          {/* <button id ='sign-in-button' onClick={() => runCode()}>Send Verification Code</button> */}
+      </div>
       </form>
     </section>
   )
