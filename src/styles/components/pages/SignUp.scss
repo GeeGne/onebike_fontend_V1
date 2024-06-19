@@ -127,6 +127,10 @@
     }
 
     &__create {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1em;
       background-color: var(--primary-color);
       color: var(--font-h-invert-color);
       font-size: var(--font-size-medium);

@@ -93,6 +93,16 @@
   }
 }
 
+@keyframes rotate {
+  from {
+    transform: rotate(0deg)
+  }
+
+  to {
+    transform: rotate(360deg)
+  }
+}
+
 .alert-popIn {
   animation-name: alert-popIn;
   animation-timing-function: ease;
@@ -128,6 +138,14 @@
   animation-timing-function: ease-out;
   animation-fill-mode: both;
   animation-duration: 10s;
+}
+
+.--rotate {
+  animation-name: rotate;
+  animation-timing-function: linear;
+  animation-fill-mode: both;
+  animation-duration: 1.5s;
+  animation-iteration-count: infinite;
 }
 
 .animation--none {

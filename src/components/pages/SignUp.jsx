@@ -1,13 +1,16 @@
-// FIREBASE
-import {auth, RecaptchaVerifier, createUserWithEmailAndPassword, signOut, updateProfile} from "/src/firebase/authSignUp";
-import intializeRecaptcha from "/src/firebase/recaptcha";
-
 // HOOKS
 import React, {useState, useEffect, useRef} from 'react';
 import {Link, useNavigate} from 'react-router-dom';
 
+// FIREBASE
+import {auth, RecaptchaVerifier, createUserWithEmailAndPassword, signOut, updateProfile} from "/src/firebase/authSignUp";
+import intializeRecaptcha from "/src/firebase/recaptcha";
+import handleAuthError from "/src/firebase/handleAuthError";
+
 // COMPONENTS
 import Banner from '/src/components/Banner';
+import ProgressActivity from '/src/components/ProgressActivity';
+import Alert from '/src/components/Alert';
 
 // SCSS
 import '/src/styles/components/pages/SignUp.scss';
@@ -22,6 +25,9 @@ import personDarkMode from '/assets/img/icons/person_darkMode.svg';
 
 function SignUp ({darkMode, lan}) {
 
+  const [processing, setProcessing] = useState(false);
+  const [alertText, setAlertText] = useState(null);
+  const [newAlert, setNewAlert] = useState(0);
   const [formData, setFormData] = useState({
     fname: '',
     lname: '',
@@ -83,20 +89,18 @@ function SignUp ({darkMode, lan}) {
       cPassEL.current.classList.remove('error');
     }
 
-    const addReadOnlyAttToInput = () => {
-      fNameInputEL.current.setAttribute('readonly', true);
-      lNameInputEL.current.setAttribute('readonly', true);
-      phoneInputEL.current.setAttribute('readonly', true);
-      passInputEL.current.setAttribute('readonly', true);
-      cPassInputEL.current.setAttribute('readonly', true);
-    }
-
     e.preventDefault();
     removeErrorPopup();
     if (validateInputs()) {
+      setProcessing(true);
       const isOperationSucesssful = await signUpWithEmailAndPass();
       if (isOperationSucesssful) {
+        setProcessing(false);
         navigate('/account');
+        scroll({top: 0, behavior: 'smooth'});
+      } else {
+        setProcessing(false);
+        formEL.current.style.border = 'solid var(--red-color) 2px';
       }
     }
   }
@@ -106,10 +110,11 @@ function SignUp ({darkMode, lan}) {
     try {
       const userCredintial = await createUserWithEmailAndPassword(auth, email, password);
       const user = userCredintial.user;
-      console.log({user});
       return true;
     } catch (error) {
       console.error(error);
+      setAlertText(handleAuthError(error, en));
+      setNewAlert(Math.random());
       return false;
     }
   }
@@ -122,8 +127,10 @@ function SignUp ({darkMode, lan}) {
       switch (false) {
         case fname !== '':
           return en ? 'can\'t be blank' : 'لا يمكن أن يكون فارغًا';
+        case !fname.includes(' '):
+          return en ? 'must not contain Spaces' : 'يجب أن لا يحتوي على مسافات';  
         case re.test(fname):
-            return en ? 'must not contain Special Characters \'$%@..\' or Numbers' : 'يجب أن لا يحتوي على أحرف خاصة مثل \'$%@..\' أو أرقام'
+          return en ? 'must not contain Special Characters \'$%@..\' or Numbers' : 'يجب أن لا يحتوي على أحرف خاصة مثل \'$%@..\' أو أرقام'
         case fname.length > 2:
           return en ? 'must be at least 3 characters' : 'يجب أن يكون على الأقل 3 أحرف';
         case fname.length < 12:
@@ -140,8 +147,10 @@ function SignUp ({darkMode, lan}) {
       switch (false) {
         case lname !== '':
           return en ? 'can\'t be blank' : 'لا يمكن أن يكون فارغًا';
-          case re.test(lname):
-            return en ? 'must not contain Special Characters \'$%@..\' or Numbers' : 'يجب أن لا يحتوي على أحرف خاصة مثل \'$%@..\' أو أرقام'
+        case !lname.includes(' '):
+          return en ? 'must not contain Spaces' : 'يجب أن لا يحتوي على مسافات';  
+        case re.test(lname):
+          return en ? 'must not contain Special Characters \'$%@..\' or Numbers' : 'يجب أن لا يحتوي على أحرف خاصة مثل \'$%@..\' أو أرقام'
         case lname.length > 2:
           return en ? 'must be at least 3 characters' : 'يجب أن يكون على الأقل 3 أحرف';
         case lname.length < 12:
@@ -158,7 +167,9 @@ function SignUp ({darkMode, lan}) {
       switch (false) {
         case email !== '':
           return en ? 'can\'t be blank' : 'لا يمكن أن يكون فارغًا';
-          case re.test(email):
+        case !email.includes(' '):
+          return en ? 'must not contain Spaces' : 'يجب أن لا يحتوي على مسافات';  
+        case re.test(email):
             return en ? 'wrong email ex: example@email.com' : 'بريد الكتروني غير صحيح مثال: example@email.com'
         default:
           return true
@@ -173,6 +184,8 @@ function SignUp ({darkMode, lan}) {
       switch (false) {
         case phone !== '':
           return en ? 'can\'t be blank' : 'لا يمكن أن يكون فارغًا';
+        case !phone.includes(' '):
+          return en ? 'must not contain Spaces' : 'يجب أن لا يحتوي على مسافات';
         case re.test(phone):
           return en ? 'must not contain Special Characters \'$%@..\' or Alphabets' : 'يجب ألا يحتوي على أحرف خاصة مثل \'$%@..\' أو أحرف أبجدية';
         case re1.test(phone):
@@ -193,6 +206,8 @@ function SignUp ({darkMode, lan}) {
       switch (false) {
         case password !== '':
           return en ? 'can\'t be blank' : 'لا يمكن أن يكون فارغًا';
+        case !password.includes(' '):
+          return en ? 'must not contain Spaces' : 'يجب أن لا يحتوي على مسافات';
         case password.length > 7:
           return en ? 'must be at least 8 characters' : 'يجب أن يكون على الأقل 8 أحرف';
         case (re.test(password)):
@@ -220,47 +235,19 @@ function SignUp ({darkMode, lan}) {
       }
     }
 
-    if (typeof(validateFirstName()) === 'string') {
-      fNamePopupEL.current.textContent = validateFirstName();
-      fNameEL.current.classList.add('error');
+    const handleError = (errorMessage, popupEL, formChildEL) => {
+      popupEL.textContent = errorMessage;
+      formChildEL.classList.add('error');
       formEL.current.style.border = 'solid var(--red-color) 2px';
-      return false;
+      return false;      
     }
 
-    if (typeof(validateLastName()) === 'string') {
-      lNamePopupEL.current.textContent = validateLastName();
-      lNameEL.current.classList.add('error');
-      formEL.current.style.border = 'solid var(--red-color) 2px';
-      return false;
-    }
-
-    if (typeof(validateEmail()) === 'string') {
-      emailPopupEL.current.textContent = validateEmail();
-      emailEL.current.classList.add('error');
-      formEL.current.style.border = 'solid var(--red-color) 2px';
-      return false;
-    }
-
-    if (typeof(validatePhone()) === 'string') {
-      phonePopupEL.current.textContent = validatePhone();
-      phoneEL.current.classList.add('error');
-      formEL.current.style.border = 'solid var(--red-color) 2px';
-      return false;
-    }
-
-    if (typeof(validatePass()) === 'string') {
-      passPopupEL.current.textContent = validatePass();
-      passEL.current.classList.add('error');
-      formEL.current.style.border = 'solid var(--red-color) 2px';
-      return false;
-    }
-
-    if (typeof(validateCPass()) === 'string') {
-      cPassPopupEL.current.textContent = validateCPass();
-      cPassEL.current.classList.add('error');
-      formEL.current.style.border = 'solid var(--red-color) 2px';
-      return false;
-    }
+    if (typeof(validateFirstName()) === 'string') return handleError(validateFirstName(), fNamePopupEL.current, fNameEL.current);
+    if (typeof(validateLastName()) === 'string') return handleError(validateLastName(), lNamePopupEL.current, lNameEL.current);
+    if (typeof(validateEmail()) === 'string') return handleError(validateEmail(), emailPopupEL.current, emailEL.current);
+    if (typeof(validatePhone()) === 'string') return handleError(validatePhone(), phonePopupEL.current, phoneEL.current);
+    if (typeof(validatePass()) === 'string') return handleError(validatePass(), passPopupEL.current, passEL.current);
+    if (typeof(validateCPass()) === 'string') return handleError(validateCPass(), cPassPopupEL.current, cPassEL.current);
 
     return true;
   }
@@ -345,8 +332,18 @@ function SignUp ({darkMode, lan}) {
     scroll({top: 0, behavior: 'smooth'});
   }
 
+  const handleProcessing = text => {
+    switch (true) {
+      case processing:
+        return <ProgressActivity darkMode={darkMode} invert={true} />
+      default:
+        return text;
+    }
+  }
+
   return (
     <section className='signUp'>
+      <Alert alertText={alertText} newAlert={newAlert} />
       <Banner pageTitle={pageTitle}/>
       <form className='signUp__form' acceptCharset="UTF-8" onSubmit={handleSubmit} ref={formEL} autoComplete="on">
         <div className="signUp__form__intro">
@@ -388,7 +385,7 @@ function SignUp ({darkMode, lan}) {
           <input className="checkbox-input" type="checkbox" name="newsLetter" id="newsLetter" autoComplete="true" onChange={handleChange} readOnly/>
           <label className="description" htmlFor="newsLetter">{en ? 'I agree recieving latest news and special deals emails according to the privacy policy' : 'أوافق على تلقي آخر الأخبار والعروض الخاصة عبر البريد الإلكتروني وفقًا لسياسة الخصوصية'}</label>
         </div>
-        <button className='signUp__form__create' type="submit" ref={createButtonEL}>{en ? 'CREATE' : 'انشئ'}</button>
+        <button className='signUp__form__create' type="submit" ref={createButtonEL}>{handleProcessing(en ? 'CREATE' : 'انشئ')}{/* <ProgressActivity darkMode={darkMode} />{en ? 'CREATE' : 'انشئ'} */}</button>
       </form>
     </section>
   )
