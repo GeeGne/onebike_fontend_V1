@@ -1,5 +1,6 @@
 // FIREBASE
-import {auth, RecaptchaVerifier, signInWithPhoneNumber} from "/src/config/firebase";
+import {auth, RecaptchaVerifier, createUserWithEmailAndPassword, signOut, updateProfile} from "/src/firebase/authSignUp";
+import intializeRecaptcha from "/src/firebase/recaptcha";
 
 // HOOKS
 import React, {useState, useEffect, useRef} from 'react';
@@ -20,33 +21,15 @@ import userDarkMode from '/assets/img/icons/user_darkMode.svg';
 import personDarkMode from '/assets/img/icons/person_darkMode.svg';
 
 function SignUp ({darkMode, lan}) {
-  const phoneNumber = '+201150407151';
 
-  const sendVerificaitonCode = async () => {
-    window.recaptchaVerifier = new RecaptchaVerifier(auth, 'sign-up', {
-      'size': 'invisible',
-      'callback': (response) => {}
-    });
-      
-    const appVerifier = window.recaptchaVerifier;
-    signInWithPhoneNumber(auth, phoneNumber, appVerifier)
-      .then((confirmationResult) => {
-        window.confirmationResult = confirmationResult;
-        alert('Verification code sent');
-      })
-      .catch((error) => {
-        console.error("Error during signInWithPhoneNumber", error);
-        alert('Error sending verification code');
-      });
-  }
-    
   const [formData, setFormData] = useState({
     fname: '',
     lname: '',
+    email: '',
     phone: '',
     password: '',
     newsLetter: false,
-    confirmedPassword: ''
+    confirmedPassword: '',
   });
 
   const en = lan === 'en';
@@ -55,24 +38,33 @@ function SignUp ({darkMode, lan}) {
   const formEL = useRef(null);
   const fNameLabelEL = useRef(null);
   const lNameLabelEL = useRef(null);
+  const emailLabelEL = useRef(null);
   const phoneLabelEL = useRef(null);
   const passLabelEL = useRef(null);
   const cPassLabelEL = useRef(null);
 
+  const fNameInputEL = useRef(null);
+  const lNameInputEL = useRef(null);
+  const emailInputEL = useRef(null);
+  const phoneInputEL = useRef(null);
+  const passInputEL = useRef(null);
+  const cPassInputEL = useRef(null);
+
   const fNamePopupEL = useRef(null);
   const lNamePopupEL = useRef(null);  
+  const emailPopupEL = useRef(null);  
   const phonePopupEL = useRef(null);  
   const passPopupEL = useRef(null);  
   const cPassPopupEL = useRef(null);  
 
-  const fNameInputEL = useRef(null);
-
   const fNameEL = useRef(null);
   const lNameEL = useRef(null);
+  const emailEL = useRef(null);
   const phoneEL = useRef(null);
   const passEL = useRef(null);
   const cPassEL = useRef(null);
 
+  const createButtonEL = useRef(null);
   const navigate = useNavigate();
 
   const handleChange = e => {
@@ -83,25 +75,45 @@ function SignUp ({darkMode, lan}) {
 
   const handleSubmit = async e => {
 
-    const addVarificationInput = () => {
-      
+    const removeErrorPopup = () => {
+      fNameEL.current.classList.remove('error');
+      lNameEL.current.classList.remove('error');
+      phoneEL.current.classList.remove('error');
+      passEL.current.classList.remove('error');
+      cPassEL.current.classList.remove('error');
     }
 
-    const addVarificationSyles = () => {
-
+    const addReadOnlyAttToInput = () => {
+      fNameInputEL.current.setAttribute('readonly', true);
+      lNameInputEL.current.setAttribute('readonly', true);
+      phoneInputEL.current.setAttribute('readonly', true);
+      passInputEL.current.setAttribute('readonly', true);
+      cPassInputEL.current.setAttribute('readonly', true);
     }
 
     e.preventDefault();
+    removeErrorPopup();
     if (validateInputs()) {
-      const isOperationSucesssful = await sendVerificaitonCode();
+      const isOperationSucesssful = await signUpWithEmailAndPass();
       if (isOperationSucesssful) {
-        addVarificationInput();
-        addVarificationSyles();
+        navigate('/account');
       }
-    };
-    console.log('submit', formData);
+    }
   }
 
+  const signUpWithEmailAndPass = async () => {
+    const {email, password} = formData;
+    try {
+      const userCredintial = await createUserWithEmailAndPassword(auth, email, password);
+      const user = userCredintial.user;
+      console.log({user});
+      return true;
+    } catch (error) {
+      console.error(error);
+      return false;
+    }
+  }
+  
   const validateInputs = () => {
     const validateFirstName = () => {
       const {fname} = formData;
@@ -139,17 +151,34 @@ function SignUp ({darkMode, lan}) {
       }
     }
 
+    const validateEmail = () => {
+      const {email} = formData;
+      const re= /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+      switch (false) {
+        case email !== '':
+          return en ? 'can\'t be blank' : 'لا يمكن أن يكون فارغًا';
+          case re.test(email):
+            return en ? 'wrong email ex: example@email.com' : 'بريد الكتروني غير صحيح مثال: example@email.com'
+        default:
+          return true
+      }
+    }
+
     const validatePhone = () => {
       const {phone} = formData;
-      const re= /^[0-9]+$/;
+      const re= /^[0-9+]+$/;
+      const re1= /^\+963/;
 
       switch (false) {
         case phone !== '':
           return en ? 'can\'t be blank' : 'لا يمكن أن يكون فارغًا';
-          case re.test(phone):
-            return en ? 'must not contain Special Characters \'$%@..\' or Alphabets' : 'يجب ألا يحتوي على أحرف خاصة مثل \'$%@..\' أو أحرف أبجدية';
-        case phone.length === 9:
-          return en ? 'wrong phone number' : 'رقم هاتف خاطئ';
+        case re.test(phone):
+          return en ? 'must not contain Special Characters \'$%@..\' or Alphabets' : 'يجب ألا يحتوي على أحرف خاصة مثل \'$%@..\' أو أحرف أبجدية';
+        case re1.test(phone):
+          return en ? 'wrong phone number ex: +963936534080' : 'رقم هاتف خاطئ مثال: +963936534080';
+        case phone.length === 13:
+          return en ? 'wrong phone number ex: +963936534080' : 'رقم هاتف خاطئ مثال: +963936534080';
         default:
           return true
       }
@@ -205,6 +234,13 @@ function SignUp ({darkMode, lan}) {
       return false;
     }
 
+    if (typeof(validateEmail()) === 'string') {
+      emailPopupEL.current.textContent = validateEmail();
+      emailEL.current.classList.add('error');
+      formEL.current.style.border = 'solid var(--red-color) 2px';
+      return false;
+    }
+
     if (typeof(validatePhone()) === 'string') {
       phonePopupEL.current.textContent = validatePhone();
       phoneEL.current.classList.add('error');
@@ -244,6 +280,10 @@ function SignUp ({darkMode, lan}) {
         lNameEL.current.classList.remove('error');
         lNameEL.current.classList.add('onFocus');  
         break;
+      case 'email':
+        emailEL.current.classList.remove('error');
+        emailEL.current.classList.add('onFocus');  
+        break;
       case 'phone':
         phoneEL.current.classList.remove('error');
         phoneEL.current.classList.add('onFocus');  
@@ -255,6 +295,10 @@ function SignUp ({darkMode, lan}) {
       case 'confirmedPassword':
         cPassEL.current.classList.remove('error');
         cPassEL.current.classList.add('onFocus');  
+        break;
+      case 'vcode':
+        vCodeEL.current.classList.remove('error');
+        vCodeEL.current.classList.add('onFocus');  
         break;
       default:
         console.log('Unknown type:', type);
@@ -273,6 +317,9 @@ function SignUp ({darkMode, lan}) {
         case 'lname':
           lNameEL.current.classList.remove('onFocus');
           break;
+        case 'email':
+          emailEL.current.classList.remove('onFocus');
+          break;
         case 'phone':
           phoneEL.current.classList.remove('onFocus');
           break;
@@ -281,6 +328,9 @@ function SignUp ({darkMode, lan}) {
           break;
         case 'confirmedPassword':
           cPassEL.current.classList.remove('onFocus');
+          break;
+        case 'vcode':
+          vCodeEL.current.classList.remove('onFocus');
           break;
         default:
           console.log('Unknown type:', type);
@@ -298,7 +348,7 @@ function SignUp ({darkMode, lan}) {
   return (
     <section className='signUp'>
       <Banner pageTitle={pageTitle}/>
-      <form className='signUp__form' onSubmit={handleSubmit} ref={formEL}>
+      <form className='signUp__form' acceptCharset="UTF-8" onSubmit={handleSubmit} ref={formEL} autoComplete="on">
         <div className="signUp__form__intro">
           <div className="img"/>
           <h1>{en ? 'Start Your Cycling Journey' : 'ابدأ رحلتك في ركوب الدراجات'}</h1>
@@ -306,38 +356,39 @@ function SignUp ({darkMode, lan}) {
         </div>
         <div className="signUp__form__fname" ref={fNameEL}>
           <label className="signUp__form__fname__label" htmlFor="fname" ref={fNameLabelEL}>{en ? 'FIRST NAME' : 'الاسم الاول'}</label>
-          <input className="signUp__form__fname__input" type="text" name="fname" id="fname" onChange={handleChange} onFocus={handleFocus} onBlur={handleBlur} ref={fNameInputEL} readOnly/>
+          <input className="signUp__form__fname__input" type="text" name="fname" id="fname" autoComplete="true" onChange={handleChange} onFocus={handleFocus} onBlur={handleBlur} ref={fNameInputEL} />
           <div className="signUp__form__fname__error-popup" onClick={() => removeError(fNameEL.current)} ref={fNamePopupEL} />
         </div>
         <div className='signUp__form__lname' ref={lNameEL}>
           <label htmlFor="lname" ref={lNameLabelEL}>{en ? 'LAST NAME' : 'الاسم الاخير'}</label>
-          <input type="text" name="lname" id="lname" onChange={handleChange} onFocus={handleFocus} onBlur={handleBlur} readonly/>
+          <input type="text" name="lname" id="lname" autoComplete="true" onChange={handleChange} onFocus={handleFocus} onBlur={handleBlur} ref={lNameInputEL}/>
           <div className="signUp__form__fname__error-popup" onClick={() => removeError(lNameEL.current)} ref={lNamePopupEL} />
+        </div>
+        <div className='signUp__form__email' ref={emailEL}>
+          <label htmlFor="email" ref={emailLabelEL}>{en ? 'EMAIL' : 'البريد الالكتروني'}</label>
+          <input type="text" name="email" id="email" autoComplete="true" onChange={handleChange} onFocus={handleFocus} onBlur={handleBlur} ref={emailInputEL}/>
+          <div className="signUp__form__email__error-popup" onClick={() => removeError(emailEL.current)} ref={emailPopupEL} />
         </div>
         <div className='signUp__form__phone' ref={phoneEL}>
           <label htmlFor="phone" ref={phoneLabelEL}>{en ? 'PHONE NUMBER' : 'رقم الهاتف'}</label>
-          <input type="tel" name="phone" id="phone" onChange={handleChange} onFocus={handleFocus} onBlur={handleBlur} />
+          <input type="text" name="phone" id="phone" autoComplete="true" onChange={handleChange} onFocus={handleFocus} onBlur={handleBlur} ref={phoneInputEL}/>
           <div className="signUp__form__phone__error-popup" onClick={() => removeError(phoneEL.current)} ref={phonePopupEL} />
         </div>
         <div className='signUp__form__password' ref={passEL}>
           <label htmlFor="password" ref={passLabelEL}>{en ? 'PASSWORD' : 'كلمه المرور'}</label>
-          <input type="password" name="password" id="password" onChange={handleChange} onFocus={handleFocus} onBlur={handleBlur}/>
+          <input type="password" name="password" id="password" autoComplete="true" onChange={handleChange} onFocus={handleFocus} onBlur={handleBlur}ref={passInputEL}/>
           <div className="signUp__form__password__error-popup" onClick={() => removeError(passEL.current)} ref={passPopupEL} />
         </div>
         <div className='signUp__form__cpassword' ref={cPassEL}>
           <label htmlFor="cpassword" ref={cPassLabelEL}>{en ? 'CONFIRM PASSWORD' : 'تاكيد كلمه المرور'}</label>
-          <input type="password" name="confirmedPassword" id="cpassword" onChange={handleChange} onFocus={handleFocus} onBlur={handleBlur} />
+          <input type="password" name="confirmedPassword" id="cpassword" autoComplete="true" onChange={handleChange} onFocus={handleFocus} onBlur={handleBlur} ref={cPassInputEL}/>
           <div className="signUp__form__password__error-popup" onClick={() => removeError(cPassEL.current)} ref={cPassPopupEL} />
         </div>
         <div className='signUp__form__newsletter'>
-          <input className="checkbox-input" type="checkbox" name="newsLetter" id="newsLetter" onChange={handleChange}/>
+          <input className="checkbox-input" type="checkbox" name="newsLetter" id="newsLetter" autoComplete="true" onChange={handleChange} readOnly/>
           <label className="description" htmlFor="newsLetter">{en ? 'I agree recieving latest news and special deals emails according to the privacy policy' : 'أوافق على تلقي آخر الأخبار والعروض الخاصة عبر البريد الإلكتروني وفقًا لسياسة الخصوصية'}</label>
         </div>
-        <button className='signUp__form__create' id ='sign-up' type="submit">{en ? 'CREATE' : 'انشئ'}</button>
-        <div>
-          <div className="test" id='recaptcha-container'></div>
-          {/* <button id ='sign-in-button' onClick={() => runCode()}>Send Verification Code</button> */}
-      </div>
+        <button className='signUp__form__create' type="submit" ref={createButtonEL}>{en ? 'CREATE' : 'انشئ'}</button>
       </form>
     </section>
   )

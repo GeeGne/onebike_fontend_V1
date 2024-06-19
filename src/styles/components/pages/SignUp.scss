@@ -49,10 +49,13 @@
 
     &__fname,
     &__lname,
+    &__email,
     &__phone,
     &__password,
     &__cpassword {
       position: relative;
+      transition: height 0.25s ease-out, opacity 0.25s ease-out, filter 0.25s ease-out;
+      &.dim {filter: invert(10%)}
 
       &.error.error label {
         color: var(--red-color);
@@ -63,6 +66,7 @@
         font-size: var(--font-size-extraSmall);
         font-weight: 500;
         color: var(--primary-color);
+        background: linear-gradient(to top, var(--background-color) 0%, var(--background-color) 50%, hsla(0, 0%, 100%, 0) 50%, hsla(0, 0%, 100%, 0) 100%);
       }
       & label {
         position: absolute;
@@ -72,8 +76,9 @@
         font-size: var(--font-size-small);
         font-weight: 600;
         color: var(--signUp-label-font-color);
-        background-color: var(--background-color);
-        transition: top 0.25s ease-out, font-size 0.25s ease-out, color 0.25s ease-out;
+        padding-inline: 0.2em;
+        z-index: 1;
+        transition: top 0.25s ease-out, font-size 0.25s ease-out, font-weight 0.25s ease-out, color 0.25s ease-out;
         body.arabic & {left: auto; right: 1em}
       }
       
@@ -94,7 +99,7 @@
         padding: 1em;
         transition: border 0.25s ease-out;
         body.arabic & input {direction: rtl}
-
+        // filter: invert(20%);
         // &:hover {border: solid var(--secondary-color) 2px}
         // &:focus {border: solid var(--primary-color) 2px}
       }
@@ -129,7 +134,7 @@
       width: 100%;
       padding-block: 1em;
       border-radius: 5px;
-      transition: background-color 0.25s ease;
+      transition: background-color 0.25s ease-out, color 0.25s ease-out;
       &:hover {background-color: var(--background-invert-color)}
     }
 

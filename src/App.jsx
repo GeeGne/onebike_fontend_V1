@@ -9,6 +9,7 @@ import Products from './components/pages/products/Products';
 import NotFound from './components/pages/NotFound';
 import SignIn from './components/pages/SignIn';
 import SignUp from './components/pages/SignUp';
+import Account from './components/pages/Account';
 import NavBottom from './components/header/navbar/NavBottom';
 
 // DATA
@@ -54,6 +55,7 @@ function App () {
             )}
             <Route path="/account/register" element={<SignUp darkMode={darkMode} lan={lan} />} />
             <Route path="/account/login" element={<SignIn darkMode={darkMode} lan={lan} />} />
+            <Route path="/account" element={<Account darkMode={darkMode} lan={lan} />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </main>
