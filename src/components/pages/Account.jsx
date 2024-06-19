@@ -1,31 +1,49 @@
+// HOOKS
 import React, {useState, useRef, useEffect} from 'react';
+import {useNavigate} from 'react-router-dom';
+
+// FIREBASE
 import {auth} from '/src/firebase/authSignUp.js';
 import {signOut, updateProfile, signInWithEmailAndPassword} from "firebase/auth";
 
+// SCSS
+import '/src/styles/components/pages/Account.scss';
+
 function Account () {
+  signOut(auth);
   const [user, setUser] = useState(null);
-//   updateProfile(auth.currentUser, {
-//     displayName: 'Geegne Bab'
-//   })
-  console.log(auth.currentUser);
-  useEffect(() => {
+  const navigate = useNavigate();
+
+  const redirectNoAuthenticated = () => {
+    const {pathname} = window.location;
+    if (!user && (pathname === '/account' || pathname === '/account/')) {
+      navigate('/account/login');
+    } 
+  }
+
+  useEffect(() => {    
     const fetchData = async () => {
       try {
+        const {pathname} = window.location;
         const user = await auth.currentUser;
-        if (!user) throw new Error('Error: unable to fetch user data')
         setUser(user);
-      } catch (error) {
-        console.error(error)
+        redirectNoAuthenticated();
+        if (!user) throw new Error('Note: user isn\'t signed it or unable to fetch user data')
+      } catch (err) {
+        console.warn(err)
       }
     }
+
     fetchData();
   }, [])
 
-  console.log(user);
   return (
-    <div>
-      welcome {user.displayName}
-    </div>
+    <>
+    {user ?
+      <div className="account">
+        welcome {user.displayName}
+      </div> : <></>}
+    </>
   )
 }
 

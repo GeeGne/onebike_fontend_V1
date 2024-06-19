@@ -51,7 +51,7 @@ function Alert ({alertText, newAlert}) {
 
   return (
     <div className="alert-container" onClick={handleClick} ref={alertElement}>
-      <h3 className="alert-container__message" ref={alertMessageElement}>{alertText}</h3>
+      <div className="alert-container__message" ref={alertMessageElement}>{alertText}</div>
       <div className="alert-container__filler-animation" ref={alertFillerElement}/>
       <div className="alert-container__timer-animation" ref={alertTimerElement}/>
     </div>
