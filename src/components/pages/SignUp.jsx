@@ -1,21 +1,14 @@
 // HOOKS
 import React, {useState, useEffect, useRef} from 'react';
-import {Link, useNavigate} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 
 // FIREBASE
-import {auth, RecaptchaVerifier, createUserWithEmailAndPassword, signOut, updateProfile} from "/src/firebase/authSignUp";
-import intializeRecaptcha from "/src/firebase/recaptcha";
-import handleAuthError from "/src/firebase/handleAuthError";
-
-// FIREBASE
-import {auth, RecaptchaVerifier, createUserWithEmailAndPassword, signOut, updateProfile} from "/src/firebase/authSignUp";
+import {auth, createUserWithEmailAndPassword, updateProfile} from "/src/firebase/authSignUp";
 import intializeRecaptcha from "/src/firebase/recaptcha";
 import handleAuthError from "/src/firebase/handleAuthError";
 
 // COMPONENTS
 import Banner from '/src/components/Banner';
-import ProgressActivity from '/src/components/ProgressActivity';
-import Alert from '/src/components/Alert';
 import ProgressActivity from '/src/components/ProgressActivity';
 import Alert from '/src/components/Alert';
 
@@ -32,9 +25,6 @@ import personDarkMode from '/assets/img/icons/person_darkMode.svg';
 
 function SignUp ({darkMode, lan}) {
 
-  const [processing, setProcessing] = useState(false);
-  const [alertText, setAlertText] = useState(null);
-  const [newAlert, setNewAlert] = useState(0);
   const [processing, setProcessing] = useState(false);
   const [alertText, setAlertText] = useState(null);
   const [newAlert, setNewAlert] = useState(0);
@@ -103,9 +93,9 @@ function SignUp ({darkMode, lan}) {
     removeErrorPopup();
     if (validateInputs()) {
       setProcessing(true);
-      setProcessing(true);
       const isOperationSucesssful = await signUpWithEmailAndPass();
       if (isOperationSucesssful) {
+        await submitForm();
         setProcessing(false);
         navigate('/account');
         scroll({top: 0, behavior: 'smooth'});
@@ -126,9 +116,18 @@ function SignUp ({darkMode, lan}) {
       console.error(error);
       setAlertText(handleAuthError(error, en));
       setNewAlert(Math.random());
-      setAlertText(handleAuthError(error, en));
-      setNewAlert(Math.random());
       return false;
+    }
+  }
+
+  const submitForm = async () => {
+    const {fname, lname, phone, newsLetter} = formData
+    try {
+      updateProfile(auth.currentUser, {
+        displayName: fname + ' ' + lname
+      })
+    } catch (err) {
+      console.error(err);
     }
   }
   
@@ -142,10 +141,7 @@ function SignUp ({darkMode, lan}) {
           return en ? 'can\'t be blank' : 'لا يمكن أن يكون فارغًا';
         case !fname.includes(' '):
           return en ? 'must not contain Spaces' : 'يجب أن لا يحتوي على مسافات';  
-        case !fname.includes(' '):
-          return en ? 'must not contain Spaces' : 'يجب أن لا يحتوي على مسافات';  
         case re.test(fname):
-          return en ? 'must not contain Special Characters \'$%@..\' or Numbers' : 'يجب أن لا يحتوي على أحرف خاصة مثل \'$%@..\' أو أرقام'
           return en ? 'must not contain Special Characters \'$%@..\' or Numbers' : 'يجب أن لا يحتوي على أحرف خاصة مثل \'$%@..\' أو أرقام'
         case fname.length > 2:
           return en ? 'must be at least 3 characters' : 'يجب أن يكون على الأقل 3 أحرف';
@@ -163,10 +159,6 @@ function SignUp ({darkMode, lan}) {
       switch (false) {
         case lname !== '':
           return en ? 'can\'t be blank' : 'لا يمكن أن يكون فارغًا';
-        case !lname.includes(' '):
-          return en ? 'must not contain Spaces' : 'يجب أن لا يحتوي على مسافات';  
-        case re.test(lname):
-          return en ? 'must not contain Special Characters \'$%@..\' or Numbers' : 'يجب أن لا يحتوي على أحرف خاصة مثل \'$%@..\' أو أرقام'
         case !lname.includes(' '):
           return en ? 'must not contain Spaces' : 'يجب أن لا يحتوي على مسافات';  
         case re.test(lname):
@@ -190,9 +182,6 @@ function SignUp ({darkMode, lan}) {
         case !email.includes(' '):
           return en ? 'must not contain Spaces' : 'يجب أن لا يحتوي على مسافات';  
         case re.test(email):
-        case !email.includes(' '):
-          return en ? 'must not contain Spaces' : 'يجب أن لا يحتوي على مسافات';  
-        case re.test(email):
             return en ? 'wrong email ex: example@email.com' : 'بريد الكتروني غير صحيح مثال: example@email.com'
         default:
           return true
@@ -209,10 +198,6 @@ function SignUp ({darkMode, lan}) {
           return en ? 'can\'t be blank' : 'لا يمكن أن يكون فارغًا';
         case !phone.includes(' '):
           return en ? 'must not contain Spaces' : 'يجب أن لا يحتوي على مسافات';
-        case !phone.includes(' '):
-          return en ? 'must not contain Spaces' : 'يجب أن لا يحتوي على مسافات';
-        case re.test(phone):
-          return en ? 'must not contain Special Characters \'$%@..\' or Alphabets' : 'يجب ألا يحتوي على أحرف خاصة مثل \'$%@..\' أو أحرف أبجدية';
         case re1.test(phone):
           return en ? 'wrong phone number ex: +963936534080' : 'رقم هاتف خاطئ مثال: +963936534080';
         case phone.length === 13:
@@ -231,8 +216,6 @@ function SignUp ({darkMode, lan}) {
       switch (false) {
         case password !== '':
           return en ? 'can\'t be blank' : 'لا يمكن أن يكون فارغًا';
-        case !password.includes(' '):
-          return en ? 'must not contain Spaces' : 'يجب أن لا يحتوي على مسافات';
         case !password.includes(' '):
           return en ? 'must not contain Spaces' : 'يجب أن لا يحتوي على مسافات';
         case password.length > 7:
@@ -265,11 +248,7 @@ function SignUp ({darkMode, lan}) {
     const handleError = (errorMessage, popupEL, formChildEL) => {
       popupEL.textContent = errorMessage;
       formChildEL.classList.add('error');
-    const handleError = (errorMessage, popupEL, formChildEL) => {
-      popupEL.textContent = errorMessage;
-      formChildEL.classList.add('error');
       formEL.current.style.border = 'solid var(--red-color) 2px';
-      return false;      
       return false;      
     }
 
@@ -372,15 +351,6 @@ function SignUp ({darkMode, lan}) {
     }
   }
 
-  const handleProcessing = text => {
-    switch (true) {
-      case processing:
-        return <ProgressActivity darkMode={darkMode} invert={true} />
-      default:
-        return text;
-    }
-  }
-
   return (
     <section className='signUp'>
       <Alert alertText={alertText} newAlert={newAlert} />
@@ -426,8 +396,7 @@ function SignUp ({darkMode, lan}) {
           <input className="checkbox-input" type="checkbox" name="newsLetter" id="newsLetter" autoComplete="true" onChange={handleChange} readOnly/>
           <label className="description" htmlFor="newsLetter">{en ? 'I agree recieving latest news and special deals emails according to the privacy policy' : 'أوافق على تلقي آخر الأخبار والعروض الخاصة عبر البريد الإلكتروني وفقًا لسياسة الخصوصية'}</label>
         </div>
-        <button className='signUp__form__create' type="submit" ref={createButtonEL}>{handleProcessing(en ? 'CREATE' : 'انشئ')}{/* <ProgressActivity darkMode={darkMode} />{en ? 'CREATE' : 'انشئ'} */}</button>
-        <button className='signUp__form__create' type="submit" ref={createButtonEL}>{handleProcessing(en ? 'CREATE' : 'انشئ')}{/* <ProgressActivity darkMode={darkMode} />{en ? 'CREATE' : 'انشئ'} */}</button>
+        <button className='signUp__form__create' type="submit" ref={createButtonEL}>{handleProcessing(en ? 'CREATE' : 'انشئ')}</button>
       </form>
     </section>
   )
