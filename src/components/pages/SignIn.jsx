@@ -15,6 +15,9 @@ import Alert from '/src/components/Alert';
 // SCSS
 import '/src/styles/components/pages/SignIn.scss';
 
+// UTILS
+import validate from '/src/utils/validate';
+
 function SignIn ({darkMode, lan}) {
 
   const [processing, setProcessing] = useState(false);
@@ -71,8 +74,7 @@ function SignIn ({darkMode, lan}) {
       const {email} = formData;
       try {
         const response = await sendPasswordResetEmail(auth, email)
-        // if (!response) throw new Error('email is invalid');
-        console.log({response, email});
+        if (!response) throw new Error('email is invalid');
         setAlertText('Rest password email has been sent!');
         setNewAlert(Math.random());
         return true;
@@ -85,26 +87,19 @@ function SignIn ({darkMode, lan}) {
     }
 
     e.preventDefault();
+    if (!validateInputs()) return;
+    setProcessing(true);
+
     if (forgotPass) {
-      setProcessing(true);
       const isOperationSucessful = await sendPassReset();
       if (isOperationSucessful) setForgotPass(prevVal => !prevVal) 
       setProcessing(false);
       return;
     }
 
-    if (validateInputs()) {
-      setProcessing(true);
-      const isOperationSucessful = await signIn();
-      if (isOperationSucessful) {
-        setProcessing(false);
-        console.log('working')
-        navigate('/account');
-        scroll({top: 0, behavior: 'smooth'});
-      } else {
-        setProcessing(false);
-      }
-    }
+    const isOperationSucessful = await signIn();
+    setProcessing(false);
+    scroll({top: 0, behavior: 'smooth'});
   }
 
   const handleChange = e => {
@@ -164,44 +159,20 @@ function SignIn ({darkMode, lan}) {
 
   const validateInputs = () => {
 
-    const validateEmail = () => {
-      const {email} = formData;
-      const re= /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-
-      switch (false) {
-        case email !== '':
-          return en ? 'can\'t be blank' : 'لا يمكن أن يكون فارغًا';
-        case !email.includes(' '):
-          return en ? 'must not contain Spaces' : 'يجب أن لا يحتوي على مسافات';  
-        case re.test(email):
-            return en ? 'wrong email ex: example@email.com' : 'بريد الكتروني غير صحيح مثال: example@email.com'
-        default:
-          return true
-      }
-    }
-
-
-    const validatePass = () => {
-      const {password} = formData;
-
-      switch (false) {
-        case password !== '':
-          return en ? 'can\'t be blank' : 'لا يمكن أن يكون فارغًا';
-        case !password.includes(' '):
-          return en ? 'must not contain Spaces' : 'يجب أن لا يحتوي على مسافات';
-        default:
-          return true
-      }
-    }
-
     const handleError = (errorMessage, popupEL, formChildEL) => {
       popupEL.textContent = errorMessage;
       formChildEL.classList.add('error');
       return false;      
     }
 
-    if (typeof(validateEmail()) === 'string') return handleError(validateEmail(), emailPopupEL.current, emailEL.current);
-    if (typeof(validatePass()) === 'string') return handleError(validatePass(), passPopupEL.current, passEL.current);
+    const {email, password} = formData;
+
+    if (forgotPass) {
+      if (typeof(validate.login.email(email, en)) === 'string') return handleError(validate.login.email(email, en), emailPopupEL.current, emailEL.current);
+    } else {
+      if (typeof(validate.login.email(email, en)) === 'string') return handleError(validate.login.email(email, en), emailPopupEL.current, emailEL.current);
+      if (typeof(validate.login.password(password, en)) === 'string') return handleError(validate.login.password(password, en), passPopupEL.current, passEL.current);
+    }
 
     return true;
   }
