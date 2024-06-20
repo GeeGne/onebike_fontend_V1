@@ -23,15 +23,9 @@ body {
   text-rendering: optimizeSpeed;
   overflow: hidden auto;
 
-  @include w.breakpoint-up(medium) {
-   font-size: 1.05rem;
-  }
-  @include w.breakpoint-up(large) {
-   font-size: 1.1rem;
-  }
-  @include w.breakpoint-up(xlarge) {
-   font-size: 1.15rem;
-  }
+  @include w.breakpoint-up(medium) {font-size: 1.05rem}
+  @include w.breakpoint-up(large) {font-size: 1.1rem}
+  @include w.breakpoint-up(xlarge) {font-size: 1.15rem}
 
   &.arabic {
     // font-family: 'PT_Sans';

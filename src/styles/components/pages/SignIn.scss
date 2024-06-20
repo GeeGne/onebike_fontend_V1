@@ -1,6 +1,6 @@
 @use '/src/styles/utils/_BreakPoints' as w;
 
-.signIn-container {
+.signIn {
   display: flex;
   flex-direction: column;
 
@@ -16,10 +16,21 @@
     @include w.breakpoint-up (medium) {width: 27em}
     
     &__password,
-    &__tel {
+    &__email {
       position: relative;
 
       body.arabic & label {left: auto; right: 1em}
+      &.error.error label {
+        color: var(--red-color);
+        &::after {content: " *"}
+      }
+      &.onFocus label {
+        top: 0;
+        font-size: var(--font-size-extraSmall);
+        font-weight: 500;
+        color: var(--primary-color);
+        background: linear-gradient(to top, var(--background-color) 0%, var(--background-color) 50%, hsla(0, 0%, 100%, 0) 50%, hsla(0, 0%, 100%, 0) 100%);
+      }
       & label {
         position: absolute;
         top: 50%;
@@ -28,11 +39,14 @@
         font-size: var(--font-size-small);
         font-weight: 600;
         color: var(--signIn-label-font-color);
-        background-color: var(--background-color);
-        transition: top 0.25s ease-out, font-size 0.25s ease-out, color 0.25s ease-out;
+        padding-inline: 0.2em;
+        z-index: 1;
+        transition: top 0.25s ease-out, font-size 0.25s ease-out, font-weight 0.25s ease-out, color 0.25s ease-out;
       }
-      
+
       body.arabic & input {direction: rtl}
+      &.error.error input {border: solid var(--red-color) 2px}
+      &.onFocus input {border: solid var(--primary-color) 2px}      
       & input {
         background-color: var(--background-color);
         color: var(--font-p-color);
@@ -44,12 +58,32 @@
         padding: 1em;
         transition: border 0.25s ease-out;
         
-        &:hover {border: solid var(--secondary-color) 2px}
-        &:focus {border: solid var(--primary-color) 2px}
+        // &:hover {border: solid var(--secondary-color) 2px}
+        // &:focus {border: solid var(--primary-color) 2px}
+      }
+
+      &.error &__error-popup {
+        visibility: visible;
+        opacity: 1;
+      }
+      &__error-popup {
+        visibility: hidden;
+        opacity: 0;
+        position: absolute;
+        top: 50%;
+        right: 0.5em;
+        transform: translateY(-50%);
+        height: 60%;
+        padding: 0.5em;
+        font-size: var(--font-size-extraSmall);
+        color: var(--red-color);
+        backdrop-filter: blur(5px);
+        transition: opacity 0.25s ease-out;
+        body.arabic & {right: auto; left: 0.5em}
       }
     }
 
-    & .signIn {
+    &__submit {
       background-color: var(--primary-color);
       color: var(--font-h-invert-color);
       font-size: var(--font-size-medium);
@@ -66,7 +100,8 @@
     body.arabic & .forgot-password {margin-left: 0; margin-right: auto}
 
     & .new-costumer,
-    & .forgot-password {
+    & .forgot-password,
+    & .cancel {
       font-size: var(--font-size-small);
       color: var(--font-p-color);
       cursor: pointer;

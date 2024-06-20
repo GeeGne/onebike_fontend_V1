@@ -82,12 +82,8 @@
         body.arabic & {left: auto; right: 1em}
       }
       
-      &.error.error input {
-        border: solid var(--red-color) 2px;
-      }
-      &.onFocus input {
-        border: solid var(--primary-color) 2px;
-      }
+      &.error.error input {border: solid var(--red-color) 2px}
+      &.onFocus input {border: solid var(--primary-color) 2px}
       & input {
         background-color: var(--background-color);
         color: var(--font-p-color);

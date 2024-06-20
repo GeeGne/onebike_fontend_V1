@@ -2,36 +2,127 @@
 import React, {useState, useEffect, useRef} from 'react';
 import {Link, useNavigate} from 'react-router-dom';
 
+// FIREBASE
+import {auth} from "/src/firebase/authSignUp";
+import {signInWithEmailAndPassword, onAuthStateChanged, sendPasswordResetEmail} from "firebase/auth";
+import handleAuthError from "/src/firebase/handleAuthError";
+
 // COMPONENTS
 import Banner from '/src/components/Banner';
+import ProgressActivity from '/src/components/ProgressActivity';
+import Alert from '/src/components/Alert';
 
 // SCSS
 import '/src/styles/components/pages/SignIn.scss';
 
 function SignIn ({darkMode, lan}) {
 
-  const en = lan === 'en';
-  const pageTitle = en ? 'LOGIN' : 'تسجيل الدخول';
-  const telLabelEL = useRef(null);
-  const passLabelEL = useRef(null);
+  const [processing, setProcessing] = useState(false);
+  const [alertText, setAlertText] = useState(null);
+  const [newAlert, setNewAlert] = useState(0);
+  const [user, setUser] = useState(null);
+  const [forgotPass, setForgotPass] = useState(false);
+  const [formData, setFormData] =  useState({
+    email: '',
+    password: '',
+  });
 
+  const emailEL = useRef(null);
+  const passEL = useRef(null);
+
+  const emailPopupEL = useRef(null);
+  const passPopupEL = useRef(null);
+
+  const emailLabelEL = useRef(null);
+  const passLabelEL = useRef(null);
+  
+  const en = lan === 'en';
+  const pageTitle = forgotPass ? (en ? 'Reset your password' : 'إعادة تعيين كلمة المرور') : (en ? 'LOGIN' : 'تسجيل الدخول');
+  const description = forgotPass ? (en ? 'We will send an email to reset your passowrd' : 'سنرسل بريدًا إلكترونيًا لإعادة تعيين كلمة المرور') : '';
   const navigate = useNavigate();
+
+  useEffect(() => redirectAuthenticated(), [user]);
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => setUser(user));
+    return () => unsubscribe();
+  }, []);
+
+  const redirectAuthenticated = () => {
+    const {pathname} = window.location;
+    if (user && (pathname === '/account/login' || pathname === '/account/login/')) navigate('/account');
+  }
+
+  const handleSubmit = async e => {
+    
+    const signIn = async () => {
+      const {email, password} = formData;
+      try {
+        await signInWithEmailAndPassword(auth, email, password)
+        return true;
+      } catch (err) {
+        console.error(err);
+        setAlertText(handleAuthError(err, en));
+        setNewAlert(Math.random());
+        return false;
+      } 
+    }
+
+    const sendPassReset = async () => {
+      const {email} = formData;
+      try {
+        const response = await sendPasswordResetEmail(auth, email)
+        // if (!response) throw new Error('email is invalid');
+        console.log({response, email});
+        setAlertText('Rest password email has been sent!');
+        setNewAlert(Math.random());
+        return true;
+      } catch (err) {
+        console.error(err);
+        setAlertText(handleAuthError(err, en));
+        setNewAlert(Math.random());
+        return false;
+      }
+    }
+
+    e.preventDefault();
+    if (forgotPass) {
+      setProcessing(true);
+      const isOperationSucessful = await sendPassReset();
+      if (isOperationSucessful) setForgotPass(prevVal => !prevVal) 
+      setProcessing(false);
+      return;
+    }
+
+    if (validateInputs()) {
+      setProcessing(true);
+      const isOperationSucessful = await signIn();
+      if (isOperationSucessful) {
+        setProcessing(false);
+        console.log('working')
+        navigate('/account');
+        scroll({top: 0, behavior: 'smooth'});
+      } else {
+        setProcessing(false);
+      }
+    }
+  }
+
+  const handleChange = e => {
+    const {name, value} = e.target;
+    setFormData(prevData => ({...prevData, [name]: value}))
+  }
 
   const handleFocus = e => {
     const {name} = e.target;
 
     switch (name) {
-      case 'tel':
-        telLabelEL.current.style.top = '0';
-        telLabelEL.current.style.fontSize = 'var(--font-size-extraSmall)';
-        telLabelEL.current.style.fontWeight = '500';
-        telLabelEL.current.style.color = 'var(--primary-color)';
+      case 'email':
+        emailEL.current.classList.add('onFocus');
+        emailEL.current.classList.remove('error');
         break;
       case 'password':
-        passLabelEL.current.style.top = '0';
-        passLabelEL.current.style.fontSize = 'var(--font-size-extraSmall)';
-        passLabelEL.current.style.fontWeight = '500';
-        passLabelEL.current.style.color = 'var(--primary-color)';
+        passEL.current.classList.remove('error');
+        passEL.current.classList.add('onFocus');
       break;
       default:
         console.log('Unknown type:', type);
@@ -44,17 +135,11 @@ function SignIn ({darkMode, lan}) {
 
     if (inputEmpty) {
       switch (name) {
-        case 'tel':
-          telLabelEL.current.style.top = '50%';
-          telLabelEL.current.style.fontSize = 'var(--font-size-small)';
-          telLabelEL.current.style.fontWeight = '600';
-          telLabelEL.current.style.color = 'var(--signIn-label-font-color)';
+        case 'email':
+          emailEL.current.classList.remove('onFocus');
           break;
         case 'password':
-          passLabelEL.current.style.top = '50%';
-          passLabelEL.current.style.fontSize = 'var(--font-size-small)';
-          passLabelEL.current.style.fontWeight = '600';
-          passLabelEL.current.style.color = 'var(--signIn-label-font-color)';
+          passEL.current.classList.remove('onFocus');
           break;
         default:
           console.log('Unknown type:', type);
@@ -75,22 +160,82 @@ function SignIn ({darkMode, lan}) {
   }
 
   const path = el => el.dataset.path;
+  const removeError = el => el.classList.remove('error');
+
+  const validateInputs = () => {
+
+    const validateEmail = () => {
+      const {email} = formData;
+      const re= /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+      switch (false) {
+        case email !== '':
+          return en ? 'can\'t be blank' : 'لا يمكن أن يكون فارغًا';
+        case !email.includes(' '):
+          return en ? 'must not contain Spaces' : 'يجب أن لا يحتوي على مسافات';  
+        case re.test(email):
+            return en ? 'wrong email ex: example@email.com' : 'بريد الكتروني غير صحيح مثال: example@email.com'
+        default:
+          return true
+      }
+    }
+
+
+    const validatePass = () => {
+      const {password} = formData;
+
+      switch (false) {
+        case password !== '':
+          return en ? 'can\'t be blank' : 'لا يمكن أن يكون فارغًا';
+        case !password.includes(' '):
+          return en ? 'must not contain Spaces' : 'يجب أن لا يحتوي على مسافات';
+        default:
+          return true
+      }
+    }
+
+    const handleError = (errorMessage, popupEL, formChildEL) => {
+      popupEL.textContent = errorMessage;
+      formChildEL.classList.add('error');
+      return false;      
+    }
+
+    if (typeof(validateEmail()) === 'string') return handleError(validateEmail(), emailPopupEL.current, emailEL.current);
+    if (typeof(validatePass()) === 'string') return handleError(validatePass(), passPopupEL.current, passEL.current);
+
+    return true;
+  }
+
+  const handleProcessing = text => {
+    switch (true) {
+      case processing:
+        return <ProgressActivity darkMode={darkMode} invert={true} />
+      default:
+        return text;
+    }
+  }
+
 
   return (
-    <section className='signIn-container'>
-      <Banner pageTitle={pageTitle}/>
-      <form className='signIn-container__form'>
-        <div className='signIn-container__form__tel'>
-          <label htmlFor="tel" ref={telLabelEL}>{en ? 'PHONE NUMBER' : 'رقم الهاتف'}</label>
-          <input type="tel" name="tel" id="tel" onFocus={handleFocus} onBlur={handleBlur}/>
+    <section className='signIn' onSubmit={handleSubmit}>
+      <Alert alertText={alertText} newAlert={newAlert} />
+      <Banner pageTitle={pageTitle} description={description}/>
+      <form className='signIn__form'>
+        <div className='signIn__form__email' ref={emailEL}>
+          <label htmlFor="email" ref={emailLabelEL}>{en ? 'EMAIL' : 'البريد الالكتروني'}</label>
+          <input type="text" name="email" id="email" autoComplete="true" onFocus={handleFocus} onBlur={handleBlur} onChange={handleChange} />
+          <div className="signIn__form__email__error-popup" onClick={() => removeError(emailEL.current)} ref={emailPopupEL} />
         </div>
-        <div className='signIn-container__form__password'>
+        {!forgotPass && 
+        <div className='signIn__form__password' ref={passEL}>
           <label htmlFor="password" ref={passLabelEL}>{en ? 'PASSWORD' : 'كلمه المرور'}</label>
-          <input type="password" name="password" id="password" required onFocus={handleFocus} onBlur={handleBlur}/>
-        </div>
-        <a className="forgot-password" tabIndex="0">{en ? 'Forgot password?' : 'نسيت كلمه المرور؟'}</a>
-        <button className='signIn' type="submit">{en ? 'SIGN IN' : 'سجل الدخول'}</button>
-        <a className="new-costumer" tabIndex="0" data-path="/account/register" onClick={handleClick} onKeyDown={handleKeyDown}>{en ? 'Don\'t have an account? Join us!' : 'ليس لديك حساب؟ انضم الينا'}</a>
+          <input type="password" name="password" id="password" autoComplete="true" onFocus={handleFocus} onBlur={handleBlur} onChange={handleChange} />
+          <div className="signIn__form__password__error-popup" onClick={() => removeError(passEL.current)} ref={passPopupEL} />
+        </div>}
+        {!forgotPass && <button className="forgot-password" tabIndex="0" onClick={() => setForgotPass(prevVal => !prevVal)}>{en ? 'Forgot password?' : 'نسيت كلمه المرور؟'}</button>}
+        <button className='signIn__form__submit' type="submit">{handleProcessing(en ? (forgotPass ? 'SUBMIT' : 'SIGN IN') : (forgotPass ? 'ارسال' : 'سجل الدخول'))}</button>
+        {!forgotPass && <a className="new-costumer" tabIndex="0" data-path="/account/register" onClick={handleClick} onKeyDown={handleKeyDown}>{en ? 'Don\'t have an account? Join us!' : 'ليس لديك حساب؟ انضم الينا'}</a>}
+        {forgotPass && <a className="cancel" tabIndex="0" onClick={() => setForgotPass(prevVal => !prevVal)} onKeyDown={handleKeyDown}>{en ? 'Cancel' : 'الغاء'}</a>}
       </form>
     </section>
   )

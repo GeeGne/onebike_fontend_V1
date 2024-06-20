@@ -3,8 +3,8 @@ import React, {useState, useEffect, useRef} from 'react';
 import {useNavigate} from 'react-router-dom';
 
 // FIREBASE
-import {auth, createUserWithEmailAndPassword, updateProfile} from "/src/firebase/authSignUp";
-import intializeRecaptcha from "/src/firebase/recaptcha";
+import {auth} from "/src/firebase/authSignUp";
+import {createUserWithEmailAndPassword, onAuthStateChanged, updateProfile} from "firebase/auth";
 import handleAuthError from "/src/firebase/handleAuthError";
 
 // COMPONENTS
@@ -16,7 +16,7 @@ import Alert from '/src/components/Alert';
 import '/src/styles/components/pages/SignUp.scss';
 
 // ASSETS
-import user from '/assets/img/icons/user.svg';
+// import user from '/assets/img/icons/user.svg';
 import person from '/assets/img/icons/person.svg';
 
 // ASSETS - DARKMODE
@@ -28,6 +28,7 @@ function SignUp ({darkMode, lan}) {
   const [processing, setProcessing] = useState(false);
   const [alertText, setAlertText] = useState(null);
   const [newAlert, setNewAlert] = useState(0);
+  const [user, setUser] = useState(false);
   const [formData, setFormData] = useState({
     fname: '',
     lname: '',
@@ -73,6 +74,17 @@ function SignUp ({darkMode, lan}) {
   const createButtonEL = useRef(null);
   const navigate = useNavigate();
 
+  useEffect(() => redirectAuthenticated(), [user]);
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => setUser(user));
+    return () => unsubscribe();
+  }, []);
+
+  const redirectAuthenticated = () => {
+    const {pathname} = window.location;
+    if (user && (pathname === '/account/register' || pathname === '/account/register/')) navigate('/account');
+  }
+
   const handleChange = e => {
     const {name, value, checked} = e.target;
     const isNewsLetter = name === 'newsLetter';
@@ -97,7 +109,6 @@ function SignUp ({darkMode, lan}) {
       if (isOperationSucesssful) {
         await submitForm();
         setProcessing(false);
-        navigate('/account');
         scroll({top: 0, behavior: 'smooth'});
       } else {
         setProcessing(false);
@@ -354,8 +365,7 @@ function SignUp ({darkMode, lan}) {
   return (
     <section className='signUp'>
       <Alert alertText={alertText} newAlert={newAlert} />
-      <Alert alertText={alertText} newAlert={newAlert} />
-      <Banner pageTitle={pageTitle}/>
+      <Banner pageTitle={pageTitle} description={''}/>
       <form className='signUp__form' acceptCharset="UTF-8" onSubmit={handleSubmit} ref={formEL} autoComplete="on">
         <div className="signUp__form__intro">
           <div className="img"/>

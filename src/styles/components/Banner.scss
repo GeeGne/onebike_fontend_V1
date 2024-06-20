@@ -1,13 +1,13 @@
 @use '/src/styles/utils/_BreakPoints' as w;
 
-.banner-container {
+.banner {
   position: relative;
   display: flex;
-  justify-content: center;
-  font-size: var(--font-size-large);
+  flex-direction: column;
+  align-items: center;
+  gap: 1em;
   background-color: var(--secondary-color);
   color: var(--font-h-color);
-  font-weight: bold;
   padding-block: 2em;
 
   &::before {
@@ -20,5 +20,18 @@
     height: 100%;
     background-color: var(--secondary-color);
     z-index: -1;
+  }
+
+  &__title {
+    font-weight: bold;
+  }
+
+  &__description {
+    font-size: var(--font-size-small);
+    font-weight: 550;
+
+    @include w.breakpoint-up(medium) {
+      font-size: var(--font-size-small);
+    }
   }
 }

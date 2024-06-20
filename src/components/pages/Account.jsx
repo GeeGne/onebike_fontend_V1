@@ -4,45 +4,37 @@ import {useNavigate} from 'react-router-dom';
 
 // FIREBASE
 import {auth} from '/src/firebase/authSignUp.js';
-import {signOut, updateProfile, signInWithEmailAndPassword} from "firebase/auth";
+import {signOut, updateProfile, signInWithEmailAndPassword, onAuthStateChanged} from "firebase/auth";
 
 // SCSS
 import '/src/styles/components/pages/Account.scss';
 
 function Account () {
-  signOut(auth);
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(true);
   const navigate = useNavigate();
+
+  useEffect(() => redirectNoAuthenticated(), [user])
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => setUser(user));
+    return () => unsubscribe();
+  }, []);
 
   const redirectNoAuthenticated = () => {
     const {pathname} = window.location;
-    if (!user && (pathname === '/account' || pathname === '/account/')) {
-      navigate('/account/login');
-    } 
+    if (!user && (pathname === '/account' || pathname === '/account/')) navigate('/account/login');
   }
 
-  useEffect(() => {    
-    const fetchData = async () => {
-      try {
-        const {pathname} = window.location;
-        const user = await auth.currentUser;
-        setUser(user);
-        redirectNoAuthenticated();
-        if (!user) throw new Error('Note: user isn\'t signed it or unable to fetch user data')
-      } catch (err) {
-        console.warn(err)
-      }
-    }
-
-    fetchData();
-  }, [])
+  const handleClick = async () => {
+    const response = await signOut(auth);
+    console.log(response);
+  }
 
   return (
     <>
-    {user ?
       <div className="account">
-        welcome {user.displayName}
-      </div> : <></>}
+        welcome {user?.displayName}
+      </div>
+      <button onClick={handleClick}>Sign Out</button>
     </>
   )
 }

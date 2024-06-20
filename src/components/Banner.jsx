@@ -4,10 +4,13 @@ import React, {useEffect, useRef, useState} from 'react';
 // SCSS
 import '/src/styles/components/Banner.scss';
 
-function Banner ({pageTitle}) {
+function Banner ({pageTitle, description}) {
 
   return (
-    <section className="banner-container">{pageTitle}</section>
+    <section className="banner">
+      <h1 className="banner__title">{pageTitle}</h1>  
+      <div className="banner__description">{description}</div>
+    </section>
   )
 }
 
