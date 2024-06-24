@@ -1,6 +1,6 @@
 const validate = {
   register: {
-    firstName: (fname, en) => {
+    firstName (fname, en) {
       const re= /^[a-zA-Z\u0600-\u06FF]+$/;
 
       switch (false) {
@@ -18,7 +18,7 @@ const validate = {
           return true
       }
     },
-    lastName: (lname, en) => {
+    lastName (lname, en) {
       const re= /^[a-zA-Z\u0600-\u06FF]+$/;
 
       switch (false) {
@@ -36,7 +36,7 @@ const validate = {
           return true
       }
     },
-    email: (email, en) => {
+    email (email, en) {
       const re= /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
       switch (false) {
@@ -50,7 +50,7 @@ const validate = {
           return true
       }
     },
-    phone: (phone, en) => {
+    phone (phone, en) {
       const re= /^[0-9+]+$/;
       const re1= /^\+963/;
 
@@ -67,7 +67,7 @@ const validate = {
           return true
       }
     },
-    password: (password, en) => {
+    password (password, en) {
       const re= /^(?=.*[a-zA-Z])(?=.*[0-9])/;
       const re1= /^[a-zA-Z]+$/;
       const re2= /^[0-9]+$/;
@@ -90,7 +90,7 @@ const validate = {
           return true
       }
     },
-    confirmPassword: (password, confirmedPassword, en) => {
+    confirmPassword (password, confirmedPassword, en) {
       switch (false) {
         case password !== '':
           return en ? 'can\'t be blank' : 'لا يمكن أن يكون فارغًا';
@@ -102,7 +102,7 @@ const validate = {
     },
   },
   login: {
-    email: (email, en) => {
+    email (email, en) {
       const re= /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
       switch (false) {
@@ -116,7 +116,7 @@ const validate = {
           return true
       }
     },
-    password: (password, en) => {
+    password (password, en) {
       switch (false) {
         case password !== '':
           return en ? 'can\'t be blank' : 'لا يمكن أن يكون فارغًا';

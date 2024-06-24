@@ -6,10 +6,11 @@ import Header from './components/header/Header';
 import Footer from './components/Footer';
 import Home from './components/pages/Home';
 import Products from './components/pages/products/Products';
-import NotFound from './components/pages/NotFound';
+import Checkout from './components/pages/Checkout';
 import SignIn from './components/pages/SignIn';
 import SignUp from './components/pages/SignUp';
 import Account from './components/pages/Account';
+import NotFound from './components/pages/NotFound';
 import NavBottom from './components/header/navbar/NavBottom';
 
 // DATA
@@ -53,7 +54,9 @@ function App () {
               ))}
             </React.Fragment>
             )}
+            <Route path="/checkouts" element={<Checkout darkMode={darkMode} lan={lan} />} />
             <Route path="/account/register" element={<SignUp darkMode={darkMode} lan={lan} />} />
+            <Route path="/checkouts/login" element={<SignIn darkMode={darkMode} lan={lan} />} />
             <Route path="/account/login" element={<SignIn darkMode={darkMode} lan={lan} />} />
             <Route path="/account" element={<Account darkMode={darkMode} lan={lan} />} />
             <Route path="*" element={<NotFound />} />

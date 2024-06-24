@@ -17,8 +17,14 @@ import '/src/styles/components/pages/SignIn.scss';
 
 // UTILS
 import validate from '/src/utils/validate';
+import Redirector from '/src/utils/Redirector';
 
 function SignIn ({darkMode, lan}) {
+
+  const en = lan === 'en';
+  const {pathname} = window.location;
+  const navigate = useNavigate();
+  const redirector = new Redirector(navigate);
 
   const [processing, setProcessing] = useState(false);
   const [alertText, setAlertText] = useState(null);
@@ -38,22 +44,15 @@ function SignIn ({darkMode, lan}) {
 
   const emailLabelEL = useRef(null);
   const passLabelEL = useRef(null);
-  
-  const en = lan === 'en';
+
   const pageTitle = forgotPass ? (en ? 'Reset your password' : 'إعادة تعيين كلمة المرور') : (en ? 'LOGIN' : 'تسجيل الدخول');
   const description = forgotPass ? (en ? 'We will send an email to reset your passowrd' : 'سنرسل بريدًا إلكترونيًا لإعادة تعيين كلمة المرور') : '';
-  const navigate = useNavigate();
-
-  useEffect(() => redirectAuthenticated(), [user]);
+  
+  useEffect(() => redirector.signin(pathname, user), [user]);
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => setUser(user));
     return () => unsubscribe();
   }, []);
-
-  const redirectAuthenticated = () => {
-    const {pathname} = window.location;
-    if (user && (pathname === '/account/login' || pathname === '/account/login/')) navigate('/account');
-  }
 
   const handleSubmit = async e => {
     

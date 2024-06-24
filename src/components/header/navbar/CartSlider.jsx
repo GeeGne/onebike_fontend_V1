@@ -1,18 +1,19 @@
 // HOOKS
 import React, {useState, useEffect, useRef, useContext, useReducer} from 'react';
+import {useNavigate} from 'react-router-dom';
 
 // SCSS
 import '/src/styles/components/header/navbar/CartSlider.scss';
 
 // REDUCERS
-import cartReducer from '/src/reducers/cartReducer.js';
+import cartReducer from '/src/reducers/cartReducer';
 
 // UTILS
-import CartProductsContext from '/src/utils/myContext.js';
-import formatNumberWithCommas from '/src/utils/formatNumberWithCommas.js'
-import calculatePrice from '/src/utils/calculatePrice.js'
-import calculateDiscountPercantage from '/src/utils/calculateDiscountPercantage.js'
-import fetchElementById from '/src/utils/fetchElementById.js'
+import CartProductsContext from '/src/utils/myContext';
+import formatNumberWithCommas from '/src/utils/formatNumberWithCommas';
+import calculatePrice from '/src/utils/calculatePrice';
+import calculateDiscountPercantage from '/src/utils/calculateDiscountPercantage';
+import fetchElementById from '/src/utils/fetchElementById';
 
 // ICONS
 import closeIcon from '/assets/img/icons/close.svg';
@@ -37,7 +38,7 @@ function CartSlider ({darkMode, lan, onCartChange, cartToggle, onCartToggleChang
   const cartContainerElement = useRef(null);  
   const sliderElement = useRef(null);
   const cartProductsELS = useRef([]);
-
+  const navigate = useNavigate();
   let totalPrice = 0;
   cart.forEach(list => (totalPrice += calculatePrice(list.product.price, list.product.discount) * list.quantity))
 
@@ -66,8 +67,8 @@ function CartSlider ({darkMode, lan, onCartChange, cartToggle, onCartToggleChang
     }
   }, [cartToggle, lan])
 
-  const handleClick = (e, type, product) => {
-
+  const handleClick = (e, product) => {
+    const {type} = e.target.dataset;
     const getElement = (els, id) => els.filter(el => Number(el.dataset.productId) === id)[0];
     const styleProductWhenRemoved = () => getElement(cartProductsELS.current, product.id).style.opacity = '0';
 
@@ -77,11 +78,21 @@ function CartSlider ({darkMode, lan, onCartChange, cartToggle, onCartToggleChang
         setTimeout(() => dispatch({type, product}), 250);
         break;
       case 'INCREASE_AMOUNT_BY_ONE':
+        console.log('test');
         dispatch({type, product, quantity: 1});
         break;
       case 'DECREASE_AMOUNT_BY_ONE':
         dispatch({type, product, quantity: -1});
         break;
+      case 'exit-slider':
+        onCartToggleChange(false);
+        break;
+      case 'nav-to-checkouts':
+        onCartToggleChange(false);
+        navigate('/checkouts/login');
+        break;
+      default:
+        console.log('Unknown type:' + type)
     }
   }
 
@@ -99,17 +110,17 @@ function CartSlider ({darkMode, lan, onCartChange, cartToggle, onCartToggleChang
   }
 
   return (
-    <div className="cartSlider-container" onClick={() => onCartToggleChange(false)} ref={cartContainerElement}>
+    <div className="cartSlider-container" data-type="exit-slider" onClick={handleClick} ref={cartContainerElement}>
       <div className={`cartSlider-container__slider${cartEmpty ? ' empty' : ''}`} onClick={e => e.stopPropagation()} ref={sliderElement}>
         <div className="cartSlider-container__slider__empty">
           <img className="cartSlider-container__slider__empty__cart" src={darkMode ? cartIconDarkMode : cartIcon}/>
           <div className="cartSlider-container__slider__empty__note">{en ? 'Your Cart Is Empty' : 'سله التسوق فارغه'}</div>
-          <button className="cartSlider-container__slider__empty__button" onClick={() => onCartToggleChange(false)}>{en ? 'Back to shopping' : 'العوده للتسوق'}</button>
+          <button className="cartSlider-container__slider__empty__button" data-type="exit-slider" onClick={handleClick}>{en ? 'Back to shopping' : 'العوده للتسوق'}</button>
         </div>
         <section className="cartSlider-container__slider__top">
           <div className="cartSlider-container__slider__top__cart">{en ? 'Cart' : 'السله'}</div>
           <div className="cartSlider-container__slider__top__quantity">{cart.length}</div>
-          <img className="cartSlider-container__slider__top__exit" onClick={() => onCartToggleChange(false)} src={darkMode ? closeIconDarkMode : closeIcon} role="button" tabIndex="0"/>
+          <img className="cartSlider-container__slider__top__exit" data-type="exit-slider" onClick={handleClick} src={darkMode ? closeIconDarkMode : closeIcon} role="button" tabIndex="0"/>
         </section>
         <ul className="cartSlider-container__slider__products">
           {cart.map((list, i) =>
@@ -118,10 +129,10 @@ function CartSlider ({darkMode, lan, onCartChange, cartToggle, onCartToggleChang
             <a className="cartSlider-container__slider__products__product__title">{list.product.title[lan]}</a>
             <div className="cartSlider-container__slider__products__product__price">{en ? 'S.P' : 'ل.س'} {formatNumberWithCommas(calculatePrice(list.product.price, list.product.discount) * list.quantity)}</div>
             <div className="cartSlider-container__slider__products__product__toggles">
-              <button className="cartSlider-container__slider__products__product__toggles__delete" onClick={e => handleClick(e, 'REMOVE_FROM_CART', list.product)}/> 
-              <button className="cartSlider-container__slider__products__product__toggles__increment" onClick={e => handleClick(e, 'INCREASE_AMOUNT_BY_ONE', list.product)}/>
+              <button className="cartSlider-container__slider__products__product__toggles__delete" data-type="REMOVE_FROM_CART" onClick={e => handleClick(e, list.product)}/> 
+              <button className="cartSlider-container__slider__products__product__toggles__increment" data-type="INCREASE_AMOUNT_BY_ONE" onClick={e => handleClick(e, list.product)}/>
               <div className="cartSlider-container__slider__products__product__toggles__value">{list.quantity}</div>
-              <button className="cartSlider-container__slider__products__product__toggles__decrement" onClick={e => handleClick(e, 'DECREASE_AMOUNT_BY_ONE', list.product)}/>
+              <button className="cartSlider-container__slider__products__product__toggles__decrement" data-type="DECREASE_AMOUNT_BY_ONE" onClick={e => handleClick(e, list.product)}/>
             </div>
           </li>
           )}
@@ -130,7 +141,7 @@ function CartSlider ({darkMode, lan, onCartChange, cartToggle, onCartToggleChang
           <div className="cartSlider-container__slider__bottom__total">{en ? 'Total' : 'اجمالي'} <span>{en ? 'S.P' : 'ل.س'} {formatNumberWithCommas(totalPrice)}</span></div>
           <div className="cartSlider-container__slider__bottom__shipment">{en ? 'Shipment fee calculated at Checkout' : 'تكاليف الشحن ستضاف عند الدفع'}</div>
           <button className="cartSlider-container__slider__bottom__view-cart">{en ? 'View cart' : 'عرض العربة'}</button>
-          <button className="cartSlider-container__slider__bottom__checkout">{en ? 'Checkout' : 'الدفع'}</button>
+          <button className="cartSlider-container__slider__bottom__checkout" data-type="nav-to-checkouts" onClick={handleClick}>{en ? 'Checkout' : 'الدفع'}</button>
         </section>
       </div>
     </div>

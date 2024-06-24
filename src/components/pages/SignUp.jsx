@@ -16,7 +16,8 @@ import Alert from '/src/components/Alert';
 import '/src/styles/components/pages/SignUp.scss';
 
 // UTILS
-import validate from '/src/utils/validate.js'
+import validate from '/src/utils/validate';
+import Redirector from '/src/utils/Redirector';
 
 // ASSETS
 // import user from '/assets/img/icons/user.svg';
@@ -27,6 +28,12 @@ import userDarkMode from '/assets/img/icons/user_darkMode.svg';
 import personDarkMode from '/assets/img/icons/person_darkMode.svg';
 
 function SignUp ({darkMode, lan}) {
+
+  const en = lan === 'en';
+  const pageTitle = en ? 'CREATE ACCOUNT' : 'انشاء حساب';
+  const {pathname} = window.location;
+  const navigate = useNavigate();
+  const redirector = new Redirector(navigate);
 
   const [processing, setProcessing] = useState(false);
   const [alertText, setAlertText] = useState(null);
@@ -42,8 +49,7 @@ function SignUp ({darkMode, lan}) {
     newsLetter: false,
   });
 
-  const en = lan === 'en';
-  const pageTitle = en ? 'CREATE ACCOUNT' : 'انشاء حساب';
+  const createButtonEL = useRef(null);
 
   const formEL = useRef(null);
   const fNameLabelEL = useRef(null);
@@ -74,19 +80,11 @@ function SignUp ({darkMode, lan}) {
   const passEL = useRef(null);
   const cPassEL = useRef(null);
 
-  const createButtonEL = useRef(null);
-  const navigate = useNavigate();
-
-  useEffect(() => redirectAuthenticated(), [user]);
+  useEffect(() => redirector.signup(pathname, user), [user]);
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => setUser(user));
     return () => unsubscribe();
   }, []);
-
-  const redirectAuthenticated = () => {
-    const {pathname} = window.location;
-    if (user && (pathname === '/account/register' || pathname === '/account/register/')) navigate('/account');
-  }
 
   const handleChange = e => {
     const {name, value, checked} = e.target;
@@ -259,7 +257,7 @@ function SignUp ({darkMode, lan}) {
   return (
     <section className='signUp'>
       <Alert alertText={alertText} newAlert={newAlert} />
-      <Banner pageTitle={pageTitle} description={''}/>
+      <Banner pageTitle={pageTitle} description={false}/>
       <form className='signUp__form' acceptCharset="UTF-8" onSubmit={handleSubmit} ref={formEL} autoComplete="on">
         <div className="signUp__form__intro">
           <div className="img"/>

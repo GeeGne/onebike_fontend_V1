@@ -9,24 +9,25 @@ import {signOut, updateProfile, signInWithEmailAndPassword, onAuthStateChanged} 
 // SCSS
 import '/src/styles/components/pages/Account.scss';
 
-function Account () {
-  const [user, setUser] = useState(true);
-  const navigate = useNavigate();
+// UTILS 
+import Redirector from '/src/utils/Redirector';
 
-  useEffect(() => redirectNoAuthenticated(), [user])
+function Account ({darkMode, lan}) {
+  const en = lan === 'en';
+  const [user, setUser] = useState(true);
+  const {pathname} = window.location;
+  const navigate = useNavigate();
+  const redirector = new Redirector(navigate);
+  
+  useEffect(() => redirector.account(pathname, user), [user]);
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => setUser(user));
     return () => unsubscribe();
   }, []);
 
-  const redirectNoAuthenticated = () => {
-    const {pathname} = window.location;
-    if (!user && (pathname === '/account' || pathname === '/account/')) navigate('/account/login');
-  }
-
   const handleClick = async () => {
     const response = await signOut(auth);
-    console.log(response);
+    // console.log(response);
   }
 
   return (

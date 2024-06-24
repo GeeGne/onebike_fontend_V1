@@ -9,7 +9,7 @@ function Banner ({pageTitle, description}) {
   return (
     <section className="banner">
       <h1 className="banner__title">{pageTitle}</h1>  
-      <div className="banner__description">{description}</div>
+      {description && <div className="banner__description">{description}</div>}
     </section>
   )
 }
