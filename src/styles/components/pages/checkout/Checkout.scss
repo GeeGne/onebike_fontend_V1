@@ -1,0 +1,36 @@
+@use '/src/styles/utils/_BreakPoints' as w;
+
+.checkout {
+  overflow: hidden;
+  transition: height 0.5s ease;
+
+
+  &__orderSummary-top {
+    // background-color: var(--light-background-color);  
+
+    &__show {
+      display: flex;
+      align-items: center;
+      gap: 0.3em;
+      padding: 1em;
+      border: solid var(--endElement-border-background-color);
+      border-width: 0 0 1px 0;
+
+      &__text {
+        font-weight: 550;
+        font-size: var(--font-size-small);
+        color: var(--font-h-color);
+      }
+
+      &__arrow {
+        margin-right: auto;
+      }
+
+      &__total {
+        color: var(--font-h-color);
+        font-weight: 600;
+      }
+    }
+  }
+
+}

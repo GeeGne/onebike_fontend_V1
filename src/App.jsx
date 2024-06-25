@@ -6,7 +6,7 @@ import Header from './components/header/Header';
 import Footer from './components/Footer';
 import Home from './components/pages/Home';
 import Products from './components/pages/products/Products';
-import Checkout from './components/pages/Checkout';
+import Checkout from './components/pages/checkout/Checkout';
 import SignIn from './components/pages/SignIn';
 import SignUp from './components/pages/SignUp';
 import Account from './components/pages/Account';

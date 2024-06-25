@@ -59,16 +59,16 @@
 
         &__favourite {
           position: absolute;
-          top: 0.5em;
-          right: 0.5em;
-          width: 1.8em;
-          height: 1.8em;
+          top: 0.7em;
+          right: 0.7em;
+          width: 1.4em;
+          height: 1.4em;
           background-color: var(--background-color);
           background-image: var(--heart-icon);
           background-repeat: no-repeat;
           background-size: 70%;
           background-position: center;
-          border-radius: 3em;
+          border-radius: 100%;
         }
 
         &__img {

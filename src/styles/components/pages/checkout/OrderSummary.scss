@@ -1,0 +1,109 @@
+@use '/src/styles/utils/_BreakPoints' as w;
+
+.orderSummary {
+  display: flex;
+  flex-direction: column;
+  padding: 1em;
+  gap: 1em;
+
+  &__products {
+    display: flex;
+    flex-direction: column;
+    // padding-inline: 1em;
+    gap: 1em;
+
+    &__product {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-areas: 
+      'img-quan description description price';
+      align-items: center;
+      gap: 1em;
+
+      &__img-quan {
+        grid-area: img-quan;
+        position: relative;
+
+        &__img {
+          width: 100%;
+        }
+
+        &__quan {
+          position: absolute;
+          top: 0;
+          right: 0;
+          background-color: hsla(0, 0%, 10%, 0.5);
+          color: var(--font-h-invert-color);
+          font-size: var(--font-size-extraSmall);
+          font-weight: bold;
+          padding: 0.5em;
+        }
+      }
+
+      &__description {
+        grid-area: description;
+        color: var(--font-h-color);
+        font-weight: 550;
+      }
+
+      &__price {
+        grid-area: price;
+        margin-left: auto;
+        color: var(--font-p-color);
+
+      }
+    }
+  }
+
+  &__subtotal {
+    display: flex;
+    justify-content: space-between;
+
+    &__text {
+      color: var(--font-p-color);
+      font-size: var(--font-size-small);
+      font-weight: 500;
+    }
+
+    &__amount {
+      color: var(--font-p-color);
+      font-size: var(--font-size-small);
+      font-weight: 500;
+    }
+  }
+
+  &__shipping {
+    display: flex;
+    justify-content: space-between;
+
+    &__text {
+      color: var(--font-p-color);
+      font-size: var(--font-size-small);
+      font-weight: 500;
+    }
+
+    &__amount {
+      color: var(--font-p-color);
+      font-size: var(--font-size-small);
+      font-weight: 500;
+    }
+  }
+
+  &__total {
+    display: flex;
+    justify-content: space-between;
+
+    &__text {
+      color: var(--font-h-color);
+      font-size: var(--font-size-medium);
+      font-weight: bold;
+    }
+
+    &__amount {
+      color: var(--font-h-color);
+      font-size: var(--font-size-medium);
+      font-weight: bold;
+    }
+  }
+  
+}
