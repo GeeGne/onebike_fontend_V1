@@ -9,7 +9,7 @@ import '/src/styles/components/header/navbar/CartSlider.scss';
 import cartReducer from '/src/reducers/cartReducer';
 
 // UTILS
-import CartProductsContext from '/src/utils/myContext';
+import {CartProductsContext} from '/src/utils/myContext';
 import formatNumberWithCommas from '/src/utils/formatNumberWithCommas';
 import calculatePrice from '/src/utils/calculatePrice';
 import calculateDiscountPercantage from '/src/utils/calculateDiscountPercantage';
@@ -40,7 +40,8 @@ function CartSlider ({darkMode, lan, onCartChange, cartToggle, onCartToggleChang
   const cartProductsELS = useRef([]);
   const navigate = useNavigate();
   let totalPrice = 0;
-  cart.forEach(list => (totalPrice += calculatePrice(list.product.price, list.product.discount) * list.quantity))
+  // cart.forEach(list => (totalPrice += calculatePrice(list.product.price, list.product.discount) * list.quantity))
+  cart.forEach(list => (totalPrice += list.quantityPrice))
 
   const cartEmpty = cart.length === 0;
   const en = lan === 'en';
@@ -91,7 +92,7 @@ function CartSlider ({darkMode, lan, onCartChange, cartToggle, onCartToggleChang
         navigate('/checkouts/login');
         break;
       default:
-        console.log('Unknown type:' + type)
+        console.log('Unknown type: ' + type)
     }
   }
 
@@ -126,7 +127,7 @@ function CartSlider ({darkMode, lan, onCartChange, cartToggle, onCartToggleChang
           <li className="cartSlider-container__slider__products__product" key={list.id} data-product-id={list.product.id} ref={el => addRef('cartProductsELS', el, i)}>
             <img className="cartSlider-container__slider__products__product__image" src={`/assets/img/products/${list.product.category}/${list.product.type}/${list.product.id + '-' + list.product.color.en}-front.webp`} />
             <a className="cartSlider-container__slider__products__product__title">{list.product.title[lan]}</a>
-            <div className="cartSlider-container__slider__products__product__price">{en ? 'S.P' : 'ل.س'} {formatNumberWithCommas(calculatePrice(list.product.price, list.product.discount) * list.quantity)}</div>
+            <div className="cartSlider-container__slider__products__product__price">{en ? 'S.P' : 'ل.س'} {formatNumberWithCommas(list.quantityPrice)}</div>
             <div className="cartSlider-container__slider__products__product__toggles">
               <button className="cartSlider-container__slider__products__product__toggles__delete" data-type="REMOVE_FROM_CART" onClick={e => handleClick(e, list.product)}/> 
               <button className="cartSlider-container__slider__products__product__toggles__increment" data-type="INCREASE_AMOUNT_BY_ONE" onClick={e => handleClick(e, list.product)}/>

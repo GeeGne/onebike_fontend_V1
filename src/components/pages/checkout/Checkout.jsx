@@ -1,5 +1,5 @@
 // HOOKS
-import React, {useState, useRef, useEffect} from 'react';
+import React, {useState, useRef, useEffect, useContext} from 'react';
 import {useNavigate} from 'react-router-dom';
 
 // FIREBASE
@@ -14,6 +14,7 @@ import '/src/styles/components/pages/checkout/Checkout.scss';
 
 // UTILS 
 import Redirector from '/src/utils/Redirector';
+import {CartContext} from '/src/utils/myContext.js';
 
 // ASSETS
 import filter from '/assets/img/icons/filter_list.svg';
@@ -25,13 +26,24 @@ import keyboardArrowDropDownDarkMode from '/assets/img/icons/keyboard_arrow_down
 
 function Checkout ({darkMode, lan}) {
   
-  const [order, setOrder] = useState(null);
+  const cart = useContext(CartContext);
+  const [order, setOrder] = useState({
+    orderId: '',
+    timestamp: '',
+    products: '',
+    total: '',
+  });
 
   const orderSummaryTopEL = useRef(null);
   const orderSummaryTopShowEL = useRef(null);
   const orderSummaryTopShowArrowEL = useRef(null);
   const orderSummaryTopShowTextEL = useRef(null);
   const en = lan === 'en';
+
+  console.log('checkOut', cart);
+  useEffect(() => {
+
+  }, [])
 
   const handleClick = e => {
     const toggleExpandDataATT = (el, expand) => el.dataset.expand = String(!expand);

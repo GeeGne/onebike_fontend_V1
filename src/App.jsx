@@ -22,7 +22,7 @@ import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 
 // UTILS
 import cleanseString from '/src/utils/cleanseString.js';
-import CartProductsContext from '/src/utils/myContext.js';
+import {CartProductsContext, CartContext} from '/src/utils/myContext.js';
 
 function App () {
 
@@ -48,23 +48,25 @@ function App () {
         </header>
 
         <main className="app-layout__main">
-          <Routes>
-            <Route exact path="/" element={<Home darkMode={darkMode} lan={lan} />} />
-            {mainListData.map(category =>
-            <React.Fragment key={category.id}>
-              <Route exact path={`/${cleanseString(category.en)}`} element={<Products category={category} darkMode={darkMode} lan={lan} onCartProductsChange={cartProductsData} />} />
-              {category.secondaryList.map(secondData => secondData.thirdList.map(thirdData => 
-              <Route path={`/${cleanseString(category.en)}/${cleanseString(thirdData.en)}`} element={<Products category={category} type={thirdData} darkMode={darkMode} lan={lan} onCartProductsChange={cartProductsData} />} key={thirdData.id} />
-              ))}
-            </React.Fragment>
-            )}
-            <Route path="/checkouts" element={<Checkout darkMode={darkMode} lan={lan} />} />
-            <Route path="/account/register" element={<SignUp darkMode={darkMode} lan={lan} />} />
-            <Route path="/checkouts/login" element={<SignIn darkMode={darkMode} lan={lan} />} />
-            <Route path="/account/login" element={<SignIn darkMode={darkMode} lan={lan} />} />
-            <Route path="/account" element={<Account darkMode={darkMode} lan={lan} />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
+          <CartContext.Provider value={cart}>
+            <Routes>
+              <Route exact path="/" element={<Home darkMode={darkMode} lan={lan} />} />
+              {mainListData.map(category =>
+              <React.Fragment key={category.id}>
+                <Route exact path={`/${cleanseString(category.en)}`} element={<Products category={category} darkMode={darkMode} lan={lan} onCartProductsChange={cartProductsData} />} />
+                {category.secondaryList.map(secondData => secondData.thirdList.map(thirdData => 
+                <Route path={`/${cleanseString(category.en)}/${cleanseString(thirdData.en)}`} element={<Products category={category} type={thirdData} darkMode={darkMode} lan={lan} onCartProductsChange={cartProductsData} />} key={thirdData.id} />
+                ))}
+              </React.Fragment>
+              )}
+              <Route path="/checkouts" element={<Checkout darkMode={darkMode} lan={lan} />} />
+              <Route path="/account/register" element={<SignUp darkMode={darkMode} lan={lan} />} />
+              <Route path="/checkouts/login" element={<SignIn darkMode={darkMode} lan={lan} />} />
+              <Route path="/account/login" element={<SignIn darkMode={darkMode} lan={lan} />} />
+              <Route path="/account" element={<Account darkMode={darkMode} lan={lan} />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </CartContext.Provider>
         </main>
         
         <footer className="app-layout__footer">
