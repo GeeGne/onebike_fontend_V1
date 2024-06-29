@@ -29,9 +29,13 @@ function App () {
   const [darkMode, setDarkMode] = useState(false);
   const [lan, setLanguage] = useState('en');
   const [cartDispatchData, setCartDispatchData] = useState([]);
+  const [cart, setCart] = useState([]);
+
   const themeData = setDarkMode;
   const languageData = setLanguage;
   const cartProductsData = setCartDispatchData;
+  const cartData = setCart;
+  console.log('cart: ', cart);
 
   return (
     <Router>
@@ -39,7 +43,7 @@ function App () {
 
         <header className="app-layout__header">
           <CartProductsContext.Provider value={cartDispatchData}>
-            <Header onThemeChange={themeData} onLanguageChange={languageData}/>
+            <Header onThemeChange={themeData} onLanguageChange={languageData} onCartChange={cartData}/>
           </CartProductsContext.Provider>
         </header>
 

@@ -1,29 +1,45 @@
 @use '/src/styles/utils/_BreakPoints' as w;
 
 .checkout {
-  overflow: hidden;
-  transition: height 0.5s ease;
-
+  max-width: 600px;
+  margin-inline: auto;
 
   &__orderSummary-top {
-    // background-color: var(--light-background-color);  
-
+    cursor: pointer;
+    overflow-y: hidden;
+    overflow-x: clip;
+    max-height: 3.35em;
+    transition: max-height 0.5s ease;
+    
     &__show {
+      position: relative;
       display: flex;
       align-items: center;
       gap: 0.3em;
       padding: 1em;
-      border: solid var(--endElement-border-background-color);
+      // border: solid var(--endElement-border-background-color);
       border-width: 0 0 1px 0;
 
+      &::before {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        min-width: 100vw;
+        height: 1px;
+        background-color: var(--light-background-color);
+      }
+  
       &__text {
-        font-weight: 550;
+        font-weight: 400;
         font-size: var(--font-size-small);
-        color: var(--font-h-color);
+        color: var(--primary-color);
       }
 
       &__arrow {
         margin-right: auto;
+        transition: transform 0.5s ease;
       }
 
       &__total {

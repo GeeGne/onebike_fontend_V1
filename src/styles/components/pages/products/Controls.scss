@@ -9,9 +9,7 @@
   border-width: 0 0 1px 0;
   background-color: var(--background-color);
 
-  body.arabic & {
-    direction: rtl;
-  }
+  body.arabic & {direction: rtl}
 
   &::before {
     content: "";

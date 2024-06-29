@@ -8,7 +8,7 @@ import '../../styles/components/header/Header.scss';
 import IntroSection from './IntroSection';
 import Navbar from './navbar/Navbar';
 
-function Header ({onThemeChange, onLanguageChange}) {
+function Header ({onThemeChange, onLanguageChange, onCartChange}) {
 
  const [darkMode, setDarkMode] = useState(false);
  const [lan, setLanguage] = useState('en');
@@ -29,11 +29,12 @@ function Header ({onThemeChange, onLanguageChange}) {
     setLanguage(data);
   }
 
+  const cartData = onCartChange;
 
   return (
     <>
       <IntroSection onThemeChange={themeData} onLanguageChange={languageData}/>
-      <Navbar darkMode={darkMode} lan={lan}/>
+      <Navbar darkMode={darkMode} lan={lan} onCartChange={cartData}/>
     </>
   )
 }

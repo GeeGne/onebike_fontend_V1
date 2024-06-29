@@ -25,17 +25,50 @@ import keyboardArrowDropDownDarkMode from '/assets/img/icons/keyboard_arrow_down
 
 function Checkout ({darkMode, lan}) {
   
-  const {pathname} = window.location;
+  const [order, setOrder] = useState(null);
+
+  const orderSummaryTopEL = useRef(null);
+  const orderSummaryTopShowEL = useRef(null);
+  const orderSummaryTopShowArrowEL = useRef(null);
+  const orderSummaryTopShowTextEL = useRef(null);
+  const en = lan === 'en';
+
+  const handleClick = e => {
+    const toggleExpandDataATT = (el, expand) => el.dataset.expand = String(!expand);
+    const {type} = e.currentTarget.dataset;
+    switch (type) {
+      case 'toggle_orderSummary':
+        const expand = e.currentTarget.dataset.expand === 'false' ? false : true;
+        const orderSummaryHeight = orderSummaryTopEL.current.scrollHeight;
+        const orderSummaryShowHeight = orderSummaryTopShowEL.current.scrollHeight;
+
+        if (expand) {
+          orderSummaryTopEL.current.style.maxHeight = String(orderSummaryShowHeight) + 'px';
+          orderSummaryTopShowArrowEL.current.style.transform = 'rotate(0deg)';
+          orderSummaryTopShowTextEL.current.style.fontWeight = '400';
+          orderSummaryTopShowTextEL.current.style.textContent = en? 'Show order summary' : 'عرض ملخص الطلب';
+        } else {
+          orderSummaryTopEL.current.style.maxHeight = String(orderSummaryHeight) + 'px';
+          orderSummaryTopShowArrowEL.current.style.transform = 'rotate(180deg)';
+          orderSummaryTopShowTextEL.current.style.fontWeight = '600';
+          orderSummaryTopShowTextEL.current.style.textContent = en? 'Hide order summary' : 'اخفاء ملخص الطلب';
+        }
+        toggleExpandDataATT(e.currentTarget, expand);
+        break;
+      default:
+        console.error('Error: Unknown type: ' + type);
+    }
+  }
 
   return (
     <div className="checkout">
-      <section className="checkout__orderSummary-top">
-        <div className="checkout__orderSummary-top__show">
-          <span className="checkout__orderSummary-top__show__text">Show order summary </span>
-          <img className="checkout__orderSummary-top__show__arrow" src={keyboardArrowDropDown} />
+      <section className="checkout__orderSummary-top" ref={orderSummaryTopEL}>
+        <div className="checkout__orderSummary-top__show" role="button" tabIndex="0" data-expand="false" data-type="toggle_orderSummary" onClick={handleClick} ref={orderSummaryTopShowEL}>
+          <span className="checkout__orderSummary-top__show__text" ref={orderSummaryTopShowTextEL}>Show order summary </span>
+          <img className="checkout__orderSummary-top__show__arrow" src={keyboardArrowDropDown} ref={orderSummaryTopShowArrowEL} />
           <span className="checkout__orderSummary-top__show__total">S.P 50000</span>
         </div>
-        <div classsName="checkout__orderSummary-top__show__order-box"><OrderSummary darkMode={darkMode} lan={lan} /></div>
+        <div className="checkout__orderSummary-top__show__order-box"><OrderSummary darkMode={darkMode} lan={lan} /></div>
       </section>
     </div>
   )

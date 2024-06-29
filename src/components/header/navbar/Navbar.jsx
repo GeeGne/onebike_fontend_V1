@@ -19,7 +19,7 @@ import searchIcon from '/assets/img/icons/search.svg';
 import searchIconDarkMode from '/assets/img/icons/search_darkMode.svg';
 
 
-function Navbar ({darkMode, lan}) {
+function Navbar ({darkMode, lan, onCartChange}) {
   
   const navigate = useNavigate();
 
@@ -37,7 +37,10 @@ function Navbar ({darkMode, lan}) {
 
   const menuData = setMenu;
   const cartToggleData = setCartToggle;
-  const cartData = setCart;
+  const cartData = (data) => {
+    setCart(data);
+    onCartChange(data);
+  }
 
   const cartEmpty = cart.length === 0;
   const largeWidth = 1000;

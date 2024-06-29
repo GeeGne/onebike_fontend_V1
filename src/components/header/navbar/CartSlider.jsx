@@ -78,7 +78,6 @@ function CartSlider ({darkMode, lan, onCartChange, cartToggle, onCartToggleChang
         setTimeout(() => dispatch({type, product}), 250);
         break;
       case 'INCREASE_AMOUNT_BY_ONE':
-        console.log('test');
         dispatch({type, product, quantity: 1});
         break;
       case 'DECREASE_AMOUNT_BY_ONE':
