@@ -3,9 +3,10 @@
 .checkout {
   max-width: 600px;
   margin-inline: auto;
+  
+  body.arabic &{direction: rtl}
 
   &__orderSummary-top {
-    cursor: pointer;
     overflow-y: hidden;
     overflow-x: clip;
     max-height: 3.35em;
@@ -19,6 +20,7 @@
       padding: 1em;
       // border: solid var(--endElement-border-background-color);
       border-width: 0 0 1px 0;
+      cursor: pointer;
 
       &::before {
         content: "";
@@ -40,6 +42,11 @@
       &__arrow {
         margin-right: auto;
         transition: transform 0.5s ease;
+        
+        body.arabic & {
+          margin-right: 0;
+          margin-left: auto;
+        }
       }
 
       &__total {

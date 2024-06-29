@@ -1,5 +1,5 @@
 // HOOKS
-import React, {useState, useRef, useEffect, useContext} from 'react';
+import React, {useState, useRef, useEffect, useContext, useReducer} from 'react';
 import {useNavigate} from 'react-router-dom';
 
 // FIREBASE
@@ -12,9 +12,13 @@ import OrderSummary from '/src/components/pages/checkout/OrderSummary';
 // SCSS
 import '/src/styles/components/pages/checkout/Checkout.scss';
 
+// REDUCERS
+import orderReducer from '/src/reducers/orderReducer';
+
 // UTILS 
 import Redirector from '/src/utils/Redirector';
 import {CartContext} from '/src/utils/myContext.js';
+import formatNumberWithCommas from '/src/utils/formatNumberWithCommas';
 
 // ASSETS
 import filter from '/assets/img/icons/filter_list.svg';
@@ -27,12 +31,14 @@ import keyboardArrowDropDownDarkMode from '/assets/img/icons/keyboard_arrow_down
 function Checkout ({darkMode, lan}) {
   
   const cart = useContext(CartContext);
-  const [order, setOrder] = useState({
-    orderId: '',
+  const [order, dispatch] = useReducer(orderReducer, {
+    orderId: 1,
     timestamp: '',
-    products: '',
+    products: [],
+    shipping: 234,
     total: '',
-  });
+  })
+  const {total, shipping} = order;
 
   const orderSummaryTopEL = useRef(null);
   const orderSummaryTopShowEL = useRef(null);
@@ -40,10 +46,8 @@ function Checkout ({darkMode, lan}) {
   const orderSummaryTopShowTextEL = useRef(null);
   const en = lan === 'en';
 
-  console.log('checkOut', cart);
-  useEffect(() => {
-
-  }, [])
+  console.log('checkOut order: ', order);
+  useEffect(() => dispatch({type: 'UPDATE_PRODUCTS', cart}), [cart])
 
   const handleClick = e => {
     const toggleExpandDataATT = (el, expand) => el.dataset.expand = String(!expand);
@@ -76,11 +80,11 @@ function Checkout ({darkMode, lan}) {
     <div className="checkout">
       <section className="checkout__orderSummary-top" ref={orderSummaryTopEL}>
         <div className="checkout__orderSummary-top__show" role="button" tabIndex="0" data-expand="false" data-type="toggle_orderSummary" onClick={handleClick} ref={orderSummaryTopShowEL}>
-          <span className="checkout__orderSummary-top__show__text" ref={orderSummaryTopShowTextEL}>Show order summary </span>
-          <img className="checkout__orderSummary-top__show__arrow" src={keyboardArrowDropDown} ref={orderSummaryTopShowArrowEL} />
-          <span className="checkout__orderSummary-top__show__total">S.P 50000</span>
+          <span className="checkout__orderSummary-top__show__text" ref={orderSummaryTopShowTextEL}>{en ? 'Show order summary' : 'عرض ملخص الطلب'}</span>
+          <img className="checkout__orderSummary-top__show__arrow" src={darkMode ? keyboardArrowDropDownDarkMode : keyboardArrowDropDown} ref={orderSummaryTopShowArrowEL} />
+          <span className="checkout__orderSummary-top__show__total">{en ? 'S.P ' : 'ل.س '}{formatNumberWithCommas(total + shipping)}</span>
         </div>
-        <div className="checkout__orderSummary-top__show__order-box"><OrderSummary darkMode={darkMode} lan={lan} /></div>
+        <div className="checkout__orderSummary-top__show__order-box"><OrderSummary darkMode={darkMode} lan={lan} order={order} /></div>
       </section>
     </div>
   )

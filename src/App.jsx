@@ -35,7 +35,6 @@ function App () {
   const languageData = setLanguage;
   const cartProductsData = setCartDispatchData;
   const cartData = setCart;
-  console.log('cart: ', cart);
 
   return (
     <Router>

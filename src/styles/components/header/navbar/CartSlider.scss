@@ -1,6 +1,6 @@
 @use '/src/styles/utils/_BreakPoints' as w;
 
-.cartSlider-container {
+.cartSlider {
   position: fixed;
   display: flex;
   justify-content: end;
@@ -51,7 +51,7 @@
         color: var(--font-h-color);
       }
 
-      &__button {
+      &__btn {
         font-weight: 600;
         font-size: var(--font-size-medium);
         color: var(--font-h-invert-color);

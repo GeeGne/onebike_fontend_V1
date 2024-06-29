@@ -2,7 +2,10 @@
 import React, {useState, useRef, useEffect} from 'react';
 
 // SCSS
-import '/src/styles/components/pages/checkout/OrderSummary.scss'
+import '/src/styles/components/pages/checkout/OrderSummary.scss';
+
+// UTILS
+import formatNumberWithCommas from '/src/utils/formatNumberWithCommas';
 
 // product img test
 import productIMG from '/assets/img/products/GIYO Small Bike tire Pump Schrader.jpg';
@@ -14,47 +17,35 @@ import brandLogo2 from '/assets/img/logo/giant.webp';
 import brandLogo3 from '/assets/img/logo/evoc.webp';
 
 
-function OrderSummary ({darkMode, lan}) {
+function OrderSummary ({darkMode, lan, order}) {
+  const {products, shipping, total} = order;
+  const en = lan === 'en';
 
   return (
     <div className="orderSummary">
       <ul className="orderSummary__products">
-        <li className="orderSummary__products__product">
+        {products.map(item => 
+        <li className="orderSummary__products__product" key={item.id}>
           <div className="orderSummary__products__product__img-quan">
-            <img className="orderSummary__products__product__img-quan__img" src={productIMG} />
-            <div className="orderSummary__products__product__img-quan__quan">5</div>
+            <img className="orderSummary__products__product__img-quan__img" src={`/assets/img/products/${item.product.category}/${item.product.type}/${item.product.id + '-' + item.product.color.en}-front.webp`} />
+            <div className="orderSummary__products__product__img-quan__quan">{item.quantity}</div>
           </div>
-          <span className="orderSummary__products__product__description">Portable Bike Air Pump</span>
-          <span className="orderSummary__products__product__price">S.P 2000</span>
+          <span className="orderSummary__products__product__description">{item.product.title[lan]}</span>
+          <span className="orderSummary__products__product__price">{en ? 'S.P ' : ' ل.س '}{formatNumberWithCommas(item.quantityPrice)}</span>
         </li>
-        <li className="orderSummary__products__product">
-          <div className="orderSummary__products__product__img-quan">
-            <img className="orderSummary__products__product__img-quan__img" src={productIMG} />
-            <div className="orderSummary__products__product__img-quan__quan">5</div>
-          </div>
-          <span className="orderSummary__products__product__description">Portable Bike Air Pump</span>
-          <span className="orderSummary__products__product__price">S.P 2000</span>
-        </li>
-        <li className="orderSummary__products__product">
-          <div className="orderSummary__products__product__img-quan">
-            <img className="orderSummary__products__product__img-quan__img" src={productIMG} />
-            <div className="orderSummary__products__product__img-quan__quan">5</div>
-          </div>
-          <span className="orderSummary__products__product__description">Portable Bike Air Pump</span>
-          <span className="orderSummary__products__product__price">S.P 2000</span>
-        </li>
+        )}
       </ul>
       <div className="orderSummary__subtotal">
-        <span className="orderSummary__subtotal__text">Subtotal</span>
-        <span className="orderSummary__subtotal__amount">S.P 60</span>
+        <span className="orderSummary__subtotal__text">{en ? 'Subtotal' : 'المجموع الفرعي'}</span>
+        <span className="orderSummary__subtotal__amount">{en ? 'S.P ' : ' ل.س '} {formatNumberWithCommas(total)}</span>
       </div>              
       <div className="orderSummary__shipping">
-        <span className="orderSummary__shipping__text">Shipping</span>
-        <span className="orderSummary__shipping__amount">S.P 600</span>
+        <span className="orderSummary__shipping__text">{en ? 'Shipping' : 'الشحن'}</span>
+        <span className="orderSummary__shipping__amount">{en ? 'S.P ' : ' ل.س '} {formatNumberWithCommas(shipping)}</span>
       </div>      
       <div className="orderSummary__total">
-        <span className="orderSummary__total__text">Total</span>
-        <span className="orderSummary__total__amount">S.P 550</span>
+        <span className="orderSummary__total__text">{en ? 'Total' : 'الاجمالي'}</span>
+        <span className="orderSummary__total__amount">{en ? 'S.P ' : ' ل.س '} {formatNumberWithCommas(shipping + total)}</span>
       </div>      
     </div>
   )
