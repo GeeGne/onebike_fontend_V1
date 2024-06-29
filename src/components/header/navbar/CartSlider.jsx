@@ -39,8 +39,8 @@ function CartSlider ({darkMode, lan, onCartChange, cartToggle, onCartToggleChang
   const sliderElement = useRef(null);
   const cartProductsELS = useRef([]);
   const navigate = useNavigate();
+
   let totalPrice = 0;
-  // cart.forEach(list => (totalPrice += calculatePrice(list.product.price, list.product.discount) * list.quantity))
   cart.forEach(list => (totalPrice += list.quantityPrice))
 
   const cartEmpty = cart.length === 0;
@@ -110,38 +110,38 @@ function CartSlider ({darkMode, lan, onCartChange, cartToggle, onCartToggleChang
   }
 
   return (
-    <div className="cartSlider-container" data-type="exit-slider" onClick={handleClick} ref={cartContainerElement}>
-      <div className={`cartSlider-container__slider${cartEmpty ? ' empty' : ''}`} onClick={e => e.stopPropagation()} ref={sliderElement}>
-        <div className="cartSlider-container__slider__empty">
-          <img className="cartSlider-container__slider__empty__cart" src={darkMode ? cartIconDarkMode : cartIcon}/>
-          <div className="cartSlider-container__slider__empty__note">{en ? 'Your Cart Is Empty' : 'سله التسوق فارغه'}</div>
-          <button className="cartSlider-container__slider__empty__button" data-type="exit-slider" onClick={handleClick}>{en ? 'Back to shopping' : 'العوده للتسوق'}</button>
+    <div className="cartSlider" data-type="exit-slider" onClick={handleClick} ref={cartContainerElement}>
+      <div className={`cartSlider__slider${cartEmpty ? ' empty' : ''}`} onClick={e => e.stopPropagation()} ref={sliderElement}>
+        <div className="cartSlider__slider__empty">
+          <img className="cartSlider__slider__empty__cart" src={darkMode ? cartIconDarkMode : cartIcon}/>
+          <div className="cartSlider__slider__empty__note">{en ? 'Your Cart Is Empty' : 'سله التسوق فارغه'}</div>
+          <button className="cartSlider__slider__empty__button" data-type="exit-slider" onClick={handleClick}>{en ? 'Back to shopping' : 'العوده للتسوق'}</button>
         </div>
-        <section className="cartSlider-container__slider__top">
-          <div className="cartSlider-container__slider__top__cart">{en ? 'Cart' : 'السله'}</div>
-          <div className="cartSlider-container__slider__top__quantity">{cart.length}</div>
-          <img className="cartSlider-container__slider__top__exit" data-type="exit-slider" onClick={handleClick} src={darkMode ? closeIconDarkMode : closeIcon} role="button" tabIndex="0"/>
+        <section className="cartSlider__slider__top">
+          <div className="cartSlider__slider__top__cart">{en ? 'Cart' : 'السله'}</div>
+          <div className="cartSlider__slider__top__quantity">{cart.length}</div>
+          <img className="cartSlider__slider__top__exit" data-type="exit-slider" onClick={handleClick} src={darkMode ? closeIconDarkMode : closeIcon} role="button" tabIndex="0"/>
         </section>
-        <ul className="cartSlider-container__slider__products">
+        <ul className="cartSlider__slider__products">
           {cart.map((list, i) =>
-          <li className="cartSlider-container__slider__products__product" key={list.id} data-product-id={list.product.id} ref={el => addRef('cartProductsELS', el, i)}>
-            <img className="cartSlider-container__slider__products__product__image" src={`/assets/img/products/${list.product.category}/${list.product.type}/${list.product.id + '-' + list.product.color.en}-front.webp`} />
-            <a className="cartSlider-container__slider__products__product__title">{list.product.title[lan]}</a>
-            <div className="cartSlider-container__slider__products__product__price">{en ? 'S.P' : 'ل.س'} {formatNumberWithCommas(list.quantityPrice)}</div>
-            <div className="cartSlider-container__slider__products__product__toggles">
-              <button className="cartSlider-container__slider__products__product__toggles__delete" data-type="REMOVE_FROM_CART" onClick={e => handleClick(e, list.product)}/> 
-              <button className="cartSlider-container__slider__products__product__toggles__increment" data-type="INCREASE_AMOUNT_BY_ONE" onClick={e => handleClick(e, list.product)}/>
-              <div className="cartSlider-container__slider__products__product__toggles__value">{list.quantity}</div>
-              <button className="cartSlider-container__slider__products__product__toggles__decrement" data-type="DECREASE_AMOUNT_BY_ONE" onClick={e => handleClick(e, list.product)}/>
+          <li className="cartSlider__slider__products__product" key={list.id} data-product-id={list.product.id} ref={el => addRef('cartProductsELS', el, i)}>
+            <img className="cartSlider__slider__products__product__image" src={`/assets/img/products/${list.product.category}/${list.product.type}/${list.product.id + '-' + list.product.color.en}-front.webp`}/>
+            <a className="cartSlider__slider__products__product__title">{list.product.title[lan]}</a>
+            <div className="cartSlider__slider__products__product__price">{en ? 'S.P' : 'ل.س'} {formatNumberWithCommas(list.quantityPrice)}</div>
+            <div className="cartSlider__slider__products__product__toggles">
+              <button className="cartSlider__slider__products__product__toggles__delete" data-type="REMOVE_FROM_CART" onClick={e => handleClick(e, list.product)}/> 
+              <button className="cartSlider__slider__products__product__toggles__increment" data-type="INCREASE_AMOUNT_BY_ONE" onClick={e => handleClick(e, list.product)}/>
+              <div className="cartSlider__slider__products__product__toggles__value">{list.quantity}</div>
+              <button className="cartSlider__slider__products__product__toggles__decrement" data-type="DECREASE_AMOUNT_BY_ONE" onClick={e => handleClick(e, list.product)}/>
             </div>
           </li>
           )}
         </ul>
-        <section className="cartSlider-container__slider__bottom">
-          <div className="cartSlider-container__slider__bottom__total">{en ? 'Total' : 'اجمالي'} <span>{en ? 'S.P' : 'ل.س'} {formatNumberWithCommas(totalPrice)}</span></div>
-          <div className="cartSlider-container__slider__bottom__shipment">{en ? 'Shipment fee calculated at Checkout' : 'تكاليف الشحن ستضاف عند الدفع'}</div>
-          <button className="cartSlider-container__slider__bottom__view-cart">{en ? 'View cart' : 'عرض العربة'}</button>
-          <button className="cartSlider-container__slider__bottom__checkout" data-type="nav-to-checkouts" onClick={handleClick}>{en ? 'Checkout' : 'الدفع'}</button>
+        <section className="cartSlider__slider__bottom">
+          <div className="cartSlider__slider__bottom__total">{en ? 'Total' : 'اجمالي'} <span>{en ? 'S.P' : 'ل.س'} {formatNumberWithCommas(totalPrice)}</span></div>
+          <div className="cartSlider__slider__bottom__shipment">{en ? 'Shipment fee calculated at Checkout' : 'تكاليف الشحن ستضاف عند الدفع'}</div>
+          <button className="cartSlider__slider__bottom__view-cart">{en ? 'View cart' : 'عرض العربة'}</button>
+          <button className="cartSlider__slider__bottom__checkout" data-type="nav-to-checkouts" onClick={handleClick}>{en ? 'Checkout' : 'الدفع'}</button>
         </section>
       </div>
     </div>
