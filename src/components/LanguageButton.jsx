@@ -4,12 +4,24 @@ import React, {useState, useRef, useEffect} from 'react';
 // SCSS
 import '../styles/components/LanguageButton.scss'
 
-function LanguageButton ({onLanguageChange}) {
+// UTILS
+import localStorage from '/src/utils/localStorage';
 
-  const [lan, setLanguage] = useState('en');
+function LanguageButton ({onLanguageChange}) {
+  
+  const [lan, setLanguage] = useState(() => {
+    try {
+      return localStorage.get('lan') || 'en';
+    } catch {
+      return 'en'
+    }
+  });
   const [languageList, setLanguageList] = useState(false);
 
+  const isInitialMount = useRef(true);
   const languageElement = useRef(null);
+
+  const en = lan === 'en';
 
   useEffect(() => {
     if (languageList) {
@@ -20,13 +32,12 @@ function LanguageButton ({onLanguageChange}) {
   },[languageList])
 
   useEffect(() => {
+    const saveToStorage = () => isInitialMount.current ? (isInitialMount.current = false) : localStorage.set('lan', lan);
+    const switchToArabic = () => document.body.classList.add('arabic');
+    const switchToEnglish = () => document.body.classList.remove('arabic');
+    en ? switchToEnglish() : switchToArabic();
     onLanguageChange(lan);
-
-    if (lan === 'ar') {
-      document.body.classList.add('arabic');
-      return;
-    }
-    document.body.classList.remove('arabic');
+    saveToStorage();
   },[lan])
 
   return (

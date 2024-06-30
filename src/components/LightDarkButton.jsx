@@ -1,8 +1,11 @@
 // HOOKS
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 
 // SCSS
 import '../styles/components/LightDarkButton.scss';
+
+// UTILS
+import localStorage from '/src/utils/localStorage';
 
 // ICONS
 import sunIcon from "/assets/img/icons/sun.svg";
@@ -10,12 +13,23 @@ import moonIcon from "/assets/img/icons/moon.svg";
 
 function LightDarkButton ({onThemeChange}) {
 
-  const [darkTheme, setDarkTheme] = useState(false);
+  const [darkTheme, setDarkTheme] = useState(() => {
+    try {
+      return localStorage.get('darkTheme') || false;
+    } catch {
+      return false;
+    }
+  });
+
+  const isInitialMount = useRef(true);
 
   useEffect(() => {
-    darkTheme ? document.body.classList.add('dark-theme') :
-    document.body.classList.remove('dark-theme');
+    const saveToLocalStorage = () => isInitialMount.current ? (isInitialMount.current = false) : localStorage.set('darkTheme', darkTheme);
+    const switchToDarkTheme = () => document.body.classList.add('dark-theme');
+    const switchToLightTheme = () => document.body.classList.remove('dark-theme');
+    darkTheme ? switchToDarkTheme() : switchToLightTheme();
     onThemeChange(darkTheme);
+    saveToLocalStorage();
   }, [darkTheme])
 
 

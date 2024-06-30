@@ -14,6 +14,7 @@ import formatNumberWithCommas from '/src/utils/formatNumberWithCommas';
 import calculatePrice from '/src/utils/calculatePrice';
 import calculateDiscountPercantage from '/src/utils/calculateDiscountPercantage';
 import fetchElementById from '/src/utils/fetchElementById';
+import localStorage from '/src/utils/localStorage';
 
 // ICONS
 import closeIcon from '/assets/img/icons/close.svg';
@@ -34,11 +35,12 @@ import brandLogo3 from '/assets/img/logo/evoc.webp';
 
 function CartSlider ({darkMode, lan, onCartChange, cartToggle, onCartToggleChange}) {
   const cartDispatchData = useContext(CartProductsContext);
-  const [cart, dispatch] = useReducer(cartReducer, []);
-
+  const [cart, dispatch] = useReducer(cartReducer, localStorage.get('cart') || []);
+  
   const cartContainerElement = useRef(null);  
   const sliderElement = useRef(null);
   const cartProductsELS = useRef([]);
+  const isInitialMount = useRef(true);
 
   let totalPrice = 0;
   cart.forEach(list => (totalPrice += list.quantityPrice));
@@ -47,7 +49,11 @@ function CartSlider ({darkMode, lan, onCartChange, cartToggle, onCartToggleChang
   const cartEmpty = cart.length === 0;
   const en = lan === 'en';
 
-  useEffect(() => onCartChange(cart), [cart])
+  useEffect(() => {
+    const saveToLocalStorage = () => isInitialMount.current ? (isInitialMount.current = false) : localStorage.set('cart', cart);
+    onCartChange(cart);
+    saveToLocalStorage();
+  }, [cart])
   useEffect(() => dispatch(cartDispatchData), [cartDispatchData]);
 
   useEffect(() => {
