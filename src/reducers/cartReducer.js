@@ -2,11 +2,7 @@ import calculatePrice from '/src/utils/calculatePrice.js';
 
 function cartReducer(cart, action) {
   const {type, quantity, product} = action;
-<<<<<<< HEAD
   
-=======
-
->>>>>>> 68a3c59ceee37e0bd54fdc99d2706a4b6bb6f160
   const updateQuantityAndCheckLimit = (prevAmount, newAmount) => {
     const totalAmount = prevAmount + newAmount;
     switch (true) {
@@ -36,10 +32,7 @@ function cartReducer(cart, action) {
       return updateCartProductQuantity();
     default:
       console.error('Error: Unknown type: ' + type);
-<<<<<<< HEAD
       return [...cart];
-=======
->>>>>>> 68a3c59ceee37e0bd54fdc99d2706a4b6bb6f160
   }
 }
 

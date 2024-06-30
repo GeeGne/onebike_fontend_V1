@@ -123,12 +123,7 @@ function CartSlider ({darkMode, lan, onCartChange, cartToggle, onCartToggleChang
           <div className="cartSlider__slider__top__cart">{en ? 'Cart' : 'السله'}</div>
           <div className="cartSlider__slider__top__quantity">{cart.length}</div>
           <img className="cartSlider__slider__top__exit" data-type="exit-slider" onClick={handleClick} src={darkMode ? closeIconDarkMode : closeIcon} role="button" tabIndex="0"/>
-        <section className="cartSlider__slider__top">
-          <div className="cartSlider__slider__top__cart">{en ? 'Cart' : 'السله'}</div>
-          <div className="cartSlider__slider__top__quantity">{cart.length}</div>
-          <img className="cartSlider__slider__top__exit" data-type="exit-slider" onClick={handleClick} src={darkMode ? closeIconDarkMode : closeIcon} role="button" tabIndex="0"/>
         </section>
-        <ul className="cartSlider__slider__products">
         <ul className="cartSlider__slider__products">
           {cart.map((list, i) =>
           <li className="cartSlider__slider__products__product" key={list.id} data-product-id={list.product.id} ref={el => addRef('cartProductsELS', el, i)}>
@@ -144,11 +139,6 @@ function CartSlider ({darkMode, lan, onCartChange, cartToggle, onCartToggleChang
           </li>
           )}
         </ul>
-        <section className="cartSlider__slider__bottom">
-          <div className="cartSlider__slider__bottom__total">{en ? 'Total' : 'اجمالي'} <span>{en ? 'S.P' : 'ل.س'} {formatNumberWithCommas(totalPrice)}</span></div>
-          <div className="cartSlider__slider__bottom__shipment">{en ? 'Shipment fee calculated at Checkout' : 'تكاليف الشحن ستضاف عند الدفع'}</div>
-          <button className="cartSlider__slider__bottom__view-cart">{en ? 'View cart' : 'عرض العربة'}</button>
-          <button className="cartSlider__slider__bottom__checkout" data-type="nav-to-checkouts" onClick={handleClick}>{en ? 'Checkout' : 'الدفع'}</button>
         <section className="cartSlider__slider__bottom">
           <div className="cartSlider__slider__bottom__total">{en ? 'Total' : 'اجمالي'} <span>{en ? 'S.P' : 'ل.س'} {formatNumberWithCommas(totalPrice)}</span></div>
           <div className="cartSlider__slider__bottom__shipment">{en ? 'Shipment fee calculated at Checkout' : 'تكاليف الشحن ستضاف عند الدفع'}</div>
