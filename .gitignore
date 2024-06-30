@@ -25,4 +25,3 @@ dist-ssr
 
 # Hide
 src/firebase/config.js
-config/

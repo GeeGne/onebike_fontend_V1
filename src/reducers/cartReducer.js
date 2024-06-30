@@ -1,7 +1,7 @@
 import calculatePrice from '/src/utils/calculatePrice.js';
 
 function cartReducer(cart, action) {
-  const {type, quantity, product} = action;
+  const {type, quantity, product, getCart} = action;
   
   const updateQuantityAndCheckLimit = (prevAmount, newAmount) => {
     const totalAmount = prevAmount + newAmount;
@@ -30,6 +30,8 @@ function cartReducer(cart, action) {
       return updateCartProductQuantity();
     case 'DECREASE_AMOUNT_BY_ONE':
       return updateCartProductQuantity();
+    case 'ADD_CART_FROM_LOCAL_STORAGE':
+      return [...getCart];
     default:
       console.error('Error: Unknown type: ' + type);
       return [...cart];
