@@ -33,6 +33,7 @@ function HamMenu ({menu, onMenuChange, darkMode, lan}) {
   const textLanguage = useRef({})
   const randomNum = useRef(0);
 
+  const en = lan === 'en';
   // const mainListDatalength = mainListData.length;
   let secondListLength = 0;
   mainListData.forEach(list => list.secondaryList.forEach(() => secondListLength++))
@@ -50,7 +51,7 @@ function HamMenu ({menu, onMenuChange, darkMode, lan}) {
       }
 
       containerStyle.backgroundColor = "hsl(0, 0%, 0%, 0)";
-      sideBoxStyle.transform = `translateX(${lan === 'en' ? '-16em' : '16em'})`;
+      sideBoxStyle.transform = `translateX(${en ? '' : '-'}16em)`;
       setTimeout( () => containerStyle.visibility = "hidden", 500);
     }
     handleMenuStyles(menu);
@@ -153,7 +154,7 @@ function HamMenu ({menu, onMenuChange, darkMode, lan}) {
               <li className="hamMenu__slider__menuL__lists__secondaryL__lists" key={secondData.id}>
                 <div 
                   className="hamMenu__slider__menuL__lists__secondaryL__lists__section"
-                  onClick={(e) => handleClick('second list', e)}
+                  onClick={e => handleClick('second list', e)}
                   data-list-id={randomNum.current = Math.random()}
                 >
                   <h3 className="hamMenu__slider__menuL__lists__secondaryL__lists__section__h3">{secondData[lan]}</h3>

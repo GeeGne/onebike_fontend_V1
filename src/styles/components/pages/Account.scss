@@ -1,5 +1,8 @@
 @use '/src/styles/utils/_BreakPoints' as w;
 
 .account {
-
+  color: var(--font-h-color);
+}                                                            
+button {
+  color: var(--font-h-color);        
 }

@@ -12,7 +12,8 @@ function LanguageButton ({onLanguageChange}) {
   const [lan, setLanguage] = useState(() => {
     try {
       return localStorage.get('lan') || 'en';
-    } catch {
+    } catch (err) {
+      console.error('Error parsing language from localStorage:', err);
       return 'en'
     }
   });

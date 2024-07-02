@@ -26,7 +26,7 @@ function Navbar ({darkMode, lan, onCartChange}) {
   const [menu, setMenu] = useState(false);
   const [search, setSearch] = useState(false);
   const [cartToggle, setCartToggle] = useState(false);
-  const [cart,setCart] = useState([]);
+  const [cart ,setCart] = useState([]);
   
   const navDropMenuEL = useRef(null);
   const prevScrollY = useRef(0);

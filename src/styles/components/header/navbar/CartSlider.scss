@@ -1,20 +1,19 @@
 @use '/src/styles/utils/_BreakPoints' as w;
 
 .cartSlider {
+  visibility: hidden;
   position: fixed;
   display: flex;
   justify-content: end;
   top: 0;
   left: 0;
   width: 100%;
-  background-color: var(--cartSlider-background-color);
   height: 100%;
+  background-color: var(--cartSlider-background-color);
   z-index: 100;
   transition: background-color 0.5s ease-out;
 
-  body.arabic & {
-    direction: rtl;
-  }
+  body.arabic & {direction: rtl}
 
   &__slider {
     position: relative;
@@ -23,9 +22,8 @@
     width: 30em;
     height: 100%;
     background-color: var(--background-color);
-    transform: translateX(30em);
+    // transform: translateX(30em);
     transition: transform 0.5s ease-out;
-
 
     &.empty &__empty{display: flex}
     &__empty {

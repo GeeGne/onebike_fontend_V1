@@ -1,0 +1,23 @@
+[{
+  "userID": 1,
+  "userOrders": [{
+    "orderID": 1,
+    "timeStamp": "2023-01-25T05:00:00Z",
+    "products": 
+    [{
+      "productID": 1,
+      "type": "pumps",
+      "title": "Portable Air Pump.",
+      "quanitity": 4,
+      "price": 45
+    },{
+      "productID": 2,
+      "type": "lights",
+      "title": "Portable light.",
+      "quanitity": 2,
+      "price": 35
+    }]
+  }]
+},{
+  // ... more users and orders goes along
+}]

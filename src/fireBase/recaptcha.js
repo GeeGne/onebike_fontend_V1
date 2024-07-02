@@ -8,12 +8,11 @@ const analytics = getAnalytics(app);
 const auth = getAuth(app);
 
 function initializeRecaptcha () {
-  // return new RecaptchaVerifier(auth, 'sign-in', {
-  //   'size': 'invisible',
-  //   'callback': (response) => {
-  //   }
-  // });
-  return auth
+  return new RecaptchaVerifier(auth, 'sign-in', {
+    'size': 'invisible',
+    'callback': (response) => {
+    }
+  });
 }
 
 export default initializeRecaptcha;

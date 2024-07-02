@@ -30,8 +30,6 @@ function cartReducer(cart, action) {
       return updateCartProductQuantity();
     case 'DECREASE_AMOUNT_BY_ONE':
       return updateCartProductQuantity();
-    case 'ADD_CART_FROM_LOCAL_STORAGE':
-      return [...getCart];
     default:
       console.error('Error: Unknown type: ' + type);
       return [...cart];
