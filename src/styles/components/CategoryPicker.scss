@@ -5,19 +5,13 @@
 
   &__ul {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    // flex-direction: row;
     gap: 0.5em;
     padding-inline: 0.5em;
     width: 100%;
-    overflow-x: hidden;
-    @include w.breakpoint-up (medium) {
-      grid-template-columns: repeat(3, 1fr);
-    }
-    
-    @include w.breakpoint-up (large) {
-      grid-template-columns: repeat(6, 1fr);
-    }
+    overflow: hidden;
+    grid-template-columns: repeat(2, 1fr);
+    @include w.breakpoint-up (medium) {grid-template-columns: repeat(3, 1fr)}
+    @include w.breakpoint-up (large) {grid-template-columns: repeat(6, 1fr)}
 
 
     &:hover &__li::after {backdrop-filter: blur(5px)}
@@ -25,16 +19,15 @@
       position: relative;
       display: flex;
       flex-direction: column;
-      // width: 12em;
-      // flex: 1;
       flex-shrink: 0;
       aspect-ratio: 1 / 1;
       cursor: pointer;
-      // @include w.breakpoints-up (large) {
-        // flex: 1;
-      // }
 
-      &:nth-child(2n + 1)::before {background-color: var(--light-invert-background-color)}
+      @include w.breakpoint-down (medium) {
+        &:nth-child(2)::before {background-color: var(--light-invert-background-color)}
+        &:nth-child(3n)::before {background-color: var(--light-invert-background-color)}
+      }
+      @include w.breakpoint-up (medium) {&:nth-child(2n + 1)::before {background-color: var(--light-invert-background-color)}}
       &::before {
         content: "";
         position: absolute;
@@ -59,15 +52,17 @@
         border-radius: 1em;
         backdrop-filter: blur(0px);
         transition: filter 0.25s ease-out;
+        z-index: 30;
       }
 
       &:hover &__img {
-        transform: scale(1.1);
+        transform: scale(1.05);
         filter: drop-shadow(0px 0px 0px var(--light-background-color)) contrast(120%);
+        z-index: 10;
       }
       &__img {
-        width: 90%;
-        height: 90%;
+        width: 95%;
+        height: 95%;
         object-fit: contain;
         margin: auto;
         filter: drop-shadow(0px 0px 1px var(--light-background-color));
@@ -78,14 +73,15 @@
         display: flex;
         justify-content: center;
         position: absolute;
-        bottom: 1em;
+        bottom: 1.5em;
         left: 0;
         width: 100%;
         color: white;
         font-weight: bold;
-        filter: drop-shadow(0 0 1px var(--font-h-color));
-        color: var(--font-h-invert-color);
+        filter: drop-shadow(0 0 1px black);
+        color: white;
         font-size: var(--font-size-medium);
+        z-index: 20;
       }
     }     
   }
