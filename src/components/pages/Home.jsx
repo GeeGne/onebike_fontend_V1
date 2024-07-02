@@ -1,5 +1,6 @@
 // COMPONENTS
 import ImageSlider from '../ImageSlider';
+import CategoryPicker from '../CategoryPicker';
 import NewsLetter from '../NewsLetter';
 import JoinWhatsAppGroup from '../JoinWhatsAppGroup';
 import NeedHelp from '../NeedHelp';
@@ -11,10 +12,11 @@ function Home ({darkMode, lan}) {
 
   return (
     <div className="home-container">
-      <ImageSlider/>
-      <NewsLetter/>
-      <JoinWhatsAppGroup/>
-      <NeedHelp darkMode={darkMode} lan={lan}/>
+      <ImageSlider />
+      <CategoryPicker darkMode={darkMode} lan={lan} />
+      <NewsLetter />
+      <JoinWhatsAppGroup />
+      <NeedHelp darkMode={darkMode} lan={lan} />
     </div>
   )
 }

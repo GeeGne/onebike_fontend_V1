@@ -51,7 +51,7 @@ function HamMenu ({menu, onMenuChange, darkMode, lan}) {
       }
 
       containerStyle.backgroundColor = "hsl(0, 0%, 0%, 0)";
-      sideBoxStyle.transform = `translateX(${en ? '' : '-'}16em)`;
+      sideBoxStyle.transform = `translateX(${en ? '-' : ''}16em)`;
       setTimeout( () => containerStyle.visibility = "hidden", 500);
     }
     handleMenuStyles(menu);
@@ -139,7 +139,7 @@ function HamMenu ({menu, onMenuChange, darkMode, lan}) {
     <nav className="hamMenu" onClick={() => onMenuChange(false)} ref={hamMenuContainerElement}>
       <div className="hamMenu__slider" onClick={(e) => e.stopPropagation()} ref={hamMenuSideBoxElement}>
         <section className="hamMenu__slider__menu">
-          <h1 className="hamMenu__slider__menu__h1">{lan === 'en' ? 'MENU' : 'القائمه'}</h1>
+          <h1 className="hamMenu__slider__menu__h1">{en ? 'MENU' : 'القائمه'}</h1>
           <img className="hamMenu__slider__menu__exit-icon" onClick={() => onMenuChange(false)} src={darkMode ? closeIconDarkMode : closeIcon}/>
         </section>
         <ul className="hamMenu__slider__menuL">
