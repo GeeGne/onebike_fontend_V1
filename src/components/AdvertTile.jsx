@@ -1,8 +1,17 @@
 // HOOKS
 import React, {useState, useEffect, useRef} from 'react';
+import {useNavigate} from 'react-router-dom';
 
 // SCSS
 import '/src/styles/components/AdvertTile.scss';
+
+// DATA
+import products from '/src/data/products.json';
+
+// UTILS
+import calculateDiscountPercantage from '/src/utils/calculateDiscountPercantage';
+import formatNumberWithCommas from '/src/utils/formatNumberWithCommas';
+import calculatePrice from '/src/utils/calculatePrice';
 
 // ASSETS
 import img from '/assets/img/products/GIYO Small Bike tire Pump Schrader.jpg';
@@ -13,23 +22,60 @@ import heart from '/assets/img/icons/heart.svg';
 import doubleArrowSecondary from '/assets/img/icons/keyboard_double_arrow_right_secondary.svg';
 import heartDarkMode from '/assets/img/icons/heart_darkMode.svg';
 
-function AdvertTile ({darkMode, lan}) {
+function AdvertTile ({darkMode, lan, type}) {
+  const navigate = useNavigate();  
+  const en = lan === "en";
+  const nowStyle = {color: "var(--primary-color)"}
 
+  const handleCategoryType = product => {
+    const {categoryType, name} = type;
+    
+    switch (categoryType) {
+      case 'type':
+      case 'category':
+        return product.hide ? false : product[categoryType] === name.en;
+      case 'discount':
+        return product.hide ? false : product[categoryType] !== false;
+      default:
+        console.error('Error: unknown categoryType', categoryType);
+    }
+  }
+
+  const getProducts = products.filter(handleCategoryType);
+
+  const handleClick = () => {
+
+  }
 
   return (
     <section className="advertTile">
       <div className="advertTile__panel">
-        <span className="advertTile__panel__title --colorChange-view">Clothing</span>
-        <span className="advertTile__panel__see-more --colorChange-view">See More</span>
+        <span className="advertTile__panel__title --colorChange-view">{type.name[lan].toUpperCase()}</span>
+        <span className="advertTile__panel__see-more --colorChange-view">{en ? 'See More' : 'شاهد المزيد'}</span>
         <img className="advertTile__panel__doubleArrow" src={darkMode ? doubleArrowSecondary : doubleArrowPrimary} />
       </div>
       <ul className="advertTile__list">
+        <button className="advertTile__list__left-arr-btn"></button>
+        <button className="advertTile__list__right-arr-btn"></button>
+        {getProducts.map(product => 
         <li className="advertTile__list__product">
           <img className="advertTile__list__product__heart-img" src={darkMode ? heartDarkMode : heart} />
-          <img className="advertTile__list__product__img" src={img} />
-          <div className="advertTile__list__product__description">Portable bike Air pump</div>
+          <img className="advertTile__list__product__img" src={`/assets/img/products/${product.category}/${product.type}/${product.id + '-' + product.color.en}-front.webp`} />
+          {product.discount && <div className="advertTile__list__product__discount">{lan === 'ar' ? 'خصم ' : ''}{calculateDiscountPercantage(product.price, product.discount)}{en ? ' off' : ''}</div>}
+          <div className="advertTile__list__product__description">{product.title[lan]}</div>
+          <div className="advertTile__list__product__price">
+            {product.discount ? <>
+            <span className="now" style={nowStyle}>{en ? 'NOW' : 'الان'}</span> 
+            <span className="total">{formatNumberWithCommas(calculatePrice(product.price, product.discount))}</span>
+            <span className="currency-symbol">{en ? 'S.P ' : 'ل.س'}</span>
+            <s className='old'>{formatNumberWithCommas(product.price)}</s></> 
+            : <><span className="total">{formatNumberWithCommas(product.price)}</span> 
+            <span className="currency-symbol">{en ? 'S.P' : 'ل.س'}</span>
+            </>}
+          </div>
           <button className="advertTile__list__product__add-btn">Add to Cart</button>
-        </li>
+        </li>      
+        )}
       </ul>
     </section>
   )

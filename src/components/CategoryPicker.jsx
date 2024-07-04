@@ -26,14 +26,13 @@ function CategoryPicker ({darkMode, lan}) {
           observerRef.current.unobserve(entry.target);
         }
       });
-    }, { threshold: 1 }); // Adjust this value as needed
+    }, { threshold: 1 });
     
     elements.forEach(el => {
       el.style.animationPlayState = 'paused';
       observerRef.current.observe(el);
     });
 
-    // Cleanup function
     return () => {
       if (observerRef.current) {
         observerRef.current.disconnect();

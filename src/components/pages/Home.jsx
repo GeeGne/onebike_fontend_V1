@@ -15,8 +15,10 @@ function Home ({darkMode, lan}) {
     <div className="home-container">
       <ImageSlider />
       <CategoryPicker darkMode={darkMode} lan={lan} />
-      <AdvertTile darkMode={darkMode} lan={lan} />
+      <AdvertTile darkMode={darkMode} lan={lan} type={{categoryType: 'discount', name: {en: 'hot sales', ar: 'اخر التخفيضات'}}}/>
+      <AdvertTile darkMode={darkMode} lan={lan} type={{categoryType: 'category', name: {en: 'accessories', ar: 'اكسسوارات'}}}/>
       <NewsLetter />
+      <AdvertTile darkMode={darkMode} lan={lan} type={{categoryType: 'type', name: {en: 'lights', ar: 'اناره'}}}/>
       <JoinWhatsAppGroup />
       <NeedHelp darkMode={darkMode} lan={lan} />
     </div>

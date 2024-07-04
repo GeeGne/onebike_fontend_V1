@@ -154,8 +154,8 @@ function ImageSlider () {
         )}
       </ul>
       <div className="imageSlider-container__arrows">
-        <button className="imageSlider-container__arrows__left-arrow"></button>
-        <button className="imageSlider-container__arrows__right-arrow"></button>
+        <button className="imageSlider-container__arrows__left-arrow" />
+        <button className="imageSlider-container__arrows__right-arrow" />
       </div>
     </section>
   )

@@ -21,7 +21,7 @@
         grid-template-columns: repeat(4, 1fr);
       }
 
-      &__product-content {
+      &__product {
         position: relative;
         display: flex;
         flex-direction: column;
@@ -59,14 +59,14 @@
 
         &__favourite {
           position: absolute;
-          top: 0.7em;
-          right: 0.7em;
-          width: 1.4em;
-          height: 1.4em;
+          top: 0.8em;
+          right: 0.8em;
+          width: 1.6em;
+          height: 1.6em;
           background-color: var(--background-color);
           background-image: var(--heart-icon);
           background-repeat: no-repeat;
-          background-size: 70%;
+          background-size: 1em;
           background-position: center;
           border-radius: 100%;
         }
@@ -98,22 +98,36 @@
         }
 
         &__price {
+          display: flex;
+          gap: 0.3em;
+          align-items: end;
           font-weight: 600;
           margin-top: auto;
-          color: var(--font-h-color);
 
-          & .currency-symbol {
+          & .now {
+            font-size: var(--font-size-small);
+          }
+
+          & .total {
+            font-size: var(--font-size-medium);
             color: var(--font-h-color);
           }
 
-          &.discount {
-            color: var(--advertList-discount-color);
+          & .currency-symbol {
+            font-size: var(--font-size-medium);
+            color: var(--font-h-color);
           }
 
-          & s {
-            margin-right: 0.5em;
+          & .old {
+            margin-left: auto;
             color: var(--font-p-color);
+            font-size: var(--font-size-extraSmall);
             font-weight: 300;
+
+            body.arabic & {
+              margin-left: 0;
+              margin-right: auto;
+            }
           }
         }
 
