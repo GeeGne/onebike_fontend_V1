@@ -1,9 +1,10 @@
 // COMPONENTS
-import ImageSlider from '../ImageSlider';
-import CategoryPicker from '../CategoryPicker';
-import NewsLetter from '../NewsLetter';
-import JoinWhatsAppGroup from '../JoinWhatsAppGroup';
-import NeedHelp from '../NeedHelp';
+import ImageSlider from '/src/components/ImageSlider';
+import CategoryPicker from '/src/components/CategoryPicker';
+import AdvertTile from '/src/components/AdvertTile';
+import NewsLetter from '/src/components/NewsLetter';
+import JoinWhatsAppGroup from '/src/components/JoinWhatsAppGroup';
+import NeedHelp from '/src/components/NeedHelp';
 
 // SCSS
 import '/src/styles/components/pages/Home.scss';
@@ -14,6 +15,7 @@ function Home ({darkMode, lan}) {
     <div className="home-container">
       <ImageSlider />
       <CategoryPicker darkMode={darkMode} lan={lan} />
+      <AdvertTile darkMode={darkMode} lan={lan} />
       <NewsLetter />
       <JoinWhatsAppGroup />
       <NeedHelp darkMode={darkMode} lan={lan} />

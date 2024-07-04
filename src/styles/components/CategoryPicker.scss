@@ -10,11 +10,13 @@
     width: 100%;
     overflow: hidden;
     grid-template-columns: repeat(2, 1fr);
+    // transform: scale(0.85) translateY(-1em);
+    // opacity: 0;  
     @include w.breakpoint-up (medium) {grid-template-columns: repeat(3, 1fr)}
     @include w.breakpoint-up (large) {grid-template-columns: repeat(6, 1fr)}
 
 
-    &:hover &__li::after {backdrop-filter: blur(5px)}
+    &:hover &__li::after {backdrop-filter: blur(3px)}
     &__li {
       position: relative;
       display: flex;

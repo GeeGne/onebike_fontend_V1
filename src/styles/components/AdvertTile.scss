@@ -1,0 +1,100 @@
+@use '/src/styles/utils/_BreakPoints' as w;
+
+.advertTile {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+
+  &__panel {
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 1em;
+
+    &::before {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100vw;
+      height: 1px;
+      background-color: var(--font-p-color);
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0vw;
+      height: 3px;
+      background-color: var(--primary-color);
+      z-index: 5;
+      animation-name: widthChange-view;
+      animation-fill-mode: both;
+      animation-timing-function: linear;
+      animation-timeline: view(70% 5%);
+    }
+
+    &__title {
+      font-size: var(--font-size-medium);
+      color: var(--font-p-color);
+      font-weight: bold;
+      margin-right: auto;
+    }
+
+    &__see-more {
+      color: var(--font-p-color);
+      font-weight: bold;
+      cursor: pointer;
+    }
+    
+    &__see-more:hover + &__doubleArrow,
+    &__doubleArrow:hover {
+      opacity: 1;
+      transform: translateX(0.2em);
+    }
+
+    &__doubleArrow {
+      opacity: 0;
+      width: 1.2em;
+      transform: translateX(-0.2em);
+      transition: opacity 0.25s ease-out, transform 0.25s ease-out;
+    }
+  }
+  
+  &__list {  
+    overflow:hidden;
+    padding-inline: 1em;
+
+    &__product {
+      position: relative;
+      width: 11em;
+
+      &__heart-img {
+        position: absolute;
+        top: 0.5em;
+        right: 0.5em;
+        width: 1.6em;
+        background-color: var(--background-color);
+        border-radius: 100%;
+        padding: 0.3em;
+      }
+      &__img {
+        width: 100%;
+        aspect-ratio: 1 / 1;
+      }
+
+
+      &__description {
+
+      }
+
+      &__add-btn {
+
+      }
+    }
+  }
+}
