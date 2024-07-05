@@ -12,6 +12,7 @@
     &__imges {
       width: 100%;
       flex-shrink: 0;
+
       & img {
         width: 100%;
         // aspect-ratio: 2.39 / 1;
@@ -101,18 +102,12 @@
 
       &__left-arrow {
         background-image: var(--arrow-left-icon); 
-
-        &::before {
-          background-image: var(--arrow-left-hover-icon); 
-        }
+        &::before {background-image: var(--arrow-left-hover-icon)}
       }
 
       &__right-arrow {
         background-image: var(--arrow-right-icon);
-
-        &::before {
-          background-image: var(--arrow-right-hover-icon); 
-        }
+        &::before {background-image: var(--arrow-right-hover-icon)}
       }
     }
   }

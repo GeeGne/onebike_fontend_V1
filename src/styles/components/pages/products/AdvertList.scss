@@ -99,6 +99,7 @@
 
         &__price {
           display: flex;
+          flex-flow: wrap-reverse;
           gap: 0.3em;
           align-items: end;
           font-weight: 600;

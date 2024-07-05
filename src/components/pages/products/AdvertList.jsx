@@ -81,12 +81,7 @@ function AdvertList ({darkMode, lan, matchedProducts, onCartProductsChange}) {
       case 'ADD_TO_CART':
         const getAmountEL = fetchElementById(e.target, 'productId', productAmountELs.current);
         const quantity = Number(getAmountEL.textContent);
-
-        setCartDispatchData({
-          type,
-          quantity,
-          product
-        })
+        setCartDispatchData({type, quantity, product});
         break;
       default:
         console.log('unknown type:' + type);
@@ -104,7 +99,7 @@ function AdvertList ({darkMode, lan, matchedProducts, onCartProductsChange}) {
             {product.discount ? <h3 className="advertList__advert-sctn__grid__product__discount">{lan === 'ar' ? 'خصم ' : ''}{calculateDiscountPercantage(product.price, product.discount)}{en ? ' off' : ''}</h3> : <></>}
             <h3 className="advertList__advert-sctn__grid__product__description">{product.title[lan]}</h3>
             <img className="advertList__advert-sctn__grid__product__brand-logo" src={product.brand ? `/assets/img/logo/${product.brand}.webp` : ''}/>
-            <h2 className="advertList__advert-sctn__grid__product__price">
+            <div className="advertList__advert-sctn__grid__product__price">
               {product.discount ? 
               <><span className="now" style={nowStyle}>{en ? 'NOW' : 'الان'}</span> 
               <span className="total">{formatNumberWithCommas(calculatePrice(product.price, product.discount))}</span>
@@ -112,7 +107,7 @@ function AdvertList ({darkMode, lan, matchedProducts, onCartProductsChange}) {
               <s className="old">{formatNumberWithCommas(product.price)}</s></> 
               : <><span className="total">{formatNumberWithCommas(product.price)}</span>
               <span className="currency-symbol">{en ? 'S.P' : 'ل.س'}</span></>}
-            </h2>
+            </div>
             <div className="advertList__advert-sctn__grid__product__btns">
               <button className="advertList__advert-sctn__grid__product__btns__add-to-cart" data-product-id={product.id} onClick={e => handleClick('ADD_TO_CART', e, product)}>{en ? 'Add to cart' : 'اضف الى السله'}</button>  
               <button className="advertList__advert-sctn__grid__product__btns__increment" data-product-id={product.id} onClick={e => updateProductAmount(e, 1)}></button>  

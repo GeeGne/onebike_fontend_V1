@@ -69,39 +69,27 @@
       opacity: 0;
       width: 1.2em;
       transform: translateX(-0.2em);
+      cursor: pointer;
       transition: opacity 0.25s ease-out, transform 0.25s ease-out;
 
-      body.arabic & {
-        transform: translateX(0.2em) rotate(180deg);
-      }
+      body.arabic & {transform: translateX(0.2em) rotate(180deg)}
     }   
   }
   
   &__list {  
     position: relative;
-    display: flex;
-    flex-direction: row;
-    gap: 1em;
-    overflow: hidden;
-    padding-inline: 1em;
 
     &__left-arr-btn {
       left: 0;
       background-image: var(--arrow-left-icon); 
-
-      &::before {
-        background-image: var(--arrow-left-hover-icon); 
-      }
+      &::before {background-image: var(--arrow-left-hover-icon)}
     }
+
     &__right-arr-btn {
       right: 0;
       background-image: var(--arrow-right-icon); 
-
-      &::before {
-        background-image: var(--arrow-right-hover-icon); 
-      }
+      &::before {background-image: var(--arrow-right-hover-icon)}
     }
-
     
     &__left-arr-btn,
     &__right-arr-btn {
@@ -142,112 +130,120 @@
         opacity: 1;
       }
     }
-   
-
-    &__product {
-      position: relative;
+    
+    &__products {
       display: flex;
-      flex-direction: column;
+      flex-direction: row;
       gap: 1em;
-      flex-shrink: 0;
-      border: solid 1px var(--advertList-productContent-border-color);
-      padding: 0.5em;     
-      width: calc((100vw - 3em) / 2.1);
-
-      @include w.breakpoint-up (medium) {width: calc((100vw - 4em) / 3.5)}
-      @include w.breakpoint-up (large) {width: calc((100vw - 4em) / 4.5)}
-      @include w.breakpoint-up (xlarge) {
-        min-width: calc((100vw - 4em) / 5.5);
-        max-width: calc((100vw - 4em) / 6.5);
-      }
-
-      &__heart-img {
-        position: absolute;
-        top: 0.8em;
-        right: 0.8em;
-        width: 1.6em;
-        background-color: var(--background-color);
-        border-radius: 100%;
-        padding: 0.3em;
-        cursor: pointer;
-      }
-
-      &__img {
-        width: 100%;
-        aspect-ratio: 1 / 1;
-      }
-
-
-      &__discount {
-        background-color: var(--primary-color);
-        color: var(--font-h-invert-color);
-        border-radius: 40px 10%;
-        font-weight: bold;
-        padding: 0.3em 2em;
-        margin-inline: auto;
-      }
-
-      &__description {
-        color: var(--font-h-color);
-      }
-
-      &__price {
+      overflow: hidden;
+      padding-inline: 1em;
+  
+      &__product {
+        position: relative;
         display: flex;
-        align-items: end;
-        color: var(--font-h-color);
-        font-weight: 550;
-        gap: 0.3em;
-        margin-top: auto;
-
-        .now {
-          font-size: var(--font-size-small);
-          font-weight: 600;
+        flex-direction: column;
+        gap: 1em;
+        flex-shrink: 0;
+        border: solid 1px var(--advertList-productContent-border-color);
+        padding: 0.5em;     
+        width: calc((100vw - 3em) / 2.1);
+  
+        @include w.breakpoint-up (medium) {width: calc((100vw - 4em) / 3.5)}
+        @include w.breakpoint-up (large) {width: calc((100vw - 4em) / 4.5)}
+        @include w.breakpoint-up (xlarge) {
+          min-width: calc((100vw - 4em) / 5.5);
+          max-width: calc((100vw - 4em) / 6.5);
         }
-
-        .total {
-          font-size: var(--font-size-medium);
+  
+        &__heart-img {
+          position: absolute;
+          top: 0.8em;
+          right: 0.8em;
+          width: 1.6em;
+          background-color: var(--background-color);
+          border-radius: 100%;
+          padding: 0.3em;
+          cursor: pointer;
         }
-        
-        .old {
-          font-size: var(--font-size-extraSmall);
-          font-weight: 300;
-          color: var(--font-p-color);
+  
+        &__img {
+          width: 100%;
+          aspect-ratio: 1 / 1;
         }
-
-        .currency-symbol {
-          font-size: var(--font-size-medium);
-          margin-right: auto;
-
-          body.arabic & {
-            margin-right: 0;
+  
+  
+        &__discount {
+          background-color: var(--primary-color);
+          color: var(--font-h-invert-color);
+          border-radius: 40px 10%;
+          font-weight: bold;
+          padding: 0.3em 2em;
+          margin-inline: auto;
+        }
+  
+        &__description {
+          color: var(--font-h-color);
+        }
+  
+        &__price {
+          display: flex;
+          flex-flow: wrap-reverse;
+          align-items: end;
+          color: var(--font-h-color);
+          font-weight: 550;
+          gap: 0.3em;
+          margin-top: auto;
+  
+          .now {
+            font-size: var(--font-size-small);
+            font-weight: 600;
+          }
+  
+          .total {
+            font-size: var(--font-size-medium);
+          }
+          
+          .old {
+            font-size: var(--font-size-extraSmall);
+            font-weight: 300;
+            color: var(--font-p-color);
             margin-left: auto;
+
+            body.arabic & {
+              margin-left: 0;
+              margin-right: auto;
+            }
+          }
+  
+          .currency-symbol {
+            font-size: var(--font-size-medium);
           }
         }
-      }
-
-      &__add-btn {
-        position: relative;
-        padding-block: 0.5em;
-        border: solid 2px var(--advertList-cartUtil-border-color);
-        border-radius: 5px;
-        font-size: var(--font-size-extraSmall);
-        font-weight: bold;
-
-        &::before,
-        &::after {
-          content: "";
-          position: absolute;
-          bottom: 0;
-          left: 0;
-          width: 100%;
-          height: 0%;
-          transition: height 0.5s ease, background-color 0.15s ease;
+  
+        &__add-btn {
+          position: relative;
+          padding-block: 0.5em;
+          border: solid 2px var(--advertList-cartUtil-border-color);
+          border-radius: 5px;
+          font-size: var(--font-size-extraSmall);
+          font-weight: bold;
+  
+          &::before,
+          &::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 0%;
+            transition: height 0.5s ease, background-color 0.15s ease;
+          }
+          &::before{background-color: var(--advertList-addToCart-background-color); z-index: -1}
+          &::after {backdrop-filter: invert(100%)}
+          &:hover::before,
+          &:hover::after {height: 100%}
+          &:active::before {background-color: var(--advertList-addToCart-active-background-color)}
         }
-        &::before{background-color: var(--advertList-addToCart-background-color); z-index: -1}
-        &::after {backdrop-filter: invert(100%)}
-        &:hover::before,
-        &:hover::after {height: 100%}
-        &:active::before {background-color: var(--advertList-addToCart-active-background-color)}
       }
     }
   }

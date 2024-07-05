@@ -17,7 +17,7 @@ function CategoryPicker ({darkMode, lan}) {
   const observerRef = useRef(null);
 
   useEffect(() => {
-    const elements = document.querySelectorAll('.--categoryAni-view');
+    const elements = document.querySelectorAll('.--categoryAni');
     
     observerRef.current = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -50,7 +50,7 @@ function CategoryPicker ({darkMode, lan}) {
     <section className="categoryPicker">
       <ul className="categoryPicker__ul">
         {categories.map(category => 
-        <li className="categoryPicker__ul__li --categoryAni-view" data-category={cleanseString(category.en)} onClick={handleClick} key={category.id}>
+        <li className="categoryPicker__ul__li --categoryAni" data-category={cleanseString(category.en)} onClick={handleClick} key={category.id}>
           <img className="categoryPicker__ul__li__img" src={'/assets/img/categories/' + category.en + '.webp'}/>
           <span className="categoryPicker__ul__li__name">{category[lan]}</span>
         </li>      

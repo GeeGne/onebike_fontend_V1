@@ -123,7 +123,7 @@
   }
 }
 
-@keyframes categoryAni-view {
+@keyframes categoryAni {
   0% {
     transform: scale(0.75) translateY(0);
     opacity: 0;  
@@ -142,6 +142,35 @@
   100% {
     transform: scale(1) translateY(0);
     opacity: 1;  
+  }
+}
+
+@keyframes slide-to-left {
+  from {
+    // left: 1em;
+    // transform: translateX(2em);
+    // opacity: 0;
+    // transform: scale(0.9);
+    opacity: 0.5;
+  }
+
+  to {
+    // left: 0;
+    // transform: translateX(0);
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes slide-to-right {
+  from {
+    // right: 1em;
+    opacity: 0.5;
+  }
+
+  to {
+    // right: 0;
+    opacity: 1;
   }
 }
 
@@ -198,10 +227,26 @@
   animation-duration: 1ms;
 }
 
-.--categoryAni-view {
-  animation-name: categoryAni-view;
+.--categoryAni {
+  animation-name: categoryAni;
   animation-duration: 0.5s;
   animation-timing-function: linear;
+  animation-fill-mode: both;
+  animation-play-state: paused;
+}
+
+.--slide-to-left {
+  animation-name: slide-to-left;
+  animation-duration: 0.5s;
+  animation-timing-function: ease-out;
+  animation-fill-mode: both;
+  animation-play-state: paused;
+}
+
+.--slide-to-right {
+  animation-name: slide-to-right;
+  animation-duration: 0.5s;
+  animation-timing-function: ease-out;
   animation-fill-mode: both;
   animation-play-state: paused;
 }
