@@ -1,17 +1,22 @@
 @use 'src/styles/utils/_breakPoints' as w;
 
-.notFound-container {
+.notFound {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+  min-height: 78vh;
   // background-color: red;
   line-height: 1;
   @include w.breakpoint-up(medium) {
     font-size: 2rem;
+    min-height: 88vh;
   }
   @include w.breakpoint-up(large) {
     font-size: 2.5rem;
   }
+
+  body.arabic & {direction: rtl;}
 
   &__404 {
     font-size: 8em;
