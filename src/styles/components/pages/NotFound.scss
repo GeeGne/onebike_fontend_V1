@@ -8,6 +8,7 @@
   min-height: 78vh;
   // background-color: red;
   line-height: 1;
+  padding-inline: 1em;
   @include w.breakpoint-up(medium) {
     font-size: 2rem;
     min-height: 88vh;

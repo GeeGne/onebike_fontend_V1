@@ -21,6 +21,8 @@ function Home ({darkMode, lan}) {
       <AdvertTile darkMode={darkMode} lan={lan} type={{categoryType: 'type', name: {en: 'lights', ar: 'اناره'}}}/>
       <JoinWhatsAppGroup />
       <NeedHelp darkMode={darkMode} lan={lan} />
+      <AdvertTile darkMode={darkMode} lan={lan} type={{categoryType: 'category', name: {en: 'components', ar: 'قطع الدراجه'}}}/>
+      <AdvertTile darkMode={darkMode} lan={lan} type={{categoryType: 'category', name: {en: 'tires-&-wheels', ar: 'كوشوك & اطار'}}}/>
     </div>
   )
 }

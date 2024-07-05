@@ -147,13 +147,9 @@
         border: solid 1px var(--advertList-productContent-border-color);
         padding: 0.5em;     
         width: calc((100vw - 3em) / 2.1);
-  
         @include w.breakpoint-up (medium) {width: calc((100vw - 4em) / 3.5)}
-        @include w.breakpoint-up (large) {width: calc((100vw - 4em) / 4.5)}
-        @include w.breakpoint-up (xlarge) {
-          min-width: calc((100vw - 4em) / 5.5);
-          max-width: calc((100vw - 4em) / 6.5);
-        }
+        @include w.breakpoint-up (large) {width: calc((100vw - 5em) / 4.5)}
+        @include w.breakpoint-up (xlarge) {width: calc((1400px - 6em) / 5.5)}
   
         &__heart-img {
           position: absolute;

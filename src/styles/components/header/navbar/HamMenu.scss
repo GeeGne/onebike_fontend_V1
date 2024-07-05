@@ -12,9 +12,7 @@
   z-index: 100;
   transition: background-color 0.5s ease-out;
 
-  @include w.breakpoint-up(large) {
-    display: none;
-  }
+  @include w.breakpoint-up(large) {display: none}
 
   &__slider {
     display: flex;
