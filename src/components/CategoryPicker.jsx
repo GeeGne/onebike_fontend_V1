@@ -43,7 +43,7 @@ function CategoryPicker ({darkMode, lan}) {
   const  handleClick = e => {
     const {category} = e.currentTarget.dataset;
     navigate(category);
-    scroll({top: 0, behavior: 'smooth'})
+    scroll({top: 0, behavior: 'smooth'});
   }
 
   return (

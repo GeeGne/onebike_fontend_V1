@@ -32,9 +32,9 @@ function AdvertTile ({darkMode, lan, type}) {
   const en = lan === "en";
   const nowStyle = {color: "var(--primary-color)"}
 
-
   useEffect(() => {
-    const elements = en ? document.querySelectorAll('.--slide-to-left') : document.querySelectorAll('.--slide-to-right');
+    // const elements = en ? document.querySelectorAll('.--slide-to-left') : document.querySelectorAll('.--slide-to-right');
+    const elements = document.querySelectorAll('.--slide-to-left');
     
     observerRef.current = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -55,7 +55,7 @@ function AdvertTile ({darkMode, lan, type}) {
         observerRef.current.disconnect();
       }
     };
-  }, [lan]);
+  }, [/* lan */]);
 
   const handleCategoryType = product => {
     const {categoryType, name} = type;
@@ -94,8 +94,8 @@ function AdvertTile ({darkMode, lan, type}) {
     }
     switch (action) {
       case 'navigate_to_url':
-        scroll({top: 0, behavior: "smooth"});
         navigate(getURL());
+        setTimeout(() => scroll({top: 0, behavior: 'smooth'}), 500);
         break;
       case 'scroll_left':
         listEL.current.scrollBy({left: -(productConWidth + gapLength), behavior: "smooth"});
@@ -118,7 +118,7 @@ function AdvertTile ({darkMode, lan, type}) {
         <button className="advertTile__list__right-arr-btn" data-action="scroll_right" onClick={handleClick}></button>
         <ul className="advertTile__list__products" ref={listEL}>
           {getProducts.map(product => 
-          <li className={`advertTile__list__products__product --slide-to-${en ? 'left' : 'right'}`} key={product.id} ref={productConEL}>
+          <li className="advertTile__list__products__product --slide-to-left" key={product.id} ref={productConEL}>
             <img className="advertTile__list__products__product__heart-img" src={darkMode ? heartDarkMode : heart} />
             <img className="advertTile__list__products__product__img" src={`/assets/img/products/${product.category}/${product.type}/${product.id + '-' + product.color.en}-front.webp`} />
             {product.discount && <div className="advertTile__list__products__product__discount">{lan === 'ar' ? 'خصم ' : ''}{calculateDiscountPercantage(product.price, product.discount)}{en ? ' off' : ''}</div>}
