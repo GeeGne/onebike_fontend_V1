@@ -41,9 +41,13 @@ function App () {
       <div className="app-layout">
 
         <header className="app-layout__header">
-          <CartProductsContext.Provider value={cartDispatchData}>
-            <Header onThemeChange={themeData} onLanguageChange={languageData} onCartChange={cartData}/>
-          </CartProductsContext.Provider>
+            <CartProductsContext.Provider value={cartDispatchData}>
+              <Header 
+                onThemeChange={themeData} 
+                onLanguageChange={languageData} 
+                onCartChange={cartData}
+              />
+            </CartProductsContext.Provider>
         </header>
 
         <main className="app-layout__main">
@@ -73,7 +77,7 @@ function App () {
         </footer>
 
         <section className="app-layout__navBottom">
-          <NavBottom />
+            <NavBottom darkMode={darkMode} lan={lan} />
         </section>
         
       </div>

@@ -1,14 +1,21 @@
 // HOOKS
-import React, {useState, useRef, useEffect, useReducer} from 'react';
+import React, {useState, useRef, useEffect, useReducer, useContext} from 'react';
 import {useNavigate} from 'react-router-dom';
 
 // COMPONENTS
 import HamMenu from './HamMenu';
 import DropMenu from './DropMenu';
 import CartSlider from './CartSlider';
+import WishlistSlider from './WishlistSlider';
 
 // REDUCERS
 import cartReducer from '/src/reducers/cartReducer.js';
+
+// UTILS
+import {WishlistToggleContext} from '/src/utils/myContext'; 
+
+// STORE
+import {useWishlistStore} from '/src/store/store';
 
 // SCSS
 import '/src/styles/components/header/navbar/Navbar.scss';
@@ -22,12 +29,14 @@ import searchIconDarkMode from '/assets/img/icons/search_darkMode.svg';
 function Navbar ({darkMode, lan, onCartChange}) {
   
   const navigate = useNavigate();
-
+  const wishlistToggleNavBottomData = useContext(WishlistToggleContext);
   const [menu, setMenu] = useState(false);
   const [search, setSearch] = useState(false);
   const [cartToggle, setCartToggle] = useState(false);
   const [cart ,setCart] = useState([]);
-  
+  const {setWishlistToggle} = useWishlistStore();
+  // const [wishlistToggle , setWishlistToggle] = useState(false);
+
   const navDropMenuEL = useRef(null);
   const prevScrollY = useRef(0);
   const prevScrollYTimer = useRef(null);
@@ -37,6 +46,7 @@ function Navbar ({darkMode, lan, onCartChange}) {
 
   const menuData = setMenu;
   const cartToggleData = setCartToggle;
+  // const wishlistToggleData = setWishlistToggle;
   const cartData = (data) => {
     setCart(data);
     onCartChange(data);
@@ -71,9 +81,8 @@ function Navbar ({darkMode, lan, onCartChange}) {
     return () => window.removeEventListener('resize', handleResize);
   }, [menu]);
 
-  useEffect(() => {
-    document.body.style.overflow = menu & !desktopWidth ? 'hidden' : 'hidden auto';
-  }, [menu])
+  useEffect(() => {document.body.style.overflow = menu & !desktopWidth ? 'hidden' : 'hidden auto'}, [menu])
+  // useEffect(() => {setWishlistToggle(typeof(wishlistToggleNavBottomData) === 'number' ? true : false)}, [wishlistToggleNavBottomData])
 
   useEffect(() => {
     const stylenavDropMenuELWhenScrolling = () => {
@@ -104,16 +113,25 @@ function Navbar ({darkMode, lan, onCartChange}) {
     return () => window.removeEventListener('scroll', stylenavDropMenuELWhenScrolling);
   }, [])
 
-  const path = el => el.dataset.path;
+  const handleClick = e => {
+    const {action, path} = e.currentTarget.dataset;
 
-  const handleClick = type => {
-    if (!desktopWidth && type === 'search') {
-      searchEL.current.classList.toggle('clicked');
-      searchButtonEL.current.classList.toggle('clicked');
-      return;
+    switch (action) {
+      case 'toggle_search':
+        if (!desktopWidth) {
+          searchEL.current.classList.toggle('clicked');
+          searchButtonEL.current.classList.toggle('clicked');
+        }
+        break;
+      case 'toggle_wishlist_to_true':
+        return setWishlistToggle(true);
+      case 'navigate_to_path':
+        navigate(path);
+        setTimeout(scroll({top: 0, behavior: 'smooth'}), 500);
+        break;
+      default:
+        console.error('Error: Unknown action: ' + action);
     }
-    navigate(path(type.target));
-    scroll({top: 0, behavior: 'smooth'});
   }
 
   const handleHover = type => {
@@ -133,20 +151,22 @@ function Navbar ({darkMode, lan, onCartChange}) {
     <div className="dropMenu" ref={navDropMenuEL}>
       <nav className="dropMenu__nav">
         <button className={`dropMenu__nav__hamburger${menu ? ' clicked' : ''}`} onClick={() => setMenu(oldMenu => !oldMenu)}/>
-        <img className="dropMenu__nav__logo" data-path="/" onClick={handleClick} src={logo}/>
+        <img className="dropMenu__nav__logo" data-action="navigate_to_path" data-path="/" onClick={handleClick} src={logo}/>
         <div className="dropMenu__nav__search-input" onMouseEnter={() => handleHover(true)}  onMouseLeave={() => handleHover(false)} ref={searchEL}>
           <input placeholder={lan === 'en' ? 'Type something' : 'هل تبحث عن شيء؟'} onBlur={() => handleHover(false)} ref={searchInputEL}/>
           <img src={darkMode ? searchIconDarkMode : searchIcon}/>
         </div>
-        <button className="dropMenu__nav__search" onClick={() => handleClick('search')} onMouseEnter={() => handleHover(true)} onMouseLeave={() => handleHover(false)} ref={searchButtonEL}/>
-        <button className="dropMenu__nav__user" data-path="/account/login" onClick={handleClick}/>
-        <button className="dropMenu__nav__favourite"/>
+        <button className="dropMenu__nav__search" data-action="toggle_search" onClick={handleClick} onMouseEnter={() => handleHover(true)} onMouseLeave={() => handleHover(false)} ref={searchButtonEL}/>
+        <button className="dropMenu__nav__user" data-action="navigate_to_path" data-path="/account/login" onClick={handleClick}/>
+        <button className="dropMenu__nav__favourite" data-action="toggle_wishlist_to_true" onClick={handleClick}/>
         <button className={`dropMenu__nav__shoppingCart${cartEmpty ? ' empty' : ''}`} onClick={() => setCartToggle(true)}/>
       </nav>
       <DropMenu menu={menu} darkMode={darkMode} lan={lan}/>
     </div>
       <HamMenu menu={menu} onMenuChange={menuData} darkMode={darkMode} lan={lan}/>
       <CartSlider darkMode={darkMode} lan={lan} onCartChange={cartData} cartToggle={cartToggle} onCartToggleChange={cartToggleData} />
+      {/* <WishlistSlider darkMode={darkMode} lan={lan} wishlistToggle={wishlistToggle} onWishlistToggleChange={wishlistToggleData} /> */}
+      <WishlistSlider darkMode={darkMode} lan={lan} />
       {/* <Outlet/> */}
     </>
   )

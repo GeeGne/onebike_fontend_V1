@@ -15,14 +15,14 @@ function Home ({darkMode, lan}) {
     <div className="home-container">
       <ImageSlider />
       <CategoryPicker darkMode={darkMode} lan={lan} />
-      <AdvertTile darkMode={darkMode} lan={lan} type={{categoryType: 'discount', name: {en: 'hot sales', ar: 'اخر التخفيضات'}}}/>
-      <AdvertTile darkMode={darkMode} lan={lan} type={{categoryType: 'category', name: {en: 'accessories', ar: 'اكسسوارات'}}}/>
+      <AdvertTile darkMode={darkMode} lan={lan} type={{categoryType: 'discount', name: {en: 'Hot sales', ar: 'اخر التخفيضات'}}}/>
+      <AdvertTile darkMode={darkMode} lan={lan} type={{categoryType: 'category', name: {en: 'Accessories', ar: 'اكسسوارات'}}}/>
       <NewsLetter />
-      <AdvertTile darkMode={darkMode} lan={lan} type={{categoryType: 'type', name: {en: 'lights', ar: 'اناره'}}}/>
+      <AdvertTile darkMode={darkMode} lan={lan} type={{categoryType: 'type', name: {en: 'Lights', ar: 'اناره'}}}/>
       <JoinWhatsAppGroup />
       <NeedHelp darkMode={darkMode} lan={lan} />
-      <AdvertTile darkMode={darkMode} lan={lan} type={{categoryType: 'category', name: {en: 'components', ar: 'قطع الدراجه'}}}/>
-      <AdvertTile darkMode={darkMode} lan={lan} type={{categoryType: 'category', name: {en: 'tires-&-wheels', ar: 'كوشوك & اطار'}}}/>
+      <AdvertTile darkMode={darkMode} lan={lan} type={{categoryType: 'category', name: {en: 'Components', ar: 'قطع الدراجه'}}}/>
+      <AdvertTile darkMode={darkMode} lan={lan} type={{categoryType: 'category', name: {en: 'Tires & Wheels', ar: 'كوشوك & اطار'}}}/>
     </div>
   )
 }

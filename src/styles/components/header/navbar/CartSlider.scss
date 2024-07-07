@@ -22,7 +22,6 @@
     width: 30em;
     height: 100%;
     background-color: var(--background-color);
-    // transform: translateX(30em);
     transition: transform 0.5s ease-out;
 
     &.empty &__empty{display: flex}

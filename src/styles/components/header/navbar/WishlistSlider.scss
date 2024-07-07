@@ -1,0 +1,67 @@
+@use '/src/styles/utils/_BreakPoints' as w;
+
+.wishlist {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--cartSlider-background-color);
+  z-index: 100;
+  transition: background-color 0.5s ease-out;
+  
+  &__slider {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: calc(75% + 5em);
+    background-color: var(--background-color);
+    border: solid var(--endElement-border-background-color);
+    border-width: 1px 0 0 0;
+    border-radius: 2em 2em 0 0;
+    overflow: hidden;
+    transform: translateY(100%);
+    transition: transform 0.25s ease-out;
+
+    &__exit-btn {
+      position: relative;
+      width: 100%;
+      height: 2em;
+      border: solid var(--endElement-border-background-color);
+      border-width: 0 0 2px 0;
+      overflow: hidden;
+      
+      &::before,
+      &::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        background-size: fill;
+        background-repeat: no-repeat;
+        background-position: center;
+      }
+
+      &::before {
+        background-image: var(--drag-handle-icon);
+        transition: transform 0.25s ease-in;
+      }
+
+      &:hover::before {
+        transform: translateY(2em);
+      }
+
+      &:hover::after {
+        transform: translateY(0);
+      }
+      &::after {
+        background-image: var(--stat-minus-icon);
+        transform: translateY(-2em);
+        transition: transform 0.25s ease-in;
+      }
+    }
+  }
+}

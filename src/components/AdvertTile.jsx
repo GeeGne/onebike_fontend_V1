@@ -12,6 +12,7 @@ import products from '/src/data/products.json';
 import calculateDiscountPercantage from '/src/utils/calculateDiscountPercantage';
 import formatNumberWithCommas from '/src/utils/formatNumberWithCommas';
 import calculatePrice from '/src/utils/calculatePrice';
+import cleanseString from '/src/utils/cleanseString';
 
 // ASSETS
 import img from '/assets/img/products/GIYO Small Bike tire Pump Schrader.jpg';
@@ -63,7 +64,7 @@ function AdvertTile ({darkMode, lan, type}) {
     switch (categoryType) {
       case 'type':
       case 'category':
-        return product.hide ? false : product[categoryType] === name.en;
+        return product.hide ? false : product[categoryType] === cleanseString(name.en);
       case 'discount':
         return product.hide ? false : product[categoryType] !== false;
       default:
@@ -83,11 +84,11 @@ function AdvertTile ({darkMode, lan, type}) {
     const getURL = () => {
       switch (categoryType) {
         case 'type':
-          const getCategory = () => products.filter(product => product.type === name.en);
-          return '/' + getCategory()[0].category + '/' + name.en;
+          const getCategory = () => products.filter(product => product.type === cleanseString(name.en));
+          return '/' + getCategory()[0].category + '/' + cleanseString(name.en);
         case 'category':
         case 'discount':
-          return '/' + name.en;
+          return '/' + cleanseString(name.en);
         default:
           console.error('Error: unknown categoryType', categoryType);
       }

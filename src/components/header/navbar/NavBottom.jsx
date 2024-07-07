@@ -1,24 +1,39 @@
 // HOOKS
-import React, {useState, useRef, useEffect} from 'react';
+import React, {useState, useRef, useEffect, useContext} from 'react';
 import {useNavigate} from 'react-router-dom';
+
+// STORE
+import {useWishlistStore} from '/src/store/store';
+
+// UTILS
+import {WishlistToggleContext} from '/src/utils/myContext';
 
 // SCSS
 import '/src/styles/components/header/navbar/NavBottom.scss';
 
-function NavBottom () {
-
+function NavBottom ({darkMode, lan}) {
+  const {setWishlistToggle} = useWishlistStore();
   const navigate = useNavigate();
   const navBottomEL = useRef(null);
   const prevScrollY = useRef(0);
   const prevScrollYTimer = useRef(null);
 
-  const path = el => el.dataset.path;
-
   const handleClick = e => {
-    navigate(path(e.target))
-    scroll({top: 0, behavior: 'smooth'})
-  }
+    const {action, path} = e.currentTarget.dataset;
 
+    switch (action) {
+      case 'navigate_to_path':
+        navigate(path);
+        setTimeout(() => scroll({top: 0, behavior: 'smooth'}), 500);
+        break;
+      case 'toggle_wishlist_to_true':
+        setWishlistToggle(false);
+        break;
+      default:
+        console.error('Error: Unknown action: ', action);
+    }
+
+  }
 
   useEffect(() => {
     const stylenavBottomELWhenScrolling = () => {
@@ -53,8 +68,8 @@ function NavBottom () {
 
   return (
     <section className="navBottom" ref={navBottomEL}>
-      <a className="navBottom__favourite" />
-      <a className="navBottom__user" data-path="/account/login" onClick={handleClick}/>
+      <a className="navBottom__favourite" data-action="toggle_wishlist_to_true" onClick={handleClick} />
+      <a className="navBottom__user" data-action="navigate_to_path" data-path="/account/login" onClick={handleClick}/>
     </section>
   )
 }

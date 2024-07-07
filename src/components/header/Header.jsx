@@ -28,9 +28,8 @@ function Header ({onThemeChange, onLanguageChange, onCartChange}) {
   const languageData = data => {
     setLanguage(data);
   }
-
   const cartData = onCartChange;
-
+  
   return (
     <>
       <IntroSection onThemeChange={themeData} onLanguageChange={languageData}/>
