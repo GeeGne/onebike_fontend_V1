@@ -63,5 +63,52 @@
         transition: transform 0.25s ease-in;
       }
     }
+
+    &__list {
+      display: flex;
+      flex-direction: column;
+      padding: 2em;
+      gap: 2em;
+      overflow: hidden scroll;
+      height: 100%;
+
+      &__product {
+        display: grid;
+        grid-template-columns: 1fr 2fr 1fr;
+        grid-template-areas:
+        'img title price'
+        'img title delete';
+        gap: 1em;
+        width: 100%;
+
+        &__img {
+          grid-area: img;
+          width: 100%;
+        }
+
+        &__title {
+          grid-area: title;
+          margin-block: auto;
+          font-size: var(--font-size-small);
+          color: var(font-h-color);
+        }
+        
+        &__price {
+          grid-area: price;
+          font-size: var(--font-size-small);
+          color: var(font-p-color);
+          margin-top: auto;
+          margin-left: auto;
+
+        }
+
+        &__delete-img {
+          grid-area: delete;
+          margin-left: auto;
+          margin-top: auto;
+          width: 1.7em;
+        }
+      }
+    }
   }
 }

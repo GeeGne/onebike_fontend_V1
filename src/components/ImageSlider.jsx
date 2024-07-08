@@ -57,22 +57,14 @@ function ImageSlider () {
 
   useEffect(() => {
     action('scroll beginning');
-    const id = setInterval(() => {
-      
-      vars().sliderScrollLeft < vars().sliderWidth && action('scroll end');
-      vars().sliderScrollWidth <= vars().totalScroll && action('scroll beginning')
-      scrollLeft.current = vars().sliderScrollLeft
-
-      action('scroll left');
-    }, 4000)
+    const id = setInterval(() => action('scroll left'), 4000)
 
     return () => clearInterval(id);
   }, []);
 
   const handleStart = e => {
-    vars().sliderScrollWidth <= vars().totalScroll && action('scroll beginning');
-    vars().sliderScrollLeft < vars().sliderWidth && action('scroll end');
-
+    action('is last image') && action('scroll beginning');
+    action('is first image') && action('scroll end');
     initialX.current = e.touches[0].clientX;
     scrollLeft.current = vars().sliderScrollLeft;   
   }
@@ -87,9 +79,12 @@ function ImageSlider () {
   const handleEnd = e => {
     const activateLength = 100;
     if (amountX.current > activateLength) {
-      action('scroll left')
+      scroll(imageSliderElement.current, vars('scroll left').sliderBetweenImagesWidth, 'smooth');    
+      setCurrentImage(oldNum => vars().lastIndex === oldNum ? 0 : oldNum + 1);
     } else if (amountX.current < -1 * activateLength) {
       action('scroll right');
+      scroll(imageSliderElement.current, vars('scroll right').sliderBetweenImagesWidth, 'smooth');    
+      setCurrentImage(oldNum => oldNum  === 0 ? vars().lastIndex : oldNum - 1);
     } else {
       action('return');
     }
@@ -97,9 +92,27 @@ function ImageSlider () {
     amountX.current = 0;
   }
 
+  const handleClick = e => {
+    const {type} = e.currentTarget.dataset;
+
+    switch (type) {
+      case 'scroll_to_left':
+        action('scroll right');
+        break;
+      case 'scroll_to_right':
+        action('scroll left');
+        break;
+      default:
+        console.error('Error: Unknown Action: ' + type);
+    }
+  }
+
   function action (action, totalAmount) {
 
-    const scroll = (e, left, behavior) => e.scroll({left,behavior});
+    const scroll = (e, left, behavior) => e.scroll({left, behavior});
+
+    const isLastImage = () => vars().sliderScrollWidth <= vars().totalScroll;
+    const isFirstImage = () => vars().sliderScrollLeft < vars().sliderWidth;
 
     const scrollToBeginning = () => {
       scroll(imageSliderElement.current, vars().sliderWidth, 'instant');
@@ -112,11 +125,19 @@ function ImageSlider () {
     }
 
     const scrollToLeft = () => {  
+      isFirstImage() && scrollToEnd();
+      isLastImage() && scrollToBeginning();
+      scrollLeft.current = vars().sliderScrollLeft;
+
       scroll(imageSliderElement.current, vars('scroll left').sliderBetweenImagesWidth, 'smooth');    
       setCurrentImage(oldNum => vars().lastIndex === oldNum ? 0 : oldNum + 1);
     }
 
     const scrollToRight = () => { 
+      isFirstImage() && scrollToEnd();
+      isLastImage() && scrollToBeginning();
+      scrollLeft.current = vars().sliderScrollLeft;
+
       scroll(imageSliderElement.current, vars('scroll right').sliderBetweenImagesWidth, 'smooth');    
       setCurrentImage(oldNum => oldNum  === 0 ? vars().lastIndex : oldNum - 1);
     }
@@ -135,6 +156,8 @@ function ImageSlider () {
     action === 'scroll right' && scrollToRight();
     action === 'return' && returnBack();
     action === 'move' && move(totalAmount);
+    action === 'is last image' && isLastImage();
+    action === 'is first image' && isFirstImage();
   }
 
   return (
@@ -154,8 +177,8 @@ function ImageSlider () {
         )}
       </ul>
       <div className="imageSlider-container__arrows">
-        <button className="imageSlider-container__arrows__left-arrow" />
-        <button className="imageSlider-container__arrows__right-arrow" />
+        <button className="imageSlider-container__arrows__left-arrow" data-type="scroll_to_left" onClick={handleClick}/>
+        <button className="imageSlider-container__arrows__right-arrow" data-type="scroll_to_right" onClick={handleClick} />
       </div>
     </section>
   )

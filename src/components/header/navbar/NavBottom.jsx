@@ -27,7 +27,7 @@ function NavBottom ({darkMode, lan}) {
         setTimeout(() => scroll({top: 0, behavior: 'smooth'}), 500);
         break;
       case 'toggle_wishlist_to_true':
-        setWishlistToggle(false);
+        setWishlistToggle(true);
         break;
       default:
         console.error('Error: Unknown action: ', action);
