@@ -19,9 +19,10 @@ import heartDarkMode from '/assets/img/icons/heart_darkMode.svg';
 import deleteDarkModeIcon from '/assets/img/icons/delete_darkMode.svg';
 
 function WishlistSlider ({darkMode, lan, onWishlistToggleChange}) {
-  const {wishlistToggle, setWishlistToggle} = useWishlistStore();
+  const {wishlist, wishlistToggle, setWishlistToggle} = useWishlistStore();
   const containerEL = useRef(null);  
   const sliderEL = useRef(null);
+  const isWishlistEmpty = wishlist.length === 0;
 
   useEffect(() => {
     const containerStyle = containerEL.current.style;
@@ -49,6 +50,14 @@ function WishlistSlider ({darkMode, lan, onWishlistToggleChange}) {
       <div className="wishlist__slider" onClick={e => e.stopPropagation()} ref={sliderEL}>
         <button className="wishlist__slider__exit-btn" onClick={() => setWishlistToggle(false)} />
         <ul className="wishlist__slider__list">
+          {wishlist.map(product => 
+          <li className="wishlist__slider__list__product" key={product.id}>
+            <img className="wishlist__slider__list__product__img" src={img} />
+            <div className="wishlist__slider__list__product__title">{product.title[lan]}</div>
+            <div className="wishlist__slider__list__product__price">S.P 2000</div>
+            <img className="wishlist__slider__list__product__delete-img" role="button" tab-index="0" src={darkMode ? deleteDarkModeIcon : deleteIcon} />
+          </li>
+          )}
           <li className="wishlist__slider__list__product">
             <img className="wishlist__slider__list__product__img" src={img} />
             <div className="wishlist__slider__list__product__title">Portable Air Pump</div>

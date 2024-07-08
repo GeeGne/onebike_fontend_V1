@@ -18,16 +18,7 @@
       &__logo {
         margin: 0.3em 1em 0.3em auto;
       }
-
-      &__favourite {
-      @include w.breakpoint-up(medium) {
-          &::after {
-            content: "";
-            left: auto;
-            right: -1em;
-          }
-        }
-      }
+    
 
       &__search-input {
 
@@ -95,6 +86,7 @@
       background-repeat: no-repeat;
       background-position: center;
       margin: 0 1em;
+      transition: opacity 0.25s ease-in, background-color 0.25s ease-in;
       
       &::before {
         content: "";
@@ -105,8 +97,8 @@
         left: -0.5em;
         border-radius: 100%;
         background-color: transparent;
-        transition: background-color 0.25s ease;
         z-index: -1;
+        transition: background-color 0.25s ease;
       }
 
       &:hover::before {background-color: var(--light-background-color)}
@@ -168,6 +160,10 @@
       background-image: var(--shoppingCart-icon);
       margin: 0 1em;
 
+      body.arabic &::after {
+        right: auto;
+        left: -0.3em
+      }
       &::after {
         content: "";
         position: absolute;
@@ -188,30 +184,51 @@
     }
 
     &__favourite {
+      position: relative;
       display: flex;
       background-image: var(--favourite-icon);
+      @include w.breakpoint-down(medium) {display: none}
 
+      body.arabic &::after {
+        right: auto;
+        left: -0.3em
+      }
       &::after {
         content: "";
         position: absolute;
-        top: 0;
-        left: -1em;
-        height: 100%;
-        width: 1px;
-        background-color: hsl(0, 0%, 50%);
+        visibility: visible;
+        top: -0.3em;
+        right: -0.3em;
+        width: 0.7em;
+        height: 0.7em;
+        background-color: var(--red-color);
+        border-radius: 1em;
+        transition: opacity 0.5s ease, transform 0.5s ease;
       }
-
-      @include w.breakpoint-down(medium) {
-        display: none;
+      &.empty::after{
+        visibility: hidden;
+        opacity: 0;
+        transform: scale(0);
       }
     }
 
     &__user {
       display: flex;
       background-image: var(--user-icon);
+      @include w.breakpoint-down(medium) {display: none}
 
-      @include w.breakpoint-down(medium) {
-        display: none;
+      body.arabic &::after {
+        right: auto;
+        left: -1em
+      }
+      &::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: -1em;
+        height: 100%;
+        width: 1px;
+        background-color: hsl(0, 0%, 50%);
       }
     }
 

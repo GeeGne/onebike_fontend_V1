@@ -11,9 +11,6 @@ import WishlistSlider from './WishlistSlider';
 // REDUCERS
 import cartReducer from '/src/reducers/cartReducer.js';
 
-// UTILS
-import {WishlistToggleContext} from '/src/utils/myContext'; 
-
 // STORE
 import {useWishlistStore} from '/src/store/store';
 
@@ -29,30 +26,30 @@ import searchIconDarkMode from '/assets/img/icons/search_darkMode.svg';
 function Navbar ({darkMode, lan, onCartChange}) {
   
   const navigate = useNavigate();
-  const wishlistToggleNavBottomData = useContext(WishlistToggleContext);
   const [menu, setMenu] = useState(false);
   const [search, setSearch] = useState(false);
   const [cartToggle, setCartToggle] = useState(false);
   const [cart ,setCart] = useState([]);
-  const {setWishlistToggle} = useWishlistStore();
-  // const [wishlistToggle , setWishlistToggle] = useState(false);
+  const {wishlist, setWishlistToggle} = useWishlistStore();
 
   const navDropMenuEL = useRef(null);
   const prevScrollY = useRef(0);
   const prevScrollYTimer = useRef(null);
   const searchEL = useRef(null);
   const searchInputEL = useRef(null);
-  const searchButtonEL = useRef(null);
+  const searchBtnEL = useRef(null);
+  const favouriteBtnEL = useRef(null);
+  const cartBtnEL = useRef(null);
 
   const menuData = setMenu;
   const cartToggleData = setCartToggle;
-  // const wishlistToggleData = setWishlistToggle;
   const cartData = (data) => {
     setCart(data);
     onCartChange(data);
   }
 
-  const cartEmpty = cart.length === 0;
+  const isCartEmpty = cart.length === 0;
+  const isWishlistEmpty = wishlist.length === 0;
   const largeWidth = 1000;
   const webWidth = window.innerWidth;
   const desktopWidth = webWidth >= largeWidth;
@@ -66,12 +63,12 @@ function Navbar ({darkMode, lan, onCartChange}) {
       switch (desktopWidth) {
         case true:
           searchEL.current.classList.add('hover');
-          searchButtonEL.current.classList.add('hover');
+          searchBtnEL.current.classList.add('hover');
           document.body.style.overflow = 'hidden auto';
           break;
         case false: 
           searchEL.current.classList.remove('hover');
-          searchButtonEL.current.classList.remove('hover');
+          searchBtnEL.current.classList.remove('hover');
           document.body.style.overflow = menu ? 'hidden' : 'hidden auto';
           break;
       }
@@ -110,6 +107,15 @@ function Navbar ({darkMode, lan, onCartChange}) {
     return () => window.removeEventListener('scroll', stylenavDropMenuELWhenScrolling);
   }, [])
 
+  // useEffect(() => {cartBtnEL.current.style.backgroundImage = isCartEmpty ? 'var(--shoppingCart-icon)' : 'var(--shoppingCart-fill-icon)'}, [cart])
+  useEffect(() => {
+    cartBtnEL.current.style.backgroundImage = 'none';
+    setTimeout(() =>
+      cartBtnEL.current.style.backgroundImage = isCartEmpty ? 'var(--shoppingCart-icon)' : 'var(--shoppingCart-fill-icon)'
+    , 250);
+  }, [cart])
+  useEffect(() => {favouriteBtnEL.current.style.backgroundImage = isWishlistEmpty ? 'var(--heart-icon)' : 'var(--heart-fill-default-icon)'}, [wishlist])
+
   const handleClick = e => {
     const {action, path} = e.currentTarget.dataset;
 
@@ -117,7 +123,7 @@ function Navbar ({darkMode, lan, onCartChange}) {
       case 'toggle_search':
         if (!desktopWidth) {
           searchEL.current.classList.toggle('clicked');
-          searchButtonEL.current.classList.toggle('clicked');
+          searchBtnEL.current.classList.toggle('clicked');
         }
         break;
       case 'toggle_wishlist_to_true':
@@ -136,11 +142,11 @@ function Navbar ({darkMode, lan, onCartChange}) {
 
     if (desktopWidth || isInputInFocus) {
       searchEL.current.classList.add('hover');
-      searchButtonEL.current.classList.add('hover');
+      searchBtnEL.current.classList.add('hover');
       return;
     }
     type ? searchEL.current.classList.add('hover') : searchEL.current.classList.remove('hover');
-    type ? searchButtonEL.current.classList.add('hover') : searchButtonEL.current.classList.remove('hover'); 
+    type ? searchBtnEL.current.classList.add('hover') : searchBtnEL.current.classList.remove('hover'); 
   }
 
   return (
@@ -153,10 +159,10 @@ function Navbar ({darkMode, lan, onCartChange}) {
           <input placeholder={lan === 'en' ? 'Type something' : 'هل تبحث عن شيء؟'} onBlur={() => handleHover(false)} ref={searchInputEL}/>
           <img src={darkMode ? searchIconDarkMode : searchIcon}/>
         </div>
-        <button className="dropMenu__nav__search" data-action="toggle_search" onClick={handleClick} onMouseEnter={() => handleHover(true)} onMouseLeave={() => handleHover(false)} ref={searchButtonEL}/>
+        <button className="dropMenu__nav__search" data-action="toggle_search" onClick={handleClick} onMouseEnter={() => handleHover(true)} onMouseLeave={() => handleHover(false)} ref={searchBtnEL}/>
         <button className="dropMenu__nav__user" data-action="navigate_to_path" data-path="/account/login" onClick={handleClick}/>
-        <button className="dropMenu__nav__favourite" data-action="toggle_wishlist_to_true" onClick={handleClick}/>
-        <button className={`dropMenu__nav__shoppingCart${cartEmpty ? ' empty' : ''}`} onClick={() => setCartToggle(true)}/>
+        <button className={`dropMenu__nav__favourite${isWishlistEmpty ? ' empty' : ''}`} data-action="toggle_wishlist_to_true" onClick={handleClick} ref={favouriteBtnEL}/>
+        <button className={`dropMenu__nav__shoppingCart${isCartEmpty ? ' empty' : ''}`} onClick={() => setCartToggle(true)} ref={cartBtnEL}/>
       </nav>
       <DropMenu menu={menu} darkMode={darkMode} lan={lan}/>
     </div>

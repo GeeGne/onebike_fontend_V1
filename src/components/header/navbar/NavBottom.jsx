@@ -12,11 +12,13 @@ import {WishlistToggleContext} from '/src/utils/myContext';
 import '/src/styles/components/header/navbar/NavBottom.scss';
 
 function NavBottom ({darkMode, lan}) {
-  const {setWishlistToggle} = useWishlistStore();
+  const {wishlist, setWishlistToggle} = useWishlistStore();
   const navigate = useNavigate();
   const navBottomEL = useRef(null);
+  const favouriteBtnEL = useRef(null);
   const prevScrollY = useRef(0);
   const prevScrollYTimer = useRef(null);
+  const isWishlistEmpty = wishlist.length === 0;
 
   const handleClick = e => {
     const {action, path} = e.currentTarget.dataset;
@@ -35,6 +37,7 @@ function NavBottom ({darkMode, lan}) {
 
   }
 
+  useEffect(() => {favouriteBtnEL.current.style.backgroundImage = isWishlistEmpty ? 'var(--heart-icon)' : 'var(--heart-fill-default-icon)'}, [wishlist])
   useEffect(() => {
     const stylenavBottomELWhenScrolling = () => {
       const hideNav = (el, height) => el.style.transform = `translateY(${height}px)`;
@@ -68,7 +71,7 @@ function NavBottom ({darkMode, lan}) {
 
   return (
     <section className="navBottom" ref={navBottomEL}>
-      <a className="navBottom__favourite" data-action="toggle_wishlist_to_true" onClick={handleClick} />
+      <a className={`navBottom__favourite${isWishlistEmpty ? ' empty' : ''}`} data-action="toggle_wishlist_to_true" onClick={handleClick} ref={favouriteBtnEL} />
       <a className="navBottom__user" data-action="navigate_to_path" data-path="/account/login" onClick={handleClick}/>
     </section>
   )

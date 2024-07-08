@@ -65,21 +65,31 @@
     }
 
     &__list {
-      display: flex;
-      flex-direction: column;
+      display: grid;
+      // flex-direction: column;
+      grid-template-columns: 1fr;
       padding: 2em;
       gap: 2em;
       overflow: hidden scroll;
+      max-width: 40em;
       height: 100%;
+      margin-inline: auto;
+      @include w.breakpoint-up (large) {
+      grid-template-columns: 1fr 1fr;
+      max-width: 80%;
+
+      }
 
       &__product {
         display: grid;
         grid-template-columns: 1fr 2fr 1fr;
+        grid-template-rows: auto;
         grid-template-areas:
         'img title price'
         'img title delete';
         gap: 1em;
         width: 100%;
+        height: auto;
 
         &__img {
           grid-area: img;
@@ -90,13 +100,13 @@
           grid-area: title;
           margin-block: auto;
           font-size: var(--font-size-small);
-          color: var(font-h-color);
+          color: var(--font-h-color);
         }
         
         &__price {
           grid-area: price;
           font-size: var(--font-size-small);
-          color: var(font-p-color);
+          color: var(--font-p-color);
           margin-top: auto;
           margin-left: auto;
 

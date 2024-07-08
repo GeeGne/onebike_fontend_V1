@@ -8,7 +8,10 @@
 // URLs 
 :root {
   --heart-icon: url(/assets/img/icons/heart.svg);
+  --heart-fill-icon: url(/assets/img/icons/heart_fill.svg);
+  --heart-fill-default-icon: url(/assets/img/icons/heart_fill_default.svg);
   --add-shoppingCart-icon: url(/assets/img/icons/add_shopping_cart.svg); 
+  --shoppingCart-fill-icon: url(/assets/img/icons/shopping_cart_fill.svg); 
   --close-icon: url(/assets/img/icons/close.svg);
   --add-icon: url(/assets/img/icons/add.svg);
   --remove-icon: url(/assets/img/icons/remove.svg);
@@ -60,7 +63,10 @@
 
 .dark-theme {
   --heart-icon: url(/assets/img/icons/heart_darkMode.svg);
+  --heart-fill-icon: url(/assets/img/icons/heart_fill_darkMode.svg);
+  --heart-fill-default-icon: url(/assets/img/icons/heart_fill_default_darkMode.svg);
   --add-shoppingCart-icon: url(/assets/img/icons/add_shopping_cart_darkMode.svg); 
+  --shoppingCart-fill-icon: url(/assets/img/icons/shopping_cart_fill_darkMode.svg); 
   --close-icon: url(/assets/img/icons/close_darkMode.svg);
   --add-icon: url(/assets/img/icons/add_darkMode.svg);
   --remove-icon: url(/assets/img/icons/remove_darkMode.svg);
