@@ -81,9 +81,6 @@ function Navbar ({darkMode, lan, onCartChange}) {
     return () => window.removeEventListener('resize', handleResize);
   }, [menu]);
 
-  useEffect(() => {document.body.style.overflow = menu & !desktopWidth ? 'hidden' : 'hidden auto'}, [menu])
-  // useEffect(() => {setWishlistToggle(typeof(wishlistToggleNavBottomData) === 'number' ? true : false)}, [wishlistToggleNavBottomData])
-
   useEffect(() => {
     const stylenavDropMenuELWhenScrolling = () => {
       const hideNav = (el, height) => el.style.transform = `translateY(-${height}px)`;
