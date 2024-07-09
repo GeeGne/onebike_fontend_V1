@@ -27,12 +27,13 @@ import heartDarkMode from '/assets/img/icons/heart_darkMode.svg';
 import deleteDarkModeIcon from '/assets/img/icons/delete_darkMode.svg';
 import heartBrokenDarkmodeIcon from '/assets/img/icons/heart_broken_darkMode.svg';
 
-function WishlistSlider ({darkMode, lan, onWishlistToggleChange}) {
+function WishlistSlider ({darkMode, lan}) {
   const {wishlist, removeProductFromWishlist, wishlistToggle, setWishlistToggle} = useWishlistStore();
 
   const containerEL = useRef(null);  
-  const sliderEL = useRef(null);
+  const sliderEL = useRef([]);
   const observerRef = useRef(null);
+  const wishlistProductsELS = useRef([]);
 
   const isWishlistEmpty = wishlist.length === 0;
   const en = lan === 'en';
@@ -85,16 +86,38 @@ function WishlistSlider ({darkMode, lan, onWishlistToggleChange}) {
     }
   }, [wishlistToggle])
 
+  useEffect(() => {
+    const filterWishlistELS = () => wishlistProductsELS.current.filter(el => wishlist.some(product => product.id === Number(el.dataset.productId)));
+    wishlistProductsELS.current = filterWishlistELS();
+  }, [wishlist])
+
   const handleClick = e => {
     const {action, productId} = e.currentTarget.dataset;
 
     switch (action) {
       case 'remove_product_from_wishlist':
-      
-      removeProductFromWishlist(getProduct(Number(productId)))
-      break;
+        const productEL = wishlistProductsELS.current.filter(el => el.dataset.productId === productId)[0];
+        productEL.classList.remove('--pop-in');
+        setTimeout(() => productEL.style.opacity= '0', 10);
+        setTimeout(() => removeProductFromWishlist(getProduct(Number(productId))), 250);
+        break;
       default:
         console.error('Error: Unknown Action: ' + action);
+    }
+  }
+
+  const addRef = el => {
+    if (!el) return;
+    const {selector, productId} = el.dataset;
+    const isElementIncluded = () =>  wishlistProductsELS.current.some(el => Number(productId) === Number(el.dataset.productId));
+    const addElement = () => [...wishlistProductsELS.current, el];
+
+    switch (selector) {
+      case 'wishlistProductsELS':
+        wishlistProductsELS.current = isElementIncluded() ? [...wishlistProductsELS.current] : addElement(); 
+        break;
+      default:
+        console.log('unknown type:' + selector);
     }
   }
 
@@ -111,12 +134,12 @@ function WishlistSlider ({darkMode, lan, onWishlistToggleChange}) {
         </div> 
         :
         <ul className="wishlist__slider__list">
-          {wishlist.map(product => 
-          <li className="wishlist__slider__list__product --pop-in" key={product.id}>
+          {wishlist.map((product, i) => 
+          <li className="wishlist__slider__list__product --pop-in" key={product.id} data-product-id={product.id} data-selector="wishlistProductsELS" ref={addRef}>
             <img className="wishlist__slider__list__product__img" src={getProductImgURL(product)} />
             <div className="wishlist__slider__list__product__title">{product.title[lan]}</div>
             <div className="wishlist__slider__list__product__price">{(en ? 'S.P ' : ' ل.س ') + getProductPrice(product)}</div>
-            <button className="wishlist__slider__list__product__delete-btn" data-action="delete_product_from_wishlist" data-product-id={product.id} onClick={handleClick}/>
+            <button className="wishlist__slider__list__product__delete-btn" data-action="remove_product_from_wishlist" data-product-id={product.id} onClick={handleClick}/>
           </li>
           )}
         </ul>

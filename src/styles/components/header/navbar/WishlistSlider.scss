@@ -144,6 +144,7 @@
         gap: 1em;
         width: 100%;
         height: auto;
+        transition: opacity 0.25s ease-in;
 
         &__img {
           grid-area: img;
@@ -171,24 +172,7 @@
             margin-right: auto;
           }
         }
-// 
-        // &__delete-btn {
-          // grid-area: delete;
-          // margin-left: auto;
-          // margin-top: auto;
-          // width: 1.7em;
-          // opacity: 0.8;
-          // cursor: pointer;
-          // transition: opacity 0.6s ease;
-// 
-          // body.arabic & {
-            // margin-right: auto;
-            // margin-left: 0;
-          // }
-// 
-          // &:hover {opacity: 1}
-        // }
-// 
+
         &__delete-btn {
           width: 2em;
           height: 2em;

@@ -42,12 +42,14 @@ function CartSlider ({darkMode, lan, onCartChange, cartToggle, onCartToggleChang
   const cartProductsELS = useRef([]);
   const isInitialMount = useRef(true);
 
-  let totalPrice = 0;
-  cart.forEach(list => (totalPrice += list.quantityPrice));
-  
   const navigate = useNavigate();
   const cartEmpty = cart.length === 0;
   const en = lan === 'en';
+
+  let totalPrice = 0;
+  cart.forEach(list => (totalPrice += list.quantityPrice));
+  const getProductImgURL = product => `/assets/img/products/${product.category}/${product.type}/${product.id + '-' + product.color.en}-front.webp`;
+  const getProduct = id => products.filter(product => product.id === id)[0];
 
   useEffect(() => {
     const saveToLocalStorage = () => isInitialMount.current ? (isInitialMount.current = false) : localStorage.set('cart', cart);
@@ -95,7 +97,7 @@ function CartSlider ({darkMode, lan, onCartChange, cartToggle, onCartToggleChang
         onCartToggleChange(false);
         break;
       case 'nav-to-checkouts':
-        scroll({top: 0, behavior: 'smooth'});
+        setTimeout(() => scroll({top: 0, behavior: 'smooth'}), 500);
         onCartToggleChange(false);
         navigate('/checkouts/login');
         break;
@@ -133,7 +135,7 @@ function CartSlider ({darkMode, lan, onCartChange, cartToggle, onCartToggleChang
         <ul className="cartSlider__slider__products">
           {cart.map((list, i) =>
           <li className="cartSlider__slider__products__product" key={list.id} data-product-id={list.product.id} ref={el => addRef('cartProductsELS', el, i)}>
-            <img className="cartSlider__slider__products__product__image" src={`/assets/img/products/${list.product.category}/${list.product.type}/${list.product.id + '-' + list.product.color.en}-front.webp`} />
+            <img className="cartSlider__slider__products__product__image" src={getProductImgURL(list.product)} />
             <a className="cartSlider__slider__products__product__title">{list.product.title[lan]}</a>
             <div className="cartSlider__slider__products__product__price">{en ? 'S.P' : 'ل.س'} {formatNumberWithCommas(list.quantityPrice)}</div>
             <div className="cartSlider__slider__products__product__toggles">

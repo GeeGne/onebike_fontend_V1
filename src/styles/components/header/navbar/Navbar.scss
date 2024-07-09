@@ -19,7 +19,6 @@
         margin: 0.3em 1em 0.3em auto;
       }
     
-
       &__search-input {
 
         & input {
@@ -261,13 +260,12 @@
         font-weight: 500;
         padding-left: 2em;
         outline: none;
-        border: none;
+        border: transparent;
         box-shadow: 0 3px 3px 1px hsl(0, 0%, 50%, 0.3);
         border-radius: 5px;
+        transition: border 0.25s ease-out;
 
-        &:focus {
-          border: solid var(--nav-searchInput-outline-color) 1px
-        }
+        &:focus {border: solid var(--nav-searchInput-outline-color) 2px}
       }
 
       & img {

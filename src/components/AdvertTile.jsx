@@ -124,23 +124,23 @@ function AdvertTile ({darkMode, lan, type}) {
         addTimerID.current = setTimeout(() => {
           e.target.style.opacity = '1';
           addProductToWishlist(getProduct(Number(productId)));
-        }, 250)
+        }, 250);
         break;
-        case 'remove_product_from_wishlist':
+      case 'remove_product_from_wishlist':
           e.target.style.opacity = '0';
-        clearTimeout(removeTimerID.current);
-        removeTimerID.current = setTimeout(() => {
-          e.target.style.opacity = '1';
-          removeProductFromWishlist(getProduct(Number(productId)));
-        }, 250)
+          clearTimeout(removeTimerID.current);
+          removeTimerID.current = setTimeout(() => {
+            e.target.style.opacity = '1';
+            removeProductFromWishlist(getProduct(Number(productId)));
+          }, 250)
         break;
-        default:
+      default:
         console.error('Error: Unknown Action: ' + action);
     }
   }
 
   return (
-    <section className="advertTile">
+  <section className="advertTile">
       <div className="advertTile__panel">
         <h2 className="advertTile__panel__title --colorChange-view">{type.name[lan].toUpperCase()}</h2>
         <span className="advertTile__panel__see-more --colorChange-view" data-action="navigate_to_url" onClick={handleClick}>{en ? 'See More' : 'شاهد المزيد'}</span>
