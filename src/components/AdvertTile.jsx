@@ -40,6 +40,8 @@ function AdvertTile ({darkMode, lan, type}) {
   const navigate = useNavigate();  
   const en = lan === "en";
   const nowStyle = {color: "var(--primary-color)"}
+  const getProductImgURL = product => `/assets/img/products/${product.category}/${product.type}/${product.id + '-' + product.color.en}-front.webp`;
+  const getProductPrice = product => formatNumberWithCommas(calculatePrice(product.price, product.discount));
   const isProductInWishlist = product => wishlist.some(item => item.id === product.id);
 
   useEffect(() => {
@@ -137,7 +139,6 @@ function AdvertTile ({darkMode, lan, type}) {
     }
   }
 
-  
   return (
     <section className="advertTile">
       <div className="advertTile__panel">
@@ -152,20 +153,20 @@ function AdvertTile ({darkMode, lan, type}) {
           {getProducts.map(product => 
           <li className="advertTile__list__products__product --slide-to-left" key={product.id} ref={productConEL}>
             {isProductInWishlist(product) ? 
-            <img className="advertTile__list__products__product__heart-img" src={heartFill} data-action="remove_product_from_wishlist" data-product-id={product.id} onClick={handleClick} />
+            <button className="advertTile__list__products__product__heart-btn added-to-wishlist" data-action="remove_product_from_wishlist" data-product-id={product.id} onClick={handleClick} />
             : 
-            <img className="advertTile__list__products__product__heart-img" src={darkMode ? heartDarkMode : heart} data-action="add_product_to_wishlist" data-product-id={product.id} onClick={handleClick} />
+            <button className="advertTile__list__products__product__heart-btn" data-action="add_product_to_wishlist" data-product-id={product.id} onClick={handleClick} />
             }
-            <img className="advertTile__list__products__product__img" src={`/assets/img/products/${product.category}/${product.type}/${product.id + '-' + product.color.en}-front.webp`} />
+            <img className="advertTile__list__products__product__img" src={getProductImgURL(product)} />
             {product.discount && <div className="advertTile__list__products__product__discount">{lan === 'ar' ? 'خصم ' : ''}{calculateDiscountPercantage(product.price, product.discount)}{en ? ' off' : ''}</div>}
             <h3 className="advertTile__list__products__product__description">{product.title[lan]}</h3>
             <div className="advertTile__list__products__product__price">
               {product.discount ? <>
               <span className="now" style={nowStyle}>{en ? 'NOW' : 'الان'}</span> 
-              <span className="total">{formatNumberWithCommas(calculatePrice(product.price, product.discount))}</span>
+              <span className="total">{getProductPrice(product)}</span>
               <span className="currency-symbol">{en ? 'S.P ' : 'ل.س'}</span>
               <s className='old'>{formatNumberWithCommas(product.price)}</s></>
-              : <><span className="total">{formatNumberWithCommas(product.price)}</span> 
+              : <><span className="total">{getProductPrice(product)}</span> 
               <span className="currency-symbol">{en ? 'S.P' : 'ل.س'}</span>
               </>}
             </div>

@@ -107,13 +107,7 @@ function Navbar ({darkMode, lan, onCartChange}) {
     return () => window.removeEventListener('scroll', stylenavDropMenuELWhenScrolling);
   }, [])
 
-  // useEffect(() => {cartBtnEL.current.style.backgroundImage = isCartEmpty ? 'var(--shoppingCart-icon)' : 'var(--shoppingCart-fill-icon)'}, [cart])
-  useEffect(() => {
-    cartBtnEL.current.style.backgroundImage = 'none';
-    setTimeout(() =>
-      cartBtnEL.current.style.backgroundImage = isCartEmpty ? 'var(--shoppingCart-icon)' : 'var(--shoppingCart-fill-icon)'
-    , 250);
-  }, [cart])
+  useEffect(() => {cartBtnEL.current.style.backgroundImage = isCartEmpty ? 'var(--shoppingCart-icon)' : 'var(--shoppingCart-fill-icon)'}, [cart])
   useEffect(() => {favouriteBtnEL.current.style.backgroundImage = isWishlistEmpty ? 'var(--heart-icon)' : 'var(--heart-fill-default-icon)'}, [wishlist])
 
   const handleClick = e => {

@@ -125,6 +125,20 @@
       -webkit-mask-image: linear-gradient(to bottom, hsla(0, 0%, 0%, 0) 0%, hsla(0, 0%, 0%, 1) 2em, hsla(0, 0%, 0%, 1) calc(100% - 2em), hsla(0, 0%, 0%, 0) 100%);
       mask-image: linear-gradient(to bottom, hsla(0, 0%, 0%, 0) 0%, hsla(0, 0%, 0%, 1) 2em, hsla(0, 0%, 0%, 1) calc(100% - 2em), hsla(0, 0%, 0%, 0) 100%);
 
+      &::-webkit-scrollbar {width: 0.5em}
+      &::-webkit-scrollbar-thumb {
+        cursor: grab;
+        background-color: var(--sideMenu-scrollBar-background-color);
+        transition: background-color 0.15s;
+        border-radius: 2em;
+      }
+      &::-webkit-scrollbar-track {
+        margin-block: 1em;
+        background-color: rgba(42, 42, 42, 0);
+      }
+      &::-webkit-scrollbar-thumb:active {cursor: grabbing}
+      &::-webkit-scrollbar-thumb:hover {background-color: hsl(0, 0%, 50%)}
+
       &__product {
         display: grid;
         grid-template-columns: 1fr 1.5fr 1.5fr;
@@ -171,9 +185,7 @@
             opacity: 0.8;
             transition: opacity 0.25s ease;
 
-            &:hover {
-              opacity: 1;
-            }
+            &:hover {opacity: 1}
           }
 
           &__increment {

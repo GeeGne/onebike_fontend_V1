@@ -1,6 +1,9 @@
 // HOOKS
 import React, {useState, useEffect, useRef, useReducer} from 'react';
 
+// STORE
+import {useWishlistStore} from '/src/store/store';
+
 // SCSS
 import '/src/styles/components/pages/products/AdvertList.scss';
 
@@ -26,16 +29,23 @@ import brandLogo2 from '/assets/img/logo/giant.webp';
 import brandLogo3 from '/assets/img/logo/evoc.webp';
 
 function AdvertList ({darkMode, lan, matchedProducts, onCartProductsChange}) {
+  const {wishlist, addProductToWishlist, removeProductFromWishlist} = useWishlistStore();
   const [cartDispatchData, setCartDispatchData] = useState([]);
   const [loadLimit, setLoadLimit] = useState(0);
   const allProductsLoaded = loadLimit === matchedProducts.length;
 
   const addToCartELs = useRef([]);
   const productAmountELs = useRef([]);
+  const heartTimerID = useRef();
+  const removeTimerID = useRef();
 
   const en = lan === 'en';
   const displayedProducts = matchedProducts.slice(0, loadLimit);
   const nowStyle = {color: "var(--primary-color)"}
+  const getProductImgURL = product => `/assets/img/products/${product.category}/${product.type}/${product.id + '-' + product.color.en}-front.webp`;
+  const getProductPrice = product => formatNumberWithCommas(calculatePrice(product.price, product.discount));
+  const isProductInWishlist = product => wishlist.some(item => item.id === product.id);
+
 
   useEffect(() => {
     onCartProductsChange(cartDispatchData);
@@ -75,13 +85,32 @@ function AdvertList ({darkMode, lan, matchedProducts, onCartProductsChange}) {
     }
   }
 
-  function handleClick (type, e, product) {
-    
+  const handleClick = e => {
+    const {type, productId} = e.currentTarget.dataset;
+    const getProduct = id => products.filter(product => product.id === id)[0]
+
     switch (type) {
       case 'ADD_TO_CART':
         const getAmountEL = fetchElementById(e.target, 'productId', productAmountELs.current);
         const quantity = Number(getAmountEL.textContent);
+        const product = getProduct(Number(productId));
         setCartDispatchData({type, quantity, product});
+        break;
+      case 'add_product_to_wishlist':
+        e.target.style.opacity = '0';
+        clearTimeout(heartTimerID.current);
+        heartTimerID.current = setTimeout(() => {
+          addProductToWishlist(getProduct(Number(productId)));
+          e.target.style.opacity = '1';
+        }, 250)
+        break;
+        case 'remove_product_from_wishlist':
+        e.target.style.opacity = '0';
+        clearTimeout(heartTimerID.current);
+        heartTimerID.current = setTimeout(() => {
+          removeProductFromWishlist(getProduct(Number(productId)));
+          e.target.style.opacity = '1';
+        }, 250)
         break;
       default:
         console.log('unknown type:' + type);
@@ -94,22 +123,27 @@ function AdvertList ({darkMode, lan, matchedProducts, onCartProductsChange}) {
         <ul className="advertList__advert-sctn__grid">
           {displayedProducts.map((product, i) => 
           <li className={`advertList__advert-sctn__grid__product${product.outOfStock ? ' out-of-stock' : ''}`} key={product.id}>
-            <button className="advertList__advert-sctn__grid__product__favourite"></button>
-            <img className="advertList__advert-sctn__grid__product__img" src={`/assets/img/products/${product.category}/${product.type}/${product.id + '-' + product.color.en}-front.webp`}/>
+            {isProductInWishlist(product) ? 
+            <button className="advertList__advert-sctn__grid__product__favourite added-to-wishlist" data-type="remove_product_from_wishlist" data-product-id={product.id} onClick={handleClick} />
+            : 
+            <button className="advertList__advert-sctn__grid__product__favourite" data-type="add_product_to_wishlist" data-product-id={product.id} onClick={handleClick} />
+            }
+            <img className="advertList__advert-sctn__grid__product__img" src={getProductImgURL(product)}/>
             {product.discount ? <h3 className="advertList__advert-sctn__grid__product__discount">{lan === 'ar' ? 'خصم ' : ''}{calculateDiscountPercantage(product.price, product.discount)}{en ? ' off' : ''}</h3> : <></>}
             <h3 className="advertList__advert-sctn__grid__product__description">{product.title[lan]}</h3>
             <img className="advertList__advert-sctn__grid__product__brand-logo" src={product.brand ? `/assets/img/logo/${product.brand}.webp` : ''}/>
             <div className="advertList__advert-sctn__grid__product__price">
               {product.discount ? 
               <><span className="now" style={nowStyle}>{en ? 'NOW' : 'الان'}</span> 
-              <span className="total">{formatNumberWithCommas(calculatePrice(product.price, product.discount))}</span>
+              <span className="total">{getProductPrice(product)}</span>
               <span className="currency-symbol">{en ? 'S.P ' : 'ل.س'}</span>
               <s className="old">{formatNumberWithCommas(product.price)}</s></> 
-              : <><span className="total">{formatNumberWithCommas(product.price)}</span>
+              : <><span className="total">{getProductPrice(product)}</span>
               <span className="currency-symbol">{en ? 'S.P' : 'ل.س'}</span></>}
             </div>
             <div className="advertList__advert-sctn__grid__product__btns">
-              <button className="advertList__advert-sctn__grid__product__btns__add-to-cart" data-product-id={product.id} onClick={e => handleClick('ADD_TO_CART', e, product)}>{en ? 'Add to cart' : 'اضف الى السله'}</button>  
+              <button className="advertList__advert-sctn__grid__product__btns__add-to-cart"
+              data-type="ADD_TO_CART" data-product-id={product.id} onClick={handleClick}>{en ? 'Add to cart' : 'اضف الى السله'}</button>  
               <button className="advertList__advert-sctn__grid__product__btns__increment" data-product-id={product.id} onClick={e => updateProductAmount(e, 1)}></button>  
               <div className="advertList__advert-sctn__grid__product__btns__total" data-product-id={product.id} ref={el => addRef('productAmountELs', el, i)}>1</div>  
               <button className="advertList__advert-sctn__grid__product__btns__decrement" data-product-id={product.id} onClick={e => updateProductAmount(e, -1)}></button>  

@@ -57,6 +57,18 @@
           &:active::before {background-color: rgba(255, 0, 0, 0.223)}
         }
 
+        &::after {
+          content: "";
+          position: absolute;
+          top: 0.8em;
+          right: 0.8em;
+          width: 1.6em;
+          height: 1.6em;
+          background-color: var(--background-color);
+          border-radius: 100%;
+        }
+
+        &__favourite.added-to-wishlist {background-image: var(--heart-fill-icon)}
         &__favourite {
           position: absolute;
           top: 0.8em;
@@ -69,6 +81,8 @@
           background-size: 1em;
           background-position: center;
           border-radius: 100%;
+          z-index: 10;
+          transition: opacity 0.25s ease-in;
         }
 
         &__img {

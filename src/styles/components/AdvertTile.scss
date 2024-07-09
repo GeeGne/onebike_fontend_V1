@@ -132,6 +132,7 @@
     }
     
     &__products {
+      position: relative;
       display: flex;
       flex-direction: row;
       gap: 1em;
@@ -150,16 +151,32 @@
         @include w.breakpoint-up (medium) {width: calc((100vw - 4em) / 3.5)}
         @include w.breakpoint-up (large) {width: calc((100vw - 5em) / 4.5)}
         @include w.breakpoint-up (xlarge) {width: calc((1400px - 6em) / 5.5)}
-  
-        &__heart-img {
+        
+        &::before {
+          content: "";
           position: absolute;
           top: 0.8em;
           right: 0.8em;
           width: 1.6em;
+          height: 1.6em;
           background-color: var(--background-color);
           border-radius: 100%;
-          padding: 0.3em;
-          cursor: pointer;
+        }
+
+        &__heart-btn.added-to-wishlist {background-image: var(--heart-fill-icon)}
+        &__heart-btn {
+          position: absolute;
+          top: 0.8em;
+          right: 0.8em;
+          width: 1.6em;
+          height: 1.6em;
+          background-color: var(--background-color);
+          background-image: var(--heart-icon);
+          background-repeat: no-repeat;
+          background-size: 1em;
+          background-position: center;
+          border-radius: 100%;
+          z-index: 10;
           transition: opacity 0.25s ease-in;
         }
   
@@ -167,7 +184,6 @@
           width: 100%;
           aspect-ratio: 1 / 1;
         }
-  
   
         &__discount {
           background-color: var(--primary-color);

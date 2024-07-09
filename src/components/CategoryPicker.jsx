@@ -15,7 +15,8 @@ function CategoryPicker ({darkMode, lan}) {
 
   const navigate = useNavigate();
   const observerRef = useRef(null);
-
+  const getCategoryImg = category => '/assets/img/categories/' + category.en + '.webp';
+  
   useEffect(() => {
     const elements = document.querySelectorAll('.--categoryAni');
     
@@ -43,7 +44,7 @@ function CategoryPicker ({darkMode, lan}) {
   const  handleClick = e => {
     const {category} = e.currentTarget.dataset;
     navigate(category);
-    scroll({top: 0, behavior: 'smooth'});
+    setTimeout(() => scroll({top: 0, behavior: 'smooth'}), 500);
   }
 
   return (
@@ -51,7 +52,7 @@ function CategoryPicker ({darkMode, lan}) {
       <ul className="categoryPicker__ul">
         {categories.map(category => 
         <li className="categoryPicker__ul__li --categoryAni" data-category={cleanseString(category.en)} onClick={handleClick} key={category.id}>
-          <img className="categoryPicker__ul__li__img" src={'/assets/img/categories/' + category.en + '.webp'}/>
+          <img className="categoryPicker__ul__li__img" src={getCategoryImg(category)}/>
           <span className="categoryPicker__ul__li__name">{category[lan]}</span>
         </li>      
         )}
