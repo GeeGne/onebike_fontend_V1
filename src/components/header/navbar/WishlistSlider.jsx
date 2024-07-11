@@ -28,7 +28,7 @@ import deleteDarkModeIcon from '/assets/img/icons/delete_darkMode.svg';
 import heartBrokenDarkmodeIcon from '/assets/img/icons/heart_broken_darkMode.svg';
 
 function WishlistSlider ({darkMode, lan}) {
-  const {wishlist, removeProductFromWishlist, wishlistToggle, setWishlistToggle} = useWishlistStore();
+  const {wishlist, removeProductFromWishlist, toggle, setToggle} = useWishlistStore();
 
   const containerEL = useRef(null);  
   const sliderEL = useRef([]);
@@ -69,7 +69,7 @@ function WishlistSlider ({darkMode, lan}) {
     const containerStyle = containerEL.current.style;
     const sliderStyle = sliderEL.current.style;
 
-    switch (wishlistToggle) {
+    switch (toggle) {
       case true:
         document.body.style.overflow = 'hidden hidden';
         containerStyle.visibility= 'visible';
@@ -84,7 +84,7 @@ function WishlistSlider ({darkMode, lan}) {
         setTimeout(() => containerStyle.visibility = 'hidden', 500);
         break;
     }
-  }, [wishlistToggle])
+  }, [toggle])
 
   useEffect(() => {
     const filterWishlistELS = () => wishlistProductsELS.current.filter(el => wishlist.some(product => product.id === Number(el.dataset.productId)));
@@ -122,15 +122,15 @@ function WishlistSlider ({darkMode, lan}) {
   }
 
   return (
-    <div className="wishlist" onClick={() => setWishlistToggle(false)} ref={containerEL}>
+    <div className="wishlist" onClick={() => setToggle(false)} ref={containerEL}>
       <div className="wishlist__slider" onClick={e => e.stopPropagation()} ref={sliderEL}>
-        <button className="wishlist__slider__exit-btn" onClick={() => setWishlistToggle(false)} />
+        <button className="wishlist__slider__exit-btn" onClick={() => setToggle(false)} />
         {isWishlistEmpty ?
         <div className="wishlist__slider__empty-list --pop-in">
           <img className="wishlist__slider__empty-list__broken-heart-img --heart-beat" src={darkMode ? heartBrokenDarkmodeIcon : heartBrokenIcon} />
           <h2 className="wishlist__slider__empty-list__description-h2">{en ? 'Looks like your wishlist needs some love' : 'يبدو أن قائمة أمنياتك بحاجة إلى بعض الاهتمام'}</h2>
           <h1 className="wishlist__slider__empty-list__description-h1">{en ? 'Start adding your favorite items!' : ' ابدأ بإضافة العناصر المفضلة لديك!'}</h1>
-          <button className="wishlist__slider__empty-list__btn" onClick={() => setWishlistToggle(false)}>{en ? 'Back to shopping' : 'العوده للتسوق'}</button>
+          <button className="wishlist__slider__empty-list__btn" onClick={() => setToggle(false)}>{en ? 'Back to shopping' : 'العوده للتسوق'}</button>
         </div> 
         :
         <ul className="wishlist__slider__list">

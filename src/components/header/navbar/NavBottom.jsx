@@ -12,7 +12,7 @@ import {WishlistToggleContext} from '/src/utils/myContext';
 import '/src/styles/components/header/navbar/NavBottom.scss';
 
 function NavBottom ({darkMode, lan}) {
-  const {wishlist, setWishlistToggle} = useWishlistStore();
+  const {wishlist, setToggle} = useWishlistStore();
   const navigate = useNavigate();
   const navBottomEL = useRef(null);
   const favouriteBtnEL = useRef(null);
@@ -29,7 +29,7 @@ function NavBottom ({darkMode, lan}) {
         setTimeout(() => scroll({top: 0, behavior: 'smooth'}), 500);
         break;
       case 'toggle_wishlist_to_true':
-        setWishlistToggle(true);
+        setToggle(true);
         break;
       default:
         console.error('Error: Unknown action: ', action);

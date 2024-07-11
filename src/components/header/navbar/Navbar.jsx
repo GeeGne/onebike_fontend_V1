@@ -30,7 +30,7 @@ function Navbar ({darkMode, lan, onCartChange}) {
   const [search, setSearch] = useState(false);
   const [cartToggle, setCartToggle] = useState(false);
   const [cart ,setCart] = useState([]);
-  const {wishlist, setWishlistToggle} = useWishlistStore();
+  const {wishlist, setToggle} = useWishlistStore();
 
   const navDropMenuEL = useRef(null);
   const prevScrollY = useRef(0);
@@ -121,7 +121,7 @@ function Navbar ({darkMode, lan, onCartChange}) {
         }
         break;
       case 'toggle_wishlist_to_true':
-        return setWishlistToggle(true);
+        return setToggle(true);
       case 'navigate_to_path':
         navigate(path);
         setTimeout(scroll({top: 0, behavior: 'smooth'}), 500);
