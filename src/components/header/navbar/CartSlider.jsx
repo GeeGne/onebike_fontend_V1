@@ -5,6 +5,9 @@ import {useNavigate} from 'react-router-dom';
 // SCSS
 import '/src/styles/components/header/navbar/CartSlider.scss';
 
+// STORES
+import {useCartStore} from '/src/store/store';
+
 // REDUCERS
 import cartReducer from '/src/reducers/cartReducer';
 
@@ -34,9 +37,10 @@ import brandLogo2 from '/assets/img/logo/giant.webp';
 import brandLogo3 from '/assets/img/logo/evoc.webp';
 
 function CartSlider ({darkMode, lan, onCartChange, cartToggle, onCartToggleChange}) {
-  const cartDispatchData = useContext(CartProductsContext);
-  const [cart, dispatch] = useReducer(cartReducer, localStorage.get('cart') || []);
-  
+  // const cartDispatchData = useContext(CartProductsContext);
+  // const [cart, dispatch] = useReducer(cartReducer, localStorage.get('cart') || []);
+  const {cart, toggle, addProductToCart, removeProductFromCart} = useCartStore();
+
   const cartContainerElement = useRef(null);  
   const sliderElement = useRef(null);
   const cartProductsELS = useRef([]);
@@ -51,12 +55,12 @@ function CartSlider ({darkMode, lan, onCartChange, cartToggle, onCartToggleChang
   const getProductImgURL = product => `/assets/img/products/${product.category}/${product.type}/${product.id + '-' + product.color.en}-front.webp`;
   const getProduct = id => products.filter(product => product.id === id)[0];
 
-  useEffect(() => {
-    const saveToLocalStorage = () => isInitialMount.current ? (isInitialMount.current = false) : localStorage.set('cart', cart);
-    onCartChange(cart);
-    saveToLocalStorage();
-  }, [cart])
-  useEffect(() => dispatch(cartDispatchData), [cartDispatchData]);
+  // useEffect(() => {
+    // const saveToLocalStorage = () => isInitialMount.current ? (isInitialMount.current = false) : localStorage.set('cart', cart);
+    // onCartChange(cart);
+    // saveToLocalStorage();
+  // }, [cart])
+  // useEffect(() => dispatch(cartDispatchData), [cartDispatchData]);
 
   useEffect(() => {
     const containerStyle = cartContainerElement.current.style;
@@ -85,13 +89,16 @@ function CartSlider ({darkMode, lan, onCartChange, cartToggle, onCartToggleChang
     switch(type) {
       case 'REMOVE_FROM_CART':
         styleProductWhenRemoved();
-        setTimeout(() => dispatch({type, product}), 250);
+        setTimeout(() => removeProductFromCart(product), 250);
+        // setTimeout(() => dispatch({type, product}), 250);
         break;
       case 'INCREASE_AMOUNT_BY_ONE':
-        dispatch({type, product, quantity: 1});
+        addProductToCart(product, 1);
+        // dispatch({type, product, quantity: 1});
         break;
       case 'DECREASE_AMOUNT_BY_ONE':
-        dispatch({type, product, quantity: -1});
+        addProductToCart(product, -1);
+        // dispatch({type, product, quantity: -1});
         break;
       case 'exit-slider':
         onCartToggleChange(false);

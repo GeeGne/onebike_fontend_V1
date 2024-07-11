@@ -12,7 +12,7 @@ import WishlistSlider from './WishlistSlider';
 import cartReducer from '/src/reducers/cartReducer.js';
 
 // STORE
-import {useWishlistStore} from '/src/store/store';
+import {useWishlistStore, useCartStore} from '/src/store/store';
 
 // SCSS
 import '/src/styles/components/header/navbar/Navbar.scss';
@@ -29,7 +29,8 @@ function Navbar ({darkMode, lan, onCartChange}) {
   const [menu, setMenu] = useState(false);
   const [search, setSearch] = useState(false);
   const [cartToggle, setCartToggle] = useState(false);
-  const [cart ,setCart] = useState([]);
+  // const [cart ,setCart] = useState([]);
+  const {cart} = useCartStore();
   const {wishlist, setToggle} = useWishlistStore();
 
   const navDropMenuEL = useRef(null);

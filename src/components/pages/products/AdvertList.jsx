@@ -2,7 +2,7 @@
 import React, {useState, useEffect, useRef, useReducer} from 'react';
 
 // STORE
-import {useWishlistStore} from '/src/store/store';
+import {useWishlistStore, useCartStore} from '/src/store/store';
 
 // SCSS
 import '/src/styles/components/pages/products/AdvertList.scss';
@@ -30,7 +30,8 @@ import brandLogo3 from '/assets/img/logo/evoc.webp';
 
 function AdvertList ({darkMode, lan, matchedProducts, onCartProductsChange}) {
   const {wishlist, addProductToWishlist, removeProductFromWishlist} = useWishlistStore();
-  const [cartDispatchData, setCartDispatchData] = useState([]);
+  // const [cartDispatchData, setCartDispatchData] = useState([]);
+  const {addProductToCart, removeProductFromCart} = useCartStore();
   const [loadLimit, setLoadLimit] = useState(0);
   const allProductsLoaded = loadLimit === matchedProducts.length;
 
@@ -47,9 +48,9 @@ function AdvertList ({darkMode, lan, matchedProducts, onCartProductsChange}) {
   const isProductInWishlist = product => wishlist.some(item => item.id === product.id);
 
 
-  useEffect(() => {
-    onCartProductsChange(cartDispatchData);
-  }, [cartDispatchData])
+  // useEffect(() => {
+  //   onCartProductsChange(cartDispatchData);
+  // }, [cartDispatchData])
 
   useEffect(() => {
     setLoadLimit(24 < matchedProducts.length ? 24 : matchedProducts.length);
@@ -87,14 +88,17 @@ function AdvertList ({darkMode, lan, matchedProducts, onCartProductsChange}) {
 
   const handleClick = e => {
     const {type, productId} = e.currentTarget.dataset;
-    const getProduct = id => products.filter(product => product.id === id)[0]
+    const getProduct = id => products.filter(product => product.id === id)[0];
 
     switch (type) {
       case 'ADD_TO_CART':
         const getAmountEL = fetchElementById(e.target, 'productId', productAmountELs.current);
         const quantity = Number(getAmountEL.textContent);
         const product = getProduct(Number(productId));
-        setCartDispatchData({type, quantity, product});
+        console.log({product, quantity})
+        addProductToCart(product, quantity);
+        // setCartDispatchData({type, quantity, product});
+
         break;
       case 'add_product_to_wishlist':
         e.target.style.opacity = '0';
