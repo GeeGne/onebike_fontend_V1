@@ -110,7 +110,7 @@ function SignUp ({darkMode, lan}) {
     const isOperationSucesssful = await signUpWithEmailAndPass();
     if (isOperationSucesssful) {
       await submitForm();
-      scroll({top: 0, behavior: 'smooth'});
+      setTimeout(() => window.scroll({top: 0, behavior: 'smooth'}), 500);
     } else {
       formEL.current.style.border = 'solid var(--red-color) 2px';
     }
@@ -242,7 +242,7 @@ function SignUp ({darkMode, lan}) {
 
   const handleClick = e => {
     navigate(path(e.target))
-    scroll({top: 0, behavior: 'smooth'});
+    setTimeout(() => window.scroll({top: 0, behavior: 'smooth'}), 500);
   }
 
   const handleProcessing = text => {

@@ -50,7 +50,7 @@ function SignIn ({darkMode, lan}) {
   
   useEffect(() => {
     redirector.signin(pathname, user)
-    if (!user) {
+    if (!user && pathname.includes('checkouts')) {
       setAlertText(en ? 'Almost there! Sign in to finalize your purchase' : 'أنت على وشك الانتهاء! سجل الدخول لإتمام عملية الشراء');
       setNewAlert(Math.random());
     }
@@ -104,7 +104,7 @@ function SignIn ({darkMode, lan}) {
 
     const isOperationSucessful = await signIn();
     setProcessing(false);
-    scroll({top: 0, behavior: 'smooth'});
+    setTimeout(() => window.scroll({top: 0, behavior: 'smooth'}), 500);
   }
 
   const handleChange = e => {
@@ -149,7 +149,7 @@ function SignIn ({darkMode, lan}) {
 
   const handleClick = e => {
     navigate(path(e.target))
-    scroll({top: 0, behavior: 'smooth'});
+    setTimeout(() => window.scroll({top: 0, behavior: 'smooth'}), 500);
   }
 
   const handleKeyDown = e => {

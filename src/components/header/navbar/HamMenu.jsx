@@ -112,7 +112,7 @@ function HamMenu ({menu, onMenuChange, darkMode, lan}) {
     if (type === 'third list') {
       navigate(`/${cleanseString(mainList)}/${cleanseString(thirdData)}`);
       onMenuChange(false);
-      window.scroll({top: 0, behavior: 'smooth'});
+      setTimeout(() => window.scroll({top: 0, behavior: 'smooth'}), 500);
     }
   }
 

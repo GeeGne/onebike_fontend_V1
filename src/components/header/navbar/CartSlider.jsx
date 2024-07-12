@@ -103,7 +103,7 @@ function CartSlider ({darkMode, lan}) {
         setCartToggle(false);
         break;
       case 'nav-to-checkouts':
-        setTimeout(() => scroll({top: 0, behavior: 'smooth'}), 500);
+        setTimeout(() => window.scroll({top: 0, behavior: 'smooth'}), 500);
         setCartToggle(false);
         navigate('/checkouts/login');
         break;

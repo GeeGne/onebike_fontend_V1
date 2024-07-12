@@ -77,12 +77,13 @@ function ImageSlider () {
   }
 
   const handleEnd = e => {
+    const scroll = (e, left, behavior) => e.scroll({left, behavior});
     const activateLength = 100;
+    
     if (amountX.current > activateLength) {
       scroll(imageSliderElement.current, vars('scroll left').sliderBetweenImagesWidth, 'smooth');    
       setCurrentImage(oldNum => vars().lastIndex === oldNum ? 0 : oldNum + 1);
-    } else if (amountX.current < -1 * activateLength) {
-      action('scroll right');
+    } else if (amountX.current < -1 * activateLength) {    
       scroll(imageSliderElement.current, vars('scroll right').sliderBetweenImagesWidth, 'smooth');    
       setCurrentImage(oldNum => oldNum  === 0 ? vars().lastIndex : oldNum - 1);
     } else {

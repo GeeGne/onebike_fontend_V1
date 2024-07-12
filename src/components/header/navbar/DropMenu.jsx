@@ -30,7 +30,7 @@ function DropMenu ({darkMode, lan, menu}) {
   const handleClick = (e, mainData, thirdData) => {
     e.stopPropagation();
     navigate(`/${cleanseString(mainData)}${thirdData ? '/' + cleanseString(thirdData) : ''}`);
-    window.scroll({top: 0, behavior: 'smooth'});
+    setTimeout(() => window.scroll({top: 0, behavior: 'smooth'}), 500);
   }
                                                          
   return (

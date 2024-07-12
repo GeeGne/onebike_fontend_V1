@@ -124,7 +124,7 @@ function Navbar ({darkMode, lan}) {
         return setWishlistToggle(true);
       case 'navigate_to_path':
         navigate(path);
-        setTimeout(scroll({top: 0, behavior: 'smooth'}), 500);
+        setTimeout(() => scroll({top: 0, behavior: 'smooth'}), 500);
         break;
       default:
         console.error('Error: Unknown action: ' + action);
