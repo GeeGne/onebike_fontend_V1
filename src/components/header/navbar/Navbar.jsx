@@ -23,15 +23,14 @@ import searchIcon from '/assets/img/icons/search.svg';
 import searchIconDarkMode from '/assets/img/icons/search_darkMode.svg';
 
 
-function Navbar ({darkMode, lan, onCartChange}) {
+function Navbar ({darkMode, lan}) {
   
   const navigate = useNavigate();
   const [menu, setMenu] = useState(false);
   const [search, setSearch] = useState(false);
-  const [cartToggle, setCartToggle] = useState(false);
-  // const [cart ,setCart] = useState([]);
-  const {cart} = useCartStore();
-  const {wishlist, setToggle} = useWishlistStore();
+  // const [cartToggle, setCartToggle] = useState(false);
+  const {cart, toggle: cartToggle, setToggle: setCartToggle} = useCartStore();
+  const {wishlist, setToggle: setWishlistToggle} = useWishlistStore();
 
   const navDropMenuEL = useRef(null);
   const prevScrollY = useRef(0);
@@ -43,11 +42,11 @@ function Navbar ({darkMode, lan, onCartChange}) {
   const cartBtnEL = useRef(null);
 
   const menuData = setMenu;
-  const cartToggleData = setCartToggle;
-  const cartData = (data) => {
-    setCart(data);
-    onCartChange(data);
-  }
+  // const cartToggleData = setCartToggle;
+  // const cartData = (data) => {
+    // setCart(data);
+    // onCartChange(data);
+  // }
 
   const isCartEmpty = cart.length === 0;
   const isWishlistEmpty = wishlist.length === 0;
@@ -122,7 +121,7 @@ function Navbar ({darkMode, lan, onCartChange}) {
         }
         break;
       case 'toggle_wishlist_to_true':
-        return setToggle(true);
+        return setWishlistToggle(true);
       case 'navigate_to_path':
         navigate(path);
         setTimeout(scroll({top: 0, behavior: 'smooth'}), 500);
@@ -162,8 +161,7 @@ function Navbar ({darkMode, lan, onCartChange}) {
       <DropMenu menu={menu} darkMode={darkMode} lan={lan}/>
     </div>
       <HamMenu menu={menu} onMenuChange={menuData} darkMode={darkMode} lan={lan}/>
-      <CartSlider darkMode={darkMode} lan={lan} onCartChange={cartData} cartToggle={cartToggle} onCartToggleChange={cartToggleData} />
-      {/* <WishlistSlider darkMode={darkMode} lan={lan} wishlistToggle={wishlistToggle} onWishlistToggleChange={wishlistToggleData} /> */}
+      <CartSlider darkMode={darkMode} lan={lan} />
       <WishlistSlider darkMode={darkMode} lan={lan} />
       {/* <Outlet/> */}
     </>

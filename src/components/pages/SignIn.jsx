@@ -27,8 +27,8 @@ function SignIn ({darkMode, lan}) {
   const redirector = new Redirector(navigate);
 
   const [processing, setProcessing] = useState(false);
-  const [alertText, setAlertText] = useState(null);
   const [newAlert, setNewAlert] = useState(0);
+  const [alertText, setAlertText] = useState(null);
   const [user, setUser] = useState(null);
   const [forgotPass, setForgotPass] = useState(false);
   const [formData, setFormData] =  useState({
@@ -48,7 +48,13 @@ function SignIn ({darkMode, lan}) {
   const pageTitle = forgotPass ? (en ? 'Reset your password' : 'إعادة تعيين كلمة المرور') : (en ? 'LOGIN' : 'تسجيل الدخول');
   const description = forgotPass ? (en ? 'We will send an email to reset your passowrd' : 'سنرسل بريدًا إلكترونيًا لإعادة تعيين كلمة المرور') : '';
   
-  useEffect(() => redirector.signin(pathname, user), [user]);
+  useEffect(() => {
+    redirector.signin(pathname, user)
+    if (!user) {
+      setAlertText(en ? 'Almost there! Sign in to finalize your purchase' : 'أنت على وشك الانتهاء! سجل الدخول لإتمام عملية الشراء');
+      setNewAlert(Math.random());
+    }
+  }, [user]);
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => setUser(user));
     return () => unsubscribe();

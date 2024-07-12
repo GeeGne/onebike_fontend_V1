@@ -2,8 +2,11 @@
 import React, {useState, useEffect, useRef} from 'react';
 import {useNavigate} from 'react-router-dom';
 
+// COMPONENTS
+import Alert from '/src/components/Alert';
+
 // STORE
-import {useWishlistStore} from '/src/store/store';
+import {useWishlistStore, useCartStore} from '/src/store/store';
 
 // SCSS
 import '/src/styles/components/AdvertTile.scss';
@@ -29,7 +32,10 @@ import heartDarkMode from '/assets/img/icons/heart_darkMode.svg';
 
 function AdvertTile ({darkMode, lan, type}) {
   
+  const {addProductToCart, removedProductFromCart} = useCartStore(); 
   const {wishlist, addProductToWishlist, removeProductFromWishlist} = useWishlistStore();
+  const [newAlert, setNewAlert] = useState(0);
+  const [alertText, setAlertText] = useState(null);
 
   const listEL = useRef(null);
   const productConEL = useRef(null);
@@ -91,7 +97,6 @@ function AdvertTile ({darkMode, lan, type}) {
     const productConWidth = productConEL.current.offsetWidth;
     const fontSize = window.getComputedStyle(productConEL.current, null).getPropertyValue('font-size');
     const gapLength = parseFloat(fontSize);
-
     const getProduct = id => products.filter(product => product.id === id)[0];
 
     const getURL = () => {
@@ -119,6 +124,8 @@ function AdvertTile ({darkMode, lan, type}) {
         listEL.current.scrollBy({left: productConWidth + gapLength, behavior: "smooth"});
         break;
       case 'add_product_to_wishlist':
+        setAlertText(`${en ? '' : 'تم اضافه'} ${getProduct(Number(productId)).title[lan]} ${en ? 'is added to Wishlist!' : 'الى المفضله!'}`);
+        setNewAlert(Math.random());
         e.target.style.opacity = '0';
         clearTimeout(addTimerID.current);
         addTimerID.current = setTimeout(() => {
@@ -127,12 +134,20 @@ function AdvertTile ({darkMode, lan, type}) {
         }, 250);
         break;
       case 'remove_product_from_wishlist':
-          e.target.style.opacity = '0';
-          clearTimeout(removeTimerID.current);
-          removeTimerID.current = setTimeout(() => {
-            e.target.style.opacity = '1';
-            removeProductFromWishlist(getProduct(Number(productId)));
-          }, 250)
+        setAlertText(`${en ? '' : 'تم ازاله'} ${getProduct(Number(productId)).title[lan]} ${en ? 'is removed from Wishlist!' : 'من المفضله!'}`);
+        setNewAlert(Math.random());
+        e.target.style.opacity = '0';
+        clearTimeout(removeTimerID.current);
+        removeTimerID.current = setTimeout(() => {
+          e.target.style.opacity = '1';
+          removeProductFromWishlist(getProduct(Number(productId)));
+        }, 250)
+        break;
+      case 'add_to_cart':
+        const amount = 1;
+        addProductToCart(getProduct(Number(productId)), amount);
+        setAlertText(`${en ? '' : 'تم اضافه'} ${getProduct(Number(productId)).title[lan]} ${en ? 'is added to cart' : 'الى السله!'}`);
+        setNewAlert(Math.random());
         break;
       default:
         console.error('Error: Unknown Action: ' + action);
@@ -140,7 +155,8 @@ function AdvertTile ({darkMode, lan, type}) {
   }
 
   return (
-  <section className="advertTile">
+    <section className="advertTile">
+      <Alert alertText={alertText} newAlert={newAlert} />
       <div className="advertTile__panel">
         <h2 className="advertTile__panel__title --colorChange-view">{type.name[lan].toUpperCase()}</h2>
         <span className="advertTile__panel__see-more --colorChange-view" data-action="navigate_to_url" onClick={handleClick}>{en ? 'See More' : 'شاهد المزيد'}</span>
@@ -152,17 +168,16 @@ function AdvertTile ({darkMode, lan, type}) {
         <ul className="advertTile__list__products" ref={listEL}>
           {getProducts.map(product => 
           <li className="advertTile__list__products__product --slide-to-left" key={product.id} ref={productConEL}>
-            {isProductInWishlist(product) ? 
-            <button className="advertTile__list__products__product__heart-btn added-to-wishlist" data-action="remove_product_from_wishlist" data-product-id={product.id} onClick={handleClick} />
-            : 
-            <button className="advertTile__list__products__product__heart-btn" data-action="add_product_to_wishlist" data-product-id={product.id} onClick={handleClick} />
+            {isProductInWishlist(product) 
+            ? <button className="advertTile__list__products__product__heart-btn added-to-wishlist" data-action="remove_product_from_wishlist" data-product-id={product.id} onClick={handleClick} />
+            : <button className="advertTile__list__products__product__heart-btn" data-action="add_product_to_wishlist" data-product-id={product.id} onClick={handleClick} />
             }
             <img className="advertTile__list__products__product__img" src={getProductImgURL(product)} />
             {product.discount && <div className="advertTile__list__products__product__discount">{lan === 'ar' ? 'خصم ' : ''}{calculateDiscountPercantage(product.price, product.discount)}{en ? ' off' : ''}</div>}
             <h3 className="advertTile__list__products__product__description">{product.title[lan]}</h3>
             <div className="advertTile__list__products__product__price">
-              {product.discount ? <>
-              <span className="now" style={nowStyle}>{en ? 'NOW' : 'الان'}</span> 
+              {product.discount 
+              ? <> <span className="now" style={nowStyle}>{en ? 'NOW' : 'الان'}</span> 
               <span className="total">{getProductPrice(product)}</span>
               <span className="currency-symbol">{en ? 'S.P ' : 'ل.س'}</span>
               <s className='old'>{formatNumberWithCommas(product.price)}</s></>
@@ -170,7 +185,7 @@ function AdvertTile ({darkMode, lan, type}) {
               <span className="currency-symbol">{en ? 'S.P' : 'ل.س'}</span>
               </>}
             </div>
-            <button className="advertTile__list__products__product__add-btn">{en ? 'Add to cart' : 'اضف الى السله'}</button>
+            <button className="advertTile__list__products__product__add-btn" data-action="add_to_cart" data-product-id={product.id} onClick={handleClick}>{en ? 'Add to cart' : 'اضف الى السله'}</button>
           </li>      
           )}
         </ul>

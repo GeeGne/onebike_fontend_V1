@@ -9,11 +9,14 @@
   &__form {
     display: grid;
     gap: 1em;
-    padding-block: 2em;
+    padding-block: 30vw;
     margin-inline: auto;
     width: 75%;
-
-    @include w.breakpoint-up (medium) {width: 27em}
+    @include w.breakpoint-up (medium) {
+      width: 27em;
+      padding-block: 25vw;
+    }
+    @include w.breakpoint-up (xlarge) {padding-block: 15vw;}
     
     &__password,
     &__email {

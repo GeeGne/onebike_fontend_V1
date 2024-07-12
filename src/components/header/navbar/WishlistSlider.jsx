@@ -93,12 +93,15 @@ function WishlistSlider ({darkMode, lan}) {
 
   const handleClick = e => {
     const {action, productId} = e.currentTarget.dataset;
-
+    const addStylesWhenProductIsRemoved = (el) => {
+      el.classList.remove('--pop-in');
+      setTimeout(() => el.style.opacity= '0', 10);
+    }
+    
     switch (action) {
       case 'remove_product_from_wishlist':
         const productEL = wishlistProductsELS.current.filter(el => el.dataset.productId === productId)[0];
-        productEL.classList.remove('--pop-in');
-        setTimeout(() => productEL.style.opacity= '0', 10);
+        addStylesWhenProductIsRemoved(productEL)
         setTimeout(() => removeProductFromWishlist(getProduct(Number(productId))), 250);
         break;
       default:

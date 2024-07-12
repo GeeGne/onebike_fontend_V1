@@ -11,6 +11,9 @@ import {useCartStore} from '/src/store/store';
 // REDUCERS
 import cartReducer from '/src/reducers/cartReducer';
 
+// DATA
+import products from '/src/data/products';
+
 // UTILS
 import {CartProductsContext} from '/src/utils/myContext';
 import formatNumberWithCommas from '/src/utils/formatNumberWithCommas';
@@ -36,10 +39,14 @@ import brandLogo from '/assets/img/logo/trek.webp';
 import brandLogo2 from '/assets/img/logo/giant.webp';
 import brandLogo3 from '/assets/img/logo/evoc.webp';
 
-function CartSlider ({darkMode, lan, onCartChange, cartToggle, onCartToggleChange}) {
-  // const cartDispatchData = useContext(CartProductsContext);
-  // const [cart, dispatch] = useReducer(cartReducer, localStorage.get('cart') || []);
-  const {cart, toggle, addProductToCart, removeProductFromCart} = useCartStore();
+function CartSlider ({darkMode, lan}) {
+  const {
+    cart, 
+    toggle: cartToggle, 
+    setToggle: setCartToggle, 
+    addProductToCart, 
+    removeProductFromCart
+  } = useCartStore();
 
   const cartContainerElement = useRef(null);  
   const sliderElement = useRef(null);
@@ -54,13 +61,6 @@ function CartSlider ({darkMode, lan, onCartChange, cartToggle, onCartToggleChang
   cart.forEach(list => (totalPrice += list.quantityPrice));
   const getProductImgURL = product => `/assets/img/products/${product.category}/${product.type}/${product.id + '-' + product.color.en}-front.webp`;
   const getProduct = id => products.filter(product => product.id === id)[0];
-
-  // useEffect(() => {
-    // const saveToLocalStorage = () => isInitialMount.current ? (isInitialMount.current = false) : localStorage.set('cart', cart);
-    // onCartChange(cart);
-    // saveToLocalStorage();
-  // }, [cart])
-  // useEffect(() => dispatch(cartDispatchData), [cartDispatchData]);
 
   useEffect(() => {
     const containerStyle = cartContainerElement.current.style;
@@ -78,34 +78,33 @@ function CartSlider ({darkMode, lan, onCartChange, cartToggle, onCartToggleChang
         containerStyle.backgroundColor= 'hsla(0, 0%, 0%, 0)';
         setTimeout(() => containerStyle.visibility = 'hidden', 500);
         break;
+      default:
+        console.error('Error: cartToggle isn\'t a boolean')
     }
   }, [cartToggle, lan])
 
-  const handleClick = (e, product) => {
-    const {type} = e.target.dataset;
+  const handleClick = e => {
+    const {type, productId} = e.target.dataset;
     const getElement = (els, id) => els.filter(el => Number(el.dataset.productId) === id)[0];
-    const styleProductWhenRemoved = () => getElement(cartProductsELS.current, product.id).style.opacity = '0';
+    const styleProductWhenRemoved = productId => getElement(cartProductsELS.current, productId).style.opacity = '0';
 
     switch(type) {
-      case 'REMOVE_FROM_CART':
-        styleProductWhenRemoved();
-        setTimeout(() => removeProductFromCart(product), 250);
-        // setTimeout(() => dispatch({type, product}), 250);
+      case 'remove_from_cart':
+        styleProductWhenRemoved(Number(productId));
+        setTimeout(() => removeProductFromCart(getProduct(Number(productId))), 250);
         break;
-      case 'INCREASE_AMOUNT_BY_ONE':
-        addProductToCart(product, 1);
-        // dispatch({type, product, quantity: 1});
+      case 'increase_amount_by_one':
+        addProductToCart(getProduct(Number(productId)), 1);
         break;
-      case 'DECREASE_AMOUNT_BY_ONE':
-        addProductToCart(product, -1);
-        // dispatch({type, product, quantity: -1});
+      case 'decrease_amount_by_one':
+        addProductToCart(getProduct(Number(productId)), -1);
         break;
-      case 'exit-slider':
-        onCartToggleChange(false);
+      case 'exit_slider':
+        setCartToggle(false);
         break;
       case 'nav-to-checkouts':
         setTimeout(() => scroll({top: 0, behavior: 'smooth'}), 500);
-        onCartToggleChange(false);
+        setCartToggle(false);
         navigate('/checkouts/login');
         break;
       default:
@@ -127,17 +126,17 @@ function CartSlider ({darkMode, lan, onCartChange, cartToggle, onCartToggleChang
   }
 
   return (
-    <div className="cartSlider" data-type="exit-slider" onClick={handleClick} ref={cartContainerElement}>
+    <div className="cartSlider" data-type="exit_slider" onClick={handleClick} ref={cartContainerElement}>
       <div className={`cartSlider__slider${cartEmpty ? ' empty' : ''}`} onClick={e => e.stopPropagation()} ref={sliderElement}>
         <div className="cartSlider__slider__empty">
           <img className="cartSlider__slider__empty__cart" src={darkMode ? cartIconDarkMode : cartIcon}/>
           <div className="cartSlider__slider__empty__note">{en ? 'Your Cart Is Empty' : 'سله التسوق فارغه'}</div>
-          <button className="cartSlider__slider__empty__btn" data-type="exit-slider" onClick={handleClick}>{en ? 'Back to shopping' : 'العوده للتسوق'}</button>
+          <button className="cartSlider__slider__empty__btn" data-type="exit_slider" onClick={handleClick}>{en ? 'Back to shopping' : 'العوده للتسوق'}</button>
         </div>
         <section className="cartSlider__slider__top">
           <div className="cartSlider__slider__top__cart">{en ? 'Cart' : 'السله'}</div>
           <div className="cartSlider__slider__top__quantity">{cart.length}</div>
-          <img className="cartSlider__slider__top__exit" data-type="exit-slider" onClick={handleClick} src={darkMode ? closeIconDarkMode : closeIcon} role="button" tabIndex="0"/>
+          <img className="cartSlider__slider__top__exit" data-type="exit_slider" onClick={handleClick} src={darkMode ? closeIconDarkMode : closeIcon} role="button" tabIndex="0"/>
         </section>
         <ul className="cartSlider__slider__products">
           {cart.map((list, i) =>
@@ -146,10 +145,10 @@ function CartSlider ({darkMode, lan, onCartChange, cartToggle, onCartToggleChang
             <a className="cartSlider__slider__products__product__title">{list.product.title[lan]}</a>
             <div className="cartSlider__slider__products__product__price">{en ? 'S.P' : 'ل.س'} {formatNumberWithCommas(list.quantityPrice)}</div>
             <div className="cartSlider__slider__products__product__toggles">
-              <button className="cartSlider__slider__products__product__toggles__delete" data-type="REMOVE_FROM_CART" onClick={e => handleClick(e, list.product)}/> 
-              <button className="cartSlider__slider__products__product__toggles__increment" data-type="INCREASE_AMOUNT_BY_ONE" onClick={e => handleClick(e, list.product)}/>
+              <button className="cartSlider__slider__products__product__toggles__delete" data-type="remove_from_cart" data-product-id={list.id} onClick={handleClick}/> 
+              <button className="cartSlider__slider__products__product__toggles__increment" data-type="increase_amount_by_one" data-product-id={list.id} onClick={handleClick}/>
               <div className="cartSlider__slider__products__product__toggles__value">{list.quantity}</div>
-              <button className="cartSlider__slider__products__product__toggles__decrement" data-type="DECREASE_AMOUNT_BY_ONE" onClick={e => handleClick(e, list.product)}/>
+              <button className="cartSlider__slider__products__product__toggles__decrement" data-type="decrease_amount_by_one" data-product-id={list.id} onClick={handleClick}/>
             </div>
           </li>
           )}

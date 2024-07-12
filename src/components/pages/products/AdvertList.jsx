@@ -1,6 +1,9 @@
 // HOOKS
 import React, {useState, useEffect, useRef, useReducer} from 'react';
 
+// COMPONENTS
+import Alert from '/src/components/Alert';
+
 // STORE
 import {useWishlistStore, useCartStore} from '/src/store/store';
 
@@ -29,11 +32,13 @@ import brandLogo2 from '/assets/img/logo/giant.webp';
 import brandLogo3 from '/assets/img/logo/evoc.webp';
 
 function AdvertList ({darkMode, lan, matchedProducts, onCartProductsChange}) {
+
   const {wishlist, addProductToWishlist, removeProductFromWishlist} = useWishlistStore();
-  // const [cartDispatchData, setCartDispatchData] = useState([]);
   const {addProductToCart, removeProductFromCart} = useCartStore();
   const [loadLimit, setLoadLimit] = useState(0);
   const allProductsLoaded = loadLimit === matchedProducts.length;
+  const [newAlert, setNewAlert] = useState(0);
+  const [alertText, setAlertText] = useState(null);
 
   const addToCartELs = useRef([]);
   const productAmountELs = useRef([]);
@@ -46,11 +51,6 @@ function AdvertList ({darkMode, lan, matchedProducts, onCartProductsChange}) {
   const getProductImgURL = product => `/assets/img/products/${product.category}/${product.type}/${product.id + '-' + product.color.en}-front.webp`;
   const getProductPrice = product => formatNumberWithCommas(calculatePrice(product.price, product.discount));
   const isProductInWishlist = product => wishlist.some(item => item.id === product.id);
-
-
-  // useEffect(() => {
-  //   onCartProductsChange(cartDispatchData);
-  // }, [cartDispatchData])
 
   useEffect(() => {
     setLoadLimit(24 < matchedProducts.length ? 24 : matchedProducts.length);
@@ -91,16 +91,17 @@ function AdvertList ({darkMode, lan, matchedProducts, onCartProductsChange}) {
     const getProduct = id => products.filter(product => product.id === id)[0];
 
     switch (type) {
-      case 'ADD_TO_CART':
+      case 'add_to_cart':
         const getAmountEL = fetchElementById(e.target, 'productId', productAmountELs.current);
         const quantity = Number(getAmountEL.textContent);
         const product = getProduct(Number(productId));
-        console.log({product, quantity})
         addProductToCart(product, quantity);
-        // setCartDispatchData({type, quantity, product});
-
+        setAlertText(`${en ? '' : 'تم اضافه'} x${quantity} ${getProduct(Number(productId)).title[lan]} ${en ? 'is added to cart' : 'الى السله!'}`);
+        setNewAlert(Math.random());
         break;
       case 'add_product_to_wishlist':
+        setAlertText(`${en ? '' : 'تم اضافه'} ${getProduct(Number(productId)).title[lan]} ${en ? 'is added to Wishlist!' : 'الى المفضله!'}`);
+        setNewAlert(Math.random());
         e.target.style.opacity = '0';
         clearTimeout(heartTimerID.current);
         heartTimerID.current = setTimeout(() => {
@@ -109,6 +110,8 @@ function AdvertList ({darkMode, lan, matchedProducts, onCartProductsChange}) {
         }, 250)
         break;
         case 'remove_product_from_wishlist':
+        setAlertText(`${en ? '' : 'تم ازاله'} ${getProduct(Number(productId)).title[lan]} ${en ? 'is removed from Wishlist!' : 'من المفضله!'}`);
+        setNewAlert(Math.random());
         e.target.style.opacity = '0';
         clearTimeout(heartTimerID.current);
         heartTimerID.current = setTimeout(() => {
@@ -123,6 +126,7 @@ function AdvertList ({darkMode, lan, matchedProducts, onCartProductsChange}) {
 
   return (
     <div className='advertList'>
+    <Alert alertText={alertText} newAlert={newAlert} />
       <section className="advertList__advert-sctn">
         <ul className="advertList__advert-sctn__grid">
           {displayedProducts.map((product, i) => 
@@ -147,7 +151,7 @@ function AdvertList ({darkMode, lan, matchedProducts, onCartProductsChange}) {
             </div>
             <div className="advertList__advert-sctn__grid__product__btns">
               <button className="advertList__advert-sctn__grid__product__btns__add-to-cart"
-              data-type="ADD_TO_CART" data-product-id={product.id} onClick={handleClick}>{en ? 'Add to cart' : 'اضف الى السله'}</button>  
+              data-type="add_to_cart" data-product-id={product.id} onClick={handleClick}>{en ? 'Add to cart' : 'اضف الى السله'}</button>  
               <button className="advertList__advert-sctn__grid__product__btns__increment" data-product-id={product.id} onClick={e => updateProductAmount(e, 1)}></button>  
               <div className="advertList__advert-sctn__grid__product__btns__total" data-product-id={product.id} ref={el => addRef('productAmountELs', el, i)}>1</div>  
               <button className="advertList__advert-sctn__grid__product__btns__decrement" data-product-id={product.id} onClick={e => updateProductAmount(e, -1)}></button>  
