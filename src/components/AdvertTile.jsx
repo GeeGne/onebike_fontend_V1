@@ -146,7 +146,7 @@ function AdvertTile ({darkMode, lan, type}) {
       case 'add_to_cart':
         const amount = 1;
         addProductToCart(getProduct(Number(productId)), amount);
-        setAlertText(`${en ? '' : 'تم اضافه'} ${getProduct(Number(productId)).title[lan]} ${en ? 'is added to cart' : 'الى السله!'}`);
+        setAlertText(`${en ? '' : 'تم اضافه'} ${getProduct(Number(productId)).title[lan]} ${en ? 'is added to Cart!' : 'الى السله!'}`);
         setNewAlert(Math.random());
         break;
       default:

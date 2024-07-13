@@ -1,10 +1,11 @@
-.language-button {
+.language-btn {
   position: relative;
   display: flex;
   color: var(--font-p-color);
   border: solid var(--font-p-color);;
   border-width: 0 0 2px 0;
   z-index: 30;
+  cursor: pointer;
 
   &:hover {color: var(--font-h-color)}
 
@@ -44,12 +45,9 @@
     left: 50%;
     transform: translateX(-50%);
     box-shadow: 0 0 10px 0.1px hsl(0, 0%, 70%, 0.8);
+    body.arabic & {direction: rtl}
 
-    body.arabic & {
-      direction: rtl;
-    }
-
-    & li button {  
+    & li {  
       position: relative;
       display: flex;
       width: 100%;
@@ -59,13 +57,11 @@
       padding: 1em 0.5em;
       transition: background-color 0.15s ease;
 
-      &:hover {
-        background-color: var(--language-list-color-hover);
-      }
+      &:hover {background-color: var(--language-list-color-hover)}
     }
   }
 
-  & li:first-child button::before {
+  & li:first-child::before {
     content: "";
     position: absolute;
     bottom: 0;

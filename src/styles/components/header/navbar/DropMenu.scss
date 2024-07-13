@@ -3,10 +3,9 @@
 .drop-menu {
   position: relative;
   transition: height 0.5s ease;
-  
-  @include w.breakpoint-down(large) {
-    display: none;
-  }
+  @include w.breakpoint-down(large) {display: none}
+
+  body.arabic & {direction: rtl}
 
   &__items {
     position: absolute;
@@ -104,10 +103,9 @@
         top: 100%;
         left: 0;
         width: 100%;
-        background-color: var(--dropMenu-subItems-background-color);
         padding: 2em;
         z-index: 20;
-        transition: opacity 0.5s ease-out;
+        transition: opacity 0.25s ease-in;
 
         &::before {
           content: "";
@@ -118,6 +116,7 @@
           width: 100vw;
           height: 100%;
           background-color: var(--dropMenu-subItems-background-color);
+          backdrop-filter: blur(3px);
           z-index: -1;
         }
 

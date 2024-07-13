@@ -82,12 +82,12 @@ function HamMenu ({menu, onMenuChange, darkMode, lan}) {
       if (elementClicked) {
         titleElement.classList.remove('clicked');
         matchedSecondaryElement.classList.remove('clicked');
-        matchedSecondaryElement.style.height = '0';
+        matchedSecondaryElement.style.maxHeight = '0';
       } else if (!elementClicked) {
         document.body.style.overFlow = "hidden hidden";
         titleElement.classList.add('clicked');
         matchedSecondaryElement.classList.add('clicked');
-        matchedSecondaryElement.style.height = `${matchedSecondaryElementScrollHeight}px`;
+        matchedSecondaryElement.style.maxHeight = `${matchedSecondaryElementScrollHeight}px`;
       }
     }
 
@@ -97,16 +97,17 @@ function HamMenu ({menu, onMenuChange, darkMode, lan}) {
       const matchedThirdElement = getElement(thirdListContainerElements.current, getListId(secondSectionElement));
       const matchedThirdElementScrollHeight = matchedThirdElement.scrollHeight; 
       const elementClicked = secondSectionElement.classList.contains('clicked');
+      const adjustSecondaryElementMaxHeight = () => secondaryListElements.current.forEach(el => el.classList.contains('clicked') && (el.style.maxHeight = el.scrollHeight + 'px'));
 
       if (elementClicked) {
         secondSectionElement.classList.remove('clicked');
-        matchedThirdElement.style.height = '0';
+        matchedThirdElement.style.maxHeight = '0';
       } else if (!elementClicked) {
         document.body.style.overFlow = "hidden hidden";
         secondSectionElement.classList.add('clicked');
-        matchedThirdElement.style.height = `${matchedThirdElementScrollHeight}px`;
+        matchedThirdElement.style.maxHeight = `${matchedThirdElementScrollHeight}px`;
+        setTimeout(() => adjustSecondaryElementMaxHeight(), 300);
       }
-      secondaryListElements.current.forEach(el => el.classList.contains('clicked') && (el.style.height = `100%`))
     }
 
     if (type === 'third list') {

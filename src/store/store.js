@@ -1,6 +1,6 @@
 // ZUSTAND
 import {create} from 'zustand';
-import {persist} from 'zustand/middleware';
+import {persist, createJSONStorage } from 'zustand/middleware';
 
 // UTILS
 import calculatePrice from '/src/utils/calculatePrice';
@@ -17,7 +17,7 @@ const useWishlistStore = create(
     }),
     {
       name: 'wishlist-storage',
-      getStorage: () => localStorage,
+      storage: createJSONStorage(() => localStorage),
     }
   )
 )
@@ -65,7 +65,7 @@ const useCartStore = create(
     }),
     {
       name: 'cart-storage',
-      getStorage: () => localStorage,
+      storage: createJSONStorage(() => localStorage),
     }
   )
 );

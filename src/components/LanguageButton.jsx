@@ -39,18 +39,18 @@ function LanguageButton ({onLanguageChange}) {
     en ? switchToEnglish() : switchToArabic();
     onLanguageChange(lan);
     saveToStorage();
-  },[lan])
+  },[lan])  
 
   return (
-    <button className="language-button" onClick={() => setLanguageList(prevLang => !prevLang)} ref={languageElement}>
-      <span className="language-button__display">{lan === 'en' ? 'English' : 'العربيه'}</span>
+    <div className="language-btn" tabIndex="0" role="button" onClick={() => setLanguageList(prevLang => !prevLang)} onKeyDown={e => e.key === 'Enter' && setLanguageList(prevLang => !prevLang)} ref={languageElement}>
+      <span className="language-btn__display">{lan === 'en' ? 'English' : 'العربيه'}</span>
       {languageList &&
-      <ul className="language-button__list">
-        <li><button onClick={() => setLanguage('en')}>English</button></li>
-        <li><button onClick={() => setLanguage('ar')}>العربيه</button></li>
+      <ul className="language-btn__list">
+        <li tabIndex="0" role="button" onKeyDown={e => e.key === 'Enter' && setLanguage('en')} onClick={() => setLanguage('en')}>English</li>
+        <li tabIndex="0" role="button" onKeyDown={e => e.key === 'Enter' && setLanguage('ar')} onClick={() => setLanguage('ar')}>العربيه</li>
       </ul>
       }
-    </button>
+    </div>
   )
 }
 

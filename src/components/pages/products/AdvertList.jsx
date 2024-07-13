@@ -96,7 +96,7 @@ function AdvertList ({darkMode, lan, matchedProducts, onCartProductsChange}) {
         const quantity = Number(getAmountEL.textContent);
         const product = getProduct(Number(productId));
         addProductToCart(product, quantity);
-        setAlertText(`${en ? '' : 'تم اضافه'} x${quantity} ${getProduct(Number(productId)).title[lan]} ${en ? 'is added to cart' : 'الى السله!'}`);
+        setAlertText(`${en ? '' : 'تم اضافه'} x${quantity} ${getProduct(Number(productId)).title[lan]} ${en ? 'is added to Cart!' : 'الى السله!'}`);
         setNewAlert(Math.random());
         break;
       case 'add_product_to_wishlist':

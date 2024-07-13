@@ -11,8 +11,8 @@
   background-color: hsl(0, 0%, 0%, 0);
   z-index: 100;
   transition: background-color 0.5s ease-out;
-
   @include w.breakpoint-up(large) {display: none}
+  body.arabic & {direction: rtl}
 
   &__slider {
     display: flex;
@@ -28,9 +28,7 @@
       background-color: var(--secondary-color);
       padding: 1rem;
       
-      &__h1 {
-        color: var(--font-h-color);
-      }
+      &__h1 {color: var(--font-h-color)}
 
       &__exit-icon {
         border-radius: 6rem;
@@ -40,35 +38,22 @@
         cursor: pointer;
         transition: background-color 0.25s ease;
 
-        &:hover {
-          background-color: var(--light-background-color);
-        }
+        &:hover {background-color: var(--light-background-color)}
       }
     }
 
     &__menuL {
       overflow-y: auto;
       
-      &::-webkit-scrollbar {
-        width: 0.5em;
-      }
-    
+      &::-webkit-scrollbar {width: 0.5em}
       &::-webkit-scrollbar-thumb {
         cursor: grab;
         background-color: var(--sideMenu-scrollBar-background-color);
         transition: background-color 0.15s;
       }
-      &::-webkit-scrollbar-thumb:active {
-        cursor: grabbing;
-      }
-    
-      &::-webkit-scrollbar-thumb:hover {
-        background-color: hsl(0, 0%, 50%);
-      }
-    
-      &::-webkit-scrollbar-track {
-        background-color: rgba(42, 42, 42, 0);
-      }
+      &::-webkit-scrollbar-thumb:active {cursor: grabbing}
+      &::-webkit-scrollbar-thumb:hover {background-color: hsl(0, 0%, 50%)}
+      &::-webkit-scrollbar-track {background-color: rgba(42, 42, 42, 0)}
 
       &__lists {
         position: relative;
@@ -91,13 +76,13 @@
           position: relative;
           display: flex;
           align-items: center;
+          justify-content: space-between;
           padding: 0.7em 0.7em 0 0.7em;
           opacity: 0.8;
           color: var(--font-h-color);
           cursor: pointer;
-          &.clicked {
-            opacity: 1;
-          }
+          &.clicked {opacity: 1}
+          &:hover {opacity: 1}
 
           &::before {
             content: "";
@@ -108,41 +93,34 @@
             height: calc(80% + 0px);
             background-color: var(--primary-color);
             transform: translateX(-0.22em);
-            // transform: translateX(0);
             transition: transform 0.25s ease;
-          }
-          &.clicked::before {
-            transform: translateX(0);
-          }
 
-          &:hover {
-            opacity: 1;
+            body.arabic & {
+              transform: translateX(0.22em);
+              left: auto;
+              right: 0;
+            }
           }
+          &.clicked::before {transform: translateX(0) !important}
 
           &__h2 {}
-          &.clicked &__h2 {
-            font-weight: 550;
-          }
+          &.clicked &__h2 {font-weight: 550}
 
           & .expand-circle {
-            // display: flex;
             width: var(--icon-size);
-            margin-left: auto;
-            transition: transform 0.5s ease-out;
+            transition: transform 0.25s ease-out;
           }
-          &.clicked .expand-circle {
-            transform: rotate(-180deg)
-          }
+          &.clicked .expand-circle {transform: rotate(-180deg)}
         }
 
         &__secondaryL {
           display: flex;
           flex-direction: column;
           overflow: hidden;
-          height: 0;
-          transition: height 0.5s ease;
+          max-height: 0;
           margin: 0.35em 0;
           background-color: var(--hamMenu-secondaryList-background-color);
+          transition: max-height 0.25s ease-out;
 
           &__lists {
             display: flex;
@@ -158,9 +136,7 @@
               &__h3 {
                 
               }
-              &.clicked &__h3 {
-                font-weight: 550;
-              }
+              &.clicked &__h3 {font-weight: 550}
 
               &__img {
                 width: var(--hamMenu-thirdList-addIcon-size);
@@ -169,16 +145,15 @@
                 background-size: cover;
                 background-repeat: no-repeat;
               }
-              &.clicked &__img {
-                background-image: var(--hamMenu-remove-icon);
-              }
+              &.clicked &__img {background-image: var(--hamMenu-remove-icon)}
             }
 
             &__thirdL {   
               background-color: var(--hamMenu-thirdList-background-color);
-              height: 0;
+              max-height: 0;
               overflow: hidden;
-              transition: height 0.5s ease;
+              transition: max-height 0.25s ease-in;
+              
               &__lists {
                 cursor: pointer;
                 &__h3{
@@ -197,40 +172,4 @@
       }
     }
   } 
-
-  body.arabic & {
-    direction: rtl;
-    &__slider {
-      &__menuL {
-        &__lists {
-          &__title {
-            &::before {
-              left: auto;
-              right: 0;
-              transform: translateX(0.22em);
-            }
-
-            & .expand-circle {
-              margin-right: auto;
-              margin-left: 0;
-            }
-
-            &.clicked {
-              &::before {
-                transform: translateX(0);
-              }
-            }
-          }
-
-          &__secondaryL {
-            &__lists {
-              &__h3{}
-            }
-          }
-        }
-      }
-
-      
-    }
-  }
 }
