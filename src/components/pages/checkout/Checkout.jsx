@@ -12,6 +12,9 @@ import OrderSummary from '/src/components/pages/checkout/OrderSummary';
 // SCSS
 import '/src/styles/components/pages/checkout/Checkout.scss';
 
+// STORE
+import {useCartStore} from '/src/store/store';
+
 // REDUCERS
 import orderReducer from '/src/reducers/orderReducer';
 
@@ -30,7 +33,9 @@ import keyboardArrowDropDownDarkMode from '/assets/img/icons/keyboard_arrow_down
 
 function Checkout ({darkMode, lan}) {
   
-  const cart = useContext(CartContext);
+  const cart = useCartStore(state => state.cart);
+  console.log({cart});
+  // const cart = useContext(CartContext);
   const [order, dispatch] = useReducer(orderReducer, {
     orderId: 1,
     timestamp: '',

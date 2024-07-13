@@ -22,6 +22,7 @@ body {
   -webkit-text-size-adjust: 100%;
   text-rendering: optimizeSpeed;
   overflow: hidden auto;
+  transition: background-color 0.5s ease-in;
   
   @include w.breakpoint-up(medium) {font-size: 1.05rem}
   @include w.breakpoint-up(large) {font-size: 1.1rem}

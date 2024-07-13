@@ -47,11 +47,18 @@ function CategoryPicker ({darkMode, lan}) {
     setTimeout(() => scroll({top: 0, behavior: 'smooth'}), 500);
   }
 
+  const  handleKeyPress = e => {
+    if (e.key !== 'Enter') return;
+    const {category} = e.currentTarget.dataset;
+    navigate(category);
+    setTimeout(() => scroll({top: 0, behavior: 'smooth'}), 500);
+  }
+
   return (
     <section className="categoryPicker">
       <ul className="categoryPicker__ul">
         {categories.map(category => 
-        <li className="categoryPicker__ul__li --categoryAni" data-category={cleanseString(category.en)} onClick={handleClick} key={category.id}>
+        <li className="categoryPicker__ul__li --categoryAni" tabIndex="0" role="button" data-category={cleanseString(category.en)} onClick={handleClick} onKeyDown={handleKeyPress} key={category.id}>
           <img className="categoryPicker__ul__li__img" src={getCategoryImg(category)}/>
           <span className="categoryPicker__ul__li__name">{category[lan]}</span>
         </li>      

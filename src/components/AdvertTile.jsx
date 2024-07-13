@@ -159,7 +159,7 @@ function AdvertTile ({darkMode, lan, type}) {
       <Alert alertText={alertText} newAlert={newAlert} />
       <div className="advertTile__panel">
         <h2 className="advertTile__panel__title --colorChange-view">{type.name[lan].toUpperCase()}</h2>
-        <span className="advertTile__panel__see-more --colorChange-view" data-action="navigate_to_url" onClick={handleClick}>{en ? 'See More' : 'شاهد المزيد'}</span>
+        <button className="advertTile__panel__see-more --colorChange-view" data-action="navigate_to_url" onClick={handleClick}>{en ? 'See More' : 'شاهد المزيد'}</button>
         <img className="advertTile__panel__doubleArrow" src={darkMode ? doubleArrowSecondary : doubleArrowPrimary} onClick={handleClick}/>
       </div>
       <div className="advertTile__list">

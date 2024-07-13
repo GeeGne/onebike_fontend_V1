@@ -38,7 +38,7 @@ function LightDarkButton ({onThemeChange}) {
     setTimeout(() => {
       setDarkTheme(theme => !theme);
       event.target.style.opacity = '1';
-    }, 500)
+    }, 150)
   }
 
   return (

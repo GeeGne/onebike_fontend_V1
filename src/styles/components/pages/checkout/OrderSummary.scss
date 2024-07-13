@@ -1,10 +1,22 @@
 @use '/src/styles/utils/_BreakPoints' as w;
 
 .orderSummary {
+  position: relative;
   display: flex;
   flex-direction: column;
   padding: 1em;
   gap: 1em;
+
+  &::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    min-width: 100vw;
+    height: 1px;
+    background-color: var(--light-background-color);
+  }
 
   &__products {
     display: flex;

@@ -41,25 +41,33 @@ const newProduct = (product, quantity) => ({
   quantityPrice: calculatePrice(product.price, product.discount) * quantity, price: calculatePrice(product.price, product.discount)
 })
 
-const useCartStore = create((set, get) => ({
-  cart: [],
-  toggle: false,
-  setToggle: boolean => set({toggle: boolean}),
-  isProductInCart: product => get().cart.some(item => item.id === product.id),
-  updateProductQuantity: (product, quantity) => 
-    set({
-      cart: get().cart.map(item => 
-        item.id === product.id 
-          ? {...item, 
-            quantity: updateQuantityAndCheckLimit(item.quantity, quantity),
-            quantityPrice: calculatePrice(item.product.price, item.product.discount) * updateQuantityAndCheckLimit(item.quantity, quantity)
-          }
-          : {...item}
-      )
+const useCartStore = create(
+  persist(
+    (set, get) => ({
+      cart: [],
+      toggle: false,
+      setToggle: boolean => set({toggle: boolean}),
+      isProductInCart: product => get().cart.some(item => item.id === product.id),
+      updateProductQuantity: (product, quantity) => 
+        set({
+          cart: get().cart.map(item => 
+            item.id === product.id 
+              ? {...item, 
+                quantity: updateQuantityAndCheckLimit(item.quantity, quantity),
+                quantityPrice: calculatePrice(item.product.price, item.product.discount) * updateQuantityAndCheckLimit(item.quantity, quantity)
+              }
+              : {...item}
+          )
+        }),
+      addProduct: (product, quantity) => set({cart: [...get().cart, newProduct(product, quantity)]}),
+      addProductToCart: (product, quantity) => get().isProductInCart(product) ? get().updateProductQuantity(product, quantity) : get().addProduct(product, quantity),
+      removeProductFromCart: product => set({cart: get().cart.filter(item => item.id !== product.id)})
     }),
-  addProduct: (product, quantity) => set({cart: [...get().cart, newProduct(product, quantity)]}),
-  addProductToCart: (product, quantity) => get().isProductInCart(product) ? get().updateProductQuantity(product, quantity) : get().addProduct(product, quantity),
-  removeProductFromCart: product => set({cart: get().cart.filter(item => item.id !== product.id)})
-}));
+    {
+      name: 'cart-storage',
+      getStorage: () => localStorage,
+    }
+  )
+);
 
 export {useWishlistStore, useCartStore};
