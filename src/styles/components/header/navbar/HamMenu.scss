@@ -19,7 +19,7 @@
     width: 16em;
     flex-direction: column;
     background-color: var(--hamMenu-sideBox-color);
-    transition: transform 0.5s ease-out;
+    transition: transform 0.25s ease-out;
     
     &__menu {
       display: flex;
@@ -108,7 +108,7 @@
 
           & .expand-circle {
             width: var(--icon-size);
-            transition: transform 0.25s ease-out;
+            transition: transform 0.25s ease;
           }
           &.clicked .expand-circle {transform: rotate(-180deg)}
         }
@@ -120,7 +120,7 @@
           max-height: 0;
           margin: 0.35em 0;
           background-color: var(--hamMenu-secondaryList-background-color);
-          transition: max-height 0.25s ease-out;
+          transition: max-height 0.25s ease-in;
 
           &__lists {
             display: flex;
@@ -133,9 +133,7 @@
               justify-content: space-between;
               padding: 0.5em 1.4em;
 
-              &__h3 {
-                
-              }
+              &__h3 {}
               &.clicked &__h3 {font-weight: 550}
 
               &__img {
@@ -152,10 +150,11 @@
               background-color: var(--hamMenu-thirdList-background-color);
               max-height: 0;
               overflow: hidden;
-              transition: max-height 0.25s ease-in;
+              transition: max-height 0.25s ease-out;
               
               &__lists {
                 cursor: pointer;
+
                 &__h3{
                   padding: 0.5em 2.1em;
                   // margin: 0 0 0.5em 2.1em;
