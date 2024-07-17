@@ -1,16 +1,33 @@
 @use '/src/styles/utils/_BreakPoints' as w;
 
 .checkout {
+  display: flex;
+  flex-direction: column;
   max-width: 600px;
+  // gap: 2em;
+  padding-bottom: 2em;
   margin-inline: auto;
   
   body.arabic &{direction: rtl}
 
   &__orderSummary-top {
+    position: relative;
     overflow-y: hidden;
     overflow-x: clip;
     max-height: 3.35em;
     transition: max-height 0.5s ease;
+
+    &::before {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      min-width: 100vw;
+      height: 1px;
+      background-color: var(--light-background-color);
+    }
+
     
     &__show {
       position: relative;
@@ -21,18 +38,7 @@
       // border: solid var(--endElement-border-background-color);
       border-width: 0 0 1px 0;
       cursor: pointer;
-
-      &::before {
-        content: "";
-        position: absolute;
-        bottom: 0;
-        left: 50%;
-        transform: translateX(-50%);
-        min-width: 100vw;
-        height: 1px;
-        background-color: var(--light-background-color);
-      }
-  
+      
       &__text {
         font-weight: 400;
         font-size: var(--font-size-small);
@@ -56,4 +62,143 @@
     }
   }
 
+  &__btm-sec {
+    display: flex;
+    flex-direction: column;
+    padding-inline: 1em;
+    padding-block: 1em;
+    // gap: 1em;
+
+
+    &__delivery {
+      display: flex;
+      flex-direction: column;
+      gap: 1em;
+
+      &__lbl {
+        font-size: var(--font-size-medium);      
+        font-weight: bold;      
+        color: var(--font-h-color);
+      }
+
+      &__inp-cont {
+        position: relative;
+
+        &:before {
+          content: "";
+          position: absolute;
+          top: 50%;
+          right: 3em;
+          transform: translateY(-50%);
+          width: 1px;
+          height: 2em;
+          background-color: var(--endElement-border-background-color);
+
+          body.arabic & {
+            left: 3em;
+            right: auto;
+          }
+
+        }
+
+        &:after {
+          content: "";
+          position: absolute;
+          top: 0;
+          right: 0;
+          height: 100%;
+          aspect-ratio: 1 / 1;
+          background-image: var(--arrow-drop-down-v2-icon);
+          background-position: center;
+          background-repeat: no-repeat;
+          background-size: 1.8em;
+          opacity: 0.6;
+
+          body.arabic & {
+            left: 0;
+            right: auto;
+          }
+        }
+
+        &__inp {
+          width: 100%;
+          padding: 1em;
+          color: var(--font-h-color);
+          font-weight: 600;
+          background-color: var(--background-color);
+          border: solid 1px var(--endElement-border-background-color);
+          border-radius: 8px;
+          outline: 0;
+          transition: border 0.15s ease-out;
+        }
+        &__inp.focus {
+          border: solid 2px var(--primary-color);
+        }
+        &__inp.focus + &__lst {
+          visibility: visible;
+          opacity: 1;
+        }
+
+        &__lst {
+          visibility: hidden;
+          position: absolute;
+          display: flex;
+          flex-direction: column;
+          top: 100%;
+          left: 0;
+          width: 100%;
+          height: 10em;
+          overflow-y: scroll;
+          background-color: var(--background-color);
+          opacity: 0;
+          box-shadow: 2px 2px 10px 1px hsl(0, 0%, 50%, 0.3);
+          border: solid 1px var(--endElement-border-background-color);
+          border-radius: 8px;
+          z-index: 10;
+          transition: opacity 0.15s ease-out;
+
+          &::-webkit-scrollbar {width: 0.5em}
+          &::-webkit-scrollbar-thumb {
+            cursor: grab;
+            background-color: var(--sideMenu-scrollBar-background-color);
+            transition: background-color 0.15s;
+            border-radius: 8px;
+          }
+          &::-webkit-scrollbar-track {background-color: rgba(42, 42, 42, 0)}
+          &::-webkit-scrollbar-thumb:active {cursor: grabbing}
+          &::-webkit-scrollbar-thumb:hover {background-color: hsl(0, 0%, 50%)}
+      
+          &__itm {
+            color: var(--font-p-color);
+            cursor: pointer;
+            padding: 1em;
+            transition: color 0.15s ease-out, background-color 0.15s ease-out, font-weight 0.15s ease-out;
+
+            &:hover {
+              background-color: var(--light-background-color);
+              color: var(--font-h-color);
+              font-weight: 600;
+            }
+          }
+        }
+      }
+
+      &__fee-cont {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+
+
+        &__shipping-fee {
+          color: var(--font-h-color);
+          font-size: var(--font-size-small);
+          font-weight: 600;
+        }
+
+        &__total {
+          color: var(--font-h-color);
+        }
+      }
+    } 
+  }
 }

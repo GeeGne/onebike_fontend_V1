@@ -3,5 +3,40 @@
   "email": "example@gmail.com",
   "facebook": "https://www.facebook.com/profile.php?id=61555487381717",
   "instagram": "https://www.instagram.com/onebike2024?fbclid=IwZXh0bgNhZW0CMTAAAR0j3tRBpSGxAkPztNBkI-KKoBI454wtiODT8gyzjrY2B6jtQhzTFDkpvuI_aem_AZvvFyQoDJ0_EqQr36CwzmanbLAnK_nFqsXLZollXvn2m7LBaFueZpOgtR9S0sRbuLf_CynuMk7xMjEVi3Capb1V",
-  "whatsApp": "https://chat.whatsapp.com/BanGDxwaSLgKMBWN6eDVzq"
+  "whatsApp": "https://chat.whatsapp.com/BanGDxwaSLgKMBWN6eDVzq",
+  "citiesAndShippingFee": [
+    {
+      "id": 1,
+      "city": {"en": "Damascus", "ar": "دمشق"},
+      "fee": 5000
+    },{
+      "id": 2,
+      "city": {"en": "Aleppo", "ar": "حلب "},
+      "fee": 15000
+    },{
+      "id": 3,
+      "city": {"en": "Hama", "ar": "حماة "},
+      "fee": 20000
+    },{
+      "id": 4,
+      "city": {"en": "Latakia", "ar": "اللاذقية"},
+      "fee": 10000
+    },{
+      "id": 5,
+      "city": {"en": "Tartus", "ar": "طرطوس"},
+      "fee": 10000
+    },{
+      "id": 6,
+      "city": {"en": "Hasakah", "ar": "الحسكة"},
+      "fee": 15000
+    },{
+      "id": 7,
+      "city": {"en": "Qamishli ", "ar": "القامشلي"},
+      "fee": 20000
+    },{
+      "id": 8,
+      "city": {"en": "Manbij", "ar": "منبج"},
+      "fee": 10000
+    }
+  ]
 }

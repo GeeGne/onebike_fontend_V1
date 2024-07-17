@@ -41,7 +41,7 @@ function OrderSummary ({darkMode, lan, order}) {
       </div>              
       <div className="orderSummary__shipping">
         <span className="orderSummary__shipping__text">{en ? 'Shipping' : 'الشحن'}</span>
-        <span className="orderSummary__shipping__amount">{en ? 'S.P ' : ' ل.س '} {formatNumberWithCommas(shipping)}</span>
+        <span className="orderSummary__shipping__amount">{shipping === 0 ? '--' : (en ? 'S.P ' : ' ل.س ') + formatNumberWithCommas(shipping)}</span>
       </div>      
       <div className="orderSummary__total">
         <span className="orderSummary__total__text">{en ? 'Total' : 'الاجمالي'}</span>

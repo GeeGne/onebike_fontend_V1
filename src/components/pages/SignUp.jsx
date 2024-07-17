@@ -154,13 +154,18 @@ function SignUp ({darkMode, lan}) {
     }
 
     const {fname, lname, email, phone, password, confirmPassword} = formData;
+    const {
+      firstName: regFirstName, lastName: regLastName, 
+      email: regEmail, phone: regPhone, 
+      password: regPassword, congirmPassword: regConfirmPassword
+    } = validate.register;
 
-    if (typeof(validate.register.firstName(fname, en)) === 'string') return handleError(validate.register.firstName(fname, en), fNamePopupEL.current, fNameEL.current);
-    if (typeof(validate.register.lastName(lname, en)) === 'string') return handleError(validate.register.lastName(lname, en), lNamePopupEL.current, lNameEL.current);
-    if (typeof(validate.register.email(email, en)) === 'string') return handleError(validate.register.email(email, en), emailPopupEL.current, emailEL.current);
-    if (typeof(validate.register.phone(phone, en)) === 'string') return handleError(validate.register.phone(phone, en), phonePopupEL.current, phoneEL.current);
-    if (typeof(validate.register.password(password, en)) === 'string') return handleError(validate.register.password(password, en), passPopupEL.current, passEL.current);
-    if (typeof(validate.register.confirmPassword(password, confirmPassword, en)) === 'string') return handleError(validate.register.confirmPassword(password, confirmPassword, en), cPassPopupEL.current, cPassEL.current);
+    if (typeof(regFirstName(fname, en)) === 'string') return handleError(regFirstName(fname, en), fNamePopupEL.current, fNameEL.current);
+    if (typeof(regLastName(lname, en)) === 'string') return handleError(regLastName(lname, en), lNamePopupEL.current, lNameEL.current);
+    if (typeof(regEmail(email, en)) === 'string') return handleError(regEmail(email, en), emailPopupEL.current, emailEL.current);
+    if (typeof(regPhone(phone, en)) === 'string') return handleError(regPhone(phone, en), phonePopupEL.current, phoneEL.current);
+    if (typeof(regPassword(password, en)) === 'string') return handleError(regPassword(password, en), passPopupEL.current, passEL.current);
+    if (typeof(regConfirmPassword(password, confirmPassword, en)) === 'string') return handleError(regConfirmPassword(password, confirmPassword, en), cPassPopupEL.current, cPassEL.current);
 
     return true;
   }

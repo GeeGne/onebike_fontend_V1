@@ -65,5 +65,10 @@
     height: 4px;
     border-radius: 4px;
     background-color: var(--alert-timer-background-color);
+
+    body.arabic & {
+      left: auto;
+      right: 1em;
+    }
   }
 }
