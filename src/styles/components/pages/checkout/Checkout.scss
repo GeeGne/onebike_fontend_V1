@@ -55,6 +55,33 @@
   body.arabic & input {direction: rtl}
 }
 
+@mixin info-description-styles {
+  visibility: hidden;
+  position: absolute;
+  bottom: calc(100% + 1em);
+  right: 0.6em;
+  width: 15em;
+  background-color: var(--font-p-color);
+  font-size: var(--font-size-extraSmall);
+  color: var(--font-p-invert-color);
+  border-radius: 0.5em 0.5em 0.2em 0.5em;
+  padding: 0.5em;
+  opacity: 0;
+  transition: opacity 0.25s ease-out;
+}
+
+@mixin info-description-before-styles {
+  content: "";
+  position: absolute;
+  bottom: -0.4em;
+  right: 0.14em;
+  transform: rotate(45deg);
+  width: 1em;
+  height: 1em;
+  background-color: var(--font-p-color);
+  border-radius: 0.2em;
+}
+
 .checkout {
   position: relative;
   display: grid;
@@ -66,7 +93,9 @@
   'orderSummary-sec'
   'delivery-sec'
   'phone-sec'
-  'shipping-address-sec';
+  'shipping-address-sec'
+  'orderSummary-bottom-sec'
+  'place-order-btn';
 
   @include w.breakpoint-up (large) {
     grid-template-columns: repeat(2, 1fr);
@@ -77,10 +106,29 @@
     grid-template-areas:
     'delivery-sec orderSummary-sec-largeLayout'
     'phone-sec orderSummary-sec-largeLayout'
-    'shipping-address-sec orderSummary-sec-largeLayout'; 
+    'shipping-address-sec orderSummary-sec-largeLayout'
+    'place-order-btn orderSummary-sec-largeLayout'; 
   }
 
   body.arabic &{direction: rtl}
+
+  // grey-background-color filler for the orderSummary-largeLayout section
+  &::before {
+    display: none;
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 100%;
+    width: 50%;
+    height: 100%;
+    background-color: var(--light-background-color);
+    @include w.breakpoint-up (large) {display: initial}
+
+    body.arabic & {
+      left: auto;
+      right: 100%;
+    }
+  }
 
   &__orderSummary-sec {
     grid-area: orderSummary-sec;
@@ -98,15 +146,16 @@
       align-items: center;
       gap: 0.3em;
       padding: 1em;
-      // border: solid var(--endElement-border-background-color);
-      border-width: 0 0 1px 0;
       cursor: pointer;
-      @include w.breakpoint-up (large) {display: none}  
+      @include w.breakpoint-up (large) {display: none}
 
       &__text {
         font-weight: 400;
         font-size: var(--font-size-small);
         color: var(--primary-color);
+        transition: font-weight 0.15s ease-out;
+
+        &:hover {font-weight: 600 !important}
       }
 
       &__arrow {
@@ -142,7 +191,6 @@
       font-weight: 600;
       padding: 1em;
     }
-
   }
 
   &__delivery-sec {
@@ -151,6 +199,41 @@
     &::before {@include bottom-line-sec-styles}
 
     &__lbl {@include title-sec-styles}
+
+    &__info-cont {
+      position: absolute;
+      top: 2em;
+      right: 1em;
+      body.arabic & {
+        right: auto;
+        left: 1em;
+      }
+
+      &__img {
+        width: 1.9em;
+        object-fit: cover;
+        object-position: center;
+      }
+
+      &:hover &__description {
+        visibility: visible;
+        opacity: 1;
+      }
+      &__description {
+        @include info-description-styles;
+        body.arabic & {
+          right: auto;
+          left: 0.6em;
+          border-radius: 0.5em 0.5em 0.5em 0.2em;
+        }
+
+        &::before {@include info-description-before-styles}
+        body.arabic &::before {
+          right: auto;
+          left: 0.16em;
+        }
+      }
+    }
 
     &__inp-cont {
       position: relative;
@@ -169,7 +252,6 @@
           left: 3em;
           right: auto;
         }
-
       }
 
       &:after {
@@ -278,6 +360,41 @@
 
     &__h2 {@include title-sec-styles}
 
+    &__info-cont {
+      position: absolute;
+      top: 2em;
+      right: 1em;
+      body.arabic & {
+        right: auto;
+        left: 1em;
+      }
+
+      &__img {
+        width: 1.9em;
+        object-fit: cover;
+        object-position: center;
+      }
+
+      &:hover &__description {
+        visibility: visible;
+        opacity: 1;
+      }
+      &__description {
+        @include info-description-styles;
+        body.arabic & {
+          right: auto;
+          left: 0.6em;
+          border-radius: 0.5em 0.5em 0.5em 0.2em;
+        }
+
+        &::before {@include info-description-before-styles}
+        body.arabic &::before {
+          right: auto;
+          left: 0.16em;
+        }
+      }
+    }
+
     &__radio-cont {
       display: flex;
       gap: 1em;
@@ -285,7 +402,6 @@
       &__inp {
         visibility: hidden;
         width: 1em;
-        background-color: red;
         cursor: pointer;
       }
       
@@ -369,6 +485,41 @@
 
     &__h2 {@include title-sec-styles}
 
+    &__info-cont {
+      position: absolute;
+      top: 2em;
+      right: 1em;
+      body.arabic & {
+        right: auto;
+        left: 1em;
+      }
+
+      &__img {
+        width: 1.9em;
+        object-fit: cover;
+        object-position: center;
+      }
+
+      &:hover &__description {
+        visibility: visible;
+        opacity: 1;
+      }
+      &__description {
+        @include info-description-styles;
+        body.arabic & {
+          right: auto;
+          left: 0.6em;
+          border-radius: 0.5em 0.5em 0.5em 0.2em;
+        }
+
+        &::before {@include info-description-before-styles}
+        body.arabic &::before {
+          right: auto;
+          left: 0.16em;
+        }
+      }
+    }
+
     &__form {
       position: relative;
 
@@ -389,5 +540,123 @@
       &.focus &__inp {border: solid var(--primary-color) 2px}
       &__inp {@include input-styles}
     }
+  }
+
+  &__orderSummary-bottom-sec {
+    grid-area: orderSummary-bottom-sec;
+    @include section-styles;
+    overflow-y: hidden;
+    overflow-x: clip;
+    transition: max-height 0.5s ease;
+    @include w.breakpoint-up (large) {display: none}
+    &::before {@include bottom-line-sec-styles}
+    
+    &__show {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 0.3em;
+      // padding: 1em;
+      cursor: pointer;
+      @include w.breakpoint-up (large) {display: none}  
+
+      &__h2 {@include title-sec-styles}
+
+      &__show {
+        margin-left: auto;
+        color: var(--primary-color);
+        font-size: var(--font-size-extraSmall);
+        font-weight: 600;
+
+        body.arabic & {
+          margin-left: 0;
+          margin-right: auto;
+        }
+      }
+
+      &__arrow {
+        width: 1em;
+        transition: transform 0.5s ease;
+      }
+
+      &__total {
+        color: var(--font-h-color);
+        font-weight: 600;
+      }
+    }
+
+    &__orderList {
+      overflow-y: hidden;
+      overflow-x: clip;
+      max-height: 0;
+      transition: max-height 0.5s ease;
+    }
+
+    &__subtotal {
+      display: flex;
+      justify-content: space-between;
+  
+      &__text {
+        color: var(--font-p-color);
+        font-size: var(--font-size-small);
+        font-weight: 500;
+      }
+  
+      &__amount {
+        color: var(--font-p-color);
+        font-size: var(--font-size-small);
+        font-weight: 500;
+      }
+    }
+  
+    &__shipping {
+      display: flex;
+      justify-content: space-between;
+  
+      &__text {
+        color: var(--font-p-color);
+        font-size: var(--font-size-small);
+        font-weight: 500;
+      }
+  
+      &__amount {
+        color: var(--font-p-color);
+        font-size: var(--font-size-small);
+        font-weight: 500;
+      }
+    }
+  
+    &__total {
+      display: flex;
+      justify-content: space-between;
+  
+      &__text {
+        color: var(--font-h-color);
+        font-size: var(--font-size-medium);
+        font-weight: bold;
+      }
+  
+      &__amount {
+        color: var(--font-h-color);
+        font-size: var(--font-size-medium);
+        font-weight: bold;
+      }
+    }  
+  }  
+
+  &__place-order-btn {
+    grid-area: place-order-btn;
+    margin-block: 1em;
+    margin-inline: auto;
+    width: calc(100% - 2em);
+    color: var(--font-h-invert-color);
+    font-size: var(--font-size-medium);
+    font-weight: 600;
+    background-color: var(--primary-color);
+    border-radius: 5px;
+    padding-block: 1em;
+    transition: background-color 0.5s ease;
+
+    &:hover {background-color: var(--background-invert-color)}
   }
 }

@@ -70,6 +70,7 @@
     }
   }
 
+  &.hidePrices &__subtotal {display: none}
   &__subtotal {
     display: flex;
     justify-content: space-between;
@@ -87,6 +88,7 @@
     }
   }
 
+  &.hidePrices &__shipping {display: none}
   &__shipping {
     display: flex;
     justify-content: space-between;
@@ -104,6 +106,7 @@
     }
   }
 
+  &.hidePrices &__total {display: none}
   &__total {
     display: flex;
     justify-content: space-between;
@@ -119,6 +122,5 @@
       font-size: var(--font-size-medium);
       font-weight: bold;
     }
-  }
-  
+  }  
 }

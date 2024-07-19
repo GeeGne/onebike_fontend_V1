@@ -29,7 +29,11 @@ import getCurrentDateFormat from '/src/utils/getCurrentDateFormat';
 
 // ASSETS
 import filter from '/assets/img/icons/filter_list.svg';
+import infoIcon from '/assets/img/icons/info.svg';
+import infoDarkModeIcon from '/assets/img/icons/info_darkMode.svg';
 import keyboardArrowDropDown from '/assets/img/icons/keyboard_arrow_down.svg';
+import keyboardArrowDropDownPrimaryColor from '/assets/img/icons/keyboard_arrow_down_primaryColor.svg';
+import keyboardArrowDropDownSecondaryColor from '/assets/img/icons/keyboard_arrow_down_secondaryColor.svg';
 
 // ASSETS - DARK MODE
 import filterDarkMode from '/assets/img/icons/filter_list_darkMode.svg';
@@ -49,6 +53,7 @@ function Checkout ({darkMode, lan}) {
     total: '',
   })
   const {total, shipping} = order;
+  const totalProducts = order.products.length;
   const [cityDelivery, setCityDelivery] = useState('');
   useEffect(() => {
     if (!isInputDefault.current) return;
@@ -59,6 +64,12 @@ function Checkout ({darkMode, lan}) {
   const orderSummaryTopShowEL = useRef(null);
   const orderSummaryTopShowArrowEL = useRef(null);
   const orderSummaryTopShowTextEL = useRef(null);
+
+  const orderSummaryBottomEL = useRef(null);
+  const orderSummaryBottomShowEL = useRef(null);
+  const orderSummaryBottomShowArrowEL = useRef(null);
+  const orderSummaryBottomShowTextEL = useRef(null);
+
   const pickCityInpEL = useRef(null);
   const phoneNumberConInpEL = useRef(null);
   const phoneNumberInpEL = useRef(null);
@@ -70,29 +81,71 @@ function Checkout ({darkMode, lan}) {
 
   const handleClick = e => {
     e.stopPropagation();
+    const closeAndStyleTopOrder = (orderSummaryShowHeight, mainEL, arrowEL, textEL) => {
+      mainEL.style.maxHeight = String(orderSummaryShowHeight) + 'px';
+      arrowEL.style.transform = 'rotate(0deg)';
+      textEL.style.fontWeight = '400';
+      textEL.textContent = en? 'Show order summary' : 'عرض ملخص الطلب';
+    }
+
+    const expandAndStyleTopOrder = (orderSummaryHeight, mainEL, arrowEL, textEL) => {
+      mainEL.style.maxHeight = String(orderSummaryHeight) + 'px';
+      arrowEL.style.transform = 'rotate(180deg)';
+      textEL.style.fontWeight = '600';
+      textEL.textContent = en? 'Hide order summary' : 'اخفاء ملخص الطلب';
+    }
+
+    const closeAndStyleBottomOrder = (mainEL, arrowEL, textEL) => {
+      mainEL.style.maxHeight = '0';
+      arrowEL.style.transform = 'rotate(0deg)';
+      textEL.textContent = en? 'Show' : 'عرض';
+    }
+
+    const expandAndStyleBottomOrder = (orderSummaryHeight, mainEL, arrowEL, textEL) => {
+      mainEL.style.maxHeight = String(orderSummaryHeight) + 'px';
+      arrowEL.style.transform = 'rotate(180deg)';
+      textEL.textContent = en? 'Hide' : 'اخفاء';
+    }
 
     const toggleExpandDataATT = (el, expand) => el.dataset.expand = String(!expand);
     const {type, shippingFee, city} = e.currentTarget.dataset;
+    let isElementExpanded;       
+    let orderSummaryHeight;      
+    let orderSummaryShowHeight;
+    let mainEL;
+    let arrowEL;
+    let textEL;
 
     switch (type) {
       case 'toggle_orderSummary':
-        const expand = e.currentTarget.dataset.expand === 'false' ? false : true;
-        const orderSummaryHeight = orderSummaryTopEL.current.scrollHeight;
-        const orderSummaryShowHeight = orderSummaryTopShowEL.current.scrollHeight;
-
-        if (expand) {
-          orderSummaryTopEL.current.style.maxHeight = String(orderSummaryShowHeight) + 'px';
-          orderSummaryTopShowArrowEL.current.style.transform = 'rotate(0deg)';
-          orderSummaryTopShowTextEL.current.style.fontWeight = '400';
-          orderSummaryTopShowTextEL.current.style.textContent = en? 'Show order summary' : 'عرض ملخص الطلب';
+        isElementExpanded = e.currentTarget.dataset.expand === 'false' ? false : true;
+        orderSummaryShowHeight = orderSummaryTopShowEL.current.scrollHeight;
+        orderSummaryHeight = orderSummaryTopEL.current.scrollHeight;
+        mainEL = orderSummaryTopEL.current;
+        arrowEL = orderSummaryTopShowArrowEL.current;
+        textEL = orderSummaryTopShowTextEL.current;
+    
+        if (isElementExpanded) {
+          closeAndStyleTopOrder(orderSummaryShowHeight, mainEL, arrowEL, textEL);
         } else {
-          orderSummaryTopEL.current.style.maxHeight = String(orderSummaryHeight) + 'px';
-          orderSummaryTopShowArrowEL.current.style.transform = 'rotate(180deg)';
-          orderSummaryTopShowTextEL.current.style.fontWeight = '600';
-          orderSummaryTopShowTextEL.current.style.textContent = en? 'Hide order summary' : 'اخفاء ملخص الطلب';
+          expandAndStyleTopOrder(orderSummaryHeight, mainEL, arrowEL, textEL);
         }
-        toggleExpandDataATT(e.currentTarget, expand);
+        toggleExpandDataATT(e.currentTarget, isElementExpanded);
         break;
+      case 'toggle_bottom_orderSummary':
+        isElementExpanded = e.currentTarget.dataset.expand === 'false' ? false : true;
+        orderSummaryHeight = orderSummaryBottomEL.current.scrollHeight;
+        mainEL = orderSummaryBottomEL.current;
+        arrowEL = orderSummaryBottomShowArrowEL.current;
+        textEL = orderSummaryBottomShowTextEL.current;
+
+        if (isElementExpanded) {
+          closeAndStyleBottomOrder(mainEL, arrowEL, textEL);
+        } else {
+          expandAndStyleBottomOrder(orderSummaryHeight, mainEL, arrowEL, textEL);
+        }
+        toggleExpandDataATT(e.currentTarget, isElementExpanded);
+        break;  
       case 'update_shipping_fee_and_inp':
         const selectedCity = e.target.textContent;
         isInputDefault.current = false;
@@ -191,17 +244,21 @@ function Checkout ({darkMode, lan}) {
       <section className="checkout__orderSummary-sec" ref={orderSummaryTopEL}>
         <div className="checkout__orderSummary-sec__show" role="button" tabIndex="0" data-expand="false" data-type="toggle_orderSummary" onClick={handleClick} ref={orderSummaryTopShowEL}>
           <span className="checkout__orderSummary-sec__show__text" ref={orderSummaryTopShowTextEL}>{en ? 'Show order summary' : 'عرض ملخص الطلب'}</span>
-          <img className="checkout__orderSummary-sec__show__arrow" src={darkMode ? keyboardArrowDropDownDarkMode : keyboardArrowDropDown} ref={orderSummaryTopShowArrowEL} />
+          <img className="checkout__orderSummary-sec__show__arrow" src={darkMode ? keyboardArrowDropDownSecondaryColor : keyboardArrowDropDownPrimaryColor} ref={orderSummaryTopShowArrowEL} />
           <span className="checkout__orderSummary-sec__show__total">{en ? 'S.P ' : 'ل.س '}{formatNumberWithCommas(total + shipping)}</span>
         </div>
-        <OrderSummary darkMode={darkMode} lan={lan} order={order} />
+        <OrderSummary darkMode={darkMode} lan={lan} order={order} hidePrices={false} />
       </section>
       <section className="checkout__orderSummary-largeLayout-sec">
         <span className="checkout__orderSummary-largeLayout-sec__title">{en ? 'Order summary' : 'ملخص الطلب'}</span>
-        <OrderSummary darkMode={darkMode} lan={lan} order={order} />
+        <OrderSummary darkMode={darkMode} lan={lan} order={order} hidePrices={false} />
       </section>
       <section className="checkout__delivery-sec"> 
         <label className="checkout__delivery-sec__lbl" htmlFor="delivery">{en ? 'Deliver to' : 'الشحن الى'}</label>
+        <div className="checkout__delivery-sec__info-cont">
+          <img className="checkout__delivery-sec__info-cont__img" src={darkMode ? infoDarkModeIcon : infoIcon} />
+          <span className="checkout__delivery-sec__info-cont__description">{en ? 'Please choose which city you\'re currently in!' : 'يرجى اختيار المدينة التي تتواجد فيها حاليًا!'}</span>
+        </div>
         <div className="checkout__delivery-sec__inp-cont" data-type="city_inp_to_focus" onClick={handleClick}> 
           <input className="checkout__delivery-sec__inp-cont__inp" value={cityDelivery} type="text" id="delivery" readOnly data-type="city_inp" onFocus={handleFocus} onBlur={handleBlur} ref={pickCityInpEL}/>
           <ul className="checkout__delivery-sec__inp-cont__lst">
@@ -217,6 +274,10 @@ function Checkout ({darkMode, lan}) {
       </section>
       <section className="checkout__phone-sec">
         <h2 className="checkout__phone-sec__h2">{en ? 'Contact Phone Number' : 'رقم الهاتف للتواصل'}</h2>
+        <div className="checkout__phone-sec__info-cont">
+          <img className="checkout__phone-sec__info-cont__img" src={darkMode ? infoDarkModeIcon : infoIcon} />
+          <span className="checkout__phone-sec__info-cont__description">{en ? 'Please choose which city you\'re currently in!' : 'يرجى اختيار المدينة التي تتواجد فيها حاليًا!'}</span>
+        </div>
         <div className="checkout__phone-sec__radio-cont">
           <input className="checkout__phone-sec__radio-cont__inp" type="radio" id="existed-number" name="phone" data-type="default_number_is_selected" onChange={handleChange} />    
           <label className="checkout__phone-sec__radio-cont__lbl" htmlFor="existed-number">{en ? 'Use the Phone Number that you provided when Signing up' : 'استخدم رقم الهاتف الذي قدمته عند التسجيل'}</label>
@@ -231,20 +292,47 @@ function Checkout ({darkMode, lan}) {
         </div>
       </section>
       <section className="checkout__shipping-address-sec">
-        <h2 className="checkout__shipping-address-sec__h2">Shipping Adress</h2>
-        <div className="checkout__shipping-address-sec__form focus">
-          <label className="checkout__shipping-address-sec__form__lbl" htmlFor="1" onClick={handleClick}>{en ? 'Phone Number' : 'رقم الهاتف'}</label>
+        <h2 className="checkout__shipping-address-sec__h2">{en ? 'Shipping Address' : 'عنوان الشحن'}</h2>
+        <div className="checkout__shipping-address-sec__info-cont">
+          <img className="checkout__shipping-address-sec__info-cont__img" src={darkMode ? infoDarkModeIcon : infoIcon} />
+          <span className="checkout__shipping-address-sec__info-cont__description">{en ? 'Please choose which city you\'re currently in!' : 'يرجى اختيار المدينة التي تتواجد فيها حاليًا!'}</span>
+        </div>
+        <div className="checkout__shipping-address-sec__form">
+          <label className="checkout__shipping-address-sec__form__lbl" htmlFor="1" onClick={handleClick}>{en ? 'Address Location Details' : 'رقم الهاتف'}</label>
           <input className="checkout__shipping-address-sec__form__inp" type="text" id="1" name="phoneNumber" onChange={handleChange} onFocus={handleFocus} onBlur={handleBlur} />
         </div>
         <div className="checkout__shipping-address-sec__form">
-          <label className="checkout__shipping-address-sec__form__lbl" htmlFor="2" onClick={handleClick}>{en ? 'Phone Number' : 'رقم الهاتف'}</label>
+          <label className="checkout__shipping-address-sec__form__lbl" htmlFor="2" onClick={handleClick}>{en ? 'Second Address (optional)' : 'رقم الهاتف'}</label>
           <input className="checkout__shipping-address-sec__form__inp" type="text" id="2" name="phoneNumber" onChange={handleChange} onFocus={handleFocus} onBlur={handleBlur} />
         </div>
         <div className="checkout__shipping-address-sec__form">
-          <label className="checkout__shipping-address-sec__form__lbl" htmlFor="3" onClick={handleClick}>{en ? 'Phone Number' : 'رقم الهاتف'}</label>
+          <label className="checkout__shipping-address-sec__form__lbl" htmlFor="3" onClick={handleClick}>{en ? 'Notes (optional)' : 'ملاحظات (اختياري)'}</label>
           <input className="checkout__shipping-address-sec__form__inp" type="text" id="3" name="phoneNumber" onChange={handleChange} onFocus={handleFocus} onBlur={handleBlur} />
         </div>
       </section>
+      <section className="checkout__orderSummary-bottom-sec">
+        <div className="checkout__orderSummary-bottom-sec__show" role="button" tabIndex="0" data-expand="false" data-type="toggle_bottom_orderSummary" onClick={handleClick} ref={orderSummaryBottomShowEL}>
+          <h2 className="checkout__orderSummary-bottom-sec__show__h2">{(en ? 'Order summary' : 'ملخص الطلب') + ` (${totalProducts})`}</h2>
+          <span className="checkout__orderSummary-bottom-sec__show__show" ref={orderSummaryBottomShowTextEL}>{en ? 'Show' : 'عرض'}</span>
+          <img className="checkout__orderSummary-bottom-sec__show__arrow" src={darkMode ? keyboardArrowDropDownSecondaryColor : keyboardArrowDropDownPrimaryColor} ref={orderSummaryBottomShowArrowEL} />
+        </div>
+        <div className="checkout__orderSummary-bottom-sec__orderList" ref={orderSummaryBottomEL}>
+          <OrderSummary darkMode={darkMode} lan={lan} order={order} hidePrices={true} />
+        </div>
+        <div className="checkout__orderSummary-bottom-sec__subtotal">
+          <span className="checkout__orderSummary-bottom-sec__subtotal__text">{en ? 'Subtotal' : 'المجموع الفرعي'}</span>
+          <span className="checkout__orderSummary-bottom-sec__subtotal__amount">{en ? 'S.P ' : ' ل.س '} {formatNumberWithCommas(total)}</span>
+        </div>              
+        <div className="checkout__orderSummary-bottom-sec__shipping">
+          <span className="checkout__orderSummary-bottom-sec__shipping__text">{en ? 'Shipping' : 'الشحن'}</span>
+          <span className="checkout__orderSummary-bottom-sec__shipping__amount">{shipping === 0 ? '--' : (en ? 'S.P ' : ' ل.س ') + formatNumberWithCommas(shipping)}</span>
+        </div>      
+        <div className="checkout__orderSummary-bottom-sec__total">
+          <span className="checkout__orderSummary-bottom-sec__total__text">{en ? 'Total' : 'الاجمالي'}</span>
+          <span className="checkout__orderSummary-bottom-sec__total__amount">{en ? 'S.P ' : ' ل.س '} {formatNumberWithCommas(shipping + total)}</span>
+        </div>      
+      </section>
+      <button className="checkout__place-order-btn">{en ? 'Place Order' : 'إتمام الطلب'}</button>
     </div>
   )
 }

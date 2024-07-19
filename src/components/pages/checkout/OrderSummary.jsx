@@ -17,12 +17,12 @@ import brandLogo2 from '/assets/img/logo/giant.webp';
 import brandLogo3 from '/assets/img/logo/evoc.webp';
 
 
-function OrderSummary ({darkMode, lan, order}) {
+function OrderSummary ({darkMode, lan, order, hidePrices}) {
   const {products, shipping, total} = order;
   const en = lan === 'en';
 
   return (
-    <div className="orderSummary">
+    <div className={`orderSummary${hidePrices ? ' hidePrices' : ''}`}>
       <ul className="orderSummary__products">
         {products.map(item => 
         <li className="orderSummary__products__product" key={item.id}>
