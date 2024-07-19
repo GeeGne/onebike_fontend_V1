@@ -131,23 +131,23 @@ function AdvertList ({darkMode, lan, matchedProducts, onCartProductsChange}) {
         <ul className="advertList__advert-sctn__grid">
           {displayedProducts.map((product, i) => 
           <li className={`advertList__advert-sctn__grid__product${product.outOfStock ? ' out-of-stock' : ''}`} key={product.id}>
-            {isProductInWishlist(product) ? 
-            <button className="advertList__advert-sctn__grid__product__favourite added-to-wishlist" data-type="remove_product_from_wishlist" data-product-id={product.id} onClick={handleClick} />
-            : 
-            <button className="advertList__advert-sctn__grid__product__favourite" data-type="add_product_to_wishlist" data-product-id={product.id} onClick={handleClick} />
+            {isProductInWishlist(product) 
+            ? <button className="advertList__advert-sctn__grid__product__favourite added-to-wishlist" data-type="remove_product_from_wishlist" data-product-id={product.id} onClick={handleClick} />
+            : <button className="advertList__advert-sctn__grid__product__favourite" data-type="add_product_to_wishlist" data-product-id={product.id} onClick={handleClick} />
             }
             <img className="advertList__advert-sctn__grid__product__img" src={getProductImgURL(product)}/>
             {product.discount ? <h3 className="advertList__advert-sctn__grid__product__discount">{lan === 'ar' ? 'خصم ' : ''}{calculateDiscountPercantage(product.price, product.discount)}{en ? ' off' : ''}</h3> : <></>}
             <h3 className="advertList__advert-sctn__grid__product__description">{product.title[lan]}</h3>
             <img className="advertList__advert-sctn__grid__product__brand-logo" src={product.brand ? `/assets/img/logo/${product.brand}.webp` : ''}/>
             <div className="advertList__advert-sctn__grid__product__price">
-              {product.discount ? 
-              <><span className="now" style={nowStyle}>{en ? 'NOW' : 'الان'}</span> 
+              {product.discount 
+              ? <><span className="now" style={nowStyle}>{en ? 'NOW' : 'الان'}</span> 
               <span className="total">{getProductPrice(product)}</span>
               <span className="currency-symbol">{en ? 'S.P ' : 'ل.س'}</span>
               <s className="old">{formatNumberWithCommas(product.price)}</s></> 
               : <><span className="total">{getProductPrice(product)}</span>
-              <span className="currency-symbol">{en ? 'S.P' : 'ل.س'}</span></>}
+              <span className="currency-symbol">{en ? 'S.P' : 'ل.س'}</span></>
+              }
             </div>
             <div className="advertList__advert-sctn__grid__product__btns">
               <button className="advertList__advert-sctn__grid__product__btns__add-to-cart"

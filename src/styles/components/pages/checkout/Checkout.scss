@@ -1,16 +1,27 @@
 @use '/src/styles/utils/_BreakPoints' as w;
 
+@mixin section-styles {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  padding-inline: 1em;
+  padding-block: 1em;
+}
+
 @mixin bottom-line-sec-styles {
   content: "";
   position: absolute;
   bottom: 0;
-  left: 0;
-  width: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 2em);
   height: 1px;
   background-color: var(--light-background-color);
 }
 
 @mixin title-sec-styles {
+  padding-block: 1em;
   font-size: var(--font-size-medium);      
   font-weight: bold;      
   color: var(--font-h-color);
@@ -26,7 +37,8 @@
   color: var(--signUp-label-font-color);
   padding-inline: 0.2em;
   z-index: 1;
-  transition: top 0.25s ease-out, font-size 0.25s ease-out, font-weight 0.25s ease-out, color 0.25s ease-out;
+  transition: top 0.25s ease-out, font-size 0.25s ease-out, 
+    font-weight 0.25s ease-out, color 0.25s ease-out;
   body.arabic & {left: auto; right: 1em}
 }
 
@@ -44,21 +56,40 @@
 }
 
 .checkout {
-  display: flex;
-  flex-direction: column;
+  position: relative;
+  display: grid;
   max-width: 600px;
   // gap: 2em;
   padding-bottom: 2em;
   margin-inline: auto;
-  
+  grid-template-areas:
+  'orderSummary-sec'
+  'delivery-sec'
+  'phone-sec'
+  'shipping-address-sec';
+
+  @include w.breakpoint-up (large) {
+    grid-template-columns: repeat(2, 1fr);
+    padding-bottom: 0em;
+    // padding-block: 2em;
+    // gap: 1em;
+    max-width: 100%;
+    grid-template-areas:
+    'delivery-sec orderSummary-sec-largeLayout'
+    'phone-sec orderSummary-sec-largeLayout'
+    'shipping-address-sec orderSummary-sec-largeLayout'; 
+  }
+
   body.arabic &{direction: rtl}
 
   &__orderSummary-sec {
+    grid-area: orderSummary-sec;
     position: relative;
     overflow-y: hidden;
     overflow-x: clip;
     max-height: 3.35em;
     transition: max-height 0.5s ease;
+    @include w.breakpoint-up (large) {display: none}
     &::before {@include bottom-line-sec-styles}
     
     &__show {
@@ -70,7 +101,8 @@
       // border: solid var(--endElement-border-background-color);
       border-width: 0 0 1px 0;
       cursor: pointer;
-      
+      @include w.breakpoint-up (large) {display: none}  
+
       &__text {
         font-weight: 400;
         font-size: var(--font-size-small);
@@ -80,7 +112,7 @@
       &__arrow {
         margin-right: auto;
         transition: transform 0.5s ease;
-        
+   
         body.arabic & {
           margin-right: 0;
           margin-left: auto;
@@ -94,13 +126,28 @@
     }
   }
 
-  &__delivery-sec {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    padding-inline: 1em;
+  &__orderSummary-largeLayout-sec {
+    grid-area: orderSummary-sec-largeLayout;
+    display: none;
     padding-block: 1em;
-    gap: 1em;
+    background-color: var(--light-background-color);
+    transition: background-color 0.5s ease-in;
+    @include w.breakpoint-up (large) {display: initial}
+
+    &__title {
+      display: flex;
+      position: relative;
+      font-size: var(--font-size-medium);
+      color: var(--primary-color);
+      font-weight: 600;
+      padding: 1em;
+    }
+
+  }
+
+  &__delivery-sec {
+    grid-area: delivery-sec;
+    @include section-styles;
     &::before {@include bottom-line-sec-styles}
 
     &__lbl {@include title-sec-styles}
@@ -212,7 +259,6 @@
       flex-direction: row;
       justify-content: space-between;
 
-
       &__shipping-fee {
         color: var(--font-h-color);
         font-size: var(--font-size-small);
@@ -226,12 +272,8 @@
   }
 
   &__phone-sec {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    gap: 1em;
-    padding-inline: 1em;
-    padding-block: 1em;
+    grid-area: phone-sec;
+    @include section-styles;
     &::before {@include bottom-line-sec-styles}
 
     &__h2 {@include title-sec-styles}
@@ -305,8 +347,8 @@
         transform: translateY(calc(-50% + 0.3em));
         opacity: 0;
         transition: top 0.25s ease-out, font-size 0.25s ease-out, 
-          font-weight 0.25s ease-out, color 0.25s ease-out, 
-          opacity 0.15s ease-out, transform 0.15s ease-out;
+        font-weight 0.25s ease-out, color 0.25s ease-out, 
+        opacity 0.15s ease-out, transform 0.15s ease-out;
       }
 
       &.error.error &__inp {border: solid var(--red-color) 2px}
@@ -315,8 +357,37 @@
         @include input-styles;
         transform: translateY(0.3em);
         opacity: 0;
-        transition: opacity 0.15s ease-out, transform 0.15s ease-out;
+        transition: border 0.25s ease-out, opacity 0.15s ease-out, transform 0.15s ease-out;
       }
+    }
+  }
+
+  &__shipping-address-sec {
+    grid-area: shipping-address-sec;
+    @include section-styles;
+    &::before {@include bottom-line-sec-styles}
+
+    &__h2 {@include title-sec-styles}
+
+    &__form {
+      position: relative;
+
+      &.error.error &__lbl {
+        color: var(--red-color);
+        &::after {content: " *"}
+      }
+      &.focus &__lbl {
+        top: 0;
+        font-size: var(--font-size-extraSmall);
+        font-weight: 500;
+        color: var(--primary-color);
+        background: linear-gradient(to top, var(--background-color) 0%, var(--background-color) 55%, hsla(0, 0%, 100%, 0) 55%, hsla(0, 0%, 100%, 0) 100%);
+      }
+      &__lbl {@include label-styles}
+
+      &.error.error &__inp {border: solid var(--red-color) 2px}
+      &.focus &__inp {border: solid var(--primary-color) 2px}
+      &__inp {@include input-styles}
     }
   }
 }

@@ -162,9 +162,8 @@ function Checkout ({darkMode, lan}) {
           phoneNumberLblEL.current.style.opacity = '0';
           phoneNumberLblEL.current.style.transform = 'translateY(calc(-50% + 0.3em))';
           phoneNumberInpEL.current.value = '';
-          phoneNumberInpEL.current.focus();
+          phoneNumberConInpEL.current.classList.remove('focus');
         }, 250);
-        phoneNumberInpEL.current.blur();
         break;
       case 'new_number_is_selected':
         newNumber = true;
@@ -195,9 +194,11 @@ function Checkout ({darkMode, lan}) {
           <img className="checkout__orderSummary-sec__show__arrow" src={darkMode ? keyboardArrowDropDownDarkMode : keyboardArrowDropDown} ref={orderSummaryTopShowArrowEL} />
           <span className="checkout__orderSummary-sec__show__total">{en ? 'S.P ' : 'ل.س '}{formatNumberWithCommas(total + shipping)}</span>
         </div>
-        {/* <div className="checkout__orderSummary-sec__show__order-box"> */}
-          <OrderSummary darkMode={darkMode} lan={lan} order={order} />
-        {/* </div> */}
+        <OrderSummary darkMode={darkMode} lan={lan} order={order} />
+      </section>
+      <section className="checkout__orderSummary-largeLayout-sec">
+        <span className="checkout__orderSummary-largeLayout-sec__title">{en ? 'Order summary' : 'ملخص الطلب'}</span>
+        <OrderSummary darkMode={darkMode} lan={lan} order={order} />
       </section>
       <section className="checkout__delivery-sec"> 
         <label className="checkout__delivery-sec__lbl" htmlFor="delivery">{en ? 'Deliver to' : 'الشحن الى'}</label>
@@ -227,6 +228,21 @@ function Checkout ({darkMode, lan}) {
         <div className="checkout__phone-sec__number-cont" ref={phoneNumberConInpEL}>
           <label className="checkout__phone-sec__number-cont__lbl" htmlFor="new-number" ref={phoneNumberLblEL} data-type="toggle_phone_number_inp_to_focus" onClick={handleClick}>{en ? 'Phone Number' : 'رقم الهاتف'}</label>
           <input className="checkout__phone-sec__number-cont__inp" type="text" id="new-number" name="phoneNumber" data-type="phone_number_inp" onChange={handleChange} onFocus={handleFocus} onBlur={handleBlur} ref={phoneNumberInpEL} />
+        </div>
+      </section>
+      <section className="checkout__shipping-address-sec">
+        <h2 className="checkout__shipping-address-sec__h2">Shipping Adress</h2>
+        <div className="checkout__shipping-address-sec__form focus">
+          <label className="checkout__shipping-address-sec__form__lbl" htmlFor="1" onClick={handleClick}>{en ? 'Phone Number' : 'رقم الهاتف'}</label>
+          <input className="checkout__shipping-address-sec__form__inp" type="text" id="1" name="phoneNumber" onChange={handleChange} onFocus={handleFocus} onBlur={handleBlur} />
+        </div>
+        <div className="checkout__shipping-address-sec__form">
+          <label className="checkout__shipping-address-sec__form__lbl" htmlFor="2" onClick={handleClick}>{en ? 'Phone Number' : 'رقم الهاتف'}</label>
+          <input className="checkout__shipping-address-sec__form__inp" type="text" id="2" name="phoneNumber" onChange={handleChange} onFocus={handleFocus} onBlur={handleBlur} />
+        </div>
+        <div className="checkout__shipping-address-sec__form">
+          <label className="checkout__shipping-address-sec__form__lbl" htmlFor="3" onClick={handleClick}>{en ? 'Phone Number' : 'رقم الهاتف'}</label>
+          <input className="checkout__shipping-address-sec__form__inp" type="text" id="3" name="phoneNumber" onChange={handleChange} onFocus={handleFocus} onBlur={handleBlur} />
         </div>
       </section>
     </div>

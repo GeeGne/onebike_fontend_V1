@@ -11,7 +11,9 @@
   padding-inline: 0.5em;
   transition: height 0.25s ease-out, padding 0.25s ease-out, background-color 0.5s ease-in;
 
-  body.arabic & {direction: rtl}
+  body.arabic & {
+    direction: rtl;
+  }
 
   &::before {
     content: "";
@@ -72,7 +74,6 @@
       cursor: copy;
       direction: ltr;
 
-      body.arabic &::before {content: "انسخ الرقم"}
       &::before {
         content: "Copy Number";
         position: absolute;
