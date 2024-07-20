@@ -6,6 +6,8 @@ import {Link, useNavigate} from 'react-router-dom';
 import {auth} from "/src/firebase/authSignUp";
 import {signInWithEmailAndPassword, onAuthStateChanged, sendPasswordResetEmail} from "firebase/auth";
 import handleAuthError from "/src/firebase/handleAuthError";
+import {db} from '/src/firebase/fireStore';
+import {doc, setDoc} from 'firebase/firestore';
 
 // COMPONENTS
 import Banner from '/src/components/Banner';
@@ -65,7 +67,12 @@ function SignIn ({darkMode, lan}) {
     const signIn = async () => {
       const {email, password} = formData;
       try {
-        await signInWithEmailAndPassword(auth, email, password)
+        const userCredential = await signInWithEmailAndPassword(auth, email, password);
+        const user = userCredential.user;
+        await setDoc(doc(db, 'users', user.uid), {
+          phoneNumber: '1234123412',
+          createdAt: new Date().toISOString()
+        });
         return true;
       } catch (err) {
         console.error(err);

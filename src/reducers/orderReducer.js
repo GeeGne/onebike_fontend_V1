@@ -1,5 +1,5 @@
 function orderReducer(order, action) {
-  const {type, cart, city: deliverTo, shippingFee: shipping, newNumber} = action
+  const {type, cart, city, shippingCost, phone, addressDetails, secondAddress, notes, user} = action
 
   const calculateTotal = () => {
     let total = 0;
@@ -8,14 +8,22 @@ function orderReducer(order, action) {
   }
 
   switch (type) {
-    case 'UPDATE_PRODUCTS':
-      return {...order, products: cart, total: calculateTotal()};
+    case 'update_products':
+      return {...order, products: cart, total: order.shippingCost + calculateTotal(), subtotal: calculateTotal()};
+    case 'update_costumer':
+      return {...order, costumer: {...order.costumer, costumerId: user?.uid, fullName: user?.displayName, email: user?.email}}      
     case 'update_shipping_fee_and_inp':
-      return {...order, shipping, deliverTo};
+      return {...order, shippingCost, shippingAddress: {...order.shippingAddress, city}, total: order.total + shippingCost};
     case 'default_number_is_selected':
     case 'new_number_is_selected':
-    case 'phone_number_inp':
-      return {...order, newNumber};
+    case 'phone':
+      return {...order, costumer: {...order.costumer, phone}};
+    case 'addressDetails':
+      return {...order, costumer: {...order.costumer, addressDetails}};
+    case 'secondAddress':
+      return {...order, costumer: {...order.costumer, secondAddress}};
+    case 'notes':
+      return {...order, notes};
     default:
       console.error('Error: Unknown type: ' + type);
       return {...order};

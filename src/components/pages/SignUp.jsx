@@ -6,6 +6,8 @@ import {useNavigate} from 'react-router-dom';
 import {auth} from "/src/firebase/authSignUp";
 import {createUserWithEmailAndPassword, onAuthStateChanged, updateProfile} from "firebase/auth";
 import handleAuthError from "/src/firebase/handleAuthError";
+import {db} from '/src/firebase/fireStore';
+import {doc, setDoc} from 'firebase/firestore';
 
 // COMPONENTS
 import Banner from '/src/components/Banner';
@@ -132,11 +134,20 @@ function SignUp ({darkMode, lan}) {
   }
 
   const submitForm = async () => {
-    const {fname, lname, phone, newsLetter} = formData
+    const {fname, lname, email, phone, newsLetter} = formData
     try {
-      updateProfile(auth.currentUser, {
-        displayName: fname + ' ' + lname
+      await updateProfile(auth.currentUser, {
+        displayName: fname + ' ' + lname,
       })
+
+      await setDoc(doc(db, 'users', user.uid), {
+        createdAt: new Date().toISOString(),  
+        phone,
+      });
+      newsLetter && await setDoc(doc(db, 'newsLetter', user.uid), {
+        createdAt: new Date().toISOString(),  
+        email
+      });
     } catch (err) {
       console.error(err);
       setAlertText(handleAuthError(err, en));
@@ -157,7 +168,7 @@ function SignUp ({darkMode, lan}) {
     const {
       firstName: regFirstName, lastName: regLastName, 
       email: regEmail, phone: regPhone, 
-      password: regPassword, congirmPassword: regConfirmPassword
+      password: regPassword, confirmPassword: regConfirmPassword
     } = validate.register;
 
     if (typeof(regFirstName(fname, en)) === 'string') return handleError(regFirstName(fname, en), fNamePopupEL.current, fNameEL.current);

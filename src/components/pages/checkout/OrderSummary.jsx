@@ -18,7 +18,7 @@ import brandLogo3 from '/assets/img/logo/evoc.webp';
 
 
 function OrderSummary ({darkMode, lan, order, hidePrices}) {
-  const {products, shipping, total} = order;
+  const {products, shippingCost, total, subtotal} = order;
   const en = lan === 'en';
 
   return (
@@ -37,15 +37,15 @@ function OrderSummary ({darkMode, lan, order, hidePrices}) {
       </ul>
       <div className="orderSummary__subtotal">
         <span className="orderSummary__subtotal__text">{en ? 'Subtotal' : 'المجموع الفرعي'}</span>
-        <span className="orderSummary__subtotal__amount">{en ? 'S.P ' : ' ل.س '} {formatNumberWithCommas(total)}</span>
+        <span className="orderSummary__subtotal__amount">{en ? 'S.P ' : ' ل.س '} {formatNumberWithCommas(subtotal)}</span>
       </div>              
       <div className="orderSummary__shipping">
         <span className="orderSummary__shipping__text">{en ? 'Shipping' : 'الشحن'}</span>
-        <span className="orderSummary__shipping__amount">{shipping === 0 ? '--' : (en ? 'S.P ' : ' ل.س ') + formatNumberWithCommas(shipping)}</span>
+        <span className="orderSummary__shipping__amount">{shippingCost === 0 ? '--' : (en ? 'S.P ' : ' ل.س ') + formatNumberWithCommas(shippingCost)}</span>
       </div>      
       <div className="orderSummary__total">
         <span className="orderSummary__total__text">{en ? 'Total' : 'الاجمالي'}</span>
-        <span className="orderSummary__total__amount">{en ? 'S.P ' : ' ل.س '} {formatNumberWithCommas(shipping + total)}</span>
+        <span className="orderSummary__total__amount">{en ? 'S.P ' : ' ل.س '} {formatNumberWithCommas(total)}</span>
       </div>      
     </div>
   )

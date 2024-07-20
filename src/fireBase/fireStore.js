@@ -7,6 +7,6 @@ const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 const db = getFirestore(app);
 
-export {app, analytics, auth, RecaptchaVerifier, createUserWithEmailAndPassword, signInWithPhoneNumber, signOut, updateProfile };
+export {app, analytics, db};
 
 
