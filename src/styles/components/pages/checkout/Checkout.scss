@@ -180,11 +180,7 @@
       &__arrow {
         margin-right: auto;
         transition: transform 0.5s ease;
-   
-        body.arabic & {
-          margin-right: 0;
-          margin-left: auto;
-        }
+        body.arabic & {margin-right: 0; margin-left: auto}
       }
 
       &__total {
@@ -223,10 +219,7 @@
       position: absolute;
       top: 2em;
       right: 1em;
-      body.arabic & {
-        right: auto;
-        left: 1em;
-      }
+      body.arabic & {right: auto; left: 1em}
 
       &__img {
         width: 1.9em;
@@ -234,18 +227,9 @@
         object-position: center;
       }
 
-      &:hover &__description {
-        visibility: visible;
-        opacity: 1;
-      }
+      &:hover &__description {visibility: visible; opacity: 1}
       &__description {
         @include info-description-styles;
-        // body.arabic & {
-          // right: auto;
-          // left: 0.6em;
-          // border-radius: 0.5em 0.5em 0.5em 0.2em;
-        // }
-
         &::before {@include info-description-before-styles}
       }
     }
@@ -263,10 +247,7 @@
         height: 2em;
         background-color: var(--endElement-border-background-color);
 
-        body.arabic & {
-          left: 3em;
-          right: auto;
-        }
+        body.arabic & {left: 3em; right: auto}
       }
 
       &:after {
@@ -286,7 +267,6 @@
       }
 
       &.error.error &__inp {border: solid var(--red-color) 2px}
-      &.focus &__inp {border: solid var(--primary-color) 2px}
       &__inp {
         width: 100%;
         padding: 1em;
@@ -298,16 +278,10 @@
         outline: 0;
         transition: border 0.15s ease-out;
       }
-      &__inp.focus {border: solid 2px var(--primary-color)}
-      &__inp.focus + &__lst {
-        visibility: visible;
-        opacity: 1;
-      }
+      &.focus &__inp {border: solid 2px var(--primary-color)}
+      &.focus &__inp ~ &__lst {visibility: visible; opacity: 1}
 
-      &.error &__error-popup {
-        visibility: visible;
-        opacity: 1;
-      }
+      &.error &__error-popup {visibility: visible; opacity: 1}
       &__error-popup {
         @include error-popup-styles;
         right: 4.5em;
@@ -370,27 +344,47 @@
         font-weight: 600;
       }
 
-      &__total {
-        color: var(--font-h-color);
-      }
+      &__total {color: var(--font-h-color)}
     } 
   }
 
+  &__phone-sec.error {
+    border: solid 2px var(--red-color);
+    border-radius: 2em;
+  }
   &__phone-sec {
     grid-area: phone-sec;
     @include section-styles;
-    &::before {@include bottom-line-sec-styles}
+    &::before {@include bottom-line-sec-styles; z-index: -1}
 
-    &__h2 {@include title-sec-styles}
+    &.error &__h2::after {visibility: visible; opacity: 1}
+    &__h2 {
+      position: relative;
+      @include title-sec-styles;
+      transition: border 0.25s ease;
+
+      &::after {
+        content: "To ensure we can reach you, please choose a phone number option.";
+        body.arabic & {content: "لضمان إمكانية الوصول إليك، يرجى اختيار أحد خيارات رقم الهاتف"}
+        visibility: hidden;
+        position: absolute;
+        bottom: -0.2em;
+        left: 50%;
+        transform: translateX(-50%);
+        white-space: nowrap;
+        color: var(--red-color);
+        font-size: 0.6em;
+        font-weight: 400;
+        opacity: 0;
+        transition: opacity 0.25s ease;
+      }
+    }
 
     &__info-cont {
       position: absolute;
       top: 2em;
       right: 1em;
-      body.arabic & {
-        right: auto;
-        left: 1em;
-      }
+      body.arabic & {right: auto; left: 1em}
 
       &__img {
         width: 1.9em;
@@ -398,18 +392,9 @@
         object-position: center;
       }
 
-      &:hover &__description {
-        visibility: visible;
-        opacity: 1;
-      }
+      &:hover &__description {visibility: visible; opacity: 1}
       &__description {
         @include info-description-styles;
-        // body.arabic & {
-          // right: auto;
-          // left: 0.6em;
-          // border-radius: 0.5em 0.5em 0.5em 0.2em;
-        // }
-
         &::before {@include info-description-before-styles}
       }
     }
@@ -434,6 +419,9 @@
       }
       &__lbl {
         position: relative;
+        display: flex;
+        align-items: center;
+        gap: 0.3em;
         cursor: pointer;
         color: var(--font-p-color);
         transition: font-weight 0.15s ease-out, color 0.15s ease-out;
@@ -451,9 +439,45 @@
           border: solid 2px var(--endElement-border-background-color);
           transition: background-color 0.15s ease-out, transform 0.15s ease-out;
 
-          body.arabic & {
-            left: auto;
-            right: -2em;
+          body.arabic & {left: auto; right: -2em}
+        }
+
+        &__phone-popup-cont {
+          position: relative;
+          height: 1.2em;
+
+          &:hover &__number {visibility: visible; opacity: 1}
+          &__number {
+            visibility: hidden;
+            position: absolute;
+            bottom: calc(100% + 0.5em);
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--font-p-color);
+            font-size: var(--font-size-extraSmall);
+            color: var(--font-p-invert-color);
+            border-radius: 0.5em;
+            padding: 0.5em;
+            opacity: 0;
+            transition: opacity 0.25s ease-out;
+
+            &::before {
+              content: "";
+              position: absolute;
+              bottom: -0.6em;
+              left: calc(50% - 0.1em);
+              transform: rotate(45deg) translateX(-50%);
+              width: 1em;
+              height: 1em;
+              background-color: var(--font-p-color);
+              border-radius: 0.2em;
+              z-index: -1;
+            }
+          }
+
+          &__img {
+            height: 100%;
+            opacity: 0.8;
           }
         }
       }
@@ -531,12 +555,6 @@
       }
       &__description {
         @include info-description-styles;
-        // body.arabic & {
-          // right: auto;
-          // left: 0.6em;
-          // border-radius: 0.5em 0.5em 0.5em 0.2em;
-        // }
-
         &::before {@include info-description-before-styles}
       }
     }
@@ -679,7 +697,7 @@
     width: calc(100% - 2em);
     color: var(--font-h-invert-color);
     font-size: var(--font-size-medium);
-    font-weight: 600;
+    font-weight: bold;
     background-color: var(--primary-color);
     border-radius: 5px;
     padding-block: 1em;

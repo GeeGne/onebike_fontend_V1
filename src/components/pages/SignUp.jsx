@@ -7,7 +7,7 @@ import {auth} from "/src/firebase/authSignUp";
 import {createUserWithEmailAndPassword, onAuthStateChanged, updateProfile} from "firebase/auth";
 import handleAuthError from "/src/firebase/handleAuthError";
 import {db} from '/src/firebase/fireStore';
-import {doc, setDoc} from 'firebase/firestore';
+import {doc, setDoc, updateDoc} from 'firebase/firestore';
 
 // COMPONENTS
 import Banner from '/src/components/Banner';
@@ -141,7 +141,7 @@ function SignUp ({darkMode, lan}) {
         displayName: fname + ' ' + lname,
       });
 
-      await setDoc(doc(db, 'users', user.uid), {
+      await updateDoc(doc(db, 'users', user.uid), {
         createdAt: new Date().toISOString(),
         userId: user.uid,
         fullName: fname + ' ' + lname,
@@ -167,6 +167,7 @@ function SignUp ({darkMode, lan}) {
     const handleError = (errorMessage, popupEL, formChildEL) => {
       popupEL.textContent = errorMessage;
       formChildEL.classList.add('error');
+      formChildEL.scrollIntoView({block: 'center', behavior: 'smooth'});
       formEL.current.style.border = 'solid var(--red-color) 2px';
       return false;      
     }

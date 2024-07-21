@@ -146,9 +146,9 @@ const validate = {
       }
     }, 
     addressDetails (addressDetails, en) {
-
       switch (false) {
         case addressDetails !== '':
+          console.log(addressDetails)
           return en ? 'can\'t be blank' : 'لا يمكن أن يكون فارغًا';
         default:
           return true;

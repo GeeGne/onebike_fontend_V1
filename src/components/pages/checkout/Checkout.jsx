@@ -6,10 +6,11 @@ import {useNavigate} from 'react-router-dom';
 import {auth} from '/src/firebase/authSignUp.js';
 import {signInWithEmailAndPassword, onAuthStateChanged} from "firebase/auth";
 import {db} from '/src/firebase/fireStore';
-import {doc, getDoc} from 'firebase/firestore';
+import {setDoc, updateDoc, getDoc, doc} from 'firebase/firestore';
 
 // COMPONENTS
 import OrderSummary from '/src/components/pages/checkout/OrderSummary';
+import ProgressActivity from '/src/components/ProgressActivity';
 
 // DATA
 import oneBike, {citiesAndShippingFee} from '/src/data/one-bike.json';
@@ -40,16 +41,19 @@ import infoDarkModeIcon from '/assets/img/icons/info_darkMode.svg';
 import keyboardArrowDropDown from '/assets/img/icons/keyboard_arrow_down.svg';
 import keyboardArrowDropDownPrimaryColor from '/assets/img/icons/keyboard_arrow_down_primaryColor.svg';
 import keyboardArrowDropDownSecondaryColor from '/assets/img/icons/keyboard_arrow_down_secondaryColor.svg';
+import adjustIcon from '/assets/img/icons/adjust.svg';
 
 // ASSETS - DARK MODE
 import filterDarkMode from '/assets/img/icons/filter_list_darkMode.svg';
 import keyboardArrowDropDownDarkMode from '/assets/img/icons/keyboard_arrow_down_darkMode.svg';
+import adjustDarkModeIcon from '/assets/img/icons/adjust_darkMode.svg';
 
 function Checkout ({darkMode, lan}) {
   const en = lan === 'en';
   
   const [user, setUser] = useState(null);
   const [userData, setUserData] = useState(null);
+  const [processing, setProcessing] = useState(false);
   const cart = useCartStore(state => state.cart);
   const [order, dispatch] = useReducer(orderReducer, {
     orderId: nanoid(12),
@@ -90,23 +94,32 @@ function Checkout ({darkMode, lan}) {
   const orderSummaryBottomShowArrowEL = useRef(null);
   const orderSummaryBottomShowTextEL = useRef(null);
 
-  const pickCityInpEL = useRef(null);
+  const cityInpContEL = useRef(null);
+  const cityInpEL = useRef(null);
+  const cityErrorPopupEL = useRef(null);
 
+  const phoneSecEL = useRef(null);
+  const defaultNumberRadioEL = useRef(null);
+  const newNumberRadioEL = useRef(null);
   const phoneNumberConInpEL = useRef(null);
   const phoneNumberInpEL = useRef(null);
   const phoneNumberLblEL = useRef(null);
+  const phoneNumberErrorPopupEL = useRef(null);
   
   const addressDetailsConInpEL = useRef(null);
   const addressDetailsInpEL = useRef(null);
   const addressDetailsLblEL = useRef(null);
+  const addressDetailsErrorPopupEL = useRef(null);
 
   const secondAddressConInpEL = useRef(null);
   const secondAddressInpEL = useRef(null);
   const secondAddressLblEL = useRef(null);
+  const secondAddressErrorPopupEL = useRef(null);
 
   const notesConInpEL = useRef(null);
   const notesInpEL = useRef(null);
   const notesLblEL = useRef(null);
+  const notesErrorPopupEL = useRef(null);
 
   const isInputDefault = useRef(true);
 
@@ -134,9 +147,7 @@ function Checkout ({darkMode, lan}) {
     fetchUserData();
   }, [user]);
 
-  console.log({userData})
-  console.log({user})
-  console.log('checkOut order: ', order);
+  console.log({user, userData, order})
   useEffect(() => dispatch({type: 'update_costumer', userData}), [userData])
   useEffect(() => dispatch({type: 'update_products', cart}), [cart])
 
@@ -150,33 +161,36 @@ function Checkout ({darkMode, lan}) {
     ? 'We use your shipping address to deliver your order promptly and accurately. Please ensure that the address provided is complete and correct to avoid any delivery delays' 
     : 'نستخدم عنوان الشحن الخاص بك لتوصيل طلبك بسرعة وبدقة. يرجى التأكد من أن العنوان المقدم كامل وصحيح لتجنب أي تأخيرات في التسليم.';
 
-  
-  const validateInputs = () => {
-
-    const handleError = (errorMessage, popupEL, formChildEL) => {
-      popupEL.textContent = errorMessage;
-      formChildEL.classList.add('error');
-      formEL.current.style.border = 'solid var(--red-color) 2px';
-      return false;      
-    }
-
-    const {phone} = order.costumer;
-    const {city, addressDetails, secondAddress} = order.shippingAddress;
-    const {notes} = order;
-    const {phone: regPhone, addressDetails: regAddressDetails} = validate.placeOrder;
-
-    if (typeof(regPhone(phone, en)) === 'string') return handleError(regPhone(phone, en), fNamePopupEL.current, fNameEL.current);
-    if (typeof(regAddressDetails(lname, en)) === 'string') return handleError(regAddressDetails(lname, en), lNamePopupEL.current, lNameEL.current);
-    if (typeof(regEmail(email, en)) === 'string') return handleError(regEmail(email, en), emailPopupEL.current, emailEL.current);
-    if (typeof(regPhone(phone, en)) === 'string') return handleError(regPhone(phone, en), phonePopupEL.current, phoneEL.current);
-    if (typeof(regPassword(password, en)) === 'string') return handleError(regPassword(password, en), passPopupEL.current, passEL.current);
-    if (typeof(regConfirmPassword(password, confirmPassword, en)) === 'string') return handleError(regConfirmPassword(password, confirmPassword, en), cPassPopupEL.current, cPassEL.current);
-
-    return true;
-  }
-
-  const handleClick = e => {
+  const handleClick = async e => {
     e.stopPropagation();
+
+    const validateInputs = () => {
+
+      const handleError = (errorMessage, popupEL, inpLblContEL) => {
+        popupEL.textContent = errorMessage;
+        inpLblContEL.classList.add('error');
+        inpLblContEL.scrollIntoView({block: 'center', behavior: 'smooth'});
+        return false;      
+      }
+  
+      const {phone} = order.costumer;
+      const {addressDetails} = order.shippingAddress;
+      const {phone: regPhone, addressDetails: regAddressDetails} = validate.placeOrder;
+      const isDefaultNumberChecked = defaultNumberRadioEL.current.checked;
+      const isNewNumberChecked = newNumberRadioEL.current.checked;
+
+      if (order.shippingCost === 0) return handleError(en ? 'please pick your City' : 'ارجاء قم باختيار مدينتك', cityErrorPopupEL.current, cityInpContEL.current);
+      if (!isDefaultNumberChecked && !isNewNumberChecked) {
+        phoneSecEL.current.classList.add('error');
+        phoneSecEL.current.scrollIntoView({block: 'center', behavior: 'smooth'});
+        return false;    
+      }
+      if (typeof(regPhone(phone, en)) === 'string' && isNewNumberChecked) return handleError(regPhone(phone, en), phoneNumberErrorPopupEL.current, phoneNumberConInpEL.current);
+      if (typeof(regAddressDetails(addressDetails, en)) === 'string') return handleError(regAddressDetails(addressDetails, en), addressDetailsErrorPopupEL.current, addressDetailsConInpEL.current);
+  
+      return true;
+    }
+  
     const closeAndStyleTopOrder = (orderSummaryShowHeight, mainEL, arrowEL, textEL) => {
       mainEL.style.maxHeight = String(orderSummaryShowHeight) + 'px';
       arrowEL.style.transform = 'rotate(0deg)';
@@ -212,7 +226,23 @@ function Checkout ({darkMode, lan}) {
     let arrowEL;
     let textEL;
 
+    const submitData = async () => {
+      try {
+        await setDoc(doc(db, 'users', user.uid, 'orders', order.orderId), order);
+      } catch(err) {
+        console.log('Error: not able to write the order data');
+      }
+    }
+
     switch (type) {
+      case 'submit_button_is_clicked':
+        setProcessing(true);
+        const isValidationSuccessful = validateInputs();
+        if (isValidationSuccessful) {
+          await submitData();
+        }
+        setProcessing(false);
+        break;
       case 'toggle_orderSummary':
         isElementExpanded = e.currentTarget.dataset.expand === 'false' ? false : true;
         orderSummaryShowHeight = orderSummaryTopShowEL.current.scrollHeight;
@@ -248,6 +278,13 @@ function Checkout ({darkMode, lan}) {
         setCityDelivery(selectedCity);
         dispatch({type, shippingCost: Number(shippingCost), city})
         break;
+      case 'city_inp_to_focus':
+        cityInpEL.current.focus();
+        break;
+      case 'remove_error-popup':
+        cityInpEL.current.focus();
+
+        break;
       default:
         console.error('Error: Unknown type: ' + type);
     }
@@ -258,22 +295,27 @@ function Checkout ({darkMode, lan}) {
 
     switch (name) {
       case 'city':
-        setTimeout(() => e.target.classList.add('focus'), 100);
+        setTimeout(() => cityInpContEL.current.classList.add('focus'), 100);
+        setTimeout(() => cityInpContEL.current.classList.remove('error'), 100);
         break;
       case 'phone':
         phoneNumberConInpEL.current.classList.add('focus');
+        phoneNumberConInpEL.current.classList.remove('error');
         break;
       case 'addressDetails':
         addressDetailsConInpEL.current.classList.add('focus');
+        addressDetailsConInpEL.current.classList.remove('error');
         break;
       case 'secondAddress':
         secondAddressConInpEL.current.classList.add('focus');
+        secondAddressConInpEL.current.classList.remove('error');
         break;
       case 'notes':
         notesConInpEL.current.classList.add('focus');
+        notesConInpEL.current.classList.remove('error');
         break;
       default:
-        console.error('Error: Unknown type: ', type);
+        console.error('Error: Unknown name: ', name);
     }
   };
 
@@ -286,7 +328,7 @@ function Checkout ({darkMode, lan}) {
 
     switch (name) {
       case 'city':
-        setTimeout(() => e.target.classList.remove('focus'), 100);
+        setTimeout(() => cityInpContEL.current.classList.remove('focus'), 100);
         break;
       case 'phone':
         phoneNumberConInpEL.current.classList.remove('focus');
@@ -318,8 +360,9 @@ function Checkout ({darkMode, lan}) {
     switch (name) {
       case 'phoneOptions':
         if (type === 'default_number_is_selected') {
-          phone = false;
-          dispatch({type, phone})
+          phone = userData?.phone;
+          dispatch({type, phone});
+          phoneSecEL.current.classList.remove('error');
           phoneNumberConInpEL.current.style.maxHeight= '0px'
           setTimeout(() => {
             phoneNumberInpEL.current.style.opacity = '0';
@@ -330,9 +373,8 @@ function Checkout ({darkMode, lan}) {
             phoneNumberConInpEL.current.classList.remove('focus');
           }, 250);
         } else if (type === 'new_number_is_selected') {
-          phone = true;
-          dispatch({type, phone})
           phoneNumberConInpEL.current.style.maxHeight = phoneNumberConInpEL.current.scrollHeight +'px';
+          phoneSecEL.current.classList.remove('error');
           setTimeout(() => {
             phoneNumberInpEL.current.style.opacity = '1';
             phoneNumberInpEL.current.style.transform = 'translateY(0)';
@@ -351,6 +393,17 @@ function Checkout ({darkMode, lan}) {
         console.error('Error Unknown name:', name);
     }
   }
+
+  const handleProcessing = text => {
+    switch (true) {
+      case processing:
+        return <ProgressActivity darkMode={darkMode} invert={true} />
+      default:
+        return text;
+    }
+  }
+
+  const removeErrorPopup = el => el.classList.remove('error');
 
   return (
     <div className="checkout">
@@ -372,9 +425,9 @@ function Checkout ({darkMode, lan}) {
           <img className="checkout__delivery-sec__info-cont__img" src={darkMode ? infoDarkModeIcon : infoIcon} />
           <span className="checkout__delivery-sec__info-cont__description">{deliverInfoTextContent()}</span>
         </div>
-        <div className="checkout__delivery-sec__inp-cont error" data-type="city_inp_to_focus" onClick={handleClick}> 
-          <input className="checkout__delivery-sec__inp-cont__inp" value={cityDelivery} type="text" id="delivery" readOnly name="city" data-type="city_inp" onFocus={handleFocus} onBlur={handleBlur} ref={pickCityInpEL}/>
-          <div className="checkout__delivery-sec__inp-cont__error-popup"/*  onClick={() => removeError(lNameEL.current)} ref={lNamePopupEL} */ > error</div>
+        <div className="checkout__delivery-sec__inp-cont" data-type="city_inp_to_focus" onClick={handleClick} ref={cityInpContEL}> 
+          <input className="checkout__delivery-sec__inp-cont__inp" value={cityDelivery} type="text" id="delivery" readOnly name="city" data-type="city_inp" onFocus={handleFocus} onBlur={handleBlur} ref={cityInpEL}/>
+          <div className="checkout__delivery-sec__inp-cont__error-popup" onClick={() => removeErrorPopup(cityInpContEL.current)} ref={cityErrorPopupEL} />
 
           <ul className="checkout__delivery-sec__inp-cont__lst">
             {citiesAndShippingFee.map(item => 
@@ -387,25 +440,30 @@ function Checkout ({darkMode, lan}) {
           <span className="checkout__delivery-sec__fee-cont__total">{order.shippingCost === 0 ? '--' : ((en ? 'S.P ' : 'ل.س ') + formatNumberWithCommas(order.shippingCost))}</span>
         </div>
       </section>
-      <section className="checkout__phone-sec">
+      <section className="checkout__phone-sec" ref={phoneSecEL}>
         <h2 className="checkout__phone-sec__h2">{en ? 'Contact Phone Number' : 'رقم الهاتف للتواصل'}</h2>
         <div className="checkout__phone-sec__info-cont">
           <img className="checkout__phone-sec__info-cont__img" src={darkMode ? infoDarkModeIcon : infoIcon} />
           <span className="checkout__phone-sec__info-cont__description">{phoneInfoTextContent()}</span>
         </div>
         <div className="checkout__phone-sec__radio-cont">
-          <input className="checkout__phone-sec__radio-cont__inp" type="radio" id="existed-number" name="phoneOptions" data-type="default_number_is_selected" onChange={handleChange} />    
-          <label className="checkout__phone-sec__radio-cont__lbl" htmlFor="existed-number">{en ? 'Use the Phone Number that you provided when Signing up' : 'استخدم رقم الهاتف الذي قدمته عند التسجيل'}</label>
+          <input className="checkout__phone-sec__radio-cont__inp" type="radio" id="existed-number" name="phoneOptions" data-type="default_number_is_selected" onChange={handleChange} ref={defaultNumberRadioEL}/>    
+          <label className="checkout__phone-sec__radio-cont__lbl" htmlFor="existed-number">
+            <span className="checkout__phone-sec__radio-cont__lbl__txt">{en ? 'Use Phone Number provided at Signing up' : 'استخدم رقم الهاتف الذي قدمته عند التسجيل'}</span>
+            <div className="checkout__phone-sec__radio-cont__lbl__phone-popup-cont" >
+              <span className="checkout__phone-sec__radio-cont__lbl__phone-popup-cont__number">{userData?.phone}</span>
+              <img className="checkout__phone-sec__radio-cont__lbl__phone-popup-cont__img" src={darkMode ? adjustDarkModeIcon : adjustIcon} />
+            </div>
+          </label>
         </div>
         <div className="checkout__phone-sec__radio-cont">
-          <input className="checkout__phone-sec__radio-cont__inp" type="radio" id="new-number" name="phoneOptions" data-type="new_number_is_selected" onChange={handleChange} />
+          <input className="checkout__phone-sec__radio-cont__inp" type="radio" id="new-number" name="phoneOptions" data-type="new_number_is_selected" onChange={handleChange} ref={newNumberRadioEL}/>
           <label className="checkout__phone-sec__radio-cont__lbl" htmlFor="new-number">{en ? 'Use another Phone Number' : 'استخدم رقم هاتف آخر'}</label>
         </div>
-        <div className="checkout__phone-sec__number-cont error" ref={phoneNumberConInpEL}>
+        <div className="checkout__phone-sec__number-cont" ref={phoneNumberConInpEL}>
           <label className="checkout__phone-sec__number-cont__lbl" htmlFor="phone" ref={phoneNumberLblEL}>{en ? 'Phone Number' : 'رقم الهاتف'}</label>
           <input className="checkout__phone-sec__number-cont__inp" type="text" id="phone" name="phone" onChange={handleChange} onFocus={handleFocus} onBlur={handleBlur} ref={phoneNumberInpEL} />
-          <div className="checkout__phone-sec__number-cont__error-popup"/*  onClick={() => removeError(phoneNumberConInpEL.current)} ref={lNamePopupEL} */ />
-
+          <div className="checkout__phone-sec__number-cont__error-popup" onClick={() => removeError(phoneNumberConInpEL.current)} ref={phoneNumberErrorPopupEL} />
         </div>
       </section>
       <section className="checkout__shipping-address-sec">
@@ -414,23 +472,20 @@ function Checkout ({darkMode, lan}) {
           <img className="checkout__shipping-address-sec__info-cont__img" src={darkMode ? infoDarkModeIcon : infoIcon} />
           <span className="checkout__shipping-address-sec__info-cont__description">{shippingInfoTextContent()}</span>
         </div>
-        <div className="checkout__shipping-address-sec__lbl-inp-cont error" ref={addressDetailsConInpEL}>
+        <div className="checkout__shipping-address-sec__lbl-inp-cont" ref={addressDetailsConInpEL}>
           <label className="checkout__shipping-address-sec__lbl-inp-cont__lbl" htmlFor="address" ref={addressDetailsLblEL}>{en ? 'Address Details' : 'تفاصيل العنوان'}</label>
           <input className="checkout__shipping-address-sec__lbl-inp-cont__inp" type="text" id="address" name="addressDetails" onChange={handleChange} onFocus={handleFocus} onBlur={handleBlur} ref={addressDetailsInpEL} />
-          <div className="checkout__shipping-address-sec__lbl-inp-cont__error-popup"/*  onClick={() => removeError(addressDetailsConInpEL.current)} ref={lNamePopupEL} */ />
-
+          <div className="checkout__shipping-address-sec__lbl-inp-cont__error-popup" onClick={() => removeError(addressDetailsConInpEL.current)} ref={addressDetailsErrorPopupEL} />
         </div>
-        <div className="checkout__shipping-address-sec__lbl-inp-cont error" ref={secondAddressConInpEL}>
+        <div className="checkout__shipping-address-sec__lbl-inp-cont" ref={secondAddressConInpEL}>
           <input className="checkout__shipping-address-sec__lbl-inp-cont__inp" type="text" id="secondAddress" name="secondAddress" onChange={handleChange} onFocus={handleFocus} onBlur={handleBlur} ref={secondAddressInpEL} />
           <label className="checkout__shipping-address-sec__lbl-inp-cont__lbl" htmlFor="secondAddress" ref={secondAddressLblEL}>{en ? 'Second Address (optional)' : 'العنوان الثاني (اختياري)'}</label>
-          <div className="checkout__shipping-address-sec__lbl-inp-cont__error-popup"/*  onClick={() => removeError(secondAddressConInpEL.current)} ref={lNamePopupEL} */ />
-
+          <div className="checkout__shipping-address-sec__lbl-inp-cont__error-popup" onClick={() => removeError(secondAddressConInpEL.current)} ref={secondAddressErrorPopupEL} />
         </div>
-        <div className="checkout__shipping-address-sec__lbl-inp-cont error" ref={notesConInpEL}>
+        <div className="checkout__shipping-address-sec__lbl-inp-cont" ref={notesConInpEL}>
           <label className="checkout__shipping-address-sec__lbl-inp-cont__lbl" htmlFor="notes" ref={notesLblEL}>{en ? 'Notes (optional)' : 'ملاحظات (اختياري)'}</label>
           <input className="checkout__shipping-address-sec__lbl-inp-cont__inp" type="text" id="notes" name="notes" onChange={handleChange} onFocus={handleFocus} onBlur={handleBlur} ref={notesInpEL} />
-          <div className="checkout__shipping-address-sec__lbl-inp-cont__error-popup"/*  onClick={() => removeError(notesConInpEL.current)} ref={lNamePopupEL} */ />
-
+          <div className="checkout__shipping-address-sec__lbl-inp-cont__error-popup" onClick={() => removeError(notesConInpEL.current)} ref={notesErrorPopupEL} />
         </div>
       </section>
       <section className="checkout__orderSummary-bottom-sec">
@@ -455,7 +510,7 @@ function Checkout ({darkMode, lan}) {
           <span className="checkout__orderSummary-bottom-sec__total__amount">{en ? 'S.P ' : ' ل.س '} {formatNumberWithCommas(order.total)}</span>
         </div>      
       </section>
-      <button className="checkout__place-order-btn" data-type="submit_button" onSubmit={handleClick}>{en ? 'Place Order' : 'إتمام الطلب'}</button>
+      <button className="checkout__place-order-btn" data-type="submit_button_is_clicked" onClick={handleClick}>{handleProcessing(en ? 'Place Order' : 'إتمام الطلب')}</button>
     </div>
   )
 }

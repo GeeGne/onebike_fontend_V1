@@ -15,13 +15,12 @@ function orderReducer(order, action) {
     case 'update_shipping_fee_and_inp':
       return {...order, shippingCost, shippingAddress: {...order.shippingAddress, city}, total: order.total + shippingCost};
     case 'default_number_is_selected':
-    case 'new_number_is_selected':
     case 'phone':
       return {...order, costumer: {...order.costumer, phone}};
     case 'addressDetails':
-      return {...order, costumer: {...order.costumer, addressDetails}};
+      return {...order, shippingAddress: {...order.shippingAddress, addressDetails}};
     case 'secondAddress':
-      return {...order, costumer: {...order.costumer, secondAddress}};
+      return {...order, shippingAddress: {...order.shippingAddress, secondAddress}};
     case 'notes':
       return {...order, notes};
     default:

@@ -69,10 +69,6 @@ function SignIn ({darkMode, lan}) {
       try {
         const userCredential = await signInWithEmailAndPassword(auth, email, password);
         const user = userCredential.user;
-        await setDoc(doc(db, 'users', user.uid), {
-          phoneNumber: '1234123412',
-          createdAt: new Date().toISOString()
-        });
         return true;
       } catch (err) {
         console.error(err);
@@ -174,6 +170,7 @@ function SignIn ({darkMode, lan}) {
     const handleError = (errorMessage, popupEL, formChildEL) => {
       popupEL.textContent = errorMessage;
       formChildEL.classList.add('error');
+      formChildEL.scrollIntoView({block: 'center', behavior: 'smooth'});
       return false;      
     }
 
