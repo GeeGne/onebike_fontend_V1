@@ -64,7 +64,7 @@ const validate = {
         case phone.length === 13:
           return en ? 'wrong phone number ex: +963936534080' : 'رقم هاتف خاطئ مثال: +963936534080';
         default:
-          return true
+          return true;
       }
     },
     password (password, en) {
@@ -87,7 +87,7 @@ const validate = {
             return en ? 'must contain at least one number' : 'يجب أن يحتوي على رقم واحد على الأقل';
           };
         default:
-          return true
+          return true;
       }
     },
     confirmPassword (password, confirmedPassword, en) {
@@ -97,7 +97,7 @@ const validate = {
         case password === confirmedPassword:
           return en ? 'unmatched password': 'كلمة المرور غير مطابقة';
         default:
-          return true
+          return true;
       }
     },
   },
@@ -113,7 +113,7 @@ const validate = {
         case re.test(email):
             return en ? 'wrong email ex: example@email.com' : 'بريد الكتروني غير صحيح مثال: example@email.com'
         default:
-          return true
+          return true;
       }
     },
     password (password, en) {
@@ -123,7 +123,35 @@ const validate = {
         case !password.includes(' '):
           return en ? 'must not contain Spaces' : 'يجب أن لا يحتوي على مسافات';
         default:
-          return true
+          return true;
+      }
+    }
+  },
+  placeOrder: {
+    phone (phone, en) {
+      const re= /^[0-9+]+$/;
+      const re1= /^\+963/;
+
+      switch (false) {
+        case phone !== '':
+          return en ? 'can\'t be blank' : 'لا يمكن أن يكون فارغًا';
+        case !phone.includes(' '):
+          return en ? 'must not contain Spaces' : 'يجب أن لا يحتوي على مسافات';
+        case re1.test(phone):
+          return en ? 'wrong phone number ex: +963936534080' : 'رقم هاتف خاطئ مثال: +963936534080';
+        case phone.length === 13:
+          return en ? 'wrong phone number ex: +963936534080' : 'رقم هاتف خاطئ مثال: +963936534080';
+        default:
+          return true;
+      }
+    }, 
+    addressDetails (addressDetails, en) {
+
+      switch (false) {
+        case addressDetails !== '':
+          return en ? 'can\'t be blank' : 'لا يمكن أن يكون فارغًا';
+        default:
+          return true;
       }
     }
   }

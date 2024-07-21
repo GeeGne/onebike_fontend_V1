@@ -111,7 +111,8 @@ function SignUp ({darkMode, lan}) {
     setProcessing(true);
     const isOperationSucesssful = await signUpWithEmailAndPass();
     if (isOperationSucesssful) {
-      await submitForm();
+      const user = isOperationSucesssful;
+      await submitForm(user);
       setTimeout(() => window.scroll({top: 0, behavior: 'smooth'}), 500);
     } else {
       formEL.current.style.border = 'solid var(--red-color) 2px';
@@ -124,7 +125,7 @@ function SignUp ({darkMode, lan}) {
     try {
       const userCredintial = await createUserWithEmailAndPassword(auth, email, password);
       const user = userCredintial.user;
-      return true;
+      return user;
     } catch (err) {
       console.error(err);
       setAlertText(handleAuthError(err, en));
@@ -133,21 +134,27 @@ function SignUp ({darkMode, lan}) {
     }
   }
 
-  const submitForm = async () => {
+  const submitForm = async (user) => {
     const {fname, lname, email, phone, newsLetter} = formData
     try {
-      await updateProfile(auth.currentUser, {
+      await updateProfile(user, {
         displayName: fname + ' ' + lname,
-      })
+      });
 
       await setDoc(doc(db, 'users', user.uid), {
-        createdAt: new Date().toISOString(),  
+        createdAt: new Date().toISOString(),
+        userId: user.uid,
+        fullName: fname + ' ' + lname,
         phone,
-      });
-      newsLetter && await setDoc(doc(db, 'newsLetter', user.uid), {
-        createdAt: new Date().toISOString(),  
         email
       });
+      
+      if (newsLetter) {
+        await setDoc(doc(db, 'newsLetter', user.uid), {
+          createdAt: new Date().toISOString(),  
+          email
+        });
+      } 
     } catch (err) {
       console.error(err);
       setAlertText(handleAuthError(err, en));

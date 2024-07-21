@@ -4,7 +4,9 @@ import {useNavigate} from 'react-router-dom';
 
 // FIREBASE
 import {auth} from '/src/firebase/authSignUp.js';
-import {signOut, updateProfile, signInWithEmailAndPassword, onAuthStateChanged} from "firebase/auth";
+import {signInWithEmailAndPassword, onAuthStateChanged} from "firebase/auth";
+import {db} from '/src/firebase/fireStore';
+import {doc, getDoc} from 'firebase/firestore';
 
 // COMPONENTS
 import OrderSummary from '/src/components/pages/checkout/OrderSummary';
@@ -22,6 +24,7 @@ import {useCartStore} from '/src/store/store';
 import orderReducer from '/src/reducers/orderReducer';
 
 // UTILS 
+import validate from '/src/utils/validate';
 import Redirector from '/src/utils/Redirector';
 import {CartContext} from '/src/utils/myContext.js';
 import formatNumberWithCommas from '/src/utils/formatNumberWithCommas';
@@ -44,8 +47,9 @@ import keyboardArrowDropDownDarkMode from '/assets/img/icons/keyboard_arrow_down
 
 function Checkout ({darkMode, lan}) {
   const en = lan === 'en';
-
+  
   const [user, setUser] = useState(null);
+  const [userData, setUserData] = useState(null);
   const cart = useCartStore(state => state.cart);
   const [order, dispatch] = useReducer(orderReducer, {
     orderId: nanoid(12),
@@ -59,15 +63,15 @@ function Checkout ({darkMode, lan}) {
       city: '',
       addressDetails: '',
       secondAddress: '',
+      trackingNumber: `TRACK${nanoid(12)}`
     },
     products: [],
     orderDate: getCurrentDateFormat(),
-    deliverTo: '',
     shippingCost: 0,
     subtotal: 0,
     total: 0,
     orderStatus: 'On schedule',
-    trackingNumber: `TRACK${nanoid(12)}`
+    notes: ''
   })
   const totalProducts = order.products.length;
   const [cityDelivery, setCityDelivery] = useState('');
@@ -107,13 +111,33 @@ function Checkout ({darkMode, lan}) {
   const isInputDefault = useRef(true);
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => setUser(user));
+    const unsubscribe = onAuthStateChanged(auth, user => setUser(user));
     return () => unsubscribe();
   }, []);
 
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        if (user) {
+          const userDoc = await getDoc(doc(db, "users", user.uid));
+          if (userDoc.exists) {
+            setUserData(userDoc.data());
+          } else {
+            console.log("No such document!");
+          }
+        }
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+    };
+
+    fetchUserData();
+  }, [user]);
+
+  console.log({userData})
   console.log({user})
   console.log('checkOut order: ', order);
-  useEffect(() => dispatch({type: 'update_costumer', user}), [user])
+  useEffect(() => dispatch({type: 'update_costumer', userData}), [userData])
   useEffect(() => dispatch({type: 'update_products', cart}), [cart])
 
   const deliverInfoTextContent = () => en 
@@ -126,8 +150,29 @@ function Checkout ({darkMode, lan}) {
     ? 'We use your shipping address to deliver your order promptly and accurately. Please ensure that the address provided is complete and correct to avoid any delivery delays' 
     : 'نستخدم عنوان الشحن الخاص بك لتوصيل طلبك بسرعة وبدقة. يرجى التأكد من أن العنوان المقدم كامل وصحيح لتجنب أي تأخيرات في التسليم.';
 
+  
   const validateInputs = () => {
 
+    const handleError = (errorMessage, popupEL, formChildEL) => {
+      popupEL.textContent = errorMessage;
+      formChildEL.classList.add('error');
+      formEL.current.style.border = 'solid var(--red-color) 2px';
+      return false;      
+    }
+
+    const {phone} = order.costumer;
+    const {city, addressDetails, secondAddress} = order.shippingAddress;
+    const {notes} = order;
+    const {phone: regPhone, addressDetails: regAddressDetails} = validate.placeOrder;
+
+    if (typeof(regPhone(phone, en)) === 'string') return handleError(regPhone(phone, en), fNamePopupEL.current, fNameEL.current);
+    if (typeof(regAddressDetails(lname, en)) === 'string') return handleError(regAddressDetails(lname, en), lNamePopupEL.current, lNameEL.current);
+    if (typeof(regEmail(email, en)) === 'string') return handleError(regEmail(email, en), emailPopupEL.current, emailEL.current);
+    if (typeof(regPhone(phone, en)) === 'string') return handleError(regPhone(phone, en), phonePopupEL.current, phoneEL.current);
+    if (typeof(regPassword(password, en)) === 'string') return handleError(regPassword(password, en), passPopupEL.current, passEL.current);
+    if (typeof(regConfirmPassword(password, confirmPassword, en)) === 'string') return handleError(regConfirmPassword(password, confirmPassword, en), cPassPopupEL.current, cPassEL.current);
+
+    return true;
   }
 
   const handleClick = e => {
@@ -327,8 +372,10 @@ function Checkout ({darkMode, lan}) {
           <img className="checkout__delivery-sec__info-cont__img" src={darkMode ? infoDarkModeIcon : infoIcon} />
           <span className="checkout__delivery-sec__info-cont__description">{deliverInfoTextContent()}</span>
         </div>
-        <div className="checkout__delivery-sec__inp-cont" data-type="city_inp_to_focus" onClick={handleClick}> 
+        <div className="checkout__delivery-sec__inp-cont error" data-type="city_inp_to_focus" onClick={handleClick}> 
           <input className="checkout__delivery-sec__inp-cont__inp" value={cityDelivery} type="text" id="delivery" readOnly name="city" data-type="city_inp" onFocus={handleFocus} onBlur={handleBlur} ref={pickCityInpEL}/>
+          <div className="checkout__delivery-sec__inp-cont__error-popup"/*  onClick={() => removeError(lNameEL.current)} ref={lNamePopupEL} */ > error</div>
+
           <ul className="checkout__delivery-sec__inp-cont__lst">
             {citiesAndShippingFee.map(item => 
             <li className="checkout__delivery-sec__inp-cont__lst__itm" key={item.id} data-type="update_shipping_fee_and_inp" data-shipping-cost={item.fee} data-city={item.city.en} onClick={handleClick}>{item.city[lan]}</li>          
@@ -354,9 +401,11 @@ function Checkout ({darkMode, lan}) {
           <input className="checkout__phone-sec__radio-cont__inp" type="radio" id="new-number" name="phoneOptions" data-type="new_number_is_selected" onChange={handleChange} />
           <label className="checkout__phone-sec__radio-cont__lbl" htmlFor="new-number">{en ? 'Use another Phone Number' : 'استخدم رقم هاتف آخر'}</label>
         </div>
-        <div className="checkout__phone-sec__number-cont" ref={phoneNumberConInpEL}>
+        <div className="checkout__phone-sec__number-cont error" ref={phoneNumberConInpEL}>
           <label className="checkout__phone-sec__number-cont__lbl" htmlFor="phone" ref={phoneNumberLblEL}>{en ? 'Phone Number' : 'رقم الهاتف'}</label>
           <input className="checkout__phone-sec__number-cont__inp" type="text" id="phone" name="phone" onChange={handleChange} onFocus={handleFocus} onBlur={handleBlur} ref={phoneNumberInpEL} />
+          <div className="checkout__phone-sec__number-cont__error-popup"/*  onClick={() => removeError(phoneNumberConInpEL.current)} ref={lNamePopupEL} */ />
+
         </div>
       </section>
       <section className="checkout__shipping-address-sec">
@@ -365,17 +414,23 @@ function Checkout ({darkMode, lan}) {
           <img className="checkout__shipping-address-sec__info-cont__img" src={darkMode ? infoDarkModeIcon : infoIcon} />
           <span className="checkout__shipping-address-sec__info-cont__description">{shippingInfoTextContent()}</span>
         </div>
-        <div className="checkout__shipping-address-sec__lbl-inp-cont" ref={addressDetailsConInpEL}>
+        <div className="checkout__shipping-address-sec__lbl-inp-cont error" ref={addressDetailsConInpEL}>
           <label className="checkout__shipping-address-sec__lbl-inp-cont__lbl" htmlFor="address" ref={addressDetailsLblEL}>{en ? 'Address Details' : 'تفاصيل العنوان'}</label>
           <input className="checkout__shipping-address-sec__lbl-inp-cont__inp" type="text" id="address" name="addressDetails" onChange={handleChange} onFocus={handleFocus} onBlur={handleBlur} ref={addressDetailsInpEL} />
+          <div className="checkout__shipping-address-sec__lbl-inp-cont__error-popup"/*  onClick={() => removeError(addressDetailsConInpEL.current)} ref={lNamePopupEL} */ />
+
         </div>
-        <div className="checkout__shipping-address-sec__lbl-inp-cont" ref={secondAddressConInpEL}>
-          <label className="checkout__shipping-address-sec__lbl-inp-cont__lbl" htmlFor="secondAddress" ref={secondAddressLblEL}>{en ? 'Second Address (optional)' : 'العنوان الثاني (اختياري)'}</label>
+        <div className="checkout__shipping-address-sec__lbl-inp-cont error" ref={secondAddressConInpEL}>
           <input className="checkout__shipping-address-sec__lbl-inp-cont__inp" type="text" id="secondAddress" name="secondAddress" onChange={handleChange} onFocus={handleFocus} onBlur={handleBlur} ref={secondAddressInpEL} />
+          <label className="checkout__shipping-address-sec__lbl-inp-cont__lbl" htmlFor="secondAddress" ref={secondAddressLblEL}>{en ? 'Second Address (optional)' : 'العنوان الثاني (اختياري)'}</label>
+          <div className="checkout__shipping-address-sec__lbl-inp-cont__error-popup"/*  onClick={() => removeError(secondAddressConInpEL.current)} ref={lNamePopupEL} */ />
+
         </div>
-        <div className="checkout__shipping-address-sec__lbl-inp-cont" ref={notesConInpEL}>
+        <div className="checkout__shipping-address-sec__lbl-inp-cont error" ref={notesConInpEL}>
           <label className="checkout__shipping-address-sec__lbl-inp-cont__lbl" htmlFor="notes" ref={notesLblEL}>{en ? 'Notes (optional)' : 'ملاحظات (اختياري)'}</label>
           <input className="checkout__shipping-address-sec__lbl-inp-cont__inp" type="text" id="notes" name="notes" onChange={handleChange} onFocus={handleFocus} onBlur={handleBlur} ref={notesInpEL} />
+          <div className="checkout__shipping-address-sec__lbl-inp-cont__error-popup"/*  onClick={() => removeError(notesConInpEL.current)} ref={lNamePopupEL} */ />
+
         </div>
       </section>
       <section className="checkout__orderSummary-bottom-sec">
@@ -400,7 +455,7 @@ function Checkout ({darkMode, lan}) {
           <span className="checkout__orderSummary-bottom-sec__total__amount">{en ? 'S.P ' : ' ل.س '} {formatNumberWithCommas(order.total)}</span>
         </div>      
       </section>
-      <button className="checkout__place-order-btn" type="submit" onSubmit={handleSubmit}>{en ? 'Place Order' : 'إتمام الطلب'}</button>
+      <button className="checkout__place-order-btn" data-type="submit_button" onSubmit={handleClick}>{en ? 'Place Order' : 'إتمام الطلب'}</button>
     </div>
   )
 }

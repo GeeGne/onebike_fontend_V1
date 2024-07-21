@@ -68,6 +68,11 @@
   padding: 0.5em;
   opacity: 0;
   transition: opacity 0.25s ease-out;
+  body.arabic & {
+    right: auto;
+    left: 0.6em;
+    border-radius: 0.5em 0.5em 0.5em 0.2em;
+  }
 }
 
 @mixin info-description-before-styles {
@@ -80,6 +85,23 @@
   height: 1em;
   background-color: var(--font-p-color);
   border-radius: 0.2em;
+  body.arabic & {right: auto; left: 0.16em}
+}
+
+@mixin error-popup-styles {
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  right: 0.5em;
+  transform: translateY(-50%);
+  height: 60%;
+  padding: 0.5em;
+  font-size: var(--font-size-extraSmall);
+  color: var(--red-color);
+  backdrop-filter: blur(5px);
+  transition: opacity 0.25s ease-out;
+  body.arabic & {right: auto; left: 0.5em}
 }
 
 .checkout {
@@ -124,10 +146,7 @@
     background-color: var(--light-background-color);
     @include w.breakpoint-up (large) {display: initial}
 
-    body.arabic & {
-      left: auto;
-      right: 100%;
-    }
+    body.arabic & {left: auto; right: 100%}
   }
 
   &__orderSummary-sec {
@@ -221,17 +240,13 @@
       }
       &__description {
         @include info-description-styles;
-        body.arabic & {
-          right: auto;
-          left: 0.6em;
-          border-radius: 0.5em 0.5em 0.5em 0.2em;
-        }
+        // body.arabic & {
+          // right: auto;
+          // left: 0.6em;
+          // border-radius: 0.5em 0.5em 0.5em 0.2em;
+        // }
 
         &::before {@include info-description-before-styles}
-        body.arabic &::before {
-          right: auto;
-          left: 0.16em;
-        }
       }
     }
 
@@ -267,12 +282,11 @@
         background-size: 1.8em;
         opacity: 0.6;
 
-        body.arabic & {
-          left: 0;
-          right: auto;
-        }
+        body.arabic & {left: 0; right: auto}
       }
 
+      &.error.error &__inp {border: solid var(--red-color) 2px}
+      &.focus &__inp {border: solid var(--primary-color) 2px}
       &__inp {
         width: 100%;
         padding: 1em;
@@ -284,14 +298,23 @@
         outline: 0;
         transition: border 0.15s ease-out;
       }
-      &__inp.focus {
-        border: solid 2px var(--primary-color);
-      }
+      &__inp.focus {border: solid 2px var(--primary-color)}
       &__inp.focus + &__lst {
         visibility: visible;
         opacity: 1;
       }
 
+      &.error &__error-popup {
+        visibility: visible;
+        opacity: 1;
+      }
+      &__error-popup {
+        @include error-popup-styles;
+        right: 4.5em;
+
+        body.arabic & {right: auto; left: 4.5em}
+      }
+      
       &__lst {
         visibility: hidden;
         position: absolute;
@@ -381,17 +404,13 @@
       }
       &__description {
         @include info-description-styles;
-        body.arabic & {
-          right: auto;
-          left: 0.6em;
-          border-radius: 0.5em 0.5em 0.5em 0.2em;
-        }
+        // body.arabic & {
+          // right: auto;
+          // left: 0.6em;
+          // border-radius: 0.5em 0.5em 0.5em 0.2em;
+        // }
 
         &::before {@include info-description-before-styles}
-        body.arabic &::before {
-          right: auto;
-          left: 0.16em;
-        }
       }
     }
 
@@ -475,6 +494,12 @@
         opacity: 0;
         transition: border 0.25s ease-out, opacity 0.15s ease-out, transform 0.15s ease-out;
       }
+
+      &.error &__error-popup {
+        visibility: visible;
+        opacity: 1;
+      }
+      &__error-popup {@include error-popup-styles}      
     }
   }
 
@@ -506,17 +531,13 @@
       }
       &__description {
         @include info-description-styles;
-        body.arabic & {
-          right: auto;
-          left: 0.6em;
-          border-radius: 0.5em 0.5em 0.5em 0.2em;
-        }
+        // body.arabic & {
+          // right: auto;
+          // left: 0.6em;
+          // border-radius: 0.5em 0.5em 0.5em 0.2em;
+        // }
 
         &::before {@include info-description-before-styles}
-        body.arabic &::before {
-          right: auto;
-          left: 0.16em;
-        }
       }
     }
 
@@ -539,6 +560,13 @@
       &.error.error &__inp {border: solid var(--red-color) 2px}
       &.focus &__inp {border: solid var(--primary-color) 2px}
       &__inp {@include input-styles}
+
+      &.error &__error-popup {
+        visibility: visible;
+        opacity: 1;
+      }
+      &__error-popup {@include error-popup-styles}
+      
     }
   }
 
