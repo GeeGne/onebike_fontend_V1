@@ -460,6 +460,7 @@
             padding: 0.5em;
             opacity: 0;
             transition: opacity 0.25s ease-out;
+            body.arabic & {direction: ltr}
 
             &::before {
               content: "";

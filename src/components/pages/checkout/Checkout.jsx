@@ -30,9 +30,13 @@ import Redirector from '/src/utils/Redirector';
 import {CartContext} from '/src/utils/myContext.js';
 import formatNumberWithCommas from '/src/utils/formatNumberWithCommas';
 import getCurrentDateFormat from '/src/utils/getCurrentDateFormat';
+import generateOrderProductsrHTML from '/src/utils/generateOrderProductsrHTML';
 
 // NANOID
 import {nanoid} from 'nanoid';
+
+// EMAILJS
+import emailjs from '@emailjs/browser';
 
 // ASSETS
 import filter from '/assets/img/icons/filter_list.svg';
@@ -50,6 +54,12 @@ import adjustDarkModeIcon from '/assets/img/icons/adjust_darkMode.svg';
 
 function Checkout ({darkMode, lan}) {
   const en = lan === 'en';
+  const emailJS = {
+    publicKey:'Ktp0E66pfT3z3E6PT',
+    serviceId: 'service_g6clw5l',
+    templateId: 'template_7vve99z'
+  }
+  emailjs.init({publicKey: emailJS.publicKey});
   
   const [user, setUser] = useState(null);
   const [userData, setUserData] = useState(null);
@@ -217,6 +227,45 @@ function Checkout ({darkMode, lan}) {
       textEL.textContent = en? 'Hide' : 'اخفاء';
     }
 
+    const submitData = async () => {
+      try {
+        await setDoc(doc(db, 'users', user.uid, 'orders', order.orderId), order);
+      } catch(err) {
+        console.log('Error: not able to write the order data');
+      }
+    }
+
+    const sendOrderEmail = async () => {
+      const productsHTML = generateOrderProductsrHTML(order);
+      try {
+        const result = await emailjs.send(
+          emailJS.serviceId,
+          emailJS.templateId,
+          {
+            order: JSON.stringify(order),
+            orderId: order.orderId,
+            orderDate: order.orderDate,
+            orderStatus: order.orderStatus,
+            subtotal: order.subtotal,
+            shippingCost: order.shippingCost,
+            total: order.total,
+            costumerId: order.costumer.costumerId,
+            fullName: order.costumer.fullName,
+            email: order.costumer.email,
+            phone: order.costumer.phone,
+            city: order.shippingAddress.city,
+            addressDetails: order.shippingAddress.addressDetails,
+            secondAddress: order.shippingAddress.secondAddress,
+            trackingNumber: order.shippingAddress.trackingNumber,
+            products: productsHTML,
+          }
+        );
+        console.log('Order notification email sent successfully', result.text);
+      } catch (error) {
+        console.error('Error sending order notification email:', error);
+      }
+    };
+
     const toggleExpandDataATT = (el, expand) => el.dataset.expand = String(!expand);
     const {type, shippingCost, city} = e.currentTarget.dataset;
     let isElementExpanded;       
@@ -226,20 +275,13 @@ function Checkout ({darkMode, lan}) {
     let arrowEL;
     let textEL;
 
-    const submitData = async () => {
-      try {
-        await setDoc(doc(db, 'users', user.uid, 'orders', order.orderId), order);
-      } catch(err) {
-        console.log('Error: not able to write the order data');
-      }
-    }
-
     switch (type) {
       case 'submit_button_is_clicked':
         setProcessing(true);
         const isValidationSuccessful = validateInputs();
         if (isValidationSuccessful) {
           await submitData();
+          await sendOrderEmail();
         }
         setProcessing(false);
         break;

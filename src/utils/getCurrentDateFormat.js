@@ -11,7 +11,3 @@ function getCurrentDateFormat () {
 }
 
 export default getCurrentDateFormat;
-
-
-
-
