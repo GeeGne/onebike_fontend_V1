@@ -1,5 +1,7 @@
+import formatNumberWithCommas from '/src/utils/formatNumberWithCommas';
+
 const generateOrderProductsrHTML = (order) => {
-  let productsHTML;
+  let productsHTML = '';
 
   order.products.forEach(productItem => {
     productsHTML += 
@@ -8,7 +10,7 @@ const generateOrderProductsrHTML = (order) => {
         id: ${productItem.product.id}\n
         Title: ${productItem.product.title.en}\n
         Quantity: ${productItem.quantity}\n
-        Price: ${productItem.quantityPrice}\n
+        Price: ${formatNumberWithCommas(productItem.quantityPrice)}\n
     `;
   });
 

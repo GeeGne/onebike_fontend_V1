@@ -203,7 +203,11 @@ function Checkout ({darkMode, lan}) {
         phoneSecEL.current.scrollIntoView({block: 'center', behavior: 'smooth'});
         return false;    
       }
-      if (typeof(regPhone(phone, en)) === 'string' && isNewNumberChecked) return handleError(regPhone(phone, en), phoneNumberErrorPopupEL.current, phoneNumberConInpEL.current);
+      if (typeof(regPhone(phone, en)) === 'string' && isNewNumberChecked) {
+        phoneSecEL.current.classList.add('error-noDescription');
+        phoneSecEL.current.scrollIntoView({block: 'center', behavior: 'smooth'});
+        return handleError(regPhone(phone, en), phoneNumberErrorPopupEL.current, phoneNumberConInpEL.current)
+      };
       if (typeof(regAddressDetails(addressDetails, en)) === 'string') return handleError(regAddressDetails(addressDetails, en), addressDetailsErrorPopupEL.current, addressDetailsConInpEL.current);
   
       return true;
@@ -242,7 +246,7 @@ function Checkout ({darkMode, lan}) {
         return true;
       } catch(err) {
         console.log('Error: not able to write the order data');
-        setAlertText(en ? 'Sorry, there\'s a problem while storing the Order Data, please try again' : 'عذرا, يوجد مشكله في تخزين بيانات الطلب, الرجاء المحاوله مره اخرى');
+        setAlertText(en ? 'Sorry, there\'s a problem while storing your Order, kindly try again' : 'عذرا, يوجد مشكله في تخزين بيانات طلبك, الرجاء المحاوله مره اخرى');
         setNewAlert(Math.random());
         return false;
       }
@@ -259,6 +263,7 @@ function Checkout ({darkMode, lan}) {
             orderId: orderUpdatedDateAndId.current.orderId,
             orderDate: orderUpdatedDateAndId.current.orderDate,
             orderStatus: order.orderStatus,
+            notes: order.notes,
             subtotal: formatNumberWithCommas(order.subtotal),
             shippingCost: formatNumberWithCommas(order.shippingCost),
             total: formatNumberWithCommas(order.total),
@@ -360,6 +365,7 @@ function Checkout ({darkMode, lan}) {
       case 'phone':
         phoneNumberConInpEL.current.classList.add('focus');
         phoneNumberConInpEL.current.classList.remove('error');
+        phoneSecEL.current.classList.remove('error-noDescription');
         break;
       case 'addressDetails':
         addressDetailsConInpEL.current.classList.add('focus');
@@ -379,7 +385,6 @@ function Checkout ({darkMode, lan}) {
   };
 
   const handleBlur = e => {
-    // const {type} = e.currentTarget.dataset;
     const {name} = e.currentTarget
     const isInputEmpty = e.target.value === '';
 
@@ -417,6 +422,8 @@ function Checkout ({darkMode, lan}) {
           phone = userData?.phone;
           dispatch({type, phone});
           phoneSecEL.current.classList.remove('error');
+          phoneSecEL.current.classList.remove('error-noDescription');
+          phoneNumberConInpEL.current.classList.remove('error');
           phoneNumberConInpEL.current.style.maxHeight= '0px'
           setTimeout(() => {
             phoneNumberInpEL.current.style.opacity = '0';
@@ -427,8 +434,11 @@ function Checkout ({darkMode, lan}) {
             phoneNumberConInpEL.current.classList.remove('focus');
           }, 250);
         } else if (type === 'new_number_is_selected') {
+          dispatch({type: 'phone', phone: ''})
           phoneNumberConInpEL.current.style.maxHeight = phoneNumberConInpEL.current.scrollHeight +'px';
           phoneSecEL.current.classList.remove('error');
+          phoneSecEL.current.classList.remove('error-noDescription');
+          phoneNumberConInpEL.current.classList.remove('error');
           setTimeout(() => {
             phoneNumberInpEL.current.style.opacity = '1';
             phoneNumberInpEL.current.style.transform = 'translateY(0)';

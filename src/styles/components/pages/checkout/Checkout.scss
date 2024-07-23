@@ -348,7 +348,8 @@
     } 
   }
 
-  &__phone-sec.error {
+  &__phone-sec.error,
+  &__phone-sec.error-noDescription {
     border: solid 2px var(--red-color);
     border-radius: 2em;
   }
@@ -357,6 +358,7 @@
     @include section-styles;
     &::before {@include bottom-line-sec-styles; z-index: -1}
 
+    &.error-noDescription &__h2::after {visibility: hidden; opacity: 0}
     &.error &__h2::after {visibility: visible; opacity: 1}
     &__h2 {
       position: relative;

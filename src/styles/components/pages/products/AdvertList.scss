@@ -31,9 +31,7 @@
         border: solid var(--advertList-productContent-border-color) 1px;
         transition: transform 0.5s ease-out;
 
-        &:hover {
-          transform: scale(1.05);
-        }
+        &:hover {transform: scale(1.05)}
 
         &.out-of-stock {
           &::before {
@@ -106,7 +104,7 @@
           color: var(--font-h-color);
         }
 
-        &__brand-logo {
+        &__brand-img {
           width: 100%;
           filter: var(--advertList-brandLogo-filter-invert);
         }

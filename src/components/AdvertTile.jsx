@@ -167,7 +167,7 @@ function AdvertTile ({darkMode, lan, type}) {
         <button className="advertTile__list__right-arr-btn" data-action="scroll_right" onClick={handleClick}></button>
         <ul className="advertTile__list__products" ref={listEL}>
           {getProducts.map(product => 
-          <li className="advertTile__list__products__product --slide-to-left" key={product.id} ref={productConEL}>
+          <li className={`advertTile__list__products__product --slide-to-left${product.outOfStock ? ' out-of-stock' : ''}`} key={product.id} ref={productConEL}>
             {isProductInWishlist(product) 
             ? <button className="advertTile__list__products__product__heart-btn added-to-wishlist" data-action="remove_product_from_wishlist" data-product-id={product.id} onClick={handleClick} />
             : <button className="advertTile__list__products__product__heart-btn" data-action="add_product_to_wishlist" data-product-id={product.id} onClick={handleClick} />
@@ -175,6 +175,7 @@ function AdvertTile ({darkMode, lan, type}) {
             <img className="advertTile__list__products__product__img" src={getProductImgURL(product)} />
             {product.discount && <div className="advertTile__list__products__product__discount">{lan === 'ar' ? 'خصم ' : ''}{calculateDiscountPercantage(product.price, product.discount)}{en ? ' off' : ''}</div>}
             <h3 className="advertTile__list__products__product__description">{product.title[lan]}</h3>
+            {product.brand && <img className="advertTile__list__products__product__brand-img" src={`/assets/img/logo/${product.brand}.webp`}/>}
             <div className="advertTile__list__products__product__price">
               {product.discount 
               ? <> <span className="now" style={nowStyle}>{en ? 'NOW' : 'الان'}</span> 

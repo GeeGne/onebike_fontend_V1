@@ -136,9 +136,9 @@ function AdvertList ({darkMode, lan, matchedProducts, onCartProductsChange}) {
             : <button className="advertList__advert-sctn__grid__product__favourite" data-type="add_product_to_wishlist" data-product-id={product.id} onClick={handleClick} />
             }
             <img className="advertList__advert-sctn__grid__product__img" src={getProductImgURL(product)}/>
-            {product.discount ? <h3 className="advertList__advert-sctn__grid__product__discount">{lan === 'ar' ? 'خصم ' : ''}{calculateDiscountPercantage(product.price, product.discount)}{en ? ' off' : ''}</h3> : <></>}
+            {product.discount && <h3 className="advertList__advert-sctn__grid__product__discount">{lan === 'ar' ? 'خصم ' : ''}{calculateDiscountPercantage(product.price, product.discount)}{en ? ' off' : ''}</h3>}
             <h3 className="advertList__advert-sctn__grid__product__description">{product.title[lan]}</h3>
-            <img className="advertList__advert-sctn__grid__product__brand-logo" src={product.brand ? `/assets/img/logo/${product.brand}.webp` : ''}/>
+            {product.brand && <img className="advertList__advert-sctn__grid__product__brand-img" src={`/assets/img/logo/${product.brand}.webp`}/>}
             <div className="advertList__advert-sctn__grid__product__price">
               {product.discount 
               ? <><span className="now" style={nowStyle}>{en ? 'NOW' : 'الان'}</span> 
