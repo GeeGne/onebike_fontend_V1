@@ -32,7 +32,7 @@ import Redirector from '/src/utils/Redirector';
 import {CartContext} from '/src/utils/myContext.js';
 import formatNumberWithCommas from '/src/utils/formatNumberWithCommas';
 import getCurrentDateFormat from '/src/utils/getCurrentDateFormat';
-import generateOrderProductsrHTML from '/src/utils/generateOrderProductsrHTML';
+import generateOrderProductsHTML from '/src/utils/generateOrderProductsHTML';
 import formatPhoneNumber from '/src/utils/formatPhoneNumber';
 
 // NANOID
@@ -60,7 +60,7 @@ function Checkout ({darkMode, lan}) {
   const emailJS = {
     publicKey:'Ktp0E66pfT3z3E6PT',
     serviceId: 'service_g6clw5l',
-    templateId: 'template_7vve99z'
+    templateId: {a: 'template_7vve99z', b: 'template_se37knq'}
   }
   emailjs.init({publicKey: emailJS.publicKey});
   
@@ -253,11 +253,11 @@ function Checkout ({darkMode, lan}) {
     }
 
     const sendOrderEmail = async () => {
-      const productsHTML = generateOrderProductsrHTML(orderUpdatedDateAndId.current);
+      const productsText = generateOrderProductsHTML(orderUpdatedDateAndId.current, 'b');
       try {
         const result = await emailjs.send(
           emailJS.serviceId,
-          emailJS.templateId,
+          emailJS.templateId.b,
           {
             order: JSON.stringify(orderUpdatedDateAndId.current),
             orderId: orderUpdatedDateAndId.current.orderId,
@@ -275,7 +275,7 @@ function Checkout ({darkMode, lan}) {
             addressDetails: order.shippingAddress.addressDetails,
             secondAddress: order.shippingAddress.secondAddress,
             trackingNumber: order.shippingAddress.trackingNumber,
-            products: productsHTML,
+            products: productsText,
           }
         );
         console.log('Order notification email sent successfully', result.text);

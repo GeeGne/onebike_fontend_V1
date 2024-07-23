@@ -81,9 +81,8 @@ function SignIn ({darkMode, lan}) {
     const sendPassReset = async () => {
       const {email} = formData;
       try {
-        const response = await sendPasswordResetEmail(auth, email)
-        if (!response) throw new Error('email is invalid');
-        setAlertText('Rest password email has been sent!');
+        await sendPasswordResetEmail(auth, email)
+        setAlertText('Reset password email has been sent!');
         setNewAlert(Math.random());
         return true;
       } catch (err) {
@@ -99,6 +98,7 @@ function SignIn ({darkMode, lan}) {
     setProcessing(true);
 
     if (forgotPass) {
+      console.log('fogot pass')
       const isOperationSucessful = await sendPassReset();
       if (isOperationSucessful) setForgotPass(prevVal => !prevVal) 
       setProcessing(false);
