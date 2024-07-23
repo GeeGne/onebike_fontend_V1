@@ -1,0 +1,55 @@
+@use '/src/styles/utils/_BreakPoints' as w;
+@use '/src/styles/utils/_StyleKits' as k;
+
+.order-complete {
+  visibility: hidden;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--background-orderComplete-color);
+  z-index: 3000;
+  opacity: 0;
+  transition: opacity 0.25s ease-out;
+
+  body.arabic & {direction: rtl;}
+
+  &__content {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: var(--background-color);
+    gap: 1em;
+    padding-block: 1em;
+    padding-inline: 2em;
+    transition: transform 0.25s ease-out, opacity 0.25s ease-out;
+
+    &__upper-cont {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-block: 1em;
+      color: var(--font-h-color);
+      font-weight: bold;
+      font-size: var(--font-size-large)
+    }
+
+    &__bottom-cont {
+      display: flex;
+      flex-direction: column;
+      gap: 1em;
+
+      &__description {
+        color: var(--font-h-color);
+      }
+
+      &__btn {
+        @include k.button-styles;
+      }
+    }
+  }
+}

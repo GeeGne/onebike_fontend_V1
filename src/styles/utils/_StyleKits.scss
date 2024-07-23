@@ -1,0 +1,16 @@
+@mixin button-styles {
+  // margin-block: 1em;
+  margin-inline: auto;
+  // min-width: calc(100% - 2em);
+  // max-width: 15em;
+  width: 15em;
+  color: var(--font-h-invert-color);
+  font-size: var(--font-size-medium);
+  font-weight: bold;
+  background-color: var(--primary-color);
+  border-radius: 5px;
+  padding-block: 1em;
+  transition: background-color 0.5s ease;
+
+  &:hover {background-color: var(--background-invert-color)}
+}

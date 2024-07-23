@@ -15,6 +15,7 @@ import oneBike from '/src/data/one-bike.json';
 
 // UTILS
 import strRemoveSpace from '/src/utils/strRemoveSpace.js';
+import formatPhoneNumber from '/src/utils/formatPhoneNumber.js';
 
 // ICONS
 import facebookIcon from '/assets/img/icons/facebook.svg';
@@ -95,7 +96,7 @@ function IntroSection ({onThemeChange, onLanguageChange}) {
   const languageData = setLanguage;
 
   const handleClick = () => {
-    const number = strRemoveSpace(phoneNumberH2Element.current.textContent);
+    const number = formatPhoneNumber(oneBike.phone);
     const alertMessage = lan === 'en' ? 
     'Number is copied to the clipboard successfully!' : 'لقد تم نسخ رقم الهاتف بنجاح!';
     
@@ -121,7 +122,7 @@ function IntroSection ({onThemeChange, onLanguageChange}) {
 
         <button className="userinfo-container__phone-number" onClick={handleClick} onMouseEnter={() => handleHover('enter')} onMouseLeave={() => handleHover('leave')}>
           <img src={darkMode ? callIconDarkMode : callIcon} ref={phoneNumberIconElement}/>
-          <span ref={phoneNumberH2Element}>{oneBike.phone}</span>
+          <span ref={phoneNumberH2Element}>{formatPhoneNumber(oneBike.phone)}</span>
         </button>
 
         <LightDarkButton onThemeChange={themeData}/>

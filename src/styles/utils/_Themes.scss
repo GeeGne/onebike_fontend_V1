@@ -82,13 +82,16 @@
   --cartSlider-addToCart-background-color: #b4926f;
   --cartSlider-addToCart-active-background-color: hsl(0, 0%, 100%);
 
- // SignIn
+  // SignIn
   --signIn-input-border-color: hsl(0, 0%, 35%);
   --signIn-label-font-color: hsl(0, 0%, 35%);
   
- // SignUp
+  // SignUp
   --signUp-input-border-color: hsl(0, 0%, 35%);
   --signUp-label-font-color: hsl(0, 0%, 35%);
+
+  // orderComplete
+  --background-orderComplete-color: hsl(0, 0%, 0%, 0.7);
 
   // Footer
   --footer-background-color: var(--secondary-color);
@@ -108,8 +111,6 @@
   --font-p-invert-color: hsl(0, 0%, 25%);
   --primary-color: #85AED0;
   --secondary-color: #192740;
-  // --primary-color: #B8D1E0;
-  // --secondary-color: #4B6D90;
 
   --button-color: hsl(0, 0%, 0%);
   --button-font-color: hsl(0, 0%, 100%);
@@ -181,6 +182,9 @@
   // SignUp
   --signUp-input-border-color: hsl(0, 0%, 65%);
   --signUp-label-font-color: hsl(0, 0%, 65%);
+
+  // orderComplete
+  --background-orderComplete-color: hsl(0, 0%, 100%, 0.7);
 
   // Footer
   --footer-background-color: var(--secondary-color);

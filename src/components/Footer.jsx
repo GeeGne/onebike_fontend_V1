@@ -14,6 +14,7 @@ import oneBike from '/src/data/one-bike.json'
 
 // UTILS
 import strRemoveSpace from '/src/utils/strRemoveSpace.js';
+import formatPhoneNumber from '/src/utils/formatPhoneNumber.js';
 
 //  ICONS
 import facebookIcon from '/assets/img/icons/facebook.svg';
@@ -39,7 +40,7 @@ function Footer ({darkMode, lan}) {
     let alertMessage ;
     
     if (type === 'phone') {
-      copiedMessage = strRemoveSpace(oneBike.phone);
+      copiedMessage = formatPhoneNumber(oneBike.phone);
       alertMessage = lan === 'en' ? 'Number is copied to the clipboard successfully!' : 'لقد تم نسخ رقم الهاتف بنجاح!';
     }
 
@@ -112,7 +113,7 @@ function Footer ({darkMode, lan}) {
           <ul className="footer-container__footer-upper-grid__section-contact-us__list">
             <li className="footer-container__footer-upper-grid__section-contact-us__list__item">
               <img className="footer-container__footer-upper-grid__section-contact-us__list__item__img" src={darkMode ? callIconDarkMode : callIcon}/>
-              <button className="footer-container__footer-upper-grid__section-contact-us__list__item__link" onClick={() => handleClick('phone')}>{oneBike.phone}</button>
+              <button className="footer-container__footer-upper-grid__section-contact-us__list__item__link" onClick={() => handleClick('phone')}>{formatPhoneNumber(oneBike.phone)}</button>
             </li>
             <li className="footer-container__footer-upper-grid__section-contact-us__list__item">
               <img className="footer-container__footer-upper-grid__section-contact-us__list__item__img" src={darkMode ? mailIconDarkMode : mailIcon}/>

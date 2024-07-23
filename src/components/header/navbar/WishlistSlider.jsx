@@ -75,7 +75,7 @@ function WishlistSlider ({darkMode, lan}) {
         containerStyle.visibility= 'visible';
         containerStyle.backgroundColor= 'var(--cartSlider-background-color)'
         sliderStyle.transform = 'translateY(0)';
-        setTimeout(() => sliderStyle.transform = 'translateY(4em)', 250);
+        setTimeout(() => sliderStyle.transform = 'translateY(4em)', 300);
         break;
       case false:
         document.body.style.overflow = 'hidden auto';

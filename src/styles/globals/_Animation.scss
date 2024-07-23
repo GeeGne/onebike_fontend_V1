@@ -212,6 +212,36 @@
   }
 }
 
+@keyframes stick-a {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  40% {
+    transform: translate(-50%, -50%) rotate(45deg);
+  }
+  60% {
+    transform: translate(-50%, -50%) rotate(135deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(180deg);
+  }
+}
+
+@keyframes stick-b {
+  0% {
+    transform: translate(-50%, -50%) rotate(-0deg);
+  }
+  40% {
+    transform: translate(-50%, -50%) rotate(-45deg);
+  }
+  60% {
+    transform: translate(-50%, -50%) rotate(-135deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(-180deg);
+  }
+}
+
 .alert-popIn {
   animation-name: alert-popIn;
   animation-timing-function: ease;
@@ -292,6 +322,30 @@
 .--heart-beat {
   animation-name: heart-beat;
   animation-duration: 1s;
+  animation-timing-function: linear;
+  animation-fill-mode: both;
+  animation-iteration-count: infinite;
+}
+
+.--heart-beat {
+  animation-name: heart-beat;
+  animation-duration: 1s;
+  animation-timing-function: linear;
+  animation-fill-mode: both;
+  animation-iteration-count: infinite;
+}
+
+.--stick-a {
+  animation-name: stick-a;
+  animation-duration: 2s;
+  animation-timing-function: linear;
+  animation-fill-mode: both;
+  animation-iteration-count: infinite;
+}
+
+.--stick-b {
+  animation-name: stick-b;
+  animation-duration: 2s;
   animation-timing-function: linear;
   animation-fill-mode: both;
   animation-iteration-count: infinite;

@@ -12,6 +12,7 @@ import oneBike from '/src/data/one-bike.json';
 
 // UTILS
 import strRemoveSpace from '/src/utils/strRemoveSpace.js';
+import formatPhoneNumber from '/src/utils/formatPhoneNumber.js';
 
 // ICONS
 import callIcon from '/assets/img/icons/call.svg';
@@ -33,7 +34,7 @@ function NeedHelp ({darkMode, lan}) {
     let alertMessage ;
     
     if (type === 'phone') {
-      copiedMessage = strRemoveSpace(oneBike.phone);
+      copiedMessage = formatPhoneNumber(oneBike.phone);
       alertMessage = lan === 'en' ? 'Number is copied to the clipboard successfully!' : 'لقد تم نسخ رقم الهاتف بنجاح!';
     }
 

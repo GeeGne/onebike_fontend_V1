@@ -47,6 +47,7 @@ const useCartStore = create(
       cart: [],
       toggle: false,
       setToggle: boolean => set({toggle: boolean}),
+      resetCart: () => set({cart: []}),
       isProductInCart: product => get().cart.some(item => item.id === product.id),
       updateProductQuantity: (product, quantity) => 
         set({
@@ -70,4 +71,10 @@ const useCartStore = create(
   )
 );
 
-export {useWishlistStore, useCartStore};
+const useOrderStore = create((set, get) => ({
+  orderState: false,
+  setOrderState: (boolean) => set({orderState: boolean})
+}));
+
+
+export {useWishlistStore, useCartStore, useOrderStore};
