@@ -92,7 +92,7 @@ function Checkout ({darkMode, lan}) {
     total: 0,
     orderStatus: 'On schedule',
     notes: ''
-  })
+  });
   const totalProducts = order.products.length;
   const [cityDelivery, setCityDelivery] = useState('');
   useEffect(() => {
@@ -347,7 +347,6 @@ function Checkout ({darkMode, lan}) {
         break;
       case 'remove_error-popup':
         cityInpEL.current.focus();
-
         break;
       default:
         console.error('Error: Unknown type: ' + type);
@@ -363,6 +362,8 @@ function Checkout ({darkMode, lan}) {
         setTimeout(() => cityInpContEL.current.classList.remove('error'), 100);
         break;
       case 'phone':
+        const isValueEmpty = phoneNumberInpEL.current.value === '';
+        if (isValueEmpty) phoneNumberInpEL.current.value = '+963';
         phoneNumberConInpEL.current.classList.add('focus');
         phoneNumberConInpEL.current.classList.remove('error');
         phoneSecEL.current.classList.remove('error-noDescription');
@@ -413,7 +414,7 @@ function Checkout ({darkMode, lan}) {
 
   const handleChange = e => {
     const {type} = e.currentTarget.dataset
-    const {name, value} = e.currentTarget;
+    let {name, value} = e.currentTarget;
     let phone;
 
     switch (name) {
@@ -451,7 +452,12 @@ function Checkout ({darkMode, lan}) {
       case 'addressDetails':
       case 'secondAddress':
       case 'notes':
-        dispatch({type: name, [name]: value})
+        if (name === 'phone') {
+          let phone = formatPhoneNumber(value);
+          value = phone;
+          phoneNumberInpEL.current.value = phone;
+        }
+        dispatch({type: name, [name]: value.trim()})
         break;
       default:
         console.error('Error Unknown name:', name);

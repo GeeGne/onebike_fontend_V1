@@ -20,6 +20,7 @@ import '/src/styles/components/pages/SignUp.scss';
 // UTILS
 import validate from '/src/utils/validate';
 import Redirector from '/src/utils/Redirector';
+import formatPhoneNumber from '/src/utils/formatPhoneNumber';
 
 // ASSETS
 // import user from '/assets/img/icons/user.svg';
@@ -87,11 +88,17 @@ function SignUp ({darkMode, lan}) {
     const unsubscribe = onAuthStateChanged(auth, (user) => setUser(user));
     return () => unsubscribe();
   }, []);
-
+  console.log(formData);
   const handleChange = e => {
-    const {name, value, checked} = e.target;
+    let {name, value, checked} = e.target;
     const isNewsLetter = name === 'newsLetter';
-    setFormData(prevData => ({...prevData, [name]: isNewsLetter ? checked : value}))
+
+    if (name === 'phone') {
+      let phone = formatPhoneNumber(value);
+      value = phone;
+      phoneInputEL.current.value = phone;
+    }
+    setFormData(prevData => ({...prevData, [name]: isNewsLetter ? checked : value.trim()}))
   }
 
   const handleSubmit = async e => {
@@ -141,7 +148,7 @@ function SignUp ({darkMode, lan}) {
         displayName: fname + ' ' + lname,
       });
 
-      await updateDoc(doc(db, 'users', user.uid), {
+      await setDoc(doc(db, 'users', user.uid), {
         createdAt: new Date().toISOString(),
         userId: user.uid,
         fullName: fname + ' ' + lname,
@@ -209,8 +216,11 @@ function SignUp ({darkMode, lan}) {
         emailEL.current.classList.add('onFocus');  
         break;
       case 'phone':
+        const isValueEmpty = phoneInputEL.current.value === '';
+        if (isValueEmpty) phoneInputEL.current.value = '+963';
         phoneEL.current.classList.remove('error');
         phoneEL.current.classList.add('onFocus');  
+
         break;
       case 'password':
         passEL.current.classList.remove('error');

@@ -53,16 +53,15 @@ const validate = {
     phone (phone, en) {
       const re= /^[0-9+]+$/;
       const re1= /^\+963/;
+      const re2= /^\+?\d{1,4}(\s\d{3}){2}\s\d{3}$/;;
 
       switch (false) {
         case phone !== '':
           return en ? 'can\'t be blank' : 'لا يمكن أن يكون فارغًا';
-        case !phone.includes(' '):
-          return en ? 'must not contain Spaces' : 'يجب أن لا يحتوي على مسافات';
-        case re1.test(phone):
-          return en ? 'wrong phone number ex: +963936534080' : 'رقم هاتف خاطئ مثال: +963936534080';
-        case phone.length === 13:
-          return en ? 'wrong phone number ex: +963936534080' : 'رقم هاتف خاطئ مثال: +963936534080';
+        case re2.test(phone):
+          return en ? 'wrong phone number ex: +963 936 534 080' : 'رقم هاتف خاطئ مثال: +963 936 534 080';
+        case phone.length === 16:
+          return en ? 'wrong phone number ex: +963 936 534 080' : 'رقم هاتف خاطئ مثال: +963 936 534 080';
         default:
           return true;
       }
@@ -79,13 +78,13 @@ const validate = {
           return en ? 'must not contain Spaces' : 'يجب أن لا يحتوي على مسافات';
         case password.length > 7:
           return en ? 'must be at least 8 characters' : 'يجب أن يكون على الأقل 8 أحرف';
-        case (re.test(password)):
-          if (!re1.test(password)) {
-            return en ? 'must contain at least one alphabet': 'يجب أن يحتوي على حرف واحد على الأقل';
-          } 
-          if (!re2.test(password)) {
-            return en ? 'must contain at least one number' : 'يجب أن يحتوي على رقم واحد على الأقل';
-          };
+        // case (re.test(password)):
+        //   if (!re1.test(password)) {
+        //     return en ? 'must contain at least one alphabet': 'يجب أن يحتوي على حرف واحد على الأقل';
+        //   } 
+        //   if (!re2.test(password)) {
+        //     return en ? 'must contain at least one number' : 'يجب أن يحتوي على رقم واحد على الأقل';
+        //   };
         default:
           return true;
       }
@@ -131,16 +130,15 @@ const validate = {
     phone (phone, en) {
       const re= /^[0-9+]+$/;
       const re1= /^\+963/;
+      const re2= /^\+?\d{1,4}(\s\d{3}){2}\s\d{3}$/;;
 
       switch (false) {
         case phone !== '':
           return en ? 'can\'t be blank' : 'لا يمكن أن يكون فارغًا';
-        case !phone.includes(' '):
-          return en ? 'must not contain Spaces' : 'يجب أن لا يحتوي على مسافات';
-        case re1.test(phone):
-          return en ? 'wrong phone number ex: +963936534080' : 'رقم هاتف خاطئ مثال: +963936534080';
-        case phone.length === 13:
-          return en ? 'wrong phone number ex: +963936534080' : 'رقم هاتف خاطئ مثال: +963936534080';
+        case re2.test(phone):
+          return en ? 'wrong phone number ex: +963 936 534 080' : 'رقم هاتف خاطئ مثال: +963 936 534 080';
+        case phone.length === 16:
+          return en ? 'wrong phone number ex: +963 936 534 080' : 'رقم هاتف خاطئ مثال: +963 936 534 080';
         default:
           return true;
       }
@@ -148,7 +146,6 @@ const validate = {
     addressDetails (addressDetails, en) {
       switch (false) {
         case addressDetails !== '':
-          console.log(addressDetails)
           return en ? 'can\'t be blank' : 'لا يمكن أن يكون فارغًا';
         default:
           return true;

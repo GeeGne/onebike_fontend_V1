@@ -51,6 +51,7 @@ function OrderCompleteLayout ({darkMode, lan}) {
   }, [orderState])
 
   const handleClick = e => {
+    document.body.style.overflow = 'hidden auto';
     navigate('/');
     setTimeout(() => window.scroll({top: 0, behavior: 'smooth'}) ,500);
     setOrderState(false);

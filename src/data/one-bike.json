@@ -8,7 +8,7 @@
     {
       "id": 1,
       "city": {"en": "Damascus", "ar": "دمشق"},
-      "fee": 500009
+      "fee": 5000
     },{
       "id": 2,
       "city": {"en": "Aleppo", "ar": "حلب "},

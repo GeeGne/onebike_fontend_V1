@@ -17,14 +17,22 @@ const generateOrderProductsHTML = (order, styleType) => {
     
       return productsText; 
     case 'b':
-      productsText = "Product | Quantity | Price | Total\n";
-      productsText += "-------|----------|-------|------\n";
+      productsText = "------------------------------------------------------------\n";
+      productsText += "ID | Product | Quantity | Price | Total \n";
+      productsText += "------------------------------------------------------------\n";
     
       order.products.forEach(item => {
         const product = item.product;
-        productsText += `${product.title.en} (${product.color.en}) | ${item.quantity} | $${formatNumberWithCommas(item.price)} | $${formatNumberWithCommas(item.quantityPrice)}\n`;
-      });
+        const id = product.id;
+        const title = (product.title.en + (product.color ? (' (' + product.color.en + ')') : ''));
+        const quantity = item.quantity.toString();
+        const price = ('S.P' + formatNumberWithCommas(item.price));
+        const total = ('S.P' + formatNumberWithCommas(item.quantityPrice));
     
+        productsText += `${id} | ${title} | ${quantity} | ${price} | ${total} \n`;
+        productsText += "------------------------------------------------------------\n";
+      });
+      
       return productsText;
     default:
       console.error('Error: Unknown styleType', styleType)
