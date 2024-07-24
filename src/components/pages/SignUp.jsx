@@ -88,11 +88,10 @@ function SignUp ({darkMode, lan}) {
     const unsubscribe = onAuthStateChanged(auth, (user) => setUser(user));
     return () => unsubscribe();
   }, []);
-  console.log(formData);
+
   const handleChange = e => {
     let {name, value, checked} = e.target;
     const isNewsLetter = name === 'newsLetter';
-
     if (name === 'phone') {
       let phone = formatPhoneNumber(value);
       value = phone;
@@ -217,7 +216,7 @@ function SignUp ({darkMode, lan}) {
         break;
       case 'phone':
         const isValueEmpty = phoneInputEL.current.value === '';
-        if (isValueEmpty) phoneInputEL.current.value = '+963';
+        if (isValueEmpty) phoneInputEL.current.value = '+963 ';
         phoneEL.current.classList.remove('error');
         phoneEL.current.classList.add('onFocus');  
 

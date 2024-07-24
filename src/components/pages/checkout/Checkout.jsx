@@ -363,7 +363,7 @@ function Checkout ({darkMode, lan}) {
         break;
       case 'phone':
         const isValueEmpty = phoneNumberInpEL.current.value === '';
-        if (isValueEmpty) phoneNumberInpEL.current.value = '+963';
+        if (isValueEmpty) phoneNumberInpEL.current.value = '+963 ';
         phoneNumberConInpEL.current.classList.add('focus');
         phoneNumberConInpEL.current.classList.remove('error');
         phoneSecEL.current.classList.remove('error-noDescription');

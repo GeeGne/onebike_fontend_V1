@@ -45,6 +45,7 @@
 
       &:hover::after {backdrop-filter: blur(0px) !important}
       &::after {
+        // display: none;
         content: "";
         position: absolute;
         top: 0;
@@ -55,6 +56,8 @@
         backdrop-filter: blur(0px);
         transition: filter 0.25s ease-out;
         z-index: 30;
+
+        @include w.breakpoint-down (medium) {backdrop-filter: blur(0px) !important}
       }
 
       &:hover &__img {

@@ -45,10 +45,7 @@
       font-weight: bold;
       margin-right: auto;
 
-      body.arabic & {
-        margin-right: 0;
-        margin-left: auto;
-      }
+      body.arabic & {margin-right: 0; margin-left: auto}
     }
 
     &__see-more {
@@ -177,12 +174,13 @@
             font-size: 1.2em;
             font-weight: 600;
             color: white;
-            backdrop-filter: brightness(50%);
-            z-index: 20;
+            // backdrop-filter: brightness(50%);
+            background-color: var(--advertTile-no-product-background-color);
+            z-index: 50;
             transition: background-color 0.25s ease-out;
           }
           body.arabic &::after {content: "المنتج غير متوفر"}
-          &:active::after {background-color: rgba(255, 0, 0, 0.223)}
+          &:active::after {background-color: rgba(110, 0, 0, 0.5)}
         }
 
 

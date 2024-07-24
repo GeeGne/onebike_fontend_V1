@@ -47,6 +47,7 @@
       & p {color: var(--font-h-color)}
     }
 
+   &__phone {& input {body.arabic & {direction: ltr}}}
     &__fname,
     &__lname,
     &__email,
@@ -94,12 +95,12 @@
         border-radius: 5px;
         padding: 1em;
         transition: border 0.25s ease-out;
-        body.arabic & input {direction: rtl}
         // filter: invert(20%);
         // &:hover {border: solid var(--secondary-color) 2px}
         // &:focus {border: solid var(--primary-color) 2px}
       }
 
+     
 
       &.error &__error-popup {
         visibility: visible;
