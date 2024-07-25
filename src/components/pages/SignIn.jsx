@@ -1,6 +1,7 @@
 // HOOKS
 import React, {useState, useEffect, useRef} from 'react';
 import {Link, useNavigate} from 'react-router-dom';
+import {Helmet} from 'react-helmet-async';
 
 // FIREBASE
 import {auth} from "/src/firebase/authSignUp";
@@ -23,8 +24,14 @@ import Redirector from '/src/utils/Redirector';
 
 function SignIn ({darkMode, lan}) {
 
+  const pageURL = window.location.href;
+  const siteName = "ONEBIKE";
+  const pageHeadTitle = "Sign In - ONEBIKE";
+  const pageDescription = "Sign in to ONEBIKE to manage your orders, view your account details, and enjoy a seamless shopping experience.";
+  const pageKeywords = "ONEBIKE, sign in, login, bicycle, bicycle parts, Syria";
+
   const en = lan === 'en';
-  const {pathname} = window.location;
+  const {href ,pathname} = window.location;
   const navigate = useNavigate();
   const redirector = new Redirector(navigate);
 
@@ -197,27 +204,40 @@ function SignIn ({darkMode, lan}) {
 
 
   return (
-    <section className='signIn' onSubmit={handleSubmit}>
-      <Alert alertText={alertText} newAlert={newAlert} />
-      <Banner pageTitle={pageTitle} description={description}/>
-      <form className='signIn__form'>
-        <div className='signIn__form__email' ref={emailEL}>
-          <label htmlFor="email" ref={emailLabelEL}>{en ? 'EMAIL' : 'البريد الالكتروني'}</label>
-          <input type="text" name="email" id="email" autoComplete="true" onFocus={handleFocus} onBlur={handleBlur} onChange={handleChange} />
-          <div className="signIn__form__email__error-popup" onClick={() => removeError(emailEL.current)} ref={emailPopupEL} />
-        </div>
-        {!forgotPass && 
-        <div className='signIn__form__password' ref={passEL}>
-          <label htmlFor="password" ref={passLabelEL}>{en ? 'PASSWORD' : 'كلمه المرور'}</label>
-          <input type="password" name="password" id="password" autoComplete="true" onFocus={handleFocus} onBlur={handleBlur} onChange={handleChange} />
-          <div className="signIn__form__password__error-popup" onClick={() => removeError(passEL.current)} ref={passPopupEL} />
-        </div>}
-        {!forgotPass && <button className="forgot-password" tabIndex="0" onClick={() => setForgotPass(prevVal => !prevVal)}>{en ? 'Forgot password?' : 'نسيت كلمه المرور؟'}</button>}
-        <button className='signIn__form__submit' type="submit">{handleProcessing(en ? (forgotPass ? 'SUBMIT' : 'SIGN IN') : (forgotPass ? 'ارسال' : 'سجل الدخول'))}</button>
-        {!forgotPass && <a className="new-costumer" tabIndex="0" data-path="/account/register" onClick={handleClick} onKeyDown={handleKeyDown}>{en ? 'Don\'t have an account? Join us!' : 'ليس لديك حساب؟ انضم الينا'}</a>}
-        {forgotPass && <a className="cancel" tabIndex="0" onClick={() => setForgotPass(prevVal => !prevVal)} onKeyDown={handleKeyDown}>{en ? 'Cancel' : 'الغاء'}</a>}
-      </form>
-    </section>
+    <>
+      <Helmet>
+        <title>{pageHeadTitle}</title>
+        <meta name="description" content={pageDescription} />
+        <meta name="keywords" content={pageKeywords} />
+        <meta property="og:title" content={pageHeadTitle} />
+        <meta property="og:description" content={pageDescription} />
+        <meta property="og:url" content={pageURL} />
+        {/* <meta property="og:image" content="https://onebike-b622f.web.app/path/to/your/image.jpg" /> */}
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content={siteName} />
+      </Helmet>
+      <section className='signIn' onSubmit={handleSubmit}>
+        <Alert alertText={alertText} newAlert={newAlert} />
+        <Banner pageTitle={pageTitle} description={description}/>
+        <form className='signIn__form'>
+          <div className='signIn__form__email' ref={emailEL}>
+            <label htmlFor="email" ref={emailLabelEL}>{en ? 'EMAIL' : 'البريد الالكتروني'}</label>
+            <input type="text" name="email" id="email" autoComplete="true" onFocus={handleFocus} onBlur={handleBlur} onChange={handleChange} />
+            <div className="signIn__form__email__error-popup" onClick={() => removeError(emailEL.current)} ref={emailPopupEL} />
+          </div>
+          {!forgotPass && 
+          <div className='signIn__form__password' ref={passEL}>
+            <label htmlFor="password" ref={passLabelEL}>{en ? 'PASSWORD' : 'كلمه المرور'}</label>
+            <input type="password" name="password" id="password" autoComplete="true" onFocus={handleFocus} onBlur={handleBlur} onChange={handleChange} />
+            <div className="signIn__form__password__error-popup" onClick={() => removeError(passEL.current)} ref={passPopupEL} />
+          </div>}
+          {!forgotPass && <button className="forgot-password" tabIndex="0" onClick={() => setForgotPass(prevVal => !prevVal)}>{en ? 'Forgot password?' : 'نسيت كلمه المرور؟'}</button>}
+          <button className='signIn__form__submit' type="submit">{handleProcessing(en ? (forgotPass ? 'SUBMIT' : 'SIGN IN') : (forgotPass ? 'ارسال' : 'سجل الدخول'))}</button>
+          {!forgotPass && <a className="new-costumer" tabIndex="0" data-path="/account/register" onClick={handleClick} onKeyDown={handleKeyDown}>{en ? 'Don\'t have an account? Join us!' : 'ليس لديك حساب؟ انضم الينا'}</a>}
+          {forgotPass && <a className="cancel" tabIndex="0" onClick={() => setForgotPass(prevVal => !prevVal)} onKeyDown={handleKeyDown}>{en ? 'Cancel' : 'الغاء'}</a>}
+        </form>
+      </section>
+    </>
   )
 }
 
