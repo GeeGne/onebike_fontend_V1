@@ -16,7 +16,7 @@ import ProgressActivity from '/src/components/ProgressActivity';
 import Alert from '/src/components/Alert';
 
 // DATA
-import oneBike, {citiesAndShippingFee} from '/src/data/one-bike.json';
+import oneBike, {citiesAndShippingFee, emailJS} from '/src/data/one-bike.json';
 
 // SCSS
 import '/src/styles/components/pages/checkout/Checkout.scss';
@@ -65,11 +65,6 @@ function Checkout ({darkMode, lan}) {
   const pageKeywords = "ONEBIKE, checkout, purchase, bicycle, bicycle parts, secure checkout, Syria";
 
   const en = lan === 'en';
-  const emailJS = {
-    publicKey:'Ktp0E66pfT3z3E6PT',
-    serviceId: 'service_1dyukgq',
-    templateId: {a: 'template_7vve99z', b: 'template_q9gltbi'}
-  }
   emailjs.init({publicKey: emailJS.publicKey});
   
   const [user, setUser] = useState(null);
