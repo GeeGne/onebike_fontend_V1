@@ -17,7 +17,7 @@ function Home ({darkMode, lan}) {
 
   return (
     <div className="home-container">
-       <Helmet>
+      <Helmet>
         <title>ONEBIKE - E-commerce for Bicycles & Bicycle Parts in Syria</title>
         <meta name="description" content="Buy quality bicycles and bicycle parts online from ONEBIKE, Syria's leading e-commerce site for bikes and accessories." />
         <meta property="og:type" content="website" />

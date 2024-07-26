@@ -7,9 +7,9 @@ function cartReducer(cart, action) {
     const totalAmount = prevAmount + newAmount;
     switch (true) {
       case totalAmount > 9:
-        return 9
+        return 9;
       case totalAmount < 1:
-        return 1
+        return 1;
       default:
         return totalAmount
     }

@@ -1,10 +1,3 @@
-// NANOID
-import {nanoid} from 'nanoid';
-
-// UTILS
-import getCurrentDateFormat from '/src/utils/getCurrentDateFormat';
-
-nanoid(12)
 function orderReducer(order, action) {
   const {type, cart, city, shippingCost, phone, addressDetails, secondAddress, notes, user, userData} = action
 

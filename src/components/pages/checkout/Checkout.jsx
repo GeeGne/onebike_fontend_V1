@@ -67,8 +67,8 @@ function Checkout ({darkMode, lan}) {
   const en = lan === 'en';
   const emailJS = {
     publicKey:'Ktp0E66pfT3z3E6PT',
-    serviceId: 'service_g6clw5l',
-    templateId: {a: 'template_7vve99z', b: 'template_se37knq'}
+    serviceId: 'service_1dyukgq',
+    templateId: {a: 'template_7vve99z', b: 'template_q9gltbi'}
   }
   emailjs.init({publicKey: emailJS.publicKey});
   

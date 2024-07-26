@@ -42,11 +42,6 @@ function Navbar ({darkMode, lan}) {
   const cartBtnEL = useRef(null);
 
   const menuData = setMenu;
-  // const cartToggleData = setCartToggle;
-  // const cartData = (data) => {
-    // setCart(data);
-    // onCartChange(data);
-  // }
 
   const isCartEmpty = cart.length === 0;
   const isWishlistEmpty = wishlist.length === 0;
@@ -71,6 +66,8 @@ function Navbar ({darkMode, lan}) {
           searchBtnEL.current.classList.remove('hover');
           document.body.style.overflow = menu ? 'hidden' : 'hidden auto';
           break;
+        default:
+          console.error('Error: Unknown type:', desktopWidth)
       }
     }
     handleResize(menu);

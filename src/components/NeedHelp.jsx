@@ -29,18 +29,22 @@ function NeedHelp ({darkMode, lan}) {
   const [alertText, setAlertText] = useState(null);
   const [newAlert, setNewAlert] = useState(0);
 
-  const handleClick = (type) => {
+  const handleClick = e => {
+    const {type} = e.currentTarget.dataset;
     let copiedMessage;
     let alertMessage ;
     
-    if (type === 'phone') {
-      copiedMessage = formatPhoneNumber(oneBike.phone);
-      alertMessage = lan === 'en' ? 'Number is copied to the clipboard successfully!' : 'لقد تم نسخ رقم الهاتف بنجاح!';
-    }
-
-    if (type === 'email') {
-      copiedMessage = oneBike.email;
-      alertMessage = lan === 'en' ? 'Email is copied to the clipboard successfully!' : 'لقد تم نسخ عنوان البريد الاكنروني بنجاح!';
+    switch (type) {
+      case 'phone':
+        copiedMessage = formatPhoneNumber(oneBike.phone);
+        alertMessage = lan === 'en' ? 'Number is copied to the clipboard successfully!' : 'لقد تم نسخ رقم الهاتف بنجاح!';  
+        break;
+      case 'email':
+        copiedMessage = oneBike.email;
+        alertMessage = lan === 'en' ? 'Email is copied to the clipboard successfully!' : 'لقد تم نسخ عنوان البريد الاكتروني بنجاح!';  
+        break;
+      default:
+        console.error('Error: Unknown type', type);
     }
   
     if (navigator.clipboard) {
@@ -80,13 +84,13 @@ function NeedHelp ({darkMode, lan}) {
         <img className="need-help-container__call-us__img" src={darkMode ? callIconDarkMode : callIcon}/>
         <h2 className="need-help-container__call-us__title">{lan === 'en' ? 'Call us' : 'اتصل بنا'}</h2>
         <h3 className="need-help-container__call-us__description">{lan === 'en' ? 'We\'re mostly available from 10 AM to 5 PM' : 'نحن متواجدون من الساعه 10 صباحاالى 5 مساءا في معظم الاوقات.'}</h3>
-        <button className="need-help-container__call-us__button" onClick={() => handleClick('phone')}>{lan === 'en' ? 'Copy Phone Number' : 'انسخ رقم الهاتف'}</button>
+        <button className="need-help-container__call-us__button" data-type="phone" onClick={handleClick}>{lan === 'en' ? 'Copy Phone Number' : 'انسخ رقم الهاتف'}</button>
       </section>
       <section className="need-help-container__email-us">
         <img className="need-help-container__email-us__img" src={darkMode ? mailIconDarkMode : mailIcon}/>
         <h2 className="need-help-container__email-us__title">{lan === 'en' ? 'Send an Email' : 'ارسل بريدا الكترونيا'}</h2>
         <h3 className="need-help-container__email-us__description">{lan === 'en' ? 'We respond to emails within 48 hours of your support request.' : 'نحن نستجيب على طلبك خلال 48 ساعه كحد اقصى.'}</h3>
-        <button className="need-help-container__email-us__button" onClick={() => handleClick('email')}>{lan === 'en' ? 'Copy Email' : 'انسخ عنوان بريدنا الاكتروني'}</button>
+        <button className="need-help-container__email-us__button" data-type="email" onClick={handleClick}>{lan === 'en' ? 'Copy Email' : 'انسخ عنوان بريدنا الاكتروني'}</button>
       </section>
       <section className="need-help-container__chat-with-us">
         <img className="need-help-container__chat-with-us__img" src={darkMode ? chatDotsIconDarkMode : chatDotsIcon}/>
