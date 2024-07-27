@@ -15,6 +15,9 @@ import Banner from '/src/components/Banner';
 import ProgressActivity from '/src/components/ProgressActivity';
 import Alert from '/src/components/Alert';
 
+// STORES
+import {useOrderStore} from '/src/store/store.js';
+
 // SCSS
 import '/src/styles/components/pages/SignIn.scss';
 
@@ -33,8 +36,9 @@ function SignIn ({darkMode, lan}) {
   const en = lan === 'en';
   const {href ,pathname} = window.location;
   const navigate = useNavigate();
-  const redirector = new Redirector(navigate);
-
+  
+  const {headToCheckouts, setHeadToCheckouts} = useOrderStore();
+  const redirector = new Redirector(navigate, headToCheckouts, setHeadToCheckouts);
   const [processing, setProcessing] = useState(false);
   const [newAlert, setNewAlert] = useState(0);
   const [alertText, setAlertText] = useState(null);
@@ -58,11 +62,12 @@ function SignIn ({darkMode, lan}) {
   const description = forgotPass ? (en ? 'We will send an email to reset your passowrd' : 'سنرسل بريدًا إلكترونيًا لإعادة تعيين كلمة المرور') : '';
   
   useEffect(() => {
-    redirector.signin(pathname, user)
-    if (!user && pathname.includes('checkouts')) {
+    redirector.signin(user, headToCheckouts)
+    if (!user && headToCheckouts) {
       setAlertText(en ? 'Almost there! Sign in to finalize your purchase' : 'أنت على وشك الانتهاء! سجل الدخول لإتمام عملية الشراء');
       setNewAlert(Math.random());
     }
+
   }, [user]);
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => setUser(user));
@@ -201,7 +206,6 @@ function SignIn ({darkMode, lan}) {
         return text;
     }
   }
-
 
   return (
     <>

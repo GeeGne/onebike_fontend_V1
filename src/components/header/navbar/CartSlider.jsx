@@ -6,7 +6,7 @@ import {useNavigate} from 'react-router-dom';
 import '/src/styles/components/header/navbar/CartSlider.scss';
 
 // STORES
-import {useCartStore} from '/src/store/store';
+import {useCartStore, useOrderStore} from '/src/store/store';
 
 // REDUCERS
 import cartReducer from '/src/reducers/cartReducer';
@@ -47,7 +47,8 @@ function CartSlider ({darkMode, lan}) {
     addProductToCart, 
     removeProductFromCart
   } = useCartStore();
-
+  const setHeadToCheckouts = useOrderStore(state => state.setHeadToCheckouts);
+  const headToCheckouts = useOrderStore(state => state.headToCheckouts);
   const cartContainerElement = useRef(null);  
   const sliderElement = useRef(null);
   const cartProductsELS = useRef([]);
@@ -105,7 +106,8 @@ function CartSlider ({darkMode, lan}) {
       case 'nav-to-checkouts':
         setTimeout(() => window.scroll({top: 0, behavior: 'smooth'}), 500);
         setCartToggle(false);
-        navigate('/checkouts/login');
+        setHeadToCheckouts(true);
+        navigate('/account/login');
         break;
       default:
         console.log('Unknown type: ' + type)

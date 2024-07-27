@@ -249,8 +249,6 @@ function Checkout ({darkMode, lan}) {
         return true;
       } catch(err) {
         console.log('Error: not able to write the order data');
-        setAlertText(en ? 'Sorry, there\'s a problem while storing your Order, kindly try again' : 'عذرا, يوجد مشكله في تخزين بيانات طلبك, الرجاء المحاوله مره اخرى');
-        setNewAlert(Math.random());
         return false;
       }
     }
@@ -298,17 +296,42 @@ function Checkout ({darkMode, lan}) {
 
     switch (type) {
       case 'submit_button_is_clicked':
-        setProcessing(true);
-        const isValidationSuccessful = validateInputs();
-        if (isValidationSuccessful) {
+        try {
+          setProcessing(true);
+
+          const isProductsEmpty = order.products.length === 0;
+          if (isProductsEmpty) throw new Error('empty_cart');
+          
+          const isValidationSuccessful = validateInputs();
+          if (!isValidationSuccessful) throw new Error('validation_failed');
+
           const isSubmitSuccessful = await submitData();
-          if (isSubmitSuccessful) {
-            await sendOrderEmail();
-            resetCart();
-            setOrderState(true);
+          if (!isSubmitSuccessful) throw new Error('submit_failed');
+
+          await sendOrderEmail();
+          resetCart();
+          setOrderState(true);
+        } catch (err) {
+          console.error('Order submission error:', err);
+
+          switch(err.message) {
+            case 'empty_cart':
+              setAlertText(en ? 'Error: Your Cart is empty': 'خطأ: سلة التسوق فارغة');
+              break;
+            case 'validation_failed':
+              setAlertText(en ? 'Error: Please check your input': 'خطأ: يرجى التحقق من المدخلات');
+              break;
+            case 'submit_failed':
+              setAlertText(en ? 'Error: Failed to submit order' : 'خطأ: فشل في تقديم الطلب');
+              break;
+            default:
+              setAlertText(en ? 'An unexpected error occurred' : 'حدث خطأ غير متوقع');
           }
+
+          setNewAlert(Math.random());
+        } finally {
+          setProcessing(false);
         }
-        setProcessing(false);
         break;
       case 'toggle_orderSummary':
         isElementExpanded = e.currentTarget.dataset.expand === 'false' ? false : true;

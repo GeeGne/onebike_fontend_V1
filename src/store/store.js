@@ -71,10 +71,20 @@ const useCartStore = create(
   )
 );
 
-const useOrderStore = create((set, get) => ({
-  orderState: false,
-  setOrderState: (boolean) => set({orderState: boolean})
-}));
+const useOrderStore = create(
+  persist(
+    (set, get) => ({
+      orderState: false,
+      setOrderState: boolean => set({orderState: boolean}),
+      headToCheckouts: false,
+      setHeadToCheckouts: boolean => set({headToCheckouts: boolean})
+    }),
+    {
+      name: 'order-storage',
+      storage: createJSONStorage(() => localStorage)
+    }
+  )
+);
 
 
 export {useWishlistStore, useCartStore, useOrderStore};

@@ -11,13 +11,9 @@
   cursor: pointer;
   z-index: 1200;
 
-  body.arabic & {
-    direction: rtl;
-  }
+  body.arabic & {direction: rtl}
 
-  &:hover {
-    filter: invert(5%);
-  }
+  &:hover {filter: invert(5%)}
 
   &__message {
     font-size: var(--font-size-extraSmall);
@@ -65,5 +61,6 @@
     height: 4px;
     border-radius: 4px;
     background-color: var(--alert-timer-background-color);
+    body.arabic & {left: auto; right: 1em}
   }
 }

@@ -15,6 +15,9 @@ import Banner from '/src/components/Banner';
 import ProgressActivity from '/src/components/ProgressActivity';
 import Alert from '/src/components/Alert';
 
+// STORES
+import {useOrderStore} from '/src/store/store.js';
+
 // SCSS
 import '/src/styles/components/pages/SignUp.scss';
 
@@ -43,7 +46,8 @@ function SignUp ({darkMode, lan}) {
   const pageTitle = en ? 'CREATE ACCOUNT' : 'انشاء حساب';
   const {pathname} = window.location;
   const navigate = useNavigate();
-  const redirector = new Redirector(navigate);
+  const {headToCheckouts, setHeadToCheckouts} = useOrderStore();
+  const redirector = new Redirector(navigate, headToCheckouts, setHeadToCheckouts);
 
   const [processing, setProcessing] = useState(false);
   const [alertText, setAlertText] = useState(null);
@@ -90,7 +94,13 @@ function SignUp ({darkMode, lan}) {
   const passEL = useRef(null);
   const cPassEL = useRef(null);
 
-  useEffect(() => redirector.signup(pathname, user), [user]);
+  useEffect(() =>{
+    redirector.signup(user);
+    if (!user && headToCheckouts) {
+      setAlertText(en ? 'Thanks for choosing us! Please register to finalize your purchase' : 'شكرًا لاختيارك لنا! يرجى التسجيل لمتابعة عملية الشراء');
+      setNewAlert(Math.random());
+    }
+  }, [user]);
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => setUser(user));
     return () => unsubscribe();
