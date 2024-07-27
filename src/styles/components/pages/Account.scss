@@ -1,8 +1,140 @@
 @use '/src/styles/utils/_BreakPoints' as w;
+@use '/src/styles/utils/_StyleKits' as k;
 
 .account {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  margin-bottom: 2em;
   color: var(--font-h-color);
+  &::before {@include k.background-color-stretch(var(--light-background-color), 100%)}  
+
+  &__banner {
+    position: relative;
+    height: 8em;
+    width: 100%;
+    &::before {@include k.background-color-stretch(var(--secondary-color), 6em)}  
+
+    &__pfp {
+      position: absolute;
+      top: 4em;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 4em;
+      height: 4em;
+      // background-color: var(--primary-color);
+      border-radius: 1em;
+      &::before {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-color: var(--primary-color);
+        transform: rotate(45deg);
+        z-index: -1;
+        border-radius: 1em;
+      }
+      &__img {
+        width: 100%;
+        object-fit: cover;
+        padding: 0.2em;
+      }
+
+    }
+  }
+
+  &__userName-sec {
+    display: flex;
+    width: 100%;
+    padding-block: 1em;
+
+    &__h2 {
+      margin-inline: auto;
+    }
+  }
+
+  &__userData {
+    display: flex;
+    flex-direction: column;
+    width: calc(100% - 4em);
+    margin-inline: auto;
+    border-radius: 1em;
+
+    &__top-bar {
+      position: relative;
+      display: flex;
+      background-color: hsl(0, 0%, 80%);
+      border-radius: 2em;
+
+      &__slider {
+        position: absolute;
+        top: 0;
+        left: 0%;
+        width: 50%;
+        height: 100%;
+        background-color: var(--background-color);
+        color: var(--font-p-color);
+        font-weight: 600;
+        padding-block: 1em;
+        border-radius: 2em;
+        box-shadow: 0 0 5px 1px hsla(0, 0%, 0%, 0.5);
+        z-index: 5;
+        transition: left 0.25s ease-out, width 0.25s ease-out, transform 0.10s ease-out;
+      }
+
+      &__item {
+        display: flex;
+        justify-content: center;
+        flex: 1;
+        color: var(--font-p-color);
+        font-size: var(--font-size-small);
+        font-weight: 600;
+        padding-block: 1em;
+        border-radius: 2em;
+        cursor: pointer;
+        z-index: 10;
+
+        &.clicked {
+          color: var(--font-p-color);
+        }
+      }
+    }
+
+    &__description-cont {
+      padding-block: 1em;
+
+      &__item {
+        display: flex;
+        justify-content: space-between;
+        gap: 1em;
+        margin-block: 1em;
+        padding: 1em;
+        background-color: var(--background-color);
+        border-radius: 2em;
+        
+        &__title {
+          color: var(--font-p-color);
+          font-weight: 600;
+        }
+
+        &__description {
+          color: var(--font-h-color);
+          font-weight: 600;
+
+        }
+      }
+    }
+  }
+  &__signOut-btn {
+    position: sticy;
+    bottom: 10em;
+    background-color: var(--red-color);
+    color: var(--font-h-invert-color);
+    box-shadow: 0 0 5px 1px hsla(0, 0%, 0%, 0.5);
+    padding-block: 1em;
+    margin-inline: 2em;
+    border-radius: 2em;
+    font-weight: 600;
+    
+  }
 }                                                            
-button {
-  color: var(--font-h-color);        
-}

@@ -6,12 +6,21 @@ import {Helmet} from 'react-helmet-async';
 // FIREBASE
 import {auth} from '/src/firebase/authSignUp.js';
 import {signOut, updateProfile, signInWithEmailAndPassword, onAuthStateChanged} from "firebase/auth";
+import {db} from '/src/firebase/fireStore';
+import {setDoc, updateDoc, getDoc, doc} from 'firebase/firestore';
 
 // SCSS
 import '/src/styles/components/pages/Account.scss';
 
 // UTILS 
 import Redirector from '/src/utils/Redirector';
+import formatPhoneNumber from '/src/utils/formatPhoneNumber';
+
+// ASSETS
+import personIcon from '/assets/img/icons/person.svg';
+
+// ASSETS - DARKMODE
+import personDarkModeIcon from '/assets/img/icons/person_darkMode.svg';
 
 function Account ({darkMode, lan}) {
 
@@ -22,20 +31,70 @@ function Account ({darkMode, lan}) {
   const pageKeywords = "ONEBIKE, account, manage account, orders, preferences, bicycle, bicycle parts, Syria";
   const en = lan === 'en';
 
+  const [userData, setUserData] = useState(null);
   const [user, setUser] = useState(true);
   const {pathname} = window.location;
   const navigate = useNavigate();
   const redirector = new Redirector(navigate);
-  
-  useEffect(() => redirector.account(pathname, user), [user]);
+
+  const topBarSliderEL = useRef(null);
+  const myInfoEL = useRef(null);
+  const ordersEL = useRef(null);
+
+  useEffect(() => {
+    redirector.account(pathname, user);
+    const fetchUserData = async () => {
+      try {
+        if (user) {
+          const userDoc = await getDoc(doc(db, 'users', user.uid));
+          if (userDoc.exists) {
+            setUserData(userDoc.data());
+          } else {
+            console.log("No such document!");
+          }
+        }    
+      } catch (err) {
+        console.error(err);
+      }
+    }
+    fetchUserData();
+  }, [user]);
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => setUser(user));
     return () => unsubscribe();
   }, []);
 
-  const handleClick = async () => {
-    const response = await signOut(auth);
-    // console.log(response);
+  console.log(userData);
+
+  const handleClick = async e => {
+    const {action} = e.currentTarget.dataset;
+
+    switch (action) {
+      case 'myInfo_is_clicked':
+        topBarSliderEL.current.style.transform = 'scale(0.9)';
+        setTimeout(() => {
+          topBarSliderEL.current.style.transform = 'scale(1)';
+          topBarSliderEL.current.style.left = '0%';
+        }, 150)
+        myInfoEL.current.style.color = 'var(--font-h-color)';
+        ordersEL.current.style.color = 'var(--font-p-color)';
+        break;
+      case 'orders_is_clicked':
+        topBarSliderEL.current.style.transform = 'scale(0.9)';
+        setTimeout(() => {
+          topBarSliderEL.current.style.transform = 'scale(1)';
+          topBarSliderEL.current.style.left = '50%';
+        }, 150)
+        myInfoEL.current.style.color = 'var(--font-p-color)';
+        ordersEL.current.style.color = 'var(--font-h-color)';
+        break;
+      case 'signOut_is_clicked':
+        const response = await signOut(auth);
+        break;
+      default:
+        console.error('Error: Unknown action', action);
+    }
   }
 
   return (
@@ -52,9 +111,37 @@ function Account ({darkMode, lan}) {
         <meta property="og:site_name" content={siteName} />
       </Helmet>
       <div className="account">
-        welcome {user?.displayName}
+        <section className="account__banner">
+          <div className="account__banner__pfp">
+            <img className="account__banner__pfp__img" src={darkMode ? personIcon : personDarkModeIcon} />
+          </div>
+        </section>
+        <section className="account__userName-sec">
+          <h2 className="account__userName-sec__h2">{userData?.fullName}</h2>
+        </section>
+        <section className="account__userData">
+          <div className="account__userData__top-bar">
+            <div className="account__userData__top-bar__slider" ref={topBarSliderEL} />
+            <span className="account__userData__top-bar__item" data-action="myInfo_is_clicked" onClick={handleClick} ref={myInfoEL}>My Info</span>
+            <span className="account__userData__top-bar__item clicked" data-action="orders_is_clicked" onClick={handleClick} ref={ordersEL}>Orders</span>
+          </div>
+          <ul className="account__userData__description-cont">
+            <li className="account__userData__description-cont__item">
+              <span className="account__userData__description-cont__item__title">Mobile Phone</span> 
+              <span className="account__userData__description-cont__item__description">{formatPhoneNumber(userData?.phone)}</span> 
+            </li>
+            <li className="account__userData__description-cont__item">
+              <span className="account__userData__description-cont__item__title">Email Address</span> 
+              <span className="account__userData__description-cont__item__description">{userData?.email}</span> 
+            </li>
+            <li className="account__userData__description-cont__item">
+              <span className="account__userData__description-cont__item__title">ID</span> 
+              <span className="account__userData__description-cont__item__description">{userData?.userId}</span> 
+            </li>
+          </ul>
+        </section>
+        <button className="account__signOut-btn" data-action="signOut_is_clicked" onClick={handleClick}>Sign Out</button>
       </div>
-      <button onClick={handleClick}>Sign Out</button>
     </>
   )
 }

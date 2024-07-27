@@ -56,7 +56,6 @@ function App () {
               )}
               <Route path="/checkouts" element={<Checkout darkMode={darkMode} lan={lan} />} />
               <Route path="/account/register" element={<SignUp darkMode={darkMode} lan={lan} />} />
-              <Route path="/checkouts/login" element={<SignIn darkMode={darkMode} lan={lan} />} />
               <Route path="/account/login" element={<SignIn darkMode={darkMode} lan={lan} />} />
               <Route path="/account" element={<Account darkMode={darkMode} lan={lan} />} />
               <Route path="*" element={<NotFound darkMode={darkMode} lan={lan} />} />

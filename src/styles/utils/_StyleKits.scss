@@ -14,3 +14,15 @@
 
   &:hover {background-color: var(--background-invert-color)}
 }
+
+@mixin background-color-stretch ($backgroundColor, $heightSize) {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100vw;
+  height: $heightSize;
+  background-color: $backgroundColor;
+  z-index: -1;
+}
