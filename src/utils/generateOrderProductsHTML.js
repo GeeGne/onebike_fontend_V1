@@ -17,9 +17,9 @@ const generateOrderProductsHTML = (order, styleType) => {
     
       return productsText; 
     case 'b':
-      productsText = "------------------------------------------------------------\n";
+      productsText = "------------------------------------------\n";
       productsText += "ID | Product | Quantity | Price | Total \n";
-      productsText += "------------------------------------------------------------\n";
+      productsText += "------------------------------------------\n";
     
       order.products.forEach(item => {
         const product = item.product;
@@ -30,7 +30,7 @@ const generateOrderProductsHTML = (order, styleType) => {
         const total = ('S.P' + formatNumberWithCommas(item.quantityPrice));
     
         productsText += `${id} | ${title} | ${quantity} | ${price} | ${total} \n`;
-        productsText += "------------------------------------------------------------\n";
+        productsText += "------------------------------------------\n";
       });
       
       return productsText;

@@ -258,7 +258,7 @@ function Checkout ({darkMode, lan}) {
       try {
         const result = await emailjs.send(
           emailJS.serviceId,
-          emailJS.templateId.b,
+          emailJS.templateId.a,
           {
             order: JSON.stringify(orderUpdatedDateAndId.current),
             orderId: orderUpdatedDateAndId.current.orderId,
