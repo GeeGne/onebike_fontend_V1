@@ -96,6 +96,10 @@
   // orderComplete
   --background-orderComplete-color: hsl(0, 0%, 0%, 0.7);
 
+  // Account
+  --account-top-bar-background-color: hsl(0, 0%, 80%);
+  --account-box-shadow-background-color: hsla(0, 0%, 20%, 0.5);
+
   // Footer
   --footer-background-color: var(--secondary-color);
 }
@@ -188,6 +192,10 @@
 
   // orderComplete
   --background-orderComplete-color: hsl(0, 0%, 100%, 0.7);
+
+  // Account
+  --account-top-bar-background-color: hsl(0, 0%, 20%);
+  --account-box-shadow-background-color: hsla(0, 0%, 80%, 0.5);
 
   // Footer
   --footer-background-color: var(--secondary-color);

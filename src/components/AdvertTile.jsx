@@ -115,7 +115,7 @@ function AdvertTile ({darkMode, lan, type}) {
     switch (action) {
       case 'navigate_to_url':
         navigate(getURL());
-        setTimeout(() => scroll({top: 0, behavior: 'smooth'}), 500);
+        setTimeout(() => window.scroll({top: 0, behavior: 'smooth'}), 500);
         break;
       case 'scroll_left':
         listEL.current.scrollBy({left: -(productConWidth + gapLength), behavior: "smooth"});
