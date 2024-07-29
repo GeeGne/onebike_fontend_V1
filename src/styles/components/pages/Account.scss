@@ -155,6 +155,7 @@
             &__description {
               color: var(--font-h-color);
               font-weight: 600;
+              direction: ltr;
             }
           }    
         }
@@ -253,7 +254,10 @@
                     top: 0;
                     right: 0;
                     background-color: hsla(0, 0%, 0%, 0.5);
-                    padding: 0.2em;
+                    padding: 0.3em;
+                    color: white;
+                    font-weight: 600;
+                    body.arabic & {right: auto; left: 0}
                   }
                 }
 
