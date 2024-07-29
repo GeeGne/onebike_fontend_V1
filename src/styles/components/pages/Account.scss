@@ -109,6 +109,7 @@
         box-shadow: 0 0 5px 1px var(--account-box-shadow-background-color);
         z-index: 5;
         transition: left 0.25s ease-out, width 0.25s ease-out, transform 0.10s ease-out;
+        body.arabic & {left: 50%}
       }
 
       &__item {
