@@ -131,7 +131,7 @@ function WishlistSlider ({darkMode, lan}) {
         {isWishlistEmpty ?
         <div className="wishlist__slider__empty-list --pop-in">
           <img className="wishlist__slider__empty-list__broken-heart-img --heart-beat" src={darkMode ? heartBrokenDarkmodeIcon : heartBrokenIcon} />
-          <h2 className="wishlist__slider__empty-list__description-h2">{en ? 'Looks like your wishlist needs some love' : 'يبدو أن قائمة أمنياتك بحاجة إلى بعض الاهتمام'}</h2>
+          <h2 className="wishlist__slider__empty-list__description-h2">{en ? 'Your wishlist needs some love' : 'قائمة أمنياتك بحاجة إلى بعض الاهتمام'}</h2>
           <h1 className="wishlist__slider__empty-list__description-h1">{en ? 'Start adding your favorite items!' : ' ابدأ بإضافة العناصر المفضلة لديك!'}</h1>
           <button className="wishlist__slider__empty-list__btn" onClick={() => setToggle(false)}>{en ? 'Back to shopping' : 'العوده للتسوق'}</button>
         </div> 

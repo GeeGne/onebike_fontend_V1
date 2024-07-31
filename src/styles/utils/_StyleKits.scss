@@ -26,3 +26,72 @@
   background-color: $backgroundColor;
   z-index: -1;
 }
+
+@mixin delete-btn {
+  width: 1.6em;
+  height: 1.6em;
+  background-image: var(--delete-icon);
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-position: center;
+  opacity: 0.8;
+  transition: opacity 0.25s ease;
+
+  &:hover {opacity: 1}
+}
+
+@mixin cart-toggles {
+  grid-area: toggles;
+  display: flex;
+
+  &__increment {
+    background-image: var(--add-icon);
+  }
+
+  &__value {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1em;
+    height: 2em;
+    font-weight: 550;
+    background-color: var(--endElement-border-background-color);
+    color: var(--font-h-color);
+  }
+
+  &__decrement {
+    background-image: var(--remove-icon);
+  }
+
+  &__increment, 
+  &__decrement {
+    position: relative;
+    width: 2em;
+    height: 2em;
+    background-repeat: no-repeat;
+    background-size: 80%;
+    background-position: center;
+    border: solid var(--endElement-border-background-color);
+
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 0;
+      transition: height 0.5s ease;
+    }
+    &:hover::before,
+    &:hover::after {height: 100%}
+    &::before {background-color: var(--cartSlider-addToCart-background-color); z-index: -1}
+    &::after {backdrop-filter: invert(100%)}
+    &:active::before {background-color: var(--cartSlider-addToCart-active-background-color)}
+  }
+}
+
+@mixin bottom-line {
+  border: solid var(--endElement-border-background-color);
+  border-width: 0 0 2px 0;
+}

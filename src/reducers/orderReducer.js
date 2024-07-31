@@ -13,7 +13,7 @@ function orderReducer(order, action) {
     case 'update_costumer':
       return {...order, costumer: {...order.costumer, costumerId: userData?.userId, fullName: userData?.fullName, email: userData?.email, phone: userData?.phone}}      
     case 'update_shipping_fee_and_inp':
-      return {...order, shippingCost, shippingAddress: {...order.shippingAddress, city}, total: order.total + shippingCost};
+      return {...order, shippingCost, shippingAddress: {...order.shippingAddress, city}, total: order.subtotal + shippingCost};
     case 'default_number_is_selected':
     case 'phone':
       return {...order, costumer: {...order.costumer, phone}};

@@ -46,8 +46,9 @@
           background-color: hsla(0, 0%, 10%, 0.5);
           color: white;
           font-size: var(--font-size-extraSmall);
-          font-weight: bold;
+          font-weight: 600;
           padding: 0.5em;
+          body.arabic & {right: auto; left: 0}
         }
       }
 

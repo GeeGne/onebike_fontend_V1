@@ -2,7 +2,7 @@
 
 .dropMenu {
   transition: transform 0.35s ease-out;
-  
+
   &__nav {
     position: relative;
     display: flex;
@@ -11,40 +11,10 @@
     font-size: inherit;
     background-color: var(--background-color);
     z-index: 10;
-
-    body.arabic & {
-      flex-direction: row-reverse;
-
-      &__logo {
-        margin: 0.3em 1em 0.3em auto;
-      }
-    
-      &__search-input {
-
-        & input {
-          padding-left: 0;
-          padding-right: 2em;
-          direction: rtl;
-        }
-
-        & img {
-          right: 0em;
-          left: 2em;
-        }
-
-        @include w.breakpoint-up(large) {
-          flex: 1;
-          width: auto;
-          margin-left: 0;
-          margin-right: 1rem;
-      
-          & img {
-            right: 0;
-            left: 1em;
-          }
-        }
-      }
-    }
+    gap: 2em;
+    padding-inline: 1em;
+    padding-block: 0.2em;
+    body.arabic & {direction: rtl}
 
     &::before {
       content: "";
@@ -87,7 +57,6 @@
       background-size: cover;
       background-repeat: no-repeat;
       background-position: center;
-      margin: 0 1em;
       transition: opacity 0.25s ease-in, background-color 0.25s ease-in;
       
       &::before {
@@ -132,7 +101,8 @@
       height: var(--navBar-logoIcon-size);
       filter: drop-shadow( 0 0 15px hsla(0, 0%, 100%, 0.4));
       cursor: pointer;
-      margin: 0.3em auto 0.3em 1em;
+      margin-right: auto;
+      body.arabic & {margin-right: 0; margin-left: auto}
     }
     
     &__search {
@@ -160,12 +130,7 @@
     &__shoppingCart {
       position: relative;
       background-image: var(--shoppingCart-icon);
-      margin: 0 1em;
 
-      body.arabic &::after {
-        right: auto;
-        left: -0.3em
-      }
       &::after {
         content: "";
         position: absolute;
@@ -177,6 +142,11 @@
         background-color: var(--red-color);
         border-radius: 1em;
         transition: opacity 0.5s ease, transform 0.5s ease;
+
+        body.arabic & {
+          right: auto;
+          left: -0.3em
+        }
       }
       &.empty::after{
         visibility: hidden;
@@ -257,18 +227,20 @@
 
       & input {
         width: 100%;
-        height: 3em;
+        // height: 3em;
         color: var(--font-h-color);
         background-color: var(--nav-searchInput-background-color);
         font-weight: 500;
-        padding-left: 2em;
+        padding-block: 1em;
+        padding-inline: 2em;
         outline: none;
         border: transparent;
         box-shadow: 0 3px 3px 1px hsl(0, 0%, 50%, 0.3);
         border-radius: 5px;
         transition: border 0.25s ease-out, background-color 0.5s ease-in;
 
-        &:focus {border: solid var(--nav-searchInput-outline-color) 2px}
+        &:focus {border: solid var(--nav-searchInput-outline-color) 2px};
+        @include w.breakpoint-up (large) {padding-block: 1em}
       }
 
       & img {
@@ -283,13 +255,15 @@
         background-repeat: no-repeat;
         z-index: 1;
         cursor: pointer;
+
+        body.arabic & {right: auto; left: 2em}
       }
 
       @include w.breakpoint-up(large) {
         position: static;
         flex: 1;
         width: auto;
-        margin-left: 1rem;
+        // margin-left: 1rem;
 
         & input {
           box-shadow: 0 0px 2px 1px hsl(0, 0%, 50%, 0.6);

@@ -112,6 +112,7 @@
           &__link {
             text-decoration: none;
             color: var(--font-p-color);
+            font-size: var(--font-size-Small);
             transition: text-decoration 0.15s ease, color 0.15s ease, font-weight 0.5s ease;
 
 
@@ -132,6 +133,7 @@
           align-items: center; 
           &__link {
             margin-inline: 0.5em;
+            font-size: var(--font-size-Small);
             body.arabic & {direction: ltr}
           }
           &__img {
@@ -170,10 +172,7 @@
       &__media-icon{
         width: 1.5em;
         transition: transform 0.25s ease-out;
-
-        &:hover {
-          transform: scale(1.2);
-        }
+        &:hover {transform: scale(1.2)}
       }
     }
 

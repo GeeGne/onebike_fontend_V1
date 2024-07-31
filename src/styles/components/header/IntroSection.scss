@@ -49,6 +49,8 @@
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center;
+    transition: transform 0.25s ease-out;
+    &:hover {transform: scale(1.2)}
   }
   &__facebook {background-image: var(--facebook-icon)}
   &__whatsapp {background-image: var(--whatsapp-icon)}  
@@ -58,6 +60,7 @@
     visibility: hidden;
     opacity: 0;
     transition: opacity 0.5s ease;
+    font-size: var(--font-size-small);
 
     @include w.breakpoint-up (medium) {
       position: absolute;

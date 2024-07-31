@@ -65,6 +65,7 @@ function Account ({darkMode, lan}) {
         console.error('Error: Unknown Order statue: ', orderStatus)
     }
   }
+  
   useEffect(() => {
     redirector.account(pathname, user);
     const fetchUserData = async () => {
@@ -164,7 +165,13 @@ function Account ({darkMode, lan}) {
         }, 550);
         break;
       case 'signOut_is_clicked':
-        const response = await signOut(auth);
+        try {
+          const response = await signOut(auth);
+          setTimeout(() => window.scroll({top: 0, behavior: 'smooth'}), 500);
+        } catch (err) {
+          console.error(err);
+        }
+
         break;
       default:
         console.error('Error: Unknown action', action);

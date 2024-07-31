@@ -67,7 +67,6 @@ function SignIn ({darkMode, lan}) {
       setAlertText(en ? 'Almost there! Sign in to finalize your purchase' : 'أنت على وشك الانتهاء! سجل الدخول لإتمام عملية الشراء');
       setNewAlert(Math.random());
     }
-
   }, [user]);
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => setUser(user));

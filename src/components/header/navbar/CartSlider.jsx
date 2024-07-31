@@ -40,6 +40,7 @@ import brandLogo2 from '/assets/img/logo/giant.webp';
 import brandLogo3 from '/assets/img/logo/evoc.webp';
 
 function CartSlider ({darkMode, lan}) {
+
   const {
     cart, 
     toggle: cartToggle, 
@@ -66,6 +67,7 @@ function CartSlider ({darkMode, lan}) {
   useEffect(() => {
     const containerStyle = cartContainerElement.current.style;
     const sliderStyle = sliderElement.current.style;
+
     switch (cartToggle) {
       case true:
         document.body.style.overflow = 'hidden hidden';
@@ -103,11 +105,16 @@ function CartSlider ({darkMode, lan}) {
       case 'exit_slider':
         setCartToggle(false);
         break;
-      case 'nav-to-checkouts':
+      case 'nav_to_checkouts':
         setTimeout(() => window.scroll({top: 0, behavior: 'smooth'}), 500);
         setCartToggle(false);
         setHeadToCheckouts(true);
         navigate('/account/login');
+        break;
+      case 'nav_to_cart':
+        setTimeout(() => window.scroll({top: 0, behavior: 'smooth'}), 500);
+        setCartToggle(false);
+        navigate('/cart');
         break;
       default:
         console.log('Unknown type: ' + type)
@@ -147,7 +154,7 @@ function CartSlider ({darkMode, lan}) {
             <a className="cartSlider__slider__products__product__title">{list.product.title[lan]}</a>
             <div className="cartSlider__slider__products__product__price">{en ? 'S.P' : 'ل.س'} {formatNumberWithCommas(list.quantityPrice)}</div>
             <div className="cartSlider__slider__products__product__toggles">
-              <button className="cartSlider__slider__products__product__toggles__delete" data-type="remove_from_cart" data-product-id={list.id} onClick={handleClick}/> 
+              <button className="cartSlider__slider__products__product__toggles__delete" data-type="remove_from_cart" data-product-id={list.id} onClick={handleClick} /> 
               <button className="cartSlider__slider__products__product__toggles__increment" data-type="increase_amount_by_one" data-product-id={list.id} onClick={handleClick}/>
               <div className="cartSlider__slider__products__product__toggles__value">{list.quantity}</div>
               <button className="cartSlider__slider__products__product__toggles__decrement" data-type="decrease_amount_by_one" data-product-id={list.id} onClick={handleClick}/>
@@ -158,8 +165,8 @@ function CartSlider ({darkMode, lan}) {
         <section className="cartSlider__slider__bottom">
           <div className="cartSlider__slider__bottom__total">{en ? 'Total' : 'اجمالي'} <span>{en ? 'S.P' : 'ل.س'} {formatNumberWithCommas(totalPrice)}</span></div>
           <div className="cartSlider__slider__bottom__shipment">{en ? 'Shipment fee calculated at Checkout' : 'تكاليف الشحن ستضاف عند الدفع'}</div>
-          <button className="cartSlider__slider__bottom__view-cart">{en ? 'View cart' : 'عرض العربة'}</button>
-          <button className="cartSlider__slider__bottom__checkout" data-type="nav-to-checkouts" onClick={handleClick}>{en ? 'Checkout' : 'الدفع'}</button>
+          <button className="cartSlider__slider__bottom__view-cart" data-type="nav_to_cart" onClick={handleClick}>{en ? 'View cart' : 'عرض العربة'}</button>
+          <button className="cartSlider__slider__bottom__checkout" data-type="nav_to_checkouts" onClick={handleClick}>{en ? 'Checkout' : 'الدفع'}</button>
         </section>
       </div>
     </div>

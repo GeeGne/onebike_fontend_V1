@@ -357,6 +357,8 @@
   animation-timing-function: ease-out;
   animation-fill-mode: both;
   animation-play-state: paused;
+
+  &.unpause {animation-play-state: running;}
 }
 
 .animation--none {

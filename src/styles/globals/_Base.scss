@@ -34,6 +34,17 @@ body {
     // font-family: 'Noto_Arabic';
     // font-family: 'Vazirmatn
   }
+
+  &::-webkit-scrollbar {width: 0.7em}
+  &::-webkit-scrollbar-thumb {
+    cursor: grab;
+    background-color: var(--sideMenu-scrollBar-background-color);
+    transition: background-color 0.15s;
+  }
+  &::-webkit-scrollbar-track {background-color: rgba(42, 42, 42, 0)}
+  &::-webkit-scrollbar-thumb:active {cursor: grabbing}
+  &::-webkit-scrollbar-thumb:hover {background-color: hsl(0, 0%, 50%)}
+
 }
 
 a:visited,

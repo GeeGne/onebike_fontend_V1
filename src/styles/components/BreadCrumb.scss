@@ -12,16 +12,19 @@
     &__link {
       margin-inline: 1em;
       color: var(--font-p-color);
+      font-size: var(--font-size-extraSmall);
       
       &:last-child {
         text-decoration: none;
         color: var(--font-h-color);
+        font-size: var(--font-size-extraSmall);
         font-weight: 550;
       }
     }
 
     &__quotation-mark-ornament {
       color: var(--font-h-color);
+      font-size: var(--font-size-extraSmall);
     }
   }
 }
