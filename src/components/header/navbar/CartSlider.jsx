@@ -165,7 +165,7 @@ function CartSlider ({darkMode, lan}) {
         <section className="cartSlider__slider__bottom">
           <div className="cartSlider__slider__bottom__total">{en ? 'Total' : 'اجمالي'} <span>{en ? 'S.P' : 'ل.س'} {formatNumberWithCommas(totalPrice)}</span></div>
           <div className="cartSlider__slider__bottom__shipment">{en ? 'Shipment fee calculated at Checkout' : 'تكاليف الشحن ستضاف عند الدفع'}</div>
-          <button className="cartSlider__slider__bottom__view-cart" data-type="nav_to_cart" onClick={handleClick}>{en ? 'View cart' : 'عرض العربة'}</button>
+          <button className="cartSlider__slider__bottom__view-cart" data-type="nav_to_cart" onClick={handleClick}>{en ? 'View cart' : 'عرض السله'}</button>
           <button className="cartSlider__slider__bottom__checkout" data-type="nav_to_checkouts" onClick={handleClick}>{en ? 'Checkout' : 'الدفع'}</button>
         </section>
       </div>

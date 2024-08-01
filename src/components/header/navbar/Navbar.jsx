@@ -1,6 +1,6 @@
 // HOOKS
 import React, {useState, useRef, useEffect, useReducer, useContext} from 'react';
-import {useNavigate} from 'react-router-dom';
+import {useNavigate, useSearchParams} from 'react-router-dom';
 
 // COMPONENTS
 import HamMenu from './HamMenu';
@@ -28,6 +28,7 @@ function Navbar ({darkMode, lan}) {
   const navigate = useNavigate();
   const [menu, setMenu] = useState(false);
   const [search, setSearch] = useState(false);
+  const [searchParams, setSearchParams] = useSearchParams();
   // const [cartToggle, setCartToggle] = useState(false);
   const {cart, toggle: cartToggle, setToggle: setCartToggle} = useCartStore();
   const {wishlist, setToggle: setWishlistToggle} = useWishlistStore();
@@ -140,17 +141,26 @@ function Navbar ({darkMode, lan}) {
     type ? searchBtnEL.current.classList.add('hover') : searchBtnEL.current.classList.remove('hover'); 
   }
 
+  const handleChange = e => {
+    // setSearchParams({search: e.currentTarget.value, title: 'title'})
+    // setSearchParams()
+  }
+
+  // console.log('search', String(searchParams));
+
+  // console.log(searchParams.get('search'), searchParams.get('page'), searchParams.get('title'))
+
   return (
     <>
     <div className="dropMenu" ref={navDropMenuEL}>
       <nav className="dropMenu__nav">
         <button className={`dropMenu__nav__hamburger${menu ? ' clicked' : ''}`} onClick={() => setMenu(oldMenu => !oldMenu)}/>
         <img className="dropMenu__nav__logo" data-action="navigate_to_path" data-path="/" onClick={handleClick} src={logo}/>
-        <div className="dropMenu__nav__search-input" onMouseEnter={() => handleHover(true)}  onMouseLeave={() => handleHover(false)} ref={searchEL}>
-          <input placeholder={lan === 'en' ? 'Type something' : 'هل تبحث عن شيء؟'} onBlur={() => handleHover(false)} ref={searchInputEL}/>
+        <div className="dropMenu__nav__search-input" /* onMouseEnter={() => handleHover(true)}  onMouseLeave={() => handleHover(false)} */ ref={searchEL}>
+          <input placeholder={lan === 'en' ? 'Type something' : 'هل تبحث عن شيء؟'} onBlur={() => handleHover(false)} onChange={handleChange} ref={searchInputEL}/>
           <img src={darkMode ? searchIconDarkMode : searchIcon}/>
         </div>
-        <button className="dropMenu__nav__search" data-action="toggle_search" onClick={handleClick} onMouseEnter={() => handleHover(true)} onMouseLeave={() => handleHover(false)} ref={searchBtnEL}/>
+        <button className="dropMenu__nav__search" data-action="toggle_search" onClick={handleClick} /* onMouseEnter={() => handleHover(true)} onMouseLeave={() => handleHover(false)} */ ref={searchBtnEL}/>
         <button className="dropMenu__nav__user" data-action="navigate_to_path" data-path="/account/login" onClick={handleClick}/>
         <button className={`dropMenu__nav__favourite${isWishlistEmpty ? ' empty' : ''}`} data-action="toggle_wishlist_to_true" onClick={handleClick} ref={favouriteBtnEL}/>
         <button className={`dropMenu__nav__shoppingCart${isCartEmpty ? ' empty' : ''}`} onClick={() => setCartToggle(true)} ref={cartBtnEL}/>

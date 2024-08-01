@@ -86,7 +86,7 @@ function Cart ({darkMode, lan}) {
     const {type, productId} = e.currentTarget.dataset;
     const getElement = (els, id) => els.filter(el => Number(el.dataset.productId) === id)[0];
     const styleProductWhenRemoved = productId => getElement(cartProductsELS.current, productId).style.opacity = '0';
-    
+
     switch(type) {
       case 'remove_from_cart':
         styleProductWhenRemoved(Number(productId));
@@ -130,11 +130,11 @@ function Cart ({darkMode, lan}) {
         <BreadCrumb category={{en :'cart', ar: 'السله'}} type={false} lan={lan}/>
       </section>
       <section className="cart__yourCart-sec">
-        <h1 className="cart__yourCart-sec__h1">{en ? 'Your Cart' : 'السله'}</h1>
+        <h1 className="cart__yourCart-sec__h1">{en ? 'Your Cart' : 'سله التسوق'}</h1>
       </section>
       {isCartEmpty 
       ? <section className="cart__empty-sec --pop-in unpause">
-        <h2 className="cart__empty-sec__h2">{en ? 'Your Cart is empty' : 'السله فارغه'}</h2>
+        <h2 className="cart__empty-sec__h2">{en ? 'Your Cart is empty' : 'سله التسوق فارغه'}</h2>
       </section>
       : <><section className="cart__products-sec">
         <div className="cart__products-sec__header-row">

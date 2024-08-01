@@ -275,7 +275,7 @@ function Account ({darkMode, lan}) {
             </li>
           </ul>
         </section>
-        <button className="account__signOut-btn" data-action="signOut_is_clicked" onClick={handleClick}>{en ? 'Sign Out' : 'تسجيل الدخول'}</button>
+        <button className="account__signOut-btn" data-action="signOut_is_clicked" onClick={handleClick}>{en ? 'Sign Out' : 'تسجيل الخروج'}</button>
       </div>
     </>
   )
