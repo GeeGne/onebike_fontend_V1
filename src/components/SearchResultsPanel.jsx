@@ -51,6 +51,7 @@ function SearchResultsPanel ({darkMode, lan}) {
 
   const panelEL = useRef(null);
   const searchVisTimerId = useRef(null);
+  const observerRef = useRef(null);
 
   const totalResults = searchResults.length;
   const isResultsAreNone = searchResults.length === 0;
@@ -123,6 +124,30 @@ function SearchResultsPanel ({darkMode, lan}) {
     handleSearch(searchFor);
   }, [searchFor]);
 
+/*   useEffect(() => {
+    const elements = document.querySelectorAll('.--shift-to-left unpause');
+    
+    observerRef.current = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.animationPlayState = 'running';
+          observerRef.current.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    
+    elements.forEach(el => {
+      el.style.animationPlayState = 'paused';
+      observerRef.current.observe(el);
+    });
+
+    return () => {
+      if (observerRef.current) {
+        observerRef.current.disconnect();
+      }
+    };
+  }, []); */
+
   const handleClick = e => {
     const {action, productId} = e.currentTarget.dataset;
 
@@ -149,9 +174,9 @@ function SearchResultsPanel ({darkMode, lan}) {
     <div className="panel" ref={panelEL}>
       <Alert alertText={alertText} newAlert={newAlert} />
       <div className="panel__content-cont">
-        <span className="panel__content-cont__searchingFor-spn">{en ? 'Search Results for' : 'نتائج البحث عن'} '{searchFor}'</span>
+        <span className="panel__content-cont__searchingFor-spn --shift-to-left unpause">{en ? 'Search Results for' : 'نتائج البحث عن'} '{searchFor}'</span>
         {isResultsAreNone 
-        ? <div className="panel__content-cont__noResults">
+        ? <div className="panel__content-cont__noResults --shift-to-left unpause">
           <p className="panel__content-cont__noResults__title">{en ? 'No results found.' : 'لم يتم العثور على نتائج.'}</p>
           <p className="panel__content-cont__noResults__description">
             {en ? 'Looks like we couldn\'t find any matches for your search.' : 'يبدو أننا لم نتمكن من العثور على أي نتائج لبحثك.'} 
@@ -170,9 +195,9 @@ function SearchResultsPanel ({darkMode, lan}) {
           </p>
         </div>
         : <><ul className="panel__content-cont__searchResults-cont">
-          <li className="panel__content-cont__searchResults-cont__foundedAmount">{totalResults} {en ? 'search reslults are found' : 'نتائج تم العثور من البحث'}</li>
+          <li className="panel__content-cont__searchResults-cont__foundedAmount --shift-to-left unpause">{totalResults} {en ? 'search reslults are found' : 'نتائج تم العثور من البحث'}</li>
           {searchResults.map(item => 
-          <li className="panel__content-cont__searchResults-cont__result" key={item.id}>
+          <li className="panel__content-cont__searchResults-cont__result --shift-to-left unpause" key={item.id}>
             <img className="panel__content-cont__searchResults-cont__result__img" src={getProductImgURL(item)}/>
             <span className="panel__content-cont__searchResults-cont__result__title">{item.title[lan]}</span>
             <span className="panel__content-cont__searchResults-cont__result__price">{en ? 'S.P ' : 'ل.س'} {getProductPrice(item)}</span>
