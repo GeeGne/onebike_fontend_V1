@@ -116,6 +116,12 @@ function Navbar ({darkMode, lan}) {
         if (!desktopWidth) {
           searchEL.current.classList.toggle('clicked');
           searchBtnEL.current.classList.toggle('clicked');
+
+          const isSearchToggled = searchEL.current.classList.contains('clicked')
+          if (!isSearchToggled) {
+            searchInputEL.current.value = '';
+            setSearchParams('');
+          }
         }
         break;
       case 'toggle_wishlist_to_true':
@@ -142,13 +148,9 @@ function Navbar ({darkMode, lan}) {
   }
 
   const handleChange = e => {
-    // setSearchParams({search: e.currentTarget.value, title: 'title'})
-    // setSearchParams()
+    const searchValue = e.currentTarget.value;
+    setSearchParams({search: searchValue})
   }
-
-  // console.log('search', String(searchParams));
-
-  // console.log(searchParams.get('search'), searchParams.get('page'), searchParams.get('title'))
 
   return (
     <>

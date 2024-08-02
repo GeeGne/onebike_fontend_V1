@@ -100,6 +100,25 @@
   --account-top-bar-background-color: hsl(0, 0%, 80%);
   --account-box-shadow-background-color: hsla(0, 0%, 20%, 0.5);
 
+  // SearchPanel
+  // --searchPanel-panel-background-color: hsl(0, 0%, 30%, 0.6);
+  --searchPanel-panel-background-color: hsl(0, 0%, 100%, 0.7);
+  --searchPanel-content-background: linear-gradient(
+    135deg,
+    hsla(210, 32%, 43%, 0.7) 0%,
+    hsla(218, 44%, 17%, 0.7) 50%,
+    hsla(210, 32%, 43%, 0.7) 100%
+  );
+  --searchPanel-product-background: linear-gradient(
+    135deg,
+    hsla(210, 32%, 43%, 1) 0%,
+    hsla(218, 44%, 17%, 1) 50%,
+    hsla(210, 32%, 43%, 1) 100%
+  );
+  // --searchPanel-content-background-color: hsl(0, 0%, 30%, 0.7);
+  --searchPanel-content-background-color: hsl(0, 0%, 100%, 0.7);
+
+
   // Footer
   --footer-background-color: var(--secondary-color);
 }
@@ -196,6 +215,25 @@
   // Account
   --account-top-bar-background-color: hsl(0, 0%, 20%);
   --account-box-shadow-background-color: hsla(0, 0%, 80%, 0.5);
+
+  // SearchPanel
+  --searchPanel-panel-background-color: hsl(0, 0%, 0%, 0.6);
+  // --searchPanel-panel-background-color: hsl(0, 0%, 30%, 0.6);
+  --searchPanel-content-background: linear-gradient(
+    135deg,
+    hsla(210, 32%, 43%, 0.7) 0%,
+    hsla(203, 39%, 80%, 0.7) 50%,
+    hsla(210, 32%, 43%, 0.7) 100%
+  );
+  --searchPanel-product-background: linear-gradient(
+    135deg,
+    hsla(210, 32%, 43%, 1) 0%,
+    hsla(203, 39%, 80%, 1) 50%,
+    hsla(210, 32%, 43%, 1) 100%
+  );
+  // --searchPanel-content-background-color: hsl(0, 0%, 30%, 0.7);
+  --searchPanel-content-background-color: hsl(0, 0%, 0%, 0.7);
+
 
   // Footer
   --footer-background-color: var(--secondary-color);

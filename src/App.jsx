@@ -2,17 +2,18 @@
 import './styles/App.scss';
 
 //  COMPONENTS
-import Header from './components/header/Header';
-import Footer from './components/Footer';
-import Home from './components/pages/Home';
-import Products from './components/pages/products/Products';
-import Checkout from './components/pages/checkout/Checkout';
-import Cart from './components/pages/Cart';
-import SignIn from './components/pages/SignIn';
-import SignUp from './components/pages/SignUp';
-import Account from './components/pages/Account';
-import NotFound from './components/pages/NotFound';
-import NavBottom from './components/header/navbar/NavBottom';
+import Header from '/src/components/header/Header';
+import Footer from '/src/components/Footer';
+import Home from '/src/components/pages/Home';
+import Products from '/src/components/pages/products/Products';
+import Checkout from '/src/components/pages/checkout/Checkout';
+import Cart from '/src/components/pages/Cart';
+import SignIn from '/src/components/pages/SignIn';
+import SignUp from '/src/components/pages/SignUp';
+import Account from '/src/components/pages/Account';
+import NotFound from '/src/components/pages/NotFound';
+import NavBottom from '/src/components/header/navbar/NavBottom';
+import SearchResultsPanel from '/src/components/SearchResultsPanel';
 
 // DATA
 import mainListData from '/src/data/menu.json';
@@ -44,6 +45,7 @@ function App () {
         </header>
 
         <main className="app-layout__main">
+          <SearchResultsPanel darkMode={darkMode} lan={lan} />
           <HelmetProvider>
             <Routes>
               <Route exact path="/" element={<Home darkMode={darkMode} lan={lan} />} />
