@@ -32,7 +32,7 @@ import heartDarkMode from '/assets/img/icons/heart_darkMode.svg';
 
 function AdvertTile ({darkMode, lan, type}) {
   
-  const {addProductToCart, removedProductFromCart} = useCartStore(); 
+  const {addProductToCart, removedProductFromCart} = useCartStore();
   const {wishlist, addProductToWishlist, removeProductFromWishlist} = useWishlistStore();
   const [newAlert, setNewAlert] = useState(0);
   const [alertText, setAlertText] = useState(null);

@@ -57,7 +57,7 @@ function ImageSlider () {
 
   useEffect(() => {
     action('scroll beginning');
-    const id = setInterval(() => action('scroll left'), 4000)
+    const id = setInterval(() => action('scroll left'), 8000);
 
     return () => clearInterval(id);
   }, []);

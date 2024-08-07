@@ -120,7 +120,7 @@ function Cart ({darkMode, lan}) {
         cartProductsELS.current = updateElements(cartProductsELS.current, el)
         break;
       default:
-        console.log('unknown type:' + type);
+        console.log('Error: Unknown type:' + type);
     }
   }
 
