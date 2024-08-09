@@ -246,10 +246,10 @@ function Account ({darkMode, lan}) {
                   </div>
                   <div className="account__userData__description-cont__orders-cont__orders__order__orderStatus">{handleOrderStatus(order.orderStatus)}</div>
                   <ul className="account__userData__description-cont__orders-cont__orders__order__products">
-                    {order.products.map(product =>
+                    {order.products.map((product, i) =>
                     <li className="account__userData__description-cont__orders-cont__orders__order__products__product" key={product.id}>
                       <div className="account__userData__description-cont__orders-cont__orders__order__products__product__img-cont">
-                        <img className="account__userData__description-cont__orders-cont__orders__order__products__product__img-cont__img" src={getProductImgURL(product.product)} alt={product.product.title[lan]} />
+                        <img className="account__userData__description-cont__orders-cont__orders__order__products__product__img-cont__img" src={getProductImgURL(product.product)} alt={product.product.title[lan]} loading={i <= 3 ? "eager" : "lazy"} fetchpriority={i <= 3 ? "high" : ""} />
                         <span className="account__userData__description-cont__orders-cont__orders__order__products__product__img-cont__amount">{product.quantity}</span>
                       </div>
                       <span className="account__userData__description-cont__orders-cont__orders__order__products__product__title">{product.product.title[lan]}</span>

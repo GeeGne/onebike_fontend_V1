@@ -51,8 +51,8 @@ function CategoryPicker ({darkMode, lan}) {
     <section className="categoryPicker">
       <ul className="categoryPicker__ul">
         {categories.map(category => 
-        <li className="categoryPicker__ul__li --categoryAni" tabIndex="0" role="button" data-category={cleanseString(category.en)} onClick={handleClick} onKeyDown={e => e.key === 'Enter' && handleClick(e)} key={category.id}>
-          <img className="categoryPicker__ul__li__img" src={getCategoryImg(category)}/>
+        <li className="categoryPicker__ul__li --categoryAni" tabIndex="0" role="button" aria-label={`Head to ${category.en} page`} data-category={cleanseString(category.en)} onClick={handleClick} onKeyDown={e => e.key === 'Enter' && handleClick(e)} key={category.id}>
+          <img className="categoryPicker__ul__li__img" src={getCategoryImg(category)} alt={category[lan]} fetchpriority="high" />
           <span className="categoryPicker__ul__li__name">{category[lan]}</span>
         </li>      
         )}

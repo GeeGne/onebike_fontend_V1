@@ -1,29 +1,29 @@
 [{
   "id": 1,
   "alt": {"en": "bicycle and syria flag poster", "ar": "bicycle and syria flag poster"},
-  "URL": "/assets/img/content/bicycle and syria flag poster.webp" 
+  "url": "/assets/img/content/bicycle and syria flag poster.webp" 
 },{
   "id": 2,
   "alt": {"en": "bicycle and lake", "ar": "bicycle and lake"},
-  "URL": "/assets/img/content/bicycle and lake.webp" 
+  "url": "/assets/img/content/bicycle and lake.webp" 
 },{
   "id": 3,
   "alt": {"en": "Special bicycle and forest", "ar": "Special bicycle and forest"},
-  "URL": "/assets/img/content/Special bicycle and forest.webp" 
+  "url": "/assets/img/content/Special bicycle and forest.webp" 
 },{
   "id": 4,
   "alt": {"en": "two bicycles", "ar": "two bicycles"},
-  "URL": "/assets/img/content/two bicycles.webp" 
+  "url": "/assets/img/content/two bicycles.webp" 
 },{
   "id": 5,
   "alt": {"en": "Giant and Snow", "ar": "Giant and Snow"},
-  "URL": "/assets/img/content/Giant and Snow.webp" 
+  "url": "/assets/img/content/Giant and Snow.webp" 
 },{
   "id": 6,
   "alt": {"en": "bicycle background", "ar": "bicycle background"},
-  "URL": "/assets/img/content/bicycle background.webp" 
+  "url": "/assets/img/content/bicycle background.webp" 
 },{
   "id": 7,
   "alt": {"en": "bicycle group", "ar": "bicycle group"},
-  "URL": "/assets/img/content/bicycle group.webp" 
+  "url": "/assets/img/content/bicycle group.webp" 
 }]

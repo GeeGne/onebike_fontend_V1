@@ -42,8 +42,8 @@ function LightDarkButton ({onThemeChange}) {
   }
 
   return (
-    <button onClick={event => toggleTheme(event)} >
-      <img className="light-dark-button" src={darkTheme? moonIcon : sunIcon}/>
+    <button onClick={event => toggleTheme(event)} aria-label="Change Theme">
+      <img className="light-dark-button" src={darkTheme ? moonIcon : sunIcon} alt={darkTheme ? "Moon Icon" : "Sun Icon"}/>
     </button>
   )
 }

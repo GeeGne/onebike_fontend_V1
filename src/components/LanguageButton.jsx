@@ -42,12 +42,12 @@ function LanguageButton ({onLanguageChange}) {
   },[lan])  
 
   return (
-    <div className="language-btn" tabIndex="0" role="button" onClick={() => setLanguageList(prevLang => !prevLang)} onKeyDown={e => e.key === 'Enter' && setLanguageList(prevLang => !prevLang)} ref={languageElement}>
+    <div className="language-btn" tabIndex="0" role="button" aria-label="Change Language To Arabic or English" onClick={() => setLanguageList(prevLang => !prevLang)} onKeyDown={e => e.key === 'Enter' && setLanguageList(prevLang => !prevLang)} ref={languageElement}>
       <span className="language-btn__display">{lan === 'en' ? 'English' : 'العربيه'}</span>
       {languageList &&
       <ul className="language-btn__list">
-        <li tabIndex="0" role="button" onKeyDown={e => e.key === 'Enter' && setLanguage('en')} onClick={() => setLanguage('en')}>English</li>
-        <li tabIndex="0" role="button" onKeyDown={e => e.key === 'Enter' && setLanguage('ar')} onClick={() => setLanguage('ar')}>العربيه</li>
+        <li tabIndex="0" role="button" onKeyDown={e => e.key === 'Enter' && setLanguage('en')} onClick={() => setLanguage('en')} aria-label="Set Language To English">English</li>
+        <li tabIndex="0" role="button" onKeyDown={e => e.key === 'Enter' && setLanguage('ar')} onClick={() => setLanguage('ar')} aria-label="Set Language To Arabic">العربيه</li>
       </ul>
       }
     </div>

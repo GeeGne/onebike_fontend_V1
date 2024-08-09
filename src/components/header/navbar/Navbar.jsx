@@ -156,16 +156,16 @@ function Navbar ({darkMode, lan}) {
     <>
     <div className="dropMenu" ref={navDropMenuEL}>
       <nav className="dropMenu__nav">
-        <button className={`dropMenu__nav__hamburger${menu ? ' clicked' : ''}`} onClick={() => setMenu(oldMenu => !oldMenu)}/>
+        <button className={`dropMenu__nav__hamburger${menu ? ' clicked' : ''}`} aria-label="Toggle Drop Menu" onClick={() => setMenu(oldMenu => !oldMenu)}/>
         <img className="dropMenu__nav__logo" alt="ONEBIKE" data-action="navigate_to_path" data-path="/" onClick={handleClick} src={logo}/>
         <div className="dropMenu__nav__search-input" /* onMouseEnter={() => handleHover(true)}  onMouseLeave={() => handleHover(false)} */ ref={searchEL}>
           <input placeholder={lan === 'en' ? 'Type something' : 'هل تبحث عن شيء؟'} onBlur={() => handleHover(false)} onChange={handleChange} ref={searchInputEL}/>
-          <img src={darkMode ? searchIconDarkMode : searchIcon}/>
+          <img src={darkMode ? searchIconDarkMode : searchIcon} alt="Search Icon"/>S
         </div>
-        <button className="dropMenu__nav__search" data-action="toggle_search" onClick={handleClick} /* onMouseEnter={() => handleHover(true)} onMouseLeave={() => handleHover(false)} */ ref={searchBtnEL}/>
-        <button className="dropMenu__nav__user" data-action="navigate_to_path" data-path="/account/login" onClick={handleClick}/>
-        <button className={`dropMenu__nav__favourite${isWishlistEmpty ? ' empty' : ''}`} data-action="toggle_wishlist_to_true" onClick={handleClick} ref={favouriteBtnEL}/>
-        <button className={`dropMenu__nav__shoppingCart${isCartEmpty ? ' empty' : ''}`} onClick={() => setCartToggle(true)} ref={cartBtnEL}/>
+        <button className="dropMenu__nav__search" aria-label="Search on a product" data-action="toggle_search" onClick={handleClick} /* onMouseEnter={() => handleHover(true)} onMouseLeave={() => handleHover(false)} */ ref={searchBtnEL}/>
+        <button className="dropMenu__nav__user" aria-label="head to your account" data-action="navigate_to_path" data-path="/account/login" onClick={handleClick}/>
+        <button className={`dropMenu__nav__favourite${isWishlistEmpty ? ' empty' : ''}`} aria-label="Open favorite tab" data-action="toggle_wishlist_to_true" onClick={handleClick} ref={favouriteBtnEL}/>
+        <button className={`dropMenu__nav__shoppingCart${isCartEmpty ? ' empty' : ''}`} aria-label="Open shoppingcart tab" onClick={() => setCartToggle(true)} ref={cartBtnEL}/>
       </nav>
       <DropMenu menu={menu} darkMode={darkMode} lan={lan}/>
     </div>

@@ -145,7 +145,7 @@ function Cart ({darkMode, lan}) {
         <ul className="cart__products-sec__products">
           {cart.map((list, i) => 
           <li className="cart__products-sec__products__product --pop-in" key={list.id} data-product-id={list.product.id} ref={el => addRef('cartProductsELS', el, i)}>
-            <img className="cart__products-sec__products__product__img" src={getProductImgURL(list.product)} alt={list.product.title[lan]} />
+            <img className="cart__products-sec__products__product__img" src={getProductImgURL(list.product)} alt={list.product.title[lan]} loading={i <= 3 ? "eager" : "lazy"} fetchpriority={i <= 3 ? "high" : ""} />
             <div className="cart__products-sec__products__product__title">{list.product.title[lan]}</div>
             <div className="cart__products-sec__products__product__total">{en ? 'S.P' : 'ل.س'} {formatNumberWithCommas(list.quantityPrice)}</div>
             <div className="cart__products-sec__products__product__toggles">

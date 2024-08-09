@@ -19,8 +19,8 @@ function ImageSlider ({darkMode, lan}) {
 
   const imageSliderElement = useRef(null);
 
-  const firstImage = sliderData[0].URL;
-  const lastImage = sliderData[sliderData.length - 1].URL;
+  const firstImage = sliderData[0];
+  const lastImage = sliderData[sliderData.length - 1];
 
   const vars = (action) => {
     // note: in theory sliderScrollWidth should be equal to sliderScrollLeft when sliding all the way to the left,
@@ -164,13 +164,13 @@ function ImageSlider ({darkMode, lan}) {
   return (
     <section className='imageSlider-container'>
       <ul className='imageSlider-container__img-holder' onTouchStart={handleStart}  onTouchMove={handleMove} onTouchEnd={handleEnd} ref={imageSliderElement}>
-        <li className='imageSlider-container__img-holder__imges'><img src={lastImage}/></li>
-        {sliderData.map(data =>
+        <li className='imageSlider-container__img-holder__imges'><img src={lastImage.url} alt={lastImage.alt[lan]} loading="lazy" /></li>
+        {sliderData.map((data, i) =>
         <li className='imageSlider-container__img-holder__imges' key={data.id}>
-          <img src={data.URL} alt={data.alt[lan]}/>
+          <img src={data.url} alt={data.alt[lan]} loading={i < 1 ? "eager" : "lazy"} fetchpriority={i < 1 ? "high" : ""} />
         </li>          
         )}
-        <li className='imageSlider-container__img-holder__imges'><img src={firstImage}/></li>
+        <li className='imageSlider-container__img-holder__imges'><img src={firstImage.url} alt={firstImage.alt[lan]} loading="lazy"/></li>
       </ul>
       <ul className="imageSlider-container__dots-container">
         {sliderData.map((data, i) =>

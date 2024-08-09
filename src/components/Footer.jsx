@@ -76,65 +76,65 @@ function Footer ({darkMode, lan}) {
   }
 
   return (
-    <div className="footer-container">
+    <div className="footer-cont">
       <Alert alertText={alertText} newAlert={newAlert}/>
-      <div className="footer-container__footer-upper-grid">
-        <section className="footer-container__footer-upper-grid__section-subscribe">
-          <label htmlFor="subscribe"><h2 className="footer-container__footer-upper-grid__section-subscribe__title">{lan === 'en' ? 'Subscribe to our newsletter' : 'اشترك في نشرتنا'}</h2></label>
-          <ul className="footer-container__footer-upper-grid__section-subscribe__list">
-            <li className="footer-container__footer-upper-grid__section-subscribe__list__item">
-              <input className="footer-container__footer-upper-grid__section-subscribe__list__item__input" id="subscribe" type="text" placeholder={lan === 'en' ? 'Email address' : 'عنوان البريد الاكتروني'} />
-              <button className="footer-container__footer-upper-grid__section-subscribe__list__item__button">{lan === 'en' ? 'Subscribe': 'اشترك'}</button>
+      <div className="footer-cont__upper-grd">
+        <section className="footer-cont__upper-grd__subscribe-sec">
+          <label htmlFor="subscribe"><h2 className="footer-cont__upper-grd__subscribe-sec__title">{lan === 'en' ? 'Subscribe to our newsletter' : 'اشترك في نشرتنا'}</h2></label>
+          <ul className="footer-cont__footer-upper-grid__section-subscribe__list">
+            <li className="footer-cont__upper-grd__subscribe-sec__lst__itm">
+              <input className="footer-cont__upper-grd__subscribe-sec__lst__itm__inpt" id="subscribe" type="text" placeholder={lan === 'en' ? 'Email address' : 'عنوان البريد الاكتروني'} />
+              <button className="footer-cont__upper-grd__subscribe-sec__lst__itm__btn">{lan === 'en' ? 'Subscribe': 'اشترك'}</button>
             </li>
           </ul>
         </section>
-        <section className="footer-container__footer-upper-grid__section-quick-links">
-          <h2 className="footer-container__footer-upper-grid__section-quick-links__title">{lan === 'en' ? 'Quick Links' : 'روابط سريعه'}</h2>
-          <ul className="footer-container__footer-upper-grid__section-quick-links__list">
-            <li className="footer-container__footer-upper-grid__section-quick-links__list__item">
-            <Link className="footer-container__footer-upper-grid__section-quick-links__list__item__link">{lan === 'en' ? 'About us' : 'عنّا'}</Link>
+        <section className="footer-cont__upper-grd__quickLinks-sec">
+          <h2 className="footer-cont__upper-grd__quickLinks-sec__title">{lan === 'en' ? 'Quick Links' : 'روابط سريعه'}</h2>
+          <ul className="footer-cont__upper-grd__quickLinks-sec__lst">
+            <li className="footer-cont__upper-grd__quickLinks-sec__lst__itm">
+            <Link className="footer-cont__upper-grd__quickLinks-sec__lst__itm__link">{lan === 'en' ? 'About us' : 'عنّا'}</Link>
             </li>
-            <li className="footer-container__footer-upper-grid__section-quick-links__list__item">
-              <Link className="footer-container__footer-upper-grid__section-quick-links__list__item__link">{lan === 'en' ? 'Privacty Policy' : 'سياسه الخصوصيه'}</Link>
+            <li className="footer-cont__upper-grd__quickLinks-sec__lst__itm">
+              <Link className="footer-cont__upper-grd__quickLinks-sec__lst__itm__link">{lan === 'en' ? 'Privacty Policy' : 'سياسه الخصوصيه'}</Link>
             </li>
-            <li className="footer-container__footer-upper-grid__section-quick-links__list__item">
-              <Link className="footer-container__footer-upper-grid__section-quick-links__list__item__link" to="/" onClick={() => window.scroll({top: 0, behavior: 'smooth'})}>{lan === 'en' ? 'Back to Home' : 'العوده الى الرئيسيه'}</Link>
+            <li className="footer-cont__upper-grd__quickLinks-sec__lst__itm">
+              <Link className="footer-cont__upper-grd__quickLinks-sec__lst__itm__link" to="/" onClick={() => window.scroll({top: 0, behavior: 'smooth'})}>{lan === 'en' ? 'Back to Home' : 'العوده الى الرئيسيه'}</Link>
             </li>
-            <li className="footer-container__footer-upper-grid__section-quick-links__list__item">
-              <Link className="footer-container__footer-upper-grid__section-quick-links__list__item__link">{lan === 'en' ? 'Shipping process' : 'عمليه الشحن'}</Link>
+            <li className="footer-cont__upper-grd__quickLinks-sec__lst__itm">
+              <Link className="footer-cont__upper-grd__quickLinks-sec__lst__itm__link">{lan === 'en' ? 'Shipping process' : 'عمليه الشحن'}</Link>
             </li>
-            <li className="footer-container__footer-upper-grid__section-quick-links__list__item">
-              <Link className="footer-container__footer-upper-grid__section-quick-links__list__item__link">{lan === 'en' ? 'Commonly Asked Questions' : 'الأسئله الشائعه'}</Link>
+            <li className="footer-cont__upper-grd__quickLinks-sec__lst__itm">
+              <Link className="footer-cont__upper-grd__quickLinks-sec__lst__itm__link">{lan === 'en' ? 'Commonly Asked Questions' : 'الأسئله الشائعه'}</Link>
             </li>
           </ul>
         </section>
-        <section className="footer-container__footer-upper-grid__section-contact-us">
-          <h2 className="footer-container__footer-upper-grid__section-contact-us__title">{lan === 'en' ? 'Contact Us' : 'تواصل معنا'}</h2>
-          <ul className="footer-container__footer-upper-grid__section-contact-us__list">
-            <li className="footer-container__footer-upper-grid__section-contact-us__list__item">
-              <img className="footer-container__footer-upper-grid__section-contact-us__list__item__img" src={darkMode ? callIconDarkMode : callIcon}/>
-              <button className="footer-container__footer-upper-grid__section-contact-us__list__item__link" onClick={() => handleClick('phone')}>{formatPhoneNumber(oneBike.phone)}</button>
+        <section className="footer-cont__upper-grd__contactUs-sec">
+          <h2 className="footer-cont__upper-grd__contactUs-sec__title">{lan === 'en' ? 'Contact Us' : 'تواصل معنا'}</h2>
+          <ul className="footer-cont__upper-grd__contactUs-sec__lst">
+            <li className="footer-cont__upper-grd__contactUs-sec__lst__itm">
+              <img className="footer-cont__upper-grd__contactUs-sec__lst__itm__img" src={darkMode ? callIconDarkMode : callIcon} fetchpriority="high" alt="Call Icon" />
+              <button className="footer-cont__upper-grd__contactUs-sec__lst__itm__link" onClick={() => handleClick('phone')}>{formatPhoneNumber(oneBike.phone)}</button>
             </li>
-            <li className="footer-container__footer-upper-grid__section-contact-us__list__item">
-              <img className="footer-container__footer-upper-grid__section-contact-us__list__item__img" src={darkMode ? mailIconDarkMode : mailIcon}/>
-              <button className="footer-container__footer-upper-grid__section-contact-us__list__item__link" onClick={() => handleClick('email')}>{oneBike.email}</button>
+            <li className="footer-cont__upper-grd__contactUs-sec__lst__itm">
+              <img className="footer-cont__upper-grd__contactUs-scc__lst__itm__img" src={darkMode ? mailIconDarkMode : mailIcon} fetchpriority="high" alt="mail Icon"/>
+              <button className="footer-cont__upper-grd__contactUs-sec__lst__itm__link" onClick={() => handleClick('email')}>{oneBike.email}</button>
             </li>
-            <li className="footer-container__footer-upper-grid__section-contact-us__list__item">
-              <img className="footer-container__footer-upper-grid__section-contact-us__list__item__img" src={darkMode ? whatsappIconDarkMode : whatsappIcon}/>
-            <Link className="footer-container__footer-upper-grid__section-contact-us__list__item__link" to={oneBike.whatsApp} target="_blank" tabIndex="0">{lan === 'en' ? 'Chat with us' : 'تحدث معنا'}</Link>
+            <li className="footer-cont__upper-grd__contactUs-sec__lst__itm">
+              <img className="footer-cont__upper-grd__contactUs-sec__lst__itm__img" src={darkMode ? whatsappIconDarkMode : whatsappIcon} fetchpriority="high" alt="Whatsapp Icon" />
+            <Link className="footer-cont__upper-grd__contactUs-sec__lst__itm__link" to={oneBike.whatsApp} target="_blank" tabIndex="0">{lan === 'en' ? 'Chat with us' : 'تحدث معنا'}</Link>
             </li>
           </ul>
         </section>
       </div>
 
-      <div className="footer-container__footer-lower">
-        <section className="footer-container__footer-lower__media-section">
-        <a href={oneBike.facebook} target="_blank" tabIndex="0"><img className="footer-container__footer-lower__media-section__media-icon" src={darkMode ? facebookIcon : facebookIconDarkMode}/></a>
-        <a href={oneBike.whatsApp} target="_blank" tabIndex="0"><img className="footer-container__footer-lower__media-section__media-icon" src={darkMode ? whatsappIcon : whatsappIconDarkMode}/></a>
-        <a href={oneBike.instagram} target="_blank" tabIndex="0"><img className="footer-container__footer-lower__media-section__media-icon" src={darkMode ? instagramIcon : instagramIconDarkMode}/></a>
+      <div className="footer-cont__lower">
+        <section className="footer-cont__lower__media-sec">
+        <a href={oneBike.facebook} target="_blank" tabIndex="0"><img className="footer-cont__lower__media-sec__media-icon" src={darkMode ? facebookIcon : facebookIconDarkMode} fetchpriority="high" alt="Facebook Icon"/></a>
+        <a href={oneBike.whatsApp} target="_blank" tabIndex="0"><img className="footer-cont__lower__media-sec__media-icon" src={darkMode ? whatsappIcon : whatsappIconDarkMode} fetchpriority="high" alt="Whatsapp Icon"/></a>
+        <a href={oneBike.instagram} target="_blank" tabIndex="0"><img className="footer-cont__lower__media-sec__media-icon" src={darkMode ? instagramIcon : instagramIconDarkMode} fetchpriority="high" alt="Instagram Icon"/></a>
         </section>
-        <section className="footer-container__footer-lower__organism-rights">
-          <h3 className="footer-container__footer-lower__organism-rights__h3">{lan === 'en' ? 'Syria © 2024 ONE BIKE all rights reseved' : 'سوريا © 2024 ون بايك جميع الحقوق محفوظة'}</h3>
+        <section className="footer-cont__lower__organism-rights">
+          <h3 className="footer-cont__lower__organism-rights__h3">{lan === 'en' ? 'Syria © 2024 ONE BIKE all rights reseved' : 'سوريا © 2024 ون بايك جميع الحقوق محفوظة'}</h3>
         </section>
       </div>
     </div>

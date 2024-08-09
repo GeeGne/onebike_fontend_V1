@@ -81,19 +81,19 @@ function NeedHelp ({darkMode, lan}) {
         <h3 className="need-help-container__need-help__description">{lan === 'en' ? <>Whether you need assistance to pick the right equipment for your bicycle, or your're having an issue with your order, we at <span style={{fontWeight: 'bold'}}>ONE BIKE</span> and our amazing community are here to help.</> : <>ان اردت المساعده في اختيار المعدات المناسبه لدراجتك او ان كان لديك مشكله في عمليه الشحن, اعضاء <span style={{fontWeight: 'bold'}}>ون بايك</span> جاهزين للخدمه.</>}</h3>
       </section>
       <section className="need-help-container__call-us">
-        <img className="need-help-container__call-us__img" src={darkMode ? callIconDarkMode : callIcon}/>
+        <img className="need-help-container__call-us__img" alt="Call Icon" fetchpriority="high" src={darkMode ? callIconDarkMode : callIcon}/>
         <h2 className="need-help-container__call-us__title">{lan === 'en' ? 'Call us' : 'اتصل بنا'}</h2>
         <h3 className="need-help-container__call-us__description">{lan === 'en' ? 'We\'re mostly available from 10 AM to 5 PM' : 'نحن متواجدون من الساعه 10 صباحاالى 5 مساءا في معظم الاوقات.'}</h3>
         <button className="need-help-container__call-us__button" data-type="phone" onClick={handleClick}>{lan === 'en' ? 'Copy Phone Number' : 'انسخ رقم الهاتف'}</button>
       </section>
       <section className="need-help-container__email-us">
-        <img className="need-help-container__email-us__img" src={darkMode ? mailIconDarkMode : mailIcon}/>
+        <img className="need-help-container__email-us__img" alt="Email Icon" fetchpriority="high" src={darkMode ? mailIconDarkMode : mailIcon}/>
         <h2 className="need-help-container__email-us__title">{lan === 'en' ? 'Send an Email' : 'ارسل بريدا الكترونيا'}</h2>
         <h3 className="need-help-container__email-us__description">{lan === 'en' ? 'We respond to emails within 48 hours of your support request.' : 'نحن نستجيب على طلبك خلال 48 ساعه كحد اقصى.'}</h3>
         <button className="need-help-container__email-us__button" data-type="email" onClick={handleClick}>{lan === 'en' ? 'Copy Email' : 'انسخ عنوان بريدنا الاكتروني'}</button>
       </section>
       <section className="need-help-container__chat-with-us">
-        <img className="need-help-container__chat-with-us__img" src={darkMode ? chatDotsIconDarkMode : chatDotsIcon}/>
+        <img className="need-help-container__chat-with-us__img" alt="Chat Icon" fetchpriority="high" src={darkMode ? chatDotsIconDarkMode : chatDotsIcon}/>
         <h2 className="need-help-container__chat-with-us__title">{lan === 'en' ? 'Chat with us' : 'تواصل معنا'}</h2>
         <h3 className="need-help-container__chat-with-us__description">{lan === 'en' ? 'Our amazing community is always here to answer whatever question you have, feel free to post your question on the Group Chat!' : 'مجتمعنا الفريد من نوعه متواجد دائما للدعم على ايا استفسار لديك, قم بارسال سؤالك على مجموعه المحادثه!'}</h3>
         <a className="need-help-container__chat-with-us__a" href={oneBike.whatsApp} target="_blank">{lan === 'en' ? 'Join our Group Chat' : 'انضم الى مجموعه المحادثه'}</a>
