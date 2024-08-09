@@ -249,7 +249,7 @@ function Account ({darkMode, lan}) {
                     {order.products.map(product =>
                     <li className="account__userData__description-cont__orders-cont__orders__order__products__product" key={product.id}>
                       <div className="account__userData__description-cont__orders-cont__orders__order__products__product__img-cont">
-                        <img className="account__userData__description-cont__orders-cont__orders__order__products__product__img-cont__img" src={getProductImgURL(product.product)}/>
+                        <img className="account__userData__description-cont__orders-cont__orders__order__products__product__img-cont__img" src={getProductImgURL(product.product)} alt={product.product.title[lan]} />
                         <span className="account__userData__description-cont__orders-cont__orders__order__products__product__img-cont__amount">{product.quantity}</span>
                       </div>
                       <span className="account__userData__description-cont__orders-cont__orders__order__products__product__title">{product.product.title[lan]}</span>

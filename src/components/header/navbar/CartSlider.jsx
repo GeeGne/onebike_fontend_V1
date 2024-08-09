@@ -150,7 +150,7 @@ function CartSlider ({darkMode, lan}) {
         <ul className="cartSlider__slider__products">
           {cart.map((list, i) =>
           <li className="cartSlider__slider__products__product" key={list.id} data-product-id={list.product.id} ref={el => addRef('cartProductsELS', el, i)}>
-            <img className="cartSlider__slider__products__product__image" src={getProductImgURL(list.product)} />
+            <img className="cartSlider__slider__products__product__image" src={getProductImgURL(list.product)} alt={list.product.title[lan]} />
             <a className="cartSlider__slider__products__product__title">{list.product.title[lan]}</a>
             <div className="cartSlider__slider__products__product__price">{en ? 'S.P' : 'ل.س'} {formatNumberWithCommas(list.quantityPrice)}</div>
             <div className="cartSlider__slider__products__product__toggles">

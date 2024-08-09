@@ -27,7 +27,7 @@ function Home ({darkMode, lan}) {
         <meta property="og:url" content={pageURL} />
         <link rel="canonical" href={pageURL} />
       </Helmet>
-      <ImageSlider />
+      <ImageSlider darkMode={darkMode} lan={lan} />
       <CategoryPicker darkMode={darkMode} lan={lan} />
       <AdvertTile darkMode={darkMode} lan={lan} type={{categoryType: 'discount', name: {en: 'Hot sales', ar: 'اخر التخفيضات'}}}/>
       <AdvertTile darkMode={darkMode} lan={lan} type={{categoryType: 'category', name: {en: 'Accessories', ar: 'اكسسوارات'}}}/>

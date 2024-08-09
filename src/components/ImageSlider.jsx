@@ -8,7 +8,7 @@ import '../styles/components/ImageSlider.scss';
 import sliderData from '/src/data/slider.json';
 
 
-function ImageSlider () {
+function ImageSlider ({darkMode, lan}) {
 
   const [currentImage, setCurrentImage] = useState(null);
 
@@ -167,7 +167,7 @@ function ImageSlider () {
         <li className='imageSlider-container__img-holder__imges'><img src={lastImage}/></li>
         {sliderData.map(data =>
         <li className='imageSlider-container__img-holder__imges' key={data.id}>
-          <img src={data.URL}/>
+          <img src={data.URL} alt={data.alt[lan]}/>
         </li>          
         )}
         <li className='imageSlider-container__img-holder__imges'><img src={firstImage}/></li>

@@ -172,7 +172,7 @@ function AdvertTile ({darkMode, lan, type}) {
             ? <button className="advertTile__list__products__product__heart-btn added-to-wishlist" data-action="remove_product_from_wishlist" data-product-id={product.id} onClick={handleClick} />
             : <button className="advertTile__list__products__product__heart-btn" data-action="add_product_to_wishlist" data-product-id={product.id} onClick={handleClick} />
             }
-            <img className="advertTile__list__products__product__img" src={getProductImgURL(product)} />
+            <img className="advertTile__list__products__product__img" src={getProductImgURL(product)} alt={product.title[lan]} />
             {product.discount && <div className="advertTile__list__products__product__discount">{lan === 'ar' ? 'خصم ' : ''}{calculateDiscountPercantage(product.price, product.discount)}{en ? ' off' : ''}</div>}
             <h3 className="advertTile__list__products__product__description">{product.title[lan]}</h3>
             {product.brand && <img className="advertTile__list__products__product__brand-img" src={`/assets/img/logo/${product.brand}.webp`}/>}

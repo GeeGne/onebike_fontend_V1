@@ -157,7 +157,7 @@ function Navbar ({darkMode, lan}) {
     <div className="dropMenu" ref={navDropMenuEL}>
       <nav className="dropMenu__nav">
         <button className={`dropMenu__nav__hamburger${menu ? ' clicked' : ''}`} onClick={() => setMenu(oldMenu => !oldMenu)}/>
-        <img className="dropMenu__nav__logo" data-action="navigate_to_path" data-path="/" onClick={handleClick} src={logo}/>
+        <img className="dropMenu__nav__logo" alt="ONEBIKE" data-action="navigate_to_path" data-path="/" onClick={handleClick} src={logo}/>
         <div className="dropMenu__nav__search-input" /* onMouseEnter={() => handleHover(true)}  onMouseLeave={() => handleHover(false)} */ ref={searchEL}>
           <input placeholder={lan === 'en' ? 'Type something' : 'هل تبحث عن شيء؟'} onBlur={() => handleHover(false)} onChange={handleChange} ref={searchInputEL}/>
           <img src={darkMode ? searchIconDarkMode : searchIcon}/>
