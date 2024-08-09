@@ -1,6 +1,6 @@
 // HOOKS
 import React, {useState, useRef, useEffect, useContext} from 'react';
-import {useNavigate} from 'react-router-dom';
+import {useNavigate, Link} from 'react-router-dom';
 
 // STORE
 import {useWishlistStore} from '/src/store/store';
@@ -71,8 +71,8 @@ function NavBottom ({darkMode, lan}) {
 
   return (
     <section className="navBottom" ref={navBottomEL}>
-      <a className={`navBottom__favourite${isWishlistEmpty ? ' empty' : ''}`} data-action="toggle_wishlist_to_true" onClick={handleClick} ref={favouriteBtnEL} />
-      <a className="navBottom__user" data-action="navigate_to_path" data-path="/account/login" onClick={handleClick}/>
+      <a className={`navBottom__favourite${isWishlistEmpty ? ' empty' : ''}`} aria-label="Toggle Wishlst" data-action="toggle_wishlist_to_true" onClick={handleClick} ref={favouriteBtnEL} />
+      <a className="navBottom__user" aria-label="Navigate to Your Account" data-action="navigate_to_path" data-path="/account/login" onClick={handleClick}/>
     </section>
   )
 }

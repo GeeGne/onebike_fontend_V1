@@ -1,12 +1,12 @@
 // HOOKS
-import React, {useState, useRef, useEffect, useReducer, useContext} from 'react';
+import React, {useState, useRef, useEffect, Suspense} from 'react';
 import {useNavigate, useSearchParams} from 'react-router-dom';
 
 // COMPONENTS
-import HamMenu from './HamMenu';
-import DropMenu from './DropMenu';
-import CartSlider from './CartSlider';
-import WishlistSlider from './WishlistSlider';
+const HamMenu = React.lazy(() => import('./HamMenu'));
+const DropMenu = React.lazy(() => import('./DropMenu'));
+const CartSlider = React.lazy(() => import('./CartSlider'));
+const WishlistSlider = React.lazy(() => import('./WishlistSlider'));
 
 // REDUCERS
 import cartReducer from '/src/reducers/cartReducer.js';
@@ -167,11 +167,17 @@ function Navbar ({darkMode, lan}) {
         <button className={`dropMenu__nav__favourite${isWishlistEmpty ? ' empty' : ''}`} aria-label="Open favorite tab" data-action="toggle_wishlist_to_true" onClick={handleClick} ref={favouriteBtnEL}/>
         <button className={`dropMenu__nav__shoppingCart${isCartEmpty ? ' empty' : ''}`} aria-label="Open shoppingcart tab" onClick={() => setCartToggle(true)} ref={cartBtnEL}/>
       </nav>
-      <DropMenu menu={menu} darkMode={darkMode} lan={lan}/>
+      <Suspense fallback="">
+        <DropMenu menu={menu} darkMode={darkMode} lan={lan}/>
+      </Suspense>
     </div>
+    
+    <Suspense fallback="">
       <HamMenu menu={menu} onMenuChange={menuData} darkMode={darkMode} lan={lan}/>
       <CartSlider darkMode={darkMode} lan={lan} />
       <WishlistSlider darkMode={darkMode} lan={lan} />
+    </Suspense>
+
       {/* <Outlet/> */}
     </>
   )
