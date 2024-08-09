@@ -160,7 +160,7 @@ function Navbar ({darkMode, lan}) {
         <img className="dropMenu__nav__logo" alt="ONEBIKE" data-action="navigate_to_path" data-path="/" onClick={handleClick} src={logo}/>
         <div className="dropMenu__nav__search-input" /* onMouseEnter={() => handleHover(true)}  onMouseLeave={() => handleHover(false)} */ ref={searchEL}>
           <input placeholder={lan === 'en' ? 'Type something' : 'هل تبحث عن شيء؟'} onBlur={() => handleHover(false)} onChange={handleChange} ref={searchInputEL}/>
-          <img src={darkMode ? searchIconDarkMode : searchIcon} alt="Search Icon"/>S
+          <img src={darkMode ? searchIconDarkMode : searchIcon} alt="Search Icon"/>
         </div>
         <button className="dropMenu__nav__search" aria-label="Search on a product" data-action="toggle_search" onClick={handleClick} /* onMouseEnter={() => handleHover(true)} onMouseLeave={() => handleHover(false)} */ ref={searchBtnEL}/>
         <button className="dropMenu__nav__user" aria-label="head to your account" data-action="navigate_to_path" data-path="/account/login" onClick={handleClick}/>
