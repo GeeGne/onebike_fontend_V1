@@ -85,12 +85,12 @@ function SearchResultsPanel ({darkMode, lan}) {
     setToggleSearch(true);
     setSearchFor(searchVal);
     window.scroll({top: 0, behavoir:'instant'});
+    panelEL.current.scroll({top: 0, behavoir:'instant'});
     document.body.style.overflow = 'hidden hidden';
 
   }, [searchParams]);
 
   useEffect(() => {
-
     const hanldeSearchToggle = boolean => {
       const containerStyle = panelEL.current.style;
 

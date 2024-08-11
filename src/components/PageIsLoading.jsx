@@ -14,7 +14,7 @@ function PageIsLoading ({ darkMode, lan }) {
 
   return (
     <div className="pageIsLoading">
-      <img className="pageIsLoading__img" src={logo} />
+      <img className="pageIsLoading__img" src={logo} alt="onebike logo" fetchpriority="high" />
       <h1 className="pageIsLoading__h1">{lan === 'ar' ? '..جاري التحميل' : 'Loading..'}</h1>
       <DotsRowActivity darkMode={darkMode} lan={lan} />
     </div>
