@@ -20,7 +20,11 @@ body {
   z-index: 2000;
   background-color: var(--light-background-color);
 
+  &__img {
+    width: 7em;
+  }
+
   &__h1 {
-    color: var(--font-h-color);
+    color: var(--font-p-color);
   }
 }

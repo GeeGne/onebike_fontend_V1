@@ -26,7 +26,7 @@ function Home ({darkMode, lan}) {
         {/* <meta property="og:image" content="/path/to/image.jpg" /> */}
         <meta property="og:url" content={pageURL} />
         <link rel="canonical" href={pageURL} />
-      </Helmet>
+        </Helmet>
       <ImageSlider darkMode={darkMode} lan={lan} />
       <CategoryPicker darkMode={darkMode} lan={lan} />
       <AdvertTile darkMode={darkMode} lan={lan} type={{categoryType: 'discount', name: {en: 'Hot sales', ar: 'اخر التخفيضات'}}}/>
