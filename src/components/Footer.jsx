@@ -80,8 +80,10 @@ function Footer ({darkMode, lan}) {
       <Alert alertText={alertText} newAlert={newAlert}/>
       <div className="footer-cont__upper-grd">
         <section className="footer-cont__upper-grd__subscribe-sec">
-          <label htmlFor="subscribe"><h2 className="footer-cont__upper-grd__subscribe-sec__title">{lan === 'en' ? 'Subscribe to our newsletter' : 'اشترك في نشرتنا'}</h2></label>
-          <ul className="footer-cont__footer-upper-grid__section-subscribe__list">
+          <label htmlFor="subscribe">
+            <h2 className="footer-cont__upper-grd__subscribe-sec__title">{lan === 'en' ? 'Subscribe to our newsletter' : 'اشترك في نشرتنا'}</h2>
+          </label>
+          <ul className="footer-cont__upper-grd__subscribe-sec__lst">
             <li className="footer-cont__upper-grd__subscribe-sec__lst__itm">
               <input className="footer-cont__upper-grd__subscribe-sec__lst__itm__inpt" id="subscribe" type="text" placeholder={lan === 'en' ? 'Email address' : 'عنوان البريد الاكتروني'} />
               <button className="footer-cont__upper-grd__subscribe-sec__lst__itm__btn">{lan === 'en' ? 'Subscribe': 'اشترك'}</button>

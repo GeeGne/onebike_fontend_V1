@@ -1,0 +1,14 @@
+@use '/src/styles/utils/_BreakPoints' as w;
+@use '/src/styles/utils/_StyleKits' as k;
+
+.dots {
+  display: flex;
+  gap: 1em;
+
+  &__dot {
+    width: 0.5em;
+    height: 0.5em;
+    background-color: var(--primary-color);
+    border-radius: 100%;
+  }
+}

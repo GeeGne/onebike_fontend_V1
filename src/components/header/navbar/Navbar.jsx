@@ -171,7 +171,7 @@ function Navbar ({darkMode, lan}) {
         <DropMenu menu={menu} darkMode={darkMode} lan={lan}/>
       </Suspense>
     </div>
-    
+
     <Suspense fallback="">
       <HamMenu menu={menu} onMenuChange={menuData} darkMode={darkMode} lan={lan}/>
       <CartSlider darkMode={darkMode} lan={lan} />

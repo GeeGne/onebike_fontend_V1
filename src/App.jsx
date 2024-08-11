@@ -7,10 +7,11 @@ import {HelmetProvider} from 'react-helmet-async';
 import './styles/App.scss';
 
 //  COMPONENTS
-import Header from '/src/components/header/Header';
-import Footer from '/src/components/Footer';
-import Home from '/src/components/pages/Home';
-import NavBottom from '/src/components/header/navbar/NavBottom';
+import PageIsLoading from '/src/components/PageIsLoading';
+const Header = React.lazy(() => import('/src/components/header/Header'));
+const Footer = React.lazy(() => import('/src/components/Footer'));
+const NavBottom = React.lazy(() => import('/src/components/header/navbar/NavBottom'));
+const Home = React.lazy(() => import('/src/components/pages/Home'));
 const Products = React.lazy(() => import('/src/components/pages/products/Products'));
 const Checkout = React.lazy(() => import('/src/components/pages/checkout/Checkout'));
 const Account = React.lazy(() => import('/src/components/pages/Account'));
@@ -37,17 +38,15 @@ function App () {
 
   return (
     <Router>
-      <div className="app-layout">
-
-        <header className="app-layout__header">
-          <Header onThemeChange={themeData} onLanguageChange={languageData} />
-        </header>
-
-        <main className="app-layout__main">
-          <Suspense fallback="">
+      <Suspense fallback={<PageIsLoading darkMode={darkMode} lan={lan} />}>
+        <div className="app-layout">
+    
+          <header className="app-layout__header">
+            <Header onThemeChange={themeData} onLanguageChange={languageData} />
+          </header>
+    
+          <main className="app-layout__main">
             <SearchResultsPanel darkMode={darkMode} lan={lan} />
-          </Suspense>
-          <Suspense fallback={<div>Loading...</div>}>
             <HelmetProvider>
               <Routes>
                 <Route exact path="/" element={<Home darkMode={darkMode} lan={lan} />} />
@@ -67,18 +66,18 @@ function App () {
                 <Route path="*" element={<NotFound darkMode={darkMode} lan={lan} />} />
               </Routes>
             </HelmetProvider>
-          </Suspense>
-        </main>
-        
-        <footer className="app-layout__footer">
-          <Footer darkMode={darkMode} lan={lan} />
-        </footer>
-
-        <section className="app-layout__navBottom">
-          <NavBottom darkMode={darkMode} lan={lan} />
-        </section>
-        
-      </div>
+          </main>
+              
+          <footer className="app-layout__footer">
+            <Footer darkMode={darkMode} lan={lan} />
+          </footer>
+              
+          <section className="app-layout__navBottom">
+            <NavBottom darkMode={darkMode} lan={lan} />
+          </section>
+              
+        </div>
+      </Suspense>
     </Router>
   )
 }
