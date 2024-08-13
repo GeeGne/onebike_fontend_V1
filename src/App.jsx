@@ -35,16 +35,24 @@ function App () {
 
   const themeData = setDarkMode;
   const languageData = setLanguage;
+  
+  // Redirect IF the domain isn't onebikesyria.com
+  useEffect(() => {
+    const redirect = () => window.location.href = 'https://onebikesyria.com';
+    const isThisMyMainDomain = window.location.host.includes('onebikesyria.com');
+
+    if (!isThisMyMainDomain) redirect();
+  }, []);
 
   return (
     <Router>
       <Suspense fallback={<PageIsLoading darkMode={darkMode} lan={lan} />}>
         <div className="app-layout">
-    
+
           <header className="app-layout__header">
             <Header onThemeChange={themeData} onLanguageChange={languageData} />
           </header>
-    
+
           <main className="app-layout__main">
             <SearchResultsPanel darkMode={darkMode} lan={lan} />
             <HelmetProvider>
@@ -71,7 +79,7 @@ function App () {
           <footer className="app-layout__footer">
             <Footer darkMode={darkMode} lan={lan} />
           </footer>
-              
+
           <section className="app-layout__navBottom">
             <NavBottom darkMode={darkMode} lan={lan} />
           </section>
