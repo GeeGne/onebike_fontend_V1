@@ -55,7 +55,7 @@ function App () {
     const redirect = () => window.location.href = 'https://onebikesyria.com';
     const isThisMyMainDomain = window.location.host.includes('onebikesyria.com');
 
-    // if (!isThisMyMainDomain) redirect();
+    if (!isThisMyMainDomain) redirect();
   }, []);
 
   return (
