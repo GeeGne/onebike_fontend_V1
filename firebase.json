@@ -1,9 +1,8 @@
 {
   "hosting": {
-    "public": "public",
     "redirects": [
       {
-        "source": "/**",
+        "source": "https://onebike-b622f.web.app",
         "destination": "https://www.onebikesyria.com",
         "type": 301
       }
