@@ -14,5 +14,15 @@
         "npm --prefix \"$RESOURCE_DIR\" run lint"
       ]
     }
-  ]
+  ],
+  "hosting": {
+    "public": "public",
+    "redirects": [
+      {
+        "source": "/**",
+        "destination": "https://onebikesyria.com/:splat",
+        "type": 301
+      }
+    ]
+  }
 }
