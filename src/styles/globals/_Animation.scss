@@ -2,6 +2,21 @@
   animation-delay: $delay;
 }
 
+.fade-enter {
+  opacity: 0;
+}
+.fade-enter-active {
+  opacity: 1;
+  transition: opacity 500ms ease-in;
+}
+.fade-exit {
+  opacity: 1;
+}
+.fade-exit-active {
+  opacity: 0;
+  transition: opacity 500ms ease-out;
+}
+
 .animate--10s {
   animation-duration: 10s;
 }
@@ -12,6 +27,10 @@
 
 .animate--05s {
   animation-duration: 0.5s;
+}
+
+.animate--025s {
+  animation-duration: 0.25s !important;
 }
 
 .delay--03s {animation-delay: 0.2s}
@@ -27,7 +46,6 @@
   100% {
     opacity: 1;
   }
-
 }
 
 @keyframes alert-popIn {
@@ -274,6 +292,20 @@
   }
 }
 
+@keyframes panel-flick {
+  0% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.6;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
 @keyframes dot {
 
   0% {
@@ -425,6 +457,14 @@
   animation-play-state: paused;
 
   &.unpause {animation-play-state: running}
+}
+
+.--panel-flick {
+  animation-name: panel-flick;
+  animation-duration: 1.5s;
+  animation-timing-function: ease;
+  animation-fill-mode: both;
+  animation-iteration-count: infinite;
 }
 
 .--dot {
