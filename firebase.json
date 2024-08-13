@@ -20,7 +20,7 @@
     "redirects": [
       {
         "source": "/**",
-        "destination": "https://onebikesyria.com/:splat",
+        "destination": "https://www.onebikesyria.com",
         "type": 301
       }
     ]
