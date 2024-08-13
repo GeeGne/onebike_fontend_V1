@@ -117,10 +117,13 @@ function Navbar ({darkMode, lan}) {
           searchEL.current.classList.toggle('clicked');
           searchBtnEL.current.classList.toggle('clicked');
 
-          const isSearchToggled = searchEL.current.classList.contains('clicked')
+          const isSearchToggled = searchEL.current.classList.contains('clicked');
           if (!isSearchToggled) {
+            searchInputEL.current.blur();
             searchInputEL.current.value = '';
             setSearchParams('');
+          } else {
+            searchInputEL.current.focus();
           }
         }
         break;
