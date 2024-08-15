@@ -41,6 +41,18 @@ class Redirector {
     } 
   }
 
+  admin (pathname, user, userData) {
+    console.log('test', userData);
+    // if (!user || userData?.admin && (pathname === '/admin' || pathname === '/admin/')) {
+    //   this.navigate('/account/login');
+    //   console.log('gi');
+    // } 
+    if (!user || !userData?.admin && (pathname === '/admin' || pathname === '/admin/')) {
+      this.navigate('/account/login');
+      console.log('gi');
+    } 
+  }
+
   // checkout (pathname, user) {
   //   if (!user && (pathname === '/checkouts' || pathname === '/checkouts/')) {
   //     this.navigate('/account/login');

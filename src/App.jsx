@@ -34,6 +34,7 @@ const SignIn = React.lazy(() => import('/src/components/pages/SignIn'));
 const SignUp = React.lazy(() => import('/src/components/pages/SignUp'));
 // const SearchResultsPanel = React.lazy(() => import('/src/components/SearchResultsPanel'));
 const Cart = React.lazy(() => import('/src/components/pages/Cart'));
+const ContentManagement = React.lazy(() => import('/src/components/pages/admin/ContentManagement'));
 
 // DATA
 import mainListData from '/src/data/menu.json';
@@ -85,6 +86,7 @@ function App () {
                 <Route path="/account/register" element={<SignUp darkMode={darkMode} lan={lan} />} />
                 <Route path="/account/login" element={<SignIn darkMode={darkMode} lan={lan} />} />
                 <Route path="/account" element={<Account darkMode={darkMode} lan={lan} />} />
+                <Route path="/admin" element={<ContentManagement darkMode={darkMode} lan={lan} />} />
                 <Route path="*" element={<NotFound darkMode={darkMode} lan={lan} />} />
               </Routes>
             </Suspense>
