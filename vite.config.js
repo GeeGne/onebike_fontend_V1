@@ -7,8 +7,8 @@ export default defineConfig({
   build: {
     rollupOptions: {
       external: [
-        '/src/firebase/authSignUp.js', // Add your problematic module here
-        // Add other external modules if needed
+        '/src/firebase/authSignUp.js',
+        '/src/firebase/fireStore'
       ]
     }
   }
