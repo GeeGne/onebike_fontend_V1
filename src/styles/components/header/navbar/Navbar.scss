@@ -1,4 +1,5 @@
-@use '../../../utils/_BreakPoints' as w;
+@use '/src/styles/utils/_BreakPoints' as w;
+@use '/src/styles/utils/_StyleKits' as k;
 
 .dropMenu {
   transition: transform 0.35s ease-out;
@@ -24,11 +25,9 @@
       transform: translateX(-50%);
       width: 100vw;
       height: 100%;
-      // background-color: var(--button-color);
       background-color: var(--background-color);
       z-index: -1;
       transition: background-color 0.5s ease-in;
-
     }
 
     &::after {
