@@ -4,10 +4,10 @@ import {useNavigate} from 'react-router-dom';
 import {Helmet} from 'react-helmet-async';
 
 // FIREBASE
-import {auth} from '/src/firebase/authSignUp.js';
+import {auth} from '/src/firebase/authSignUp';
 import {signOut, updateProfile, signInWithEmailAndPassword, onAuthStateChanged} from "firebase/auth";
 import {db} from '/src/firebase/fireStore';
-import {setDoc, updateDoc, getDoc, doc, collection, getDocs} from 'firebase/firestore';
+import {getDoc, doc, collection, getDocs} from 'firebase/firestore';
 
 // SCSS
 import '/src/styles/components/pages/Account.scss';
