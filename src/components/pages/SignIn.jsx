@@ -7,8 +7,6 @@ import {Helmet} from 'react-helmet-async';
 import {auth} from "/src/firebase/authSignUp";
 import {signInWithEmailAndPassword, onAuthStateChanged, sendPasswordResetEmail} from "firebase/auth";
 import handleAuthError from "/src/firebase/handleAuthError";
-import {db} from '/src/firebase/fireStore';
-import {doc, setDoc} from 'firebase/firestore';
 
 // COMPONENTS
 import Banner from '/src/components/Banner';

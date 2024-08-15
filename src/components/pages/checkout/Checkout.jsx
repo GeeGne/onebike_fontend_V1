@@ -167,8 +167,8 @@ function Checkout ({darkMode, lan}) {
 
     fetchUserData();
   }, [user]);
-  console.log({orderState});
-  console.log({user, userData, order})
+  // console.log({orderState});
+  // console.log({user, userData, order})
   useEffect(() => dispatch({type: 'update_costumer', userData}), [userData])
   useEffect(() => dispatch({type: 'update_products', cart}), [cart])
 
