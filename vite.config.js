@@ -8,7 +8,7 @@ export default defineConfig({
     rollupOptions: {
       external: [
         '/src/firebase/authSignUp.js',
-        '/src/firebase/fireStore.js'
+        '/src/firebase/fireStore'
       ]
     }
   }
