@@ -24,4 +24,4 @@ dist-ssr
 *.sw?
 
 # Hide
-src/firebase/config.js
+# src/firebase/config.js
