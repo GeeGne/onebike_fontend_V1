@@ -162,7 +162,7 @@ function ImageSlider ({darkMode, lan}) {
   }
 
   return (
-    <section className='imageSlider-container --fade-in'>
+    <section className='imageSlider-container --fade-in delay--04s animate--03s'>
       <ul className='imageSlider-container__img-holder' onTouchStart={handleStart}  onTouchMove={handleMove} onTouchEnd={handleEnd} ref={imageSliderElement}>
         <li className='imageSlider-container__img-holder__imges'><img src={lastImage.url} alt={lastImage.alt[lan]} loading="lazy" /></li>
         {sliderData.map((data, i) =>

@@ -9,10 +9,10 @@ function DotsRowActivity () {
   return (
     <ul className="dots">
       <li className="dots__dot --dot" />
-      <li className="dots__dot --dot delay--03s" />
+      <li className="dots__dot --dot delay--02s" />
+      <li className="dots__dot --dot delay--04s" />
       <li className="dots__dot --dot delay--06s" />
-      <li className="dots__dot --dot delay--09s" />
-      <li className="dots__dot --dot delay--1o2s" />
+      <li className="dots__dot --dot delay--08s" />
     </ul>
   )
 }

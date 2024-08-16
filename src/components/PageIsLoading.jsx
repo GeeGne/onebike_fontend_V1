@@ -15,17 +15,31 @@ import logo from '/assets/img/logo/onebike.webp';
 
 function PageIsLoading ({ type, darkMode, lan }) {
 
+  const logoImgEL = useRef(null);
+
   if (type === 'a') {
     darkMode = localStorage.get('darkTheme') || false;
     lan = localStorage.get('lan') || false;
     if (darkMode) document.body.classList.add('dark-theme');
+  }     
+
+  const handleLoad = e => {
+    const { type } = e.currentTarget.dataset;
+
+    switch (type) {
+      case 'onebike_logo':
+        logoImgEL.current.classList.add('--fade-in', '--animate-015s');
+        break;
+      default:
+        console.error('Unknown type: ', type);
+    }
   }
 
   return (
     <div className={`pageIsLoading${type === 'b' ? ' b --panel-flick' : ''}`}>
       {type === 'a' 
       ? <>
-          <img className="pageIsLoading__img" src={logo} alt="onebike logo" fetchpriority="high" />
+          <img className="pageIsLoading__img" src={logo} alt="onebike logo" fetchpriority="high" data-type="onebike_logo" onLoad={handleLoad} ref={logoImgEL} />
           <h1 className="pageIsLoading__h1">{lan === 'ar' ? '..جاري التحميل' : 'Loading..'}</h1>
           <DotsRowActivity darkMode={darkMode} lan={lan} />
         </> 

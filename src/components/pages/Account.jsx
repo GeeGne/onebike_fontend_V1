@@ -171,7 +171,9 @@ function Account ({darkMode, lan}) {
         } catch (err) {
           console.error(err);
         }
-
+        break;
+      case 'manage_content_btn_is_clicked':
+        navigate('/admin');
         break;
       default:
         console.error('Error: Unknown action', action);
@@ -194,13 +196,14 @@ function Account ({darkMode, lan}) {
       <div className="account" ref={accountEL}>
 
         <section className="account__banner">
+          <button className={`account__banner__manageContent-btn${userData?.admin ? ' show': ''}`} data-action="manage_content_btn_is_clicked" onClick={handleClick} />
           <div className="account__banner__pfp">
             <img className="account__banner__pfp__img" src={darkMode ? personIcon : personDarkModeIcon} />
           </div>
         </section>
 
         <section className="account__userName-sec">
-          <h2 className="account__userName-sec__h2">{userData?.fullName}</h2>
+          <h2 className="account__userName-sec__h2">{userData?.fullName || (en ? 'Loading..' : '..جاري التحميل')}</h2>
         </section>
 
         <section className="account__userData">
@@ -214,11 +217,11 @@ function Account ({darkMode, lan}) {
               <ul className="account__userData__description-cont__myInfo-cont__list" ref={myInfoListContEL}>
                 <li className="account__userData__description-cont__myInfo-cont__list__item">
                   <span className="account__userData__description-cont__myInfo-cont__list__item__title">{en ? 'Mobile Phone' : 'رقم الهاتف'}</span> 
-                  <span className="account__userData__description-cont__myInfo-cont__list__item__description">{formatPhoneNumber(userData?.phone)}</span> 
+                  <span className="account__userData__description-cont__myInfo-cont__list__item__description">{formatPhoneNumber(userData?.phone) || (en ? 'Loading..' : '..جاري التحميل')}</span> 
                 </li>
                 <li className="account__userData__description-cont__myInfo-cont__list__item">
                   <span className="account__userData__description-cont__myInfo-cont__list__item__title">{en ? 'Email Address' : 'عنوان البريد'}</span> 
-                  <span className="account__userData__description-cont__myInfo-cont__list__item__description">{userData?.email}</span> 
+                  <span className="account__userData__description-cont__myInfo-cont__list__item__description">{userData?.email || (en ? 'Loading..' : '..جاري التحميل')}</span> 
                 </li>
                 {/* <li className="account__userData__description-cont__myInfo-cont__list__item">
                   <span className="account__userData__description-cont__myInfo-cont__list__item__title">ID</span> 

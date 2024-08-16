@@ -1,4 +1,4 @@
-@use '_BreakPoints' as w;
+@use '/src/styles/utils/_BreakPoints' as w;
 
 //  Icon size 
 :root {
@@ -20,6 +20,7 @@
   --whatsapp-icon: url(/assets/img/icons/whatsapp.svg);
   --instagram-icon: url(/assets/img/icons/instagram.svg);
   --person-fill-icon: url(/assets/img/icons/person_fill.svg);
+  --folder-managed-icon: url(/assets/img/icons/folder_managed.svg);
   --user-icon: url(/assets/img/icons/user.svg);
   --keyboard-double-arrow-icon: url(/assets/img/icons/keyboard_double_arrow_right.svg);
   --drag-handle-icon: url(/assets/img/icons/drag_handle.svg);
@@ -76,6 +77,7 @@
   --whatsapp-icon: url(/assets/img/icons/whatsapp_darkMode.svg);
   --instagram-icon: url(/assets/img/icons/instagram_darkMode.svg);
   --person-fill-icon: url(/assets/img/icons/person_fill_darkMode.svg);
+  --folder-managed-icon: url(/assets/img/icons/folder_managed_darkMode.svg);
   --user-icon: url(/assets/img/icons/user_darkMode.svg);
   --keyboard-double-arrow-icon: url(/assets/img/icons/keyboard_double_arrow_right_darkMode.svg);
   --drag-handle-icon: url(/assets/img/icons/drag_handle_darkMode.svg);
