@@ -1,6 +1,88 @@
 @use '/src/styles/utils/_BreakPoints' as w;
 @use '/src/styles/utils/_StyleKits' as k;
 
-.contentManagement {
+.cm {
+  display: flex;
+  flex-direction: column;
+  // background-color: var(--light-background-color);
+  padding-inline: 1em;
+  body.arabic & {direction: rtl}
+
+  &__breadCrumb-sec {
+    padding-block: 1em;
+  }
+
+  &__title-sec {
+    padding-block: 1em;
+    border: solid var(--primary-color);
+    border-width: 0 0 3px 0;
+
+    &__h1 {
+      color: var(--font-h-color);
+    }
+  }
+
+  &__cntnt-sec {
+    display: flex;
+    flex-direction: column;
+    // margin-top: 1em;
+    padding-block: 1em;    
+    background-color: var(--light-background-color);
+    gap: 1em;
+
+    &__header-row {
+      display: flex;
+      padding-inline: 0.5em;
+
+      &__spn {
+        display: flex;
+        flex: 1;
+        justify-content: center;
+        color: var(--background-p-color);
+        font-weight: 600;
+      }
+    }
+
+    &__lst {
+      
+
+      &__itm {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr; 
+        align-items: center;
+        padding-block: 0.5em;
+        padding-inline: 0.5em;
+
+        &:nth-child(2n + 1) {background-color: var(--background-color)}
+
+        &__cont {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 0.3em;
+
+          &__img {
+            height: 3em;
+            aspect-ratio: 1 / 1;
+          }
   
+          &__title {
+            font-size: var(--font-size-extraSmall);
+          }
+  
+          &__id {
+            font-size: var(--font-size-extraSmall);
+          }
+  
+          &__price {
+            font-size: var(--font-size-extraSmall);
+          }
+  
+          &__discount {
+            font-size: var(--font-size-extraSmall);
+          }  
+        }
+      }
+    }
+  }
 }

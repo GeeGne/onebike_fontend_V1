@@ -48,7 +48,7 @@ function Account ({darkMode, lan}) {
   const myInfoContEL = useRef(null);
   const myInfoListContEL = useRef(null);
   const ordersContEL = useRef(null);
-  const ordersListContEL = useRef(null);
+  const ordersListContEL = useRef(null);  
 
   const getProductImgURL = product => `/assets/img/products/${product.category}/${product.type}/${product.id + '-' + product.color.en}-front.webp`;
   const getProductPrice = product => formatNumberWithCommas(calculatePrice(product.price, product.discount));
@@ -173,7 +173,7 @@ function Account ({darkMode, lan}) {
         }
         break;
       case 'manage_content_btn_is_clicked':
-        navigate('/admin');
+        navigate('/account/admin');
         break;
       default:
         console.error('Error: Unknown action', action);

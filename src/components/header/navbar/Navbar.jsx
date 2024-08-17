@@ -157,7 +157,7 @@ function Navbar ({darkMode, lan}) {
 
   return (
     <>
-    <div className="dropMenu" ref={navDropMenuEL}>
+    <div className="dropMenu --fade-in animate--05s delay--03s iteration--1" ref={navDropMenuEL}>
       <nav className="dropMenu__nav">
         <button className={`dropMenu__nav__hamburger${menu ? ' clicked' : ''}`} aria-label="Toggle Drop Menu" onClick={() => setMenu(oldMenu => !oldMenu)}/>
         <img className="dropMenu__nav__logo" alt="ONEBIKE" data-action="navigate_to_path" data-path="/" onClick={handleClick} src={logo}/>

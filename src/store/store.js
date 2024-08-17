@@ -1,16 +1,28 @@
 // ZUSTAND
-import {create} from 'zustand';
-import {persist, createJSONStorage } from 'zustand/middleware';
+import { create } from 'zustand';
+import { persist, createJSONStorage } from 'zustand/middleware';
 
 // UTILS
 import calculatePrice from '/src/utils/calculatePrice';
+
+const useDataStore = create(
+  (set, get) => ({
+    user: null,
+    setUser: user => set({ user }),
+    userData: null,
+    setUserData: data => set({ userData: {...get().userData, ...data} }),
+    resetUserDataToNull: () => set({userData: null}),
+    products: [],
+    setProducts: products => set({ products }),
+  })
+);
 
 const isProductInWishlist = (wishlist ,product) => wishlist.some(item => item.id === product.id);
 const useWishlistStore = create(
   persist(
     (set, get) => ({
       wishlist: [],
-      addProductToWishlist: (product) => isProductInWishlist(get().wishlist, product) || set(state =>({wishlist: [...state.wishlist, product]})),
+      addProductToWishlist: (product) => isProductInWishlist(get().wishlist, product) || set(state => ({ wishlist: [...state.wishlist, product] })),
       removeProductFromWishlist: (product) => set({wishlist: [...get().wishlist.filter(item => item.id !== product.id)]}),
       toggle: false,
       setToggle: (boolean) => set({toggle: boolean}),
@@ -87,4 +99,4 @@ const useOrderStore = create(
 );
 
 
-export {useWishlistStore, useCartStore, useOrderStore};
+export {useWishlistStore, useCartStore, useOrderStore, useDataStore};

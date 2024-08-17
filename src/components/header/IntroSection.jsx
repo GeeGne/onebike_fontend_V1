@@ -114,7 +114,7 @@ function IntroSection ({onThemeChange, onLanguageChange}) {
   }
 
   return (
-    <section className="userinfo-container" ref={infoSectionEL}>
+    <section className="userinfo-container --fade-in animate--05s delay--03s iteration--1" ref={infoSectionEL}>
       <Alert alertText={alertText} newAlert={newAlert}/>
         <a className="userinfo-container__facebook" href={oneBike.facebook} target="_blank" tabIndex="0" aria-label="Head to our facebook page" rel="noopener noreferrer" />
         <a className="userinfo-container__whatsapp" href={oneBike.whatsApp} target="_blank" tabIndex="0" aria-label="Head to our whatsapp group" rel="noopener noreferrer" />

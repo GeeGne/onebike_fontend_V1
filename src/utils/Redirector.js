@@ -47,9 +47,8 @@ class Redirector {
     //   this.navigate('/account/login');
     //   console.log('gi');
     // } 
-    if (!user || !userData?.admin && (pathname === '/admin' || pathname === '/admin/')) {
+    if (!user || !userData?.admin && (pathname === '/account/admin' || pathname === '/account/admin/')) {
       this.navigate('/account/login');
-      console.log('gi');
     } 
   }
 

@@ -1,7 +1,11 @@
 // HOOKS
-import React, {useEffect, useState, useRef, Suspense} from 'react';
-import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
-import {HelmetProvider} from 'react-helmet-async';
+import React, { useEffect, useState, useRef, Suspense } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { HelmetProvider } from 'react-helmet-async';
+import { useQuery } from 'react-query';
+import useFetchAuth from '/src/hooks/useFetchAuth';
+import useFetchUserData from '/src/hooks/useFetchUserData';
+import useFetchProductsData from '/src/hooks/useFetchProductsData';
 
 //  STYLES
 // import './styles/App.scss';
@@ -39,18 +43,24 @@ const ContentManagement = React.lazy(() => import('/src/components/pages/admin/C
 // DATA
 import mainListData from '/src/data/menu.json';
 
+// STORE
+import { useDataStore } from '/src/store/store.js';
+
 // UTILS
 import cleanseString from '/src/utils/cleanseString.js';
 import {CartProductsContext, CartContext} from '/src/utils/myContext.js';
 
 function App () {
 
+  const { user, userData, products } = useDataStore()
   const [darkMode, setDarkMode] = useState(false);
   const [lan, setLanguage] = useState('en');
+  useFetchAuth();
+  useFetchUserData();
+  useFetchProductsData();
 
   const themeData = setDarkMode;
   const languageData = setLanguage;
-
   // Redirect IF the domain isn't onebikesyria.com
   useEffect(() => {
     const redirect = () => window.location.href = 'https://onebikesyria.com';
@@ -59,6 +69,8 @@ function App () {
     // if (!isThisMyMainDomain) redirect();
   }, []);
 
+  // console.log(user, userData, products);
+  console.log(products);
   return (
     <Router>
       <div className="app-layout">
@@ -86,7 +98,7 @@ function App () {
                 <Route path="/account/register" element={<SignUp darkMode={darkMode} lan={lan} />} />
                 <Route path="/account/login" element={<SignIn darkMode={darkMode} lan={lan} />} />
                 <Route path="/account" element={<Account darkMode={darkMode} lan={lan} />} />
-                <Route path="/admin" element={<ContentManagement darkMode={darkMode} lan={lan} />} />
+                <Route path="/account/admin" element={<ContentManagement darkMode={darkMode} lan={lan} />} />
                 <Route path="*" element={<NotFound darkMode={darkMode} lan={lan} />} />
               </Routes>
             </Suspense>
