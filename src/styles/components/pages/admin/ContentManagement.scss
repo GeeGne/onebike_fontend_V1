@@ -50,9 +50,8 @@
         flex-direction: column;
         max-height: 4em;
         overflow: hidden;
-        transition: max-height 0.15s ease-in, overflow 0.15s ease-in;
+        transition: max-height 0.4s cubic-bezier(1,1.72,.32,.64);
         &:nth-child(2n + 1) {background-color: var(--background-color)}
-        &.clicked {overflow: visible}
 
         &.clicked &__info-cont__toggles-cont__edit-btn::before{background-color: var(--secondary-color)}
         &__info-cont {
@@ -169,9 +168,11 @@
           grid-template-areas: 
           'nameSpn nameSpn'
           'nameEnInpt nameArInpt'
+          'categorySpn categorySpn'
+          'categoryInpt typeInpt'
           'priceSpn priceSpn'
           'priceInpt discountInpt'
-          'optionsInpt saveBtn'
+          'itemStateInpt saveBtn'
           ;
           gap: 0.5em;
           background-color: var(--secondary-color);
@@ -179,13 +180,15 @@
           padding-inline: 0.5em;
 
           &__name-spn {grid-area: nameSpn}
+          &__category-spn {grid-area: categorySpn}
+          &__price-spn {grid-area: priceSpn}
           &__nameEn-inpt {grid-area: nameEnInpt}
           &__nameAr-inpt {grid-area: nameArInpt}
-          &__price-spn {grid-area: priceSpn}
           &__price-inpt {grid-area: priceInpt}
           &__discount-inpt{grid-area: discountInpt}
 
           &__name-spn,
+          &__category-spn,
           &__price-spn {
             position: relative;
             color: var(--font-p-color);
@@ -204,10 +207,34 @@
             border: none
           }
 
-          &__options-cont {
-            grid-area: optionsInpt;
+          &__itemState-cont {grid-area: itemStateInpt}
+          &__category-cont {grid-area: categoryInpt}
+          &__type-cont {grid-area: typeInpt}
+
+          &__itemState-cont,
+          &__category-cont,
+          &__type-cont {
             position: relative;
             z-index: 5;
+
+            &.focus::before {
+              opacity: 1;
+            }
+            &::before {
+              content: "";
+              position: absolute;
+              top: 50%;
+              right: 0.5em;
+              transform: translateY(-50%);
+              width: 1.3em;
+              height: 1.3em;
+              background-image: var(--arrow-drop-down-icon);
+              background-repeat: no-repeat;
+              background-size: cover;
+              background-position: center;
+              opacity: 0.7;
+              transition: opacity 0.15s ease-out;
+            }
 
             &__inpt {
               width: 100%;

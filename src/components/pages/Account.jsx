@@ -38,7 +38,6 @@ function Account ({darkMode, lan}) {
 
   const {user, userData} = useDataStore();
   const ordersData = userData?.ordersData || [];
-  const {pathname} = window.location;
   const navigate = useNavigate();
   const redirector = new Redirector(navigate);
 
