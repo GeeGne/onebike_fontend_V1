@@ -12,6 +12,9 @@ import {getDoc, doc, collection, getDocs} from 'firebase/firestore';
 // SCSS
 import '/src/styles/components/pages/Account.scss';
 
+// STORE
+import { useDataStore } from '/src/store/store';
+
 // UTILS 
 import Redirector from '/src/utils/Redirector';
 import formatPhoneNumber from '/src/utils/formatPhoneNumber';
@@ -33,8 +36,7 @@ function Account ({darkMode, lan}) {
   const pageKeywords = "ONEBIKE, account, manage account, orders, preferences, bicycle, bicycle parts, Syria";
   const en = lan === 'en';
 
-  const [userData, setUserData] = useState(null);
-  const [user, setUser] = useState(true);
+  const {user, userData} = useDataStore();
   const ordersData = userData?.ordersData || [];
   const {pathname} = window.location;
   const navigate = useNavigate();
@@ -67,53 +69,8 @@ function Account ({darkMode, lan}) {
   }
   
   useEffect(() => {
-    redirector.account(pathname, user);
-    const fetchUserData = async () => {
-      try {
-        if (user) {
-          const userDoc = await getDoc(doc(db, 'users', user.uid));
-          if (userDoc.exists) {
-            setUserData(userDoc.data());
-          } else {
-            throw new Error("No such document!");
-          }
-        }    
-      } catch (err) {
-        console.error(err);
-      }
-    }
-
-    const fetchOrdersData = async () => {
-      try {
-        const ordersCollectionRef = collection(db, 'users', user.uid, 'orders');
-        const ordersSnapshot = await getDocs(ordersCollectionRef);
-
-        if (!ordersSnapshot.empty) {
-          const ordersData = ordersSnapshot.docs.map(doc => (
-            {...doc.data()}
-          ));
-          setUserData(prevData => ({...prevData, ordersData}))
-        } else {
-          console.log("No orders found for this user");
-          setUserData(prevData => ({...prevData, ordersData: []}))
-        }
-      } catch (err) {
-        console.error("Error fetching orders data:", err);
-      }
-    }
-
-    const fetchData = async () => {
-      await fetchUserData();
-      await fetchOrdersData();
-    };
-
-    fetchData();
+    redirector.account(user);
   }, [user]);
-
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => setUser(user));
-    return () => unsubscribe();
-  }, []);
 
   useEffect(() => {
     const maxHeight = myInfoListContEL.current.scrollHeight;
