@@ -22,7 +22,7 @@ import oneBike, {citiesAndShippingFee, emailJS} from '/src/data/one-bike.json';
 import '/src/styles/components/pages/checkout/Checkout.scss';
 
 // STORE
-import {useCartStore, useOrderStore} from '/src/store/store';
+import {useCartStore, useOrderStore, useDataStore} from '/src/store/store';
 
 // REDUCERS
 import orderReducer from '/src/reducers/orderReducer';
@@ -66,15 +66,15 @@ function Checkout ({darkMode, lan}) {
 
   const en = lan === 'en';
   emailjs.init({publicKey: emailJS.publicKey});
-  
-  const [user, setUser] = useState(null);
-  const [userData, setUserData] = useState(null);
-  const [processing, setProcessing] = useState(false);
-  const [newAlert, setNewAlert] = useState(0);
-  const [alertText, setAlertText] = useState(null);
-  const {orderState, setOrderState} = useOrderStore(); 
-  const {cart, resetCart} = useCartStore();
-  const [order, dispatch] = useReducer(orderReducer, {
+  const navigate = useNavigate();
+
+  const { user, userData } = useDataStore();
+  const [ processing, setProcessing ] = useState(false);
+  const [ newAlert, setNewAlert ] = useState(0);
+  const [ alertText, setAlertText ] = useState(null);
+  const { orderState, setOrderState } = useOrderStore(); 
+  const { cart, resetCart } = useCartStore();
+  const [ order, dispatch ] = useReducer(orderReducer, {
     orderId: nanoid(12),
     costumer: {
       costumerId: '',
@@ -102,6 +102,7 @@ function Checkout ({darkMode, lan}) {
     if (!isInputDefault.current) return;
     setCityDelivery(en ? 'Pick your City' : 'اختر مدينتك')
   }, [lan])
+  const redirect = new Redirector(navigate);
 
   const orderUpdatedDateAndId = useRef(null);
 
@@ -144,33 +145,11 @@ function Checkout ({darkMode, lan}) {
 
   const isInputDefault = useRef(true);
 
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, user => setUser(user));
-    return () => unsubscribe();
-  }, []);
-
-  useEffect(() => {
-    const fetchUserData = async () => {
-      try {
-        if (user) {
-          const userDoc = await getDoc(doc(db, "users", user.uid));
-          if (userDoc.exists) {
-            setUserData(userDoc.data());
-          } else {
-            console.log("No such document!");
-          }
-        }
-      } catch (error) {
-        console.error("Error fetching user data:", error);
-      }
-    };
-
-    fetchUserData();
-  }, [user]);
   // console.log({orderState});
-  // console.log({user, userData, order})
-  useEffect(() => dispatch({type: 'update_costumer', userData}), [userData])
-  useEffect(() => dispatch({type: 'update_products', cart}), [cart])
+  // console.log({user, userData, order});
+  useEffect(() => redirect.checkout(user), [user]);
+  useEffect(() => dispatch({type: 'update_costumer', userData}), [userData]);
+  useEffect(() => dispatch({type: 'update_products', cart}), [cart]);
 
   const deliverInfoTextContent = () => en 
     ? 'Choose your city to tailor the delivery options and provide you with the best service based on your location.' 

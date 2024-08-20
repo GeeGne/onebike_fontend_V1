@@ -12,7 +12,7 @@ const WishlistSlider = React.lazy(() => import('./WishlistSlider'));
 import cartReducer from '/src/reducers/cartReducer.js';
 
 // STORE
-import {useWishlistStore, useCartStore} from '/src/store/store';
+import {useWishlistStore, useCartStore, useDataStore} from '/src/store/store';
 
 // SCSS
 import '/src/styles/components/header/navbar/Navbar.scss';
@@ -32,6 +32,7 @@ function Navbar ({darkMode, lan}) {
   // const [cartToggle, setCartToggle] = useState(false);
   const {cart, toggle: cartToggle, setToggle: setCartToggle} = useCartStore();
   const {wishlist, setToggle: setWishlistToggle} = useWishlistStore();
+  const { user } = useDataStore();
 
   const navDropMenuEL = useRef(null);
   const prevScrollY = useRef(0);
@@ -166,7 +167,7 @@ function Navbar ({darkMode, lan}) {
           <img src={darkMode ? searchIconDarkMode : searchIcon} alt="Search Icon"/>
         </div>
         <button className="dropMenu__nav__search" aria-label="Search on a product" data-action="toggle_search" onClick={handleClick} /* onMouseEnter={() => handleHover(true)} onMouseLeave={() => handleHover(false)} */ ref={searchBtnEL}/>
-        <button className="dropMenu__nav__user" aria-label="head to your account" data-action="navigate_to_path" data-path="/account/login" onClick={handleClick}/>
+        <button className="dropMenu__nav__user" aria-label="head to your account" data-action="navigate_to_path" data-path={user ? "/account" : "/account/login"} onClick={handleClick}/>
         <button className={`dropMenu__nav__favourite${isWishlistEmpty ? ' empty' : ''}`} aria-label="Open favorite tab" data-action="toggle_wishlist_to_true" onClick={handleClick} ref={favouriteBtnEL}/>
         <button className={`dropMenu__nav__shoppingCart${isCartEmpty ? ' empty' : ''}`} aria-label="Open shoppingcart tab" onClick={() => setCartToggle(true)} ref={cartBtnEL}/>
       </nav>

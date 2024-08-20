@@ -17,7 +17,6 @@ class Redirector {
       this.navigate('/account');
       return;
     }
-
   }
 
   signup (user) {
@@ -40,16 +39,19 @@ class Redirector {
   }
 
   admin (user, userData) {
-    if (!user || !userData?.admin && (this.pathname === '/account/admin' || this.pathname === '/account/admin/')) {
+    if (!user && (this.pathname === '/account/admin' || this.pathname === '/account/admin/')) {
       this.navigate('/account/login');
+    } 
+    if (user && !userData?.admin && (this.pathname === '/account/admin' || this.pathname === '/account/admin/')) {
+      this.navigate('/account');
     } 
   }
 
-  // checkout (pathname, user) {
-  //   if (!user && (pathname === '/checkouts' || pathname === '/checkouts/')) {
-  //     this.navigate('/account/login');
-  //   } 
-  // }
+  checkout (user) {
+    if (!user && (this.pathname === '/checkouts' || this.pathname === '/checkouts/')) {
+      this.navigate('/account/login');
+    } 
+  }
 
 }
 

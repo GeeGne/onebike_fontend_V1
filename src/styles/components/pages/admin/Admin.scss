@@ -1,7 +1,7 @@
 @use '/src/styles/utils/_BreakPoints' as w;
 @use '/src/styles/utils/_StyleKits' as k;
 
-.cm {
+.admin {
   display: flex;
   flex-direction: column;
   // background-color: var(--light-background-color);
@@ -170,11 +170,11 @@
           display: grid;
           grid-template-columns: 1fr 1fr;
           grid-template-areas: 
-          'nameSpn nameSpn'
+          'nameTitle nameTitle'
           'nameEnInpt nameArInpt'
-          'categorySpn categorySpn'
+          'categoryTitle categoryTitle'
           'categoryInpt typeInpt'
-          'priceSpn priceSpn'
+          'priceTitle priceTitle'
           'priceInpt discountInpt'
           'itemStateInpt saveBtn'
           ;
@@ -183,19 +183,69 @@
           padding-block: 0.5em;
           padding-inline: 0.5em;
 
-          &__name-spn {grid-area: nameSpn}
-          &__category-spn {grid-area: categorySpn}
-          &__price-spn {grid-area: priceSpn}
+          &__nameTitle-cont {grid-area: nameTitle}
+          &__categoryTitle-cont {grid-area: categoryTitle}
+          &__priceTitle-cont {grid-area: priceTitle}
           &__nameEn-inpt {grid-area: nameEnInpt}
           &__nameAr-inpt {grid-area: nameArInpt}
           &__price-inpt {grid-area: priceInpt}
           &__discount-inpt{grid-area: discountInpt}
 
-          &__name-spn,
-          &__category-spn,
-          &__price-spn {
-            position: relative;
-            color: var(--font-p-color);
+          &__nameTitle-cont {
+            display: flex;
+            align-items: center;
+            gap: 0.5em;
+
+            &__name-spn {
+              color: var(--font-p-color);
+              margin-right: auto;
+              body.arabic & {margin-left: auto; margin-right: 0}
+            }
+
+            &__enVal-spn,
+            &__arVal-spn {
+              font-size: var(--font-size-extraSmall);
+              color: var(--font-p-color);
+              font-weight: 600;
+            }
+          }
+
+          &__categoryTitle-cont {
+            display: flex;
+            align-items: center;
+            gap: 0.5em;
+
+            &__category-spn {
+              color: var(--font-p-color);
+              margin-right: auto;
+              body.arabic & {margin-left: auto; margin-right: 0}
+            }
+
+            &__categoryVal-spn,
+            &__typeVal-spn {
+              font-size: var(--font-size-extraSmall);
+              color: var(--font-p-color);
+              font-weight: 600;
+            }
+          }
+
+          &__priceTitle-cont {
+            display: flex;
+            align-items: center;
+            gap: 0.5em;
+
+            &__price-spn {
+              color: var(--font-p-color);
+              margin-right: auto;
+              body.arabic & {margin-left: auto; margin-right: 0}
+            }
+
+            &__priceVal-spn,
+            &__discountVal-spn {
+              font-size: var(--font-size-extraSmall);
+              color: var(--font-p-color);
+              font-weight: 600;
+            }
           }
 
           &__nameEn-inpt, 

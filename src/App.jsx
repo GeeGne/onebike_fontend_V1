@@ -38,7 +38,7 @@ const SignIn = React.lazy(() => import('/src/components/pages/SignIn'));
 const SignUp = React.lazy(() => import('/src/components/pages/SignUp'));
 // const SearchResultsPanel = React.lazy(() => import('/src/components/SearchResultsPanel'));
 const Cart = React.lazy(() => import('/src/components/pages/Cart'));
-const ContentManagement = React.lazy(() => import('/src/components/pages/admin/ContentManagement'));
+const Admin = React.lazy(() => import('/src/components/pages/admin/Admin'));
 
 // DATA
 import mainListData from '/src/data/menu.json';
@@ -61,16 +61,7 @@ function App () {
 
   const themeData = setDarkMode;
   const languageData = setLanguage;
-  // Redirect IF the domain isn't onebikesyria.com
-  useEffect(() => {
-    const redirect = () => window.location.href = 'https://onebikesyria.com';
-    const isThisMyMainDomain = window.location.host.includes('onebikesyria.com');
-
-    // if (!isThisMyMainDomain) redirect();
-  }, []);
-
-  // console.log(user, userData, products);
-  console.log(products);
+  
   return (
     <Router>
       <div className="app-layout">
@@ -98,7 +89,7 @@ function App () {
                 <Route path="/account/register" element={<SignUp darkMode={darkMode} lan={lan} />} />
                 <Route path="/account/login" element={<SignIn darkMode={darkMode} lan={lan} />} />
                 <Route path="/account" element={<Account darkMode={darkMode} lan={lan} />} />
-                <Route path="/account/admin" element={<ContentManagement darkMode={darkMode} lan={lan} />} />
+                <Route path="/account/admin" element={<Admin darkMode={darkMode} lan={lan} />} />
                 <Route path="*" element={<NotFound darkMode={darkMode} lan={lan} />} />
               </Routes>
             </Suspense>

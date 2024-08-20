@@ -6,7 +6,7 @@ import {useNavigate} from 'react-router-dom';
 import '/src/styles/components/header/navbar/CartSlider.scss';
 
 // STORES
-import {useCartStore, useOrderStore} from '/src/store/store';
+import {useCartStore, useOrderStore, useDataStore} from '/src/store/store';
 
 // REDUCERS
 import cartReducer from '/src/reducers/cartReducer';
@@ -50,6 +50,7 @@ function CartSlider ({darkMode, lan}) {
   } = useCartStore();
   const setHeadToCheckouts = useOrderStore(state => state.setHeadToCheckouts);
   const headToCheckouts = useOrderStore(state => state.headToCheckouts);
+  const user = useDataStore(state => state.user);
   const cartContainerElement = useRef(null);  
   const sliderElement = useRef(null);
   const cartProductsELS = useRef([]);
@@ -108,8 +109,12 @@ function CartSlider ({darkMode, lan}) {
       case 'nav_to_checkouts':
         setTimeout(() => window.scroll({top: 0, behavior: 'smooth'}), 500);
         setCartToggle(false);
-        setHeadToCheckouts(true);
-        navigate('/account/login');
+        if (user) {
+          navigate('/checkouts');
+        } else {
+          setHeadToCheckouts(true);
+          navigate('/account/login');  
+        }
         break;
       case 'nav_to_cart':
         setTimeout(() => window.scroll({top: 0, behavior: 'smooth'}), 500);

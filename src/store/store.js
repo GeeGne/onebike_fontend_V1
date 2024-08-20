@@ -7,7 +7,7 @@ import calculatePrice from '/src/utils/calculatePrice';
 
 const useDataStore = create(
   (set, get) => ({
-    user: null,
+    user: true,
     setUser: user => set({ user }),
     userData: null,
     setUserData: data => set({ userData: {...get().userData, ...data} }),
