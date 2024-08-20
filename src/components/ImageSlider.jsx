@@ -167,13 +167,13 @@ function ImageSlider ({darkMode, lan}) {
   return (
     <section className='imageSlider-container --fade-in delay--04s animate--03s'>
       <ul className='imageSlider-container__img-holder' onTouchStart={handleStart}  onTouchMove={handleMove} onTouchEnd={handleEnd} ref={imageSliderElement}>
-        <li className='imageSlider-container__img-holder__imges'><img src={lastImage.url} alt={lastImage.alt[lan]} loading="lazy" /></li>
+        <li className='imageSlider-container__img-holder__imges'><DisplayImg className='imageSlider-container__img-holder__imges__img' src={lastImage.url} alt={lastImage.alt[lan]} loading="lazy" /></li>
         {sliderData.map((data, i) =>
         <li className='imageSlider-container__img-holder__imges' key={data.id}>
-          <DisplayImg src={data.url} alt={data.alt[lan]} loading={i < 1 ? "eager" : "lazy"} fetchpriority={i < 1 ? "high" : ""} />
+          <DisplayImg className='imageSlider-container__img-holder__imges__img' src={data.url} alt={data.alt[lan]} loading={i < 1 ? "eager" : "lazy"} fetchpriority={i < 1 ? "high" : ""} />
         </li>          
         )}
-        <li className='imageSlider-container__img-holder__imges'><img src={firstImage.url} alt={firstImage.alt[lan]} loading="lazy"/></li>
+        <li className='imageSlider-container__img-holder__imges'><DisplayImg className='imageSlider-container__img-holder__imges__img'  src={firstImage.url} alt={firstImage.alt[lan]} loading="lazy"/></li>
       </ul>
       <ul className="imageSlider-container__dots-container">
         {sliderData.map((data, i) =>

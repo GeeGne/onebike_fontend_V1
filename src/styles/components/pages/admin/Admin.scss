@@ -318,10 +318,11 @@
               &__itm {
                 color: var(--font-p-color);
                 font-size: var(--font-size-extraSmall);
+                font-weight: 550;
                 padding-block: 0.5em;
                 padding-inline: 0.5em;
                 transition: background-color 0.15s ease-out, color 0.15s ease-out;
-                font-weight: 550;
+                cursor: pointer;
                 &:hover {background-color: var(--light-background-color); color: var(--font-h-color)}
               }
             }

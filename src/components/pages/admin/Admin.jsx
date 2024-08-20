@@ -110,13 +110,13 @@ function Admin ({darkMode, lan}) {
 
   useEffect(() => {
     const setItemHeights = () => {
-      itemELRefs.current.forEach(el => 
-        el.style.maxHeight = String(itemEditELRefs.current[0].scrollHeight) + 'px'
+      itemELRefs.current.forEach((el, i) => 
+        el.style.maxHeight = String(itemInfoELRefs.current[i].scrollHeight) + 'px'
       );  
     }
 
     setItemHeights();
-  }, []);
+  }, [products]);
 
   // useEffect(() => {
   //   products.map(item => {
@@ -138,12 +138,11 @@ function Admin ({darkMode, lan}) {
 
         if (isELClicked(getEL(itemELRefs.current))) {
           getEL(itemELRefs.current).style.maxHeight = String( totalHeight(getEL(itemELRefs.current)) ) + 'px';
-          console.log(overflowTimerId.current)
           clearTimeout(overflowTimerId.current);
           overflowTimerId.current = setTimeout(() => getEL(itemELRefs.current).style.overflow = 'visible', 250);
         } else {
           clearTimeout(overflowTimerId.current);
-          getEL(itemELRefs.current).style.maxHeight = String( totalHeight(getEL(itemEditELRefs.current)) ) + 'px';
+          getEL(itemELRefs.current).style.maxHeight = String( totalHeight(getEL(itemInfoELRefs.current)) ) + 'px';
           getEL(itemELRefs.current).style.overflow = 'hidden';
         }
         break;
@@ -225,7 +224,7 @@ function Admin ({darkMode, lan}) {
         <ul className="admin__cntnt-sec__lst">
           {products.map((item, i) => 
           <li className="admin__cntnt-sec__lst__itm" key={i} data-index={i} ref={el => itemELRefs.current[i] = el}>
-            <div className="admin__cntnt-sec__lst__itm__info-cont" data-index={i} ref={el => itemEditELRefs.current[i] = el}>
+            <div className="admin__cntnt-sec__lst__itm__info-cont" data-index={i} ref={el => itemInfoELRefs.current[i] = el}>
               <div className="admin__cntnt-sec__lst__itm__info-cont__name-cont">
                 <div className={`admin__cntnt-sec__lst__itm__info-cont__name-cont__state${getColorForState(item.state)}`} />
                 <DisplayWebImg className="admin__cntnt-sec__lst__itm__info-cont__name-cont__img" src={getProductImgURL(item)} alt={item.title[lan]} loading="lazy" />
@@ -243,7 +242,7 @@ function Admin ({darkMode, lan}) {
                 <button className="admin__cntnt-sec__lst__itm__info-cont__toggles-cont__edit-btn" aria-label="Edit Item" data-action="edit_button_is_clicked" data-index={i} onClick={handleClick} />
               </div> 
             </div>
-            <div className="admin__cntnt-sec__lst__itm__edit-cont" data-index={i} ref={el => itemInfoELRefs.current[i] = el}>
+            <div className="admin__cntnt-sec__lst__itm__edit-cont" data-index={i} ref={el => itemEditELRefs.current[i] = el}>
               <div className="admin__cntnt-sec__lst__itm__edit-cont__priceTitle-cont">
                 <span className="admin__cntnt-sec__lst__itm__edit-cont__priceTitle-cont__price-spn">{en ? 'Price' : 'السعر'}</span>
                 <span className="admin__cntnt-sec__lst__itm__edit-cont__priceTitle-cont__priceVal-spn">{item.price}</span>{' / '}
