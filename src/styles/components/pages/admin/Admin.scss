@@ -133,6 +133,7 @@
             align-items: center;
             justify-content: center;
             gap: 0.5em;
+            color: var(--font-p-color);
             @include w.breakpoint-up (medium) {gap: 1em}
 
             &__state {
@@ -142,9 +143,9 @@
               border-radius: 1em;
               filter: drop-shadow(0 0px 3px hsla(0, 0%, 0%, 0.3));
               
-              &.green {background-color: var(--green-color)}
-              &.yellow {background-color: var(--yellow-color)}
-              &.red {background-color: var(--red-color)}
+              &.green {background-color: var(--green-color); filter: drop-shadow(0 0px 2px var(--green-color))}
+              &.yellow {background-color: var(--yellow-color); filter: drop-shadow(0 0px 2px var(--yellow-color))}
+              &.red {background-color: var(--red-color); filter: drop-shadow(0 0px 2px var(--red-color))}
             }
 
             &__img {
@@ -203,55 +204,26 @@
           &__price-inpt {grid-area: priceInpt}
           &__discount-inpt{grid-area: discountInpt}
 
-          &__nameTitle-cont {
-            display: flex;
-            align-items: center;
-            gap: 0.5em;
-
-            &__name-spn {
-              color: var(--font-p-color);
-              margin-right: auto;
-              body.arabic & {margin-left: auto; margin-right: 0}
-            }
-
-            &__enVal-spn,
-            &__arVal-spn {
-              font-size: var(--font-size-extraSmall);
-              color: var(--font-p-color);
-              font-weight: 600;
-            }
-          }
-
-          &__categoryTitle-cont {
-            display: flex;
-            align-items: center;
-            gap: 0.5em;
-
-            &__category-spn {
-              color: var(--font-p-color);
-              margin-right: auto;
-              body.arabic & {margin-left: auto; margin-right: 0}
-            }
-
-            &__categoryVal-spn,
-            &__typeVal-spn {
-              font-size: var(--font-size-extraSmall);
-              color: var(--font-p-color);
-              font-weight: 600;
-            }
-          }
-
+          &__nameTitle-cont, 
+          &__categoryTitle-cont,
           &__priceTitle-cont {
             display: flex;
             align-items: center;
-            gap: 0.5em;
+            gap: 1em;
+            color: var(--font-p-color);
 
+            &__name-spn,
+            &__category-spn,
             &__price-spn {
               color: var(--font-p-color);
               margin-right: auto;
               body.arabic & {margin-left: auto; margin-right: 0}
             }
 
+            &__enVal-spn,
+            &__arVal-spn,
+            &__categoryVal-spn,
+            &__typeVal-spn,
             &__priceVal-spn,
             &__discountVal-spn {
               font-size: var(--font-size-extraSmall);
@@ -264,6 +236,7 @@
           &__nameAr-inpt, 
           &__price-inpt, 
           &__discount-inpt{
+            background-color: var(--background-color);
             color: var(--font-h-color);
             font-size: var(--font-size-extraSmall);
             font-weight: 600;
@@ -303,6 +276,7 @@
 
             &__inpt {
               width: 100%;
+              background-color: var(--background-color);
               color: var(--font-h-color);
               font-size: var(--font-size-extraSmall);
               font-weight: 600;
@@ -321,13 +295,26 @@
               top: calc(100% + 2px);
               left: 0;
               width: 100%;
-              height: auto;
+              max-height: 8em;
+              overflow-y: scroll;
               flex-direction: column;
               padding-block: 0.5em;
               background-color: var(--background-color);
               border-radius: 0.5em;
               transition: opacity 0.25s ease-out;
 
+              &::-webkit-scrollbar {width: 0.7em}
+              &::-webkit-scrollbar-thumb {
+                cursor: grab;
+                background-color: var(--sideMenu-scrollBar-background-color);
+                transition: background-color 0.15s;
+                border-radius: 0.5em; 
+              }
+
+              &::-webkit-scrollbar-track {background-color: rgba(42, 42, 42, 0)}
+              &::-webkit-scrollbar-thumb:active {cursor: grabbing}
+              &::-webkit-scrollbar-thumb:hover {background-color: hsl(0, 0%, 50%)}
+            
               &__itm {
                 color: var(--font-p-color);
                 font-size: var(--font-size-extraSmall);

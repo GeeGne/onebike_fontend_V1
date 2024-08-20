@@ -8,7 +8,7 @@ import '/src/styles/components/pages/admin/Admin.scss';
 // COMPONENTS
 import Alert from '/src/components/Alert';
 import BreadCrumb from '/src/components/BreadCrumb';
-import DisplayImage from '/src/components/DisplayImage';
+import DisplayWebImg from '/src/components/DisplayWebImg';
 
 // STORE
 import { useDataStore } from '/src/store/store';
@@ -67,7 +67,9 @@ function Admin ({darkMode, lan}) {
     if (isTypeItmSelected) {
       let array = [];
 
-      const getTheCategory = menu.filter(list => list.key === typeItmArray[i].key)[0];
+      console.log(typeItmArray[i])
+      const getTheKey = typeItmArray.filter(list => i === list.index)[0];
+      const getTheCategory = menu.filter(list => list.key === getTheKey.key)[0];
       const getTypes = getTheCategory.secondaryList.forEach(list => list.thirdList.forEach(list => array = [...array, list]));
 
       return array.map((item, index) => 
@@ -226,7 +228,7 @@ function Admin ({darkMode, lan}) {
             <div className="admin__cntnt-sec__lst__itm__info-cont" data-index={i} ref={el => itemEditELRefs.current[i] = el}>
               <div className="admin__cntnt-sec__lst__itm__info-cont__name-cont">
                 <div className={`admin__cntnt-sec__lst__itm__info-cont__name-cont__state${getColorForState(item.state)}`} />
-                <DisplayImage className="admin__cntnt-sec__lst__itm__info-cont__name-cont__img" src={getProductImgURL(item)} alt={item.title[lan]} loading="lazy" />
+                <DisplayWebImg className="admin__cntnt-sec__lst__itm__info-cont__name-cont__img" src={getProductImgURL(item)} alt={item.title[lan]} loading="lazy" />
                 <span className="admin__cntnt-sec__lst__itm__info-cont__name-cont__title">{item.title[lan]}</span>
               </div>
               <div className="admin__cntnt-sec__lst__itm__info-cont__id-cont">

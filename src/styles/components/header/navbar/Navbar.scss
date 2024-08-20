@@ -96,12 +96,15 @@
       }
     }
     
-    &__logo {
-      height: var(--navBar-logoIcon-size);
-      filter: drop-shadow( 0 0 15px hsla(0, 0%, 100%, 0.4));
-      cursor: pointer;
+    &__logo-btn {
       margin-right: auto;
+      cursor: pointer;
       body.arabic & {margin-right: 0; margin-left: auto}
+
+      &__img {
+        height: var(--navBar-logoIcon-size);
+        filter: drop-shadow( 0 0 15px hsla(0, 0%, 100%, 0.4));  
+      }
     }
     
     &__search {

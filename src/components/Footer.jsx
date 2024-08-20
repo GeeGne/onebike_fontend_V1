@@ -6,14 +6,13 @@ import {Link} from 'react-router-dom';
 import '../styles/components/Footer.scss';
 
 // COMPONENTS
-import NeedHelp from './NeedHelp';
 import Alert from './Alert';
+import DisplayImg from '/src/components/DisplayImg';
 
 // JSON
 import oneBike from '/src/data/one-bike.json'
 
 // UTILS
-import strRemoveSpace from '/src/utils/strRemoveSpace.js';
 import formatPhoneNumber from '/src/utils/formatPhoneNumber.js';
 
 //  ICONS
@@ -114,15 +113,15 @@ function Footer ({darkMode, lan}) {
           <h2 className="footer-cont__upper-grd__contactUs-sec__title">{lan === 'en' ? 'Contact Us' : 'تواصل معنا'}</h2>
           <ul className="footer-cont__upper-grd__contactUs-sec__lst">
             <li className="footer-cont__upper-grd__contactUs-sec__lst__itm">
-              <img className="footer-cont__upper-grd__contactUs-sec__lst__itm__img" src={darkMode ? callIconDarkMode : callIcon} fetchpriority="high" alt="Call Icon" />
+              <DisplayImg className="footer-cont__upper-grd__contactUs-sec__lst__itm__img" src={darkMode ? callIconDarkMode : callIcon} fetchpriority="high" alt="Call Icon" />
               <button className="footer-cont__upper-grd__contactUs-sec__lst__itm__link" onClick={() => handleClick('phone')}>{formatPhoneNumber(oneBike.phone)}</button>
             </li>
             <li className="footer-cont__upper-grd__contactUs-sec__lst__itm">
-              <img className="footer-cont__upper-grd__contactUs-scc__lst__itm__img" src={darkMode ? mailIconDarkMode : mailIcon} fetchpriority="high" alt="mail Icon"/>
+              <DisplayImg className="footer-cont__upper-grd__contactUs-scc__lst__itm__img" src={darkMode ? mailIconDarkMode : mailIcon} fetchpriority="high" alt="mail Icon"/>
               <button className="footer-cont__upper-grd__contactUs-sec__lst__itm__link" onClick={() => handleClick('email')}>{oneBike.email}</button>
             </li>
             <li className="footer-cont__upper-grd__contactUs-sec__lst__itm">
-              <img className="footer-cont__upper-grd__contactUs-sec__lst__itm__img" src={darkMode ? whatsappIconDarkMode : whatsappIcon} fetchpriority="high" alt="Whatsapp Icon" />
+              <DisplayImg className="footer-cont__upper-grd__contactUs-sec__lst__itm__img" src={darkMode ? whatsappIconDarkMode : whatsappIcon} fetchpriority="high" alt="Whatsapp Icon" />
             <Link className="footer-cont__upper-grd__contactUs-sec__lst__itm__link" to={oneBike.whatsApp} target="_blank" tabIndex="0">{lan === 'en' ? 'Chat with us' : 'تحدث معنا'}</Link>
             </li>
           </ul>
@@ -131,9 +130,9 @@ function Footer ({darkMode, lan}) {
 
       <div className="footer-cont__lower">
         <section className="footer-cont__lower__media-sec">
-        <a href={oneBike.facebook} target="_blank" tabIndex="0"><img className="footer-cont__lower__media-sec__media-icon" src={darkMode ? facebookIcon : facebookIconDarkMode} fetchpriority="high" alt="Facebook Icon"/></a>
-        <a href={oneBike.whatsApp} target="_blank" tabIndex="0"><img className="footer-cont__lower__media-sec__media-icon" src={darkMode ? whatsappIcon : whatsappIconDarkMode} fetchpriority="high" alt="Whatsapp Icon"/></a>
-        <a href={oneBike.instagram} target="_blank" tabIndex="0"><img className="footer-cont__lower__media-sec__media-icon" src={darkMode ? instagramIcon : instagramIconDarkMode} fetchpriority="high" alt="Instagram Icon"/></a>
+        <a href={oneBike.facebook} target="_blank" tabIndex="0"><DisplayImg className="footer-cont__lower__media-sec__media-icon" src={darkMode ? facebookIcon : facebookIconDarkMode} fetchpriority="high" alt="Facebook Icon"/></a>
+        <a href={oneBike.whatsApp} target="_blank" tabIndex="0"><DisplayImg className="footer-cont__lower__media-sec__media-icon" src={darkMode ? whatsappIcon : whatsappIconDarkMode} fetchpriority="high" alt="Whatsapp Icon"/></a>
+        <a href={oneBike.instagram} target="_blank" tabIndex="0"><DisplayImg className="footer-cont__lower__media-sec__media-icon" src={darkMode ? instagramIcon : instagramIconDarkMode} fetchpriority="high" alt="Instagram Icon"/></a>
         </section>
         <section className="footer-cont__lower__organism-rights">
           <h3 className="footer-cont__lower__organism-rights__h3">{lan === 'en' ? 'Syria © 2024 ONE BIKE all rights reseved' : 'سوريا © 2024 ون بايك جميع الحقوق محفوظة'}</h3>

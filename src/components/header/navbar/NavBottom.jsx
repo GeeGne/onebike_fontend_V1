@@ -3,7 +3,7 @@ import React, {useState, useRef, useEffect, useContext} from 'react';
 import {useNavigate, Link} from 'react-router-dom';
 
 // STORE
-import {useWishlistStore} from '/src/store/store';
+import { useWishlistStore, useDataStore } from '/src/store/store';
 
 // UTILS
 import {WishlistToggleContext} from '/src/utils/myContext';
@@ -12,6 +12,7 @@ import {WishlistToggleContext} from '/src/utils/myContext';
 import '/src/styles/components/header/navbar/NavBottom.scss';
 
 function NavBottom ({darkMode, lan}) {
+  const user = useDataStore(state => state.user);
   const {wishlist, setToggle} = useWishlistStore();
   const navigate = useNavigate();
   const navBottomEL = useRef(null);
@@ -72,7 +73,7 @@ function NavBottom ({darkMode, lan}) {
   return (
     <section className="navBottom" ref={navBottomEL}>
       <a className={`navBottom__favourite${isWishlistEmpty ? ' empty' : ''}`} aria-label="Toggle Wishlst" data-action="toggle_wishlist_to_true" onClick={handleClick} ref={favouriteBtnEL} />
-      <a className="navBottom__user" aria-label="Navigate to Your Account" data-action="navigate_to_path" data-path="/account/login" onClick={handleClick}/>
+      <a className="navBottom__user" aria-label="Navigate to Your Account" data-action="navigate_to_path" data-path={user ? "/account" : "/account/login"} onClick={handleClick}/>
     </section>
   )
 }

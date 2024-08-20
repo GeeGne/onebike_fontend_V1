@@ -7,6 +7,7 @@ const HamMenu = React.lazy(() => import('./HamMenu'));
 const DropMenu = React.lazy(() => import('./DropMenu'));
 const CartSlider = React.lazy(() => import('./CartSlider'));
 const WishlistSlider = React.lazy(() => import('./WishlistSlider'));
+import DisplayImg from '/src/components/DisplayImg';
 
 // REDUCERS
 import cartReducer from '/src/reducers/cartReducer.js';
@@ -161,10 +162,12 @@ function Navbar ({darkMode, lan}) {
     <div className="dropMenu --fade-in animate--05s delay--03s iteration--1" ref={navDropMenuEL}>
       <nav className="dropMenu__nav">
         <button className={`dropMenu__nav__hamburger${menu ? ' clicked' : ''}`} aria-label="Toggle Drop Menu" onClick={() => setMenu(oldMenu => !oldMenu)}/>
-        <img className="dropMenu__nav__logo" alt="ONEBIKE" data-action="navigate_to_path" data-path="/" onClick={handleClick} src={logo}/>
-        <div className="dropMenu__nav__search-input" /* onMouseEnter={() => handleHover(true)}  onMouseLeave={() => handleHover(false)} */ ref={searchEL}>
+         <button className="dropMenu__nav__logo-btn" aria-label="Home Icon" data-action="navigate_to_path" data-path="/" onClick={handleClick}>
+          <DisplayImg className="dropMenu__nav__logo-btn__img" alt="ONEBIKE Logo" fetchpriority="high" onClick={handleClick} src={logo}/>
+        </button> 
+        <div className="dropMenu__nav__search-input" ref={searchEL}>
           <input placeholder={lan === 'en' ? 'Type something' : 'هل تبحث عن شيء؟'} onBlur={() => handleHover(false)} onChange={handleChange} ref={searchInputEL}/>
-          <img src={darkMode ? searchIconDarkMode : searchIcon} alt="Search Icon"/>
+          <DisplayImg src={darkMode ? searchIconDarkMode : searchIcon} alt="Search Icon"/>
         </div>
         <button className="dropMenu__nav__search" aria-label="Search on a product" data-action="toggle_search" onClick={handleClick} /* onMouseEnter={() => handleHover(true)} onMouseLeave={() => handleHover(false)} */ ref={searchBtnEL}/>
         <button className="dropMenu__nav__user" aria-label="head to your account" data-action="navigate_to_path" data-path={user ? "/account" : "/account/login"} onClick={handleClick}/>

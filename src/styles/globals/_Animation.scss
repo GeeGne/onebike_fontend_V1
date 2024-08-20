@@ -17,6 +17,9 @@
   transition: opacity 500ms ease-out;
 }
 
+.--pause {animation-play-state: paused !important}
+.--play {animation-play-state: running !important}
+
 .animate--015s {animation-duration: 0.15s !important}
 .animate--02s {animation-duration: 0.2s !important}
 .animate--03s {animation-duration: 0.3s !important}

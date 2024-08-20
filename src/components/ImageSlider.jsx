@@ -4,6 +4,9 @@ import React, {useState, useRef, useEffect} from 'react';
 // SCSS
 import '../styles/components/ImageSlider.scss';
 
+// COMPONENTS
+import DisplayImg from '/src/components/DisplayImg';
+
 // JSON
 import sliderData from '/src/data/slider.json';
 
@@ -167,7 +170,7 @@ function ImageSlider ({darkMode, lan}) {
         <li className='imageSlider-container__img-holder__imges'><img src={lastImage.url} alt={lastImage.alt[lan]} loading="lazy" /></li>
         {sliderData.map((data, i) =>
         <li className='imageSlider-container__img-holder__imges' key={data.id}>
-          <img src={data.url} alt={data.alt[lan]} loading={i < 1 ? "eager" : "lazy"} fetchpriority={i < 1 ? "high" : ""} />
+          <DisplayImg src={data.url} alt={data.alt[lan]} loading={i < 1 ? "eager" : "lazy"} fetchpriority={i < 1 ? "high" : ""} />
         </li>          
         )}
         <li className='imageSlider-container__img-holder__imges'><img src={firstImage.url} alt={firstImage.alt[lan]} loading="lazy"/></li>
