@@ -178,6 +178,7 @@ function ContentManagement ({darkMode, lan}) {
         <li className="cm__cntnt-sec__lst__itm" key={i} data-index={i} ref={el => itemELRefs.current[i] = el}>
           <div className="cm__cntnt-sec__lst__itm__info-cont" data-index={i} ref={el => itemEditELRefs.current[i] = el}>
             <div className="cm__cntnt-sec__lst__itm__info-cont__name-cont">
+              <div className="cm__cntnt-sec__lst__itm__info-cont__name-cont__state" />
               <DisplayImage className="cm__cntnt-sec__lst__itm__info-cont__name-cont__img" src={getProductImgURL(item)} alt={item.title[lan]} loading="lazy" />
               <span className="cm__cntnt-sec__lst__itm__info-cont__name-cont__title">{item.title[lan]}</span>
             </div>

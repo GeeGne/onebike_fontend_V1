@@ -79,6 +79,19 @@ function Admin ({darkMode, lan}) {
     }
 
   }
+  const getColorForState = state => {
+    switch (state) {
+      case 'available':
+        return ' green';
+      case 'out-of-stock':
+        return ' yellow';
+      case 'hidden':
+        return  ' red';
+      default:
+        console.error('Error: unknown state: ', state);
+        return '';
+    }
+  }
   const getProductImgURL = product => `/assets/img/products/${product.category}/${product.type}/${product.id + '-' + product.color.en}-front.webp`;
   // const getProductPrice = product => formatNumberWithCommas(calculatePrice(product.price, product.discount));
   // const isProductInWishlist = product => wishlist.some(item => item.id === product.id);
@@ -212,6 +225,7 @@ function Admin ({darkMode, lan}) {
           <li className="admin__cntnt-sec__lst__itm" key={i} data-index={i} ref={el => itemELRefs.current[i] = el}>
             <div className="admin__cntnt-sec__lst__itm__info-cont" data-index={i} ref={el => itemEditELRefs.current[i] = el}>
               <div className="admin__cntnt-sec__lst__itm__info-cont__name-cont">
+                <div className={`admin__cntnt-sec__lst__itm__info-cont__name-cont__state${getColorForState(item.state)}`} />
                 <DisplayImage className="admin__cntnt-sec__lst__itm__info-cont__name-cont__img" src={getProductImgURL(item)} alt={item.title[lan]} loading="lazy" />
                 <span className="admin__cntnt-sec__lst__itm__info-cont__name-cont__title">{item.title[lan]}</span>
               </div>
