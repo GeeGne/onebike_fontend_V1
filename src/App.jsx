@@ -1,5 +1,5 @@
 // HOOKS
-import React, { useState, Suspense } from 'react';
+import React, { useState, Suspense, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import useFetchAuth from '/src/hooks/useFetchAuth';
@@ -47,6 +47,8 @@ import mainListData from '/src/data/menu.json';
 
 // UTILS
 import cleanseString from '/src/utils/cleanseString.js';
+import localStorage from '/src/utils/localStorage';
+
 
 function App () {
 
@@ -58,6 +60,13 @@ function App () {
 
   const themeData = setDarkMode;
   const languageData = setLanguage;
+
+  useEffect(() => {
+    const darkTheme = localStorage.get('darkTheme') || false;
+    const switchToDarkTheme = () => document.body.classList.add('dark-theme');
+    const switchToLightTheme = () => document.body.classList.remove('dark-theme');
+    darkTheme ? switchToDarkTheme() : switchToLightTheme();
+  }, [])
 
   return (
     <Router>

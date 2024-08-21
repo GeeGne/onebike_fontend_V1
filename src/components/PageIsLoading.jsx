@@ -21,6 +21,7 @@ function PageIsLoading ({ type, darkMode, lan }) {
     darkMode = localStorage.get('darkTheme') || false;
     lan = localStorage.get('lan') || false;
     if (darkMode) document.body.classList.add('dark-theme');
+    document.body.style.transition= "background-color 0.5s ease-in";
   }     
 
   const handleLoad = e => {
@@ -36,7 +37,7 @@ function PageIsLoading ({ type, darkMode, lan }) {
   }
 
   return (
-    <div className={`pageIsLoading${type === 'b' ? ' b --panel-flick' : ''}`}>
+    <div className={`pageIsLoading${type === 'b' ? ' b --panel-flick' : ' --fade-in animate--02s'}`}>
       {type === 'a' 
       ? <>
           <img className="pageIsLoading__img" src={logo} alt="onebike logo" fetchpriority="high" data-type="onebike_logo" onLoad={handleLoad} ref={logoImgEL} />
