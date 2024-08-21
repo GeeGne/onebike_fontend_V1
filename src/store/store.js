@@ -14,6 +14,8 @@ const useDataStore = create(
     resetUserDataToNull: () => set({userData: null}),
     products: [],
     setProducts: products => set({ products }),
+    refreshProducts: 0,
+    setRefreshProducts: refreshProducts => set({ refreshProducts })
   })
 );
 

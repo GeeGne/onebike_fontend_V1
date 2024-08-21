@@ -1,8 +1,7 @@
 // HOOKS
-import React, { useEffect, useState, useRef, Suspense } from 'react';
+import React, { useState, Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
-import { useQuery } from 'react-query';
 import useFetchAuth from '/src/hooks/useFetchAuth';
 import useFetchUserData from '/src/hooks/useFetchUserData';
 import useFetchProductsData from '/src/hooks/useFetchProductsData';
@@ -44,15 +43,13 @@ const Admin = React.lazy(() => import('/src/components/pages/admin/Admin'));
 import mainListData from '/src/data/menu.json';
 
 // STORE
-import { useDataStore } from '/src/store/store.js';
+// import { useDataStore } from '/src/store/store.js';
 
 // UTILS
 import cleanseString from '/src/utils/cleanseString.js';
-import {CartProductsContext, CartContext} from '/src/utils/myContext.js';
 
 function App () {
 
-  const { user, userData, products } = useDataStore()
   const [darkMode, setDarkMode] = useState(false);
   const [lan, setLanguage] = useState('en');
   useFetchAuth();
@@ -61,7 +58,7 @@ function App () {
 
   const themeData = setDarkMode;
   const languageData = setLanguage;
-  
+
   return (
     <Router>
       <div className="app-layout">

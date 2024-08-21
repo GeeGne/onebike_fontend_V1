@@ -1,5 +1,5 @@
 // HOOKS
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 // STORE
 import { useDataStore } from '/src/store/store';
@@ -10,7 +10,7 @@ import {getDoc, doc, collection, getDocs} from 'firebase/firestore';
 
 
 function useFetchProductsData () {
-  const { setProducts } = useDataStore();
+  const { setProducts, refreshProducts } = useDataStore();
 
   useEffect(() => {
     const fetchProductsData = async () => {
@@ -34,7 +34,7 @@ function useFetchProductsData () {
     }
 
     fetchProductsData();
-  }, []);
+  }, [refreshProducts]);
 }
 
 export default useFetchProductsData;

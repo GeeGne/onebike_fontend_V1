@@ -6,26 +6,27 @@ import { useNavigate } from 'react-router-dom';
 import '/src/styles/components/pages/admin/Admin.scss';
 
 // COMPONENTS
-import Alert from '/src/components/Alert';
 import BreadCrumb from '/src/components/BreadCrumb';
 import DisplayWebImg from '/src/components/DisplayWebImg';
+import Alert from '/src/components/Alert';
+import ProgressActivity from '/src/components/ProgressActivity';
 
 // STORE
 import { useDataStore } from '/src/store/store';
 
 // FIREBASE
-import { auth } from "/src/firebase/authSignUp";
-import { signInWithEmailAndPassword, onAuthStateChanged, sendPasswordResetEmail } from "firebase/auth";
 import { db } from '/src/firebase/fireStore';
-import { getDoc, doc, collection, getDocs } from 'firebase/firestore';
+import { getDoc, doc, collection, getDocs, setDoc, updateDoc } from 'firebase/firestore';
 import { storage } from '/src/firebase/storage';
-import { ref, getDownloadURL } from "firebase/storage";
 
 // JSON
 import menu from '/src/data/menu.json';
 
 // UTILS
 import Redirector from '/src/utils/Redirector';
+
+// NANOID
+import { nanoid } from 'nanoid';
 
 // ASSETS
 import img from '/assets/img/products/GIYO Small Bike tire Pump Schrader.jpg';
@@ -38,13 +39,21 @@ import doubleArrowSecondary from '/assets/img/icons/keyboard_double_arrow_right_
 import heartDarkMode from '/assets/img/icons/heart_darkMode.svg';
 
 function Admin ({darkMode, lan}) {
+
   const array = [1, 2, 3, 4];
-  const {user, userData, products} = useDataStore();
-  const [typeItmArray, setTypeItmArray] = useState([]);
+  const { user, userData, products, setRefreshProducts } = useDataStore();
+  const [ typeItmArray, setTypeItmArray ] = useState([]);
+  const [ newAlert, setNewAlert ] = useState(0);
+  const [ alertText, setAlertText ] = useState(null);
 
   const itemELRefs = useRef([]);
   const itemInfoELRefs = useRef([]);
   const itemEditELRefs = useRef([]);
+
+  const titleEnInptELRefs = useRef([]);
+  const titleArInptELRefs = useRef([]);
+  const priceInptELRefs = useRef([]);
+  const discountInptELRefs = useRef([]);
 
   const itemStateContELRefs = useRef([]);
   const itemStateInptELRefs = useRef([]);
@@ -94,10 +103,23 @@ function Admin ({darkMode, lan}) {
         return '';
     }
   }
-  const getProductImgURL = product => `/assets/img/products/${product.category}/${product.type}/${product.id + '-' + product.color.en}-front.webp`;
+  const getProductImgURL = product => `/assets/img/products/${product.category}/${product.type}/${product.id + '-' + product.color}-front.webp`;
   // const getProductPrice = product => formatNumberWithCommas(calculatePrice(product.price, product.discount));
   // const isProductInWishlist = product => wishlist.some(item => item.id === product.id);
 
+  const saveProductChanges = async (productId, productData) => {
+    try {
+      console.log('sdf', productId)
+      const productRef = doc(db, "products", String(productId));
+      await updateDoc(productRef, productData);
+      setRefreshProducts(Math.random());
+      setAlertText(en ? 'Sucess! changes has been saved to the product' : 'نجاح! تم حفظ التغييرات على المنتج')
+    } catch(err) {
+      console.error('Error updating product: ', err);
+      setAlertText(en ? 'Error updaing product' : 'حصل خطأ في تعديل المنتج')
+    }
+    setNewAlert(Math.random());
+  }
   useEffect(() => {
     if (userData) redirector.admin(user, userData);
   }, [userData]);
@@ -106,13 +128,14 @@ function Admin ({darkMode, lan}) {
   // console.log('userData', userData);
   // console.log('itemELRefs', itemELRefs.current);
   // console.log('products', products);
-  console.log('typeItmArray', typeItmArray);
+  // console.log('typeItmArray', typeItmArray);
 
   useEffect(() => {
     const setItemHeights = () => {
-      itemELRefs.current.forEach((el, i) => 
-        el.style.maxHeight = String(itemInfoELRefs.current[i].scrollHeight) + 'px'
-      );  
+      itemELRefs.current.forEach((el, i) => {
+        el.style.maxHeight = String(itemInfoELRefs.current[i].scrollHeight) + 'px';
+        el.style.overflow = 'hidden';
+      });  
     }
 
     setItemHeights();
@@ -126,11 +149,12 @@ function Admin ({darkMode, lan}) {
   // }, [products])
 
   const handleClick = e => {
-    const {action, index, key} = e.currentTarget.dataset;
-    const getEL = el => el.filter(el => Number(el.dataset.index) === Number(index))[0];
+    const { action, index, key, productId } = e.currentTarget.dataset;
+    const getEL = el => el.filter(el => Number(el.dataset.index) === Number(index))[0];1
     const isELClicked = el => el.classList.contains('clicked');
     const totalHeight = el => el.scrollHeight;
     const getTextContent = el => el.textContent;
+    const getProduct = () => products.filter(item => item.id === Number(productId))[0];
 
     switch(action) {
       case 'edit_button_is_clicked':
@@ -151,14 +175,52 @@ function Admin ({darkMode, lan}) {
         break;
       case 'itemState_option_is_clicked':
         getEL(itemStateInptELRefs.current).value = getTextContent(e.currentTarget);
+        getEL(itemStateInptELRefs.current).dataset.key = key;
         break;
       case 'category_option_is_clicked':
         getEL(categoryInptELRefs.current).value = getTextContent(e.currentTarget);
+        getEL(categoryInptELRefs.current).dataset.key = key;
         setTypeItmArray(prevArr => [...prevArr.filter(item => item.index !== Number(index)), {index: Number(index), key}]);
         getEL(typeInptELRefs.current).value = '';
         break;
       case 'type_option_is_clicked':
         getEL(typeInptELRefs.current).value = getTextContent(e.currentTarget);
+        getEL(typeInptELRefs.current).dataset.key = key;
+        break;
+      case 'save_button_is_clicked':
+        const getTitleVal = lan => getEL(lan === 'en' ? titleEnInptELRefs.current : titleArInptELRefs.current).value === "" ? getProduct().title[lan] : getEL(lan === 'en' ? titleEnInptELRefs.current : titleArInptELRefs.current).value;
+        const getCategoryVal = () => getEL(categoryInptELRefs.current).value === "" ? getProduct().category : getEL(categoryInptELRefs.current).dataset.key;
+        const getTypeVal = () => getEL(typeInptELRefs.current).value === "" ? getProduct().type : getEL(typeInptELRefs.current).dataset.key;
+        const getStateVal = () => getEL(itemStateInptELRefs.current).value === "" ? getProduct().state : getEL(itemStateInptELRefs.current).dataset.key;
+        const getPriceVal = () => getEL(priceInptELRefs.current).value === "" ? getProduct().price : Number(getEL(priceInptELRefs.current).value);
+        const getDiscountVal = () => {
+          const isInputEmpty = getEL(discountInptELRefs.current).value === "";
+          const isInputContainsPercantage = getEL(discountInptELRefs.current).value.includes('%');
+
+          switch (true) {
+            case isInputEmpty:
+              return getProduct().discount;
+            case isInputContainsPercantage:
+              return getEL(discountInptELRefs.current).value;
+            default:
+              return Number(getEL(discountInptELRefs.current).value) || false;
+          }
+        };
+
+        const productData = {
+          title: {en: getTitleVal('en') , ar: getTitleVal('ar')},
+          category: getCategoryVal(),
+          type: getTypeVal(),
+          color: 'black',
+          state: getStateVal(),
+          brand: '',
+          price: getPriceVal(),
+          discount: getDiscountVal(),
+        }
+
+        console.log('productData', productData)
+        saveProductChanges(Number(productId), productData);
+
         break;
       default:
         console.error('Error: unknown action: ', action);
@@ -209,6 +271,7 @@ function Admin ({darkMode, lan}) {
 
   return (
     <div className="admin">
+      <Alert alertText={alertText} newAlert={newAlert} />
       <section className="admin__breadCrumb-sec">
         <BreadCrumb type={{en: 'admin', ar: 'ادمن'}} category={{en: 'account', ar: 'الحساب'}} lan={lan} />
       </section>
@@ -235,7 +298,7 @@ function Admin ({darkMode, lan}) {
               </div>
               <div className="admin__cntnt-sec__lst__itm__info-cont__price-cont">
                 <span className="admin__cntnt-sec__lst__itm__info-cont__price-cont__price">{item.price}</span>{' - '}
-                <span className="admin__cntnt-sec__lst__itm__info-cont__price-cont__discount">4%</span>
+                <span className="admin__cntnt-sec__lst__itm__info-cont__price-cont__discount" data-index={i}>4%</span>
               </div>
               <div className="admin__cntnt-sec__lst__itm__info-cont__toggles-cont">
                 <button className="admin__cntnt-sec__lst__itm__info-cont__toggles-cont__delete-btn" aria-label="Delete Item" data-action="delete_button_is_clicked" data-index={i} onClick={handleClick} />
@@ -258,10 +321,10 @@ function Admin ({darkMode, lan}) {
                 <span className="admin__cntnt-sec__lst__itm__edit-cont__nameTitle-cont__enVal-spn">{item.title.en}</span>{' / '}
                 <span className="admin__cntnt-sec__lst__itm__edit-cont__nameTitle-cont__arVal-spn">{item.title.ar}</span>
               </div>
-              <input className="admin__cntnt-sec__lst__itm__edit-cont__nameEn-inpt" name="titleEn" placeholder={en ? "name in english" : "الاسم بلانجليزي"} />
-              <input className="admin__cntnt-sec__lst__itm__edit-cont__nameAr-inpt" name="titleAr" placeholder={en ? "name in arabic" : "الاسم بلعربي"} />
-              <input className="admin__cntnt-sec__lst__itm__edit-cont__price-inpt" name="price" placeholder={en ? "price" : "السعر"} />
-              <input className="admin__cntnt-sec__lst__itm__edit-cont__discount-inpt" name="discount" placeholder={en ? "discount" : "التخفيض"} />
+              <input className="admin__cntnt-sec__lst__itm__edit-cont__nameEn-inpt" name="titleEn" data-index={i} placeholder={en ? "name in english" : "الاسم بلانجليزي"} ref={el => titleEnInptELRefs.current[i] = el} />
+              <input className="admin__cntnt-sec__lst__itm__edit-cont__nameAr-inpt" name="titleAr" data-index={i} placeholder={en ? "name in arabic" : "الاسم بلعربي"} ref={el => titleArInptELRefs.current[i] = el} />
+              <input className="admin__cntnt-sec__lst__itm__edit-cont__price-inpt" name="price" data-index={i} placeholder={en ? "price" : "السعر"} ref={el => priceInptELRefs.current[i] = el} />
+              <input className="admin__cntnt-sec__lst__itm__edit-cont__discount-inpt" name="discount" data-index={i} placeholder={en ? "discount" : "التخفيض"} ref={el => discountInptELRefs.current[i] = el} />
               <div className="admin__cntnt-sec__lst__itm__edit-cont__itemState-cont" ref={el => itemStateContELRefs.current[i] = el} data-index={i}>
                 <input className="admin__cntnt-sec__lst__itm__edit-cont__itemState-cont__inpt" name="state" placeholder={en ? "Item State" : "حاله المنتج"} data-type="item_state_input" data-index={i} readOnly onFocus={handleFocus} onBlur={handleBlur} ref={el => itemStateInptELRefs.current[i] = el} />
                 <ul className="admin__cntnt-sec__lst__itm__edit-cont__itemState-cont__lst">
@@ -284,7 +347,7 @@ function Admin ({darkMode, lan}) {
                   {addTypeItmtHTML(i)}
                 </ul>
               </div>
-              <button className="admin__cntnt-sec__lst__itm__edit-cont__save-btn" data-index={i} data-action="save_button_is_clicked" onClick={handleClick}>Save</button>
+              <button className="admin__cntnt-sec__lst__itm__edit-cont__save-btn" data-index={i} data-action="save_button_is_clicked" data-product-id={item.id} onClick={handleClick}>Save</button>
             </div>
           </li>
           )}
