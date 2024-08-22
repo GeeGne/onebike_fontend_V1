@@ -165,7 +165,8 @@ function ImageSlider ({darkMode, lan}) {
   }
 
   return (
-    <section className='imageSlider-container --fade-in delay--04s animate--03s'>
+    // <section className='imageSlider-container --fade-in delay--04s animate--03s'>
+    <section className='imageSlider-container'>
       <ul className='imageSlider-container__img-holder' onTouchStart={handleStart}  onTouchMove={handleMove} onTouchEnd={handleEnd} ref={imageSliderElement}>
         <li className='imageSlider-container__img-holder__imges'><DisplayImg className='imageSlider-container__img-holder__imges__img' src={lastImage.url} alt={lastImage.alt[lan]} loading="lazy" /></li>
         {sliderData.map((data, i) =>
@@ -181,8 +182,8 @@ function ImageSlider ({darkMode, lan}) {
         )}
       </ul>
       <div className="imageSlider-container__arrows">
-        <button className="imageSlider-container__arrows__left-arrow" data-type="scroll_to_left" onClick={handleClick}/>
-        <button className="imageSlider-container__arrows__right-arrow" data-type="scroll_to_right" onClick={handleClick} />
+        <button className="imageSlider-container__arrows__left-arrow" aria_label="Left Arrow" data-type="scroll_to_left" onClick={handleClick}/>
+        <button className="imageSlider-container__arrows__right-arrow" aria_label="Right Arrow" data-type="scroll_to_right" onClick={handleClick} />
       </div>
     </section>
   )

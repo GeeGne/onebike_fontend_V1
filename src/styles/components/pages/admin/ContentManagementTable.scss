@@ -16,7 +16,9 @@
 
     &__addProduct-btn {
       @include k.diamond-btn-styles (var(--add-icon), var(--primary-color));
-      top: 0;
+      top: 50%;
+      right: 0.5em;
+      transform: translateY(-50%) rotate(45deg);
       width: 1.5em;
       height: 1.5em;
       &::before {filter: invert(100%)}

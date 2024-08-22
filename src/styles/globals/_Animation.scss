@@ -320,6 +320,18 @@
   }
 }
 
+@keyframes grow-and-rotate {
+
+  0% {
+    transform: translate(-50%, -50%) rotate(45deg) scale(0.5);
+  }
+
+  100% {
+    transform: translate(-50%, -50%) rotate(45deg) scale(1);
+  }
+
+}
+
 .--fade-in {
   animation-name: fade-in;
   animation-duration: 0.7s;
@@ -470,6 +482,14 @@
   animation-name: dot;
   animation-duration: 1.5s;
   animation-timing-function: ease-out;
+  animation-fill-mode: both;
+  animation-iteration-count: infinite;
+}
+
+.--grow-and-rotate {
+  animation-name: grow-and-rotate;
+  animation-duration: 1.5s;
+  animation-timing-function: linear;
   animation-fill-mode: both;
   animation-iteration-count: infinite;
 }

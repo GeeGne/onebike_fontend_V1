@@ -1,0 +1,232 @@
+@use '/src/styles/utils/_BreakPoints' as w;
+@use '/src/styles/utils/_StyleKits' as k;
+
+@keyframes grow-and-rotate {
+
+  0% {
+    transform: translate(-50%, -50%) rotate(0) scale(0.5);
+    opacity: 0;
+  }
+
+  20% {
+    transform: translate(-50%, -50%) rotate(20deg) scale(0.6);
+    opacity: 0.5;
+  }
+
+  40% {
+    transform: translate(-50%, -50%) rotate(60deg) scale(0.7);
+    opacity: 1;
+  }
+
+  60% {
+    transform: translate(-50%, -50%) rotate(120deg) scale(0.8);
+    opacity: 1;
+  }
+
+  80% {
+    transform: translate(-50%, -50%) rotate(260deg) scale(0.9);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translate(-50%, -50%) rotate(315deg) scale(1);
+    opacity: 1;
+
+  }
+
+}
+
+.productWindow {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--window-background-color);
+  z-index: 2000;
+  &.show {display: initial}
+  &.hide {display: none}
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(45deg);
+    width: 70%;
+    aspect-ratio: 1 / 1;
+    border-radius: 25%;
+    background-color: var(--secondary-color);
+    z-index: -1;
+    animation-name: grow-and-rotate;
+    animation-duration: 1s;
+    animation-timing-function: linear;
+    animation-fill-mode: both;
+    animation-iteration-count: 1;
+  }
+
+  &__edit-cont {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: 
+    'nameTitle nameTitle'
+    'nameEnInpt nameArInpt'
+    'categoryTitle categoryTitle'
+    'categoryInpt typeInpt'
+    'priceTitle priceTitle'
+    'priceInpt discountInpt'
+    'itemStateInpt saveBtn'
+    ;
+    gap: 0.5em;
+    // background-color: var(--secondary-color);
+    padding-block: 0.5em;
+    padding-inline: 0.5em;
+
+    &__nameTitle-cont {grid-area: nameTitle}
+    &__categoryTitle-cont {grid-area: categoryTitle}
+    &__priceTitle-cont {grid-area: priceTitle}
+    &__nameEn-inpt {grid-area: nameEnInpt}
+    &__nameAr-inpt {grid-area: nameArInpt}
+    &__price-inpt {grid-area: priceInpt}
+    &__discount-inpt{grid-area: discountInpt}
+
+    &__nameTitle-cont, 
+    &__categoryTitle-cont,
+    &__priceTitle-cont {
+      display: flex;
+      align-items: center;
+      gap: 1em;
+      color: var(--font-p-color);
+
+      &__name-spn,
+      &__category-spn,
+      &__price-spn {
+        color: var(--font-p-color);
+        margin-right: auto;
+        body.arabic & {margin-left: auto; margin-right: 0}
+      }
+
+      &__enVal-spn,
+      &__arVal-spn,
+      &__categoryVal-spn,
+      &__typeVal-spn,
+      &__priceVal-spn,
+      &__discountVal-spn {
+        font-size: var(--font-size-extraSmall);
+        color: var(--font-p-color);
+        font-weight: 600;
+      }
+    }
+
+    &__nameEn-inpt, 
+    &__nameAr-inpt, 
+    &__price-inpt, 
+    &__discount-inpt{
+      background-color: var(--background-color);
+      color: var(--font-h-color);
+      font-size: var(--font-size-extraSmall);
+      font-weight: 600;
+      padding-inline: 1em;
+      padding-block: 0.5em;
+      border-radius: 0.5em;
+      border: none
+    }
+
+    &__itemState-cont {grid-area: itemStateInpt}
+    &__category-cont {grid-area: categoryInpt}
+    &__type-cont {grid-area: typeInpt}
+
+    &__itemState-cont,
+    &__category-cont,
+    &__type-cont {
+      position: relative;
+      z-index: 5;
+
+      &.focus::before {opacity: 1}
+      &::before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        right: 0.5em;
+        transform: translateY(-50%);
+        width: 1.3em;
+        height: 1.3em;
+        background-image: var(--arrow-drop-down-icon);
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        opacity: 0.7;
+        transition: opacity 0.15s ease-out;
+        body.arabic & {right: auto; left: 0.5em}
+      }
+
+      &__inpt {
+        width: 100%;
+        background-color: var(--background-color);
+        color: var(--font-h-color);
+        font-size: var(--font-size-extraSmall);
+        font-weight: 600;
+        padding-inline: 1em;
+        padding-block: 0.5em;
+        border-radius: 0.5em;
+        border: none;
+      }
+
+      &.focus &__lst {visibility: visible; opacity: 1;}
+      &__lst {
+        visibility: hidden;
+        opacity: 0;
+        position: absolute;
+        display: flex;
+        top: calc(100% + 2px);
+        left: 0;
+        width: 100%;
+        max-height: 8em;
+        overflow-y: scroll;
+        flex-direction: column;
+        padding-block: 0.5em;
+        background-color: var(--background-color);
+        border-radius: 0.5em;
+        transition: opacity 0.25s ease-out;
+
+        &::-webkit-scrollbar {width: 0.7em}
+        &::-webkit-scrollbar-thumb {
+          cursor: grab;
+          background-color: var(--sideMenu-scrollBar-background-color);
+          transition: background-color 0.15s;
+          border-radius: 0.5em; 
+        }
+
+        &::-webkit-scrollbar-track {background-color: rgba(42, 42, 42, 0)}
+        &::-webkit-scrollbar-thumb:active {cursor: grabbing}
+        &::-webkit-scrollbar-thumb:hover {background-color: hsl(0, 0%, 50%)}
+      
+        &__itm {
+          color: var(--font-p-color);
+          font-size: var(--font-size-extraSmall);
+          font-weight: 550;
+          padding-block: 0.5em;
+          padding-inline: 0.5em;
+          transition: background-color 0.15s ease-out, color 0.15s ease-out;
+          cursor: pointer;
+          &:hover {background-color: var(--light-background-color); color: var(--font-h-color)}
+        }
+      }
+    }
+
+    &__save-btn {
+      grid-area: saveBtn;
+      background-color: var(--primary-color);
+      border-radius: 0.5em;
+      color: var(--font-p-invert-color);
+      font-size: var(-font-size-extraSmall);
+      font-weight: 600;
+      transition: opacity 0.15s ease-out;
+      &:hover {opacity: 0.7}
+    }
+  }
+}

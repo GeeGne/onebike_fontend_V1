@@ -164,8 +164,8 @@ function AdvertTile ({darkMode, lan, type}) {
         <img className="advertTile__panel__doubleArrow" src={darkMode ? doubleArrowSecondary : doubleArrowPrimary} onClick={handleClick} alt="Double Down Arrows"/>
       </div>
       <div className="advertTile__list">
-        <button className="advertTile__list__left-arr-btn" data-action="scroll_left" onClick={handleClick}></button>
-        <button className="advertTile__list__right-arr-btn" data-action="scroll_right" onClick={handleClick}></button>
+        <button className="advertTile__list__left-arr-btn" aria-label="Left Arrow" data-action="scroll_left" onClick={handleClick}></button>
+        <button className="advertTile__list__right-arr-btn" aria-label="Right Arrow" data-action="scroll_right" onClick={handleClick}></button>
         <ul className="advertTile__list__products" ref={listEL}>
           {getProducts.map((product, i) => 
           <li className={`advertTile__list__products__product --slide-to-left${product.outOfStock ? ' out-of-stock' : ''}`} key={product.id} ref={productConEL}>

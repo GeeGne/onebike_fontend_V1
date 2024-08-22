@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import '/src/styles/components/pages/admin/ContentManagementTable.scss';
 
 // COMPONENTS
+import AddProductWindow from '/src/components/pages/admin/AddProductWindow';
 import DisplayWebImg from '/src/components/DisplayWebImg';
 import Alert from '/src/components/Alert';
 import ProgressActivity from '/src/components/ProgressActivity';
@@ -30,12 +31,9 @@ import { nanoid } from 'nanoid';
 // ASSETS
 import img from '/assets/img/products/GIYO Small Bike tire Pump Schrader.jpg';
 import doubleArrowPrimary from '/assets/img/icons/keyboard_double_arrow_right_primary.svg';
-import heart from '/assets/img/icons/heart.svg';
-import heartFill from '/assets/img/icons/heart_fill.svg';
 
 // ASSETS - DARKMODE
 import doubleArrowSecondary from '/assets/img/icons/keyboard_double_arrow_right_secondary.svg';
-import heartDarkMode from '/assets/img/icons/heart_darkMode.svg';
 
 
 function ContentManagementTable ({darkMode, lan}) {
@@ -46,7 +44,9 @@ function ContentManagementTable ({darkMode, lan}) {
   const [ newAlert, setNewAlert ] = useState(0);
   const [ alertText, setAlertText ] = useState(null);
   const [ activity, setActivity ] = useState(false);
-
+  const [ toggleAddProductWindow, setToggleAddProductWindow ] = useState(false);
+  console.log(toggleAddProductWindow);
+  const handleToggleAddProductWindow = data => setToggleAddProductWindow(data);
   const itemELRefs = useRef([]);
   const itemInfoELRefs = useRef([]);
   const itemEditELRefs = useRef([]);
@@ -119,7 +119,6 @@ function ContentManagementTable ({darkMode, lan}) {
     setActivity(true);
 
     try {
-      console.log('sdf', productId);
       const productRef = doc(db, "products", String(productId));
       await updateDoc(productRef, productData);
       setRefreshProducts(Math.random());
@@ -150,86 +149,72 @@ function ContentManagementTable ({darkMode, lan}) {
     setItemHeights();
   }, [products]);
 
-  // useEffect(() => {
-  //   products.map(item => {
-  //     return
-  //   })
-  //   settypeItmArray(products.map)
-  // }, [products])
-
   const handleClick = e => {
     const { action, index, key, productId } = e.currentTarget.dataset;
-    const getEL = el => el.filter(el => Number(el.dataset.index) === Number(index))[0];1
+
+    const findElement = ref => ref.filter(el => Number(el.dataset.index) === Number(index))[0];
     const isELClicked = el => el.classList.contains('clicked');
     const totalHeight = el => el.scrollHeight;
-    const getTextContent = el => el.textContent;
     const getProduct = () => products.filter(item => item.id === Number(productId))[0];
+    const getTextContent = el => el.textContent;
 
     switch(action) {
       case 'edit_button_is_clicked':
-        getEL(itemELRefs.current).classList.toggle('clicked');
+        findElement(itemELRefs.current).classList.toggle('clicked');
 
-        if (isELClicked(getEL(itemELRefs.current))) {
-          getEL(itemELRefs.current).style.maxHeight = String( totalHeight(getEL(itemELRefs.current)) ) + 'px';
+        if (isELClicked(findElement(itemELRefs.current))) {
+          findElement(itemELRefs.current).style.maxHeight = String( totalHeight(findElement(itemELRefs.current)) ) + 'px';
           clearTimeout(overflowTimerId.current);
-          overflowTimerId.current = setTimeout(() => getEL(itemELRefs.current).style.overflow = 'visible', 250);
+          overflowTimerId.current = setTimeout(() => findElement(itemELRefs.current).style.overflow = 'visible', 250);
         } else {
           clearTimeout(overflowTimerId.current);
-          getEL(itemELRefs.current).style.maxHeight = String( totalHeight(getEL(itemInfoELRefs.current)) ) + 'px';
-          getEL(itemELRefs.current).style.overflow = 'hidden';
+          findElement(itemELRefs.current).style.maxHeight = String( totalHeight(findElement(itemInfoELRefs.current)) ) + 'px';
+          findElement(itemELRefs.current).style.overflow = 'hidden';
         }
         break;
       case 'delete_button_is_clicked':
         console.log(index);
         break;
+      case 'add_product_button_is_clicked':
+        setToggleAddProductWindow(prevVal => !prevVal);
+        break;
       case 'itemState_option_is_clicked':
-        getEL(itemStateInptELRefs.current).value = getTextContent(e.currentTarget);
-        getEL(itemStateInptELRefs.current).dataset.key = key;
+        findElement(itemStateInptELRefs.current).value = getTextContent(e.currentTarget);
+        findElement(itemStateInptELRefs.current).dataset.key = key;
         break;
       case 'category_option_is_clicked':
-        getEL(categoryInptELRefs.current).value = getTextContent(e.currentTarget);
-        getEL(categoryInptELRefs.current).dataset.key = key;
+        findElement(categoryInptELRefs.current).value = getTextContent(e.currentTarget);
+        findElement(categoryInptELRefs.current).dataset.key = key;
         setTypeItmArray(prevArr => [...prevArr.filter(item => item.index !== Number(index)), {index: Number(index), key}]);
-        getEL(typeInptELRefs.current).value = '';
+        findElement(typeInptELRefs.current).value = '';
         break;
       case 'type_option_is_clicked':
-        getEL(typeInptELRefs.current).value = getTextContent(e.currentTarget);
-        getEL(typeInptELRefs.current).dataset.key = key;
+        findElement(typeInptELRefs.current).value = getTextContent(e.currentTarget);
+        findElement(typeInptELRefs.current).dataset.key = key;
+        break;
+      case 'add_product_button_is_clicked':
+        findElement(typeInptELRefs.current).value = getTextContent(e.currentTarget);
+        findElement(typeInptELRefs.current).dataset.key = key;
         break;
       case 'save_button_is_clicked':
-        const getTitleVal = lan => getEL(lan === 'en' ? titleEnInptELRefs.current : titleArInptELRefs.current).value === "" ? getProduct().title[lan] : getEL(lan === 'en' ? titleEnInptELRefs.current : titleArInptELRefs.current).value;
-        const getCategoryVal = () => getEL(categoryInptELRefs.current).value === "" ? getProduct().category : getEL(categoryInptELRefs.current).dataset.key;
-        const getTypeVal = () => getEL(typeInptELRefs.current).value === "" ? getProduct().type : getEL(typeInptELRefs.current).dataset.key;
-        const getStateVal = () => getEL(itemStateInptELRefs.current).value === "" ? getProduct().state : getEL(itemStateInptELRefs.current).dataset.key;
-        const getPriceVal = () => getEL(priceInptELRefs.current).value === "" ? getProduct().price : Number(getEL(priceInptELRefs.current).value);
-        const getDiscountVal = () => {
-          const isInputEmpty = getEL(discountInptELRefs.current).value === "";
-          const isInputContainsPercantage = getEL(discountInptELRefs.current).value.includes('%');
-
-          switch (true) {
-            case isInputEmpty:
-              return getProduct().discount;
-            case isInputContainsPercantage:
-              return getEL(discountInptELRefs.current).value;
-            default:
-              return Number(getEL(discountInptELRefs.current).value) || false;
-          }
-        };
 
         const productData = {
-          title: {en: getTitleVal('en') , ar: getTitleVal('ar')},
-          category: getCategoryVal(),
-          type: getTypeVal(),
+          title: {
+            en: findElement(titleEnInptELRefs.current).value || getProduct().title.en,
+            ar: findElement(titleArInptELRefs.current).value || getProduct().title.ar,
+          },
+          category: findElement(categoryInptELRefs.current).value || getProduct().category,
+          type: findElement(categoryInptELRefs.current).value || getProduct().type,
           color: 'black',
-          state: getStateVal(),
+          state: findElement(itemStateInptELRefs.current).dataset.key || getProduct().state,
           brand: '',
-          price: getPriceVal(),
-          discount: getDiscountVal(),
+          price: Number(findElement(priceInptELRefs.current).value) || getProduct().price,
+          discount: findElement(discountInptELRefs.current).value.includes('%') 
+            ? findElement(discountInptELRefs.current).value
+            : Number(findElement(discountInptELRefs.current).value) || getProduct().discount,
         }
 
-        console.log('productData', productData)
         saveProductChanges(Number(productId), productData);
-
         break;
       default:
         console.error('Error: unknown action: ', action);
@@ -239,8 +224,6 @@ function ContentManagementTable ({darkMode, lan}) {
   const handleFocus = e => {
     const {type, index} = e.currentTarget.dataset;
     const getEL = el => el.filter(el => Number(el.dataset.index) === Number(index))[0];
-    const isELClicked = el => el.classList.contains('clicked');
-    const totalHeight = el => el.scrollHeight
 
     switch (type) {
       case 'item_state_input':
@@ -260,8 +243,6 @@ function ContentManagementTable ({darkMode, lan}) {
   const handleBlur = e => {
     const {type, index} = e.currentTarget.dataset;
     const getEL = el => el.filter(el => Number(el.dataset.index) === Number(index))[0];
-    const isELClicked = el => el.classList.contains('clicked');
-    const totalHeight = el => el.scrollHeight
 
     switch (type) {
       case 'item_state_input':
@@ -280,8 +261,9 @@ function ContentManagementTable ({darkMode, lan}) {
 
   return (
     <section className="cm">
+      <AddProductWindow toggle={toggleAddProductWindow} toggleData={handleToggleAddProductWindow} darkMode={darkMode} lan={lan} />
       <div className="cm__header-row">
-        <button className="cm__header-row__addProduct-btn" aria-label="Add a Product to Products" />
+        <button className="cm__header-row__addProduct-btn" aria-label="Add a Product to Products" data-action="add_product_button_is_clicked" onClick={handleClick} />
         <span className="cm__header-row__spn">{en ? 'Name' : 'الاسم'}</span>
         <span className="cm__header-row__spn">{en ? 'ID' : 'رمز'}</span>
         <span className="cm__header-row__spn">{en ? 'price' : 'السعر'}</span>

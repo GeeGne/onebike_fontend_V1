@@ -116,7 +116,7 @@
   height: 2em;  
   border-radius: 0.5em;
   background-color: $background-color;
-  filter: drop-shadow(0 0px 3px  var(--account-box-shadow-background-color));
+  filter: drop-shadow(0 0px 3px $background-color);
   transition: opacity 0.25s ease;
   &:hover {opacity: 0.8}
 
