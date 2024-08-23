@@ -24,7 +24,6 @@ import fetchElementById from '/src/utils/fetchElementById.js'
 
 function AdvertList ({darkMode, lan, matchedProducts}) {
 
-  const { products } = useDataStore();
   const {wishlist, addProductToWishlist, removeProductFromWishlist} = useWishlistStore();
   const {addProductToCart, removeProductFromCart} = useCartStore();
   const [loadLimit, setLoadLimit] = useState(0);
@@ -80,7 +79,7 @@ function AdvertList ({darkMode, lan, matchedProducts}) {
 
   const handleClick = e => {
     const {type, productId} = e.currentTarget.dataset;
-    const getProduct = id => products.filter(product => product.id === id)[0];
+    const getProduct = id => products.find(product => product.id === id);
 
     switch (type) {
       case 'add_to_cart':
@@ -122,7 +121,7 @@ function AdvertList ({darkMode, lan, matchedProducts}) {
       <section className="advertList__advert-sctn">
         <ul className="advertList__advert-sctn__grid">
           {displayedProducts.map((product, i) => 
-          <li className={`advertList__advert-sctn__grid__product${product.outOfStock ? ' out-of-stock' : ''}`} key={product.id}>
+          <li className={`advertList__advert-sctn__grid__product${product.state ? ' out-of-stock' : ''}`} key={product.id}>
             {isProductInWishlist(product) 
             ? <button className="advertList__advert-sctn__grid__product__favourite added-to-wishlist" data-type="remove_product_from_wishlist" data-product-id={product.id} onClick={handleClick} />
             : <button className="advertList__advert-sctn__grid__product__favourite" data-type="add_product_to_wishlist" data-product-id={product.id} onClick={handleClick} />

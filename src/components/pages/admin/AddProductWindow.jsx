@@ -132,18 +132,8 @@ function AddProductWindow ({toggle, toggleData, darkMode, lan}) {
     setActivity(false);
   }
   
-  // console.log('user', user);
-  // console.log('userData', userData);
-  // console.log('itemEL', itemEL.current);
-  // console.log('products', products);
-  // console.log('typeItmKey', typeItmKey);
-
   const handleClick = e => {
-    const { action, index, key, productId } = e.currentTarget.dataset;
-
-    const isELClicked = el => el.classList.contains('clicked');
-    const totalHeight = el => el.scrollHeight;
-    const getProduct = () => products.filter(item => item.id === Number(productId))[0];
+    const { action, key, productId } = e.currentTarget.dataset;
     const getTextContent = el => el.textContent;
 
     switch(action) {
@@ -157,7 +147,6 @@ function AddProductWindow ({toggle, toggleData, darkMode, lan}) {
       case 'category_option_is_clicked':
         categoryInptEL.current.value = getTextContent(e.currentTarget);
         categoryInptEL.current.dataset.key = key;
-        // setTypeItmArray(prevArr => [...prevArr.filter(item => item.index !== Number(index)), {index: Number(index), key}]);
         setTypeItmKey(key);
         typeInptEL.current.value = '';
         break;
@@ -186,9 +175,8 @@ function AddProductWindow ({toggle, toggleData, darkMode, lan}) {
             ? discountInptEL.current.value
             : Number(discountInptEL.current.value) || 0,
         }
-        console.log(productData);
-        console.log('imgFile', imgFile.current);
-        addNewProductData(Number(productId), productData);
+        // console.log(productData);
+        addNewProductData(productId, productData);
         break;
       default:
         console.error('Error: unknown action: ', action);
@@ -245,7 +233,6 @@ function AddProductWindow ({toggle, toggleData, darkMode, lan}) {
   
           file ? reader.readAsDataURL(file) : setProductSrc('');
           imgFile.current = file;
-          console.log(file);
         }
 
         previewImage();
@@ -254,6 +241,12 @@ function AddProductWindow ({toggle, toggleData, darkMode, lan}) {
         console.error('Error: unknown type: ', type);
     }
   }
+
+  // console.log('user', user);
+  // console.log('userData', userData);
+  // console.log('itemEL', itemEL.current);
+  // console.log('products', products);
+  // console.log('typeItmKey', typeItmKey);
 
   return (
     <div className={`productWindow${toggle}`} data-action="close_window" onClick={handleClick}>

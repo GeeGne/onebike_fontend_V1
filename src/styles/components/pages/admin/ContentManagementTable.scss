@@ -4,8 +4,8 @@
 .cm {
   display: flex;
   flex-direction: column;
-  // margin-top: 1em;
-  padding-block: 1em;    
+  margin-bottom: 1em;
+  padding-top: 1em;    
   background-color: var(--light-background-color);
   gap: 1em;
   transition: height 0.5s ease;
@@ -43,7 +43,7 @@
       flex-direction: column;
       max-height: 4em;
       overflow: hidden;
-      transition: max-height 0.4s cubic-bezier(1,1.72,.32,.64), opacity 0.5s ease-out;
+      transition: max-height 0.4s cubic-bezier(1,1.72,.32,.64), opacity 0.25s ease-out;
       &:nth-child(2n) {background-color: var(--background-color)}
 
       &.clicked &__info-cont__toggles-cont__edit-btn::before{background-color: var(--secondary-color)}

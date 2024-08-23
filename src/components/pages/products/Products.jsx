@@ -29,7 +29,7 @@ function Products ({category, type, darkMode, lan, onCartProductsChange}) {
 
   const productCategory = type ? type[lan] : category[lan];
   const productCategoryEN = type ? type.en : category.en;
-  const matchedProducts = products.filter(product => checkMatchedProduct(product.category, product.type) && !product.hide);
+  const matchedProducts = products.filter(product => checkMatchedProduct(product.category, product.type) && product.state !== 'hidden');
   const totalProducts = matchedProducts.length;
 
   // const cartProductsData = data => onCartProductsChange(data);

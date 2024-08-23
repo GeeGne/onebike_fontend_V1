@@ -43,6 +43,7 @@ function ContentManagementTable ({darkMode, lan}) {
   const [ toggleAddProductWindow, setToggleAddProductWindow ] = useState('');
 
   const handleToggleAddProductWindow = data => setToggleAddProductWindow(data);
+  const refreshTimerId = useRef(null);
   const itemELRefs = useRef([]);
   const itemInfoELRefs = useRef([]);
   const itemEditELRefs = useRef([]);
@@ -72,7 +73,6 @@ function ContentManagementTable ({darkMode, lan}) {
     if (isTypeItmSelected) {
       let array = [];
 
-      console.log(typeItmArray[i])
       const getTheKey = typeItmArray.filter(list => i === list.index)[0];
       const getTheCategory = menu.filter(list => list.key === getTheKey.key)[0];
       const getTypes = getTheCategory.secondaryList.forEach(list => list.thirdList.forEach(list => array = [...array, list]));
@@ -108,8 +108,6 @@ function ContentManagementTable ({darkMode, lan}) {
     }
   }
   const getProductImgURL = product => `/assets/img/products/${product.category}/${product.type}/${product.id + '-' + product.color}-front.webp`;
-  // const getProductPrice = product => formatNumberWithCommas(calculatePrice(product.price, product.discount));
-  // const isProductInWishlist = product => wishlist.some(item => item.id === product.id);
 
   const saveProductChanges = async (productId, productData) => {
     setActivity(true);
@@ -130,16 +128,17 @@ function ContentManagementTable ({darkMode, lan}) {
   }
 
   const deleteProduct = async (productId, index) => {
-    const findElement = ref => ref.filter(el => Number(el.dataset.index) === Number(index))[0];
+    const findElement = ref => ref.find(el => el.dataset.index === index);
 
     try {
       const productRef = doc(db, 'products', productId);
       await deleteDoc(productRef);
 
       setAlertText(en ? 'Success! product is deleted' : 'تم حذف المنتج بنجاح!')
-
       findElement(itemELRefs.current).style.opacity= '0';
-      setTimeout(() => setRefreshProducts(Math.random()), 500);
+    
+      setTimeout(() => setRefreshProducts(Math.random()), 250);
+      setTimeout(() => findElement(itemELRefs.current).style.opacity= '1', 500);
     } catch(err) {
       console.error('Error deleting product: ', err);
       setAlertText(en ? 'Error deleting product' : 'حصل خطأ في حذف المنتج')
@@ -156,7 +155,7 @@ function ContentManagementTable ({darkMode, lan}) {
       });  
     }
 
-    setItemHeights();
+    if (products) setItemHeights();
   }, []);
 
   const handleClick = e => {
@@ -220,8 +219,7 @@ function ContentManagementTable ({darkMode, lan}) {
             : Number(findElement(discountInptELRefs.current).value) || getProduct().discount,
         }
 
-        console.log(productData);
-
+        // console.log(productData);
         saveProductChanges(productId, productData);
         break;
       default:

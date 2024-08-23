@@ -22,11 +22,10 @@ function NavBottom ({darkMode, lan}) {
   const isWishlistEmpty = wishlist.length === 0;
 
   const handleClick = e => {
-    const {action, path} = e.currentTarget.dataset;
+    const { action } = e.currentTarget.dataset;
 
     switch (action) {
       case 'navigate_to_path':
-        navigate(path);
         setTimeout(() => scroll({top: 0, behavior: 'smooth'}), 500);
         break;
       case 'toggle_wishlist_to_true':
@@ -73,7 +72,7 @@ function NavBottom ({darkMode, lan}) {
   return (
     <section className="navBottom" ref={navBottomEL}>
       <button className={`navBottom__favourite${isWishlistEmpty ? ' empty' : ''}`} aria-label="Toggle Wishlst" data-action="toggle_wishlist_to_true" onClick={handleClick} ref={favouriteBtnEL} />
-      <a className="navBottom__user" to={user ? "/account" : "/account/login"} aria-label="Navigate to Your Account" data-action="navigate_to_path" data-path={user ? "/account" : "/account/login"} />
+      <Link className="navBottom__user" to={user ? "/account" : "/account/login"} aria-label="Navigate to Your Account" data-action="navigate_to_path" onClick={handleClick} />
     </section>
   )
 }
