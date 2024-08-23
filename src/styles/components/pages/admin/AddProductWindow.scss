@@ -1,78 +1,108 @@
 @use '/src/styles/utils/_BreakPoints' as w;
 @use '/src/styles/utils/_StyleKits' as k;
 
-@keyframes grow-and-rotate {
-
-  0% {
-    transform: translate(-50%, -50%) rotate(0) scale(0.5);
-    opacity: 0;
+@keyframes productWindow-toggle-show {
+  from {
+    visibility: hidden; 
+    backdrop-filter: blur(0px); 
+    background-color: transparent;
   }
-
-  20% {
-    transform: translate(-50%, -50%) rotate(20deg) scale(0.6);
-    opacity: 0.5;
+  to {
+    visibility: visible; 
+    backdrop-filter: blur(3px); 
+    background-color: var(--window-background-color);
   }
-
-  40% {
-    transform: translate(-50%, -50%) rotate(60deg) scale(0.7);
-    opacity: 1;
+}
+@keyframes productWindow-toggle-hide {
+  from {
+    visibility: visible; 
+    backdrop-filter: blur(3px); 
+    background-color: var(--window-background-color);
   }
-
-  60% {
-    transform: translate(-50%, -50%) rotate(120deg) scale(0.8);
-    opacity: 1;
+  to {
+    visibility: hidden; 
+    backdrop-filter: blur(0px); 
+    background-color: transparent;
   }
-
-  80% {
-    transform: translate(-50%, -50%) rotate(260deg) scale(0.9);
-    opacity: 1;
-  }
-
-  100% {
-    transform: translate(-50%, -50%) rotate(315deg) scale(1);
-    opacity: 1;
-
-  }
-
 }
 
 .productWindow {
+  visibility: hidden; 
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: var(--window-background-color);
   z-index: 2000;
-  &.show {display: initial}
-  &.hide {display: none}
 
+  animation-duration: 1s;
+  animation-timing-function: linear;
+  animation-fill-mode: both;
+  animation-iteration-count: 1;
+  &.show {animation-name: productWindow-toggle-show}
+  &.hide {animation-name: productWindow-toggle-hide}
+
+  &.show::before {animation-name: grow-and-rotate}
+  &.hide::before {animation-name: shrink-and-rotate}
   &::before {
     content: "";
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%) rotate(45deg);
-    width: 70%;
+    width: 80%;
     aspect-ratio: 1 / 1;
     border-radius: 25%;
     background-color: var(--secondary-color);
+    border: solid var(--primary-color);
+    border-width: 6px 6px 0 0;
     z-index: -1;
-    animation-name: grow-and-rotate;
+    @include w.breakpoint-up(medium) {height: 80%; width: auto}
+
     animation-duration: 1s;
     animation-timing-function: linear;
     animation-fill-mode: both;
     animation-iteration-count: 1;
   }
 
+  &.show::after {animation-name: fade-in}
+  &.hide::after {animation-name: fade-out}
+  &::after {
+    content: "";
+    position: absolute;
+    top: 1em;
+    left: 1em;
+    width: 2em;
+    aspect-ratio: 1 / 1;
+    transform: rotate(45deg);
+    border-radius: 0.5em;
+    background-color: var(--background-color);
+    background-image: var(--add-icon);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    cursor: pointer;
+
+    animation-duration: 1s;
+    animation-timing-function: linear;
+    animation-fill-mode: both;
+    animation-iteration-count: 1;
+  }
+
+  &.show &__edit-cont {animation-name: fade-in}
+  &.hide &__edit-cont {animation-name: fade-out}
   &__edit-cont {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    width: 70%;
+    max-width: 700px;
+    
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-areas: 
+    'img img'
     'nameTitle nameTitle'
     'nameEnInpt nameArInpt'
     'categoryTitle categoryTitle'
@@ -81,18 +111,80 @@
     'priceInpt discountInpt'
     'itemStateInpt saveBtn'
     ;
-    gap: 0.5em;
+    gap: 1em;
     // background-color: var(--secondary-color);
     padding-block: 0.5em;
     padding-inline: 0.5em;
 
+    animation-delay: 0.5s;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-fill-mode: both;
+    animation-iteration-count: 1;
+
+    &__img-cont {grid-area: img}
     &__nameTitle-cont {grid-area: nameTitle}
     &__categoryTitle-cont {grid-area: categoryTitle}
     &__priceTitle-cont {grid-area: priceTitle}
     &__nameEn-inpt {grid-area: nameEnInpt}
     &__nameAr-inpt {grid-area: nameArInpt}
     &__price-inpt {grid-area: priceInpt}
-    &__discount-inpt{grid-area: discountInpt}
+    &__discount-inpt{grid-area: discountInpt}                   
+
+    &__img-cont {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      &__img-wrapper {
+        position: relative;
+        width: 6em;
+        height: 6em;
+        background-color: var(--light-background-color);
+        background-image: var(--add-icon);
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        cursor: pointer;
+
+        &::before {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          z-index: 5;
+          border: dashed 5px hsla(0, 0%, 0%, 0.5);
+          body.dark-theme &{border: dashed 5px hsla(0, 0%, 100%, 0.5);}
+
+        }
+
+        &__imgUpload-inpt {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          opacity: 0;
+          z-index: 15;
+          cursor: pointer;
+        }
+
+        &__img {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          aspect-ratio: 1 / 1;
+          z-index: 10;
+          background-color: var(--light-background-color);
+          cursor: pointer;
+          &.hide {display: none;}
+        }
+      }
+    }
 
     &__nameTitle-cont, 
     &__categoryTitle-cont,
@@ -105,20 +197,11 @@
       &__name-spn,
       &__category-spn,
       &__price-spn {
+        font-size: var(--font-size-small);
+        font-weight: 600;
         color: var(--font-p-color);
         margin-right: auto;
         body.arabic & {margin-left: auto; margin-right: 0}
-      }
-
-      &__enVal-spn,
-      &__arVal-spn,
-      &__categoryVal-spn,
-      &__typeVal-spn,
-      &__priceVal-spn,
-      &__discountVal-spn {
-        font-size: var(--font-size-extraSmall);
-        color: var(--font-p-color);
-        font-weight: 600;
       }
     }
 

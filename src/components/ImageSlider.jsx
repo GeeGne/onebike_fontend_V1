@@ -10,7 +10,6 @@ import DisplayImg from '/src/components/DisplayImg';
 // JSON
 import sliderData from '/src/data/slider.json';
 
-
 function ImageSlider ({darkMode, lan}) {
 
   const [currentImage, setCurrentImage] = useState(null);
@@ -172,7 +171,7 @@ function ImageSlider ({darkMode, lan}) {
         {sliderData.map((data, i) =>
         <li className='imageSlider-container__img-holder__imges' key={data.id}>
           <DisplayImg className='imageSlider-container__img-holder__imges__img' src={data.url} alt={data.alt[lan]} loading={i < 1 ? "eager" : "lazy"} fetchpriority={i < 1 ? "high" : ""} />
-        </li>          
+        </li>  
         )}
         <li className='imageSlider-container__img-holder__imges'><DisplayImg className='imageSlider-container__img-holder__imges__img'  src={firstImage.url} alt={firstImage.alt[lan]} loading="lazy"/></li>
       </ul>

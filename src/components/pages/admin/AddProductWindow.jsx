@@ -16,52 +16,56 @@ import menu from '/src/data/menu.json';
 import { db } from '/src/firebase/fireStore';
 import { getDoc, doc, collection, getDocs, setDoc, updateDoc } from 'firebase/firestore';
 import { storage } from '/src/firebase/storage';
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 // STORE
 import { useDataStore } from '/src/store/store';
 
+// NANOID
+import { nanoid } from 'nanoid';
+
 function AddProductWindow ({toggle, toggleData, darkMode, lan}) {
 
   const { user, userData, products, setRefreshProducts } = useDataStore();
-  const [ typeItmKey, setTypeItmArray ] = useState("");
+  const [ productSrc, setProductSrc ] = useState("");
+  const [ typeItmKey, setTypeItmKey ] = useState("");
   const [ newAlert, setNewAlert ] = useState(0);
   const [ alertText, setAlertText ] = useState(null);
   const [ activity, setActivity ] = useState(false);
+  const imgFile = useRef(null);
 
-  const itemEL = useRef([]);
-  const itemInfoEL = useRef([]);
-  const itemEditEL = useRef([]);
+  const itemEL = useRef(null);
+  const itemInfoEL = useRef(null);
+  const itemEditEL = useRef(null);
+  const productImgEL = useRef(null);
 
-  const titleEnInptEL = useRef([]);
-  const titleArInptEL = useRef([]);
-  const priceInptEL = useRef([]);
-  const discountInptEL = useRef([]);
+  const titleEnInptEL = useRef(null);
+  const titleArInptEL = useRef(null);
+  const priceInptEL = useRef(null);
+  const discountInptEL = useRef(null);
+  const imgUploadInptEL = useRef(null);
 
-  const itemStateContEL = useRef([]);
-  const itemStateInptEL = useRef([]);
+  const itemStateContEL = useRef(null);
+  const itemStateInptEL = useRef(null);
 
-  const categoryContEL = useRef([]);
-  const categoryInptEL = useRef([]);
+  const categoryContEL = useRef(null);
+  const categoryInptEL = useRef(null);
   
-  const typeContEL = useRef([]);
-  const typeLstEL = useRef([]);
-  const typeInptEL = useRef([]);
-
-  const overflowTimerId = useRef(null);
+  const typeContEL = useRef(null);
+  const typeLstEL = useRef(null);
+  const typeInptEL = useRef(null);
 
   const en = lan === 'en';
   const addTypeItmtHTML = () => {
 
     if (typeItmKey) {
-
-      console.log(typeItmKey[i])
+      let array = [];
       const getTheCategory = menu.find(list => list.key === typeItmKey);
       const getTypes = getTheCategory.secondaryList.forEach(list => list.thirdList.forEach(list => array = [...array, list]));
-
+      
       return array.map((item, index) => 
-        <li className="productWindow__edit-cont__type-cont__lst__itm" key={index} data-index={i} data-action="type_option_is_clicked" data-key={item.key} onClick={handleClick}>{item[lan]}</li>
+        <li className="productWindow__edit-cont__type-cont__lst__itm" key={index} data-action="type_option_is_clicked" data-key={item.key} onClick={handleClick}>{item[lan]}</li>
       ) 
-
     } else {
       return <li className="productWindow__edit-cont__type-cont__lst__itm">{en ? 'Please Select a Category' : 'الرجاء اختيار صنف'}</li> 
     }
@@ -92,18 +96,37 @@ function AddProductWindow ({toggle, toggleData, darkMode, lan}) {
   // const getProductPrice = product => formatNumberWithCommas(calculatePrice(product.price, product.discount));
   // const isProductInWishlist = product => wishlist.some(item => item.id === product.id);
 
-  const saveProductChanges = async (productId, productData) => {
+  const clearInputs = () => {
+    titleEnInptEL.current.value = '';
+    titleArInptEL.current.value = '';
+    priceInptEL.current.value = '';
+    discountInptEL.current.value = '';
+    categoryInptEL.current.value = '';
+    typeInptEL.current.value = '';
+    itemStateInptEL.current.value = '';
+    imgUploadInptEL.current.value = '';
+    setProductSrc("");
+    imgFile.current = null;
+  }
+
+  const addNewProductData = async (productId, productData) => {
     setActivity(true);
 
     try {
-      const productRef = doc(db, "products", String(productId));
-      await updateDoc(productRef, productData);
+      const productRef = doc(db, "products", productData.id);
+      await setDoc(productRef, productData);
+
+      const storageRef = ref(storage, getProductImgURL(productData));
+      await uploadBytes(storageRef, imgFile.current);
+  
+      clearInputs();
+      toggleData(' hide');
       setRefreshProducts(Math.random());
-      setAlertText(en ? 'Success! changes has been saved to the product' : 'تم حفظ التغييرات على المنتج بنجاح!')
+      setAlertText(en ? 'Success! new Product is added to the could' : 'تم اضافه منتج جديد  بنجاج!')
     } catch(err) {
       console.error('Error updating product: ', err);
-      setAlertText(en ? 'Error updaing product' : 'حصل خطأ في تعديل المنتج')
-    }
+      setAlertText(en ? 'Error adding updaing product' : 'حصل خطأ في اضافه المنتج')
+    }  
 
     setNewAlert(Math.random());
     setActivity(false);
@@ -118,13 +141,15 @@ function AddProductWindow ({toggle, toggleData, darkMode, lan}) {
   const handleClick = e => {
     const { action, index, key, productId } = e.currentTarget.dataset;
 
-    const findElement = ref => ref.filter(el => Number(el.dataset.index) === Number(index))[0];
     const isELClicked = el => el.classList.contains('clicked');
     const totalHeight = el => el.scrollHeight;
     const getProduct = () => products.filter(item => item.id === Number(productId))[0];
     const getTextContent = el => el.textContent;
 
     switch(action) {
+      case 'close_window':
+        toggleData(' hide')
+        break;
       case 'itemState_option_is_clicked':
         itemStateInptEL.current.value = getTextContent(e.currentTarget);
         itemStateInptEL.current.dataset.key = key;
@@ -132,7 +157,8 @@ function AddProductWindow ({toggle, toggleData, darkMode, lan}) {
       case 'category_option_is_clicked':
         categoryInptEL.current.value = getTextContent(e.currentTarget);
         categoryInptEL.current.dataset.key = key;
-        setTypeItmArray(prevArr => [...prevArr.filter(item => item.index !== Number(index)), {index: Number(index), key}]);
+        // setTypeItmArray(prevArr => [...prevArr.filter(item => item.index !== Number(index)), {index: Number(index), key}]);
+        setTypeItmKey(key);
         typeInptEL.current.value = '';
         break;
       case 'type_option_is_clicked':
@@ -143,25 +169,26 @@ function AddProductWindow ({toggle, toggleData, darkMode, lan}) {
         typeInptEL.current.value = getTextContent(e.currentTarget);
         typeInptEL.current.dataset.key = key;
         break;
-      case 'save_button_is_clicked':
-
+      case 'add_button_is_clicked':
         const productData = {
+          id: nanoid(12),
           title: {
-            en: titleEnInptEL.current.value || getProduct().title.en,
-            ar: titleArInptEL.current.value || getProduct().title.ar,
+            en: titleEnInptEL.current.value || 'No Title exist for this product',
+            ar: titleArInptEL.current.value || 'لايوجد اسم لهذا المنتج',
           },
-          category: categoryInptEL.current.value || getProduct().category,
-          type: categoryInptEL.current.value || getProduct().type,
+          category: categoryInptEL.current.dataset.key || 'accessories',
+          type: typeInptEL.current.dataset.key || 'lights',
           color: 'black',
-          state: findElement(itemStateInptEL.current).dataset.key || getProduct().state,
+          state: itemStateInptEL.current.dataset.key || 'hidden',
           brand: '',
-          price: Number(priceInptEL.current.value) || getProduct().price,
+          price: Number(priceInptEL.current.value) || '1000',
           discount: discountInptEL.current.value.includes('%') 
             ? discountInptEL.current.value
-            : Number(discountInptEL.current.value) || getProduct().discount,
+            : Number(discountInptEL.current.value) || 0,
         }
-
-        saveProductChanges(Number(productId), productData);
+        console.log(productData);
+        console.log('imgFile', imgFile.current);
+        addNewProductData(Number(productId), productData);
         break;
       default:
         console.error('Error: unknown action: ', action);
@@ -169,7 +196,7 @@ function AddProductWindow ({toggle, toggleData, darkMode, lan}) {
   }
 
   const handleFocus = e => {
-    const {type, index} = e.currentTarget.dataset;
+    const { type } = e.currentTarget.dataset;
 
     switch (type) {
       case 'item_state_input':
@@ -188,8 +215,6 @@ function AddProductWindow ({toggle, toggleData, darkMode, lan}) {
 
   const handleBlur = e => {
     const {type, index} = e.currentTarget.dataset;
-    const isELClicked = el => el.classList.contains('clicked');
-    const totalHeight = el => el.scrollHeight
 
     switch (type) {
       case 'item_state_input':
@@ -206,23 +231,48 @@ function AddProductWindow ({toggle, toggleData, darkMode, lan}) {
     }    
   }
 
+  const handleChange = e => {
+    const { type } = e.currentTarget.dataset;
+
+    switch (type) {
+      case 'imgUpload_input':
+        const previewImage = () => {
+          const file = e.currentTarget.files[0];
+          const reader = new FileReader();
+          reader.onloadend = function () {
+            setProductSrc(reader.result);
+          }
+  
+          file ? reader.readAsDataURL(file) : setProductSrc('');
+          imgFile.current = file;
+          console.log(file);
+        }
+
+        previewImage();
+        break;
+      default:
+        console.error('Error: unknown type: ', type);
+    }
+  }
+
   return (
-    <div className={`productWindow${toggle ? ' show' : ' hide'}`} onClick={() => toggleData(!toggle)}>
-      <div className="productWindow__edit-cont" ref={itemEditEL}>
+    <div className={`productWindow${toggle}`} data-action="close_window" onClick={handleClick}>
+      <Alert alertText={alertText} newAlert={newAlert} />
+      <div className="productWindow__edit-cont" ref={itemEditEL} onClick={e => e.stopPropagation()}>
+        <div className="productWindow__edit-cont__img-cont">
+          <div className="productWindow__edit-cont__img-cont__img-wrapper">
+            <input className="productWindow__edit-cont__img-cont__img-wrapper__imgUpload-inpt" type="file" id="file-input" accept="image/*" data-type="imgUpload_input" onChange={handleChange} ref={imgUploadInptEL} />
+            <img className={`productWindow__edit-cont__img-cont__img-wrapper__img${productSrc ? '' : ' hide'}`} src={productSrc} ref={productImgEL} />
+          </div>
+        </div>
         <div className="productWindow__edit-cont__priceTitle-cont">
           <span className="productWindow__edit-cont__priceTitle-cont__price-spn">{en ? 'Price' : 'السعر'}</span>
-          <span className="productWindow__edit-cont__priceTitle-cont__priceVal-spn">200</span>{' / '}
-          <span className="productWindow__edit-cont__priceTitle-cont__discountVal-spn">{"5%"}</span>
         </div>
         <div className="productWindow__edit-cont__categoryTitle-cont">
           <span className="productWindow__edit-cont__categoryTitle-cont__category-spn">{en ? 'Category' : 'التصنيف'}</span>
-          <span className="productWindow__edit-cont__categoryTitle-cont__categoryVal-spn">resr</span>{' / '}
-          <span className="productWindow__edit-cont__categoryTitle-cont__typeVal-spn">ser</span>
         </div>
         <div className="productWindow__edit-cont__nameTitle-cont">
           <span className="productWindow__edit-cont__nameTitle-cont__name-spn">{en ? 'Name' : 'الاسم'}</span>
-          <span className="productWindow__edit-cont__nameTitle-cont__enVal-spn">ser</span>{' / '}
-          <span className="productWindow__edit-cont__nameTitle-cont__arVal-spn">ser</span>
         </div>
         <input className="productWindow__edit-cont__nameEn-inpt" name="titleEn" placeholder={en ? "name in english" : "الاسم بلانجليزي"} ref={titleEnInptEL} />
         <input className="productWindow__edit-cont__nameAr-inpt" name="titleAr" placeholder={en ? "name in arabic" : "الاسم بلعربي"} ref={titleArInptEL} />
@@ -250,7 +300,7 @@ function AddProductWindow ({toggle, toggleData, darkMode, lan}) {
             {addTypeItmtHTML()}
           </ul>
         </div>
-        <button className="productWindow__edit-cont__save-btn" data-action="save_button_is_clicked" onClick={handleClick}>{renderLoadingState(en ? 'Save' : 'حفظ')}</button>
+        <button className="productWindow__edit-cont__save-btn" data-action="add_button_is_clicked" onClick={handleClick}>{renderLoadingState(en ? 'Add' : 'اضافه')}</button>
       </div>
     </div>
   )

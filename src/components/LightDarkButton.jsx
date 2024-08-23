@@ -25,14 +25,8 @@ function LightDarkButton ({onThemeChange}) {
 
   useEffect(() => {
     const saveToLocalStorage = () => isInitialMount.current ? (isInitialMount.current = false) : localStorage.set('darkTheme', darkTheme);
-    const switchToDarkTheme = () => {
-      document.body.classList.add('dark-theme');
-      document.body.classList.remove('light-theme');
-    };
-    const switchToLightTheme = () => {
-      document.body.classList.remove('dark-theme')
-      document.body.classList.add('light-theme')
-    };
+    const switchToDarkTheme = () => document.body.classList.add('dark-theme');
+    const switchToLightTheme = () => document.body.classList.remove('dark-theme');
     darkTheme ? switchToDarkTheme() : switchToLightTheme();
     onThemeChange(darkTheme);
     saveToLocalStorage();

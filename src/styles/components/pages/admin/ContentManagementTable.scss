@@ -22,6 +22,8 @@
       width: 1.5em;
       height: 1.5em;
       &::before {filter: invert(100%)}
+
+      body.arabic & {left: 0.5em; right: auto}
     }
 
     &__spn {
@@ -40,7 +42,7 @@
       flex-direction: column;
       max-height: 4em;
       overflow: hidden;
-      transition: max-height 0.4s cubic-bezier(1,1.72,.32,.64);
+      transition: max-height 0.4s cubic-bezier(1,1.72,.32,.64), opacity 0.5s ease-out;
       &:nth-child(2n) {background-color: var(--background-color)}
 
       &.clicked &__info-cont__toggles-cont__edit-btn::before{background-color: var(--secondary-color)}

@@ -16,7 +16,7 @@ import { useDataStore } from '/src/store/store';
 
 // FIREBASE
 import { db } from '/src/firebase/fireStore';
-import { getDoc, doc, collection, getDocs, setDoc, updateDoc } from 'firebase/firestore';
+import { getDoc, doc, collection, setDoc, updateDoc, deleteDoc } from 'firebase/firestore';
 import { storage } from '/src/firebase/storage';
 
 // JSON
@@ -27,6 +27,9 @@ import Redirector from '/src/utils/Redirector';
 
 // NANOID
 import { nanoid } from 'nanoid';
+
+// UTILS
+import formatNumberWithCommas from '/src/utils/formatNumberWithCommas';
 
 // ASSETS
 import img from '/assets/img/products/GIYO Small Bike tire Pump Schrader.jpg';
@@ -44,8 +47,8 @@ function ContentManagementTable ({darkMode, lan}) {
   const [ newAlert, setNewAlert ] = useState(0);
   const [ alertText, setAlertText ] = useState(null);
   const [ activity, setActivity ] = useState(false);
-  const [ toggleAddProductWindow, setToggleAddProductWindow ] = useState(false);
-  console.log(toggleAddProductWindow);
+  const [ toggleAddProductWindow, setToggleAddProductWindow ] = useState('');
+
   const handleToggleAddProductWindow = data => setToggleAddProductWindow(data);
   const itemELRefs = useRef([]);
   const itemInfoELRefs = useRef([]);
@@ -119,8 +122,9 @@ function ContentManagementTable ({darkMode, lan}) {
     setActivity(true);
 
     try {
-      const productRef = doc(db, "products", String(productId));
+      const productRef = doc(db, "products", productId);
       await updateDoc(productRef, productData);
+
       setRefreshProducts(Math.random());
       setAlertText(en ? 'Success! changes has been saved to the product' : 'تم حفظ التغييرات على المنتج بنجاح!')
     } catch(err) {
@@ -131,13 +135,26 @@ function ContentManagementTable ({darkMode, lan}) {
     setNewAlert(Math.random());
     setActivity(false);
   }
-  
-  // console.log('user', user);
-  // console.log('userData', userData);
-  // console.log('itemELRefs', itemELRefs.current);
-  // console.log('products', products);
-  // console.log('typeItmArray', typeItmArray);
 
+  const deleteProduct = async (productId, index) => {
+    const findElement = ref => ref.filter(el => Number(el.dataset.index) === Number(index))[0];
+
+    try {
+      const productRef = doc(db, 'products', productId);
+      await deleteDoc(productRef);
+
+      setAlertText(en ? 'Success! product is deleted' : 'تم حذف المنتج بنجاح!')
+
+      findElement(itemELRefs.current).style.opacity= '0';
+      setTimeout(() => setRefreshProducts(Math.random()), 500);
+    } catch(err) {
+      console.error('Error deleting product: ', err);
+      setAlertText(en ? 'Error deleting product' : 'حصل خطأ في حذف المنتج')
+    }
+
+    setNewAlert(Math.random());
+  }
+  
   useEffect(() => {
     const setItemHeights = () => {
       itemELRefs.current.forEach((el, i) => {
@@ -147,7 +164,7 @@ function ContentManagementTable ({darkMode, lan}) {
     }
 
     setItemHeights();
-  }, [products]);
+  }, []);
 
   const handleClick = e => {
     const { action, index, key, productId } = e.currentTarget.dataset;
@@ -155,7 +172,7 @@ function ContentManagementTable ({darkMode, lan}) {
     const findElement = ref => ref.filter(el => Number(el.dataset.index) === Number(index))[0];
     const isELClicked = el => el.classList.contains('clicked');
     const totalHeight = el => el.scrollHeight;
-    const getProduct = () => products.filter(item => item.id === Number(productId))[0];
+    const getProduct = () => products.filter(item => String(item.id) === productId)[0];
     const getTextContent = el => el.textContent;
 
     switch(action) {
@@ -173,10 +190,10 @@ function ContentManagementTable ({darkMode, lan}) {
         }
         break;
       case 'delete_button_is_clicked':
-        console.log(index);
+        deleteProduct(productId, index);
         break;
       case 'add_product_button_is_clicked':
-        setToggleAddProductWindow(prevVal => !prevVal);
+        setToggleAddProductWindow(' show');
         break;
       case 'itemState_option_is_clicked':
         findElement(itemStateInptELRefs.current).value = getTextContent(e.currentTarget);
@@ -203,8 +220,8 @@ function ContentManagementTable ({darkMode, lan}) {
             en: findElement(titleEnInptELRefs.current).value || getProduct().title.en,
             ar: findElement(titleArInptELRefs.current).value || getProduct().title.ar,
           },
-          category: findElement(categoryInptELRefs.current).value || getProduct().category,
-          type: findElement(categoryInptELRefs.current).value || getProduct().type,
+          category: findElement(categoryInptELRefs.current).dataset.key || getProduct().category,
+          type: findElement(typeInptELRefs.current).dataset.key || getProduct().type,
           color: 'black',
           state: findElement(itemStateInptELRefs.current).dataset.key || getProduct().state,
           brand: '',
@@ -259,6 +276,12 @@ function ContentManagementTable ({darkMode, lan}) {
     }    
   }
 
+  // console.log('user', user);
+  // console.log('userData', userData);
+  // console.log('itemELRefs', itemELRefs.current);
+  // console.log('products', products);
+  // console.log('typeItmArray', typeItmArray);
+
   return (
     <section className="cm">
       <AddProductWindow toggle={toggleAddProductWindow} toggleData={handleToggleAddProductWindow} darkMode={darkMode} lan={lan} />
@@ -282,18 +305,18 @@ function ContentManagementTable ({darkMode, lan}) {
               <span className="cm__lst__itm__info-cont__id-cont__id">{item.id}</span>
             </div>
             <div className="cm__lst__itm__info-cont__price-cont">
-              <span className="cm__lst__itm__info-cont__price-cont__price">{item.price}</span>{' - '}
+              <span className="cm__lst__itm__info-cont__price-cont__price">{formatNumberWithCommas(item.price)}</span>{' - '}
               <span className="cm__lst__itm__info-cont__price-cont__discount" data-index={i}>4%</span>
             </div>
             <div className="cm__lst__itm__info-cont__toggles-cont">
-              <button className="cm__lst__itm__info-cont__toggles-cont__delete-btn" aria-label="Delete Item" data-action="delete_button_is_clicked" data-index={i} onClick={handleClick} />
+              <button className="cm__lst__itm__info-cont__toggles-cont__delete-btn" aria-label="Delete Item" data-action="delete_button_is_clicked" data-index={i} data-product-id={item.id} onClick={handleClick} />
               <button className="cm__lst__itm__info-cont__toggles-cont__edit-btn" aria-label="Edit Item" data-action="edit_button_is_clicked" data-index={i} onClick={handleClick} />
             </div> 
           </div>
           <div className="cm__lst__itm__edit-cont" data-index={i} ref={el => itemEditELRefs.current[i] = el}>
             <div className="cm__lst__itm__edit-cont__priceTitle-cont">
               <span className="cm__lst__itm__edit-cont__priceTitle-cont__price-spn">{en ? 'Price' : 'السعر'}</span>
-              <span className="cm__lst__itm__edit-cont__priceTitle-cont__priceVal-spn">{item.price}</span>{' / '}
+              <span className="cm__lst__itm__edit-cont__priceTitle-cont__priceVal-spn">{formatNumberWithCommas(item.price)}</span>{' / '}
               <span className="cm__lst__itm__edit-cont__priceTitle-cont__discountVal-spn">{"5%"}</span>
             </div>
             <div className="cm__lst__itm__edit-cont__categoryTitle-cont">
