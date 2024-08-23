@@ -15,7 +15,7 @@ import {useCartStore, useOrderStore, useDataStore} from '/src/store/store';
 import cartReducer from '/src/reducers/cartReducer';
 
 // DATA
-import products from '/src/data/products';
+// import products from '/src/data/products';
 
 // UTILS
 import {CartProductsContext} from '/src/utils/myContext';
@@ -44,7 +44,7 @@ function CartSlider ({darkMode, lan}) {
   } = useCartStore();
   const setHeadToCheckouts = useOrderStore(state => state.setHeadToCheckouts);
   const headToCheckouts = useOrderStore(state => state.headToCheckouts);
-  const user = useDataStore(state => state.user);
+  const { user, products } = useDataStore();
   const cartContainerElement = useRef(null);  
   const sliderElement = useRef(null);
   const cartProductsELS = useRef([]);
@@ -56,7 +56,7 @@ function CartSlider ({darkMode, lan}) {
 
   let totalPrice = 0;
   cart.forEach(list => (totalPrice += list.quantityPrice));
-  const getProductImgURL = product => `/assets/img/products/${product.category}/${product.type}/${product.id + '-' + product.color.en}-front.webp`;
+  const getProductImgURL = product => `/assets/img/products/${product.category}/${product.type}/${product.id + '-' + product.color}-front.webp`;
   const getProduct = id => products.filter(product => product.id === id)[0];
 
   useEffect(() => {

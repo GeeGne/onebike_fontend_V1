@@ -1,6 +1,9 @@
 // HOOKS
 import React, {useState, useRef, useEffect} from 'react';
 
+// COMPONENTS
+import DisplayWebImg from '/src/components/DisplayWebImg';
+
 // SCSS
 import '/src/styles/components/pages/checkout/OrderSummary.scss';
 
@@ -17,7 +20,7 @@ function OrderSummary ({darkMode, lan, order, hidePrices}) {
         {products.map(item => 
         <li className="orderSummary__products__product" key={item.id}>
           <div className="orderSummary__products__product__img-quan">
-            <img className="orderSummary__products__product__img-quan__img" src={`/assets/img/products/${item.product.category}/${item.product.type}/${item.product.id + '-' + item.product.color.en}-front.webp`} />
+            <DisplayWebImg className="orderSummary__products__product__img-quan__img" src={`/assets/img/products/${item.product.category}/${item.product.type}/${item.product.id + '-' + item.product.color}-front.webp`} />
             <div className="orderSummary__products__product__img-quan__quan">{item.quantity}</div>
           </div>
           <span className="orderSummary__products__product__description">{item.product.title[lan]}</span>
