@@ -15,16 +15,9 @@ import calculatePrice from '/src/utils/formatNumberWithCommas';
 import products from '/src/data/products.json';
 
 // ASSETS
-import img from '/assets/img/products/GIYO Small Bike tire Pump Schrader.jpg';
-import doubleArrowPrimary from '/assets/img/icons/keyboard_double_arrow_right_primary.svg';
-import heart from '/assets/img/icons/heart.svg';
-import deleteIcon from '/assets/img/icons/delete.svg';
 import heartBrokenIcon from '/assets/img/icons/heart_broken.svg';
 
 // ASSETS - DARKMODE
-import doubleArrowSecondary from '/assets/img/icons/keyboard_double_arrow_right_secondary.svg';
-import heartDarkMode from '/assets/img/icons/heart_darkMode.svg';
-import deleteDarkModeIcon from '/assets/img/icons/delete_darkMode.svg';
 import heartBrokenDarkmodeIcon from '/assets/img/icons/heart_broken_darkMode.svg';
 
 function WishlistSlider ({darkMode, lan}) {

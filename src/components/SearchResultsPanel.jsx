@@ -21,22 +21,6 @@ import {useCartStore} from '/src/store/store';
 import formatNumberWithCommas from '/src/utils/formatNumberWithCommas';
 import calculatePrice from '/src/utils/calculatePrice';
 
-// ICONS
-import closeIcon from '/assets/img/icons/close.svg';
-import cartIcon from '/assets/img/icons/shopping_cart.svg';
-
-// ICONS - DARKMODE
-import closeIconDarkMode from '/assets/img/icons/close_darkMode.svg';
-import cartIconDarkMode from '/assets/img/icons/shopping_cart_darkMode.svg';
-
-// product img test
-import productIMG from '/assets/img/products/GIYO Small Bike tire Pump Schrader.jpg';
-import productIMG2 from '/assets/img/products/Giant Bicycle Road full Carbon.avif';
-import productIMG3 from '/assets/img/products/RIDE 12 Chili Red Carbon Grey 2023.avif';
-import productIMG4 from '/assets/img/products/Seymour Oceanweave 1.3 H2O.avif';
-import brandLogo from '/assets/img/logo/trek.webp';
-import brandLogo2 from '/assets/img/logo/giant.webp';
-import brandLogo3 from '/assets/img/logo/evoc.webp';
 
 function SearchResultsPanel ({darkMode, lan}) {
 

@@ -23,7 +23,6 @@ import calculatePrice from '/src/utils/calculatePrice';
 import cleanseString from '/src/utils/cleanseString';
 
 // ASSETS
-import img from '/assets/img/products/GIYO Small Bike tire Pump Schrader.jpg';
 import doubleArrowPrimary from '/assets/img/icons/keyboard_double_arrow_right_primary.svg';
 import heart from '/assets/img/icons/heart.svg';
 import heartFill from '/assets/img/icons/heart_fill.svg';
