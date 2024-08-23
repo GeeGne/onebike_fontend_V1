@@ -3,16 +3,17 @@ import React, {useState, useEffect, useRef} from 'react';
 import {useNavigate} from 'react-router-dom';
 
 // COMPONENTS
+import DisplayWebImg from '/src/components/DisplayWebImg';
 import Alert from '/src/components/Alert';
 
 // STORE
-import {useWishlistStore, useCartStore} from '/src/store/store';
+import {useWishlistStore, useCartStore, useDataStore} from '/src/store/store';
 
 // SCSS
 import '/src/styles/components/AdvertTile.scss';
 
 // DATA
-import products from '/src/data/products.json';
+// import products from '/src/data/products.json';
 
 // UTILS
 import calculateDiscountPercantage from '/src/utils/calculateDiscountPercantage';
@@ -33,10 +34,11 @@ import heartDarkMode from '/assets/img/icons/heart_darkMode.svg';
 
 function AdvertTile ({darkMode, lan, type}) {
   
-  const {addProductToCart, removedProductFromCart} = useCartStore();
-  const {wishlist, addProductToWishlist, removeProductFromWishlist} = useWishlistStore();
-  const [newAlert, setNewAlert] = useState(0);
-  const [alertText, setAlertText] = useState(null);
+  const { addProductToCart, removedProductFromCart } = useCartStore();
+  const { products } = useDataStore();
+  const { wishlist, addProductToWishlist, removeProductFromWishlist } = useWishlistStore();
+  const [ newAlert, setNewAlert ] = useState(0);
+  const [ alertText, setAlertText ] = useState(null);
 
   const listEL = useRef(null);
   const productConEL = useRef(null);
@@ -47,7 +49,7 @@ function AdvertTile ({darkMode, lan, type}) {
   const navigate = useNavigate();  
   const en = lan === "en";
   const nowStyle = {color: "var(--primary-color)"}
-  const getProductImgURL = product => `/assets/img/products/${product.category}/${product.type}/${product.id + '-' + product.color.en}-front.webp`;
+  const getProductImgURL = product => `/assets/img/products/${product.category}/${product.type}/${product.id + '-' + product.color}-front.webp`;
   const getProductPrice = product => formatNumberWithCommas(calculatePrice(product.price, product.discount));
   const isProductInWishlist = product => wishlist.some(item => item.id === product.id);
 
@@ -74,7 +76,7 @@ function AdvertTile ({darkMode, lan, type}) {
         observerRef.current.disconnect();
       }
     };
-  }, [/* lan */]);
+  }, [products]);
 
   const handleCategoryType = product => {
     const {categoryType, name} = type;
@@ -82,9 +84,9 @@ function AdvertTile ({darkMode, lan, type}) {
     switch (categoryType) {
       case 'type':
       case 'category':
-        return product.hide ? false : product[categoryType] === cleanseString(name.en);
+        return product.state === 'hidden' ? false : product[categoryType] === cleanseString(name.en);
       case 'discount':
-        return product.hide ? false : product[categoryType] !== false;
+        return product.state === 'hidden' ? false : product[categoryType];
       default:
         console.error('Error: unknown categoryType', categoryType);
     }
@@ -125,29 +127,29 @@ function AdvertTile ({darkMode, lan, type}) {
         listEL.current.scrollBy({left: productConWidth + gapLength, behavior: "smooth"});
         break;
       case 'add_product_to_wishlist':
-        setAlertText(`${en ? '' : 'تم اضافه'} ${getProduct(Number(productId)).title[lan]} ${en ? 'is added to Wishlist!' : 'الى المفضله!'}`);
+        setAlertText(`${en ? '' : 'تم اضافه'} ${getProduct(productId).title[lan]} ${en ? 'is added to Wishlist!' : 'الى المفضله!'}`);
         setNewAlert(Math.random());
         e.target.style.opacity = '0';
         clearTimeout(addTimerID.current);
         addTimerID.current = setTimeout(() => {
           e.target.style.opacity = '1';
-          addProductToWishlist(getProduct(Number(productId)));
+          addProductToWishlist(getProduct(productId));
         }, 250);
         break;
       case 'remove_product_from_wishlist':
-        setAlertText(`${en ? '' : 'تم ازاله'} ${getProduct(Number(productId)).title[lan]} ${en ? 'is removed from Wishlist!' : 'من المفضله!'}`);
+        setAlertText(`${en ? '' : 'تم ازاله'} ${getProduct(productId).title[lan]} ${en ? 'is removed from Wishlist!' : 'من المفضله!'}`);
         setNewAlert(Math.random());
         e.target.style.opacity = '0';
         clearTimeout(removeTimerID.current);
         removeTimerID.current = setTimeout(() => {
           e.target.style.opacity = '1';
-          removeProductFromWishlist(getProduct(Number(productId)));
+          removeProductFromWishlist(getProduct(productId));
         }, 250)
         break;
       case 'add_to_cart':
         const amount = 1;
-        addProductToCart(getProduct(Number(productId)), amount);
-        setAlertText(`${en ? '' : 'تم اضافه'} ${getProduct(Number(productId)).title[lan]} ${en ? 'is added to Cart!' : 'الى السله!'}`);
+        addProductToCart(getProduct(productId), amount);
+        setAlertText(`${en ? '' : 'تم اضافه'} ${getProduct(productId).title[lan]} ${en ? 'is added to Cart!' : 'الى السله!'}`);
         setNewAlert(Math.random());
         break;
       default:
@@ -168,12 +170,12 @@ function AdvertTile ({darkMode, lan, type}) {
         <button className="advertTile__list__right-arr-btn" aria-label="Right Arrow" data-action="scroll_right" onClick={handleClick}></button>
         <ul className="advertTile__list__products" ref={listEL}>
           {getProducts.map((product, i) => 
-          <li className={`advertTile__list__products__product --slide-to-left${product.outOfStock ? ' out-of-stock' : ''}`} key={product.id} ref={productConEL}>
+          <li className={`advertTile__list__products__product --slide-to-left${product.state === 'out-of-stock' ? ' out-of-stock' : ''}`} key={product.id} ref={productConEL}>
             {isProductInWishlist(product) 
             ? <button className="advertTile__list__products__product__heart-btn added-to-wishlist" aria-label="Remove product from wishlist" data-action="remove_product_from_wishlist" data-product-id={product.id} onClick={handleClick} />
             : <button className="advertTile__list__products__product__heart-btn" aria-label="Add product to wishlist" data-action="add_product_to_wishlist" data-product-id={product.id} onClick={handleClick} />
             }
-            <img className="advertTile__list__products__product__img" src={getProductImgURL(product)} alt={product.title[lan]} loading={i <= 3 ? "eager" : "lazy"} fetchpriority={i <= 3 ? "high" : ""} />
+            <DisplayWebImg className="advertTile__list__products__product__img" src={getProductImgURL(product)} alt={product.title[lan]} loading={i <= 3 ? "eager" : "lazy"} fetchpriority={i <= 3 ? "high" : ""} />
             {product.discount && <div className="advertTile__list__products__product__discount">{lan === 'ar' ? 'خصم ' : ''}{calculateDiscountPercantage(product.price, product.discount)}{en ? ' off' : ''}</div>}
             <h3 className="advertTile__list__products__product__description">{product.title[lan]}</h3>
             {product.brand && <img className="advertTile__list__products__product__brand-img" alt={capitalizeFirstLetter(product.brand) + ' Logo'} loading="lazy" src={`/assets/img/logo/${product.brand}.webp`}/>}

@@ -2,6 +2,9 @@
 import React, {useState, useEffect, useRef, useContext, useReducer} from 'react';
 import {useNavigate} from 'react-router-dom';
 
+// COMPONETNS
+import DisplayWebImg from '/src/components/DisplayWebImg';
+
 // SCSS
 import '/src/styles/components/header/navbar/CartSlider.scss';
 
@@ -29,15 +32,6 @@ import cartIcon from '/assets/img/icons/shopping_cart.svg';
 // ICONS - DARKMODE
 import closeIconDarkMode from '/assets/img/icons/close_darkMode.svg';
 import cartIconDarkMode from '/assets/img/icons/shopping_cart_darkMode.svg';
-
-// product img test
-import productIMG from '/assets/img/products/GIYO Small Bike tire Pump Schrader.jpg';
-import productIMG2 from '/assets/img/products/Giant Bicycle Road full Carbon.avif';
-import productIMG3 from '/assets/img/products/RIDE 12 Chili Red Carbon Grey 2023.avif';
-import productIMG4 from '/assets/img/products/Seymour Oceanweave 1.3 H2O.avif';
-import brandLogo from '/assets/img/logo/trek.webp';
-import brandLogo2 from '/assets/img/logo/giant.webp';
-import brandLogo3 from '/assets/img/logo/evoc.webp';
 
 function CartSlider ({darkMode, lan}) {
 
@@ -89,19 +83,19 @@ function CartSlider ({darkMode, lan}) {
 
   const handleClick = e => {
     const {type, productId} = e.target.dataset;
-    const getElement = (els, id) => els.filter(el => Number(el.dataset.productId) === id)[0];
+    const getElement = (els, id) => els.filter(el => el.dataset.productId === id)[0];
     const styleProductWhenRemoved = productId => getElement(cartProductsELS.current, productId).style.opacity = '0';
 
     switch(type) {
       case 'remove_from_cart':
-        styleProductWhenRemoved(Number(productId));
-        setTimeout(() => removeProductFromCart(getProduct(Number(productId))), 250);
+        styleProductWhenRemoved(productId);
+        setTimeout(() => removeProductFromCart(getProduct(productId)), 250);
         break;
       case 'increase_amount_by_one':
-        addProductToCart(getProduct(Number(productId)), 1);
+        addProductToCart(getProduct(productId), 1);
         break;
       case 'decrease_amount_by_one':
-        addProductToCart(getProduct(Number(productId)), -1);
+        addProductToCart(getProduct(productId), -1);
         break;
       case 'exit_slider':
         setCartToggle(false);
@@ -155,7 +149,7 @@ function CartSlider ({darkMode, lan}) {
         <ul className="cartSlider__slider__products">
           {cart.map((list, i) =>
           <li className="cartSlider__slider__products__product" key={list.id} data-product-id={list.product.id} ref={el => addRef('cartProductsELS', el, i)}>
-            <img className="cartSlider__slider__products__product__image" src={getProductImgURL(list.product)} alt={list.product.title[lan]} loading={i <= 3 ? "eager" : "lazy"} fetchpriority={i <= 3 ? "high" : ""} />
+            <DisplayWebImg className="cartSlider__slider__products__product__image" src={getProductImgURL(list.product)} alt={list.product.title[lan]} loading={i <= 3 ? "eager" : "lazy"} fetchpriority={i <= 3 ? "high" : ""} />
             <a className="cartSlider__slider__products__product__title">{list.product.title[lan]}</a>
             <div className="cartSlider__slider__products__product__price">{en ? 'S.P' : 'ل.س'} {formatNumberWithCommas(list.quantityPrice)}</div>
             <div className="cartSlider__slider__products__product__toggles">

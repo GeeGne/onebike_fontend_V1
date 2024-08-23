@@ -8,6 +8,7 @@
   padding-block: 1em;    
   background-color: var(--light-background-color);
   gap: 1em;
+  transition: height 0.5s ease;
 
   &__header-row {
     position: relative;

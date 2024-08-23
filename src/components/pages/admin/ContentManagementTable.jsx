@@ -24,6 +24,7 @@ import menu from '/src/data/menu.json';
 
 // UTILS
 import Redirector from '/src/utils/Redirector';
+import calculateDiscountPercantage from '/src/utils/calculateDiscountPercantage';
 
 // NANOID
 import { nanoid } from 'nanoid';
@@ -209,10 +210,6 @@ function ContentManagementTable ({darkMode, lan}) {
         findElement(typeInptELRefs.current).value = getTextContent(e.currentTarget);
         findElement(typeInptELRefs.current).dataset.key = key;
         break;
-      case 'add_product_button_is_clicked':
-        findElement(typeInptELRefs.current).value = getTextContent(e.currentTarget);
-        findElement(typeInptELRefs.current).dataset.key = key;
-        break;
       case 'save_button_is_clicked':
 
         const productData = {
@@ -231,7 +228,9 @@ function ContentManagementTable ({darkMode, lan}) {
             : Number(findElement(discountInptELRefs.current).value) || getProduct().discount,
         }
 
-        saveProductChanges(Number(productId), productData);
+        console.log(productData);
+
+        saveProductChanges(productId, productData);
         break;
       default:
         console.error('Error: unknown action: ', action);
@@ -306,7 +305,7 @@ function ContentManagementTable ({darkMode, lan}) {
             </div>
             <div className="cm__lst__itm__info-cont__price-cont">
               <span className="cm__lst__itm__info-cont__price-cont__price">{formatNumberWithCommas(item.price)}</span>{' - '}
-              <span className="cm__lst__itm__info-cont__price-cont__discount" data-index={i}>4%</span>
+              <span className="cm__lst__itm__info-cont__price-cont__discount" data-index={i}>{item.discount ? calculateDiscountPercantage(item.price, item.discount) : '--'}</span>
             </div>
             <div className="cm__lst__itm__info-cont__toggles-cont">
               <button className="cm__lst__itm__info-cont__toggles-cont__delete-btn" aria-label="Delete Item" data-action="delete_button_is_clicked" data-index={i} data-product-id={item.id} onClick={handleClick} />
@@ -317,7 +316,7 @@ function ContentManagementTable ({darkMode, lan}) {
             <div className="cm__lst__itm__edit-cont__priceTitle-cont">
               <span className="cm__lst__itm__edit-cont__priceTitle-cont__price-spn">{en ? 'Price' : 'السعر'}</span>
               <span className="cm__lst__itm__edit-cont__priceTitle-cont__priceVal-spn">{formatNumberWithCommas(item.price)}</span>{' / '}
-              <span className="cm__lst__itm__edit-cont__priceTitle-cont__discountVal-spn">{"5%"}</span>
+              <span className="cm__lst__itm__edit-cont__priceTitle-cont__discountVal-spn">{item.discount ? calculateDiscountPercantage(item.price, item.discount) : '--'}</span>
             </div>
             <div className="cm__lst__itm__edit-cont__categoryTitle-cont">
               <span className="cm__lst__itm__edit-cont__categoryTitle-cont__category-spn">{en ? 'Category' : 'التصنيف'}</span>
