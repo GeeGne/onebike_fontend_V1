@@ -32,14 +32,6 @@ import { nanoid } from 'nanoid';
 // UTILS
 import formatNumberWithCommas from '/src/utils/formatNumberWithCommas';
 
-// ASSETS
-import img from '/assets/img/products/GIYO Small Bike tire Pump Schrader.jpg';
-import doubleArrowPrimary from '/assets/img/icons/keyboard_double_arrow_right_primary.svg';
-
-// ASSETS - DARKMODE
-import doubleArrowSecondary from '/assets/img/icons/keyboard_double_arrow_right_secondary.svg';
-
-
 function ContentManagementTable ({darkMode, lan}) {
 
   const array = [1, 2, 3, 4];

@@ -26,19 +26,6 @@ import menu from '/src/data/menu.json';
 // UTILS
 import Redirector from '/src/utils/Redirector';
 
-// NANOID
-import { nanoid } from 'nanoid';
-
-// ASSETS
-import img from '/assets/img/products/GIYO Small Bike tire Pump Schrader.jpg';
-import doubleArrowPrimary from '/assets/img/icons/keyboard_double_arrow_right_primary.svg';
-import heart from '/assets/img/icons/heart.svg';
-import heartFill from '/assets/img/icons/heart_fill.svg';
-
-// ASSETS - DARKMODE
-import doubleArrowSecondary from '/assets/img/icons/keyboard_double_arrow_right_secondary.svg';
-import heartDarkMode from '/assets/img/icons/heart_darkMode.svg';
-
 function Admin ({darkMode, lan}) {
 
   const { user, userData, products, setRefreshProducts } = useDataStore();

@@ -2,16 +2,16 @@
 import React, {useState, useEffect, useRef, useReducer} from 'react';
 
 // COMPONENTS
+import DisplayWebImg from '/src/components/DisplayWebImg';
 import Alert from '/src/components/Alert';
 
 // STORE
-import {useWishlistStore, useCartStore} from '/src/store/store';
+import { useWishlistStore, useCartStore, useDataStore } from '/src/store/store';
 
 // SCSS
 import '/src/styles/components/pages/products/AdvertList.scss';
 
 // JSON
-import products from '/src/data/products.json';
 
 // REDUCERS
 import cartReducer from '/src/reducers/cartReducer.js';
@@ -22,8 +22,9 @@ import calculatePrice from '/src/utils/calculatePrice.js'
 import calculateDiscountPercantage from '/src/utils/calculateDiscountPercantage.js'
 import fetchElementById from '/src/utils/fetchElementById.js'
 
-function AdvertList ({darkMode, lan, matchedProducts, onCartProductsChange}) {
+function AdvertList ({darkMode, lan, matchedProducts}) {
 
+  const { products } = useDataStore();
   const {wishlist, addProductToWishlist, removeProductFromWishlist} = useWishlistStore();
   const {addProductToCart, removeProductFromCart} = useCartStore();
   const [loadLimit, setLoadLimit] = useState(0);
@@ -39,7 +40,7 @@ function AdvertList ({darkMode, lan, matchedProducts, onCartProductsChange}) {
   const en = lan === 'en';
   const displayedProducts = matchedProducts.slice(0, loadLimit);
   const nowStyle = {color: "var(--primary-color)"}
-  const getProductImgURL = product => `/assets/img/products/${product.category}/${product.type}/${product.id + '-' + product.color.en}-front.webp`;
+  const getProductImgURL = product => `/assets/img/products/${product.category}/${product.type}/${product.id + '-' + product.color}-front.webp`;
   const getProductPrice = product => formatNumberWithCommas(calculatePrice(product.price, product.discount));
   const isProductInWishlist = product => wishlist.some(item => item.id === product.id);
 
@@ -126,7 +127,7 @@ function AdvertList ({darkMode, lan, matchedProducts, onCartProductsChange}) {
             ? <button className="advertList__advert-sctn__grid__product__favourite added-to-wishlist" data-type="remove_product_from_wishlist" data-product-id={product.id} onClick={handleClick} />
             : <button className="advertList__advert-sctn__grid__product__favourite" data-type="add_product_to_wishlist" data-product-id={product.id} onClick={handleClick} />
             }
-            <img className="advertList__advert-sctn__grid__product__img" src={getProductImgURL(product)} alt={product.title[lan]} loading={i <= 5 ? "eager" : "lazy"} fetchpriority={i <= 5 ? "high" : ""} />
+            <DisplayWebImg className="advertList__advert-sctn__grid__product__img" src={getProductImgURL(product)} alt={product.title[lan]} loading={i <= 5 ? "eager" : "lazy"} fetchpriority={i <= 5 ? "high" : ""} />
             {product.discount && <h3 className="advertList__advert-sctn__grid__product__discount">{lan === 'ar' ? 'خصم ' : ''}{calculateDiscountPercantage(product.price, product.discount)}{en ? ' off' : ''}</h3>}
             <h3 className="advertList__advert-sctn__grid__product__description">{product.title[lan]}</h3>
             {product.brand && <img className="advertList__advert-sctn__grid__product__brand-img" src={`/assets/img/logo/${product.brand}.webp`}/>}

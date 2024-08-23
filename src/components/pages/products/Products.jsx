@@ -13,14 +13,17 @@ import NeedHelp from '../../NeedHelp';
 import '/src/styles/components/pages/products/Products.scss';
 
 // JSON
-import products from '/src/data/products.json';
-// import products from '/src/data/products copy.json';
 
 // UTILS
 import capitalizeFirstLetter from '/src/utils/capitalizeFirstLetter.js';
 import cleanseString from '/src/utils/cleanseString.js';
 
+// STORE 
+import { useDataStore } from '/src/store/store';
+
 function Products ({category, type, darkMode, lan, onCartProductsChange}) {
+
+  const { products } = useDataStore();
   const pageURL = window.location.href;
   const checkMatchedProduct = (category, type) => category === cleanseString(productCategoryEN) || type  === cleanseString(productCategoryEN)
 
