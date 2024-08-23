@@ -3,6 +3,9 @@ import React, {useState, useRef, useEffect} from 'react';
 import {useNavigate} from 'react-router-dom';
 import {Helmet} from 'react-helmet-async';
 
+// COMPONENTS
+import DisplayWebImg from '/src/components/DisplayWebImg';
+
 // FIREBASE
 import {auth} from '/src/firebase/authSignUp';
 import {signOut, updateProfile, signInWithEmailAndPassword, onAuthStateChanged} from "firebase/auth";
