@@ -92,7 +92,7 @@ function AddProductWindow ({toggle, toggleData, darkMode, lan}) {
         return '';
     }
   }
-  const getProductImgURL = product => `/assets/img/products/${product.category}/${product.type}/${product.id + '-' + product.color}-front.webp`;
+  const getProductImgURL = product => `/assets/img/products/${product.id}/main.webp`;
 
   const clearInputs = () => {
     titleEnInptEL.current.value = '';

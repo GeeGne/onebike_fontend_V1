@@ -3,6 +3,7 @@ import React, {useEffect, useState, useRef} from 'react';
 import {useNavigate} from 'react-router-dom';
 
 // COMPONENTS
+import DisplayWebImg from '/src/components/DisplayWebImg';
 import Alert from '/src/components/Alert';
 import BreadCrumb from '/src/components/BreadCrumb';
 
@@ -40,7 +41,7 @@ function Cart ({darkMode, lan}) {
 
   let totalPrice = 0;
   cart.forEach(list => (totalPrice += list.quantityPrice));
-  const getProductImgURL = product => `/assets/img/products/${product.category}/${product.type}/${product.id + '-' + product.color.en}-front.webp`;
+  const getProductImgURL = product => `/assets/img/products/${product.id}/main.webp`;
   const getProduct = id => products.filter(product => product.id === id)[0];
 
   useEffect(() => {
@@ -130,7 +131,7 @@ function Cart ({darkMode, lan}) {
         <ul className="cart__products-sec__products">
           {cart.map((list, i) => 
           <li className="cart__products-sec__products__product --pop-in" key={list.id} data-product-id={list.product.id} ref={el => addRef('cartProductsELS', el, i)}>
-            <img className="cart__products-sec__products__product__img" src={getProductImgURL(list.product)} alt={list.product.title[lan]} loading={i <= 3 ? "eager" : "lazy"} fetchpriority={i <= 3 ? "high" : ""} />
+            <DisplayWebImg className="cart__products-sec__products__product__img" src={getProductImgURL(list.product)} alt={list.product.title[lan]} loading={i <= 3 ? "eager" : "lazy"} fetchpriority={i <= 3 ? "high" : ""} />
             <div className="cart__products-sec__products__product__title">{list.product.title[lan]}</div>
             <div className="cart__products-sec__products__product__total">{en ? 'S.P' : 'ل.س'} {formatNumberWithCommas(list.quantityPrice)}</div>
             <div className="cart__products-sec__products__product__toggles">

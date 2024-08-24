@@ -54,7 +54,7 @@ function Account ({darkMode, lan}) {
   const ordersContEL = useRef(null);
   const ordersListContEL = useRef(null);  
 
-  const getProductImgURL = product => `/assets/img/products/${product.category}/${product.type}/${product.id + '-' + product.color}-front.webp`;
+  const getProductImgURL = product => `/assets/img/products/${product.id}/main.webp`;
   const getProductPrice = product => formatNumberWithCommas(calculatePrice(product.price, product.discount));
   const isOrdersEmpty = ordersData.length === 0;
   const handleOrderStatus = (orderStatus) => {

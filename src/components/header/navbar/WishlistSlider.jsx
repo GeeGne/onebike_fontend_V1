@@ -34,7 +34,7 @@ function WishlistSlider ({darkMode, lan}) {
 
   const isWishlistEmpty = wishlist.length === 0;
   const en = lan === 'en';
-  const getProductImgURL = product => `/assets/img/products/${product.category}/${product.type}/${product.id + '-' + product.color}-front.webp`;
+  const getProductImgURL = product => `/assets/img/products/${product.id}/main.webp`;
   const getProductPrice = product => formatNumberWithCommas(calculatePrice(product.price, product.discount));
   const getProduct = id => products.filter(product => product.id === id)[0];
 
