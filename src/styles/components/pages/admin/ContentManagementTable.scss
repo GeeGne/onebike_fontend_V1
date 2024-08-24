@@ -59,7 +59,7 @@
         &__toggles-cont {
           position: absolute;
           display: flex;
-          right: 0.5em;
+          right: 0.3em;
           top: 50%;
           transform: translateY(-50%);
           gap: 0.3em;
@@ -86,9 +86,7 @@
               transition: background-color 0.25s ease-out;
             }
 
-            &:hover::before {
-              background-color: var(--dark-background-color);
-            }
+            &:hover::before {background-color: var(--dark-background-color)}
           }
 
           &__delete-btn {
@@ -112,9 +110,7 @@
               transition: background-color 0.25s ease-out;
             }
 
-            &:hover::before {
-              background-color: var(--dark-background-color);
-            }
+            &:hover::before {background-color: var(--dark-background-color)}
           }
         }  
         
@@ -130,9 +126,7 @@
           @include w.breakpoint-up (medium) {gap: 1em}
 
           &__state {
-            // width: 1em;
-            // height: 1em;
-            padding: 0.5em;
+            padding: 0.3em;
             border-radius: 1em;
             filter: drop-shadow(0 0px 3px hsla(0, 0%, 0%, 0.3));
             
@@ -209,6 +203,8 @@
           &__category-spn,
           &__price-spn {
             color: var(--font-p-color);
+            font-weight: 600;
+            font-size: var(--font-size-small);
             margin-right: auto;
             body.arabic & {margin-left: auto; margin-right: 0}
           }
@@ -220,7 +216,7 @@
           &__priceVal-spn,
           &__discountVal-spn {
             font-size: var(--font-size-extraSmall);
-            color: var(--font-p-color);
+            color: var(--font-h-color);
             font-weight: 600;
           }
         }

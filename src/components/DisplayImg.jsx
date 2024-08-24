@@ -1,18 +1,22 @@
 import React, {useEffect, useState, useRef} from 'react';
 
 function DisplayImg ({className, src, alt, loading, fetchpriority, darkMode, lan}) {
-  const [isUrlLoaded, setIsUrlLoaded] = useState(false);
-  const handleLoad = e => setIsUrlLoaded(true);
+  const [isLoading, setIsLoading] = useState(true);
+  const handleLoad = () => setIsLoading(false);
 
   return (
     
     <img 
-      className={`${className} --fade-in iteration--1 animate--05s${isUrlLoaded ? ' --play' : ' --pause'}`} 
+      className={className} 
       src={src} 
       loading={!loading ? '' : loading} 
-      alt={!alt ? '' : alt} 
-      fetchpriority={!fetchpriority ? '' : fetchpriority} 
+      alt={alt || ''} 
+      fetchpriority={fetchpriority || 'auto'} 
       onLoad={handleLoad}
+      style={{
+        transition: 'opacity 0.5s ease-in-out',
+        opacity: isLoading ? '0' : '1',
+      }}
     />
 
   )

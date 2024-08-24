@@ -109,7 +109,33 @@ function ContentManagementTable ({darkMode, lan}) {
   }
   const getProductImgURL = product => `/assets/img/products/${product.id}/main.webp`;
 
-  const saveProductChanges = async (productId, productData) => {
+  const clearInputsAndCloseTab = index => {
+    const findElement = ref => ref.filter(el => Number(el.dataset.index) === Number(index))[0];
+    const isElementClicked = el => el.classList.contains('clicked');
+    const totalHeight = el => el.scrollHeight;
+
+
+    findElement(titleEnInptELRefs.current).value = '';
+    findElement(titleArInptELRefs.current).value = '';
+    findElement(priceInptELRefs.current).value = '';
+    findElement(discountInptELRefs.current).value = '';
+    findElement(categoryInptELRefs.current).value = '';
+    findElement(typeInptELRefs.current).value = '';
+    findElement(itemStateInptELRefs.current).value = '';
+
+    findElement(itemELRefs.current).classList.toggle('clicked');
+    if (isElementClicked( findElement(itemELRefs.current) )) {
+      findElement(itemELRefs.current).style.maxHeight = String( totalHeight(findElement(itemELRefs.current)) ) + 'px';
+      clearTimeout(overflowTimerId.current);
+      overflowTimerId.current = setTimeout(() => findElement(itemELRefs.current).style.overflow = 'visible', 250);
+    } else {
+      clearTimeout(overflowTimerId.current);
+      findElement(itemELRefs.current).style.maxHeight = String( totalHeight(findElement(itemInfoELRefs.current)) ) + 'px';
+      findElement(itemELRefs.current).style.overflow = 'hidden';
+    }
+  }
+
+  const saveProductChanges = async (productId, productData, index) => {
     setActivity(true);
 
     try {
@@ -117,6 +143,7 @@ function ContentManagementTable ({darkMode, lan}) {
       await updateDoc(productRef, productData);
 
       setRefreshProducts(Math.random());
+      clearInputsAndCloseTab(index);
       setAlertText(en ? 'Success! changes has been saved to the product' : 'تم حفظ التغييرات على المنتج بنجاح!')
     } catch(err) {
       console.error('Error updating product: ', err);
@@ -160,11 +187,11 @@ function ContentManagementTable ({darkMode, lan}) {
 
   const handleClick = e => {
     const { action, index, key, productId } = e.currentTarget.dataset;
-
-    const findElement = ref => ref.filter(el => Number(el.dataset.index) === Number(index))[0];
+    
+    const findElement = ref => ref.find(el => Number(el.dataset.index) === Number(index));
     const isELClicked = el => el.classList.contains('clicked');
     const totalHeight = el => el.scrollHeight;
-    const getProduct = () => products.filter(item => String(item.id) === productId)[0];
+    const getProduct = () => products.find(item => String(item.id) === productId);
     const getTextContent = el => el.textContent;
 
     switch(action) {
@@ -220,7 +247,7 @@ function ContentManagementTable ({darkMode, lan}) {
         }
 
         // console.log(productData);
-        saveProductChanges(productId, productData);
+        saveProductChanges(productId, productData, index);
         break;
       default:
         console.error('Error: unknown action: ', action);

@@ -24,6 +24,9 @@ import { useDataStore } from '/src/store/store';
 // NANOID
 import { nanoid } from 'nanoid';
 
+// ASSETS
+  import emptyImgURL from '/assets/img/empty/empty.webp';
+
 function AddProductWindow ({toggle, toggleData, darkMode, lan}) {
 
   const { user, userData, products, setRefreshProducts } = useDataStore();
@@ -32,8 +35,9 @@ function AddProductWindow ({toggle, toggleData, darkMode, lan}) {
   const [ newAlert, setNewAlert ] = useState(0);
   const [ alertText, setAlertText ] = useState(null);
   const [ activity, setActivity ] = useState(false);
-  const imgFile = useRef(null);
 
+
+  const imgFile = useRef(null);
   const itemEL = useRef(null);
   const itemInfoEL = useRef(null);
   const itemEditEL = useRef(null);
@@ -107,6 +111,16 @@ function AddProductWindow ({toggle, toggleData, darkMode, lan}) {
     imgFile.current = null;
   }
 
+  const fetchEmptyImgAsBlob = async imgUrl => {
+    try {
+      const response = await fetch(imgUrl);
+      const blob = await response.blob();
+      return blob;
+    } catch(error) {
+      console.error('Error: fetching image: ', error);
+    }
+  }
+
   const addNewProductData = async (productId, productData) => {
     setActivity(true);
 
@@ -114,6 +128,7 @@ function AddProductWindow ({toggle, toggleData, darkMode, lan}) {
       const productRef = doc(db, "products", productData.id);
       await setDoc(productRef, productData);
 
+      if (!imgFile.current) imgFile.current = await fetchEmptyImgAsBlob(emptyImgURL);
       const storageRef = ref(storage, getProductImgURL(productData));
       await uploadBytes(storageRef, imgFile.current);
   
@@ -130,6 +145,7 @@ function AddProductWindow ({toggle, toggleData, darkMode, lan}) {
     setActivity(false);
   }
   
+
   const handleClick = e => {
     const { action, key, productId } = e.currentTarget.dataset;
     const getTextContent = el => el.textContent;
@@ -230,7 +246,7 @@ function AddProductWindow ({toggle, toggleData, darkMode, lan}) {
           }
   
           file ? reader.readAsDataURL(file) : setProductSrc('');
-          imgFile.current = file;
+          imgFile.current = file || fetchEmptyImgAsBlob(emptyImgURL);
         }
 
         previewImage();
