@@ -187,7 +187,7 @@ function ContentManagementTable ({darkMode, lan}) {
 
   const handleClick = e => {
     const { action, index, key, productId } = e.currentTarget.dataset;
-    
+
     const findElement = ref => ref.find(el => Number(el.dataset.index) === Number(index));
     const isELClicked = el => el.classList.contains('clicked');
     const totalHeight = el => el.scrollHeight;

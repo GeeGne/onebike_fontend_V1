@@ -46,14 +46,3 @@ function DisplayWebImg ({className, src, alt, loading, fetchpriority, darkMode, 
 }
 
 export default DisplayWebImg;
-
-{/* <img 
-      className={`${className} --fade-in iteration--1 animate--05s${isLoading ? ' -play' : ' -pause'}`} 
-      // className={`${className}${isLoading ? '' : ' add-background-color --panel-flick'}`} 
-      src={imageUrl} 
-      loading={!loading ? '' : loading} 
-      alt={!alt ? '' : alt} 
-      fetchpriority={!fetchpriority ? '' : fetchpriority} 
-      onLoad={handleLoad}
-    />
- */}

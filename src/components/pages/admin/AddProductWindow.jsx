@@ -36,7 +36,6 @@ function AddProductWindow ({toggle, toggleData, darkMode, lan}) {
   const [ alertText, setAlertText ] = useState(null);
   const [ activity, setActivity ] = useState(false);
 
-
   const imgFile = useRef(null);
   const itemEL = useRef(null);
   const itemInfoEL = useRef(null);
@@ -179,12 +178,12 @@ function AddProductWindow ({toggle, toggleData, darkMode, lan}) {
             en: titleEnInptEL.current.value || 'No Title exist for this product',
             ar: titleArInptEL.current.value || 'لايوجد اسم لهذا المنتج',
           },
-          category: categoryInptEL.current.dataset.key || 'accessories',
-          type: typeInptEL.current.dataset.key || 'lights',
+          category: categoryInptEL.current.dataset.key || '--',
+          type: typeInptEL.current.dataset.key || '--',
           color: 'black',
           state: itemStateInptEL.current.dataset.key || 'hidden',
           brand: '',
-          price: Number(priceInptEL.current.value) || '1000',
+          price: Number(priceInptEL.current.value) || 0,
           discount: discountInptEL.current.value.includes('%') 
             ? discountInptEL.current.value
             : Number(discountInptEL.current.value) || 0,
