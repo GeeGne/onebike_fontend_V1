@@ -38,7 +38,7 @@ function DisplayWebImg ({className, src, alt, loading, fetchpriority, darkMode, 
       onLoad={handleLoad}
       style={{
         transition: 'filter 0.5s ease-in-out',
-        filter: 'blur(' + (isLoading ? '3' : '0') + 'px)',
+        filter: 'blur(' + (isLoading ? '20' : '0') + 'px)',
       }}
     />
 
