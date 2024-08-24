@@ -24,7 +24,7 @@ const generateOrderProductsHTML = (order, styleType) => {
       order.products.forEach(item => {
         const product = item.product;
         const id = product.id;
-        const title = (product.title.en + (product.color ? (' (' + product.color.en + ')') : ''));
+        const title = (product.title.en + (product.color ? (' (' + product.color + ')') : ''));
         const quantity = item.quantity.toString();
         const price = ('S.P' + formatNumberWithCommas(item.price));
         const total = ('S.P' + formatNumberWithCommas(item.quantityPrice));

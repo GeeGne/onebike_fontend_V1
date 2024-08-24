@@ -24,6 +24,7 @@ import fetchElementById from '/src/utils/fetchElementById.js'
 
 function AdvertList ({darkMode, lan, matchedProducts}) {
 
+  const { products } = useDataStore();
   const {wishlist, addProductToWishlist, removeProductFromWishlist} = useWishlistStore();
   const {addProductToCart, removeProductFromCart} = useCartStore();
   const [loadLimit, setLoadLimit] = useState(0);
@@ -85,28 +86,28 @@ function AdvertList ({darkMode, lan, matchedProducts}) {
       case 'add_to_cart':
         const getAmountEL = fetchElementById(e.target, 'productId', productAmountELs.current);
         const quantity = Number(getAmountEL.textContent);
-        const product = getProduct(Number(productId));
+        const product = getProduct(productId);
         addProductToCart(product, quantity);
-        setAlertText(`${en ? '' : 'تم اضافه'} x${quantity} ${getProduct(Number(productId)).title[lan]} ${en ? 'is added to Cart!' : 'الى السله!'}`);
+        setAlertText(`${en ? '' : 'تم اضافه'} x${quantity} ${getProduct(productId).title[lan]} ${en ? 'is added to Cart!' : 'الى السله!'}`);
         setNewAlert(Math.random());
         break;
       case 'add_product_to_wishlist':
-        setAlertText(`${en ? '' : 'تم اضافه'} ${getProduct(Number(productId)).title[lan]} ${en ? 'is added to Wishlist!' : 'الى المفضله!'}`);
+        setAlertText(`${en ? '' : 'تم اضافه'} ${getProduct(productId).title[lan]} ${en ? 'is added to Wishlist!' : 'الى المفضله!'}`);
         setNewAlert(Math.random());
         e.target.style.opacity = '0';
         clearTimeout(heartTimerID.current);
         heartTimerID.current = setTimeout(() => {
-          addProductToWishlist(getProduct(Number(productId)));
+          addProductToWishlist(getProduct(productId));
           e.target.style.opacity = '1';
         }, 250)
         break;
         case 'remove_product_from_wishlist':
-        setAlertText(`${en ? '' : 'تم ازاله'} ${getProduct(Number(productId)).title[lan]} ${en ? 'is removed from Wishlist!' : 'من المفضله!'}`);
+        setAlertText(`${en ? '' : 'تم ازاله'} ${getProduct(productId).title[lan]} ${en ? 'is removed from Wishlist!' : 'من المفضله!'}`);
         setNewAlert(Math.random());
         e.target.style.opacity = '0';
         clearTimeout(heartTimerID.current);
         heartTimerID.current = setTimeout(() => {
-          removeProductFromWishlist(getProduct(Number(productId)));
+          removeProductFromWishlist(getProduct(productId));
           e.target.style.opacity = '1';
         }, 250)
         break;
@@ -121,13 +122,13 @@ function AdvertList ({darkMode, lan, matchedProducts}) {
       <section className="advertList__advert-sctn">
         <ul className="advertList__advert-sctn__grid">
           {displayedProducts.map((product, i) => 
-          <li className={`advertList__advert-sctn__grid__product${product.state ? ' out-of-stock' : ''}`} key={product.id}>
+          <li className={`advertList__advert-sctn__grid__product${product.state === 'out-of-stock' ? ' out-of-stock' : ''}`} key={product.id}>
             {isProductInWishlist(product) 
             ? <button className="advertList__advert-sctn__grid__product__favourite added-to-wishlist" data-type="remove_product_from_wishlist" data-product-id={product.id} onClick={handleClick} />
             : <button className="advertList__advert-sctn__grid__product__favourite" data-type="add_product_to_wishlist" data-product-id={product.id} onClick={handleClick} />
             }
             <DisplayWebImg className="advertList__advert-sctn__grid__product__img" src={getProductImgURL(product)} alt={product.title[lan]} loading={i <= 5 ? "eager" : "lazy"} fetchpriority={i <= 5 ? "high" : ""} />
-            {product.discount && <h3 className="advertList__advert-sctn__grid__product__discount">{lan === 'ar' ? 'خصم ' : ''}{calculateDiscountPercantage(product.price, product.discount)}{en ? ' off' : ''}</h3>}
+            {!product.discount || <h3 className="advertList__advert-sctn__grid__product__discount">{lan === 'ar' ? 'خصم ' : ''}{calculateDiscountPercantage(product.price, product.discount)}{en ? ' off' : ''}</h3>}
             <h3 className="advertList__advert-sctn__grid__product__description">{product.title[lan]}</h3>
             {product.brand && <img className="advertList__advert-sctn__grid__product__brand-img" src={`/assets/img/logo/${product.brand}.webp`}/>}
             <div className="advertList__advert-sctn__grid__product__price">
