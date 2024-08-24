@@ -5,7 +5,7 @@ import { storage } from '/src/firebase/storage';
 function DisplayWebImg ({className, src, alt, loading, fetchpriority, darkMode, lan}) {
   const [imageUrl, setImageUrl] = useState("");
   const [isUrlLoaded, setIsUrlLoaded] = useState(false);
-
+  
   useEffect(() => {
 
     const fetchImageUrl = async () => {

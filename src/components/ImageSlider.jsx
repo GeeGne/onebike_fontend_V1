@@ -181,8 +181,8 @@ function ImageSlider ({darkMode, lan}) {
         )}
       </ul>
       <div className="imageSlider-container__arrows">
-        <button className="imageSlider-container__arrows__left-arrow" aria_label="Left Arrow" data-type="scroll_to_left" onClick={handleClick}/>
-        <button className="imageSlider-container__arrows__right-arrow" aria_label="Right Arrow" data-type="scroll_to_right" onClick={handleClick} />
+        <button className="imageSlider-container__arrows__left-arrow" aria-label="Left Arrow" data-type="scroll_to_left" onClick={handleClick}/>
+        <button className="imageSlider-container__arrows__right-arrow" aria-label="Right Arrow" data-type="scroll_to_right" onClick={handleClick} />
       </div>
     </section>
   )

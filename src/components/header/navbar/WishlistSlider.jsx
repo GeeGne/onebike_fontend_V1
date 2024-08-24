@@ -1,6 +1,9 @@
 // HOOKS
 import React, {useState, useEffect, useRef} from 'react';
 
+// COMPONETNS
+import DisplayWebImg from '/src/components/DisplayWebImg';
+
 // SCSS
 import '/src/styles/components/header/navbar/WishlistSlider.scss';
 
@@ -21,6 +24,7 @@ import heartBrokenIcon from '/assets/img/icons/heart_broken.svg';
 import heartBrokenDarkmodeIcon from '/assets/img/icons/heart_broken_darkMode.svg';
 
 function WishlistSlider ({darkMode, lan}) {
+
   const {wishlist, removeProductFromWishlist, toggle, setToggle} = useWishlistStore();
 
   const containerEL = useRef(null);  
@@ -30,7 +34,7 @@ function WishlistSlider ({darkMode, lan}) {
 
   const isWishlistEmpty = wishlist.length === 0;
   const en = lan === 'en';
-  const getProductImgURL = product => `/assets/img/products/${product.category}/${product.type}/${product.id + '-' + product.color.en}-front.webp`;
+  const getProductImgURL = product => `/assets/img/products/${product.category}/${product.type}/${product.id + '-' + product.color}-front.webp`;
   const getProductPrice = product => formatNumberWithCommas(calculatePrice(product.price, product.discount));
   const getProduct = id => products.filter(product => product.id === id)[0];
 
@@ -132,7 +136,7 @@ function WishlistSlider ({darkMode, lan}) {
         <ul className="wishlist__slider__list">
           {wishlist.map((product, i) => 
           <li className="wishlist__slider__list__product --pop-in" key={product.id} data-product-id={product.id} data-selector="wishlistProductsELS" ref={addRef}>
-            <img className="wishlist__slider__list__product__img" src={getProductImgURL(product)} />
+            <DisplayWebImg className="wishlist__slider__list__product__img" src={getProductImgURL(product)} />
             <div className="wishlist__slider__list__product__title">{product.title[lan]}</div>
             <div className="wishlist__slider__list__product__price">{(en ? 'S.P ' : ' ل.س ') + getProductPrice(product)}</div>
             <button className="wishlist__slider__list__product__delete-btn" data-action="remove_product_from_wishlist" data-product-id={product.id} onClick={handleClick}/>
