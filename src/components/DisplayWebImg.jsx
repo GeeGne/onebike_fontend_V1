@@ -37,8 +37,8 @@ function DisplayWebImg ({className, src, alt, loading, fetchpriority, darkMode, 
       fetchpriority={fetchpriority || 'auto'} 
       onLoad={handleLoad}
       style={{
-        transition: 'opacity 0.5s ease-in-out',
-        opacity: isLoading ? '0' : '1',
+        transition: 'filter 0.5s ease-in-out',
+        filter: 'blur(' + (isLoading ? '3' : '0') + 'px)',
       }}
     />
 
