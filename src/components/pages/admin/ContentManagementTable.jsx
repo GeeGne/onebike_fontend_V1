@@ -165,7 +165,7 @@ function ContentManagementTable ({darkMode, lan}) {
       findElement(itemELRefs.current).style.opacity= '0';
     
       setTimeout(() => setRefreshProducts(Math.random()), 250);
-      setTimeout(() => findElement(itemELRefs.current).style.opacity= '1', 500);
+      setTimeout(() => findElement(itemELRefs.current).style.opacity= '1', 500)
     } catch(err) {
       console.error('Error deleting product: ', err);
       setAlertText(en ? 'Error deleting product' : 'حصل خطأ في حذف المنتج')

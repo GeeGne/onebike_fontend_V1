@@ -292,7 +292,7 @@
             border-radius: 0.5em;
             transition: opacity 0.25s ease-out;
 
-            &::-webkit-scrollbar {width: 0.7em}
+            &::-webkit-scrollbar {width: 0.5em}
             &::-webkit-scrollbar-thumb {
               cursor: grab;
               background-color: var(--sideMenu-scrollBar-background-color);

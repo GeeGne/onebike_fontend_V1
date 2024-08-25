@@ -22,25 +22,4 @@
     }
   }
 
-  &__cntnt-sec {
-    display: flex;
-    flex-direction: column;
-    // margin-top: 1em;
-    padding-block: 1em;    
-    background-color: var(--light-background-color);
-    gap: 1em;
-
-    &__header-row {
-      display: flex;
-      padding-inline: 0.5em 2em;
-
-      &__spn {
-        display: flex;
-        flex: 1;
-        justify-content: center;
-        color: var(--font-p-color);
-        font-weight: 600;
-      }
-    }
-  }
 }

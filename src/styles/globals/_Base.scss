@@ -35,7 +35,7 @@ body {
     // font-family: 'Vazirmatn
   }
 
-  &::-webkit-scrollbar {width: 0.7em}
+  &::-webkit-scrollbar {width: 0.7em !important}
   &::-webkit-scrollbar-thumb {
     cursor: grab;
     background-color: var(--sideMenu-scrollBar-background-color);

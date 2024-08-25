@@ -14,7 +14,7 @@ import ProgressActivity from '/src/components/ProgressActivity';
 import Alert from '/src/components/Alert';
 
 // STORES
-import {useOrderStore} from '/src/store/store.js';
+import { useOrderStore, useDataStore } from '/src/store/store.js';
 
 // SCSS
 import '/src/styles/components/pages/SignIn.scss';
@@ -36,11 +36,12 @@ function SignIn ({darkMode, lan}) {
   const navigate = useNavigate();
   
   const {headToCheckouts, setHeadToCheckouts} = useOrderStore();
+  const { user } = useDataStore();
   const redirector = new Redirector(navigate, headToCheckouts, setHeadToCheckouts);
   const [processing, setProcessing] = useState(false);
   const [newAlert, setNewAlert] = useState(0);
   const [alertText, setAlertText] = useState(null);
-  const [user, setUser] = useState(null);
+  // const [user, setUser] = useState(null);
   const [forgotPass, setForgotPass] = useState(false);
   const [formData, setFormData] =  useState({
     email: '',
@@ -66,10 +67,6 @@ function SignIn ({darkMode, lan}) {
       setNewAlert(Math.random());
     }
   }, [user]);
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => setUser(user));
-    return () => unsubscribe();
-  }, []);
 
   const handleSubmit = async e => {
     

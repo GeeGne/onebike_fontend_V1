@@ -16,7 +16,7 @@ import ProgressActivity from '/src/components/ProgressActivity';
 import Alert from '/src/components/Alert';
 
 // STORES
-import {useOrderStore} from '/src/store/store.js';
+import { useOrderStore, useDataStore} from '/src/store/store.js';
 
 // SCSS
 import '/src/styles/components/pages/SignUp.scss';
@@ -47,12 +47,12 @@ function SignUp ({darkMode, lan}) {
   const {pathname} = window.location;
   const navigate = useNavigate();
   const {headToCheckouts, setHeadToCheckouts} = useOrderStore();
+  const { user } = useDataStore();
   const redirector = new Redirector(navigate, headToCheckouts, setHeadToCheckouts);
 
   const [processing, setProcessing] = useState(false);
   const [alertText, setAlertText] = useState(null);
   const [newAlert, setNewAlert] = useState(0);
-  const [user, setUser] = useState(false);
   const [formData, setFormData] = useState({
     fname: '',
     lname: '',
@@ -101,10 +101,6 @@ function SignUp ({darkMode, lan}) {
       setNewAlert(Math.random());
     }
   }, [user]);
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => setUser(user));
-    return () => unsubscribe();
-  }, []);
 
   const handleChange = e => {
     let {name, value, checked} = e.target;
