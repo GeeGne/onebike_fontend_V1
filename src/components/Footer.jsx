@@ -114,11 +114,11 @@ function Footer ({darkMode, lan}) {
           <ul className="footer-cont__upper-grd__contactUs-sec__lst">
             <li className="footer-cont__upper-grd__contactUs-sec__lst__itm">
               <DisplayImg className="footer-cont__upper-grd__contactUs-sec__lst__itm__img" src={darkMode ? callIconDarkMode : callIcon} fetchpriority="high" alt="Call Icon" />
-              <button className="footer-cont__upper-grd__contactUs-sec__lst__itm__link" onClick={() => handleClick('phone')}>{formatPhoneNumber(oneBike.phone)}</button>
+              <a className="footer-cont__upper-grd__contactUs-sec__lst__itm__link" href={'tel:' + oneBike.phone} onClick={() => handleClick('phone')}>{formatPhoneNumber(oneBike.phone)}</a>
             </li>
             <li className="footer-cont__upper-grd__contactUs-sec__lst__itm">
-              <DisplayImg className="footer-cont__upper-grd__contactUs-scc__lst__itm__img" src={darkMode ? mailIconDarkMode : mailIcon} fetchpriority="high" alt="mail Icon"/>
-              <button className="footer-cont__upper-grd__contactUs-sec__lst__itm__link" onClick={() => handleClick('email')}>{oneBike.email}</button>
+              <DisplayImg className="footer-cont__upper-grd__contactUs-sec__lst__itm__img" src={darkMode ? mailIconDarkMode : mailIcon} fetchpriority="high" alt="mail Icon"/>
+              <a className="footer-cont__upper-grd__contactUs-sec__lst__itm__link" href={'mailto:' + oneBike.email} onClick={() => handleClick('email')}>{oneBike.email}</a>
             </li>
             <li className="footer-cont__upper-grd__contactUs-sec__lst__itm">
               <DisplayImg className="footer-cont__upper-grd__contactUs-sec__lst__itm__img" src={darkMode ? whatsappIconDarkMode : whatsappIcon} fetchpriority="high" alt="Whatsapp Icon" />

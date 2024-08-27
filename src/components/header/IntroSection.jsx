@@ -120,10 +120,10 @@ function IntroSection ({onThemeChange, onLanguageChange}) {
         <a className="userinfo-container__whatsapp" href={oneBike.whatsApp} target="_blank" tabIndex="0" aria-label="Head to our whatsapp group" rel="noopener noreferrer" />
         <a className="userinfo-container__instagram" href={oneBike.instagram} target="_blank" tabIndex="0" aria-label="Head to our instagram" rel="noopener noreferrer" />
 
-        <button className="userinfo-container__phone-number" onClick={handleClick} onMouseEnter={() => handleHover('enter')} onMouseLeave={() => handleHover('leave')}>
+        <a className="userinfo-container__phone-number" href={'tel:' + oneBike.phone} onClick={handleClick} onMouseEnter={() => handleHover('enter')} onMouseLeave={() => handleHover('leave')}>
           <img src={darkMode ? callIconDarkMode : callIcon} ref={phoneNumberIconElement} alt="Call Icon"/>
           <span ref={phoneNumberH2Element}>{formatPhoneNumber(oneBike.phone)}</span>
-        </button>
+        </a>
 
         <LightDarkButton onThemeChange={themeData}/>
         <LanguageButton onLanguageChange={languageData}/>

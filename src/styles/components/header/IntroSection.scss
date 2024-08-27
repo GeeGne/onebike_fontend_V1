@@ -59,6 +59,7 @@
 
   &__phone-number {
     visibility: hidden;
+    text-decoration: none;
     opacity: 0;
     transition: opacity 0.5s ease;
     font-size: var(--font-size-small);

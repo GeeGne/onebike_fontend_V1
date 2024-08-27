@@ -64,9 +64,9 @@ function ContentManagementTable ({darkMode, lan}) {
   const typeInptELRefs = useRef([]);
 
   const overflowTimerId = useRef(null);
-
   const en = lan === 'en';
   const navigate = useNavigate();
+
   const addTypeItmtHTML = i => {
     const isTypeItmSelected = typeItmArray.some(item => Number(item.index) === i);
 

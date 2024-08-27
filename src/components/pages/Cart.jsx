@@ -70,19 +70,19 @@ function Cart ({darkMode, lan}) {
 
   const handleClick = e => {
     const {type, productId} = e.currentTarget.dataset;
-    const getElement = (els, id) => els.filter(el => Number(el.dataset.productId) === id)[0];
+    const getElement = (els, id) => els.filter(el => el.dataset.productId === id)[0];
     const styleProductWhenRemoved = productId => getElement(cartProductsELS.current, productId).style.opacity = '0';
 
     switch(type) {
       case 'remove_from_cart':
-        styleProductWhenRemoved(Number(productId));
-        setTimeout(() => removeProductFromCart(getProduct(Number(productId))), 250);
+        styleProductWhenRemoved(productId);
+        setTimeout(() => removeProductFromCart(getProduct(productId)), 250);
         break;
       case 'increase_amount_by_one':
-        addProductToCart(getProduct(Number(productId)), 1);
+        addProductToCart(getProduct(productId), 1);
         break;
       case 'decrease_amount_by_one':
-        addProductToCart(getProduct(Number(productId)), -1);
+        addProductToCart(getProduct(productId), -1);
         break;
       case 'exit_slider':
         setCartToggle(false);

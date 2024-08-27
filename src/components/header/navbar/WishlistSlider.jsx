@@ -8,14 +8,14 @@ import DisplayWebImg from '/src/components/DisplayWebImg';
 import '/src/styles/components/header/navbar/WishlistSlider.scss';
 
 // STORE
-import {useWishlistStore} from '/src/store/store';
+import { useWishlistStore, useDataStore } from '/src/store/store';
 
 // UTILS
 import formatNumberWithCommas from '/src/utils/formatNumberWithCommas';
 import calculatePrice from '/src/utils/formatNumberWithCommas';
 
 // DATA
-import products from '/src/data/products.json';
+// import products from '/src/data/products.json';
 
 // ASSETS
 import heartBrokenIcon from '/assets/img/icons/heart_broken.svg';
@@ -25,6 +25,7 @@ import heartBrokenDarkmodeIcon from '/assets/img/icons/heart_broken_darkMode.svg
 
 function WishlistSlider ({darkMode, lan}) {
 
+  const { products } = useDataStore();
   const {wishlist, removeProductFromWishlist, toggle, setToggle} = useWishlistStore();
 
   const containerEL = useRef(null);  
@@ -36,7 +37,7 @@ function WishlistSlider ({darkMode, lan}) {
   const en = lan === 'en';
   const getProductImgURL = product => `/assets/img/products/${product.id}/main.webp`;
   const getProductPrice = product => formatNumberWithCommas(calculatePrice(product.price, product.discount));
-  const getProduct = id => products.filter(product => product.id === id)[0];
+  const getProduct = id => products.find(product => product.id === id);
 
   useEffect(() => {
     const elements = document.querySelectorAll('.--pop-in');
@@ -84,7 +85,7 @@ function WishlistSlider ({darkMode, lan}) {
   }, [toggle])
 
   useEffect(() => {
-    const filterWishlistELS = () => wishlistProductsELS.current.filter(el => wishlist.some(product => product.id === Number(el.dataset.productId)));
+    const filterWishlistELS = () => wishlistProductsELS.current.filter(el => wishlist.some(product => product.id === el.dataset.productId));
     wishlistProductsELS.current = filterWishlistELS();
   }, [wishlist])
 
@@ -97,9 +98,9 @@ function WishlistSlider ({darkMode, lan}) {
     
     switch (action) {
       case 'remove_product_from_wishlist':
-        const productEL = wishlistProductsELS.current.filter(el => el.dataset.productId === productId)[0];
+        const productEL = wishlistProductsELS.current.find(el => el.dataset.productId === productId);
         addStylesWhenProductIsRemoved(productEL)
-        setTimeout(() => removeProductFromWishlist(getProduct(Number(productId))), 250);
+        setTimeout(() => removeProductFromWishlist(getProduct(productId)), 250);
         break;
       default:
         console.error('Error: Unknown Action: ' + action);
@@ -109,7 +110,7 @@ function WishlistSlider ({darkMode, lan}) {
   const addRef = el => {
     if (!el) return;
     const {selector, productId} = el.dataset;
-    const isElementIncluded = () =>  wishlistProductsELS.current.some(el => Number(productId) === Number(el.dataset.productId));
+    const isElementIncluded = () =>  wishlistProductsELS.current.some(el => productId === el.dataset.productId);
     const addElement = () => [...wishlistProductsELS.current, el];
 
     switch (selector) {

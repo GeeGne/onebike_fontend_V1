@@ -3,19 +3,20 @@ import React, {useState, useRef, useEffect} from 'react';
 import {useSearchParams} from 'react-router-dom';
 
 // COMPONENTS
+import DisplayWebImg from '/src/components/DisplayWebImg';
 import Alert from '/src/components/Alert';
 
 // SCSS
 import '/src/styles/components/SearchResultsPanel.scss';
 
 // DATA
-import products from '/src/data/products.json';
+// import products from '/src/data/products.json';
 
 // FUSE
 import Fuse from 'fuse.js';
 
 // STORE
-import {useCartStore} from '/src/store/store';
+import {useCartStore, useDataStore} from '/src/store/store';
 
 // UTILS
 import formatNumberWithCommas from '/src/utils/formatNumberWithCommas';
@@ -24,26 +25,27 @@ import calculatePrice from '/src/utils/calculatePrice';
 
 function SearchResultsPanel ({darkMode, lan}) {
 
-  const {addProductToCart} = useCartStore();
-  const [newAlert, setNewAlert] = useState(0);
-  const [alertText, setAlertText] = useState(null); 
-  const [searchParams, setSearchParams] = useSearchParams();
-  const [searchFor, setSearchFor] = useState('');
-  const [searchResults, setSearchResults] = useState([]);
-  const [toggleSearch, setToggleSearch] = useState(false);
-  const [fuse, setFuse] = useState(null);
+  const { products } = useDataStore();
+  const { addProductToCart } = useCartStore();
+  const [ newAlert, setNewAlert ] = useState(0);
+  const [ alertText, setAlertText ] = useState(null); 
+  const [ searchParams, setSearchParams ] = useSearchParams();
+  const [ searchFor, setSearchFor ] = useState('');
+  const [ searchResults, setSearchResults ] = useState([]);
+  const [ toggleSearch, setToggleSearch ] = useState(false);
+  const [ fuse, setFuse ] = useState(null);
 
   const panelEL = useRef(null);
   const searchVisTimerId = useRef(null);
-  const observerRef = useRef(null);
 
   const totalResults = searchResults.length;
   const isResultsAreNone = searchResults.length === 0;
+  const isProductsLoaded = products.length !== 0;
   const en = lan === "en";
-  const getProductImgURL = product => `/assets/img/products/${product.category}/${product.type}/${product.id + '-' + product.color.en}-front.webp`;
+  const getProductImgURL = product => `/assets/img/products/${product.id}/main.webp`;
   const getProductPrice = product => formatNumberWithCommas(calculatePrice(product.price, product.discount));
   const isProductInWishlist = product => wishlist.some(item => item.id === product.id);
-  const getProduct = id => products.filter(product => product.id === id)[0];
+  const getProduct = id => products.find(product => product.id === id);
 
   useEffect(() => {
     const options = {
@@ -51,8 +53,8 @@ function SearchResultsPanel ({darkMode, lan}) {
       threshold: 0.3
     };
 
-    setFuse(new Fuse(products, options));
-  }, []);
+    if (isProductsLoaded) setFuse(new Fuse(products, options));
+  }, [products]);
 
   useEffect(() => {
     let url = new URL(window.location.href);
@@ -103,34 +105,10 @@ function SearchResultsPanel ({darkMode, lan}) {
       if (!fuse) return;
       const results = fuse.search(query);
       setSearchResults(results.map(result => result.item));
-    }                 
+    }
 
     handleSearch(searchFor);
-  }, [searchFor]);
-
-/*   useEffect(() => {
-    const elements = document.querySelectorAll('.--shift-to-left unpause');
-    
-    observerRef.current = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.style.animationPlayState = 'running';
-          observerRef.current.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.1 });
-    
-    elements.forEach(el => {
-      el.style.animationPlayState = 'paused';
-      observerRef.current.observe(el);
-    });
-
-    return () => {
-      if (observerRef.current) {
-        observerRef.current.disconnect();
-      }
-    };
-  }, []); */
+  }, [searchFor, fuse]);
 
   const handleClick = e => {
     const {action, productId} = e.currentTarget.dataset;
@@ -145,8 +123,8 @@ function SearchResultsPanel ({darkMode, lan}) {
         break;
       case 'add_product_to_cart':
         const amount = 1;
-        addProductToCart(getProduct(Number(productId)), amount);
-        setAlertText(`${en ? '' : 'تم اضافه'} ${getProduct(Number(productId)).title[lan]} ${en ? 'is added to Cart!' : 'الى السله!'}`);
+        addProductToCart(getProduct(productId), amount);
+        setAlertText(`${en ? '' : 'تم اضافه'} ${getProduct(productId).title[lan]} ${en ? 'is added to Cart!' : 'الى السله!'}`);
         setNewAlert(Math.random());
         break;
       default:
@@ -182,7 +160,7 @@ function SearchResultsPanel ({darkMode, lan}) {
           <li className="panel__content-cont__searchResults-cont__foundedAmount --shift-to-left unpause">{totalResults} {en ? 'search reslults are found' : 'نتائج تم العثور من البحث'}</li>
           {searchResults.map(item => 
           <li className="panel__content-cont__searchResults-cont__result --shift-to-left unpause" key={item.id}>
-            <img className="panel__content-cont__searchResults-cont__result__img" src={getProductImgURL(item)}/>
+            <DisplayWebImg className="panel__content-cont__searchResults-cont__result__img" src={getProductImgURL(item)} alt={item.title[lan]} loading="lazy" />
             <span className="panel__content-cont__searchResults-cont__result__title">{item.title[lan]}</span>
             <span className="panel__content-cont__searchResults-cont__result__price">{en ? 'S.P ' : 'ل.س'} {getProductPrice(item)}</span>
             <button className="panel__content-cont__searchResults-cont__result__addToCart-btn" data-action="add_product_to_cart" data-product-id={item.id} onClick={handleClick}>{en ? 'Add To Cart' : 'اضف الى السله'}</button>
