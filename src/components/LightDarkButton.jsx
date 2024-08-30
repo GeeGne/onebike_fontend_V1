@@ -43,7 +43,11 @@ function LightDarkButton ({onThemeChange}) {
   }
 
   return (
-    <button className="theme" onClick={event => toggleTheme(event)}>
+    <button 
+      className="theme" 
+      aria-label="Change Theme" 
+      onClick={event => toggleTheme(event)}
+    >
       <div className="theme__slider" />
     </button>
   )
