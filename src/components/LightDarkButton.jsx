@@ -33,18 +33,24 @@ function LightDarkButton ({onThemeChange}) {
   }, [darkTheme]);
 
   const toggleTheme = (event) => {
-    event.target.style.opacity = '0';
-    setTimeout(() => {
-      setDarkTheme(theme => !theme);
-      event.target.style.opacity = '1';
-    }, 150)
+    setDarkTheme(theme => !theme);
+
+    // event.target.style.opacity = '0';
+    // setTimeout(() => {
+      // setDarkTheme(theme => !theme);
+      // event.target.style.opacity = '1';
+    // }, 150)
   }
 
   return (
-    <button onClick={event => toggleTheme(event)} aria-label="Change Theme">
-      <img className="light-dark-button" src={darkTheme ? moonIcon : sunIcon} alt={darkTheme ? "Moon Icon" : "Sun Icon"}/>
+    <button className="theme" onClick={event => toggleTheme(event)}>
+      <div className="theme__slider" />
     </button>
   )
 }
 
 export default LightDarkButton;
+
+{/* <button onClick={event => toggleTheme(event)} aria-label="Change Theme"> */}
+{/* <img className="light-dark-button" src={darkTheme ? moonIcon : sunIcon} alt={darkTheme ? "Moon Icon" : "Sun Icon"}/> */}
+{/* </button> */}
