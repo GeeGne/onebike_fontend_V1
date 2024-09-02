@@ -35,7 +35,7 @@
 
         &.out-of-stock {
           &::before {
-            content: "Item is out of stock";
+            content: "Out Of Stock";
             position: absolute;
             display: flex;
             top: 0;

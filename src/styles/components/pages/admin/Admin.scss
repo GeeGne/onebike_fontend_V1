@@ -13,12 +13,38 @@
   }
 
   &__title-sec {
+    display: flex;
     padding-block: 1em;
-    border: solid var(--primary-color);
-    border-width: 0 0 3px 0;
+    gap: 1em;
 
     &__h1 {
       color: var(--font-h-color);
+      white-space: nowrap;
+      text-overflow: ellipsis; 
+      margin-right: auto;
+    }
+
+    &__btn {
+      @include k.diamond-btn-styles (var(--boxSeam-primaryColor-icon), var(--background-color));
+      position: static;
+      transform: rotate(45deg);
+      width: 1.7em;
+      height: 1.7em;
+      border: solid 1px var(--primary-color);
+      
+      &:hover {
+        @include k.diamond-btn-styles (var(--boxSeam-icon), var(--primary-color));
+        position: static;
+        transform: rotate(45deg);
+        width: 1.7em;
+        height: 1.7em;
+        border: none;
+      }
+      
+      &:hover::before {background-size: 1em; filter: invert(100%)}
+      &::before {
+        background-size: 1em;
+      }
     }
   }
 

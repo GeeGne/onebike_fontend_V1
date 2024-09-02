@@ -10,8 +10,12 @@
   width: 2.6em;
   padding: 0.2em;
   border-radius: 2em;
+  // outline: solid black 3px;
   overflow: hidden;
-  box-shadow: 0 0 3px 1px inset hsla(0, 0%, 20%, 0.4);
+  // box-shadow: 0 0 3px 1px inset hsla(0, 0%, 20%, 0.4);
+  // box-shadow: 0 2px 2px 0px inset hsla(0, 0%, 20%, 0.5);
+  box-shadow: 0 2px 2px 0px inset var(--theme-box-shadow-color);
+  transition: box-shadow 2s ease;
 
   body.dark-theme &::before {transform: translateX(-50%)}
   &::before {

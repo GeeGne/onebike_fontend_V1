@@ -31,14 +31,25 @@ function Admin ({darkMode, lan}) {
   const { user, userData, products, setRefreshProducts } = useDataStore();
   const [ newAlert, setNewAlert ] = useState(0);
   const [ alertText, setAlertText ] = useState(null);
+  const [ tab, setTab ] = useState('content-management');
 
   const en = lan === 'en';
   const navigate = useNavigate();
   const redirector = new Redirector(navigate);
-
+  const tabTitle = () => {
+    switch (tab) {
+      case 'content-management':
+      return en ? 'Content Management' : 'اداره المحتوى';
+      case 'general-settings':
+      return en ? 'General Settings' : 'الاعدادات العامه';
+      case 'order-management':
+      return en ? 'Order Management' : 'اداره الطلبات';
+    }
+  }
   useEffect(() => {
     if (userData) redirector.admin(user, userData);
   }, [userData]);
+
 
   return (
     <div className="admin">
@@ -47,7 +58,10 @@ function Admin ({darkMode, lan}) {
         <BreadCrumb type={{en: 'admin', ar: 'ادمن'}} category={{en: 'account', ar: 'الحساب'}} lan={lan} />
       </section>
       <section className="admin__title-sec">
-        <h1 className="admin__title-sec__h1">{en ? 'Content Management' : 'اداره المحتوى'}</h1>
+        <h1 className="admin__title-sec__h1">{tabTitle()}</h1>
+        <button className="admin__title-sec__btn"></button>
+        <button className="admin__title-sec__btn"></button>
+        <button className="admin__title-sec__btn"></button>
       </section>
       <ContentManagementTable darkMode={darkMode} lan={lan} />
     </div>
