@@ -292,9 +292,10 @@
             padding-block: 0.5em;
             background-color: var(--background-color);
             border-radius: 0.5em;
+            box-shadow: 0 0 3px 1px var(--dark-background-color);
             transition: opacity 0.25s ease-out;
 
-            &::-webkit-scrollbar {width: 0.5em}
+            &::-webkit-scrollbar {width: 0.4em}
             &::-webkit-scrollbar-thumb {
               cursor: grab;
               background-color: var(--sideMenu-scrollBar-background-color);

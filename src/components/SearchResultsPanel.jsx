@@ -104,7 +104,7 @@ function SearchResultsPanel ({darkMode, lan}) {
     const handleSearch = query => {
       if (!fuse) return;
       const results = fuse.search(query);
-      setSearchResults(results.map(result => result.item));
+      setSearchResults(results.map(result => result.item).filter(item => item.state === "available"));
     }
 
     handleSearch(searchFor);

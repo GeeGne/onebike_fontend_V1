@@ -24,16 +24,26 @@
       margin-right: auto;
     }
 
-    &__btn {
-      @include k.diamond-btn-styles (var(--boxSeam-primaryColor-icon), var(--background-color));
+    &__content-btn {@include k.diamond-btn-styles (var(--cardList-primaryColor-icon), var(--background-color))}
+    &__general-btn {@include k.diamond-btn-styles (var(--gearWide-primaryColor-icon), var(--background-color))}
+    &__orders-btn {@include k.diamond-btn-styles (var(--boxSeam-primaryColor-icon), var(--background-color))}
+
+    &__content-btn:hover, &__content-btn.clicked {@include k.diamond-btn-styles (var(--cardList-icon), var(--primary-color))}
+    &__general-btn:hover, &__general-btn.clicked {@include k.diamond-btn-styles (var(--gearWide-icon), var(--primary-color))}
+    &__orders-btn:hover, &__orders-btn.clicked {@include k.diamond-btn-styles (var(--boxSeam-icon), var(--primary-color))}
+
+    &__content-btn,
+    &__general-btn,
+    &__orders-btn {
       position: static;
       transform: rotate(45deg);
       width: 1.7em;
       height: 1.7em;
       border: solid 1px var(--primary-color);
-      
+      transition: background-color 0.15s ease-out;
+
+      &.clicked,
       &:hover {
-        @include k.diamond-btn-styles (var(--boxSeam-icon), var(--primary-color));
         position: static;
         transform: rotate(45deg);
         width: 1.7em;
@@ -41,9 +51,10 @@
         border: none;
       }
       
-      &:hover::before {background-size: 1em; filter: invert(100%)}
+      &:hover::before, &.clicked::before {background-size: 1.1em; filter: invert(100%)}
       &::before {
         background-size: 1em;
+        transition: background-size 0.15s ease-out;
       }
     }
   }

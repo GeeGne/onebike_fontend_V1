@@ -11,10 +11,10 @@ import BreadCrumb from '/src/components/BreadCrumb';
 import '/src/styles/components/pages/Cart.scss';
 
 // STORES
-import {useCartStore, useOrderStore} from '/src/store/store';
+import {useCartStore, useOrderStore, useDataStore} from '/src/store/store';
 
 // DATA
-import products from '/src/data/products.json';
+// import products from '/src/data/products.json';
 
 // UTILS
 import formatNumberWithCommas from '/src/utils/formatNumberWithCommas';
@@ -30,6 +30,7 @@ function Cart ({darkMode, lan}) {
     addProductToCart, 
     removeProductFromCart
   } = useCartStore();
+  const products = useDataStore(state => state.products);
   const setHeadToCheckouts = useOrderStore(state => state.setHeadToCheckouts);
 
   const cartProductsELS = useRef([]);
@@ -42,7 +43,7 @@ function Cart ({darkMode, lan}) {
   let totalPrice = 0;
   cart.forEach(list => (totalPrice += list.quantityPrice));
   const getProductImgURL = product => `/assets/img/products/${product.id}/main.webp`;
-  const getProduct = id => products.filter(product => product.id === id)[0];
+  const getProduct = id => products.find(product => product.id === id);
 
   useEffect(() => {
     const elements = document.querySelectorAll('.--pop-in');
@@ -69,10 +70,10 @@ function Cart ({darkMode, lan}) {
   }, []);
 
   const handleClick = e => {
-    const {type, productId} = e.currentTarget.dataset;
-    const getElement = (els, id) => els.filter(el => el.dataset.productId === id)[0];
+    const { type, productId } = e.currentTarget.dataset;
+    const getElement = (els, id) => els.find(el => el.dataset.productId === id);
     const styleProductWhenRemoved = productId => getElement(cartProductsELS.current, productId).style.opacity = '0';
-
+    
     switch(type) {
       case 'remove_from_cart':
         styleProductWhenRemoved(productId);
@@ -97,18 +98,18 @@ function Cart ({darkMode, lan}) {
     }
   }
 
-  const addRef = (type, el, i) => {
-    const updateElements = (currentArray, el) => currentArray.length < cart.length ? [...currentArray, el] : currentArray;
-    
-    switch (type) {
-      case 'cartProductsELS':
-        i === 0 && (cartProductsELS.current = []);
-        cartProductsELS.current = updateElements(cartProductsELS.current, el)
-        break;
-      default:
-        console.log('Error: Unknown type:' + type);
-    }
-  }
+  // const addRef = (type, el, i) => {
+    // const updateElements = (currentArray, el) => currentArray.length < cart.length ? [...currentArray, el] : currentArray;
+    // 
+    // switch (type) {
+      // case 'cartProductsELS':
+        // i === 0 && (cartProductsELS.current = []);
+        // cartProductsELS.current = updateElements(cartProductsELS.current, el)
+        // break;
+      // default:
+        // console.log('Error: Unknown type:' + type);
+    // }
+  // }
 
   return (
     <div className="cart">
@@ -130,7 +131,7 @@ function Cart ({darkMode, lan}) {
         </div>
         <ul className="cart__products-sec__products">
           {cart.map((list, i) => 
-          <li className="cart__products-sec__products__product --pop-in" key={list.id} data-product-id={list.product.id} ref={el => addRef('cartProductsELS', el, i)}>
+          <li className="cart__products-sec__products__product --pop-in" key={list.id} data-product-id={list.product.id} ref={el => cartProductsELS.current[i] = el}>
             <DisplayWebImg className="cart__products-sec__products__product__img" src={getProductImgURL(list.product)} alt={list.product.title[lan]} loading={i <= 3 ? "eager" : "lazy"} fetchpriority={i <= 3 ? "high" : ""} />
             <div className="cart__products-sec__products__product__title">{list.product.title[lan]}</div>
             <div className="cart__products-sec__products__product__total">{en ? 'S.P' : 'ل.س'} {formatNumberWithCommas(list.quantityPrice)}</div>
