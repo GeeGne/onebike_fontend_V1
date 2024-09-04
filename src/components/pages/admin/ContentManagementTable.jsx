@@ -1,5 +1,5 @@
 // HOOKS
-import React, {useEffect, useState, useRef } from 'react';
+import React, {useEffect, useState, useRef, useReducer } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 // SCSS
@@ -23,20 +23,22 @@ import { storage } from '/src/firebase/storage';
 import menu from '/src/data/menu.json';
 
 // UTILS
-import Redirector from '/src/utils/Redirector';
 import calculateDiscountPercantage from '/src/utils/calculateDiscountPercantage';
-
-// NANOID
-import { nanoid } from 'nanoid';
-
-// UTILS
 import formatNumberWithCommas from '/src/utils/formatNumberWithCommas';
+
+// REDUCERS
+import deleteWindowReducer from '/src/reducers/deleteWindowReducer';
 
 function ContentManagementTable ({darkMode, lan}) {
 
   const array = [1, 2, 3, 4];
   const { user, userData, products, setRefreshProducts } = useDataStore();
   const [ typeItmArray, setTypeItmArray ] = useState([]);
+  const [ deleteWindow, dispatch ] = useReducer(deleteWindowReducer, {
+    toggle: '',
+    productId: '',
+    index: '',
+  });
   const [ newAlert, setNewAlert ] = useState(0);
   const [ alertText, setAlertText ] = useState(null);
   const [ activity, setActivity ] = useState(false);
@@ -66,6 +68,7 @@ function ContentManagementTable ({darkMode, lan}) {
   const overflowTimerId = useRef(null);
   const en = lan === 'en';
   const navigate = useNavigate();
+  const getProduct = productId => products.find(item => String(item.id) === productId);
 
   const addTypeItmtHTML = i => {
     const isTypeItmSelected = typeItmArray.some(item => Number(item.index) === i);
@@ -209,7 +212,7 @@ function ContentManagementTable ({darkMode, lan}) {
         }
         break;
       case 'delete_button_is_clicked':
-        deleteProduct(productId, index);
+        dispatch({type: action, productId, index});
         break;
       case 'add_product_button_is_clicked':
         setToggleAddProductWindow(' show');
@@ -249,6 +252,14 @@ function ContentManagementTable ({darkMode, lan}) {
         // console.log(productData);
         saveProductChanges(productId, productData, index);
         break;
+      case 'cancel_window_button_is_clicked':
+        dispatch({type: action})
+        break;
+      case 'delete_window_button_is_clicked':
+        dispatch({type: action})
+        deleteProduct(productId, index);
+        break;
+      
       default:
         console.error('Error: unknown action: ', action);
     }
@@ -297,10 +308,19 @@ function ContentManagementTable ({darkMode, lan}) {
   // console.log('itemELRefs', itemELRefs.current);
   // console.log('products', products);
   // console.log('typeItmArray', typeItmArray);
+  // console.log('deleteWindow', deleteWindow);
 
   return (
     <section className="cm">
       <AddProductWindow toggle={toggleAddProductWindow} toggleData={handleToggleAddProductWindow} darkMode={darkMode} lan={lan} />
+      <div className={`cm__delete-window${deleteWindow.toggle}`}>
+        <div className="cm__delete-window__wrapper">
+          <h2 className="cm__delete-window__wrapper__title">{en ? 'User confirmation Needed' : 'مطلوب تأكيد المستخدم'}</h2>
+          <span className="cm__delete-window__wrapper__description">{`${en ? 'Delete' : 'مسح'} "${deleteWindow.productId && getProduct(deleteWindow.productId).title[lan]}" ${en ? '?' : '؟'}`}</span>
+          <button className="cm__delete-window__wrapper__cancel-btn" data-action="cancel_window_button_is_clicked" onClick={handleClick}>{en ? 'Cancel' : 'الغاء'}</button>
+          <button className="cm__delete-window__wrapper__delete-btn" data-product-id={deleteWindow.productId} data-index={deleteWindow.index} data-action="delete_window_button_is_clicked" onClick={handleClick}>{en ? 'Delete' : 'مسح'}</button>          
+        </div>
+      </div>
       <div className="cm__header-row">
         <button className="cm__header-row__addProduct-btn" aria-label="Add a Product to Products" data-action="add_product_button_is_clicked" onClick={handleClick} />
         <span className="cm__header-row__spn">{en ? 'Name' : 'الاسم'}</span>
@@ -382,3 +402,4 @@ function ContentManagementTable ({darkMode, lan}) {
 
 
 export default ContentManagementTable;
+

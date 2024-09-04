@@ -1,6 +1,58 @@
 @use '/src/styles/utils/_BreakPoints' as w;
 @use '/src/styles/utils/_StyleKits' as k;
 
+@keyframes delete-window-show {
+  from {
+    visibility: hidden;
+    backdrop-filter: blur(0);
+    background-color: transparent;
+  }
+
+  to {
+    visibility: visible;
+    backdrop-filter: blur(3px);
+    background-color: var(--window-background-color);
+  }
+}
+
+@keyframes delete-window-hide {
+  from {
+    visibility: visible;
+    backdrop-filter: blur(3px);
+    background-color: var(--window-background-color);
+  }
+
+  to {
+    visibility: hidden;
+    backdrop-filter: blur(0);
+    background-color: transparent;
+  }
+}
+
+@keyframes delete-window-wrapper-show {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.5);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+@keyframes delete-window-wrapper-hide {
+  from {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  to {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.5);
+  }
+}
+
 .cm {
   display: flex;
   flex-direction: column;
@@ -11,6 +63,108 @@
   border: solid var(--primary-color);
   border-width: 3px 0 0 0;
   transition: height 0.5s ease;
+  overflow: hidden;
+
+  &__delete-window {
+    visibility: hidden;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    backdrop-filter: blur(3px);
+    z-index: 2000;
+
+    animation-duration: 0.25s;
+    animation-timing-function: ease-out;
+    animation-fill-mode: both;
+    &.show {animation-name: delete-window-show}
+    &.hide {animation-name: delete-window-hide; animation-delay: 0.25s}
+    
+    &.show &__wrapper {animation-name: delete-window-wrapper-show}    
+    &.hide &__wrapper {animation-name: delete-window-wrapper-hide; animation-delay: 0s;}    
+    &__wrapper {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 20em;
+      background-color: var(--background-color);
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-areas:
+      'title title'
+      'description description'
+      'cancel delete'
+      ;
+      align-items: center;
+      justify-content: center;
+      border-radius: 1em;
+      overflow: hidden;
+      box-shadow: 0 0 10px 1px hsla(0, 0%, 0%, 0.6);
+
+      animation-duration: 0.5s;
+      animation-timing-function: cubic-bezier(0.68,-0.55,0.27,1.55);
+      animation-fill-mode: both;
+  
+      &__title {
+        grid-area: title;
+        text-align: center;
+        padding-block: 1em;
+        color: var(--font-p-color);
+      }
+
+      &__description {
+        grid-area: description;
+        position: relative;
+        text-align: center;
+        font-weight: 600;
+        padding-inline: 1em;
+        padding-bottom: 1em;
+        color: var(--font-h-color);
+
+        &::before {
+          content: "";
+          position: absolute;
+          top: 100%;
+          right: 0;
+          width: 100%;
+          height: 1px;
+          background-color: var(--endElement-border-background-color);
+        }
+      }
+
+      &__cancel-btn {
+        grid-area: cancel;
+        position: relative;
+        &:hover {background-color: var(--light-background-color)}
+
+        &::before {
+          content: "";
+          position: absolute;
+          top: 0;
+          right: 0;
+          width: 1px;
+          height: 100%;
+          background-color: var(--endElement-border-background-color);
+        }
+      }
+
+      &__delete-btn {
+        grid-area: delete;
+        &:hover {background-color: var(--red-color)}
+      }
+
+      &__delete-btn,
+      &__cancel-btn {
+        font-size: var(--font-size-extraSmall);
+        color: var(--font-p-color);
+        font-weight: 600;
+        padding-block: 1em;
+        transition: background-color 0.15s ease-out, color 0.15s ease-out;
+        &:hover {color: var(--font-h-color)}
+      }
+    }
+  }
 
   &__header-row {
     position: relative;

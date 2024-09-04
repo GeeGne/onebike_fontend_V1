@@ -7,6 +7,8 @@ import '/src/styles/components/pages/admin/Admin.scss';
 
 // COMPONENTS
 import ContentManagementTable from '/src/components/pages/admin/ContentManagementTable';
+import GeneralSettingsTable from '/src/components/pages/admin/GeneralSettingsTable';
+import OrdersManagementTable from '/src/components/pages/admin/OrdersManagementTable';
 import BreadCrumb from '/src/components/BreadCrumb';
 import DisplayWebImg from '/src/components/DisplayWebImg';
 import Alert from '/src/components/Alert';
@@ -40,7 +42,7 @@ function Admin ({darkMode, lan}) {
   const en = lan === 'en';
   const navigate = useNavigate();
   const redirector = new Redirector(navigate);
-  const tabTitle = () => {
+  const titleTab = () => {
     switch (tab) {
       case 'content-management':
       return en ? 'Content Management' : 'اداره المحتوى';
@@ -51,13 +53,24 @@ function Admin ({darkMode, lan}) {
     }
   }
 
+  const descriptionTab = () => {
+    switch (tab) {
+      case 'content-management':
+      return <ContentManagementTable darkMode={darkMode} lan={lan} />;
+      case 'general-settings':
+      return <GeneralSettingsTable darkMode={darkMode} lan={lan} />;
+      case 'orders-management':
+      return <OrdersManagementTable darkMode={darkMode} lan={lan} />;
+    }
+  }
+
   useEffect(() => {
     if (userData) redirector.admin(user, userData);
   }, [userData]);
 
   const handleClick = e => {
     const { action } = e.currentTarget.dataset;
-    
+
     const removeClickedClassFromButtons = () => {
       contentBtnEL.current.classList.remove('clicked');
       generalBtnEL.current.classList.remove('clicked');
@@ -90,12 +103,12 @@ function Admin ({darkMode, lan}) {
         <BreadCrumb type={{en: 'admin', ar: 'ادمن'}} category={{en: 'account', ar: 'الحساب'}} lan={lan} />
       </section>
       <section className="admin__title-sec">
-        <h1 className="admin__title-sec__h1">{tabTitle()}</h1>
+        <h1 className="admin__title-sec__h1">{titleTab()}</h1>
         <button className="admin__title-sec__content-btn clicked" aria-label="Open Content Management Tab" data-action="content_button_is_clicked" onClick={handleClick} ref={contentBtnEL} />
         <button className="admin__title-sec__general-btn" aria-label="Open General Settings Tab" data-action="general_button_is_clicked" onClick={handleClick} ref={generalBtnEL} />
         <button className="admin__title-sec__orders-btn" aria-label="Open Orders Management Tab" data-action="orders_button_is_clicked" onClick={handleClick} ref={ordersBtnEL} />
       </section>
-      <ContentManagementTable darkMode={darkMode} lan={lan} />
+      <section className="admin__description-sec">{descriptionTab()}</section>
     </div>
   )
 }

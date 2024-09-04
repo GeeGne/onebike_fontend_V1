@@ -22,6 +22,7 @@
       white-space: nowrap;
       text-overflow: ellipsis; 
       margin-right: auto;
+      body.arabic & {margin-left: auto; margin-right: 0}
     }
 
     &__content-btn {@include k.diamond-btn-styles (var(--cardList-primaryColor-icon), var(--background-color))}

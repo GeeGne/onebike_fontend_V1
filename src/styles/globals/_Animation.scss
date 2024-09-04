@@ -397,6 +397,18 @@
   }
 }
 
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    top: -5em;
+  }
+
+  to {
+    opacity: 1;
+    top: 0;
+  }
+}
+
 .--fade-in {
   animation-name: fade-in;
   animation-duration: 0.7s;
@@ -557,6 +569,12 @@
   animation-timing-function: linear;
   animation-fill-mode: both;
   animation-iteration-count: infinite;
+}
+
+.--slide-up {
+  animation-name: slide-up;
+  animation-timing-function: ease-out;
+  animation-fill-mode: both;
 }
 
 .animation--none {

@@ -35,7 +35,7 @@
   height: 100vh;
   z-index: 2000;
 
-  animation-duration: 1s;
+  animation-duration: 0.5s;
   animation-timing-function: linear;
   animation-fill-mode: both;
   animation-iteration-count: 1;
@@ -58,15 +58,15 @@
     border-width: 6px 6px 0 0;
     z-index: -1;
     @include w.breakpoint-up(medium) {height: 80%; width: auto}
-
-    animation-duration: 1s;
+    
+    animation-duration: 0.5s;
     animation-timing-function: linear;
     animation-fill-mode: both;
     animation-iteration-count: 1;
   }
 
   &.show::after {animation-name: fade-in}
-  &.hide::after {animation-name: fade-out}
+  &.hide::after {animation-name: fade-out; animation-delay: 0.5s}
   &::after {
     content: "";
     position: absolute;
@@ -83,13 +83,13 @@
     background-position: center;
     cursor: pointer;
 
-    animation-duration: 1s;
+    animation-duration: 0.25s;
     animation-timing-function: linear;
     animation-fill-mode: both;
     animation-iteration-count: 1;
   }
 
-  &.show &__edit-cont {animation-name: fade-in}
+  &.show &__edit-cont {animation-name: fade-in; animation-delay: 0.5s}
   &.hide &__edit-cont {animation-name: fade-out}
   &__edit-cont {
     position: absolute;
@@ -116,7 +116,6 @@
     padding-block: 0.5em;
     padding-inline: 0.5em;
 
-    animation-delay: 0.5s;
     animation-duration: 0.5s;
     animation-timing-function: linear;
     animation-fill-mode: both;

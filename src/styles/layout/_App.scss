@@ -4,31 +4,19 @@
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: auto 1fr auto auto;
-  // border: solid 1px black;
-  // gap: 1rem;
-  // min-width: 100%;
   max-width: 1400px;
   min-height: 100vh;
-  // max-height: auto;
   margin: 0 auto;
-  // height: 100vh;
-  // overflow: hidden;
 
   &__header {
     position: sticky;
     top: 0;
     z-index: 1100;
-    // border: solid 1px black;
   }
   &__main {
     position: relative;
-    // border: solid 1px black;
-    // display: none;
-    // grid-row: 1fr;
   }
   &__footer {
-    // border: solid 1px black;
-    // margin-top: 2em;
   }
 
   &__navBottom {
