@@ -193,7 +193,8 @@ function SignUp ({darkMode, lan}) {
         userId: user.uid,
         fullName: fname + ' ' + lname,
         phone,
-        email
+        email,
+        role: 'user',
       });
       
       if (newsLetter) {

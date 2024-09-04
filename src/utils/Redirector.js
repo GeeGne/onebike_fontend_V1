@@ -42,7 +42,13 @@ class Redirector {
     if (!user && (this.pathname === '/account/admin' || this.pathname === '/account/admin/')) {
       this.navigate('/account/login');
     } 
-    if (user && !userData?.admin && (this.pathname === '/account/admin' || this.pathname === '/account/admin/')) {
+    if (
+      user 
+      && userData?.role !== 'admin' 
+      && userData?.role !== 'owner' 
+      && userData?.role === 'user' 
+      && (this.pathname === '/account/admin' || this.pathname === '/account/admin/')
+    ) {
       this.navigate('/account');
     } 
   }

@@ -146,6 +146,8 @@
           width: 1px;
           height: 100%;
           background-color: var(--endElement-border-background-color);
+
+          body.arabic & {right: auto; left: 0}
         }
       }
 
