@@ -5,6 +5,7 @@ import { HelmetProvider } from 'react-helmet-async';
 import useFetchAuth from '/src/hooks/useFetchAuth';
 import useFetchUserData from '/src/hooks/useFetchUserData';
 import useFetchProductsData from '/src/hooks/useFetchProductsData';
+import useFetchRolesData from '/src/hooks/useFetchRolesData';
 
 //  STYLES
 // import './styles/App.scss';
@@ -57,11 +58,10 @@ function App () {
   useFetchAuth();
   useFetchUserData();
   useFetchProductsData();
+  useFetchRolesData();
 
   const themeData = setDarkMode;
   const languageData = setLanguage;
-
-
 
   return (
     <Router>

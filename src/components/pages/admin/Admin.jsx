@@ -30,7 +30,7 @@ import Redirector from '/src/utils/Redirector';
 
 function Admin ({darkMode, lan}) {
 
-  const { user, userData, products, setRefreshProducts } = useDataStore();
+  const { user, userData, products, setRefreshProducts, rolesData } = useDataStore();
   const [ newAlert, setNewAlert ] = useState(0);
   const [ alertText, setAlertText ] = useState(null);
   const [ tab, setTab ] = useState('content-management');
@@ -65,8 +65,8 @@ function Admin ({darkMode, lan}) {
   }
 
   useEffect(() => {
-    if (userData) redirector.admin(user, userData);
-  }, [userData]);
+    redirector.admin(user, rolesData);
+  }, [rolesData]);
 
   const handleClick = e => {
     const { action } = e.currentTarget.dataset;

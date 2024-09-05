@@ -38,15 +38,15 @@ class Redirector {
     } 
   }
 
-  admin (user, userData) {
+  admin (user, rolesData) {
     if (!user && (this.pathname === '/account/admin' || this.pathname === '/account/admin/')) {
       this.navigate('/account/login');
     } 
     if (
       user 
-      && userData?.role !== 'admin' 
-      && userData?.role !== 'owner' 
-      && userData?.role === 'user' 
+      && rolesData?.role !== 'admin' 
+      && rolesData?.role !== 'owner' 
+      && (rolesData?.role === 'user' || !rolesData?.role)
       && (this.pathname === '/account/admin' || this.pathname === '/account/admin/')
     ) {
       this.navigate('/account');

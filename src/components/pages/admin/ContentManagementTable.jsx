@@ -117,7 +117,6 @@ function ContentManagementTable ({darkMode, lan}) {
     const isElementClicked = el => el.classList.contains('clicked');
     const totalHeight = el => el.scrollHeight;
 
-
     findElement(titleEnInptELRefs.current).value = '';
     findElement(titleArInptELRefs.current).value = '';
     findElement(priceInptELRefs.current).value = '';
@@ -252,6 +251,10 @@ function ContentManagementTable ({darkMode, lan}) {
         // console.log(productData);
         saveProductChanges(productId, productData, index);
         break;
+      case 'window_wrapper_is_clicked':
+        e.stopPropagation()
+        break;
+      case 'window_background_is_clicked':
       case 'cancel_window_button_is_clicked':
         dispatch({type: action})
         break;
@@ -313,8 +316,8 @@ function ContentManagementTable ({darkMode, lan}) {
   return (
     <section className="cm">
       <AddProductWindow toggle={toggleAddProductWindow} toggleData={handleToggleAddProductWindow} darkMode={darkMode} lan={lan} />
-      <div className={`cm__delete-window${deleteWindow.toggle}`}>
-        <div className="cm__delete-window__wrapper">
+      <div className={`cm__delete-window${deleteWindow.toggle}`} data-action="window_background_is_clicked" onClick={handleClick}>
+        <div className="cm__delete-window__wrapper" data-action="window_wrapper_is_clicked" onClick={e => e.stopPropagation()}>
           <h2 className="cm__delete-window__wrapper__title">{en ? 'User confirmation Needed' : 'مطلوب تأكيد المستخدم'}</h2>
           <span className="cm__delete-window__wrapper__description">{`${en ? 'Delete' : 'مسح'} "${deleteWindow.productId && getProduct(deleteWindow.productId).title[lan]}" ${en ? '?' : '؟'}`}</span>
           <button className="cm__delete-window__wrapper__cancel-btn" data-action="cancel_window_button_is_clicked" onClick={handleClick}>{en ? 'Cancel' : 'الغاء'}</button>

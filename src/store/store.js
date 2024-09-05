@@ -15,7 +15,10 @@ const useDataStore = create(
     products: [],
     setProducts: products => set({ products }),
     refreshProducts: 0,
-    setRefreshProducts: refreshProducts => set({ refreshProducts })
+    setRefreshProducts: refreshProducts => set({ refreshProducts }),
+    rolesData: null,
+    setRolesData: rolesData => set({ rolesData }),
+    resetRolesDataToNull: () => set({rolesData: null}),
   })
 );
 

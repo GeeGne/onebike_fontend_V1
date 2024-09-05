@@ -39,7 +39,7 @@ function Account ({darkMode, lan}) {
   const pageKeywords = "ONEBIKE, account, manage account, orders, preferences, bicycle, bicycle parts, Syria";
   const en = lan === 'en';
 
-  const { user, userData } = useDataStore();
+  const { user, userData, rolesData } = useDataStore();
   const ordersData = userData?.ordersData || [];
   const navigate = useNavigate();
   const redirector = new Redirector(navigate);
@@ -155,7 +155,7 @@ function Account ({darkMode, lan}) {
       <div className="account" ref={accountEL}>
 
         <section className="account__banner">
-          <button className={`account__banner__manageContent-btn${userData?.role === 'admin' || userData?.role === 'owner' ? ' show': ''}`} data-action="manage_content_btn_is_clicked" onClick={handleClick} />
+          <button className={`account__banner__manageContent-btn${rolesData?.role === 'admin' || rolesData?.role === 'owner' ? ' show': ''}`} data-action="manage_content_btn_is_clicked" onClick={handleClick} />
           <div className="account__banner__pfp">
             <img className="account__banner__pfp__img" src={darkMode ? personIcon : personDarkModeIcon} />
           </div>
