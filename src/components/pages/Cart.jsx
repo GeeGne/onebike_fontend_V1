@@ -30,6 +30,7 @@ function Cart ({darkMode, lan}) {
     addProductToCart, 
     removeProductFromCart
   } = useCartStore();
+  const user = useDataStore(state => state.user);
   const products = useDataStore(state => state.products);
   const setHeadToCheckouts = useOrderStore(state => state.setHeadToCheckouts);
 
@@ -73,7 +74,7 @@ function Cart ({darkMode, lan}) {
     const { type, productId } = e.currentTarget.dataset;
     const getElement = (els, id) => els.find(el => el.dataset.productId === id);
     const styleProductWhenRemoved = productId => getElement(cartProductsELS.current, productId).style.opacity = '0';
-    
+
     switch(type) {
       case 'remove_from_cart':
         styleProductWhenRemoved(productId);
@@ -90,8 +91,13 @@ function Cart ({darkMode, lan}) {
         break;
       case 'nav_to_checkouts':
         setTimeout(() => window.scroll({top: 0, behavior: 'smooth'}), 500);
-        setHeadToCheckouts(true);
-        navigate('/account/login');
+        if (user) {
+          navigate('/checkouts');
+        } else {
+          setHeadToCheckouts(true);
+          navigate('/account/login');  
+        }
+
         break;
       default:
         console.log('Unknown type: ' + type)
