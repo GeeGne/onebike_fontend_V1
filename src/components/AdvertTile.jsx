@@ -92,6 +92,8 @@ function AdvertTile ({darkMode, lan, type}) {
   }
 
   const getProducts = products.filter(handleCategoryType);
+  const isProductsLoaded = getProducts.length != 0;
+  const displayBlocks = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
   const handleClick = e => {
     const {categoryType, name} = type;
@@ -168,7 +170,8 @@ function AdvertTile ({darkMode, lan, type}) {
         <button className="advertTile__list__left-arr-btn" aria-label="Left Arrow" data-action="scroll_left" onClick={handleClick}></button>
         <button className="advertTile__list__right-arr-btn" aria-label="Right Arrow" data-action="scroll_right" onClick={handleClick}></button>
         <ul className="advertTile__list__products" ref={listEL}>
-          {getProducts.map((product, i) => 
+          {isProductsLoaded 
+          ? getProducts.map((product, i) => 
           <li className={`advertTile__list__products__product --slide-to-left${product.state === 'out-of-stock' ? ' out-of-stock' : ''}`} key={product.id} ref={productConEL}>
             {isProductInWishlist(product) 
             ? <button className="advertTile__list__products__product__heart-btn added-to-wishlist" aria-label="Remove product from wishlist" data-action="remove_product_from_wishlist" data-product-id={product.id} onClick={handleClick} />
@@ -190,6 +193,14 @@ function AdvertTile ({darkMode, lan, type}) {
             </div>
             <button className="advertTile__list__products__product__add-btn" data-action="add_to_cart" data-product-id={product.id} onClick={handleClick}>{en ? 'Add to cart' : 'اضف الى السله'}</button>
           </li>      
+          )
+          : displayBlocks.map(() => 
+          <li className="advertTile__list__products__product empty --panel-flick">
+            <div className="advertTile__list__products__product__heart-btn" />
+            <div className="advertTile__list__products__product__img" src="" />
+            <div className="advertTile__list__products__product__description" />
+            <div className="advertTile__list__products__product__add-btn" />
+          </li>   
           )}
         </ul>
       </div>

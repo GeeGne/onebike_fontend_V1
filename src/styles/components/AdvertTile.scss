@@ -5,7 +5,7 @@
   flex-direction: column;
   gap: 1em;
   body.arabic & {direction: rtl}
-
+  
   &__panel {
     position: relative;
     display: flex;
@@ -148,6 +148,7 @@
         @include w.breakpoint-up (medium) {width: calc((100vw - 4em) / 3.5)}
         @include w.breakpoint-up (large) {width: calc((100vw - 5em) / 4.5)}
         @include w.breakpoint-up (xlarge) {width: calc((1400px - 6em) / 5.5)}
+        &.empty {background-color: var(--light-background-color); border: none}
         
         &::before {
           content: "";
@@ -183,7 +184,7 @@
           &:active::after {background-color: rgba(110, 0, 0, 0.5)}
         }
 
-
+        &.empty &__heart-btn {background-color: var(--light-background-color); background-image: none}
         &__heart-btn.added-to-wishlist {background-image: var(--heart-fill-icon)}
         &__heart-btn {
           position: absolute;
@@ -201,6 +202,7 @@
           transition: opacity 0.25s ease-in;
         }
   
+        &.empty &__img {background-color:var(--dark-background-color)}
         &__img {
           width: 100%;
           aspect-ratio: 1 / 1;
@@ -214,7 +216,8 @@
           padding: 0.3em 2em;
           margin-inline: auto;
         }
-  
+        
+        &.empty &__description {background-color:var(--dark-background-color); width: 100%; height: 2em; margin-bottom: 4em}
         &__description {
           color: var(--font-h-color);
         }
@@ -258,7 +261,8 @@
             font-size: var(--font-size-medium);
           }
         }
-  
+        
+        &.empty &__add-btn {background-color: var(--dark-background-color); border: none; border-radius: 0}
         &__add-btn {
           position: relative;
           color: var(--font-p-color);
