@@ -23,7 +23,6 @@ import img4 from '/assets/img/content/Special bicycle and forest.webp'
 function GeneralSettingsTable ({darkMode, lan}) {
 
   const { homePageBannersData, setHomePageBannersData, setRefreshHomePageBannersData } = useDataStore();
-  const [ arrayTest, setArrayTest ] = useState([img1, img2, img3, img4]);
   console.log('homePageBannersData', homePageBannersData)
 
   const en = lan === 'en';
@@ -59,8 +58,6 @@ function GeneralSettingsTable ({darkMode, lan}) {
       await Promise.all(addBannerPromises);
       setHomePageBannersData([]);
       setRefreshHomePageBannersData(Math.random());
-
-      console.log('success');
     } catch (error) {
       console.error('Error: couldn\'t update Bannsers Data: ', error);
     }
@@ -74,19 +71,14 @@ function GeneralSettingsTable ({darkMode, lan}) {
       case 'move_img_to_previous':
         if (Number(index) > 0) {
           [newArray[Number(index)], newArray[Number(index) - 1]] = [newArray[Number(index) - 1], newArray[Number(index)]];
+          updateBannersData(newArray);
         }
-        console.log(newArray);
-
-        // setArrayTest(newArray);
-        updateBannersData(newArray);
         break;
       case 'move_img_to_next':
         if (Number(index) < newArray.length - 1) {
           [newArray[Number(index)], newArray[Number(index) + 1]] = [newArray[Number(index) + 1], newArray[Number(index)]];
+          updateBannersData(newArray);
         }
-        console.log(newArray);
-        // setArrayTest(newArray)
-        updateBannersData(newArray);
         break;
       default:
         console.error('Error: unknown action: ', action);
