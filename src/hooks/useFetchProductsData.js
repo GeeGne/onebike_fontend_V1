@@ -22,7 +22,6 @@ function useFetchProductsData () {
           const productsData = productsSnapshot.docs.map(doc => (
             {...doc.data()}
           ))
-          // console.log(productsData);
           setProducts(productsData);
         } else {
           setProducts([]);

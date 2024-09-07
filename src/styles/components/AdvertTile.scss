@@ -217,7 +217,7 @@
           margin-inline: auto;
         }
         
-        &.empty &__description {background-color:var(--dark-background-color); width: 100%; height: 2em; margin-bottom: 4em}
+        &.empty &__description {background-color:var(--dark-background-color); width: 70%; height: 1em; border-radius: 2em}
         &__description {
           color: var(--font-h-color);
         }
@@ -227,6 +227,7 @@
           filter: var(--advertList-brandLogo-filter-invert);
         }
 
+        &.empty &__price {background-color:var(--dark-background-color); width: 40%; height: 1em; margin-bottom: 4em; border-radius: 2em}
         &__price {
           display: flex;
           flex-flow: wrap-reverse;
@@ -262,7 +263,7 @@
           }
         }
         
-        &.empty &__add-btn {background-color: var(--dark-background-color); border: none; border-radius: 0}
+        &.empty &__add-btn {background-color: var(--dark-background-color); padding-block: 1em; border: none; border-radius: 0}
         &__add-btn {
           position: relative;
           color: var(--font-p-color);

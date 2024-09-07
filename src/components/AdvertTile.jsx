@@ -194,11 +194,12 @@ function AdvertTile ({darkMode, lan, type}) {
             <button className="advertTile__list__products__product__add-btn" data-action="add_to_cart" data-product-id={product.id} onClick={handleClick}>{en ? 'Add to cart' : 'اضف الى السله'}</button>
           </li>      
           )
-          : displayBlocks.map(() => 
-          <li className="advertTile__list__products__product empty --panel-flick">
+          : displayBlocks.map(num => 
+          <li className="advertTile__list__products__product empty --panel-flick" key={num} ref={productConEL}>
             <div className="advertTile__list__products__product__heart-btn" />
-            <div className="advertTile__list__products__product__img" src="" />
+            <div className="advertTile__list__products__product__img" />
             <div className="advertTile__list__products__product__description" />
+            <div className="advertTile__list__products__product__price" />
             <div className="advertTile__list__products__product__add-btn" />
           </li>   
           )}

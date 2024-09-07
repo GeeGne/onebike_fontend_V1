@@ -18,7 +18,12 @@ const useDataStore = create(
     setRefreshProducts: refreshProducts => set({ refreshProducts }),
     rolesData: null,
     setRolesData: rolesData => set({ rolesData }),
-    resetRolesDataToNull: () => set({rolesData: null}),
+    resetRolesDataToNull: () => set({ rolesData: null }),
+    homePageBannersData: null,
+    setHomePageBannersData: homePageBannersData => set({ homePageBannersData }),
+    refreshHomePageBannersData: 0,
+    setRefreshHomePageBannersData: refreshHomePageBannersData => set({ refreshHomePageBannersData }),
+    resetHomePageBannersDataToNull: () => set({ homePageBannersData: null }),
   })
 );
 

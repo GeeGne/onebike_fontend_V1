@@ -2,5 +2,150 @@
 @use '/src/styles/utils/_StyleKits' as k;
 
 .gs {
-  background-color: red;
+
+  &__contentDisplay-sec {
+    display: flex;
+    flex-direction: column;
+    padding-block: 1em;
+    gap: 1em;
+  
+    &__title {
+      color: var(--font-h-color);
+      font-weight: 600;
+    }
+
+    &__lst {
+      display: flex;
+      flex-direction: column;
+      gap: 1em;
+      @include w.breakpoint-up (large) {
+        width: 700px;
+        margin-inline: auto;
+      }
+
+      &__itm {
+        display: grid;
+        gap: 0 3em;
+        grid-template-columns: auto auto 1fr;
+        grid-template-areas:
+        'count up-arrow delete-btn'
+        'count down-arrow delete-btn'
+        ;
+        align-items: center;
+        @include w.breakpoint-up (large) {
+          width: 700px;
+        }
+
+        &__count {
+          grid-area: count;
+          color: var(--font-p-color);
+          font-size: 4em;
+          font-weight: 500;
+        }
+
+        &__up-arrow-btn,
+        &__down-arrow-btn {
+          cursor: pointer;
+          width: 2em;
+          height: 2em;
+          background-size: cover;
+          background-repeat: no-repeat;
+          background-position: center;
+          transition: opacity 0.15s ease-out;
+          &:hover {opacity: 0.5}
+        }
+
+        &__up-arrow-btn {
+          grid-area: up-arrow;
+          background-image: var(--caret-up-fill-icon);  
+          margin-top: auto;
+        }
+
+        &__down-arrow-btn {
+          grid-area: down-arrow;
+          background-image: var(--caret-down-fill-icon);  
+          margin-bottom: auto;
+        }
+
+        &__delete-btn {
+          grid-area: delete-btn;
+          position: relative;
+          width: 15em;
+          margin-left: auto;
+
+          &:hover::before {opacity: 1}
+          &::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: hsla(0, 0%, 0%, 0.5);
+            background-image: url(/assets/img/icons/delete_darkMode.svg);
+            background-repeat: no-repeat;
+            background-size: 4em;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 0.15s ease-out;
+
+          }
+
+          &__img {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            @include w.breakpoint-up(large) {aspect-ratio: 2.39 / 1}
+            @include w.breakpoint-up(xlarge) {aspect-ratio: 2.5 / 1}
+            object-fit: cover;
+            cursor: pointer;
+          }
+        }
+      }
+    }
+
+    &__wrapper {
+      position: relative;
+      width: 15em;
+      aspect-ratio: 16 / 9;
+      @include w.breakpoint-up(large) {aspect-ratio: 2.39 / 1}
+      @include w.breakpoint-up(xlarge) {aspect-ratio: 2.5 / 1}
+      margin-left: auto;
+      @include w.breakpoint-up (large) {
+        width: 700px;
+        margin-inline: auto;
+      }
+
+      &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 15em;
+        aspect-ratio: 16 / 9;
+        border: dashed 5px hsla(0, 0%, 0%, 0.5);
+        body.dark-theme & { border: dashed 5px hsla(0, 0%, 100%, 0.5) }
+        @include w.breakpoint-up(large) {aspect-ratio: 2.39 / 1}
+        @include w.breakpoint-up(xlarge) {aspect-ratio: 2.5 / 1}
+        background-color: var(--light-background-color);
+        background-image: var(--add-icon);
+        background-repeat: no-repeat;
+        background-size: 4em;
+        background-position: center;
+        z-index: 5;
+      }
+
+      &__add-inpt {
+        position: absolute;
+        top: 0;
+        right: 0;
+        opacity: 0;
+        z-index: 20;
+        width: 15em;
+        aspect-ratio: 16 / 9;
+        @include w.breakpoint-up(large) {aspect-ratio: 2.39 / 1}
+        @include w.breakpoint-up(xlarge) {aspect-ratio: 2.5 / 1}
+        cursor: pointer;
+      }
+    }
+  }
 }
