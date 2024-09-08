@@ -8,6 +8,7 @@ import '/src/styles/components/pages/admin/GeneralSettingsTable.scss';
 import DisplayWebImg from '/src/components/DisplayWebImg';
 import Alert from '/src/components/Alert';
 import ProgressActivity from '/src/components/ProgressActivity';
+import ProgressWindowActivity from '/src/components/ProgressWindowActivity';
 
 // STORES
 import { useDataStore } from '/src/store/store'; 
@@ -17,13 +18,15 @@ import editAltWindowReducer from '/src/reducers/editAltWindowReducer';
 
 // FIREBASE
 import { db} from '/src/firebase/fireStore';
-import { getDoc, doc, collection, updateDoc, getDocs, addDoc, writeBatch } from 'firebase/firestore';
+import { getDoc, setDoc, doc, collection, updateDoc, getDocs, addDoc, writeBatch } from 'firebase/firestore';
 
 // ASSETS
 import img1 from '/assets/img/content/bicycle and syria flag poster.webp'
 import img2 from '/assets/img/content/bicycle and lake.webp'
 import img3 from '/assets/img/content/Giant and Snow.webp'
 import img4 from '/assets/img/content/Special bicycle and forest.webp'
+import infoIcon from '/assets/img/icons/info.svg';
+import infoDarkModeIcon from '/assets/img/icons/info_darkMode.svg';
 
 function GeneralSettingsTable ({darkMode, lan}) {
 
@@ -37,6 +40,7 @@ function GeneralSettingsTable ({darkMode, lan}) {
     id: '',
   });
   const [ activity, setActivity ] = useState(false);
+  const [ windowActivity, setwindowActivity ] = useState('');
 
 console.log(editAltWindow);
   const altInputEL = useRef(null);
@@ -50,7 +54,7 @@ console.log(editAltWindow);
 
       const batch = writeBatch(db);
 
-      snapshot.forEach(banner => {
+      snapshot.forEach(async banner => {
         const bannersRef = doc(db, 'homePageBanners', banner.id);
         batch.delete(bannersRef)
       });
@@ -61,25 +65,29 @@ console.log(editAltWindow);
       console.error('Error: couldn\'t delete Bannsers Data: ', error);
     }
   }
-
   const updateBannersOrderData = async newBanners => {
+
+    setwindowActivity(' show');
+
     try {
       await deleteBannersData();
-      const bannersCollection = collection(db, 'homePageBanners');
 
-      const addBannerPromises = newBanners.map((banner) => {
-        return addDoc(bannersCollection, banner)
+      const addBannerPromises = newBanners.map(banner => {
+        const docRef = doc(db, 'homePageBanners', banner.id);
+        return setDoc(docRef, banner);
       });
 
       await Promise.all(addBannerPromises);
-      setHomePageBannersData([]);
+
+      // setHomePageBannersData([]);
       setRefreshHomePageBannersData(Math.random());
-      setAlertText('success')
+      setAlertText(en ? 'Banners order has been changed successfully!' : 'تم تغيير ترتيب اللافتات بنجاح!');
     } catch (error) {
       console.error('Error: couldn\'t update Bannsers Data: ', error);
-      setAlertText('fail')
+      setAlertText(en ? 'Error has been occured while changing the the order of the Banners' : 'حدث خطأ أثناء تغيير ترتيب اللافتات')
     } finally {
       setNewAlert(Math.random());
+      setwindowActivity(' hide');
     }
   }
 
@@ -94,10 +102,10 @@ console.log(editAltWindow);
 
       dispatch({type: 'alt_data_is_updated'})
       setRefreshHomePageBannersData(Math.random());
-      setAlertText('success')
+      setAlertText(en ? 'Banner alt has been updated successfully!' : 'تم تحديث النص البديل للافتة بنجاح!')
     } catch (error) {
       console.error('Error: couldn\'t update alt data: ', error);
-      setAlertText('fail')
+      setAlertText(en ? 'An error has occurred while updating the banner\'s alt' : 'حدث خطأ أثناء تحديث النص البديل للافتة');
     } finally {
       setNewAlert(Math.random());
       setActivity(false);
@@ -135,7 +143,6 @@ console.log(editAltWindow);
         dispatch({type: action})
         break;
       case 'save_window_button_is_clicked':
-        console.log('clcik')
         updateBannerAltData(bannerId, alt);
         break;
       case 'edit_alt_button_is_clicked':
@@ -161,6 +168,7 @@ console.log(editAltWindow);
   return (
     <div className="gs">
       <Alert alertText={alertText} newAlert={newAlert} />
+      <ProgressWindowActivity darkMode={darkMode} windowActivity={windowActivity} invert={false} />
       <div className={`gs__editAlt-window${editAltWindow.toggle}`} data-action="window_background_is_clicked" onClick={handleClick}>
         <div className="gs__editAlt-window__wrapper" data-action="window_wrapper_is_clicked" onClick={e => e.stopPropagation()}>
           <h2 className="gs__editAlt-window__wrapper__title">{en ? 'Set alt' : 'مطلوب تأكيد المستخدم'}</h2>
@@ -177,10 +185,12 @@ console.log(editAltWindow);
             <span className="gs__contentDisplay-sec__lst__itm__count">{i + 1}</span>
             <button className="gs__contentDisplay-sec__lst__itm__up-arrow-btn" aria-label="move image to previous" data-index={i} data-action="move_img_to_previous" onClick={handleClick} />
             <button className="gs__contentDisplay-sec__lst__itm__down-arrow-btn" aria-label="move image to next" data-index={i} data-action="move_img_to_next" onClick={handleClick} />
-            <div className="gs__contentDisplay-sec__lst__itm__alt-popUp" data-banner-id={itm.id} data-action="move_img_to_next"> 
-              <span className="gs__contentDisplay-sec__lst__itm__alt-popUp__alt-description">{itm.alt}</span>
+            <div className="gs__contentDisplay-sec__lst__itm__alt-wrapper">
+              <span className="gs__contentDisplay-sec__lst__itm__alt-wrapper__title">Alt</span>
+              <button className="gs__contentDisplay-sec__lst__itm__alt-wrapper__btn" data-banner-id={itm.id} data-action="edit_alt_button_is_clicked" onClick={handleClick} />     
+              <img className="gs__contentDisplay-sec__lst__itm__alt-wrapper__img" src={darkMode ? infoDarkModeIcon : infoIcon} /> 
+              <span className="gs__contentDisplay-sec__lst__itm__alt-wrapper__description">{itm.alt}</span>
             </div>
-            <button className="gs__contentDisplay-sec__lst__itm__alt-btn" data-banner-id={itm.id} data-action="edit_alt_button_is_clicked" onClick={handleClick} />     
             <button className="gs__contentDisplay-sec__lst__itm__delete-btn" aria-label="delte image" data-index={i} data-action="delete_img" >
               <DisplayWebImg className="gs__contentDisplay-sec__lst__itm__delete-btn__img" src={getBannerImgURL(itm)} loading="lazy" role="button" />
             </button>

@@ -2,7 +2,7 @@
 import React, {useState, useEffect, useRef} from 'react';
 
 // SCSS
-import '/src/styles/components/ProgressActivity.scss'
+import '/src/styles/components/ProgressWindowActivity.scss'
 
 // ASSETS
 import progressActivity from '/assets/img/icons/progress_activity.svg';
@@ -10,7 +10,7 @@ import progressActivity from '/assets/img/icons/progress_activity.svg';
 // ASSETS - DARK MODE
 import progressActivityDarkMode from '/assets/img/icons/progress_activity_darkMode.svg';
 
-function ProgressWindowActivity ({darkMode, invert}) {
+function ProgressWindowActivity ({ darkMode, windowActivity, invert }) {
 
   const handleSrc = () => {
     switch (true){
@@ -22,7 +22,9 @@ function ProgressWindowActivity ({darkMode, invert}) {
   }
 
   return (
-    <img className="progressActivity --rotate" src={handleSrc()} />
+    <div className={`progressWindowActivity${windowActivity}`}>
+      <img className="progressWindowActivity__img" src={handleSrc()} />
+    </div>
   )
 }
 

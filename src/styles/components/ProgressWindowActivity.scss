@@ -1,0 +1,39 @@
+@use '/src/styles/utils/_BreakPoints' as w;
+
+.progressWindowActivity {
+  visibility: hidden;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(3px);
+  z-index: 2000;
+
+  animation-duration: 0.25s;
+  animation-timing-function: ease-out;
+  animation-fill-mode: both;
+  &.show {animation-name: typeA-window-show}
+  &.hide {animation-name: typeA-window-hide; animation-delay: 0.25s}
+  
+  &.show &__img {animation-name: typeB-window-wrapper-show, rotate}    
+  &.hide &__img {animation-name: typeB-window-wrapper-hide, rotate}    
+  &__img  {
+    // position: absolute;
+    // top: 50%;
+    // left: 50%;
+    // transform: translate(-50%, -50%) rotate(0deg);
+    width: 5em;
+    height: 5em;
+    transform-origin: center;
+
+    animation-duration: 0.5s, 1s;
+    // animation-delay: 0s, 0.5s;
+    animation-timing-function: cubic-bezier(0.68,-0.55,0.27,1.55), linear;
+    animation-fill-mode: both, both;
+    animation-iteration-count: 1, infinite;
+  }
+}
