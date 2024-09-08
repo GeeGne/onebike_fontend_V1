@@ -3,6 +3,117 @@
 
 .gs {
 
+  &__editAlt-window {
+    visibility: hidden;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    backdrop-filter: blur(3px);
+    z-index: 2000;
+
+    animation-duration: 0.25s;
+    animation-timing-function: ease-out;
+    animation-fill-mode: both;
+    &.show {animation-name: typeA-window-show}
+    &.hide {animation-name: typeA-window-hide; animation-delay: 0.25s}
+    
+    &.show &__wrapper {animation-name: typeA-window-wrapper-show}    
+    &.hide &__wrapper {animation-name: typeA-window-wrapper-hide; animation-delay: 0s;}    
+    &__wrapper {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 20em;
+      background-color: var(--background-color);
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-areas:
+      'title title'
+      'inpt inpt'
+      'cancel save'
+      ;
+      align-items: center;
+      justify-content: center;
+      border-radius: 1em;
+      overflow: hidden;
+      box-shadow: 0 0 10px 1px hsla(0, 0%, 0%, 0.6);
+
+      animation-duration: 0.5s;
+      animation-timing-function: cubic-bezier(0.68,-0.55,0.27,1.55);
+      animation-fill-mode: both;
+  
+      &__title {
+        grid-area: title;
+        text-align: center;
+        padding-block: 1em;
+        color: var(--font-p-color);
+      }
+
+      &__inpt {
+        grid-area: inpt;
+        position: relative;
+        text-align: center;
+        font-weight: 600;
+        padding-inline: 1em;
+        padding-block: 0.5em;
+        margin-bottom: 1em;
+        margin-inline: 2em;
+        background-color: var(--light-background-color);
+        border: solid var(--dark-invert-background-color);
+        border-width: 0 0 2px 0;
+        outline: none;
+        color: var(--font-h-color);
+        font-size: var(--font-size-extraSmall);
+        transition: border 0.15s ease-out;
+        &:focus {border: solid var(--background-invert-color); border-width: 0 0 2px 0}
+      }
+
+      &__cancel-btn {
+        grid-area: cancel;
+        &:hover {background-color: var(--light-invert-background-color)}
+
+        &::before {
+          content: "";
+          position: absolute;
+          top: 0;
+          right: 0;
+          width: 1px;
+          height: 100%;
+          background-color: var(--endElement-border-background-color);
+          body.arabic & {right: auto; left: 0}
+        }
+      }
+
+      &__save-btn {
+        grid-area: save;
+        &:hover {background-color: var(--primary-color)}
+      }
+
+      &__save-btn,
+      &__cancel-btn {
+        position: relative;
+        font-size: var(--font-size-extraSmall);
+        color: var(--font-p-color);
+        font-weight: 600;
+        padding-block: 1em;
+        transition: background-color 0.15s ease-out, color 0.15s ease-out;
+        &:hover {color: var(--font-h-invert-color)}
+
+        &::after {
+          content: "";
+          position: absolute;
+          top: 0;
+          right: 0;
+          width: 100%;
+          height: 1px;
+          background-color: var(--endElement-border-background-color);
+        }
+      }
+    }
+  }
+
   &__contentDisplay-sec {
     display: flex;
     flex-direction: column;
@@ -18,23 +129,19 @@
       display: flex;
       flex-direction: column;
       gap: 1em;
-      @include w.breakpoint-up (large) {
-        width: 700px;
-        margin-inline: auto;
-      }
+      @include w.breakpoint-up (large) {width: 700px; margin-inline: auto}
 
       &__itm {
         display: grid;
-        gap: 0 3em;
-        grid-template-columns: auto auto 1fr;
+        // gap: 0 3em;
+        grid-template-columns: auto auto auto 2em 15em;
         grid-template-areas:
-        'count up-arrow delete-btn'
-        'count down-arrow delete-btn'
+        'count up-arrow alt-btn alt-popUp delete-btn'
+        'count down-arrow alt-btn alt-popUp delete-btn'
         ;
         align-items: center;
-        @include w.breakpoint-up (large) {
-          width: 700px;
-        }
+        @include w.breakpoint-up (medium) { grid-template-columns: 4em auto auto 2em 15em }
+        @include w.breakpoint-up (large) { width: 700px; grid-template-columns: 4em auto auto 2em 15em }
 
         &__count {
           grid-area: count;
@@ -51,8 +158,11 @@
           background-size: cover;
           background-repeat: no-repeat;
           background-position: center;
+          margin-right: auto;
+          opacity: 0.5;
           transition: opacity 0.15s ease-out;
-          &:hover {opacity: 0.5}
+          &:hover {opacity: 1}
+          body.arabic & { margin-right: 0; margin-left: auto }
         }
 
         &__up-arrow-btn {
@@ -65,6 +175,54 @@
           grid-area: down-arrow;
           background-image: var(--caret-down-fill-icon);  
           margin-bottom: auto;
+        }
+
+        &__alt-btn {
+          grid-area: alt-btn;
+          width: 2em;
+          height: 2em;
+          background-size: cover;
+          background-repeat: no-repeat;
+          background-position: center;
+          background-image: var(--pencil-fill-icon);  
+          margin-block: auto;
+          cursor: pointer;
+          opacity: 0.5;
+          margin-inline: auto;
+          transition: opacity 0.15s ease-out;
+          &:hover {opacity: 1}
+        }
+
+        &__alt-popUp {
+          grid-area: alt-popUp;
+          position: relative;
+          width: 1.3em;
+          height: 1.3em;
+          background-size: cover;
+          background-repeat: no-repeat;
+          background-position: center;
+          background-image: var(--info-icon);  
+          margin-inline: auto;
+          margin-bottom: auto;
+          cursor: pointer;
+          transition: opacity 0.15s ease-out;
+          &:hover {opacity: 1}
+
+          &:hover &__alt-description {opacity: 1}
+          &__alt-description {
+            position: absolute;
+            bottom: calc(100% + 0.5em);
+            left: 50%;
+            transform: translateX(-50%);
+            white-space: nowrap;
+            font-size: var(--font-size-small);
+            color: var(--font-p-invert-color);
+            background-color: var(--dark-invert-background-color);
+            padding: 0.5em;
+            border-radius: 0.5em;
+            opacity: 0;
+            transition: opacity 0.15s ease-out;
+          }
         }
 
         &__delete-btn {
@@ -87,8 +245,8 @@
             background-size: 4em;
             background-position: center;
             opacity: 0;
+            z-index: 10;
             transition: opacity 0.15s ease-out;
-
           }
 
           &__img {

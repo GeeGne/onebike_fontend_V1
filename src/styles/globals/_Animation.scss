@@ -409,6 +409,58 @@
   }
 }
 
+@keyframes typeA-window-show {
+  from {
+    visibility: hidden;
+    backdrop-filter: blur(0);
+    background-color: transparent;
+  }
+
+  to {
+    visibility: visible;
+    backdrop-filter: blur(3px);
+    background-color: var(--window-background-color);
+  }
+}
+
+@keyframes typeA-window-hide {
+  from {
+    visibility: visible;
+    backdrop-filter: blur(3px);
+    background-color: var(--window-background-color);
+  }
+
+  to {
+    visibility: hidden;
+    backdrop-filter: blur(0);
+    background-color: transparent;
+  }
+}
+
+@keyframes typeA-window-wrapper-show {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.5);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+@keyframes typeA-window-wrapper-hide {
+  from {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  to {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.5);
+  }
+}
+
 .--fade-in {
   animation-name: fade-in;
   animation-duration: 0.7s;

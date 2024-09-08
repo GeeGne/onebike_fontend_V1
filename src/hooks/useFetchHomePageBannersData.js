@@ -10,11 +10,10 @@ import { getDoc, doc, collection, getDocs, writeBatch } from 'firebase/firestore
 
 function useFetchHomePageBannersData () {
   const { setHomePageBannersData, refreshHomePageBannersData } = useDataStore();
-  console.log(refreshHomePageBannersData)
+
   useEffect(() => {
     const fetchHomePageBannersData = async () => {
       try {
-        console.log('isRefreshing');
         const bannersCollection = collection(db, 'homePageBanners')
         const bannersSnapshot = await getDocs(bannersCollection);
 

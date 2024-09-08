@@ -61,7 +61,7 @@
   bottom: calc(100% + 1em);
   right: 0.6em;
   width: 15em;
-  background-color: var(--font-p-color);
+  background-color: var(--dark-invert-background-color);
   font-size: var(--font-size-extraSmall);
   color: var(--font-p-invert-color);
   border-radius: 0.5em 0.5em 0.2em 0.5em;
@@ -83,7 +83,7 @@
   transform: rotate(45deg);
   width: 1em;
   height: 1em;
-  background-color: var(--font-p-color);
+  background-color: var(--dark-invert-background-color);
   border-radius: 0.2em;
   body.arabic & {right: auto; left: 0.16em}
 }
