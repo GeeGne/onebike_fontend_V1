@@ -67,7 +67,7 @@
         color: var(--font-h-color);
         font-size: var(--font-size-extraSmall);
         transition: border 0.15s ease-out;
-        &:focus {border: solid var(--background-invert-color); border-width: 0 0 2px 0}
+        &:focus {border: solid var(--primary-color); border-width: 0 0 2px 0}
       }
 
       &__cancel-btn {
@@ -133,7 +133,7 @@
 
       &__itm {
         display: grid;
-        // gap: 0 3em;
+        // gap: 0 1em;
         grid-template-columns: auto auto auto 15em;
         grid-template-areas:
         'count up-arrow alt delete-btn'
@@ -153,8 +153,8 @@
         &__up-arrow-btn,
         &__down-arrow-btn {
           cursor: pointer;
-          width: 2em;
-          height: 2em;
+          width: 2.5em;
+          height: 2.5em;
           background-size: cover;
           background-repeat: no-repeat;
           background-position: center;
@@ -176,54 +176,6 @@
           background-image: var(--caret-down-fill-icon);  
           margin-bottom: auto;
         }
-
-  /*       &__alt-btn {
-          grid-area: alt-btn;
-          width: 2em;
-          height: 2em;
-          background-size: cover;
-          background-repeat: no-repeat;
-          background-position: center;
-          background-image: var(--pencil-fill-icon);  
-          margin-block: auto;
-          cursor: pointer;
-          opacity: 0.5;
-          margin-inline: auto;
-          transition: opacity 0.15s ease-out;
-          &:hover {opacity: 1}
-        }
- */
-        /* &__alt-popUp {
-          grid-area: alt-popUp;
-          position: relative;
-          width: 1.3em;
-          height: 1.3em;
-          background-size: cover;
-          background-repeat: no-repeat;
-          background-position: center;
-          background-image: var(--info-icon);  
-          margin-inline: auto;
-          margin-bottom: auto;
-          cursor: pointer;
-          transition: opacity 0.15s ease-out;
-          &:hover {opacity: 1}
-
-          &:hover &__alt-description {opacity: 1}
-          &__alt-description {
-            position: absolute;
-            bottom: calc(100% + 0.5em);
-            left: 50%;
-            transform: translateX(-50%);
-            white-space: nowrap;
-            font-size: var(--font-size-small);
-            color: var(--font-p-invert-color);
-            background-color: var(--dark-invert-background-color);
-            padding: 0.5em;
-            border-radius: 0.5em;
-            opacity: 0;
-            transition: opacity 0.15s ease-out;
-          }
-        } */
 
         &__alt-wrapper {
           grid-area: alt;

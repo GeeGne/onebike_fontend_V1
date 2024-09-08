@@ -18,15 +18,18 @@ import editAltWindowReducer from '/src/reducers/editAltWindowReducer';
 
 // FIREBASE
 import { db} from '/src/firebase/fireStore';
-import { getDoc, setDoc, doc, collection, updateDoc, getDocs, addDoc, writeBatch } from 'firebase/firestore';
+import { getDoc, deleteDoc, setDoc, doc, collection, updateDoc, getDocs, writeBatch } from 'firebase/firestore';
+import { storage } from '/src/firebase/storage';
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+
+// NANOID
+import { nanoid } from 'nanoid';
 
 // ASSETS
-import img1 from '/assets/img/content/bicycle and syria flag poster.webp'
-import img2 from '/assets/img/content/bicycle and lake.webp'
-import img3 from '/assets/img/content/Giant and Snow.webp'
-import img4 from '/assets/img/content/Special bicycle and forest.webp'
 import infoIcon from '/assets/img/icons/info.svg';
 import infoDarkModeIcon from '/assets/img/icons/info_darkMode.svg';
+import emptyImgURL from '/assets/img/empty/empty.webp';
+
 
 function GeneralSettingsTable ({darkMode, lan}) {
 
@@ -41,11 +44,14 @@ function GeneralSettingsTable ({darkMode, lan}) {
   });
   const [ activity, setActivity ] = useState(false);
   const [ windowActivity, setwindowActivity ] = useState('');
+  const [ bannerSrc, setBannerSrc ] = useState("");
 
-console.log(editAltWindow);
+  console.log(editAltWindow);
+  const imgBannerFile = useRef(null);
   const altInputEL = useRef(null);
   const en = lan === 'en';
   const getBannerImgURL = item => `/assets/img/banners/homepage/${item.id}.webp`;
+  const clearAltInputValue = () => altInputEL.current.value = "";
 
   const deleteBannersData = async () => {
     try {
@@ -70,7 +76,7 @@ console.log(editAltWindow);
     setwindowActivity(' show');
 
     try {
-      await deleteBannersData();
+      // await deleteBannersData();
 
       const addBannerPromises = newBanners.map(banner => {
         const docRef = doc(db, 'homePageBanners', banner.id);
@@ -97,12 +103,14 @@ console.log(editAltWindow);
 
     try {
       console.log('documentID', documentID);
-      const docRef = doc(db, 'homePageBanners', documentID)
+      const docRef = doc(db, 'homePageBanners', documentID);
       await updateDoc(docRef, { alt });
 
       dispatch({type: 'alt_data_is_updated'})
       setRefreshHomePageBannersData(Math.random());
-      setAlertText(en ? 'Banner alt has been updated successfully!' : 'تم تحديث النص البديل للافتة بنجاح!')
+      clearAltInputValue();
+
+      setAlertText(en ? 'Banner alt has been updated successfully!' : 'تم تحديث النص البديل للافتة بنجاح!');
     } catch (error) {
       console.error('Error: couldn\'t update alt data: ', error);
       setAlertText(en ? 'An error has occurred while updating the banner\'s alt' : 'حدث خطأ أثناء تحديث النص البديل للافتة');
@@ -110,43 +118,101 @@ console.log(editAltWindow);
       setNewAlert(Math.random());
       setActivity(false);
     }
+  };
+
+  const addNewBannerData = async (refID, bannerData) => {
+    
+    setwindowActivity(' show');
+
+    try {
+      const docRef = doc(db, 'homePageBanners', refID);
+      await setDoc(docRef, bannerData);
+
+      if (!imgBannerFile.current) imgBannerFile.current = await fetchEmptyImgAsBlob(emptyImgURL);
+      const storageRef = ref(storage, getBannerImgURL(bannerData));
+      await uploadBytes(storageRef, imgBannerFile.current);
+
+      setRefreshHomePageBannersData(Math.random());
+      setAlertText(en ? 'Success! new Banner is added to the cloud' : 'تم اضافه لافته جديده بنجاج!')
+    } catch (error) {
+      console.error('Error: couldn\'t add Banner Data: ', error);
+      setAlertText(en ? 'Error adding new Banner' : 'حصل خطأ في اضافه لافته');
+    } finally {
+      setNewAlert(Math.random());
+      setwindowActivity(' hide');
+    }
+  };
+
+  const deleteBannerData = async (bannerID) => {
+    
+    setwindowActivity(' show');
+    
+    try {
+      const docRef = doc(db, 'homePageBanners', bannerID);
+      await deleteDoc(docRef);
+      
+      setRefreshHomePageBannersData(Math.random());
+      setAlertText(en ? 'Success! Banner is deleted successfully' : 'تم حذف الافته بنجاج!');
+    } catch (error) {
+      console.error('Error: couldn\' delete Banner: ', error);
+      setAlertText(en ? 'An error has occured while deleting the Banner' : 'حدث خطأ أثناء حذف اللافته');
+    } finally {
+      setNewAlert(Math.random());
+      setwindowActivity(' hide');
+    }
   }
 
   const renderLoadingState = textContent => {
+
     if (activity) {
       return <ProgressActivity darkMode={darkMode} invert={false} />
     } else {
       return textContent;
+    } 
+  };
+
+  const fetchEmptyImgAsBlob = async imgUrl => {
+    try {
+      const response = await fetch(imgUrl);
+      const blob = await response.blob();
+      return blob;
+    } catch(error) {
+      console.error('Error: fetching image: ', error);
     }
   }
 
   const handleClick = e => {
     const {action, index, bannerId, alt} = e.currentTarget.dataset;
     const newArray = [...homePageBannersData];
+    const addOrders = array => array.map((item, i) => ({...item, order: i + 1}));
 
     switch (action) {
       case 'move_img_to_previous':
         if (Number(index) > 0) {
           [newArray[Number(index)], newArray[Number(index) - 1]] = [newArray[Number(index) - 1], newArray[Number(index)]];
-          updateBannersOrderData(newArray);
+          updateBannersOrderData(addOrders(newArray));
         }
         break;
       case 'move_img_to_next':
         if (Number(index) < newArray.length - 1) {
           [newArray[Number(index)], newArray[Number(index) + 1]] = [newArray[Number(index) + 1], newArray[Number(index)]];
-          updateBannersOrderData(newArray);
+          updateBannersOrderData(addOrders(newArray));
         }
         break;
       case 'window_background_is_clicked':
       case 'cancel_window_button_is_clicked':
-        altInputEL.current.value = '';
-        dispatch({type: action})
+        clearAltInputValue();
+        dispatch({type: action});
         break;
       case 'save_window_button_is_clicked':
         updateBannerAltData(bannerId, alt);
         break;
       case 'edit_alt_button_is_clicked':
-        dispatch({type: action, id: bannerId})
+        dispatch({type: action, id: bannerId});
+        break;
+      case 'delete_banner_img':
+        console.log('lcicked')
+        deleteBannerData(bannerId);
         break;
       default:
         console.error('Error: unknown action: ', action);
@@ -158,7 +224,23 @@ console.log(editAltWindow);
 
     switch (name) {
       case 'alt':
-        dispatch({type: 'add_alt_data', [name]: value.trim()})
+        dispatch({type: 'add_alt_data', [name]: value.trim()});
+        break;
+      case 'imgUpload':
+        const previewImage = () => {
+          const file = e.currentTarget.files[0];
+          const reader = new FileReader();
+          reader.onloadend = function () {
+            setProductSrc(reader.result);
+          }
+
+          file ? reader.readAsDataURL(file) : setProductSrc('');
+          imgBannerFile.current = file || fetchEmptyImgAsBlob(emptyImgURL);
+        }
+
+        const bannerData = {id: nanoid(12), alt: '', order: homePageBannersData.length + 1};
+        previewImage();
+        addNewBannerData(bannerData.id, bannerData);
         break;
       default:
         console.error('Error: unknown name: ', name);
@@ -191,14 +273,14 @@ console.log(editAltWindow);
               <img className="gs__contentDisplay-sec__lst__itm__alt-wrapper__img" src={darkMode ? infoDarkModeIcon : infoIcon} /> 
               <span className="gs__contentDisplay-sec__lst__itm__alt-wrapper__description">{itm.alt}</span>
             </div>
-            <button className="gs__contentDisplay-sec__lst__itm__delete-btn" aria-label="delte image" data-index={i} data-action="delete_img" >
+            <button className="gs__contentDisplay-sec__lst__itm__delete-btn" aria-label="delte image" data-banner-id={itm.id} data-action="delete_banner_img" onClick={handleClick} >
               <DisplayWebImg className="gs__contentDisplay-sec__lst__itm__delete-btn__img" src={getBannerImgURL(itm)} loading="lazy" role="button" />
             </button>
           </li>        
         )}
         </ul>
         <div className="gs__contentDisplay-sec__wrapper">
-          <input className="gs__contentDisplay-sec__wrapper__add-inpt" type="file" accept="image/*" name="imgUpload" />
+          <input className="gs__contentDisplay-sec__wrapper__add-inpt" type="file" accept="image/*" name="imgUpload" onChange={handleChange} />
         </div>
       </section>
     </div>

@@ -6,7 +6,7 @@ import { useDataStore } from '/src/store/store';
 
 // FIREBASE
 import { db } from '/src/firebase/fireStore';
-import { getDoc, doc, collection, getDocs, writeBatch } from 'firebase/firestore';
+import { getDoc, doc, collection, getDocs, orderBy, query, writeBatch } from 'firebase/firestore';
 
 function useFetchHomePageBannersData () {
   const { setHomePageBannersData, refreshHomePageBannersData } = useDataStore();
@@ -15,8 +15,8 @@ function useFetchHomePageBannersData () {
     const fetchHomePageBannersData = async () => {
       try {
         const bannersCollection = collection(db, 'homePageBanners')
-        const bannersSnapshot = await getDocs(bannersCollection);
-
+        const queryRef = query(bannersCollection, orderBy('order', 'asc'));
+        const bannersSnapshot = await getDocs(queryRef);
         if (!bannersSnapshot.empty) {
           const bannersData = bannersSnapshot.docs.map(doc => (
             doc.data()
