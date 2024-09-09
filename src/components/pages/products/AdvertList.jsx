@@ -41,6 +41,7 @@ function AdvertList ({darkMode, lan, matchedProducts}) {
   const displayedProducts = matchedProducts.slice(0, loadLimit);
   const nowStyle = {color: "var(--primary-color)"}
   const getProductImgURL = product => `/assets/img/products/${product.id}/main.webp`;
+  const getProductBrandURL = product => `/assets/img/brands/${product.brand}.svg`;
   const getProductPrice = product => formatNumberWithCommas(calculatePrice(product.price, product.discount));
   const isProductInWishlist = product => wishlist.some(item => item.id === product.id);
 
@@ -128,9 +129,13 @@ function AdvertList ({darkMode, lan, matchedProducts}) {
             : <button className="advertList__advert-sctn__grid__product__favourite" data-type="add_product_to_wishlist" data-product-id={product.id} onClick={handleClick} />
             }
             <DisplayWebImg className="advertList__advert-sctn__grid__product__img" src={getProductImgURL(product)} alt={product.title[lan]} loading={i <= 5 ? "eager" : "lazy"} fetchpriority={i <= 5 ? "high" : ""} />
-            {!product.discount || <h3 className="advertList__advert-sctn__grid__product__discount">{lan === 'ar' ? 'خصم ' : ''}{calculateDiscountPercantage(product.price, product.discount)}{en ? ' off' : ''}</h3>}
+            {!product.discount || 
+              <h3 className="advertList__advert-sctn__grid__product__discount">{lan === 'ar' ? 'خصم ' : ''}{calculateDiscountPercantage(product.price, product.discount)}{en ? ' off' : ''}</h3>
+            }
             <h3 className="advertList__advert-sctn__grid__product__description">{product.title[lan]}</h3>
-            {product.brand && <img className="advertList__advert-sctn__grid__product__brand-img" src={`/assets/img/logo/${product.brand}.webp`}/>}
+            {product.brand && 
+              <DisplayWebImg className="advertList__advert-sctn__grid__product__brand-img" src={getProductBrandURL((product))}/>
+            }
             <div className="advertList__advert-sctn__grid__product__price">
               {product.discount 
               ? <><span className="now" style={nowStyle}>{en ? 'NOW' : 'الان'}</span> 

@@ -60,7 +60,7 @@
     // border: solid 3px var(--background-color);
     border-radius: 2em;
     transition: left 0.5s cubic-bezier(0.68,-0.55,0.27,1.55);
-    box-shadow: 0 0 5px 1px hsla(0, 0%, 0%, 0.5);
+    box-shadow: 0 2px 2px 0 hsla(0, 0%, 0%, 0.5);
     z-index: 10;
   }
 }

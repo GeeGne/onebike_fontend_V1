@@ -1,0 +1,41 @@
+[{
+  "id": 1,
+  "key": "trek",
+  "brand": "Trek"
+},{
+  "id": 2,
+  "key": "bianchi",
+  "brand": "Bianchi"
+},{
+  "id": 3,
+  "key": "cannondale",
+  "brand": "Cannondale"
+},{
+  "id": 4,
+  "key": "cervelo",
+  "brand": "Cervelo"
+},{
+  "id": 5,
+  "key": "cube",
+  "brand": "Cube"
+},{
+  "id": 6,
+  "key": "gt",
+  "brand": "GT"
+},{
+  "id": 7,
+  "key": "kenda",
+  "brand": "Kenda"
+},{
+  "id": 8,
+  "key": "giant",
+  "brand": "Giant"
+},{
+  "id": 9,
+  "key": "shimano",
+  "brand": "Shimano"
+},{
+  "id": 10,
+  "key": "specialized",
+  "brand": "SPECIALIZED"
+}]

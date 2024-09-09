@@ -146,7 +146,6 @@
           width: 1px;
           height: 100%;
           background-color: var(--endElement-border-background-color);
-
           body.arabic & {right: auto; left: 0}
         }
       }
@@ -334,7 +333,9 @@
         'categoryInpt typeInpt'
         'priceTitle priceTitle'
         'priceInpt discountInpt'
-        'itemStateInpt saveBtn'
+        'stateBrandTitle stateBrandTitle'
+        'itemStateInpt brandInpt'
+        'imgInpt saveBtn'
         ;
         gap: 0.5em;
         background-color: var(--secondary-color);
@@ -344,12 +345,15 @@
         &__nameTitle-cont {grid-area: nameTitle}
         &__categoryTitle-cont {grid-area: categoryTitle}
         &__priceTitle-cont {grid-area: priceTitle}
+        &__stateBrandTitle-cont {grid-area: stateBrandTitle}
         &__nameEn-inpt {grid-area: nameEnInpt}
         &__nameAr-inpt {grid-area: nameArInpt}
         &__price-inpt {grid-area: priceInpt}
-        &__discount-inpt{grid-area: discountInpt}
+        &__discount-inpt {grid-area: discountInpt}
+        &__img-inpt {grid-area: imgInpt} 
 
         &__nameTitle-cont, 
+        &__stateBrandTitle-cont, 
         &__categoryTitle-cont,
         &__priceTitle-cont {
           display: flex;
@@ -359,6 +363,7 @@
 
           &__name-spn,
           &__category-spn,
+          &__stateBrand-spn,
           &__price-spn {
             color: var(--font-p-color);
             font-weight: 600;
@@ -372,7 +377,9 @@
           &__categoryVal-spn,
           &__typeVal-spn,
           &__priceVal-spn,
-          &__discountVal-spn {
+          &__discountVal-spn,
+          &__stateVal-spn,
+          &__brandVal-spn {
             font-size: var(--font-size-extraSmall);
             color: var(--font-h-color);
             font-weight: 600;
@@ -382,7 +389,8 @@
         &__nameEn-inpt, 
         &__nameAr-inpt, 
         &__price-inpt, 
-        &__discount-inpt{
+        &__img-inpt, 
+        &__discount-inpt {
           background-color: var(--background-color);
           color: var(--font-h-color);
           font-size: var(--font-size-extraSmall);
@@ -396,9 +404,11 @@
         &__itemState-cont {grid-area: itemStateInpt}
         &__category-cont {grid-area: categoryInpt}
         &__type-cont {grid-area: typeInpt}
+        &__brand-cont {grid-area: brandInpt}
 
         &__itemState-cont,
         &__category-cont,
+        &__brand-cont,
         &__type-cont {
           position: relative;
           z-index: 5;

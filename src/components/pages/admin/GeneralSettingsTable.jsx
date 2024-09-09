@@ -34,7 +34,6 @@ import emptyImgURL from '/assets/img/empty/empty.webp';
 function GeneralSettingsTable ({darkMode, lan}) {
 
   const { homePageBannersData, setHomePageBannersData, setRefreshHomePageBannersData } = useDataStore();
-  console.log('homePageBannersData', homePageBannersData);
   const [ newAlert, setNewAlert ] = useState(0);
   const [ alertText, setAlertText ] = useState(null);
   const [ editAltWindow, dispatch ] = useReducer(editAltWindowReducer, {
@@ -46,9 +45,9 @@ function GeneralSettingsTable ({darkMode, lan}) {
   const [ windowActivity, setwindowActivity ] = useState('');
   const [ bannerSrc, setBannerSrc ] = useState("");
 
-  console.log(editAltWindow);
   const imgBannerFile = useRef(null);
   const altInputEL = useRef(null);
+
   const en = lan === 'en';
   const getBannerImgURL = item => `/assets/img/banners/homepage/${item.id}.webp`;
   const clearAltInputValue = () => altInputEL.current.value = "";
@@ -102,7 +101,6 @@ function GeneralSettingsTable ({darkMode, lan}) {
     setActivity(true);
 
     try {
-      console.log('documentID', documentID);
       const docRef = doc(db, 'homePageBanners', documentID);
       await updateDoc(docRef, { alt });
 
@@ -211,7 +209,6 @@ function GeneralSettingsTable ({darkMode, lan}) {
         dispatch({type: action, id: bannerId});
         break;
       case 'delete_banner_img':
-        console.log('lcicked')
         deleteBannerData(bannerId);
         break;
       default:

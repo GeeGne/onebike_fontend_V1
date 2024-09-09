@@ -21,6 +21,7 @@ import { storage } from '/src/firebase/storage';
 
 // JSON
 import menu from '/src/data/menu.json';
+import brands from '/src/data/brands.json';
 
 // UTILS
 import calculateDiscountPercantage from '/src/utils/calculateDiscountPercantage';
@@ -31,7 +32,6 @@ import deleteWindowReducer from '/src/reducers/deleteWindowReducer';
 
 function ContentManagementTable ({darkMode, lan}) {
 
-  const array = [1, 2, 3, 4];
   const { user, userData, products, setRefreshProducts } = useDataStore();
   const [ typeItmArray, setTypeItmArray ] = useState([]);
   const [ deleteWindow, dispatch ] = useReducer(deleteWindowReducer, {
@@ -60,6 +60,9 @@ function ContentManagementTable ({darkMode, lan}) {
 
   const categoryContELRefs = useRef([]);
   const categoryInptELRefs = useRef([]);
+
+  const brandContELRefs = useRef([]);
+  const brandInptELRefs = useRef([]);
   
   const typeContELRefs = useRef([]);
   const typeLstELRefs = useRef([]);
@@ -124,6 +127,7 @@ function ContentManagementTable ({darkMode, lan}) {
     findElement(categoryInptELRefs.current).value = '';
     findElement(typeInptELRefs.current).value = '';
     findElement(itemStateInptELRefs.current).value = '';
+    findElement(brandInptELRefs.current).value = '';
 
     findElement(itemELRefs.current).classList.toggle('clicked');
     if (isElementClicked( findElement(itemELRefs.current) )) {
@@ -230,6 +234,10 @@ function ContentManagementTable ({darkMode, lan}) {
         findElement(typeInptELRefs.current).value = getTextContent(e.currentTarget);
         findElement(typeInptELRefs.current).dataset.key = key;
         break;
+      case 'brand_option_is_clicked':
+        findElement(brandInptELRefs.current).value = getTextContent(e.currentTarget);
+        findElement(brandInptELRefs.current).dataset.key = key;
+        break;
       case 'save_button_is_clicked':
 
         const productData = {
@@ -241,7 +249,7 @@ function ContentManagementTable ({darkMode, lan}) {
           type: findElement(typeInptELRefs.current).dataset.key || getProduct().type,
           color: 'black',
           state: findElement(itemStateInptELRefs.current).dataset.key || getProduct().state,
-          brand: '',
+          brand: findElement(brandInptELRefs.current).dataset.key || getProduct().brand || '',
           price: Number(findElement(priceInptELRefs.current).value) || getProduct().price,
           discount: findElement(discountInptELRefs.current).value.includes('%') 
             ? findElement(discountInptELRefs.current).value
@@ -282,6 +290,9 @@ function ContentManagementTable ({darkMode, lan}) {
       case 'type_input':
         getEL(typeContELRefs.current).classList.add('focus');
         break;
+      case 'brand_input':
+        getEL(brandContELRefs.current).classList.add('focus');
+        break;
       default:
         console.error('Error: unknown type: ', type)
     }
@@ -300,6 +311,9 @@ function ContentManagementTable ({darkMode, lan}) {
         break;
       case 'type_input':
         setTimeout(() => getEL(typeContELRefs.current).classList.remove('focus'), 100);
+        break;
+      case 'brand_input':
+        setTimeout(() => getEL(brandContELRefs.current).classList.remove('focus'), 100);
         break;
       default:
         console.error('Error: unknown type: ', type)
@@ -363,6 +377,11 @@ function ContentManagementTable ({darkMode, lan}) {
               <span className="cm__lst__itm__edit-cont__categoryTitle-cont__categoryVal-spn">{item.category}</span>{' / '}
               <span className="cm__lst__itm__edit-cont__categoryTitle-cont__typeVal-spn">{item.type}</span>
             </div>
+            <div className="cm__lst__itm__edit-cont__stateBrandTitle-cont">
+              <span className="cm__lst__itm__edit-cont__stateBrandTitle-cont__stateBrand-spn">{en ? 'State & Brand' : 'الحاله & الماركه'}</span>
+              <span className="cm__lst__itm__edit-cont__stateBrandTitle-cont__stateVal-spn">{item.state}</span>{' / '}
+              <span className="cm__lst__itm__edit-cont__stateBrandTitle-cont__brandVal-spn">{item.brand || '--'}</span>
+            </div>
             <div className="cm__lst__itm__edit-cont__nameTitle-cont">
               <span className="cm__lst__itm__edit-cont__nameTitle-cont__name-spn">{en ? 'Name' : 'الاسم'}</span>
               <span className="cm__lst__itm__edit-cont__nameTitle-cont__enVal-spn">{item.title.en}</span>{' / '}
@@ -371,6 +390,7 @@ function ContentManagementTable ({darkMode, lan}) {
             <input className="cm__lst__itm__edit-cont__nameEn-inpt" name="titleEn" data-index={i} placeholder={en ? "name in english" : "الاسم بلانجليزي"} ref={el => titleEnInptELRefs.current[i] = el} />
             <input className="cm__lst__itm__edit-cont__nameAr-inpt" name="titleAr" data-index={i} placeholder={en ? "name in arabic" : "الاسم بلعربي"} ref={el => titleArInptELRefs.current[i] = el} />
             <input className="cm__lst__itm__edit-cont__price-inpt" name="price" data-index={i} placeholder={en ? "price" : "السعر"} ref={el => priceInptELRefs.current[i] = el} />
+            <input className="cm__lst__itm__edit-cont__img-inpt" name="img" type="file" data-index={i} placeholder={en ? "discount" : "التخفيض"} ref={el => discountInptELRefs.current[i] = el} />
             <input className="cm__lst__itm__edit-cont__discount-inpt" name="discount" data-index={i} placeholder={en ? "discount" : "التخفيض"} ref={el => discountInptELRefs.current[i] = el} />
             <div className="cm__lst__itm__edit-cont__itemState-cont" ref={el => itemStateContELRefs.current[i] = el} data-index={i}>
               <input className="cm__lst__itm__edit-cont__itemState-cont__inpt" name="state" placeholder={en ? "Item State" : "حاله المنتج"} data-type="item_state_input" data-index={i} readOnly onFocus={handleFocus} onBlur={handleBlur} ref={el => itemStateInptELRefs.current[i] = el} />
@@ -385,6 +405,15 @@ function ContentManagementTable ({darkMode, lan}) {
               <ul className="cm__lst__itm__edit-cont__category-cont__lst">
               {menu.map(item => 
                 <li className="cm__lst__itm__edit-cont__category-cont__lst__itm" key={item.id} data-index={i} data-action="category_option_is_clicked" data-key={item.key} onClick={handleClick}>{item[lan]}</li>
+              )}
+              </ul>
+            </div>
+            <div className="cm__lst__itm__edit-cont__brand-cont" ref={el => brandContELRefs.current[i] = el} data-index={i}>
+              <input className="cm__lst__itm__edit-cont__brand-cont__inpt" name="brand" placeholder={en ? "Brand" : "ماركه"} data-type="brand_input" data-index={i} readOnly onFocus={handleFocus} onBlur={handleBlur} ref={el => brandInptELRefs.current[i] = el} />
+              <ul className="cm__lst__itm__edit-cont__brand-cont__lst">
+              <li className="cm__lst__itm__edit-cont__brand-cont__lst__itm" data-index={i} data-action="brand_option_is_clicked" data-key={''} onClick={handleClick}>{en ? 'none' : 'لايوجد'}</li>
+              {brands.map(item => 
+                <li className="cm__lst__itm__edit-cont__brand-cont__lst__itm" key={item.id} data-index={i} data-action="brand_option_is_clicked" data-key={item.key} onClick={handleClick}>{item.brand}</li>
               )}
               </ul>
             </div>
