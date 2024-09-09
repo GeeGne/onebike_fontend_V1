@@ -19,11 +19,11 @@ const useDataStore = create(
     rolesData: null,
     setRolesData: rolesData => set({ rolesData }),
     resetRolesDataToNull: () => set({ rolesData: null }),
-    homePageBannersData: null,
+    homePageBannersData: [],
     setHomePageBannersData: homePageBannersData => set({ homePageBannersData }),
     refreshHomePageBannersData: 0,
     setRefreshHomePageBannersData: refreshHomePageBannersData => set({ refreshHomePageBannersData }),
-    resetHomePageBannersDataToNull: () => set({ homePageBannersData: null }),
+    resetHomePageBannersDataToNull: () => set({ homePageBannersData: [] }),
   })
 );
 
@@ -43,7 +43,6 @@ const useWishlistStore = create(
     }
   )
 )
-
 
 const updateQuantityAndCheckLimit = (prevAmount, newAmount) => {
   const totalAmount = prevAmount + newAmount;

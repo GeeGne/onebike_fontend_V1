@@ -288,11 +288,12 @@
       aspect-ratio: 16 / 9;
       @include w.breakpoint-up(large) {aspect-ratio: 2.39 / 1}
       @include w.breakpoint-up(xlarge) {aspect-ratio: 2.5 / 1}
-      margin-left: auto;
       @include w.breakpoint-up (large) {
         width: 700px;
         margin-inline: auto;
       }
+      margin-left: auto;
+      body.arabic & { margin-left: 0; margin-right: auto; }
 
       &::before {
         content: "";

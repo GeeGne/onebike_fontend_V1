@@ -1,16 +1,25 @@
 @use '/src/styles/utils/_BreakPoints' as w;
 
 
-.imageSlider-container {
+.imageSlider-cont {
   position: relative;
   width: 100%;
-  
+
+  /* &.empty &__img-holder {
+    aspect-ratio: 16 / 9;
+    @include w.breakpoint-up(large) {aspect-ratio: 2.39 / 1}
+    @include w.breakpoint-up(xlarge) {aspect-ratio: 2.5 / 1}  
+  } */
   &__img-holder {
     display: flex;
     flex-direction: row;
     width: 100%;
     overflow: hidden;
-    
+
+    aspect-ratio: 16 / 9;
+    @include w.breakpoint-up(large) {aspect-ratio: 2.39 / 1}
+    @include w.breakpoint-up(xlarge) {aspect-ratio: 2.5 / 1}  
+  
     &__imges {
       width: 100%;
       flex-shrink: 0;
@@ -22,6 +31,7 @@
         aspect-ratio: 16 / 9;
         @include w.breakpoint-up(large) {aspect-ratio: 2.39 / 1}
         @include w.breakpoint-up(xlarge) {aspect-ratio: 2.5 / 1}
+        &.empty {background-color: var(--light-background-color);}
       }      
     }
   }
@@ -35,6 +45,7 @@
     transform: translateX(-50%);
     gap: 0.5em;
 
+
     &__dot {
       width: 0.7em;
       height: 0.7em;
@@ -43,12 +54,15 @@
       border-radius: 1em;
       opacity: 1;
       transition: width 0.5s ease, height 0.5s ease, opacity 0.5s ease, background-color 0.5s ease;
+      &.empty {background-color: var(--dark-background-color); border: solid 2px var(--dark-background-color)}
 
       &.current {
         width: 1em;
         height: 1em;
-        background-color: #B8D1E0;
+        background-color: #85AED0;
+        border: solid 2px hsl(0, 0%, 50%);
         opacity: 1;
+        &.empty {background-color: hsl(0, 0%, 50%)}
       }
     }
   }

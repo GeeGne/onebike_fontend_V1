@@ -6,13 +6,19 @@ import '../styles/components/ImageSlider.scss';
 
 // COMPONENTS
 import DisplayImg from '/src/components/DisplayImg';
+import DisplayWebImg from '/src/components/DisplayWebImg';
 
 // JSON
-import sliderData from '/src/data/slider.json';
+// import homePageBannersData from '/src/data/slider.json';
+
+// STORE 
+import { useDataStore } from '/src/store/store';
 
 function ImageSlider ({darkMode, lan}) {
 
   const [currentImage, setCurrentImage] = useState(null);
+  const { homePageBannersData } = useDataStore();
+  // const homePageBannersData = [];
 
   const initialX = useRef(null);
   const currentX = useRef(null);
@@ -21,8 +27,11 @@ function ImageSlider ({darkMode, lan}) {
 
   const imageSliderElement = useRef(null);
 
-  const firstImage = sliderData[0];
-  const lastImage = sliderData[sliderData.length - 1];
+  const displayBlocks = [1, 2, 3, 4];
+  const isBannersDataLoaded = homePageBannersData.length !== 0;
+  const firstImage = isBannersDataLoaded && homePageBannersData[0];
+  const lastImage = isBannersDataLoaded && homePageBannersData[homePageBannersData.length - 1];
+  const getBannerImgURL = item => `/assets/img/banners/homepage/${item.id}.webp`;
 
   const vars = (action) => {
     // note: in theory sliderScrollWidth should be equal to sliderScrollLeft when sliding all the way to the left,
@@ -43,7 +52,7 @@ function ImageSlider ({darkMode, lan}) {
     const sliderLastImageWidth = sliderScrollWidth - sliderWidth * 2;
     const extraLength = 100;
     const totalScroll = sliderScrollLeft + sliderWidth + extraLength;
-    const lastIndex = sliderData.length - 1;
+    const lastIndex = homePageBannersData.length - 1;
 
     return {
       sliderWidth,
@@ -164,25 +173,48 @@ function ImageSlider ({darkMode, lan}) {
   }
 
   return (
-    // <section className='imageSlider-container --fade-in delay--04s animate--03s'>
-    <section className='imageSlider-container'>
-      <ul className='imageSlider-container__img-holder' onTouchStart={handleStart}  onTouchMove={handleMove} onTouchEnd={handleEnd} ref={imageSliderElement}>
-        <li className='imageSlider-container__img-holder__imges'><DisplayImg className='imageSlider-container__img-holder__imges__img' src={lastImage.url} alt={lastImage.alt[lan]} loading="lazy" /></li>
-        {sliderData.map((data, i) =>
-        <li className='imageSlider-container__img-holder__imges' key={data.id}>
-          <DisplayImg className='imageSlider-container__img-holder__imges__img' src={data.url} alt={data.alt[lan]} loading={i < 1 ? "eager" : "lazy"} fetchpriority={i < 1 ? "high" : ""} />
-        </li>  
-        )}
-        <li className='imageSlider-container__img-holder__imges'><DisplayImg className='imageSlider-container__img-holder__imges__img'  src={firstImage.url} alt={firstImage.alt[lan]} loading="lazy"/></li>
+    <section className={`imageSlider-cont${isBannersDataLoaded ? '' : ' empty'}`}>
+      <ul className='imageSlider-cont__img-holder' onTouchStart={handleStart}  onTouchMove={handleMove} onTouchEnd={handleEnd} ref={imageSliderElement}>
+        { isBannersDataLoaded 
+          ? <li className='imageSlider-cont__img-holder__imges'>
+              <DisplayWebImg className='imageSlider-cont__img-holder__imges__img' src={getBannerImgURL(lastImage)} alt={lastImage.alt} loading="lazy" />
+            </li>
+          : <li className='imageSlider-cont__img-holder__imges'>
+              <div className='imageSlider-cont__img-holder__imges__img empty --panel-flick' />
+            </li>
+        }
+        { isBannersDataLoaded 
+          ? homePageBannersData.map((data, i) =>
+            <li className='imageSlider-cont__img-holder__imges' key={data.id}>
+              <DisplayWebImg className='imageSlider-cont__img-holder__imges__img' src={getBannerImgURL(data)} alt={data.alt} loading={i < 1 ? "eager" : "lazy"} fetchpriority={i < 1 ? "high" : ""} />
+            </li>)
+          : displayBlocks.map((data, i) =>
+            <li className='imageSlider-cont__img-holder__imges' key={data.id}>
+              <div className='imageSlider-cont__img-holder__imges__img empty --panel-flick' />
+            </li>)
+        }
+        { isBannersDataLoaded 
+          ? <li className='imageSlider-cont__img-holder__imges'>
+              <DisplayWebImg className='imageSlider-cont__img-holder__imges__img'  src={getBannerImgURL(firstImage)} alt={firstImage.alt} loading="lazy"/>
+            </li>
+          : <li className='imageSlider-cont__img-holder__imges'>
+              <div className='imageSlider-cont__img-holder__imges__img empty --panel-flick' />
+            </li>
+        }
       </ul>
-      <ul className="imageSlider-container__dots-container">
-        {sliderData.map((data, i) =>
-        <li className ={`imageSlider-container__dots-container__dot ${i === currentImage && 'current'}`} key={data.id}></li>
-        )}
+      <ul className="imageSlider-cont__dots-container">
+        { isBannersDataLoaded 
+          ?  homePageBannersData.map((data, i) =>
+              <li className ={`imageSlider-cont__dots-container__dot ${i === currentImage && 'current'}`} key={data.id} />
+            )
+          : displayBlocks.map((data, i) =>
+             <li className ={`imageSlider-cont__dots-container__dot ${i === currentImage && 'current'} empty --panel-flick`} key={data.id} />
+            )
+        }
       </ul>
-      <div className="imageSlider-container__arrows">
-        <button className="imageSlider-container__arrows__left-arrow" aria-label="Left Arrow" data-type="scroll_to_left" onClick={handleClick}/>
-        <button className="imageSlider-container__arrows__right-arrow" aria-label="Right Arrow" data-type="scroll_to_right" onClick={handleClick} />
+      <div className="imageSlider-cont__arrows">
+        <button className="imageSlider-cont__arrows__left-arrow" aria-label="Left Arrow" data-type="scroll_to_left" onClick={handleClick}/>
+        <button className="imageSlider-cont__arrows__right-arrow" aria-label="Right Arrow" data-type="scroll_to_right" onClick={handleClick} />
       </div>
     </section>
   )

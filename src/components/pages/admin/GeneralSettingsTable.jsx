@@ -253,7 +253,7 @@ function GeneralSettingsTable ({darkMode, lan}) {
       <ProgressWindowActivity darkMode={darkMode} windowActivity={windowActivity} invert={false} />
       <div className={`gs__editAlt-window${editAltWindow.toggle}`} data-action="window_background_is_clicked" onClick={handleClick}>
         <div className="gs__editAlt-window__wrapper" data-action="window_wrapper_is_clicked" onClick={e => e.stopPropagation()}>
-          <h2 className="gs__editAlt-window__wrapper__title">{en ? 'Set alt' : 'مطلوب تأكيد المستخدم'}</h2>
+          <h2 className="gs__editAlt-window__wrapper__title">{en ? 'Set alt' : 'ادخل alt'}</h2>
           <input className="gs__editAlt-window__wrapper__inpt" name="alt" placeholder="example: bicycle on a hilly snow" onChange={handleChange} ref={altInputEL} />
           <button className="gs__editAlt-window__wrapper__cancel-btn" data-action="cancel_window_button_is_clicked" onClick={handleClick}>{en ? 'Cancel' : 'الغاء'}</button>
           <button className="gs__editAlt-window__wrapper__save-btn" data-banner-id={editAltWindow.id} data-alt={editAltWindow.alt} data-action="save_window_button_is_clicked" onClick={handleClick}>{renderLoadingState(en ? 'Save' : 'حفظ')}</button>          
