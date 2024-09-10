@@ -109,7 +109,9 @@
     'categoryInpt typeInpt'
     'priceTitle priceTitle'
     'priceInpt discountInpt'
-    'itemStateInpt saveBtn'
+    'stateBrandTitle stateBrandTitle'
+    'itemStateInpt brandInpt'
+    'saveBtn saveBtn'
     ;
     gap: 1em;
     // background-color: var(--secondary-color);
@@ -125,10 +127,11 @@
     &__nameTitle-cont {grid-area: nameTitle}
     &__categoryTitle-cont {grid-area: categoryTitle}
     &__priceTitle-cont {grid-area: priceTitle}
+    &__stateBrandTitle-cont {grid-area: stateBrandTitle}
     &__nameEn-inpt {grid-area: nameEnInpt}
     &__nameAr-inpt {grid-area: nameArInpt}
     &__price-inpt {grid-area: priceInpt}
-    &__discount-inpt{grid-area: discountInpt}                   
+    &__discount-inpt {grid-area: discountInpt}                   
 
     &__img-cont {
       display: flex;
@@ -179,14 +182,15 @@
           z-index: 10;
           background-color: var(--light-background-color);
           cursor: pointer;
-          &.hide {display: none;}
+          &.hide {display: none}
         }
       }
     }
 
     &__nameTitle-cont, 
     &__categoryTitle-cont,
-    &__priceTitle-cont {
+    &__priceTitle-cont,
+    &__stateBrandTitle-cont {
       display: flex;
       align-items: center;
       gap: 1em;
@@ -194,7 +198,8 @@
 
       &__name-spn,
       &__category-spn,
-      &__price-spn {
+      &__price-spn, 
+      &__stateBrand-spn {
         font-size: var(--font-size-small);
         font-weight: 600;
         color: var(--font-p-color);
@@ -206,7 +211,8 @@
     &__nameEn-inpt, 
     &__nameAr-inpt, 
     &__price-inpt, 
-    &__discount-inpt{
+    &__discount-inpt,
+    &__brand-inpt {
       background-color: var(--background-color);
       color: var(--font-h-color);
       font-size: var(--font-size-extraSmall);
@@ -220,10 +226,12 @@
     &__itemState-cont {grid-area: itemStateInpt}
     &__category-cont {grid-area: categoryInpt}
     &__type-cont {grid-area: typeInpt}
+    &__brand-cont {grid-area: brandInpt}
 
     &__itemState-cont,
     &__category-cont,
-    &__type-cont {
+    &__type-cont,
+    &__brand-cont {
       position: relative;
       z-index: 5;
 
@@ -303,6 +311,7 @@
     &__save-btn {
       grid-area: saveBtn;
       background-color: var(--primary-color);
+      padding-block: 0.5em;
       border-radius: 0.5em;
       color: var(--font-p-invert-color);
       font-size: var(-font-size-extraSmall);

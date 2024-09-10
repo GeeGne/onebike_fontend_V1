@@ -11,12 +11,13 @@ import ProgressActivity from '/src/components/ProgressActivity';
 
 // JSON
 import menu from '/src/data/menu.json';
+import brands from '/src/data/brands.json';
 
 // FIREBASE
 import { db } from '/src/firebase/fireStore';
 import { getDoc, doc, collection, getDocs, setDoc, updateDoc } from 'firebase/firestore';
 import { storage } from '/src/firebase/storage';
-import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { ref, uploadBytes } from "firebase/storage";
 
 // STORE
 import { useDataStore } from '/src/store/store';
@@ -25,7 +26,7 @@ import { useDataStore } from '/src/store/store';
 import { nanoid } from 'nanoid';
 
 // ASSETS
-  import emptyImgURL from '/assets/img/empty/empty.webp';
+import emptyImgURL from '/assets/img/empty/empty.webp';
 
 function AddProductWindow ({toggle, toggleData, darkMode, lan}) {
 
@@ -53,7 +54,10 @@ function AddProductWindow ({toggle, toggleData, darkMode, lan}) {
 
   const categoryContEL = useRef(null);
   const categoryInptEL = useRef(null);
-  
+
+  const brandContEL = useRef(null);
+  const brandInptEL = useRef(null);
+
   const typeContEL = useRef(null);
   const typeLstEL = useRef(null);
   const typeInptEL = useRef(null);
@@ -82,19 +86,6 @@ function AddProductWindow ({toggle, toggleData, darkMode, lan}) {
     }
   }
 
-  const getColorForState = state => {
-    switch (state) {
-      case 'available':
-        return ' green';
-      case 'out-of-stock':
-        return ' yellow';
-      case 'hidden':
-        return  ' red';
-      default:
-        console.error('Error: unknown state: ', state);
-        return '';
-    }
-  }
   const getProductImgURL = product => `/assets/img/products/${product.id}/main.webp`;
 
   const clearInputs = () => {
@@ -105,6 +96,7 @@ function AddProductWindow ({toggle, toggleData, darkMode, lan}) {
     categoryInptEL.current.value = '';
     typeInptEL.current.value = '';
     itemStateInptEL.current.value = '';
+    brandInptEL.current.value = '';
     imgUploadInptEL.current.value = '';
     setProductSrc("");
     imgFile.current = null;
@@ -134,10 +126,10 @@ function AddProductWindow ({toggle, toggleData, darkMode, lan}) {
       clearInputs();
       toggleData(' hide');
       setRefreshProducts(Math.random());
-      setAlertText(en ? 'Success! new Product is added to the could' : 'تم اضافه منتج جديد  بنجاج!')
+      setAlertText(en ? 'Success! new Product is added to the cloud' : 'تم اضافه منتج جديد  بنجاج!')
     } catch(err) {
       console.error('Error updating product: ', err);
-      setAlertText(en ? 'Error adding updaing product' : 'حصل خطأ في اضافه المنتج')
+      setAlertText(en ? 'Error adding new product' : 'حصل خطأ في اضافه المنتج')
     }  
 
     setNewAlert(Math.random());
@@ -167,9 +159,9 @@ function AddProductWindow ({toggle, toggleData, darkMode, lan}) {
         typeInptEL.current.value = getTextContent(e.currentTarget);
         typeInptEL.current.dataset.key = key;
         break;
-      case 'add_product_button_is_clicked':
-        typeInptEL.current.value = getTextContent(e.currentTarget);
-        typeInptEL.current.dataset.key = key;
+      case 'brand_option_is_clicked':
+        brandInptEL.current.value = getTextContent(e.currentTarget);
+        brandInptEL.current.dataset.key = key;
         break;
       case 'add_button_is_clicked':
         const productData = {
@@ -187,6 +179,9 @@ function AddProductWindow ({toggle, toggleData, darkMode, lan}) {
           discount: discountInptEL.current.value.includes('%') 
             ? discountInptEL.current.value
             : Number(discountInptEL.current.value) || 0,
+          brand: brandInptEL.current.dataset.key === 'none'
+            ? ''
+            : brandInptEL.current.dataset.key || '',
         }
         // console.log(productData);
         addNewProductData(productId, productData);
@@ -209,6 +204,9 @@ function AddProductWindow ({toggle, toggleData, darkMode, lan}) {
       case 'type_input':
         typeContEL.current.classList.add('focus');
         break;
+      case 'brand_input':
+        brandContEL.current.classList.add('focus');
+        break;
       default:
         console.error('Error: unknown type: ', type)
     }
@@ -226,6 +224,9 @@ function AddProductWindow ({toggle, toggleData, darkMode, lan}) {
         break;
       case 'type_input':
         setTimeout(() => typeContEL.current.classList.remove('focus'), 100);
+        break;
+      case 'brand_input':
+        setTimeout(() => brandContEL.current.classList.remove('focus'), 100);
         break;
       default:
         console.error('Error: unknown type: ', type)
@@ -280,6 +281,9 @@ function AddProductWindow ({toggle, toggleData, darkMode, lan}) {
         <div className="productWindow__edit-cont__nameTitle-cont">
           <span className="productWindow__edit-cont__nameTitle-cont__name-spn">{en ? 'Name' : 'الاسم'}</span>
         </div>
+        <div className="productWindow__edit-cont__stateBrandTitle-cont">
+          <span className="productWindow__edit-cont__nameTitle-cont__stateBrand-spn">{en ? 'State & Brand' : 'الحاله & الماركه'}</span>
+        </div>
         <input className="productWindow__edit-cont__nameEn-inpt" name="titleEn" placeholder={en ? "name in english" : "الاسم بلانجليزي"} ref={titleEnInptEL} />
         <input className="productWindow__edit-cont__nameAr-inpt" name="titleAr" placeholder={en ? "name in arabic" : "الاسم بلعربي"} ref={titleArInptEL} />
         <input className="productWindow__edit-cont__price-inpt" name="price" placeholder={en ? "price" : "السعر"} ref={priceInptEL} />
@@ -295,9 +299,18 @@ function AddProductWindow ({toggle, toggleData, darkMode, lan}) {
         <div className="productWindow__edit-cont__category-cont" ref={categoryContEL}>
           <input className="productWindow__edit-cont__category-cont__inpt" name="category" placeholder={en ? "Gategory" : "صنف"} data-type="category_input" readOnly onFocus={handleFocus} onBlur={handleBlur} ref={categoryInptEL} />
           <ul className="productWindow__edit-cont__category-cont__lst">
-          {menu.map(item => 
-            <li className="productWindow__edit-cont__category-cont__lst__itm" key={item.id} data-action="category_option_is_clicked" data-key={item.key} onClick={handleClick}>{item[lan]}</li>
-          )}
+            {menu.map(item => 
+              <li className="productWindow__edit-cont__category-cont__lst__itm" key={item.id} data-action="category_option_is_clicked" data-key={item.key} onClick={handleClick}>{item[lan]}</li>
+            )}
+          </ul>
+        </div>
+        <div className="productWindow__edit-cont__brand-cont" ref={brandContEL}>
+          <input className="productWindow__edit-cont__brand-cont__inpt" name="brand" placeholder={en ? "Brand" : "الماركه"} data-type="brand_input" readOnly onFocus={handleFocus} onBlur={handleBlur} ref={brandInptEL} />
+          <ul className="productWindow__edit-cont__brand-cont__lst">
+            <li className="productWindow__edit-cont__brand-cont__lst__itm" data-action="brand_option_is_clicked" data-key="none" onClick={handleClick}>{en ? 'none' : 'لايوجد'}</li>
+            {brands.map(item => 
+              <li className="productWindow__edit-cont__brand-cont__lst__itm" key={item.id} data-action="brand_option_is_clicked" data-key={item.key} onClick={handleClick}>{item.brand}</li>
+            )}
           </ul>
         </div>
         <div className="productWindow__edit-cont__type-cont" ref={typeContEL}>

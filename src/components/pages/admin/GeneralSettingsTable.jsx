@@ -43,7 +43,6 @@ function GeneralSettingsTable ({darkMode, lan}) {
   });
   const [ activity, setActivity ] = useState(false);
   const [ windowActivity, setwindowActivity ] = useState('');
-  const [ bannerSrc, setBannerSrc ] = useState("");
 
   const imgBannerFile = useRef(null);
   const altInputEL = useRef(null);
@@ -224,19 +223,10 @@ function GeneralSettingsTable ({darkMode, lan}) {
         dispatch({type: 'add_alt_data', [name]: value.trim()});
         break;
       case 'imgUpload':
-        const previewImage = () => {
-          const file = e.currentTarget.files[0];
-          const reader = new FileReader();
-          reader.onloadend = function () {
-            setProductSrc(reader.result);
-          }
-
-          file ? reader.readAsDataURL(file) : setProductSrc('');
-          imgBannerFile.current = file || fetchEmptyImgAsBlob(emptyImgURL);
-        }
+        const file = e.currentTarget.files[0];
+        imgBannerFile.current = file || fetchEmptyImgAsBlob(emptyImgURL);
 
         const bannerData = {id: nanoid(12), alt: '', order: homePageBannersData.length + 1};
-        previewImage();
         addNewBannerData(bannerData.id, bannerData);
         break;
       default:
