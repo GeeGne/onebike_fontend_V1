@@ -313,8 +313,8 @@
       background-color: var(--primary-color);
       padding-block: 0.5em;
       border-radius: 0.5em;
-      color: var(--font-p-invert-color);
-      font-size: var(-font-size-extraSmall);
+      color: var(--font-h-invert-color);
+      font-size: var(--font-size-small);
       font-weight: 600;
       transition: opacity 0.15s ease-out;
       &:hover {opacity: 0.7}

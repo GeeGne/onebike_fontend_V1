@@ -212,7 +212,6 @@
         padding-inline: 0.5em 2em;
         padding-block: 0.5em;
 
-        
         &__toggles-cont {
           position: absolute;
           display: flex;
@@ -490,8 +489,8 @@
           grid-area: saveBtn;
           background-color: var(--primary-color);
           border-radius: 0.5em;
-          color: var(--font-p-invert-color);
-          font-size: var(-font-size-extraSmall);
+          color: var(--font-h-invert-color);
+          font-size: var(--font-size-small);
           font-weight: 600;
           transition: opacity 0.15s ease-out;
           &:hover {opacity: 0.7}
