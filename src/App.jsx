@@ -79,6 +79,7 @@ function App () {
             <Suspense fallback={<PageIsLoading type="b" darkMode={darkMode} lan={lan} />}>
               <Routes>
                 <Route exact path="/" element={<Home darkMode={darkMode} lan={lan} />} />
+                <Route exact path="/hot-sales" element={<Products additional={{key:"discount", en:"Hot Sales", ar:"اخر التخفيضات"}} darkMode={darkMode} lan={lan} />} />
                 {mainListData.map(category =>
                 <React.Fragment key={category.id}>
                   <Route exact path={`/${cleanseString(category.en)}`} element={<Products category={category} darkMode={darkMode} lan={lan} />} />

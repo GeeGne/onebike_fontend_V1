@@ -41,7 +41,7 @@ function AdvertList ({darkMode, lan, matchedProducts}) {
   const displayedProducts = matchedProducts.slice(0, loadLimit);
   const nowStyle = {color: "var(--primary-color)"}
   const getProductImgURL = product => `/assets/img/products/${product.id}/main.webp`;
-  const getProductBrandURL = product => `/assets/img/brands/${product.brand}.svg`;
+  const getProductBrandURL = product => `/assets/img/brands/${product.brand}${darkMode ? '_darkMode' : ''}.svg`;
   const getProductPrice = product => formatNumberWithCommas(calculatePrice(product.price, product.discount));
   const isProductInWishlist = product => wishlist.some(item => item.id === product.id);
 
