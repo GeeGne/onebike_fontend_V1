@@ -38,4 +38,32 @@
   "id": 10,
   "key": "specialized",
   "brand": "SPECIALIZED"
+},{
+  "id": 11,
+  "key": "sram",
+  "brand": "SRAM"
+},{
+  "id": 12,
+  "key": "scott",
+  "brand": "SCOTT"
+},{
+  "id": 13,
+  "key": "fuji",
+  "brand": "Fuji"
+},{
+  "id": 14,
+  "key": "santaCruz",
+  "brand": "Santa Cruz"
+},{
+  "id": 15,
+  "key": "fox",
+  "brand": "FOX"
+},{
+  "id": 16,
+  "key": "rockshox",
+  "brand": "ROCK SHOX"
+},{
+  "id": 17,
+  "key": "evoc",
+  "brand": "Evoc"
 }]

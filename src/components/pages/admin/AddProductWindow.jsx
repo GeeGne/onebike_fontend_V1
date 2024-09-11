@@ -174,7 +174,6 @@ function AddProductWindow ({toggle, toggleData, darkMode, lan}) {
           type: typeInptEL.current.dataset.key || '--',
           color: 'black',
           state: itemStateInptEL.current.dataset.key || 'hidden',
-          brand: '',
           price: Number(priceInptEL.current.value) || 0,
           discount: discountInptEL.current.value.includes('%') 
             ? discountInptEL.current.value
