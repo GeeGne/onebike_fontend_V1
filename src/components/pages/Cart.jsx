@@ -120,7 +120,7 @@ function Cart ({darkMode, lan}) {
   return (
     <div className="cart">
       <section className="cart__breadCrumb-sec">
-        <BreadCrumb category={{en: 'cart', ar: 'السله'}} type={false} lan={lan}/>
+        <BreadCrumb subject={ { key: 'cart', en: 'Cart', ar: 'السله' } } lan={lan}/>
       </section>
       <section className="cart__yourCart-sec">
         <h1 className="cart__yourCart-sec__h1">{en ? 'Your Cart' : 'سله التسوق'}</h1>

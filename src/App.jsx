@@ -79,15 +79,17 @@ function App () {
             <Suspense fallback={<PageIsLoading type="b" darkMode={darkMode} lan={lan} />}>
               <Routes>
                 <Route exact path="/" element={<Home darkMode={darkMode} lan={lan} />} />
-                <Route exact path="/hot-sales" element={<Products additional={{key:"discount", en:"Hot Sales", ar:"اخر التخفيضات"}} darkMode={darkMode} lan={lan} />} />
-                {mainListData.map(category =>
-                <React.Fragment key={category.id}>
-                  <Route exact path={`/${cleanseString(category.en)}`} element={<Products category={category} darkMode={darkMode} lan={lan} />} />
-                  {category.secondaryList.map(secondData => secondData.thirdList.map(thirdData => 
-                  <Route path={`/${cleanseString(category.en)}/${cleanseString(thirdData.en)}`} element={<Products category={category} type={thirdData} darkMode={darkMode} lan={lan} />} key={thirdData.id} />
-                  ))}
-                </React.Fragment>
-                )}
+                <Route exact path="/hot-sales" element={<Products subject={{ key: true, value: 'discount', en: "Hot Sales", ar: "اخر التخفيضات" }} darkMode={darkMode} lan={lan} />} />
+                  {mainListData.map(category =>
+                    <React.Fragment key={category.id}>
+                      <Route exact path={`/${category.key}`} element={ <Products subject={category} darkMode={darkMode} lan={lan} /> } />
+                      {category.secondaryList.map(secondData => 
+                        secondData.thirdList.map(thirdData => 
+                          <Route path={`/${category.key}/${thirdData.key}`} element={<Products subject={{...thirdData, firstLink: category}} darkMode={darkMode} lan={lan} />} key={thirdData.id} />
+                        )
+                      )}
+                    </React.Fragment>
+                  )}
                 <Route path="/checkouts" element={<Checkout darkMode={darkMode} lan={lan} />} />
                 <Route path="/cart" element={<Cart darkMode={darkMode} lan={lan} />} />
                 <Route path="/account/register" element={<SignUp darkMode={darkMode} lan={lan} />} />

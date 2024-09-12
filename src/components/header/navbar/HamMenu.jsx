@@ -167,7 +167,7 @@ function HamMenu ({menu, onMenuChange, darkMode, lan}) {
                   ref={el => addRef('thirdListContainerElements', el, i)} data-list-id={randomNum.current}
                 >
                   {secondData.thirdList.map(thirdData =>           
-                  <li className="hamMenu__slider__menuL__lists__secondaryL__lists__thirdL__lists" onClick={() => handleClick('third list', null, mainData.en, thirdData.en)} key={thirdData.id}>
+                  <li className="hamMenu__slider__menuL__lists__secondaryL__lists__thirdL__lists" onClick={() => handleClick('third list', null, mainData.key, thirdData.key)} key={thirdData.id}>
                     <h3 className="hamMenu__slider__menuL__lists__secondaryL__lists__thirdL__lists__h3">{thirdData[lan]}</h3>
                   </li>
                   )}

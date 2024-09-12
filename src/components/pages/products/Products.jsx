@@ -21,18 +21,16 @@ import cleanseString from '/src/utils/cleanseString.js';
 // STORE 
 import { useDataStore } from '/src/store/store';
 
-function Products ({category, type, additional, darkMode, lan}) {
+function Products ({ subject, darkMode, lan }) {
 
   const { products } = useDataStore();
   const pageURL = window.location.href;
-  const checkMatchedProduct = (category, type) => category === cleanseString(productCategoryEN) || type  === cleanseString(productCategoryEN)
-  const productCategory = additional ? additional[lan] : type ? type[lan] : category[lan];
-  const productCategoryEN = additional ? additional.en : type ? type.en : category.en;
-  const matchedProducts = category 
-    ? products.filter(product => checkMatchedProduct(product.category, product.type) && product.state !== 'hidden')
-    : products.filter(product => product[additional.key]);
+  const matchedProducts = products.filter(product => subject.value === 'discount' 
+    ? product[subject.value] 
+    : product[subject.value] === subject.key
+  );
   const totalProducts = matchedProducts.length;
-  
+
   return (
 
     <>
@@ -53,18 +51,21 @@ function Products ({category, type, additional, darkMode, lan}) {
       </Helmet>
       <div className="products-container">
         <section className="products-container__breadCrumb-container">
-          <BreadCrumb category={category} type={type} additional={additional} lan={lan}/>
+          {/* <BreadCrumb category={category} type={type} additional={additional} lan={lan}/> */}
+          <BreadCrumb subject={subject} lan={lan}/>
         </section>
         <section className="products-container__category-title-container">
-          <h1 className="products-container__category-title-container__h1">{productCategory}</h1>
+          <h1 className="products-container__category-title-container__h1">{subject[lan]}</h1>
           <h3 className="products-container__category-title-container__result">&#10088;{lan === 'en' ? totalProducts + ' results' : totalProducts + ' نتيجه'}&#10089;</h3>
         </section>
         <Controls darkMode={darkMode} lan={lan}/>
-        {totalProducts === 0 ? <>
-        <EmptyList darkMode={darkMode} lan={lan} productCategoryEN={cleanseString(productCategoryEN)} productCategory={productCategory}/> 
-        <NeedHelp darkMode={darkMode} lan={lan}/></>
-        : 
-        <AdvertList darkMode={darkMode} lan={lan} matchedProducts={matchedProducts}/>}
+        {totalProducts === 0 
+          ? <>
+            {/* <EmptyList darkMode={darkMode} lan={lan} productCategoryEN={cleanseString(productCategoryEN)} productCategory={productCategory}/>  */}
+            <EmptyList darkMode={darkMode} lan={lan} subject={subject}/> 
+            <NeedHelp darkMode={darkMode} lan={lan}/></>
+          : <AdvertList darkMode={darkMode} lan={lan} matchedProducts={matchedProducts}/>
+        }
       </div>
     </>
   )

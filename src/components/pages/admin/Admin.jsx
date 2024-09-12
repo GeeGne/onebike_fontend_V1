@@ -100,7 +100,7 @@ function Admin ({darkMode, lan}) {
     <div className="admin">
       <Alert alertText={alertText} newAlert={newAlert} />
       <section className="admin__breadCrumb-sec">
-        <BreadCrumb type={{en: 'admin', ar: 'ادمن'}} category={{en: 'account', ar: 'الحساب'}} lan={lan} />
+        <BreadCrumb subject={ { firstLink: { key: 'account', en: 'Account', ar: 'الحساب' }, key: 'admin', en: 'Admin', ar: 'ادمن' }} lan={lan} />
       </section>
       <section className="admin__title-sec">
         <h1 className="admin__title-sec__h1">{titleTab()}</h1>

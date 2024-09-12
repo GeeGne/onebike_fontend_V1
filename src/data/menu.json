@@ -1,5 +1,6 @@
 [{
   "id": 0,
+  "value": "category",
   "key": "bikes",
   "en": "Bikes", "ar" : "دراجات",
   "secondaryList": [{
@@ -8,24 +9,29 @@
     "en": "Bikes", "ar" : "دراجات",
     "thirdList": [{
       "id": 0,
+      "value": "type",
       "key": "road-bikes",
       "en": "Road Bike", "ar": "دراجه الطرق"
     },{
       "id": 1,
+      "value": "type",
       "key": "mountain-bikes",
       "en": "Mountain Bike", "ar": "دراجه الجبلي"
     },{
       "id": 2,
+      "value": "type",
       "key": "hybird-bikes",
       "en": "Hybird Bike", "ar": "دراجه الهجين"
     },{
       "id": 3,
+      "value": "type",
       "key": "city-bikes",
       "en": "City Bike", "ar": "دراجه سياحي"
     }]
   }]
 },{
   "id": 1,
+  "value": "category",
   "key": "accessories",
   "en": "Accessories", "ar": "اكسسوارات",
   "secondaryList": [{
@@ -34,22 +40,27 @@
     "en": "Most Popular", "ar" : "اكثر طلبا",
     "thirdList": [{
       "id": 0,
+      "value": "type",
       "key": "lights",
       "en": "Lights", "ar": "اناره"
     },{
       "id": 1,
+      "value": "type",
       "key": "bags",
       "en": "Bags", "ar": "حقائب"
     },{
       "id": 2,
+      "value": "type",
       "key": "pumps",
       "en": "Pumps", "ar": "منافخ"
     },{
       "id": 3,
+      "value": "type",
       "key": "trainers",
       "en": "Trainers", "ar": "ترينرز"
     },{
       "id": 4,
+      "value": "type",
       "key": "sunglasses",
       "en": "Sunglasses", "ar": "نظارات شمسيه"
     }]
@@ -59,22 +70,27 @@
     "en": "Essentials", "ar": "اساسيات",
     "thirdList": [{
       "id": 0,
+      "value": "type",
       "key": "bike-locks",
       "en": "Bike Locks", "ar": "قفل للدراجه"
     },{
       "id": 1,
+      "value": "type",
       "key": "body-creams",
       "en": "Body Creams", "ar": "كريم للجسم"
     },{
       "id": 2,
+      "value": "type",
       "key": "bells-&-horns",
       "en": "Bells & Horns", "ar": "مزامير"
     },{
       "id": 3,
+      "value": "type",
       "key": "bottles",
       "en": "Bottles", "ar": "مطره"
     },{
       "id": 4,
+      "value": "type",
       "key": "cages",
       "en": "Cages", "ar": "حماله مطره"
     }]
@@ -84,22 +100,27 @@
     "en": "Tools, Racks, Lube", "ar": "ادوات, شحم",
     "thirdList": [{
       "id": 0,
+      "value": "type",
       "key": "chain-lubricants",
       "en": "Chain Lubricants", "ar": "شحم للجنزير"
     },{
       "id": 1,
+      "value": "type",
       "key": "cleaning-tools",
       "en": "Cleaning Tools", "ar": "معدات للتنضيف"
     },{
       "id": 2,
+      "value": "type",
       "key": "tools",
       "en": "Tools", "ar": "معدات"
     },{
       "id": 3,
+      "value": "type",
       "key": "car-bike-racks",
       "en": "Car Bike Racks", "ar": "قواعد تنصيب الدراجه للسياره"
     },{
       "id": 4,
+      "value": "type",
       "key": "storage-&-display-stands",
       "en": "Storage & Display Stands", "ar": "تخزين & عرض"
     }]
@@ -109,24 +130,29 @@
     "en": "Additonal", "ar": "اضافي",
     "thirdList": [{
       "id": 0,
+      "value": "type",
       "key": "hanldebar-mirros",
       "en": "Handlebar Mirros", "ar": "مرايا"
     },{
       "id": 1,
+      "value": "type",
       "key": "baskets",
       "en": "Baskets", "ar": "سله"
     },{
       "id": 2,
+      "value": "type",
       "key": "child-seats",
       "en": "Child Seats", "ar": "مقعد للاطفال"
     },{
       "id": 3,
+      "value": "type",
       "key": "bike-trailers",
       "en": "Bike Trailers", "ar": "مقطورات الدراجه"
     }]
   }]
 },{
   "id": 2,
+  "value": "category",
   "key": "tires-&-wheels",
   "en": "Tires & Wheels", "ar": "كوشوك & اطار",
   "secondaryList": [{
@@ -135,14 +161,17 @@
     "en": "Most Replaced", "ar": "الاكثر استبدالا",
     "thirdList": [{
       "id": 0,
+      "value": "type",
       "key": "tires",
       "en": "Tires", "ar": "كوشوك خارجي"
     },{
       "id": 1,
+      "value": "type",
       "key": "tubes",
       "en": "Tubes", "ar": "كوشوك داخلي"
     },{
       "id": 2,
+      "value": "type",
       "key": "wheels",
       "en": "Wheels", "ar": "دواليب"
     }]
@@ -152,28 +181,34 @@
     "en": "Wheel Components", "ar": "قطع الدولاب",
     "thirdList": [{
       "id": 0,
+      "value": "type",
       "key": "rims",
       "en": "Rims", "ar": "طارات"
     },{
       "id": 1,
+      "value": "type",
       "key": "spokes",
       "en": "Spokes", "ar": "سياخ"
     },{
       "id": 2,
+      "value": "type",
       "key": "hubs",
       "en": "Hubs", "ar": "قوالب"
     },{
       "id": 3,
+      "value": "type",
       "key": "adaptors",
       "en": "Adaptors", "ar": "فك قفل"
     },{
       "id": 4,
+      "value": "type",
       "key": "hub's-axis",
       "en": "Hubs's Axis", "ar": "عواميد القالب"
     }]
   }]
 },{
   "id": 3,
+  "value": "category",
   "key": "components",
   "en": "Components", "ar": "قطع الدراجه",
   "secondaryList": [{
@@ -182,22 +217,27 @@
     "en": "Common Parts", "ar": "قطع الاكثر شيوعا",
     "thirdList": [{
       "id": 0,
+      "value": "type",
       "key": "pedals",
       "en": "Pedals", "ar": "دواسه"
     },{
       "id": 1,
+      "value": "type",
       "key": "groupsets",
       "en": "Groupsets", "ar": "مجموعه القياده"
     },{
       "id": 2,
+      "value": "type",
       "key": "seats",
       "en": "Seats", "ar": "مقعد"
     },{
       "id": 3,
+      "value": "type",
       "key": "brakes-&-parts",
       "en": "Brakes & Parts", "ar": "فرامل و اجزاءه"
     },{
       "id": 4,
+      "value": "type",
       "key": "power-meters",
       "en": "Power Meters", "ar": "مقياس الطاقه"
     }]
@@ -207,18 +247,22 @@
     "en": "Drive Train", "ar": "قطع الحركه",
     "thirdList": [{
       "id": 0,
+      "value": "type",
       "key": "chains",
       "en": "Chains", "ar": "جنزير"
     },{
       "id": 1,
+      "value": "type",
       "key": "derailleurs",
       "en": "Derailleurs", "ar": "صندوق المسننات"
     },{
       "id": 2,
+      "value": "type",
       "key": "cranksets",
       "en": "Cranksets", "ar": "مجموعه الدفع الاماميه"
     },{
       "id": 3,
+      "value": "type",
       "key": "bottom-brackets",
       "en": "Bottom Brackets", "ar": "القوالب الاماميه و الخلفيه"
     }]
@@ -228,28 +272,34 @@
     "en": "Handlebars", "ar": "مستلزمات الكيدون",
     "thirdList": [{
       "id": 0,
+      "value": "type",
       "key": "grearShifters-&-cables",
       "en": "GearShifters & Cables", "ar": "غيار الحركه & شرطان"
     },{
       "id": 1,
+      "value": "type",
       "key": "grips",
       "en": "Grips", "ar": "مسكات"
     },{
       "id": 2,
+      "value": "type",
       "key": "bar-tape",
       "en": "Bar Tape", "ar": "لفاف الكيدون"
     },{
       "id": 3,
+      "value": "type",
       "key": "stems",
       "en": "Stems", "ar": "رقبات"
     },{
       "id": 4,
+      "value": "type",
       "key": "headsets-&-spacers",
       "en": "Headsets & Spacers", "ar": "مجموعه قطع الرقبه & تسميكات"
     }]
   }]
 },{
   "id": 4,
+  "value": "category",
   "key": "clothing",
   "en": "Clothing", "ar": "ملابس",
   "secondaryList": [{
@@ -258,22 +308,27 @@
     "en": "UpperBody", "ar": "القسم العلوي",
     "thirdList": [{
       "id": 0,
+      "value": "type",
       "key": "short-sleeve-jerseys",
       "en": "Short SLeeve Jerseys", "ar": "جيرسي كم قصير"
     },{
       "id": 1,
+      "value": "type",
       "key": "long-sleeve-jerseys",
       "en": "Long Sleeve Jerseys", "ar": "جيرسي كم طويل"
     },{
       "id": 2,
+      "value": "type",
       "key": "sleevless-jerseys",
       "en": "Sleeveless Jerseys", "ar": "جيرسي كم حفر"
     },{
       "id": 3,
+      "value": "type",
       "key": "vests",
       "en": "Vests", "ar": "فيستس"
     },{
       "id": 4,
+      "value": "type",
       "key": "jackets",
       "en": "Jackets", "ar": "جواكيت"
     }]
@@ -283,14 +338,17 @@
     "en": "Lower Body", "ar": "القسم السفلي",
     "thirdList": [{
       "id": 0,
+      "value": "type",
       "key": "shorts",
       "en": "Shorts", "ar": "شورتس"
     },{
       "id": 1,
+      "value": "type",
       "key": "mountain-bike-shorts",
       "en": "Mountain Bike Shorts", "ar": "شورتس للدراجه الجبلي"
     },{
       "id": 2,
+      "value": "type",
       "key": "cycling-tights",
       "en": "Cycling Tights", "ar": "مشدات رياضيه"
     }]
@@ -300,28 +358,34 @@
     "en": "Essentials", "ar": "اساسيات",
     "thirdList": [{
       "id": 0,
+      "value": "type",
       "key": "gloves",
       "en": "Gloves", "ar": "كفوف"
     },{
       "id": 1,
+      "value": "type",
       "key": "socks",
       "en": "Socks", "ar": "جرابات"
     },{
       "id": 2,
+      "value": "type",
       "key": "warmers-&-base-layer",
       "en": "Warmers & Base Layers", "ar": "داخلي"
     },{
       "id": 3,
+      "value": "type",
       "key": "t-shirts",
       "en": "T-Shirts", "ar": "تشيرتات"
     },{
       "id": 4,
+      "value": "type",
       "key": "caps",
       "en": "Caps", "ar": "طواقي"
     }]
   }]
 },{
   "id": 5,
+  "value": "category",
   "key": "helmets-&-shoes",
   "en": "Helmets & Shoes", "ar": "خوذ & احذيه",
   "secondaryList": [{
@@ -330,14 +394,17 @@
     "en": "Shoe Accessories", "ar": "اكسسوارات الاحذيه",
     "thirdList": [{
       "id": 0,
+      "value": "type",
       "key": "cleats",
       "en": "Cleats", "ar": "مرابط"
     },{
       "id": 1,
+      "value": "type",
       "key": "cleat-covers",
       "en": "Cleat Covers", "ar": "كفر المربط"
     },{
       "id": 2,
+      "value": "type",
       "key": "shoe-covers",
       "en": "Shoe Covers", "ar": "كفر الحذاء"
     }]
@@ -347,10 +414,12 @@
     "en": "Helmet Categories", "ar": "اقسام الخوذ",
     "thirdList": [{
       "id": 0,
+      "value": "type",
       "key": "road-bike-helmets",
       "en": "Road Bike Helmets", "ar": "خوذ الطريق"
     },{
       "id": 1,
+      "value": "type",
       "key": "mountain-bike-helmets",
       "en": "Mountain Bike Helmets", "ar": "خوذ الجبلي"
     },{
