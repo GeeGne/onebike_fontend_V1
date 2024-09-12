@@ -40,7 +40,7 @@ function AdvertTile ({darkMode, lan, type}) {
   const [ alertText, setAlertText ] = useState(null);
 
   const listEL = useRef(null);
-  const productConEL = useRef(null);
+  const productContRefs = useRef([]);
   const observerRef = useRef(null);
   const addTimerID = useRef(null);
   const removeTimerID = useRef(null);
@@ -99,8 +99,8 @@ function AdvertTile ({darkMode, lan, type}) {
   const handleClick = e => {
     const {categoryType, name} = type;
     const {action, productId} = e.currentTarget.dataset;
-    const productConWidth = productConEL.current.offsetWidth;
-    const fontSize = window.getComputedStyle(productConEL.current, null).getPropertyValue('font-size');
+    const productConWidth = productContRefs.current[0].offsetWidth;
+    const fontSize = window.getComputedStyle(productContRefs.current[0], null).getPropertyValue('font-size');
     const gapLength = parseFloat(fontSize);
     const getProduct = id => products.filter(product => product.id === id)[0];
 
@@ -173,7 +173,7 @@ function AdvertTile ({darkMode, lan, type}) {
         <ul className="advertTile__list__products" ref={listEL}>
           {isProductsLoaded 
           ? getProducts.map((product, i) => 
-          <li className={`advertTile__list__products__product --slide-to-left${product.state === 'out-of-stock' ? ' out-of-stock' : ''}`} key={product.id} ref={productConEL}>
+          <li className={`advertTile__list__products__product --slide-to-left${product.state === 'out-of-stock' ? ' out-of-stock' : ''}`} key={product.id} ref={el => productContRefs.current[i] = el}>
             {isProductInWishlist(product) 
             ? <button className="advertTile__list__products__product__heart-btn added-to-wishlist" aria-label="Remove product from wishlist" data-action="remove_product_from_wishlist" data-product-id={product.id} onClick={handleClick} />
             : <button className="advertTile__list__products__product__heart-btn" aria-label="Add product to wishlist" data-action="add_product_to_wishlist" data-product-id={product.id} onClick={handleClick} />
@@ -199,8 +199,8 @@ function AdvertTile ({darkMode, lan, type}) {
             <button className="advertTile__list__products__product__add-btn" data-action="add_to_cart" data-product-id={product.id} onClick={handleClick}>{en ? 'Add to cart' : 'اضف الى السله'}</button>
           </li>      
           )
-          : displayBlocks.map(num => 
-          <li className="advertTile__list__products__product empty --panel-flick" key={num} ref={productConEL}>
+          : displayBlocks.map((num, i) => 
+          <li className="advertTile__list__products__product empty --panel-flick" key={num} ref={el => productContRefs.current[i] = el}>
             <div className="advertTile__list__products__product__heart-btn" />
             <div className="advertTile__list__products__product__img" />
             <div className="advertTile__list__products__product__description" />

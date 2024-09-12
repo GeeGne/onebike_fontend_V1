@@ -188,8 +188,8 @@ function ImageSlider ({darkMode, lan}) {
             <li className='imageSlider-cont__img-holder__imges' key={data.id}>
               <DisplayWebImg className='imageSlider-cont__img-holder__imges__img' src={getBannerImgURL(data)} alt={data.alt} loading={i < 1 ? "eager" : "lazy"} fetchpriority={i < 1 ? "high" : ""} />
             </li>)
-          : displayBlocks.map((data, i) =>
-            <li className='imageSlider-cont__img-holder__imges' key={data.id}>
+          : displayBlocks.map(data =>
+            <li className='imageSlider-cont__img-holder__imges' key={data}>
               <div className='imageSlider-cont__img-holder__imges__img empty --panel-flick' />
             </li>)
         }
@@ -208,7 +208,7 @@ function ImageSlider ({darkMode, lan}) {
               <li className ={`imageSlider-cont__dots-container__dot ${i === currentImage && 'current'}`} key={data.id} />
             )
           : displayBlocks.map((data, i) =>
-             <li className ={`imageSlider-cont__dots-container__dot ${i === currentImage && 'current'} empty --panel-flick`} key={data.id} />
+             <li className ={`imageSlider-cont__dots-container__dot ${i === currentImage && 'current'} empty --panel-flick`} key={data} />
             )
         }
       </ul>

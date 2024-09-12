@@ -36,6 +36,13 @@ const useWishlistStore = create(
       removeProductFromWishlist: (product) => set({wishlist: [...get().wishlist.filter(item => item.id !== product.id)]}),
       toggle: false,
       setToggle: (boolean) => set({toggle: boolean}),
+      filterInvalidWishlistProducts: products => set(
+        {wishlist: get().wishlist.filter(
+          item => products.filter(product => product.state === 'available')
+            .some(product => item.id === product.id)
+          )
+        }
+      )
     }),
     {
       name: 'wishlist-storage',
@@ -83,7 +90,14 @@ const useCartStore = create(
         }),
       addProduct: (product, quantity) => set({cart: [...get().cart, newProduct(product, quantity)]}),
       addProductToCart: (product, quantity) => get().isProductInCart(product) ? get().updateProductQuantity(product, quantity) : get().addProduct(product, quantity),
-      removeProductFromCart: product => set({cart: get().cart.filter(item => item.id !== product.id)})
+      removeProductFromCart: product => set({cart: get().cart.filter(item => item.id !== product.id)}),
+      filterInvalidCartProducts: products => set(
+        {cart: get().cart.filter(
+          item => products.filter(product => product.state === 'available')
+            .some(product => item.id === product.id)
+          )
+        }
+      )
     }),
     {
       name: 'cart-storage',

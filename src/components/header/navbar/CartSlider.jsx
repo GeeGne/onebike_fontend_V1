@@ -18,12 +18,7 @@ import cartReducer from '/src/reducers/cartReducer';
 // import products from '/src/data/products';
 
 // UTILS
-import {CartProductsContext} from '/src/utils/myContext';
 import formatNumberWithCommas from '/src/utils/formatNumberWithCommas';
-import calculatePrice from '/src/utils/calculatePrice';
-import calculateDiscountPercantage from '/src/utils/calculateDiscountPercantage';
-import fetchElementById from '/src/utils/fetchElementById';
-import localStorage from '/src/utils/localStorage';
 
 // ICONS
 import closeIcon from '/assets/img/icons/close.svg';
@@ -40,7 +35,7 @@ function CartSlider ({darkMode, lan}) {
     toggle: cartToggle, 
     setToggle: setCartToggle, 
     addProductToCart, 
-    removeProductFromCart
+    removeProductFromCart,
   } = useCartStore();
   const setHeadToCheckouts = useOrderStore(state => state.setHeadToCheckouts);
   const headToCheckouts = useOrderStore(state => state.headToCheckouts);

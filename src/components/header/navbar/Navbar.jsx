@@ -33,7 +33,7 @@ function Navbar ({darkMode, lan}) {
   // const [cartToggle, setCartToggle] = useState(false);
   const {cart, toggle: cartToggle, setToggle: setCartToggle} = useCartStore();
   const {wishlist, setToggle: setWishlistToggle} = useWishlistStore();
-  const { user } = useDataStore();
+  const { user, setRefreshProducts } = useDataStore();
 
   const navDropMenuEL = useRef(null);
   const prevScrollY = useRef(0);
@@ -130,7 +130,13 @@ function Navbar ({darkMode, lan}) {
         }
         break;
       case 'toggle_wishlist_to_true':
-        return setWishlistToggle(true);
+        setRefreshProducts(Math.random());
+        setWishlistToggle(true);
+        break;
+      case 'toggle_cart_to_true':
+        setRefreshProducts(Math.random());
+        setCartToggle(true);
+        break;
       case 'navigate_to_path':
         navigate(path);
         setTimeout(() => scroll({top: 0, behavior: 'smooth'}), 500);
@@ -172,7 +178,7 @@ function Navbar ({darkMode, lan}) {
         <button className="dropMenu__nav__search" aria-label="Search on a product" data-action="toggle_search" onClick={handleClick} /* onMouseEnter={() => handleHover(true)} onMouseLeave={() => handleHover(false)} */ ref={searchBtnEL}/>
         <button className="dropMenu__nav__user" aria-label="head to your account" data-action="navigate_to_path" data-path={user ? "/account" : "/account/login"} onClick={handleClick}/>
         <button className={`dropMenu__nav__favourite${isWishlistEmpty ? ' empty' : ''}`} aria-label="Open favorite tab" data-action="toggle_wishlist_to_true" onClick={handleClick} ref={favouriteBtnEL}/>
-        <button className={`dropMenu__nav__shoppingCart${isCartEmpty ? ' empty' : ''}`} aria-label="Open shoppingcart tab" onClick={() => setCartToggle(true)} ref={cartBtnEL}/>
+        <button className={`dropMenu__nav__shoppingCart${isCartEmpty ? ' empty' : ''}`} aria-label="Open shoppingcart tab" data-action="toggle_cart_to_true" onClick={handleClick} ref={cartBtnEL}/>
       </nav>
       <Suspense fallback="">
         <DropMenu menu={menu} darkMode={darkMode} lan={lan}/>

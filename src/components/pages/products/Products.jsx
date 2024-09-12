@@ -32,7 +32,7 @@ function Products ({category, type, additional, darkMode, lan}) {
     ? products.filter(product => checkMatchedProduct(product.category, product.type) && product.state !== 'hidden')
     : products.filter(product => product[additional.key]);
   const totalProducts = matchedProducts.length;
-  console.log(productCategory, productCategoryEN)
+  
   return (
 
     <>

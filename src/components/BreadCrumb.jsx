@@ -10,7 +10,6 @@ import strSlashSplit from '/src/utils/strSlashSplit.js';
 import cleanseString from '/src/utils/cleanseString.js';
 
 function BreadCrumb ({category, type, additional, lan}) {
-  console.log(additional);
   return (
     <ul className="breadCrumb-list">
       <li className="breadCrumb-list__item-container">

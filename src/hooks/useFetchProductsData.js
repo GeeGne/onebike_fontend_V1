@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 
 // STORE
-import { useDataStore } from '/src/store/store';
+import { useDataStore, useCartStore, useWishlistStore } from '/src/store/store';
 
 // FIREBASE
 import {db} from '/src/firebase/fireStore';
@@ -10,6 +10,8 @@ import {getDoc, doc, collection, getDocs} from 'firebase/firestore';
 
 
 function useFetchProductsData () {
+  const { filterInvalidWishlistProducts } = useWishlistStore();
+  const { filterInvalidCartProducts } = useCartStore();
   const { setProducts, refreshProducts } = useDataStore();
 
   useEffect(() => {
@@ -23,6 +25,9 @@ function useFetchProductsData () {
             {...doc.data()}
           ))
           setProducts(productsData);
+
+          filterInvalidCartProducts(productsData);
+          filterInvalidWishlistProducts(productsData);
         } else {
           setProducts([]);
           throw new Error("No Products to be found");
