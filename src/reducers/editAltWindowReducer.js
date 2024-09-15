@@ -1,5 +1,5 @@
  function editAltWindowReducer (editAltWindow, action) {
-  const { type, alt, id } = action;
+  const { type, name, value, id } = action;
 
   switch (type) {
     case 'edit_alt_button_is_clicked':
@@ -9,7 +9,7 @@
     case 'alt_data_is_updated':
       return {toggle: ' hide', alt: "", id: ''};
     case 'add_alt_data':
-      return {...editAltWindow, alt};
+      return {...editAltWindow, [name]: value};
     default:
       console.error('Error: unknown type: ', type);
       return {...editAltWindow};

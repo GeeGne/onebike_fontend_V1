@@ -43,17 +43,13 @@ import {nanoid} from 'nanoid';
 import emailjs from '@emailjs/browser';
 
 // ASSETS
-import filter from '/assets/img/icons/filter_list.svg';
 import infoIcon from '/assets/img/icons/info.svg';
 import infoDarkModeIcon from '/assets/img/icons/info_darkMode.svg';
-import keyboardArrowDropDown from '/assets/img/icons/keyboard_arrow_down.svg';
 import keyboardArrowDropDownPrimaryColor from '/assets/img/icons/keyboard_arrow_down_primaryColor.svg';
 import keyboardArrowDropDownSecondaryColor from '/assets/img/icons/keyboard_arrow_down_secondaryColor.svg';
 import adjustIcon from '/assets/img/icons/adjust.svg';
 
 // ASSETS - DARK MODE
-import filterDarkMode from '/assets/img/icons/filter_list_darkMode.svg';
-import keyboardArrowDropDownDarkMode from '/assets/img/icons/keyboard_arrow_down_darkMode.svg';
 import adjustDarkModeIcon from '/assets/img/icons/adjust_darkMode.svg';
 
 function Checkout ({darkMode, lan}) {
@@ -517,10 +513,9 @@ function Checkout ({darkMode, lan}) {
           <div className="checkout__delivery-sec__inp-cont" data-type="city_inp_to_focus" onClick={handleClick} ref={cityInpContEL}> 
             <input className="checkout__delivery-sec__inp-cont__inp" value={cityDelivery} type="text" id="delivery" readOnly name="city" data-type="city_inp" onFocus={handleFocus} onBlur={handleBlur} ref={cityInpEL}/>
             <div className="checkout__delivery-sec__inp-cont__error-popup" onClick={() => removeErrorPopup(cityInpContEL.current)} ref={cityErrorPopupEL} />
-
             <ul className="checkout__delivery-sec__inp-cont__lst">
               {citiesAndShippingFee.map(item => 
-              <li className="checkout__delivery-sec__inp-cont__lst__itm" key={item.id} data-type="update_shipping_fee_and_inp" data-shipping-cost={item.fee} data-city={item.city.en} onClick={handleClick}>{item.city[lan]}</li>          
+                <li className="checkout__delivery-sec__inp-cont__lst__itm" key={item.id} data-type="update_shipping_fee_and_inp" data-shipping-cost={item.fee} data-city={item.city.en} onClick={handleClick}>{item.city[lan]}</li>          
               )}
             </ul>
           </div>

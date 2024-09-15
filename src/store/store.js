@@ -12,18 +12,27 @@ const useDataStore = create(
     userData: null,
     setUserData: data => set({ userData: {...get().userData, ...data} }),
     resetUserDataToNull: () => set({userData: null}),
+
     products: [],
     setProducts: products => set({ products }),
     refreshProducts: 0,
     setRefreshProducts: refreshProducts => set({ refreshProducts }),
+
     rolesData: null,
     setRolesData: rolesData => set({ rolesData }),
     resetRolesDataToNull: () => set({ rolesData: null }),
+
     homePageBannersData: [],
     setHomePageBannersData: homePageBannersData => set({ homePageBannersData }),
     refreshHomePageBannersData: 0,
     setRefreshHomePageBannersData: refreshHomePageBannersData => set({ refreshHomePageBannersData }),
     resetHomePageBannersDataToNull: () => set({ homePageBannersData: [] }),
+
+    websiteDetailsData: [],
+    setWebsiteDetailsData: websiteDetailsData => set({ websiteDetailsData }),
+    refreshWebsiteDetailsData: 0,
+    setRefreshWebsiteDetailsData: refreshWebsiteDetailsData => set({ refreshWebsiteDetailsData }),
+    resetWebsiteDetailsDataToNull: () => set({ websiteDetailsData: [] }),
   })
 );
 

@@ -20,7 +20,7 @@
     &.hide {animation-name: typeA-window-hide; animation-delay: 0.25s}
     
     &.show &__wrapper {animation-name: typeA-window-wrapper-show}    
-    &.hide &__wrapper {animation-name: typeA-window-wrapper-hide;}    
+    &.hide &__wrapper {animation-name: typeA-window-wrapper-hide}    
     &__wrapper {
       position: absolute;
       top: 50%;
@@ -54,7 +54,6 @@
       &__inpt {
         grid-area: inpt;
         position: relative;
-        text-align: center;
         font-weight: 600;
         padding-inline: 1em;
         padding-block: 0.5em;
@@ -68,6 +67,7 @@
         font-size: var(--font-size-extraSmall);
         transition: border 0.15s ease-out;
         &:focus {border: solid var(--primary-color); border-width: 0 0 2px 0}
+        &::placeholder { text-align: center }
       }
 
       &__cancel-btn {
@@ -114,7 +114,172 @@
     }
   }
 
-  &__contentDisplay-sec {
+  &__editSiteDetails-window {
+    visibility: hidden;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    backdrop-filter: blur(3px);
+    z-index: 2000;
+
+    animation-duration: 0.25s;
+    animation-timing-function: ease-out;
+    animation-fill-mode: both;
+    &.show {animation-name: typeA-window-show}
+    &.hide {animation-name: typeA-window-hide; animation-delay: 0.25s}
+    
+    &.show &__wrapper {animation-name: typeC-window-wrapper-show}    
+    &.hide &__wrapper {animation-name: typeC-window-wrapper-hide}    
+    &__wrapper {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 20em;
+      max-width: 800px;
+      @include w.breakpoint-up (medium) { width: 80vw }
+      background-color: var(--background-color);
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      @include w.breakpoint-up (medium) { grid-template-columns: repeat(4, 1fr) }
+      grid-template-areas:
+      'title title'
+      'email-lbl email-lbl'
+      'email-inpt email-inpt'
+      'phone-lbl phone-lbl'
+      'phone-inpt phone-inpt'
+      'whatsApp-lbl whatsApp-lbl'
+      'whatsApp-inpt whatsApp-inpt'
+      'facebook-lbl facebook-lbl'
+      'facebook-inpt facebook-inpt'
+      'instagram-lbl instagram-lbl'
+      'instagram-inpt instagram-inpt'
+      'cancel save'
+      ;
+      @include w.breakpoint-up (medium) {
+        grid-template-areas:
+        'title title title title'
+        'email-lbl email-lbl phone-lbl phone-lbl'
+        'email-inpt email-inpt phone-inpt phone-inpt'
+        'whatsApp-lbl whatsApp-lbl facebook-lbl facebook-lbl'
+        'whatsApp-inpt whatsApp-inpt facebook-inpt facebook-inpt'
+        'instagram-lbl instagram-lbl instagram-lbl instagram-lbl'
+        'instagram-inpt instagram-inpt instagram-inpt instagram-inpt'
+        'cancel cancel save save'
+        ;
+      }
+      align-items: center;
+      justify-content: center;
+      border-radius: 1em;
+      overflow: hidden;
+      box-shadow: 0 0 10px 1px hsla(0, 0%, 0%, 0.6);
+
+      animation-duration: 0.5s;
+      animation-timing-function: cubic-bezier(0.68,-0.55,0.27,1.55);
+      animation-fill-mode: both;
+  
+      &__title {
+        grid-area: title;
+        text-align: center;
+        padding-block: 1em;
+        color: var(--font-p-color);
+      }
+
+      &__email-lbl { grid-area: email-lbl }
+      &__phone-lbl { grid-area: phone-lbl } 
+      &__whatsApp-lbl { grid-area: whatsApp-lbl } 
+      &__facebook-lbl { grid-area: facebook-lbl } 
+      &__instagram-lbl { grid-area: instagram-lbl } 
+      &__email-inpt { grid-area: email-inpt }
+      &__phone-inpt { grid-area: phone-inpt } 
+      &__whatsApp-inpt { grid-area: whatsApp-inpt } 
+      &__facebook-inpt { grid-area: facebook-inpt } 
+      &__instagram-inpt { grid-area: instagram-inpt } 
+
+
+      &__email-lbl,
+      &__phone-lbl,
+      &__whatsApp-lbl,
+      &__facebook-lbl,
+      &__instagram-lbl {
+        display: flex;
+        align-items: center;
+        color: var(--font-h-color);
+        gap: 0.3em;
+        font-weight: 600;
+        padding-inline: 2em;
+        padding-block: 0.5em;
+        // margin-inline: 2em;
+      }
+
+      &__email-inpt,
+      &__phone-inpt,
+      &__whatsApp-inpt,
+      &__facebook-inpt,
+      &__instagram-inpt {
+        position: relative;
+        font-weight: 600;
+        padding-inline: 1em;
+        padding-block: 0.5em;
+        margin-bottom: 1em;
+        margin-inline: 2em;
+        background-color: var(--light-background-color);
+        border: solid var(--dark-invert-background-color);
+        border-width: 0 0 2px 0;
+        outline: none;
+        color: var(--font-h-color);
+        font-size: var(--font-size-extraSmall);
+        transition: border 0.15s ease-out;
+        &:focus { border: solid var(--primary-color); border-width: 0 0 2px 0 }
+        &::placeholder { text-align: center }
+      }
+
+      &__cancel-btn {
+        grid-area: cancel;
+        &:hover {background-color: var(--light-invert-background-color)}
+
+        &::before {
+          content: "";
+          position: absolute;
+          top: 0;
+          right: 0;
+          width: 1px;
+          height: 100%;
+          background-color: var(--endElement-border-background-color);
+          body.arabic & {right: auto; left: 0}
+        }
+      }
+
+      &__save-btn {
+        grid-area: save;
+        &:hover {background-color: var(--primary-color)}
+      }
+
+      &__save-btn,
+      &__cancel-btn {
+        position: relative;
+        font-size: var(--font-size-extraSmall);
+        color: var(--font-p-color);
+        font-weight: 600;
+        padding-block: 1em;
+        transition: background-color 0.15s ease-out, color 0.15s ease-out;
+        &:hover {color: var(--font-h-invert-color)}
+
+        &::after {
+          content: "";
+          position: absolute;
+          top: 0;
+          right: 0;
+          width: 100%;
+          height: 1px;
+          background-color: var(--endElement-border-background-color);
+        }
+      }
+    }
+  }
+
+  &__banners-sec {
     display: flex;
     flex-direction: column;
     padding-block: 1em;
@@ -293,7 +458,7 @@
         margin-inline: auto;
       }
       margin-left: auto;
-      body.arabic & { margin-left: 0; margin-right: auto; }
+      body.arabic & { margin-left: 0; margin-right: auto }
 
       &::before {
         content: "";
@@ -330,6 +495,99 @@
         @include w.breakpoint-up(large) {aspect-ratio: 2.39 / 1}
         @include w.breakpoint-up(xlarge) {aspect-ratio: 2.5 / 1}
         cursor: pointer;
+      }
+    }
+  }
+
+  &__siteDetails-sec {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding-block: 1em;
+    gap: 1em;
+   
+    &__title {
+      color: var(--font-h-color);
+      font-weight: 600;
+    }
+
+    &__edit-btn {
+      position: absolute;
+      top: 1em;
+      right: 0;
+      width: 2em;
+      height: 2em;
+      background-color: transparent;
+      background-size: 1em;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-image: var(--pencil-fill-icon);  
+      border-radius: 1em;
+      transition: background-color 0.15s ease-out;
+      body.arabic & { right: auto; left: 1em }
+
+      &:hover { background-color: var(--light-background-color) }
+    }
+
+    &__lst {
+      display: flex;
+      flex-direction: column;
+      gap: 1em;
+
+      &__itm {
+        display: flex;
+        justify-content: space-between;
+        background-color: var(--light-background-color);
+        border-radius: 2em;
+
+        &__wrapper {
+          display: flex;
+          align-items: center;
+          gap: 0.3em;
+          padding-inline: 2em;
+          padding-block: 0.5em;
+          border-radius: 2em;
+          background-color: var(--primary-color);
+
+          &__img {
+            width: 1em;
+            @include w.breakpoint-up (medium) { width: 1.3em }
+          }
+
+          &__spn {
+            font-size: var(--font-size-extraSmall);
+            @include w.breakpoint-up (medium) { font-size: var(--font-size-small) }
+            color: var(--font-h-invert-color);
+            font-weight: 600;
+          }
+        }
+
+        &__spn {
+          font-size: var(--font-size-extraSmall);
+          @include w.breakpoint-up (medium) { font-size: var(--font-size-small) }
+          padding-inline: 2em;
+          padding-block: 0.5em;
+          color: var(--font-p-color);
+          font-weight: 600;    
+        }
+
+        &__a {
+          display: flex;
+          align-items: center;
+          text-decoration: none;
+          gap: 0.3em;
+          padding-inline: 2em;
+          padding-block: 0.5em;
+          color: var(--font-p-color);
+          font-weight: 600;
+          font-size: var(--font-size-extraSmall);
+          @include w.breakpoint-up (medium) { font-size: var(--font-size-small) }
+
+          &__img {
+            width: 1em;
+            @include w.breakpoint-up (medium) { width: 1em }
+          }
+        }
       }
     }
   }

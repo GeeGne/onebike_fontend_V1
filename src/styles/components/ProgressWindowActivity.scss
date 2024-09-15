@@ -22,10 +22,6 @@
   &.show &__img {animation-name: typeB-window-wrapper-show, rotate}    
   &.hide &__img {animation-name: typeB-window-wrapper-hide, rotate}    
   &__img  {
-    // position: absolute;
-    // top: 50%;
-    // left: 50%;
-    // transform: translate(-50%, -50%) rotate(0deg);
     width: 5em;
     height: 5em;
     transform-origin: center;

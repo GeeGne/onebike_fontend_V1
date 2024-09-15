@@ -1,5 +1,5 @@
 function handleAuthError (err, en) {
-  const {code} = err;
+  const { code } = err;
 
   switch (code) {
     case 'auth/user-disabled':

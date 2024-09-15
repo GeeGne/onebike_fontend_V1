@@ -7,6 +7,7 @@ import useFetchUserData from '/src/hooks/useFetchUserData';
 import useFetchProductsData from '/src/hooks/useFetchProductsData';
 import useFetchRolesData from '/src/hooks/useFetchRolesData';
 import useFetchHomePageBannersData from '/src/hooks/useFetchHomePageBannersData';
+import useFetchWebsiteDetailsData from '/src/hooks/useFetchWebsiteDetailsData';
 
 //  STYLES
 // import './styles/App.scss';
@@ -61,6 +62,7 @@ function App () {
   useFetchProductsData();
   useFetchRolesData();
   useFetchHomePageBannersData();
+  useFetchWebsiteDetailsData();
 
   const themeData = setDarkMode;
   const languageData = setLanguage;

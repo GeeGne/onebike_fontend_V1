@@ -25,7 +25,7 @@ function EmptyList ({ darkMode, lan, subject }) {
               <li><b>Check out our <a href={oneBike.instagram} target="_blank">Instagram</a></b> for sneak peeks of what's coming.</li>
               <li><b>Join our newsletter </b>{`to be the first to know when the new ${subject[lan]} are in!`}</li>
             </ul>
-          :<ul>
+          : <ul>
               <li><b>تابعنا على فيسبوك </b>تابعنا على فيسبوك لأحدث الإصدارات والعروض الحصرية.</li>
               <li><b>تفقد حسابنا على إنستغرام </b>تفقد حسابنا على إنستغرام للحصول على لمحات مسبقة عن ما هو قادم.</li>
               <li><b>اشترك في نشرتنا الإخبارية </b>{`اشترك في نشرتنا الإخبارية لتكون أول من يعلم عند وصول ${subject[lan]} الجديدة!`}</li>
