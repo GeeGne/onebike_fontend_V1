@@ -73,9 +73,23 @@ function GeneralSettingsTable ({darkMode, lan}) {
   const imgBannerFile = useRef(null);
   const altInputEL = useRef(null);
 
+  const emailInputEL = useRef(null);
+  const phoneInputEL = useRef(null);
+  const whatsAppInputEL = useRef(null);
+  const facebookInputEL = useRef(null);
+  const instagramInputEL = useRef(null);
+
   const en = lan === 'en';
   const getBannerImgURL = item => `/assets/img/banners/homepage/${item.id}.webp`;
   const clearAltInputValue = () => altInputEL.current.value = "";
+  const clearSiteDetailsInputValues = () => {
+    emailInputEL.current.value = "";
+    phoneInputEL.current.value = "";
+    whatsAppInputEL.current.value = "";
+    facebookInputEL.current.value = "";
+    instagramInputEL.current.value = "";
+  }
+
 
   const deleteBannersData = async () => {
     try {
@@ -193,7 +207,8 @@ function GeneralSettingsTable ({darkMode, lan}) {
       const docRef = doc(db, 'websiteDetails', 'onebike');
       await updateDoc(docRef, newData);
 
-      dispatchSiteDetails({type: 'websiteDetails_data_is_updated'})
+      dispatchSiteDetails({type: 'websiteDetails_data_is_updated'});
+      clearSiteDetailsInputValues();
       setRefreshWebsiteDetailsData(Math.random());
       setAlertText(en ? 'Success! Website Details are updated successfully' : 'نجاح! تم تحديث تفاصيل الموقع بنجاح')
     } catch (error) {
@@ -317,27 +332,27 @@ function GeneralSettingsTable ({darkMode, lan}) {
             <DisplayImg src={darkMode ? mailDarkModeIcon : mailIcon }/>
             <span>{en ? 'Email' : 'البريد الاكتروني'}</span>
           </label>
-          <input className="gs__editSiteDetails-window__wrapper__email-inpt" id="email" name="email" placeholder={websiteDetailsData.email} onChange={handleChange} ref={altInputEL} />
+          <input className="gs__editSiteDetails-window__wrapper__email-inpt" id="email" name="email" placeholder={websiteDetailsData.email} onChange={handleChange} ref={emailInputEL} />
           <label className="gs__editSiteDetails-window__wrapper__phone-lbl" htmlFor="phone">
             <DisplayImg src={darkMode ? callDarkModeIcon : callIcon }/>
             <span>{en ? 'Phone': 'رقم الهاتف'}</span>
           </label>
-          <input className="gs__editSiteDetails-window__wrapper__phone-inpt" id="phone" name="phone" placeholder={websiteDetailsData.phone} onChange={handleChange} ref={altInputEL} />
+          <input className="gs__editSiteDetails-window__wrapper__phone-inpt" id="phone" name="phone" placeholder={websiteDetailsData.phone} onChange={handleChange} ref={phoneInputEL} />
           <label className="gs__editSiteDetails-window__wrapper__whatsApp-lbl" htmlFor="whatsApp">
             <DisplayImg src={darkMode ? whatsappDarkModeIcon : whatsappIcon }/>
             <span>{en ? 'Whatsapp Link' : 'رابط الواتساب'}</span>
           </label>
-          <input className="gs__editSiteDetails-window__wrapper__whatsApp-inpt" id="whatsApp" name="whatsApp" placeholder={websiteDetailsData.whatsApp} onChange={handleChange} ref={altInputEL} />
+          <input className="gs__editSiteDetails-window__wrapper__whatsApp-inpt" id="whatsApp" name="whatsApp" placeholder={websiteDetailsData.whatsApp} onChange={handleChange} ref={whatsAppInputEL} />
           <label className="gs__editSiteDetails-window__wrapper__facebook-lbl" htmlFor="facebook">
             <DisplayImg src={darkMode ? facebookDarkModeIcon : facebookIcon }/>
             <span>{en ? 'Facebook Link' : 'رابط الفيسبوك'}</span>
           </label>
-          <input className="gs__editSiteDetails-window__wrapper__facebook-inpt" id="facebook" name="facebook" placeholder={websiteDetailsData.facebook} onChange={handleChange} ref={altInputEL} />
+          <input className="gs__editSiteDetails-window__wrapper__facebook-inpt" id="facebook" name="facebook" placeholder={websiteDetailsData.facebook} onChange={handleChange} ref={facebookInputEL} />
           <label className="gs__editSiteDetails-window__wrapper__instagram-lbl" htmlFor="instagram">
             <DisplayImg src={darkMode ? instagramDarkModeIcon : instagramIcon }/>
             <span>{en ? 'Instagram Link' : 'رابط الانستغرام'}</span>
           </label>
-          <input className="gs__editSiteDetails-window__wrapper__instagram-inpt" id="instagram" name="instagram" placeholder={websiteDetailsData.instagram} onChange={handleChange} ref={altInputEL} />
+          <input className="gs__editSiteDetails-window__wrapper__instagram-inpt" id="instagram" name="instagram" placeholder={websiteDetailsData.instagram} onChange={handleChange} ref={instagramInputEL} />
           <button className="gs__editSiteDetails-window__wrapper__cancel-btn" data-action="cancel_siteDetails_window_button_is_clicked" onClick={handleClick}>{en ? 'Cancel' : 'الغاء'}</button>
           <button className="gs__editSiteDetails-window__wrapper__save-btn" data-action="save_siteDetails_window_button_is_clicked" onClick={handleClick}>{renderLoadingState(en ? 'Save' : 'حفظ')}</button>          
         </div>

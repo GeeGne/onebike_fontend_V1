@@ -11,11 +11,14 @@ import LanguageButton from '../LanguageButton';
 import LightDarkButton from '../LightDarkButton';
 
 // JSON
-import oneBike from '/src/data/one-bike.json';
+// import oneBike from '/src/data/one-bike.json';
 
 // UTILS
 import strRemoveSpace from '/src/utils/strRemoveSpace.js';
 import formatPhoneNumber from '/src/utils/formatPhoneNumber.js';
+
+// STORE
+import { useDataStore } from '/src/store/store';
 
 // ICONS
 import facebookIcon from '/assets/img/icons/facebook.svg';
@@ -33,6 +36,7 @@ import callPlusFillIconDarkMode from '/assets/img/icons/call_plus_fill_darkMode.
 
 function IntroSection ({onThemeChange, onLanguageChange}) {
  
+  const { websiteDetailsData } = useDataStore();
   const [darkMode, setDarkMode] = useState(false);
   const [lan, setLanguage] = useState('en');
   const [alertText, setAlertText] = useState(null);
@@ -116,13 +120,13 @@ function IntroSection ({onThemeChange, onLanguageChange}) {
   return (
     <section className="userinfo-container --fade-in animate--05s delay--03s iteration--1" ref={infoSectionEL}>
       <Alert alertText={alertText} newAlert={newAlert}/>
-        <a className="userinfo-container__facebook" href={oneBike.facebook} target="_blank" tabIndex="0" aria-label="Head to our facebook page" rel="noopener noreferrer" />
-        <a className="userinfo-container__whatsapp" href={oneBike.whatsApp} target="_blank" tabIndex="0" aria-label="Head to our whatsapp group" rel="noopener noreferrer" />
-        <a className="userinfo-container__instagram" href={oneBike.instagram} target="_blank" tabIndex="0" aria-label="Head to our instagram" rel="noopener noreferrer" />
+        <a className="userinfo-container__facebook" href={websiteDetailsData?.facebook} target="_blank" tabIndex="0" aria-label="Head to our facebook page" rel="noopener noreferrer" />
+        <a className="userinfo-container__whatsapp" href={websiteDetailsData?.whatsApp} target="_blank" tabIndex="0" aria-label="Head to our whatsapp group" rel="noopener noreferrer" />
+        <a className="userinfo-container__instagram" href={websiteDetailsData?.instagram} target="_blank" tabIndex="0" aria-label="Head to our instagram" rel="noopener noreferrer" />
 
-        <a className="userinfo-container__phone-number" href={'tel:' + oneBike.phone} onClick={handleClick} onMouseEnter={() => handleHover('enter')} onMouseLeave={() => handleHover('leave')}>
+        <a className="userinfo-container__phone-number" href={'tel:' + websiteDetailsData?.phone} onClick={handleClick} onMouseEnter={() => handleHover('enter')} onMouseLeave={() => handleHover('leave')}>
           <img src={darkMode ? callIconDarkMode : callIcon} ref={phoneNumberIconElement} alt="Call Icon"/>
-          <span ref={phoneNumberH2Element}>{formatPhoneNumber(oneBike.phone)}</span>
+          <span ref={phoneNumberH2Element}>{formatPhoneNumber(websiteDetailsData?.phone)}</span>
         </a>
 
         <LightDarkButton onThemeChange={themeData}/>
