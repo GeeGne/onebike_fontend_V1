@@ -57,7 +57,6 @@ function GeneralSettingsTable ({darkMode, lan}) {
     websiteDetailsData,
     setRefreshWebsiteDetailsData
   } = useDataStore();
-  // console.log(websiteDetailsData);
   const [ newAlert, setNewAlert ] = useState(0);
   const [ alertText, setAlertText ] = useState(null);
   const [ editAltWindow, dispatch ] = useReducer(editAltWindowReducer, {
@@ -66,7 +65,6 @@ function GeneralSettingsTable ({darkMode, lan}) {
     id: '',
   });
   const [ editSiteDetails, dispatchSiteDetails ] = useReducer(editSiteDetailsWindowReducer, { toggle: '' });
-  console.log('editSiteDetails', editSiteDetails);
   const [ activity, setActivity ] = useState(false);
   const [ windowActivity, setwindowActivity ] = useState('');
 
@@ -306,7 +304,7 @@ function GeneralSettingsTable ({darkMode, lan}) {
       case'whatsApp':
       case'facebook':
       case'instagram':
-        dispatchSiteDetails({ type: 'add_inputs_values', name: name, value: value.trim() });
+        dispatchSiteDetails({ type: 'add_inputs_values', name, value: value.trim() });
         break;
       default:
         console.error('Error: unknown name: ', name);

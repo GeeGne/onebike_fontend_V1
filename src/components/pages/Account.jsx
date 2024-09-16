@@ -1,10 +1,14 @@
 // HOOKS
-import React, {useState, useRef, useEffect} from 'react';
+import React, {useState, useRef, useEffect, useReducer} from 'react';
 import {useNavigate} from 'react-router-dom';
 import {Helmet} from 'react-helmet-async';
 
 // COMPONENTS
 import DisplayWebImg from '/src/components/DisplayWebImg';
+import DisplayImg from '/src/components/DisplayImg';
+import Alert from '/src/components/Alert';
+import ProgressActivity from '/src/components/ProgressActivity';
+import ProgressWindowActivity from '/src/components/ProgressWindowActivity';
 
 // FIREBASE
 import {auth} from '/src/firebase/authSignUp';
@@ -18,6 +22,10 @@ import '/src/styles/components/pages/Account.scss';
 // STORE
 import { useDataStore } from '/src/store/store';
 
+// REDUCERS
+import editAltWindowReducer from '/src/reducers/editAltWindowReducer';
+import editPersonalDetailsWindowReducer from '/src/reducers/editPersonalDetailsWindowReducer';
+
 // UTILS 
 import Redirector from '/src/utils/Redirector';
 import formatPhoneNumber from '/src/utils/formatPhoneNumber';
@@ -25,7 +33,27 @@ import formatNumberWithCommas from '/src/utils/formatNumberWithCommas';
 import calculatePrice from '/src/utils/calculatePrice';
 
 // ASSETS
+import infoIcon from '/assets/img/icons/info.svg';
 import personIcon from '/assets/img/icons/person.svg';
+import infoDarkModeIcon from '/assets/img/icons/info_darkMode.svg';
+import emptyImgURL from '/assets/img/empty/empty.webp';
+import mailIcon from '/assets/img/icons/mail.svg';
+import mailDarkModeIcon from '/assets/img/icons/mail_darkMode.svg';
+import callIcon from '/assets/img/icons/call.svg';
+import callDarkModeIcon from '/assets/img/icons/call_darkMode.svg';
+import whatsappIcon from '/assets/img/icons/whatsapp.svg';
+import whatsappDarkModeIcon from '/assets/img/icons/whatsapp_darkMode.svg';
+import facebookIcon from '/assets/img/icons/facebook.svg';
+import facebookDarkModeIcon from '/assets/img/icons/facebook_darkMode.svg';
+import instagramIcon from '/assets/img/icons/instagram.svg';
+import instagramDarkModeIcon from '/assets/img/icons/instagram_darkMode.svg';
+import linkIcon from '/assets/img/icons/link.svg';
+import linkDarkModeIcon from '/assets/img/icons/link_darkMode.svg';
+import locationIcon from '/assets/img/icons/location.svg';
+import locationDarkModeIcon from '/assets/img/icons/location_darkMode.svg';
+import notesIcon from '/assets/img/icons/notes.svg';
+import notesDarkModeIcon from '/assets/img/icons/notes_darkMode.svg';
+import img from '/assets/img/content/two bicycles.webp';
 
 // ASSETS - DARKMODE
 import personDarkModeIcon from '/assets/img/icons/person_darkMode.svg';
@@ -39,7 +67,10 @@ function Account ({darkMode, lan}) {
   const pageKeywords = "ONEBIKE, account, manage account, orders, preferences, bicycle, bicycle parts, Syria";
   const en = lan === 'en';
 
+  const [ editPersonalDetails, dispatch ] = useReducer(editPersonalDetailsWindowReducer, { toggle: '' });
+  console.log('reducer', editPersonalDetails)
   const { user, userData, rolesData } = useDataStore();
+  const [ activity, setActivity ] = useState(false);
   const ordersData = userData?.ordersData || [];
   const navigate = useNavigate();
   const redirector = new Redirector(navigate);
@@ -53,6 +84,25 @@ function Account ({darkMode, lan}) {
   const myInfoListContEL = useRef(null);
   const ordersContEL = useRef(null);
   const ordersListContEL = useRef(null);  
+
+  const fullNameInputEL = useRef(null);
+  const emailInputEL = useRef(null);
+  const phoneInputEL = useRef(null);
+  const addressDetailsInputEL = useRef(null);
+  const secondAddressInputEL = useRef(null);
+  const notesInputEL = useRef(null);
+
+  //Set Personal Data to Input Values
+  useEffect(() => {
+
+    fullNameInputEL.current.value = userData?.fullName || '';
+    emailInputEL.current.value = userData?.email || '';
+    phoneInputEL.current.value = userData?.phone || '';
+    addressDetailsInputEL.current.value = userData?.addressDetails || '';
+    secondAddressInputEL.current.value = userData?.secondAddress || '';
+    notesInputEL.current.value = userData?.notes || '';
+  
+  },[userData]);
 
   const getProductImgURL = product => `/assets/img/products/${product.id}/main.webp`;
   const getProductPrice = product => formatNumberWithCommas(calculatePrice(product.price, product.discount));
@@ -68,7 +118,16 @@ function Account ({darkMode, lan}) {
       default:
         console.error('Error: Unknown Order statue: ', orderStatus)
     }
-  }
+  };
+
+  const renderLoadingState = textContent => {
+
+    if (activity) {
+      return <ProgressActivity darkMode={darkMode} invert={false} />
+    } else {
+      return textContent;
+    } 
+  };
   
   useEffect(() => {
     redirector.account(user);
@@ -134,8 +193,30 @@ function Account ({darkMode, lan}) {
       case 'manage_content_btn_is_clicked':
         navigate('/account/admin');
         break;
+      case 'personalDetails_window_background_is_clicked':
+      case 'cancel_personalDetails_window_button_is_clicked':
+      case 'edit_personal_details_btn_is_clicked':
+        dispatch({type: action})
+        break;
       default:
         console.error('Error: Unknown action', action);
+    }
+  }
+
+  const handleChange = e => {
+    const { name, value } = e.currentTarget;
+
+    switch (name) {
+      case 'fullName':
+      case 'email':
+      case 'phone':
+      case 'addressDetails':
+      case 'secondAddress':
+      case 'notes':
+        dispatch({ type: 'add_inputs_values', name, value: value.trim() })
+        break;
+      default:
+        console.error('Error: unknown name: ', name);
     }
   }
 
@@ -156,6 +237,7 @@ function Account ({darkMode, lan}) {
 
         <section className="account__banner">
           <button className={`account__banner__manageContent-btn${rolesData?.role === 'admin' || rolesData?.role === 'owner' ? ' show': ''}`} data-action="manage_content_btn_is_clicked" onClick={handleClick} />
+          <button className="account__banner__editPersonalDetails-btn" data-action="edit_personal_details_btn_is_clicked" onClick={handleClick} />
           <div className="account__banner__pfp">
             <img className="account__banner__pfp__img" src={darkMode ? personIcon : personDarkModeIcon} />
           </div>
@@ -164,6 +246,48 @@ function Account ({darkMode, lan}) {
         <section className="account__userName-sec">
           <h2 className="account__userName-sec__h2">{userData?.fullName || (en ? 'Loading..' : '..جاري التحميل')}</h2>
         </section>
+
+        <div className={`account__editPersonalDetails-window${editPersonalDetails.toggle}`} data-action="personalDetails_window_background_is_clicked" onClick={handleClick}>
+          <div className="account__editPersonalDetails-window__wrapper" data-action="personalDetails_window_wrapper_is_clicked" onClick={e => e.stopPropagation()}>
+            <h2 className="account__editPersonalDetails-window__wrapper__title">{en ? 'Edit Personal Details' : 'تعديل معلومات الصفحه'}</h2>
+            <div className="account__editPersonalDetails-window__wrapper__pfp-wrapper" htmlFor="email">
+              <DisplayImg className="account__editPersonalDetails-window__wrapper__pfp-wrapper__img" src={img}/>
+              <input className="account__editPersonalDetails-window__wrapper__pfp-wrapper__inpt" type="file" />
+            </div>
+            <label className="account__editPersonalDetails-window__wrapper__fullName-lbl" htmlFor="fullName">
+              <DisplayImg className="account__editPersonalDetails-window__wrapper__fullName-lbl__icon" src={darkMode ? personDarkModeIcon : personIcon }/>
+              <span className="account__editPersonalDetails-window__wrapper__fullName-lbl__span">{en ? 'Full Name' : 'الاسم الكامل'}</span>
+              <input className="account__editPersonalDetails-window__wrapper__fullName-lbl__fullName-inpt" id="fullName" name="fullName" onChange={handleChange} ref={fullNameInputEL} />
+            </label>
+            <label className="account__editPersonalDetails-window__wrapper__phone-lbl" htmlFor="phone">
+              <DisplayImg className="account__editPersonalDetails-window__wrapper__phone-lbl__icon" src={darkMode ? callDarkModeIcon : callIcon }/>
+              <span className="account__editPersonalDetails-window__wrapper__phone-lbl__span">{en ? 'Phone': 'رقم الهاتف'}</span>
+              <input className="account__editPersonalDetails-window__wrapper__phone-lbl__phone-inpt" id="phone" name="phone" onChange={handleChange} ref={phoneInputEL} />
+            </label>
+            <label className="account__editPersonalDetails-window__wrapper__email-lbl" htmlFor="email">
+              <DisplayImg className="account__editPersonalDetails-window__wrapper__email-lbl__icon" src={darkMode ? mailDarkModeIcon : mailIcon }/>
+              <span className="account__editPersonalDetails-window__wrapper__email-lbl__span">{en ? 'Email' : 'البريد الاكتروني'}</span>
+              <input className="account__editPersonalDetails-window__wrapper__email-lbl__email-inpt" id="email" name="email" onChange={handleChange} ref={emailInputEL} />
+            </label>
+            <label className="account__editPersonalDetails-window__wrapper__addressDetails-lbl" htmlFor="addressDetails">
+              <DisplayImg className="account__editPersonalDetails-window__wrapper__addressDetails-lbl__icon" src={darkMode ? locationDarkModeIcon : locationIcon }/>
+              <span className="account__editPersonalDetails-window__wrapper__addressDetails-lbl__span">{en ? 'Address Details' : 'تفاصيل العنوان'}</span>
+              <input className="account__editPersonalDetails-window__wrapper__addressDetails-lbl__addressDetails-inpt" id="addressDetails" name="addressDetails" onChange={handleChange} ref={addressDetailsInputEL} />
+            </label>
+            <label className="account__editPersonalDetails-window__wrapper__secondAddress-lbl" htmlFor="secondAddress">
+              <DisplayImg className="account__editPersonalDetails-window__wrapper__secondAddress-lbl__icon" src={darkMode ? locationDarkModeIcon : locationIcon }/>
+              <span className="account__editPersonalDetails-window__wrapper__secondAddress-lbl__span">{en ? 'Second Address' : 'العنوان الثاني'}</span>
+              <input className="account__editPersonalDetails-window__wrapper__secondAddress-lbl__secondAddress-inpt" id="secondAddress" name="secondAddress" onChange={handleChange} ref={secondAddressInputEL} />
+            </label>
+            <label className="account__editPersonalDetails-window__wrapper__notes-lbl" htmlFor="notes">
+              <DisplayImg className="account__editPersonalDetails-window__wrapper__notes-lbl__icon" src={darkMode ? notesDarkModeIcon : notesIcon }/>
+              <span className="account__editPersonalDetails-window__wrapper__notes-lbl__span">{en ? 'Notes' : 'ملاحظات'}</span>
+              <input className="account__editPersonalDetails-window__wrapper__notes-lbl__notes-inpt" id="notes" name="notes" onChange={handleChange} ref={notesInputEL} />
+            </label>
+            <button className="account__editPersonalDetails-window__wrapper__cancel-btn" data-action="cancel_personalDetails_window_button_is_clicked" onClick={handleClick}>{en ? 'Cancel' : 'الغاء'}</button>
+            <button className="account__editPersonalDetails-window__wrapper__save-btn" data-action="save_siteDetails_window_button_is_clicked" onClick={handleClick}>{renderLoadingState(en ? 'Save' : 'حفظ')}</button>          
+          </div>
+        </div>
 
         <section className="account__userData">
           <div className="account__userData__top-bar">

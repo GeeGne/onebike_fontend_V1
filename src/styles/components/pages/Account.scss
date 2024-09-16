@@ -17,6 +17,273 @@
     height: var(--stretch-height, 100%);
   }
 
+  &__editPersonalDetails-window {
+    visibility: hidden;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    backdrop-filter: blur(3px);
+    z-index: 2000;
+
+    animation-duration: 0.25s;
+    animation-timing-function: ease-out;
+    animation-fill-mode: both;
+    &.show {animation-name: typeA-window-show}
+    &.hide {animation-name: typeA-window-hide; animation-delay: 0.25s}
+    
+    &.show &__wrapper {animation-name: typeC-window-wrapper-show}    
+    &.hide &__wrapper {animation-name: typeC-window-wrapper-hide}    
+    &__wrapper {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 20em;
+      max-width: 800px;
+      @include w.breakpoint-up (medium) { width: 80vw }
+      background-color: var(--background-color);
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      @include w.breakpoint-up (medium) { grid-template-columns: repeat(4, 1fr) }
+      grid-template-areas:
+      'title title'
+      'pfp-wrapper pfp-wrapper'
+      'fullName-lbl fullName-lbl'
+      'phone-lbl phone-lbl'
+      'email-lbl email-lbl'
+      'addressDetails-lbl addressDetails-lbl'
+      'secondAddress-lbl secondAddress-lbl'
+      'notes-lbl notes-lbl'
+      'cancel save'
+      ;
+      @include w.breakpoint-up (medium) {
+        grid-template-areas:
+        'title title title title'
+        'pfp-wrapper pfp-wrapper fullName-lbl fullName-lbl'
+        'pfp-wrapper pfp-wrapper phone-lbl phone-lbl'
+        'addressDetails-lbl addressDetails-lbl email-lbl email-lbl'
+        'secondAddress-lbl secondAddress-lbl notes-lbl notes-lbl'
+        'cancel cancel save save'
+        ;
+      }
+      align-items: center;
+      justify-content: center;
+      border-radius: 1em;
+      overflow: hidden;
+      box-shadow: 0 0 10px 1px hsla(0, 0%, 0%, 0.6);
+
+      animation-duration: 0.5s;
+      animation-timing-function: cubic-bezier(0.68,-0.55,0.27,1.55);
+      animation-fill-mode: both;
+  
+      &__title {
+        grid-area: title;
+        text-align: center;
+        padding-block: 1em;
+        color: var(--font-p-color);
+      }
+
+      &__fullName-lbl { grid-area: fullName-lbl } 
+      &__phone-lbl { grid-area: phone-lbl } 
+      &__email-lbl { grid-area: email-lbl }
+      &__addressDetails-lbl { grid-area: addressDetails-lbl } 
+      &__secondAddress-lbl { grid-area: secondAddress-lbl } 
+      &__notes-lbl { grid-area: notes-lbl } 
+
+      &__pfp-wrapper {
+        grid-area: pfp-wrapper;
+        position: relative;
+        width: 10em;
+        aspect-ratio: 1 / 1;
+        margin-inline: auto;
+
+        // change-photo-btn
+        &:hover::before {
+          color: var(--font-h-color);
+          background-image: var(--camera-icon);
+          background-color: var(--background-color);
+        }
+        &::before {
+          content: "change photo";
+          position: absolute;
+          bottom: 1em;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          color: var(--font-p-color);
+          font-size: var(--font-size-extraSmall);
+          font-weight: 600;
+          white-space: nowrap;
+          background-color: var(--light-background-color);
+          background-image: var(--camera-light-icon);
+          background-size: 1.3em;
+          background-repeat: no-repeat;
+          background-position: center left 1em;  
+          padding-inline: 2.8em 1em;
+          body.arabic & { padding-inline: 1em 2.8em }
+          padding-block: 0.5em;
+          border-radius: 1.5em;
+          z-index: 10;
+          transition: color 0.15s ease-out, background-color 0.15s ease-out;
+        }
+
+        // add-photo
+        &::after {
+          content: "";
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          width: 100%;
+          aspect-ratio: 1 / 1;
+          color: var(--font-p-color);
+          font-size: var(--font-size-extraSmall);
+          font-weight: 600;
+          background-color: var(--light-background-color);
+          background-image: var(--add-icon);
+          background-size: cover;
+          background-repeat: no-repeat;
+          background-position: center;
+          border: dashed var(--dark-invert-background-color) 0.5em;  
+          border-radius: 100%;
+          transition: color 0.15s ease-out, background-color 0.15s ease-out;
+        }
+
+        &__img {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          width: 100%;
+          aspect-ratio: 1 / 1;
+          border-radius: 100%;
+          object-fit: cover;
+          opacity: 0;
+          z-index: 5;
+        }
+
+        &__inpt {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          width: 100%;
+          aspect-ratio: 1 / 1;
+          opacity: 0;
+          cursor: pointer;
+          z-index: 15;
+        }
+      }
+
+      &__fullName-lbl,
+      &__phone-lbl,
+      &__email-lbl,
+      &__addressDetails-lbl,
+      &__secondAddress-lbl,
+      &__notes-lbl {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        grid-template-areas: 
+        'icon span'
+        'inpt inpt'
+        ;
+        gap: 0.5em;
+        align-items: center;
+        font-size: var(--font-size-extraSmall);
+        @include w.breakpoint-up (medium) { font-size: var(--font-size-small) }
+        color: var(--font-h-color);
+        font-weight: 600;
+        padding-inline: 2em;
+        padding-block: 0.5em;
+
+        &__fullName-icon,
+        &__email-icon,
+        &__phone-icon,
+        &__addressDetails-icon,
+        &__secondAddress-icon,
+        &__notes-icon {
+          grid-area: icon;
+        }
+
+        &__fullName-span,
+        &__email-span,
+        &__phone-span,
+        &__addressDetails-span,
+        &__secondAddress-span,
+        &__notes-span {
+          grid-area: span;
+        }
+
+
+        &__fullName-inpt,
+        &__email-inpt,
+        &__phone-inpt,
+        &__addressDetails-inpt,
+        &__secondAddress-inpt,
+        &__notes-inpt {
+          position: relative;
+          grid-area: inpt;
+          font-weight: 600;
+          padding-inline: 1em;
+          padding-block: 0.5em;
+          margin-bottom: 1em;
+          background-color: var(--light-background-color);
+          border: solid var(--dark-invert-background-color);
+          border-width: 0 0 2px 0;
+          outline: none;
+          color: var(--font-h-color);
+          font-size: var(--font-size-extraSmall);
+          transition: border 0.15s ease-out;
+          &:focus { border: solid var(--primary-color); border-width: 0 0 2px 0 }
+          &::placeholder { text-align: center }
+        }
+      }
+      
+      &__cancel-btn {
+        grid-area: cancel;
+        &:hover {background-color: var(--light-invert-background-color)}
+
+        &::before {
+          content: "";
+          position: absolute;
+          top: 0;
+          right: 0;
+          width: 1px;
+          height: 100%;
+          background-color: var(--endElement-border-background-color);
+          body.arabic & {right: auto; left: 0}
+        }
+      }
+
+      &__save-btn {
+        grid-area: save;
+        &:hover {background-color: var(--primary-color)}
+      }
+
+      &__save-btn,
+      &__cancel-btn {
+        position: relative;
+        font-size: var(--font-size-extraSmall);
+        color: var(--font-p-color);
+        font-weight: 600;
+        padding-block: 1em;
+        transition: background-color 0.15s ease-out, color 0.15s ease-out;
+        &:hover {color: var(--font-h-invert-color)}
+
+        &::after {
+          content: "";
+          position: absolute;
+          top: 0;
+          right: 0;
+          width: 100%;
+          height: 1px;
+          background-color: var(--endElement-border-background-color);
+        }
+      }
+    }
+  }
+
+
   &__banner {
     position: relative;
     height: 8em;
@@ -39,6 +306,7 @@
       transition: opacity 0.25s ease;
       &:hover {opacity: 0.8}
       &.show {display: initial}
+      body.arabic & { right: auto; left: 1em }
 
       &::before {
         content: "";
@@ -52,7 +320,36 @@
         background-size: 1.3em;
         background-repeat: no-repeat;
         background-position: center;
-  
+      }
+    }
+
+    &__editPersonalDetails-btn {
+      position: absolute;
+      top: 2em;
+      left: 1em;
+      transform: rotate(45deg);
+      transform-origin: center;
+      width: 2em;
+      height: 2em;
+      border-radius: 0.5em;
+      background-color: var(--light-background-color);
+      filter: drop-shadow(0 0px 3px  var(--account-box-shadow-background-color));
+      transition: opacity 0.25s ease;
+      &:hover {opacity: 0.8}
+      &.show {display: initial}
+      body.arabic & { left: auto; right: 1em }
+      &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        transform: rotate(-45deg);
+        background-image: var(--pencil-fill-icon);
+        background-size: 1em;
+        background-repeat: no-repeat;
+        background-position: center;
       }
     }
 

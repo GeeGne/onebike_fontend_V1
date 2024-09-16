@@ -28,7 +28,7 @@ const useDataStore = create(
     setRefreshHomePageBannersData: refreshHomePageBannersData => set({ refreshHomePageBannersData }),
     resetHomePageBannersDataToNull: () => set({ homePageBannersData: [] }),
 
-    websiteDetailsData: [],
+    websiteDetailsData: {},
     setWebsiteDetailsData: websiteDetailsData => set({ websiteDetailsData }),
     refreshWebsiteDetailsData: 0,
     setRefreshWebsiteDetailsData: refreshWebsiteDetailsData => set({ refreshWebsiteDetailsData }),

@@ -46,7 +46,7 @@ function IntroSection ({onThemeChange, onLanguageChange}) {
   const phoneNumberIconElement = useRef(null);
   const phoneNumberH2Element = useRef(null);
   const sectionHeight = useRef(null);
-
+  const en = lan === 'en';
   useEffect(() => {
     sectionHeight.current = infoSectionEL.current.scrollHeight; 
   }, []);
@@ -116,7 +116,7 @@ function IntroSection ({onThemeChange, onLanguageChange}) {
 
     type === 'enter' ? (element.src = callFillImg) : (element.src = callImg);
   }
-
+  
   return (
     <section className="userinfo-container --fade-in animate--05s delay--03s iteration--1" ref={infoSectionEL}>
       <Alert alertText={alertText} newAlert={newAlert}/>
@@ -126,7 +126,7 @@ function IntroSection ({onThemeChange, onLanguageChange}) {
 
         <a className="userinfo-container__phone-number" href={'tel:' + websiteDetailsData?.phone} onClick={handleClick} onMouseEnter={() => handleHover('enter')} onMouseLeave={() => handleHover('leave')}>
           <img src={darkMode ? callIconDarkMode : callIcon} ref={phoneNumberIconElement} alt="Call Icon"/>
-          <span ref={phoneNumberH2Element}>{formatPhoneNumber(websiteDetailsData?.phone)}</span>
+          <span ref={phoneNumberH2Element}>{formatPhoneNumber(websiteDetailsData?.phone) || (en ? 'Loading..' : '..جاري التحميل')}</span>
         </a>
 
         <LightDarkButton onThemeChange={themeData}/>
