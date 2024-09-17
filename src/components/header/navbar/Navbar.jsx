@@ -53,7 +53,7 @@ function Navbar ({darkMode, lan}) {
   const largeWidth = 1000;
   const webWidth = window.innerWidth;
   const desktopWidth = webWidth >= largeWidth;
-  const getUserImgURL = () => `/assets/img/userpfp/USER_${user?.uid}.webp`;
+  const getUserImgURL = () => `/assets/img/userpfp/${user?.uid}/main.webp`;
 
   useEffect(() => {
     const handleResize = (menu) => {

@@ -8,6 +8,7 @@ import '/src/styles/components/pages/admin/AddProductWindow.scss';
 import DisplayWebImg from '/src/components/DisplayWebImg';
 import Alert from '/src/components/Alert';
 import ProgressActivity from '/src/components/ProgressActivity';
+import DisplayImg from '/src/components/DisplayImg';
 
 // JSON
 import menu from '/src/data/menu.json';

@@ -251,7 +251,6 @@
           border-width: 0 0 2px 0;
           outline: none;
           color: var(--font-h-color);
-          font-size: var(--font-size-extraSmall);
           transition: border 0.15s ease-out;
           &:focus { border: solid var(--primary-color); border-width: 0 0 2px 0 }
           &::placeholder { text-align: center }

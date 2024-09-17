@@ -8,7 +8,6 @@ import DisplayWebImg from '/src/components/DisplayWebImg';
 import DisplayImg from '/src/components/DisplayImg';
 import Alert from '/src/components/Alert';
 import ProgressActivity from '/src/components/ProgressActivity';
-import ProgressWindowActivity from '/src/components/ProgressWindowActivity';
 
 // FIREBASE
 import {auth} from '/src/firebase/authSignUp';
@@ -110,7 +109,7 @@ function Account ({darkMode, lan}) {
 
   const getProductImgURL = product => `/assets/img/products/${product.id}/main.webp`;
   const getProductPrice = product => formatNumberWithCommas(calculatePrice(product.price, product.discount));
-  const getUserImgURL = () => `/assets/img/userpfp/USER_${user?.uid}.webp`;
+  const getUserImgURL = () => `/assets/img/userpfp/${user?.uid}/main.webp`;
   const isOrdersEmpty = ordersData.length === 0;
   const handleOrderStatus = (orderStatus) => {
     switch (orderStatus) {

@@ -2,6 +2,10 @@ import React, {useEffect, useState, useRef, useMemo} from 'react';
 import { ref, getDownloadURL } from 'firebase/storage';
 import { storage } from '/src/firebase/storage';
 
+// ASSETS
+import emptyLayout1 from '/assets/img/empty/empty(3).webp';
+import emptyLayout2 from '/assets/img/empty/empty(2).webp';
+
 function DisplayWebImg ({className, src, alt, loading, fetchpriority, backup, refresh, darkMode, lan}) {
   const [imageUrl, setImageUrl] = useState("");
   const [isLoading, setIsLoading] = useState(true);
@@ -9,9 +13,9 @@ function DisplayWebImg ({className, src, alt, loading, fetchpriority, backup, re
   const hanldeBackup = () => {
     switch (backup) {
       case false:
-        return "";
+        return emptyLayout1;
       case undefined:
-        return '/assets/img/empty/empty(2).webp';
+        return emptyLayout2;
       default:
         return backup;
     }
@@ -29,6 +33,7 @@ function DisplayWebImg ({className, src, alt, loading, fetchpriority, backup, re
         setImageUrl(url);
       } catch (error) {
         console.error("Error fetching image:", error);
+        setImageUrl("");
         setIsLoading(false)
       }
     };

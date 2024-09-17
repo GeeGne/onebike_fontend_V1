@@ -31,7 +31,7 @@ function NavBottom ({darkMode, lan}) {
   const prevScrollYTimer = useRef(null);
 
   const isWishlistEmpty = wishlist.length === 0;
-  const getUserImgURL = () => `/assets/img/userpfp/USER_${user?.uid}.webp`;
+  const getUserImgURL = () => `/assets/img/userpfp/${user?.uid}/main.webp`;
 
   const handleClick = e => {
     const { action } = e.currentTarget.dataset;
