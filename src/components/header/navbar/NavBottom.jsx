@@ -2,6 +2,10 @@
 import React, {useState, useRef, useEffect, useContext} from 'react';
 import {useNavigate, Link} from 'react-router-dom';
 
+// COMPONENTS
+import DisplayWebImg from '/src/components/DisplayWebImg';
+import DisplayImg from '/src/components/DisplayImg';
+
 // STORE
 import { useWishlistStore, useDataStore } from '/src/store/store';
 
@@ -11,15 +15,23 @@ import {WishlistToggleContext} from '/src/utils/myContext';
 // SCSS
 import '/src/styles/components/header/navbar/NavBottom.scss';
 
+// ASSETS
+import userIcon from '/assets/img/icons/user.svg';
+import userIconDarkMode from '/assets/img/icons/user_darkMode.svg';
+
 function NavBottom ({darkMode, lan}) {
   const user = useDataStore(state => state.user);
+  const userData = useDataStore(state => state.userData);
   const {wishlist, setToggle} = useWishlistStore();
   const navigate = useNavigate();
+
   const navBottomEL = useRef(null);
   const favouriteBtnEL = useRef(null);
   const prevScrollY = useRef(0);
   const prevScrollYTimer = useRef(null);
+
   const isWishlistEmpty = wishlist.length === 0;
+  const getUserImgURL = () => `/assets/img/userpfp/USER_${user?.uid}.webp`;
 
   const handleClick = e => {
     const { action } = e.currentTarget.dataset;
@@ -72,7 +84,9 @@ function NavBottom ({darkMode, lan}) {
   return (
     <section className="navBottom" ref={navBottomEL}>
       <button className={`navBottom__favourite${isWishlistEmpty ? ' empty' : ''}`} aria-label="Toggle Wishlst" data-action="toggle_wishlist_to_true" onClick={handleClick} ref={favouriteBtnEL} />
-      <Link className="navBottom__user" to={user ? "/account" : "/account/login"} aria-label="Navigate to Your Account" data-action="navigate_to_path" onClick={handleClick} />
+      <Link className="navBottom__user" to={user ? "/account" : "/account/login"} aria-label="Navigate to Your Account" data-action="navigate_to_path" onClick={handleClick}>
+        <DisplayWebImg className="navBottom__user__img" src={getUserImgURL()} backup={darkMode ? userIconDarkMode : userIcon} refresh={userData} />
+      </Link> 
     </section>
   )
 }

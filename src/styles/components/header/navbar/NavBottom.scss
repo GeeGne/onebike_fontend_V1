@@ -42,6 +42,7 @@
     background-position: center;
     transition: opacity 0.25s ease-in;
 
+    &:hover::before {background-color: var(--light-background-color)}
     &::before {
       content: "";
       position: absolute;
@@ -56,7 +57,13 @@
       z-index: -1;
     }
 
-    &:hover::before {background-color: var(--light-background-color)}
+    &__img {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      border-radius: 100%;
+    }
+
   }
   
   &__favourite {
@@ -82,7 +89,6 @@
       transform: scale(0);
     }
   }
-
 
   @include w.breakpoint-up (medium) {
     display: none;
