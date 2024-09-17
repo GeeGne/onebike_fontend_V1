@@ -1,6 +1,6 @@
 // HOOKS
 import React, {useState, useEffect, useRef} from 'react';
-import {useNavigate} from 'react-router-dom';
+import {useNavigate, Link} from 'react-router-dom';
 
 // COMPONENTS
 import TwoBarsActivity from '/src/components/TwoBarsActivity';
@@ -52,7 +52,6 @@ function OrderCompleteLayout ({darkMode, lan}) {
 
   const handleClick = e => {
     document.body.style.overflow = 'hidden auto';
-    navigate('/');
     setTimeout(() => window.scroll({top: 0, behavior: 'smooth'}) ,500);
     setOrderState(false);
   }
@@ -66,7 +65,8 @@ function OrderCompleteLayout ({darkMode, lan}) {
         </div>
         <div className="order-complete__content__bottom-cont">
           <h3 className="order-complete__content__bottom-cont__description">{descriptionContent()}</h3>
-          <button className="order-complete__content__bottom-cont__btn" onClick={handleClick}>{en ? 'Back To Home' : 'العوده الى الرئيسيه'}</button>
+          <Link className="order-complete__content__bottom-cont__home-btn" to="/" onClick={handleClick}>{en ? 'Back To Home' : 'العوده الى الرئيسيه'}</Link>
+          <Link className="order-complete__content__bottom-cont__account-btn" to="/account" onClick={handleClick}>{en ? 'View Order' : 'عرض الطلب'}</Link>
         </div>
       </div>
     </div>

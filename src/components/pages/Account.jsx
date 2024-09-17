@@ -34,27 +34,13 @@ import formatNumberWithCommas from '/src/utils/formatNumberWithCommas';
 import calculatePrice from '/src/utils/calculatePrice';
 
 // ASSETS
-import infoIcon from '/assets/img/icons/info.svg';
 import personIcon from '/assets/img/icons/person.svg';
-import infoDarkModeIcon from '/assets/img/icons/info_darkMode.svg';
-import emptyImgURL from '/assets/img/empty/empty.webp';
-import mailIcon from '/assets/img/icons/mail.svg';
-import mailDarkModeIcon from '/assets/img/icons/mail_darkMode.svg';
 import callIcon from '/assets/img/icons/call.svg';
 import callDarkModeIcon from '/assets/img/icons/call_darkMode.svg';
-import whatsappIcon from '/assets/img/icons/whatsapp.svg';
-import whatsappDarkModeIcon from '/assets/img/icons/whatsapp_darkMode.svg';
-import facebookIcon from '/assets/img/icons/facebook.svg';
-import facebookDarkModeIcon from '/assets/img/icons/facebook_darkMode.svg';
-import instagramIcon from '/assets/img/icons/instagram.svg';
-import instagramDarkModeIcon from '/assets/img/icons/instagram_darkMode.svg';
-import linkIcon from '/assets/img/icons/link.svg';
-import linkDarkModeIcon from '/assets/img/icons/link_darkMode.svg';
 import locationIcon from '/assets/img/icons/location.svg';
 import locationDarkModeIcon from '/assets/img/icons/location_darkMode.svg';
 import notesIcon from '/assets/img/icons/notes.svg';
 import notesDarkModeIcon from '/assets/img/icons/notes_darkMode.svg';
-import img from '/assets/img/content/two bicycles.webp';
 
 // ASSETS - DARKMODE
 import personDarkModeIcon from '/assets/img/icons/person_darkMode.svg';

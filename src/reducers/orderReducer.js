@@ -11,7 +11,19 @@ function orderReducer(order, action) {
     case 'update_products':
       return {...order, products: cart, total: order.shippingCost + calculateTotal(), subtotal: calculateTotal()};
     case 'update_costumer':
-      return {...order, costumer: {...order.costumer, costumerId: userData?.userId, fullName: userData?.fullName, email: userData?.email, phone: userData?.phone}}      
+      return {...order, 
+        costumer: {...order.costumer, 
+          costumerId: userData?.userId || '',
+          fullName: userData?.fullName || '',
+          email: userData?.email || '',
+          phone: userData?.phone | ''
+        },
+        shippingAddress: {...order.shippingAddress,
+          addressDetails: userData?.addressDetails || '',
+          secondAddress: userData?.secondAddress || '',
+        },
+        notes: userData?.notes || ''
+      }      
     case 'update_shipping_fee_and_inp':
       return {...order, shippingCost, shippingAddress: {...order.shippingAddress, city}, total: order.subtotal + shippingCost};
     case 'default_number_is_selected':

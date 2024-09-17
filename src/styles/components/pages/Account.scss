@@ -511,11 +511,15 @@
             
             &__title {
               color: var(--font-p-color);
+              font-size: var(--font-size-extraSmall);
+              @include w.breakpoint-up (medium) { font-size: var(--font-size-small) }
               font-weight: 600;
             }
     
             &__description {
               color: var(--font-h-color);
+              font-size: var(--font-size-extraSmall);
+              @include w.breakpoint-up (medium) { font-size: var(--font-size-small) }
               font-weight: 600;
               direction: ltr;
             }
