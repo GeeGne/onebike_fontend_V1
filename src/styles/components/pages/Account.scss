@@ -110,6 +110,7 @@
         }
         &::before {
           content: "change photo";
+          body.arabic & { content: "تغيير الصورة"}
           position: absolute;
           bottom: 1em;
           left: 50%;
@@ -123,8 +124,8 @@
           background-size: 1.3em;
           background-repeat: no-repeat;
           background-position: center left 1em;  
+          body.arabic & { background-position: center right 1em; }
           padding-inline: 2.6em 1em;
-          body.arabic & { padding-inline: 1em 2.6em }
           padding-block: 0.5em;
           border-radius: 1.5em;
           z-index: 20;
