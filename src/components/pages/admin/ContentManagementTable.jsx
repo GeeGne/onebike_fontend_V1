@@ -361,7 +361,7 @@ function ContentManagementTable ({darkMode, lan}) {
           <div className="cm__lst__itm__info-cont" data-index={i} ref={el => itemInfoELRefs.current[i] = el}>
             <div className="cm__lst__itm__info-cont__name-cont">
               <div className={`cm__lst__itm__info-cont__name-cont__state${getColorForState(item.state)}`} />
-              <DisplayWebImg className="cm__lst__itm__info-cont__name-cont__img" src={getProductImgURL(item.id)} alt={item.title[lan]} loading="lazy" />
+              <DisplayWebImg className="cm__lst__itm__info-cont__name-cont__img" src={getProductImgURL(item.id)} alt={item.title[lan]} loading="lazy" refresh={products} />
               <span className="cm__lst__itm__info-cont__name-cont__title">{item.title[lan]}</span>
             </div>
             <div className="cm__lst__itm__info-cont__id-cont">

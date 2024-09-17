@@ -64,7 +64,7 @@ function Checkout ({darkMode, lan}) {
   emailjs.init({publicKey: emailJS.publicKey});
   const navigate = useNavigate();
 
-  const { user, userData } = useDataStore();
+  const { user, userData, setRefreshUserData } = useDataStore();
   const [ processing, setProcessing ] = useState(false);
   const [ newAlert, setNewAlert ] = useState(0);
   const [ alertText, setAlertText ] = useState(null);
@@ -144,7 +144,25 @@ function Checkout ({darkMode, lan}) {
   // console.log({orderState});
   // console.log({user, userData, order});
   useEffect(() => redirect.checkout(user), [user]);
-  useEffect(() => dispatch({type: 'update_costumer', userData}), [userData]);
+  useEffect(() => {
+    dispatch({type: 'update_costumer', userData})
+    
+    if (userData?.addressDetails) {
+      addressDetailsInpEL.current.focus();
+      addressDetailsInpEL.current.value = userData?.addressDetails;
+    }
+
+    if (userData?.secondAddress) {
+      secondAddressInpEL.current.focus();
+      secondAddressInpEL.current.value = userData?.secondAddress;
+    }
+
+    if (userData?.notes) {
+      notesInpEL.current.focus();
+      notesInpEL.current.value = userData?.notes;
+    }
+
+  }, [userData]);
   useEffect(() => dispatch({type: 'update_products', cart}), [cart]);
 
   const deliverInfoTextContent = () => en 
@@ -219,8 +237,22 @@ function Checkout ({darkMode, lan}) {
 
     const submitData = async () => {
       orderUpdatedDateAndId.current = {...order, orderId: nanoid(12), orderDate: getCurrentDateFormat()};
+
+      const personalData = {
+        phone: order.costumer.phone,
+        addressDetails: order.shippingAddress.addressDetails,
+        secondAddress: order.shippingAddress.secondAddress,
+        notes: order.notes,
+      }
+
       try {
-        await setDoc(doc(db, 'users', user.uid, 'orders', orderUpdatedDateAndId.current.orderId), orderUpdatedDateAndId.current);
+        const ordersCollectionRef = doc(db, 'users', user.uid, 'orders', orderUpdatedDateAndId.current.orderId);
+        await setDoc(ordersCollectionRef, orderUpdatedDateAndId.current);
+
+        const usertRef = doc(db, "users", user.uid);
+        await updateDoc(usertRef, personalData);
+
+        setRefreshUserData(Math.random());
         return true;
       } catch(err) {
         console.log('Error: not able to write the order data');
@@ -259,6 +291,30 @@ function Checkout ({darkMode, lan}) {
         console.error('Error sending order notification email:', error);
       }
     };
+
+    const updateUserData = async (personalData) => {
+      setActivity(true);
+  
+      try {
+        const productRef = doc(db, "users", user.uid);
+        await updateDoc(productRef, personalData);
+  
+        if (imgFile.current) {
+          const storageRef = ref(storage, getnewUserImgURL());
+          await uploadBytes(storageRef, imgFile.current);
+        }
+    
+        setRefreshUserData(Math.random());
+        setAlertText(en ? 'Success! Your Personal Data is Updated' : 'تم تحديث بياناتك الشخصية بنجاح!')
+      } catch(err) {
+        console.error('Error updating perosnal data: ', err);
+        setAlertText(en ? 'Error updating Persoanl Data' : 'خطأ في تحديث البيانات الشخصية')
+      } finally {
+        setNewAlert(Math.random());
+        setActivity(false);  
+      }
+    }
+  
 
     const toggleExpandDataATT = (el, expand) => el.dataset.expand = String(!expand);
     const {type, shippingCost, city} = e.currentTarget.dataset;
@@ -533,7 +589,7 @@ function Checkout ({darkMode, lan}) {
           <div className="checkout__phone-sec__radio-cont">
             <input className="checkout__phone-sec__radio-cont__inp" type="radio" id="existed-number" name="phoneOptions" data-type="default_number_is_selected" onChange={handleChange} ref={defaultNumberRadioEL}/>    
             <label className="checkout__phone-sec__radio-cont__lbl" htmlFor="existed-number">
-              <span className="checkout__phone-sec__radio-cont__lbl__txt">{en ? 'Use Phone Number provided at Signing up' : 'استخدم رقم الهاتف الذي قدمته عند التسجيل'}</span>
+              <span className="checkout__phone-sec__radio-cont__lbl__txt">{en ? 'Use the Number from your personal account' : 'استخدم رقم الهاتف من حسابك الشخصي'}</span>
               <div className="checkout__phone-sec__radio-cont__lbl__phone-popup-cont" >
                 <span className="checkout__phone-sec__radio-cont__lbl__phone-popup-cont__number">{formatPhoneNumber(userData?.phone)}</span>
                 <img className="checkout__phone-sec__radio-cont__lbl__phone-popup-cont__img" src={darkMode ? adjustDarkModeIcon : adjustIcon} />

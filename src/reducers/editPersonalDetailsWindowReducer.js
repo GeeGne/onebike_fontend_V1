@@ -6,7 +6,7 @@
       return {...editSiteDetails, toggle: ' show'};
     case 'personalDetails_window_background_is_clicked':
     case 'cancel_personalDetails_window_button_is_clicked':
-    case 'websiteDetails_data_is_updated':
+    case 'user_data_is_updated':
       return {toggle: ' hide'};
     case 'add_inputs_values':
       return {...editSiteDetails, toggle: ' show', [name]: value};

@@ -1,11 +1,22 @@
-import React, {useEffect, useState, useRef} from 'react';
+import React, {useEffect, useState, useRef, useMemo} from 'react';
 import { ref, getDownloadURL } from 'firebase/storage';
 import { storage } from '/src/firebase/storage';
 
-function DisplayWebImg ({className, src, alt, loading, fetchpriority, darkMode, lan}) {
+function DisplayWebImg ({className, src, alt, loading, fetchpriority, backup, refresh, darkMode, lan}) {
   const [imageUrl, setImageUrl] = useState("");
   const [isLoading, setIsLoading] = useState(true);
-  
+
+  const hanldeBackup = () => {
+    switch (backup) {
+      case false:
+        return "";
+      case undefined:
+        return '/assets/img/empty/empty(2).webp';
+      default:
+        return backup;
+    }
+  }
+
   useEffect(() => {
 
     const fetchImageUrl = async () => {
@@ -18,21 +29,20 @@ function DisplayWebImg ({className, src, alt, loading, fetchpriority, darkMode, 
         setImageUrl(url);
       } catch (error) {
         console.error("Error fetching image:", error);
-        setImageUrl('/assets/img/empty/empty(2).webp');
+        setIsLoading(false)
       }
     };
 
     fetchImageUrl();
-  }, [src]);
+  }, [src, refresh]);
 
   const handleLoad = () => imageUrl && setIsLoading(false);
-
   return (
     
     <img 
       className={className} 
-      src={imageUrl} 
-      loading={!loading ? '' : loading} 
+      src={imageUrl || hanldeBackup()} 
+      loading={loading || ''} 
       alt={alt || ''} 
       fetchpriority={fetchpriority || 'auto'} 
       onLoad={handleLoad}

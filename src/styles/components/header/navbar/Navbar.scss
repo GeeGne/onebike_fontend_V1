@@ -187,9 +187,8 @@
     }
 
     &__user {
-      display: flex;
-      background-image: var(--user-icon);
       @include w.breakpoint-down(medium) {display: none}
+      cursor: pointer;
 
       body.arabic &::after {
         right: auto;
@@ -203,6 +202,13 @@
         height: 100%;
         width: 1px;
         background-color: hsl(0, 0%, 50%);
+      }
+
+      &__img {
+        width: 100%;
+        aspect-ratio: 1 / 1;
+        object-fit: cover;
+        border-radius: 100%;
       }
     }
 

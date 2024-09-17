@@ -25,9 +25,8 @@ function useFetchWebsiteDetailsData () {
       }
     }
 
-    if (user) fetchWebsiteDetailsData();
-    if (!user) resetWebsiteDetailsDataToNull();
-  }, [user, refreshWebsiteDetailsData]);
+    fetchWebsiteDetailsData();
+  }, [refreshWebsiteDetailsData]);
 }
 
 export default useFetchWebsiteDetailsData;

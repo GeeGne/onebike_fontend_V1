@@ -1,6 +1,6 @@
 // HOOKS
 import React, {useState, useRef, useEffect, Suspense} from 'react';
-import {useNavigate, useSearchParams} from 'react-router-dom';
+import {useNavigate, useSearchParams, Link} from 'react-router-dom';
 
 // COMPONENTS
 const HamMenu = React.lazy(() => import('./HamMenu'));
@@ -8,6 +8,7 @@ const DropMenu = React.lazy(() => import('./DropMenu'));
 const CartSlider = React.lazy(() => import('./CartSlider'));
 const WishlistSlider = React.lazy(() => import('./WishlistSlider'));
 import DisplayImg from '/src/components/DisplayImg';
+import DisplayWebImg from '/src/components/DisplayWebImg';
 
 // REDUCERS
 import cartReducer from '/src/reducers/cartReducer.js';
@@ -22,7 +23,8 @@ import '/src/styles/components/header/navbar/Navbar.scss';
 import logo from '/assets/img/logo/onebike.webp';
 import searchIcon from '/assets/img/icons/search.svg';
 import searchIconDarkMode from '/assets/img/icons/search_darkMode.svg';
-
+import userIcon from '/assets/img/icons/user.svg';
+import userIconDarkMode from '/assets/img/icons/user_darkMode.svg';
 
 function Navbar ({darkMode, lan}) {
   
@@ -33,7 +35,7 @@ function Navbar ({darkMode, lan}) {
   // const [cartToggle, setCartToggle] = useState(false);
   const {cart, toggle: cartToggle, setToggle: setCartToggle} = useCartStore();
   const {wishlist, setToggle: setWishlistToggle} = useWishlistStore();
-  const { user, setRefreshProducts } = useDataStore();
+  const { user, userData, setRefreshProducts } = useDataStore();
 
   const navDropMenuEL = useRef(null);
   const prevScrollY = useRef(0);
@@ -51,6 +53,7 @@ function Navbar ({darkMode, lan}) {
   const largeWidth = 1000;
   const webWidth = window.innerWidth;
   const desktopWidth = webWidth >= largeWidth;
+  const getUserImgURL = () => `/assets/img/userpfp/USER_${user?.uid}.webp`;
 
   useEffect(() => {
     const handleResize = (menu) => {
@@ -176,7 +179,9 @@ function Navbar ({darkMode, lan}) {
           <DisplayImg src={darkMode ? searchIconDarkMode : searchIcon} alt="Search Icon"/>
         </div>
         <button className="dropMenu__nav__search" aria-label="Search on a product" data-action="toggle_search" onClick={handleClick} /* onMouseEnter={() => handleHover(true)} onMouseLeave={() => handleHover(false)} */ ref={searchBtnEL}/>
-        <button className="dropMenu__nav__user" aria-label="head to your account" data-action="navigate_to_path" data-path={user ? "/account" : "/account/login"} onClick={handleClick}/>
+        <Link className="dropMenu__nav__user" to={user ? "/account" : "/account/login"} role="button" tabIndex="0" aria-label="head to your account">
+          <DisplayWebImg className="dropMenu__nav__user__img" src={getUserImgURL()} backup={darkMode ? userIconDarkMode : userIcon} refresh={userData} />
+        </Link>
         <button className={`dropMenu__nav__favourite${isWishlistEmpty ? ' empty' : ''}`} aria-label="Open favorite tab" data-action="toggle_wishlist_to_true" onClick={handleClick} ref={favouriteBtnEL}/>
         <button className={`dropMenu__nav__shoppingCart${isCartEmpty ? ' empty' : ''}`} aria-label="Open shoppingcart tab" data-action="toggle_cart_to_true" onClick={handleClick} ref={cartBtnEL}/>
       </nav>

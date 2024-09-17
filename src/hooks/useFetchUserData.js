@@ -10,7 +10,7 @@ import {getDoc, doc, collection, getDocs} from 'firebase/firestore';
 
 
 function useFetchUserData () {
-  const {user, setUserData, resetUserDataToNull } = useDataStore();
+  const {user, setUserData, refreshUserData, resetUserDataToNull } = useDataStore();
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -52,7 +52,7 @@ function useFetchUserData () {
 
     if (user) fetchData();
     if (!user) resetUserDataToNull();
-  }, [user]);
+  }, [user, refreshUserData]);
 }
 
 export default useFetchUserData;
