@@ -13,9 +13,9 @@ function DisplayWebImg ({className, src, alt, loading, fetchpriority, backup, re
   const hanldeBackup = () => {
     switch (backup) {
       case false:
-        return emptyLayout1;
+        return isLoading ? '' : emptyLayout1;
       case undefined:
-        return emptyLayout2;
+        return isLoading ? '': emptyLayout2;
       default:
         return backup;
     }
