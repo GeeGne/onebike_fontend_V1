@@ -297,6 +297,8 @@
             min-height: 3em;
             max-height: 3em;
             object-fit: contain;
+            object-position: center;
+            background-color: white;
           }
   
           &__title {
