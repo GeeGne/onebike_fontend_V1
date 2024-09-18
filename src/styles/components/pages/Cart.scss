@@ -84,7 +84,10 @@
         &__img {
           grid-area: img;
           width: 6em;
-          margin-block: auto;
+          aspect-ratio: 1 / 1;
+          object-fit: contain;
+          object-position: center;
+          background-color: white;
         }
 
         &__title {
