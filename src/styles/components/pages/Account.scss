@@ -373,11 +373,11 @@
 
     &__pfp {
       position: absolute;
-      top: 4em;
+      top: 3em;
       left: 50%;
       transform: translateX(-50%) rotate(45deg);
-      width: 4em;
-      height: 4em;
+      width: 6em;
+      height: 6em;
       // background-color: var(--primary-color);
       border-radius: 1em;
       overflow: hidden;
@@ -417,7 +417,7 @@
   &__userName-sec {
     display: flex;
     width: 100%;
-    padding-block: 1em;
+    padding-block: 2em;
 
     &__h2 {
       position: relative;

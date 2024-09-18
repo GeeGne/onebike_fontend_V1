@@ -285,7 +285,7 @@ function Account ({darkMode, lan}) {
 
         <div className={`account__editPersonalDetails-window${editPersonalDetails.toggle}`} data-action="personalDetails_window_background_is_clicked" onClick={handleClick}>
           <div className="account__editPersonalDetails-window__wrapper" data-action="personalDetails_window_wrapper_is_clicked" onClick={e => e.stopPropagation()}>
-            <h2 className="account__editPersonalDetails-window__wrapper__title">{en ? 'Edit Personal Details' : 'تعديل معلومات الصفحه'}</h2>
+            <h2 className="account__editPersonalDetails-window__wrapper__title">{en ? 'Edit Personal Details' : 'تعديل المعلومات الشخصيه'}</h2>
             <div className="account__editPersonalDetails-window__wrapper__pfp-wrapper" htmlFor="userPfp">
               <DisplayWebImg className="account__editPersonalDetails-window__wrapper__pfp-wrapper__current-img" src={getUserImgURL()} backup={false} />
               <DisplayImg className="account__editPersonalDetails-window__wrapper__pfp-wrapper__new-img" src={pfpSrc} />
