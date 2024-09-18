@@ -179,7 +179,9 @@
           height: 100%;
           aspect-ratio: 1 / 1;
           z-index: 10;
-          background-color: var(--light-background-color);
+          background-color: white;
+          object-fit: contain;
+          object-position: center;
           cursor: pointer;
           &.hide {display: none}
         }
