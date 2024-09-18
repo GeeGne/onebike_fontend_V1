@@ -107,6 +107,9 @@
         &__brand-img {
           width: 100%;
           filter: var(--advertList-brandLogo-filter-invert);
+          object-fit: contain;
+          object-position: center;
+          flex: 1;
         }
 
         &__price {
@@ -115,7 +118,6 @@
           gap: 0.3em;
           align-items: end;
           font-weight: 600;
-          margin-top: auto;
 
           & .now {
             font-size: var(--font-size-small);

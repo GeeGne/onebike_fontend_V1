@@ -227,8 +227,8 @@
           width: 100%;
           filter: var(--advertList-brandLogo-filter-invert);
           object-fit: contain;
+          object-position: center;
           flex: 1;
-
         }
 
         &.empty &__price {background-color:var(--dark-background-color); width: 40%; height: 1em; margin-bottom: 4em; border-radius: 2em}
