@@ -201,8 +201,11 @@
           grid-area: img;
           width: 100%;
           aspect-ratio: 1 / 1;
-          border-radius: 2em;
+          background-color: white;
+          object-fit: contain;
+          object-position: center;
           margin-block: auto;
+          border-radius: 2em;
         }
   
         &__title {
