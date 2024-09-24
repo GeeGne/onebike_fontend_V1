@@ -10,7 +10,7 @@ import Alert from './Alert';
 import DisplayImg from '/src/components/DisplayImg';
 
 // JSON
-import websiteDetailsData from '/src/data/one-bike.json'
+// import oneBike from '/src/data/one-bike.json'
 
 // UTILS
 import formatPhoneNumber from '/src/utils/formatPhoneNumber.js';

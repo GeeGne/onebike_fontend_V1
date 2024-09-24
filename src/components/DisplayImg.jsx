@@ -9,7 +9,7 @@ function DisplayImg ({className, src, alt, loading, fetchpriority, darkMode, lan
     <img 
       className={className} 
       src={src} 
-      loading={!loading ? '' : loading} 
+      loading={loading || ''} 
       alt={alt || ''} 
       fetchpriority={fetchpriority || 'auto'} 
       onLoad={handleLoad}

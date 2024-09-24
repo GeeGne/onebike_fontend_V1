@@ -11,12 +11,13 @@
   // background-image: -webkit-gradient(linear, left top, left bottom, from(#001e3d5e), to(#5090d055)), url('/src/assets/Img/Content/bicycle background.jpg');
   // box-shadow: 0 0 23px 30px white inset;
   background-repeat: no-repeat;
+  @include w.breakpoint-up(large) { background-attachment: fixed }
   background-size: cover;
   background-position: left;
   overflow: hidden;
 
   @include w.breakpoint-up(medium) {
-    aspect-ratio: 3 / 2;
+    aspect-ratio: 4 / 2;
 
     &::before {
       content: "";
@@ -31,7 +32,7 @@
   }
 
   @include w.breakpoint-up(large) {
-    aspect-ratio: 3 / 2;
+    aspect-ratio: 6 / 2;
   }
 
   &__content {

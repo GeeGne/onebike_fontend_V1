@@ -34,9 +34,9 @@ function Home ({darkMode, lan}) {
       <NewsLetter />
       <AdvertTile darkMode={darkMode} lan={lan} type={{categoryType: 'type', name: {en: 'Lights', ar: 'اناره'}}}/>
       <JoinWhatsAppGroup />
-      <NeedHelp darkMode={darkMode} lan={lan} />
       <AdvertTile darkMode={darkMode} lan={lan} type={{categoryType: 'category', name: {en: 'Components', ar: 'قطع الدراجه'}}}/>
       <AdvertTile darkMode={darkMode} lan={lan} type={{categoryType: 'category', name: {en: 'Tires & Wheels', ar: 'كوشوك & اطار'}}}/>
+      <NeedHelp darkMode={darkMode} lan={lan} />
     </div>
   )
 }
