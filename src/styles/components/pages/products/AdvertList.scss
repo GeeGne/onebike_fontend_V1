@@ -106,10 +106,13 @@
         }
 
         &__brand-img {
-          width: 100%;
+          width: calc(100% - 2em);
+          max-height: 3em;
           filter: var(--advertList-brandLogo-filter-invert);
           object-fit: contain;
           object-position: center;
+          margin-inline: auto;
+          margin-block: auto;
           flex: 1;
         }
 
